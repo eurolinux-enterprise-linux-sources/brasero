@@ -271,6 +271,27 @@ brasero_utils_unregister_string (const gchar *string)
 }
 
 GtkWidget *
+brasero_utils_properties_get_label (GtkWidget *properties)
+{
+	GList *children;
+	GList *iter;
+
+	children = gtk_container_get_children (GTK_CONTAINER (properties));
+	for (iter = children; iter; iter = iter->next) {
+		GtkWidget *widget;
+
+		widget = iter->data;
+		if (GTK_IS_LABEL (widget)) {
+			g_list_free (children);
+			return widget;
+		}
+	}
+
+	g_list_free (children);
+	return NULL;
+}
+
+GtkWidget *
 brasero_utils_pack_properties_list (const gchar *title, GSList *list)
 {
 	GtkWidget *hbox, *vbox_main, *vbox_prop;
@@ -290,7 +311,11 @@ brasero_utils_pack_properties_list (const gchar *title, GSList *list)
 
 	label = gtk_label_new ("\t");
 	gtk_widget_show (label);
-	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (hbox),
+			    label,
+			    FALSE,
+			    TRUE,
+			    0);
 
 	vbox_prop = gtk_vbox_new (FALSE, 6);
 	gtk_widget_show (vbox_prop);
@@ -300,31 +325,34 @@ brasero_utils_pack_properties_list (const gchar *title, GSList *list)
 			    TRUE,
 			    0);
 
-	for (iter = list; iter; iter = iter->next) {
+	for (iter = list; iter; iter = iter->next)
 		gtk_box_pack_start (GTK_BOX (vbox_prop),
 				    iter->data,
 				    TRUE,
 				    TRUE,
 				    0);
-	}
 
 	if (title) {
-		GtkWidget *frame;
+		GtkWidget *vbox;
+		GtkWidget *label;
 
-		frame = gtk_frame_new (title);
-		gtk_widget_show (frame);
-		gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_NONE);
+		vbox = gtk_vbox_new (FALSE, 0);
 
-		label = gtk_frame_get_label_widget (GTK_FRAME (frame));
+		label = gtk_label_new (title);
+		gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
 		gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
+		gtk_box_pack_start (GTK_BOX (vbox), label, TRUE, TRUE, 0);
+		gtk_widget_show (label);
 
-		gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-		gtk_container_add (GTK_CONTAINER (frame), vbox_main);
-		return frame;
+		gtk_box_pack_start (GTK_BOX (vbox), vbox_main, TRUE, TRUE, 0);
+
+		gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+		gtk_widget_show (vbox);
+
+		return vbox;
 	}
-	else
-		gtk_container_set_border_width (GTK_CONTAINER (vbox_main), 6);
 
+	gtk_container_set_border_width (GTK_CONTAINER (vbox_main), 6);
 	return vbox_main;
 }
 
@@ -381,12 +409,14 @@ brasero_utils_create_message_dialog (GtkWidget *parent,
 	GtkWidget *message;
 
 	message = gtk_message_dialog_new (GTK_WINDOW (parent),
-					  GTK_DIALOG_MODAL |
-					  GTK_DIALOG_DESTROY_WITH_PARENT,
+					  0,
 					  type,
 					  GTK_BUTTONS_CLOSE,
 					  "%s",
 					  primary_message);
+
+	gtk_window_set_icon_name (GTK_WINDOW (message),
+	                          parent? gtk_window_get_icon_name (GTK_WINDOW (parent)):"brasero");
 
 	gtk_window_set_title (GTK_WINDOW (message), "");
 

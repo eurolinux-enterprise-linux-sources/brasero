@@ -17,16 +17,8 @@ brasero-track-type
 <!-- ##### SECTION Stability_Level ##### -->
 
 
-<!-- ##### ENUM BraseroTrackDataType ##### -->
-<para>
+<!-- ##### SECTION Image ##### -->
 
-</para>
-
-@BRASERO_TRACK_TYPE_NONE: 
-@BRASERO_TRACK_TYPE_STREAM: 
-@BRASERO_TRACK_TYPE_DATA: 
-@BRASERO_TRACK_TYPE_IMAGE: 
-@BRASERO_TRACK_TYPE_DISC: 
 
 <!-- ##### STRUCT BraseroTrackType ##### -->
 <para>
@@ -39,6 +31,7 @@ brasero-track-type
 
 </para>
 
+@void: 
 @Returns: 
 
 

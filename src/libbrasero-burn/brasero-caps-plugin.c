@@ -42,6 +42,9 @@
 #include "burn-caps.h"
 #include "burn-debug.h"
 
+#include "brasero-plugin-private.h"
+#include "brasero-plugin-information.h"
+
 #define SUBSTRACT(a, b)		((a) &= ~((b)&(a)))
 
 /**
@@ -72,9 +75,9 @@ brasero_burn_caps_sort (gconstpointer a, gconstpointer b)
 	const BraseroCaps *caps_b = b;
 	gint result;
 
-	/* First put DISC (the most used caps) then IMAGE type; these two types
-	 * are the ones that most often searched. At the end of the list we put
-	 * DATA  and AUDIO.
+	/* First put DISC (the most used caps) then AUDIO then IMAGE type; these
+	 * two types are the ones that most often searched. At the end of the
+	 * list we put DATA.
 	 * Another (sub)rule is that for DATA, DISC, AUDIO we put a caps that is
 	 * encompassed by another before.
 	 */
@@ -847,14 +850,6 @@ brasero_plugin_check_caps (BraseroPlugin *plugin,
 		link->plugins = g_slist_prepend (link->plugins, plugin);
 	}
 }
-
-/**
- * This is to register a plugin group 
- * This function is only define here (though it's implemented in burn-plugin.c).
- */
-
-void
-brasero_plugin_set_group (BraseroPlugin *plugin, gint group_id);
 
 void
 brasero_plugin_register_group (BraseroPlugin *plugin,

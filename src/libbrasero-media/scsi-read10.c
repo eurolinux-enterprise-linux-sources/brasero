@@ -34,6 +34,8 @@
 
 #include <glib.h>
 
+#include "scsi-sbc.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -98,6 +100,8 @@ brasero_sbc_read10_block (BraseroDeviceHandle *handle,
 {
 	BraseroRead10CDB *cdb;
 	BraseroScsiResult res;
+
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 
 	cdb = brasero_scsi_command_new (&info, handle);
 	BRASERO_SET_32 (cdb->start_address, start);

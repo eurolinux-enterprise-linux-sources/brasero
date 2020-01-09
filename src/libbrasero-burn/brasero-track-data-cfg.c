@@ -619,7 +619,7 @@ brasero_track_data_cfg_get_value (GtkTreeModel *model,
 		case BRASERO_DATA_TREE_MODEL_NAME:
 			g_value_init (value, G_TYPE_STRING);
 			if (node->is_exploring)
-				g_value_set_string (value, _("(loading ...)"));
+				g_value_set_string (value, _("(loading…)"));
 			else
 				g_value_set_string (value, _("Empty"));
 
@@ -718,7 +718,7 @@ brasero_track_data_cfg_get_value (GtkTreeModel *model,
 	case BRASERO_DATA_TREE_MODEL_MIME_DESC:
 		g_value_init (value, G_TYPE_STRING);
 		if (node->is_loading)
-			g_value_set_string (value, _("(loading ...)"));
+			g_value_set_string (value, _("(loading…)"));
 		else if (!node->is_file) {
 			gchar *description;
 
@@ -729,7 +729,7 @@ brasero_track_data_cfg_get_value (GtkTreeModel *model,
 		else if (node->is_imported)
 			g_value_set_string (value, _("Disc file"));
 		else if (!BRASERO_FILE_NODE_MIME (node))
-			g_value_set_string (value, _("(loading ...)"));
+			g_value_set_string (value, _("(loading…)"));
 		else {
 			gchar *description;
 
@@ -790,12 +790,12 @@ brasero_track_data_cfg_get_value (GtkTreeModel *model,
 	case BRASERO_DATA_TREE_MODEL_SIZE:
 		g_value_init (value, G_TYPE_STRING);
 		if (node->is_loading)
-			g_value_set_string (value, _("(loading ...)"));
+			g_value_set_string (value, _("(loading…)"));
 		else if (!node->is_file) {
 			guint nb_items;
 
 			if (node->is_exploring) {
-				g_value_set_string (value, _("(loading ...)"));
+				g_value_set_string (value, _("(loading…)"));
 				return;
 			}
 
@@ -1088,7 +1088,7 @@ brasero_track_data_cfg_drag_data_get (GtkTreeDragSource *drag_source,
 				      GtkTreePath *treepath,
 				      GtkSelectionData *selection_data)
 {
-	if (selection_data->target == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
+	if (gtk_selection_data_get_target (selection_data) == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
 		GtkTreeRowReference *reference;
 
 		reference = gtk_tree_row_reference_new (GTK_TREE_MODEL (drag_source), treepath);
@@ -1123,6 +1123,7 @@ brasero_track_data_cfg_drag_data_received (GtkTreeDragDest *drag_dest,
 	BraseroFileNode *node;
 	BraseroFileNode *parent;
 	GtkTreePath *dest_parent;
+	GdkAtom target;
 	BraseroTrackDataCfgPrivate *priv;
 
 	priv = BRASERO_TRACK_DATA_CFG_PRIVATE (drag_dest);
@@ -1142,14 +1143,15 @@ brasero_track_data_cfg_drag_data_received (GtkTreeDragDest *drag_dest,
 
 	gtk_tree_path_free (dest_parent);
 
+	target = gtk_selection_data_get_target (selection_data);
 	/* Received data: see where it comes from:
 	 * - from us, then that's a simple move
 	 * - from another widget then it's going to be URIS and we add
 	 *   them to the DataProject */
-	if (selection_data->target == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
+	if (target == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
 		GList *iter;
 
-		iter = (GList *) selection_data->data;
+		iter = (GList *) gtk_selection_data_get_data (selection_data);
 
 		/* That's us: move the row and its children. */
 		for (; iter; iter = iter->next) {
@@ -1170,7 +1172,7 @@ brasero_track_data_cfg_drag_data_received (GtkTreeDragDest *drag_dest,
 			brasero_data_project_move_node (BRASERO_DATA_PROJECT (priv->tree), node, parent);
 		}
 	}
-	else if (selection_data->target == gdk_atom_intern ("text/uri-list", TRUE)) {
+	else if (target == gdk_atom_intern ("text/uri-list", TRUE)) {
 		gint i;
 		gchar **uris;
 		gboolean success = FALSE;
@@ -1212,13 +1214,16 @@ brasero_track_data_cfg_row_drop_possible (GtkTreeDragDest *drag_dest,
 					  GtkTreePath *dest_path,
 					  GtkSelectionData *selection_data)
 {
+	GdkAtom target;
+
+	target = gtk_selection_data_get_target (selection_data);
 	/* See if we are dropping to ourselves */
-	if (selection_data->target == gdk_atom_intern_static_string (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST)) {
+	if (target == gdk_atom_intern_static_string (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST)) {
 		GtkTreePath *dest_parent;
 		BraseroFileNode *parent;
 		GList *iter;
 
-		iter = (GList *) selection_data->data;
+		iter = (GList *) gtk_selection_data_get_data (selection_data);
 
 		/* make sure the parent is a directory.
 		 * NOTE: in this case dest_path is the exact path where it
@@ -1290,7 +1295,7 @@ brasero_track_data_cfg_row_drop_possible (GtkTreeDragDest *drag_dest,
 		gtk_tree_path_free (dest_parent);
 		return FALSE;
 	}
-	else if (selection_data->target == gdk_atom_intern_static_string ("text/uri-list"))
+	else if (target == gdk_atom_intern_static_string ("text/uri-list"))
 		return TRUE;
 
 	return FALSE;
@@ -1968,6 +1973,9 @@ brasero_track_data_cfg_remove (BraseroTrackDataCfg *track,
 		return FALSE;
 
 	node = brasero_track_data_cfg_path_to_node (track, treepath);
+	if (!node)
+		return FALSE;
+
 	brasero_data_project_remove_node (BRASERO_DATA_PROJECT (priv->tree), node);
 	return TRUE;
 }
@@ -2385,7 +2393,7 @@ brasero_track_data_cfg_get_file_num (BraseroTrackData *track)
 	return stats->children;
 }
 
-static BraseroTrackDataType
+static BraseroBurnResult
 brasero_track_data_cfg_get_track_type (BraseroTrack *track,
 				       BraseroTrackType *type)
 {
@@ -2393,13 +2401,10 @@ brasero_track_data_cfg_get_track_type (BraseroTrack *track,
 
 	priv = BRASERO_TRACK_DATA_CFG_PRIVATE (track);
 
-	if (!type)
-		return BRASERO_TRACK_TYPE_DATA;
-
 	brasero_track_type_set_has_data (type);
 	brasero_track_type_set_data_fs (type, brasero_track_data_cfg_get_fs (BRASERO_TRACK_DATA (track)));
 
-	return BRASERO_TRACK_TYPE_DATA;
+	return BRASERO_BURN_OK;
 }
 
 static BraseroBurnResult
@@ -2421,10 +2426,9 @@ brasero_track_data_cfg_get_status (BraseroTrack *track,
 	 * yet in the project and therefore project will look empty */
 	if (brasero_data_vfs_is_active (BRASERO_DATA_VFS (priv->tree))) {
 		if (status)
-			brasero_status_set_not_ready (status,
-						      -1.0,
-						      _("Analysing files"));
-
+			brasero_status_set_running (status,
+						    -1.0,
+						    _("Analysing files"));
 		return BRASERO_BURN_NOT_READY;
 	}
 
@@ -2506,10 +2510,10 @@ brasero_track_data_cfg_image_uri_cb (BraseroDataVFS *vfs,
 	g_value_init (params, G_TYPE_STRING);
 	g_value_set_string (params, uri);
 
-	/* default to CANCEL */
+	/* default to OK (for addition) */
 	return_value.g_type = 0;
 	g_value_init (&return_value, G_TYPE_INT);
-	g_value_set_int (&return_value, BRASERO_BURN_CANCEL);
+	g_value_set_int (&return_value, BRASERO_BURN_OK);
 
 	g_signal_emitv (instance_and_params,
 			brasero_track_data_cfg_signals [IMAGE],

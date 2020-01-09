@@ -40,7 +40,6 @@
 #include <brasero-status.h>
 #include <brasero-track.h>
 
-
 G_BEGIN_DECLS
 
 #define BRASERO_TYPE_BURN_SESSION         (brasero_burn_session_get_type ())
@@ -72,8 +71,8 @@ struct _BraseroBurnSessionClass {
 
 	/** Signals **/
 	void			(*flags_changed)	(BraseroBurnSession *session);
-	void			(*tag_changed)	(BraseroBurnSession *session,
-					                   const gchar *tag);
+	void			(*tag_changed)		(BraseroBurnSession *session,
+					                 const gchar *tag);
 	void			(*track_added)		(BraseroBurnSession *session,
 							 BraseroTrack *track);
 	void			(*track_removed)	(BraseroBurnSession *session,
@@ -85,9 +84,9 @@ struct _BraseroBurnSessionClass {
 							 BraseroMedium *former_medium);
 };
 
-GType brasero_burn_session_get_type ();
+GType brasero_burn_session_get_type (void);
 
-BraseroBurnSession *brasero_burn_session_new ();
+BraseroBurnSession *brasero_burn_session_new (void);
 
 
 /**
@@ -146,9 +145,20 @@ BraseroBurnResult
 brasero_burn_session_tag_remove (BraseroBurnSession *session,
 				 const gchar *tag);
 
+BraseroBurnResult
+brasero_burn_session_tag_add_int (BraseroBurnSession *self,
+                                  const gchar *tag,
+                                  gint value);
+gint
+brasero_burn_session_tag_lookup_int (BraseroBurnSession *self,
+                                     const gchar *tag);
+
 /**
  * Destination 
  */
+BraseroBurnResult
+brasero_burn_session_get_output_type (BraseroBurnSession *self,
+                                      BraseroTrackType *output);
 
 BraseroDrive *
 brasero_burn_session_get_burner (BraseroBurnSession *session);
@@ -168,9 +178,12 @@ brasero_burn_session_get_output (BraseroBurnSession *session,
 				 gchar **image,
 				 gchar **toc);
 
+BraseroBurnResult
+brasero_burn_session_set_image_output_format (BraseroBurnSession *self,
+					    BraseroImageFormat format);
+
 BraseroImageFormat
 brasero_burn_session_get_output_format (BraseroBurnSession *session);
-
 
 const gchar *
 brasero_burn_session_get_label (BraseroBurnSession *session);
@@ -234,17 +247,33 @@ brasero_burn_session_get_blank_flags (BraseroBurnSession *session,
  * Used to test the possibilities offered for a given session
  */
 
+void
+brasero_burn_session_set_strict_support (BraseroBurnSession *session,
+                                         gboolean strict_check);
+
+gboolean
+brasero_burn_session_get_strict_support (BraseroBurnSession *session);
+
 BraseroBurnResult
 brasero_burn_session_can_blank (BraseroBurnSession *session);
 
 BraseroBurnResult
 brasero_burn_session_can_burn (BraseroBurnSession *session,
-			       gboolean use_flags);
+                               gboolean check_flags);
+
+typedef BraseroBurnResult	(* BraseroForeachPluginErrorCb)	(BraseroPluginErrorType type,
+		                                                         const gchar *detail,
+		                                                         gpointer user_data);
+
+BraseroBurnResult
+brasero_session_foreach_plugin_error (BraseroBurnSession *session,
+                                      BraseroForeachPluginErrorCb callback,
+                                      gpointer user_data);
 
 BraseroBurnResult
 brasero_burn_session_input_supported (BraseroBurnSession *session,
 				      BraseroTrackType *input,
-				      gboolean use_flags);
+                                      gboolean check_flags);
 
 BraseroBurnResult
 brasero_burn_session_output_supported (BraseroBurnSession *session,

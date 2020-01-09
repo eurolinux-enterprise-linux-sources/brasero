@@ -34,6 +34,8 @@
 
 #include <glib.h>
 
+#include "scsi-spc1.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -95,6 +97,8 @@ brasero_spc1_mode_select (BraseroDeviceHandle *handle,
 {
 	BraseroModeSelectCDB *cdb;
 	BraseroScsiResult res;
+
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 
 	cdb = brasero_scsi_command_new (&info, handle);
 	cdb->PF = 1;

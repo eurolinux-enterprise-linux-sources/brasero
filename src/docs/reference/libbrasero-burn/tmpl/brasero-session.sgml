@@ -17,6 +17,9 @@ BraseroBurnSession
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroBurnSession ##### -->
 <para>
 
@@ -45,6 +48,7 @@ BraseroBurnSession
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -294,7 +298,7 @@ BraseroBurnSession
 </para>
 
 @session: 
-@use_flags: 
+@check_flags: 
 @Returns: 
 
 
@@ -305,7 +309,7 @@ BraseroBurnSession
 
 @session: 
 @input: 
-@use_flags: 
+@check_flags: 
 @Returns: 
 
 

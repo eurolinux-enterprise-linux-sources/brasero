@@ -237,7 +237,14 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Questa è la finestra iniziale per tutte le diverse tipologie di progetti. Per iniziare un progetto è sufficiente fare clic sul tipo di progetto desiderato. Se precedentemente sono stati creati altri progetti con <application>Brasero</application>, è possibile selezionarli nella sezione <guilabel>Scegliere un progetto aperto di recente</guilabel> (per maggiori informazioni, consultare <xref linkend="brasero-open-recent-project"/>).</para>
+    <para>
+	This window is the starting point for all of your projects.
+	You can click on the project type you wish to start from here.
+	If you have created other projects with <application>Brasero</application>, you will be
+	able to select them from the <guilabel>Recent
+	projects</guilabel> (see <xref linkend="brasero-open-recent-project"/> for more
+	information).
+      </para>
     </sect2>
   </sect1>
 
@@ -656,7 +663,13 @@
 	</para>
 	<para>
 	  <note>
-	    <para>Se nel proprio sistema è presente più di un'unità CD/DVD, è possibile usare un dispositivo come sorgente e l'altro come la destinazione. Nel caso in cui si abbia un solo dispositivo, viene chiesto di rimuovere il CD o il DVD che si sta copiando e di sostituirlo con un supporto vergine.</para>
+	    <para>
+	      If you have more than one drive on your system, you can
+	      use one drive as the source drive and the other as the
+	      destination drive. If you do not, you will be prompted
+	      to remove the CD or DVD you are copying and insert a
+	      blank media.
+	    </para>
 	  </note>
 	</para>
       </sect3>
@@ -860,7 +873,11 @@
 	  <para>Scegliere <menuchoice><guimenu>Progetto</guimenu><guisubmenu>Progetti recenti</guisubmenu></menuchoice> e selezionare il progetto da aprire.</para>
 	</listitem>
 	<listitem>
-	  <para>Dalla finestra principale, fare clic sul progetto da aprire in <guilabel>Scegliere un progetto aperto di recente</guilabel>.</para>
+	  <para>
+	    From the main window, click on the project you want to open
+	    under <guilabel>Recent
+	    projects</guilabel>.
+	  </para>
 	</listitem>
       </itemizedlist></para>
     <para>Per aprire un progetto che non compare in <guilabel>Progetti recenti</guilabel>, scegliere <menuchoice><guimenu>Progetto</guimenu><guimenuitem>Apri</guimenuitem></menuchoice> e selezionare il file del progetto.</para>

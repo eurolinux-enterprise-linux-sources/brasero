@@ -235,7 +235,7 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Αυτό το παράθυρο είναι το σημείο εκκίνησης για όλες τις εργασίες σας. Μπορείτε να κάνετε κλικ στον τύπο εργασίας που επιθυμείτε να ξεκινήσετε από εδώ. Αν έχετε δημιουργήσει άλλες εργασίες με το <application>Brasero</application>, μπορείτε να τις επιλέξετε από το <guilabel>Επιλέξτε την εργασία που ανοίξατε πρόσφατα:</guilabel> (Δες το <xref linkend="brasero-open-recent-project"/> για περισσότερες πληροφορίες).</para>
+    <para>Αυτό το παράθυρο είναι το σημείο εκκίνησης για όλες τις εργασίες σας. Από εδώ μπορείτε να πατήσετε στον τύπο εργασίας που επιθυμείτε να ξεκινήσετε. Αν έχετε δημιουργήσει άλλες εργασίες με το <application>Brasero</application>, μπορείτε να τις επιλέξετε από τις <guilabel>Πρόσφατες εργασίες</guilabel> (δείτε το <xref linkend="brasero-open-recent-project"/> για περισσότερες πληροφορίες).</para>
     </sect2>
   </sect1>
 
@@ -858,7 +858,7 @@
 	  <para>Επιλέξτε <menuchoice><guimenu>Εργασία</guimenu><guisubmenu>Πρόσφατες εργασίες</guisubmenu></menuchoice> και επιλέξτε την εργασία που θέλετε να ανοίξετε.</para>
 	</listitem>
 	<listitem>
-	  <para>Στο κεντρικό παράθυρο, πατήστε στην εργασία που θέλετε να ανοίξετε κάτω από το <guilabel>Επιλέξτε την εργασία που ανοίξατε πρόσφατα:</guilabel>.</para>
+	  <para>Στο κεντρικό παράθυρο, πατήστε στην εργασία που θέλετε να ανοίξετε κάτω από τις <guilabel>Πρόσφατες εργασίες</guilabel>.</para>
 	</listitem>
       </itemizedlist></para>
     <para>Για να ανοίξετε μια εργασία που δεν εμφανίζεται στο <guilabel>Πρόσφατες εργασίες</guilabel>, πατήστε <menuchoice><guimenu>Εργασία</guimenu><guimenuitem>Άνοιγμα</guimenuitem></menuchoice> και επιλέξτε την εργασία.</para>
@@ -920,22 +920,22 @@
 	  <para>Εισάγετε το  CD ή DVD στον υπολογιστή σας για να ελεγχθεί.</para>
 	</listitem>
 	<listitem>
-	  <para>Από την μπάρα μενού, επιλέξτε <menuchoice><guimenu>Εργαλεία</guimenu><guimenuitem>Έλεγχος ακεραιότητας<guimenuitem>, CtrlF.
-	
-	
-	  Brasero 
-	      
-		 
-	      
-	      
-		 .md5
-	      
-	    
-	
-	
-	   
-	
-      </guimenuitem></guimenuitem></menuchoice></para></listitem></orderedlist></para>
+	  <para>Από την μπάρα μενού, επιλέξτε <menuchoice><guimenu>Εργαλεία</guimenu><guimenuitem>Έλεγχος ακεραιότητας</guimenuitem></menuchoice>, ή πιέστε <keycombo><keycap>Ctrl</keycap><keycap>F</keycap></keycombo>.</para>
+	</listitem>
+	<listitem>
+	  <para>Μπορείτε να ελέγξετε την ακεραιότητα χρησιμοποιώντας ένα αρχείο MD5 ή αφήνοντας τον <application>Brasero</application> να εκτελέσει αυτόματα έναν έλεγχο στο μέσο. <itemizedlist>
+	      <listitem>
+		<para>Επιλέξτε την επιλογή <guilabel>Χρησιμοποιήστε ένα αρχείο τύπου md5 για να ελέγξετε το δίσκο</guilabel> για να χρησιμοποιήσετε ένα αρχείο MD5.</para>
+	      </listitem>
+	      <listitem>
+		<para>Πατήστε το κουμπί <guilabel>κανένα</guilabel> κάτω από την προαναφερόμενη επιλογή και επιλέξτε ένα αρχείο MD5, συνήθως με την κατάληξη <filename>.md5</filename></para>
+	      </listitem>
+	    </itemizedlist></para>
+	</listitem>
+	<listitem>
+	  <para>Πατήστε το κουμπί <guibutton>Έλεγχος</guibutton> για να αρχίσει ο έλεγχος ακεραιότητας.</para>
+	</listitem>
+      </orderedlist></para>
     <para>Αν ο έλεγχος ακεραιότητας επιτύχει, ο <application>Brasero</application> θα σας ειδοποιήσει με τον διάλογο <guilabel>Επιτυχία ελέγχου ακεραιότητας αρχείου</guilabel>, αλλιώς ο διάλογος <guilabel>Σφάλμα κατά τον έλεγχο ακεραιότητας αρχείου</guilabel> θα εμφανιστεί.</para>
   </sect1>
 

@@ -172,10 +172,10 @@ static void
 brasero_src_image_update (BraseroSrcImage *self)
 {
 	gchar *uri;
-	gchar *path;
-	GFile *file;
+	gchar *name;
 	gchar *string;
 	goffset bytes = 0;
+	GFile *file = NULL;
 	GError *error = NULL;
 	BraseroStatus *status;
 	BraseroBurnResult result;
@@ -189,7 +189,6 @@ brasero_src_image_update (BraseroSrcImage *self)
 		return;
 
 	/* Retrieve a path or an uri */
-	path = NULL;
 	format = brasero_track_image_get_format (BRASERO_TRACK_IMAGE (priv->track));
 	switch (format) {
 	case BRASERO_IMAGE_FORMAT_NONE:
@@ -214,32 +213,27 @@ brasero_src_image_update (BraseroSrcImage *self)
 	file = g_file_new_for_uri (uri);
 	g_free (uri);
 
-	if (g_file_is_native (file)) {
-		path = g_file_get_path (file);
-		if (!path)
-			path = g_file_get_uri (file);
-	}
-	else
-		path = g_file_get_uri (file);
-
-	g_object_unref (file);
-	if (!path)
+	name = g_file_get_basename (file);
+	if (!name) {
+		if (file)
+			g_object_unref (file);
 		return;
+	}
 
 	/* See if information retrieval went fine and/or is ready */
 	status = brasero_status_new ();
 	result = brasero_track_get_status (BRASERO_TRACK (priv->track), status);
-	if (result == BRASERO_BURN_NOT_READY) {
+	if (result == BRASERO_BURN_NOT_READY || result == BRASERO_BURN_RUNNING) {
 		/* Translators: %s is a path */
-		string = g_strdup_printf (_("\"%s\": loading"), path);
+		string = g_strdup_printf (_("\"%s\": loading"), name);
 		gtk_widget_set_tooltip_text (GTK_WIDGET (self), NULL);
-		g_free (path);
+		g_free (name);
 		goto end;
 	}
 	else if (result != BRASERO_BURN_OK) {
 		/* Translators: %s is a path and image refers to a disc image */
-		string = g_strdup_printf (_("\"%s\": unknown disc image type"), path);
-		g_free (path);
+		string = g_strdup_printf (_("\"%s\": unknown disc image type"), name);
+		g_free (name);
 
 		error = brasero_status_get_error (status);
 		if (!error)
@@ -251,7 +245,8 @@ brasero_src_image_update (BraseroSrcImage *self)
 		goto end;
 	}
 
-	gtk_widget_set_tooltip_text (GTK_WIDGET (self), NULL);
+	uri = g_file_get_uri (file);
+	gtk_widget_set_tooltip_text (GTK_WIDGET (self), uri);
 
 	/* Deal with size */
 	brasero_track_get_size (BRASERO_TRACK (priv->track), NULL, &bytes);
@@ -259,13 +254,16 @@ brasero_src_image_update (BraseroSrcImage *self)
 
 	/* NOTE to translators, the first %s is the path of the image
 	 * file and the second its size. */
-	string = g_strdup_printf (_("\"%s\": %s"), path, size_string);
+	string = g_strdup_printf (_("\"%s\": %s"), name, size_string);
 	g_free (size_string);
-	g_free (path);
+	g_free (name);
 
 end:
 
-	brasero_status_free (status);
+	if (file)
+		g_object_unref (file);
+
+	g_object_unref (status);
 	if (string) {
 		/* This is hackish and meant to avoid ellipsization to make the
 		 * label to small. */
@@ -351,35 +349,18 @@ brasero_src_image_changed (BraseroSrcImage *dialog)
 static void
 brasero_src_image_set_formats (BraseroSrcImage *dialog)
 {
-	BraseroTrackType *input = NULL;
 	BraseroSrcImagePrivate *priv;
 	BraseroImageFormat formats;
 	BraseroImageFormat format;
 
 	priv = BRASERO_SRC_IMAGE_PRIVATE (dialog);
 
-	if (!priv->format)
-		return;
-
-	/* get the available image types */
-	input = brasero_track_type_new ();
-	brasero_track_type_set_has_image (input);
-	formats = BRASERO_IMAGE_FORMAT_NONE;
-	format = BRASERO_IMAGE_FORMAT_CDRDAO;
-
-	for (; format != BRASERO_IMAGE_FORMAT_NONE; format >>= 1) {
-		BraseroBurnResult result;
-
-		brasero_track_type_set_image_format (input, format);
-		result = brasero_burn_session_input_supported (priv->session,
-							       input,
-							       FALSE);
-		if (result == BRASERO_BURN_OK)
-			formats |= format;
-	}
-
-	brasero_track_type_free (input);
-
+	/* Show all formats here even if we miss a
+	 * plugin to burn or use it */
+	formats = BRASERO_IMAGE_FORMAT_BIN|
+			 BRASERO_IMAGE_FORMAT_CUE|
+			 BRASERO_IMAGE_FORMAT_CDRDAO|
+			 BRASERO_IMAGE_FORMAT_CLONE;
 	brasero_image_type_chooser_set_formats (BRASERO_IMAGE_TYPE_CHOOSER (priv->format), formats,  TRUE, FALSE);
 
 	format = brasero_track_image_cfg_get_forced_format (priv->track);
@@ -474,7 +455,7 @@ brasero_src_image_clicked (GtkButton *button)
 	/* add the type chooser to the dialog */
 	box = gtk_hbox_new (FALSE, 6);
 	gtk_widget_show (box);
-	gtk_box_pack_end (GTK_BOX (GTK_DIALOG (priv->file)->vbox),
+	gtk_box_pack_end (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (priv->file))),
 			  box,
 			  FALSE,
 			  FALSE,

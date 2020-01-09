@@ -36,6 +36,9 @@
 
 #include "brasero-media-private.h"
 
+#include "scsi-mmc1.h"
+#include "scsi-mmc3.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -172,6 +175,8 @@ brasero_mmc1_read_toc_formatted (BraseroDeviceHandle *handle,
 	BraseroRdTocPmaAtipCDB *cdb;
 	BraseroScsiResult res;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
+
 	cdb = brasero_scsi_command_new (&info, handle);
 	cdb->format = BRASERO_RD_TAP_FORMATTED_TOC;
 
@@ -201,6 +206,8 @@ brasero_mmc1_read_toc_raw (BraseroDeviceHandle *handle,
 	BraseroRdTocPmaAtipCDB *cdb;
 	BraseroScsiResult res;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
+
 	cdb = brasero_scsi_command_new (&info, handle);
 	cdb->format = BRASERO_RD_TAP_RAW_TOC;
 
@@ -229,6 +236,8 @@ brasero_mmc3_read_cd_text (BraseroDeviceHandle *handle,
 	BraseroRdTocPmaAtipCDB *cdb;
 	BraseroScsiResult res;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
+
 	cdb = brasero_scsi_command_new (&info, handle);
 	cdb->format = BRASERO_RD_TAP_CD_TEXT;
 
@@ -253,6 +262,8 @@ brasero_mmc1_read_atip (BraseroDeviceHandle *handle,
 {
 	BraseroRdTocPmaAtipCDB *cdb;
 	BraseroScsiResult res;
+
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 
 	/* In here we have to ask how many bytes the drive wants to return first
 	 * indeed there is a difference in the descriptor size between MMC1/MMC2

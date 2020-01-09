@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 /***************************************************************************
  *            project.h
  *
@@ -61,27 +63,35 @@ typedef struct {
 	void	(*add_pressed)	(BraseroProject *project);
 } BraseroProjectClass;
 
-GType brasero_project_get_type ();
-GtkWidget *brasero_project_new ();
+GType brasero_project_get_type (void);
+GtkWidget *brasero_project_new (void);
 
 void
 brasero_project_burn (BraseroProject *project);
 
-gboolean
-brasero_project_confirm_switch (BraseroProject *project);
+BraseroBurnResult
+brasero_project_confirm_switch (BraseroProject *project,
+				gboolean keep_files);
 
 void
-brasero_project_set_audio (BraseroProject *project, GSList *uris);
+brasero_project_set_audio (BraseroProject *project);
 void
-brasero_project_set_data (BraseroProject *project, GSList *uris);
+brasero_project_set_data (BraseroProject *project);
 void
-brasero_project_set_video (BraseroProject *project, GSList *uris);
+brasero_project_set_video (BraseroProject *project);
 void
 brasero_project_set_none (BraseroProject *project);
 
 void
 brasero_project_set_source (BraseroProject *project,
 			    BraseroURIContainer *source);
+
+BraseroProjectType
+brasero_project_convert_to_data (BraseroProject *project);
+
+BraseroProjectType
+brasero_project_convert_to_stream (BraseroProject *project,
+				   gboolean is_video);
 
 BraseroProjectType
 brasero_project_open_session (BraseroProject *project,

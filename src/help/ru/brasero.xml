@@ -239,7 +239,14 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Это окно является отправной точкой для всех проектов. Здесь можно выбрать тип проекта. Созданные ранее в <application>Brasero</application> проекты можно выбрать из <guilabel>Выбрать недавний проект</guilabel> (подробнее смотрите <xref linkend="brasero-open-recent-project"/>).</para>
+    <para>
+	This window is the starting point for all of your projects.
+	You can click on the project type you wish to start from here.
+	If you have created other projects with <application>Brasero</application>, you will be
+	able to select them from the <guilabel>Recent
+	projects</guilabel> (see <xref linkend="brasero-open-recent-project"/> for more
+	information).
+      </para>
     </sect2>
   </sect1>
 
@@ -688,7 +695,13 @@
 	</para>
 	<para>
 	  <note>
-	    <para>Если в системе присутствует больше одного привода, один из них можно использовать в качестве привода источника, а другой в качестве привода назначения. В противном случае, приходится извлекать CD или DVD, с которого выполнялась копия, и вставлять пустой носитель.</para>
+	    <para>
+	      If you have more than one drive on your system, you can
+	      use one drive as the source drive and the other as the
+	      destination drive. If you do not, you will be prompted
+	      to remove the CD or DVD you are copying and insert a
+	      blank media.
+	    </para>
 	  </note>
 	</para>
       </sect3>
@@ -908,7 +921,11 @@
 	  <para>Выберите <menuchoice><guimenu>Проект</guimenu><guisubmenu>Недавние проекты</guisubmenu></menuchoice>, и выберите проект, который нужно открыть.</para>
 	</listitem>
 	<listitem>
-	  <para>В главном окне под меткой <guilabel>Выбрать недавный проект</guilabel> выберите проект, который нужно открыть.</para>
+	  <para>
+	    From the main window, click on the project you want to open
+	    under <guilabel>Recent
+	    projects</guilabel>.
+	  </para>
 	</listitem>
       </itemizedlist></para>
     <para>Чтобы открыть проект, который отсутствует под надписью <guilabel>Недавние проекты</guilabel>, выберите <menuchoice><guimenu>Проект</guimenu><guimenuitem>Открыть</guimenuitem></menuchoice> и выберите файл проекта.</para>

@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
 <link rel="prev" href="libbrasero-media-BraseroVolume.html" title="BraseroVolume">
 <link rel="next" href="libbrasero-media-BraseroDriveSelection.html" title="BraseroDriveSelection">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-media">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -41,14 +37,14 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-media-BraseroMediumSelection.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">                    <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a>;
-<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html">GtkWidget</a>*          <a href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-new">brasero_medium_selection_new</a>        (void);
-<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *     <a href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-get-active">brasero_medium_selection_get_active</a> (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-set-active">brasero_medium_selection_set_active</a> (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector,
-                                                         <a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
-void                <a href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-show-media-type">brasero_medium_selection_show_media_type</a>
-                                                        (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector,
-                                                         <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType">BraseroMediaType</a> type);
+<pre class="synopsis">                    <a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection">BraseroMediumSelection</a>;
+<a href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a>*          <a class="link" href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-new" title="brasero_medium_selection_new ()">brasero_medium_selection_new</a>        (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="returnvalue">BraseroMedium</span></a> *     <a class="link" href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-get-active" title="brasero_medium_selection_get_active ()">brasero_medium_selection_get_active</a> (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-set-active" title="brasero_medium_selection_set_active ()">brasero_medium_selection_set_active</a> (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="type">BraseroMedium</span></a> *medium</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-show-media-type" title="brasero_medium_selection_show_media_type ()">brasero_medium_selection_show_media_type</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType" title="enum BraseroMediaType"><span class="type">BraseroMediaType</span></a> type</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -65,19 +61,21 @@ void                <a href="libbrasero-media-BraseroMediumSelection.html#braser
 } BraseroMediumSelection;
 </pre>
 <p>
+Rename to: MediumSelection
 </p>
 </div>
 <hr>
 <div class="refsect2" title="brasero_medium_selection_new ()">
 <a name="brasero-medium-selection-new"></a><h3>brasero_medium_selection_new ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html">GtkWidget</a>*          brasero_medium_selection_new        (void);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"><span class="returnvalue">GtkWidget</span></a>*          brasero_medium_selection_new        (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> object</p>
+Creates a new <a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> object
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a>. Unref when it is not needed anymore.
+<td> a <a href="/usr/share/gtk-doc/html/gtk/GtkWidget.html"><span class="type">GtkWidget</span></a>. Unref when it is not needed anymore.
 </td>
 </tr></tbody>
 </table></div>
@@ -85,20 +83,21 @@ Creates a new <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediu
 <hr>
 <div class="refsect2" title="brasero_medium_selection_get_active ()">
 <a name="brasero-medium-selection-get-active"></a><h3>brasero_medium_selection_get_active ()</h3>
-<pre class="programlisting"><a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *     brasero_medium_selection_get_active (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="returnvalue">BraseroMedium</span></a> *     brasero_medium_selection_get_active (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>);</pre>
 <p>
-Gets the active medium.</p>
+Gets the active medium.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
+<td>a <a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a> or NULL. Unref when it is not needed anymore.
+<td> a <a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="type">BraseroMedium</span></a> or NULL. Unref when it is not needed anymore.
 </td>
 </tr>
 </tbody>
@@ -107,26 +106,27 @@ Gets the active medium.</p>
 <hr>
 <div class="refsect2" title="brasero_medium_selection_set_active ()">
 <a name="brasero-medium-selection-set-active"></a><h3>brasero_medium_selection_set_active ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_selection_set_active (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector,
-                                                         <a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_medium_selection_set_active (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="type">BraseroMedium</span></a> *medium</code></em>);</pre>
 <p>
-Sets the active medium. Emits the ::medium-changed signal.</p>
+Sets the active medium. Emits the ::medium-changed signal.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
+<td>a <a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a> to set as the active one in the selector
+<td>a <a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="BraseroMedium"><span class="type">BraseroMedium</span></a> to set as the active one in the selector
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it succeeded, FALSE otherwise.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it succeeded, FALSE otherwise.
 </td>
 </tr>
 </tbody>
@@ -135,22 +135,23 @@ Sets the active medium. Emits the ::medium-changed signal.</p>
 <hr>
 <div class="refsect2" title="brasero_medium_selection_show_media_type ()">
 <a name="brasero-medium-selection-show-media-type"></a><h3>brasero_medium_selection_show_media_type ()</h3>
-<pre class="programlisting">void                brasero_medium_selection_show_media_type
-                                                        (<a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection">BraseroMediumSelection</a> *selector,
-                                                         <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType">BraseroMediaType</a> type);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_medium_selection_show_media_type
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a> *selector</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType" title="enum BraseroMediaType"><span class="type">BraseroMediaType</span></a> type</code></em>);</pre>
 <p>
-Filters and displays media corresponding to <em class="parameter"><code>type</code></em>.</p>
+Filters and displays media corresponding to <em class="parameter"><code>type</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
+<td>a <a class="link" href="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection" title="BraseroMediumSelection"><span class="type">BraseroMediumSelection</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> a <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType"><span class="type">BraseroMediaType</span></a>
+<td>a <a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType" title="enum BraseroMediaType"><span class="type">BraseroMediaType</span></a>
 </td>
 </tr>
 </tbody>
@@ -160,6 +161,6 @@ Filters and displays media corresponding to <em class="parameter"><code>type</co
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

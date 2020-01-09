@@ -17,6 +17,9 @@ BraseroBurnDialog
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroBurnDialog ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroBurnDialog
 
 </para>
 
+@void: 
 @Returns: 
 
 

@@ -6,7 +6,7 @@
       <sub name="brasero-media" link="libbrasero-media-brasero-media.html"/>
       <sub name="brasero-units" link="libbrasero-media-brasero-units.html"/>
       <sub name="BraseroMediumMonitor" link="libbrasero-media-BraseroMediumMonitor.html"/>
-      <sub name="BraseroDrive" link="libbrasero-media-BraseroDrive.html"/>
+      <sub name="BraseroDrive" link="libbrasero-media-brasero-drive.html"/>
       <sub name="BraseroMedium" link="libbrasero-media-BraseroMedium.html"/>
       <sub name="BraseroVolume" link="libbrasero-media-BraseroVolume.html"/>
       <sub name="BraseroMediumSelection" link="libbrasero-media-BraseroMediumSelection.html"/>
@@ -79,26 +79,26 @@
     <function name="brasero_medium_monitor_get_drives ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-drives"/>
     <function name="brasero_medium_monitor_get_drive ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-drive"/>
     <function name="brasero_medium_monitor_is_probing ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-is-probing"/>
-    <function name="enum BraseroDriveCaps" link="libbrasero-media-BraseroDrive.html#BraseroDriveCaps"/>
-    <function name="BraseroDrive" link="libbrasero-media-BraseroDrive.html#BraseroDrive"/>
-    <function name="brasero_drive_reprobe ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-reprobe"/>
-    <function name="brasero_drive_get_medium ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-medium"/>
-    <function name="brasero_drive_get_gdrive ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-gdrive"/>
-    <function name="brasero_drive_get_udi ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-udi"/>
-    <function name="brasero_drive_is_fake ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-is-fake"/>
-    <function name="brasero_drive_get_display_name ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-display-name"/>
-    <function name="brasero_drive_get_device ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-device"/>
-    <function name="brasero_drive_get_block_device ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-block-device"/>
-    <function name="brasero_drive_get_bus_target_lun_string ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-bus-target-lun-string"/>
-    <function name="brasero_drive_get_caps ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-caps"/>
-    <function name="brasero_drive_can_write ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-write"/>
-    <function name="brasero_drive_can_eject ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-eject"/>
-    <function name="brasero_drive_eject ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-eject"/>
-    <function name="brasero_drive_cancel_current_operation ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-cancel-current-operation"/>
-    <function name="brasero_drive_is_door_open ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-is-door-open"/>
-    <function name="brasero_drive_can_use_exclusively ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-use-exclusively"/>
-    <function name="brasero_drive_lock ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-lock"/>
-    <function name="brasero_drive_unlock ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-unlock"/>
+    <function name="enum BraseroDriveCaps" link="libbrasero-media-brasero-drive.html#BraseroDriveCaps"/>
+    <function name="BraseroDrive" link="libbrasero-media-brasero-drive.html#BraseroDrive"/>
+    <function name="brasero_drive_reprobe ()" link="libbrasero-media-brasero-drive.html#brasero-drive-reprobe"/>
+    <function name="brasero_drive_get_medium ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-medium"/>
+    <function name="brasero_drive_get_gdrive ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-gdrive"/>
+    <function name="brasero_drive_get_udi ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-udi"/>
+    <function name="brasero_drive_is_fake ()" link="libbrasero-media-brasero-drive.html#brasero-drive-is-fake"/>
+    <function name="brasero_drive_get_display_name ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-display-name"/>
+    <function name="brasero_drive_get_device ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-device"/>
+    <function name="brasero_drive_get_block_device ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-block-device"/>
+    <function name="brasero_drive_get_bus_target_lun_string ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-bus-target-lun-string"/>
+    <function name="brasero_drive_get_caps ()" link="libbrasero-media-brasero-drive.html#brasero-drive-get-caps"/>
+    <function name="brasero_drive_can_write ()" link="libbrasero-media-brasero-drive.html#brasero-drive-can-write"/>
+    <function name="brasero_drive_can_eject ()" link="libbrasero-media-brasero-drive.html#brasero-drive-can-eject"/>
+    <function name="brasero_drive_eject ()" link="libbrasero-media-brasero-drive.html#brasero-drive-eject"/>
+    <function name="brasero_drive_cancel_current_operation ()" link="libbrasero-media-brasero-drive.html#brasero-drive-cancel-current-operation"/>
+    <function name="brasero_drive_is_door_open ()" link="libbrasero-media-brasero-drive.html#brasero-drive-is-door-open"/>
+    <function name="brasero_drive_can_use_exclusively ()" link="libbrasero-media-brasero-drive.html#brasero-drive-can-use-exclusively"/>
+    <function name="brasero_drive_lock ()" link="libbrasero-media-brasero-drive.html#brasero-drive-lock"/>
+    <function name="brasero_drive_unlock ()" link="libbrasero-media-brasero-drive.html#brasero-drive-unlock"/>
     <function name="BraseroMedium" link="libbrasero-media-BraseroMedium.html#BraseroMedium"/>
     <function name="brasero_medium_get_status ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-status"/>
     <function name="brasero_medium_get_max_write_speed ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-max-write-speed"/>

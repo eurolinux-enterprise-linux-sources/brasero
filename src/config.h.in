@@ -12,11 +12,20 @@
 /* version */
 #undef BRASERO_VERSION
 
+/* define if you want to use search pane */
+#undef BUILD_BEAGLE
+
+/* define if you want to build cdrdao plugins */
+#undef BUILD_CDRDAO
+
 /* define if you want to build cdrkit plugins */
 #undef BUILD_CDRKIT
 
 /* define if you want to build cdrtools plugins */
 #undef BUILD_CDRTOOLS
+
+/* define if you want to build growisofs plugins */
+#undef BUILD_GROWISOFS
 
 /* define if you want to build inotify */
 #undef BUILD_INOTIFY
@@ -32,6 +41,9 @@
 
 /* define if you want to use search pane */
 #undef BUILD_SEARCH
+
+/* define if you want to use search pane */
+#undef BUILD_TRACKER
 
 /* always defined to indicate that i18n is enabled */
 #undef ENABLE_NLS
@@ -123,6 +135,9 @@
 
 /* Define to the one symbol short name of this package. */
 #undef PACKAGE_TARNAME
+
+/* Define to the home page for this package. */
+#undef PACKAGE_URL
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION

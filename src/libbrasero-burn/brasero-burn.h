@@ -62,6 +62,9 @@ typedef struct {
 									 BraseroBurnError error,
 									 BraseroMedia required_media);
 
+	BraseroBurnResult		(*eject_failure)				(BraseroBurn *obj,
+							                                  BraseroDrive *drive);
+
 	BraseroBurnResult		(*location_request)		(BraseroBurn *obj,
 									 GError *error,
 									 gboolean is_temporary);
@@ -81,10 +84,14 @@ typedef struct {
 									 glong time_remaining);
 	void				(*action_changed)		(BraseroBurn *obj,
 									 BraseroBurnAction action);
+
+	BraseroBurnResult		(*install_missing)		(BraseroBurn *obj,
+									 BraseroPluginErrorType error,
+									 const gchar *detail);
 } BraseroBurnClass;
 
-GType brasero_burn_get_type ();
-BraseroBurn *brasero_burn_new ();
+GType brasero_burn_get_type (void);
+BraseroBurn *brasero_burn_new (void);
 
 BraseroBurnResult 
 brasero_burn_record (BraseroBurn *burn,

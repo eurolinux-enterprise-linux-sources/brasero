@@ -17,6 +17,9 @@ BraseroSessionCfg
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroSessionCfg ##### -->
 <para>
 
@@ -62,6 +65,7 @@ BraseroSessionCfg
 
 </para>
 
+@void: 
 @Returns: 
 
 

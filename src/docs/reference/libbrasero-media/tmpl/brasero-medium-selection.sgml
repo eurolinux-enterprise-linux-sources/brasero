@@ -17,6 +17,9 @@ BraseroMediumSelection
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroMediumSelection ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroMediumSelection
 
 </para>
 
+@void: 
 @Returns: 
 
 

@@ -235,7 +235,14 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>本窗口是您所有项目的起点。您可以点击您希望从这开始的项目类型。如果您曾经使用 <application>Brasero</application> 创建过其它项目，您将可以从 <guilabel>选择最近打开的项目</guilabel> 中选择它们(参见 <xref linkend="brasero-open-recent-project"/> 以获取更多信息)。</para>
+    <para>
+	This window is the starting point for all of your projects.
+	You can click on the project type you wish to start from here.
+	If you have created other projects with <application>Brasero</application>, you will be
+	able to select them from the <guilabel>Recent
+	projects</guilabel> (see <xref linkend="brasero-open-recent-project"/> for more
+	information).
+      </para>
     </sect2>
   </sect1>
 
@@ -670,7 +677,13 @@
 	</para>
 	<para>
 	  <note>
-	    <para>如果您的系统上有多个驱动器，您可以使用一个作为源驱动器，另一个作为目标驱动器。如果您没有，您将被提示移除已复制的光盘并且插入一张空光盘。</para>
+	    <para>
+	      If you have more than one drive on your system, you can
+	      use one drive as the source drive and the other as the
+	      destination drive. If you do not, you will be prompted
+	      to remove the CD or DVD you are copying and insert a
+	      blank media.
+	    </para>
 	  </note>
 	</para>
       </sect3>
@@ -874,7 +887,11 @@
 	  <para>选择 <menuchoice><guimenu>项目</guimenu><guisubmenu>最近的项目</guisubmenu></menuchoice> 然后选择您希望打开的项目。 </para>
 	</listitem>
 	<listitem>
-	  <para>从主窗口，点击 <guilabel>选择最近打开的项目</guilabel> 下方您希望打开的项目。</para>
+	  <para>
+	    From the main window, click on the project you want to open
+	    under <guilabel>Recent
+	    projects</guilabel>.
+	  </para>
 	</listitem>
       </itemizedlist></para>
     <para>要打开没有出现在 <guilabel>最近的项目</guilabel> 中的项目，选择 <menuchoice><guimenu>项目</guimenu><guimenuitem>打开</guimenuitem></menuchoice> 然后选择项目文件。</para>

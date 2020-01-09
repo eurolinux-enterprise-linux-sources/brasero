@@ -49,9 +49,16 @@
 #include "brasero-plugin-registration.h"
 #include "burn-job.h"
 #include "burn-process.h"
-#include "burn-dvdauthor.h"
 #include "brasero-track-data.h"
 #include "brasero-track-stream.h"
+
+
+#define BRASERO_TYPE_DVD_AUTHOR             (brasero_dvd_author_get_type ())
+#define BRASERO_DVD_AUTHOR(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), BRASERO_TYPE_DVD_AUTHOR, BraseroDvdAuthor))
+#define BRASERO_DVD_AUTHOR_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), BRASERO_TYPE_DVD_AUTHOR, BraseroDvdAuthorClass))
+#define BRASERO_IS_DVD_AUTHOR(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BRASERO_TYPE_DVD_AUTHOR))
+#define BRASERO_IS_DVD_AUTHOR_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), BRASERO_TYPE_DVD_AUTHOR))
+#define BRASERO_DVD_AUTHOR_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), BRASERO_TYPE_DVD_AUTHOR, BraseroDvdAuthorClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroDvdAuthor, brasero_dvd_author, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -354,31 +361,23 @@ brasero_dvd_author_class_init (BraseroDvdAuthorClass *klass)
 	process_class->post = brasero_dvd_author_post;
 }
 
-static BraseroBurnResult
-brasero_dvd_author_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_dvd_author_export_caps (BraseroPlugin *plugin)
 {
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	/* NOTE: it seems that cdrecord can burn cue files on the fly */
 	brasero_plugin_define (plugin,
 			       "dvdauthor",
-			       _("Use dvdauthor to create Video DVDs"),
+			       _("Creates disc images suitable for Video DVDs"),
 			       "Philippe Rouquier",
 			       1);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("dvdauthor", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_FILE,
 					BRASERO_AUDIO_FORMAT_AC3|
 					BRASERO_AUDIO_FORMAT_MP2|
 					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100|
-					BRASERO_AUDIO_FORMAT_48000|
 					BRASERO_METADATA_INFO|
 					BRASERO_VIDEO_FORMAT_VIDEO_DVD);
 
@@ -393,8 +392,6 @@ brasero_dvd_author_export_caps (BraseroPlugin *plugin, gchar **error)
 					BRASERO_AUDIO_FORMAT_AC3|
 					BRASERO_AUDIO_FORMAT_MP2|
 					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100|
-					BRASERO_AUDIO_FORMAT_48000|
 					BRASERO_VIDEO_FORMAT_VIDEO_DVD);
 
 	brasero_plugin_link_caps (plugin, output, input);
@@ -424,6 +421,15 @@ brasero_dvd_author_export_caps (BraseroPlugin *plugin, gchar **error)
 				  BRASERO_MEDIUM_HAS_DATA,
 				  BRASERO_BURN_FLAG_NONE,
 				  BRASERO_BURN_FLAG_NONE);
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 0, 6, 0};
+	brasero_plugin_test_app (plugin,
+	                         "dvdauthor",
+	                         "-h",
+	                         "DVDAuthor::dvdauthor, version %d.%d.%d.",
+	                         version);
 }

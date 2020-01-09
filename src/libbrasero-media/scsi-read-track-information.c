@@ -36,6 +36,8 @@
 
 #include "brasero-media-private.h"
 
+#include "scsi-mmc1.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -172,6 +174,8 @@ brasero_mmc1_read_track_info (BraseroDeviceHandle *handle,
 {
 	BraseroRdTrackInfoCDB *cdb;
 	BraseroScsiResult res;
+
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 
 	cdb = brasero_scsi_command_new (&info, handle);
 	cdb->addr_num_type = BRASERO_FIELD_TRACK_NUM;

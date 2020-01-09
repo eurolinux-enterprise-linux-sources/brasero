@@ -102,17 +102,19 @@ brasero_tool_color_picker_expose (GtkWidget *widget,
 				  BraseroToolColorPicker *self)
 {
 	BraseroToolColorPickerPrivate *priv;
+	GtkAllocation allocation;
 	cairo_t *ctx;
 
 	priv = BRASERO_TOOL_COLOR_PICKER_PRIVATE (self);
 
-	ctx = gdk_cairo_create (GDK_DRAWABLE (widget->window));
+	ctx = gdk_cairo_create (GDK_DRAWABLE (gtk_widget_get_window (widget)));
 	gdk_cairo_set_source_color (ctx, &priv->color);
+	gtk_widget_get_allocation (widget, &allocation);
 	cairo_rectangle (ctx,
-			 widget->allocation.x,
-			 widget->allocation.y,
-			 widget->allocation.width,
-			 widget->allocation.height);
+			 allocation.x,
+			 allocation.y,
+			 allocation.width,
+			 allocation.height);
 	cairo_fill (ctx);
 	cairo_stroke (ctx);
 	cairo_destroy (ctx);
@@ -121,34 +123,36 @@ brasero_tool_color_picker_expose (GtkWidget *widget,
 }
 
 static void
-brasero_tool_color_picker_cancel_clicked (GtkWidget *widget,
-					  BraseroToolColorPicker *self)
+brasero_tool_color_picker_destroy (GtkWidget *widget,
+                                   BraseroToolColorPicker *self)
 {
 	BraseroToolColorPickerPrivate *priv;
 
 	priv = BRASERO_TOOL_COLOR_PICKER_PRIVATE (self);
-
-	gtk_widget_destroy (priv->dialog);
 	priv->dialog = NULL;
 }
 
 static void
-brasero_tool_color_picker_ok_clicked (GtkWidget *widget,
-				      BraseroToolColorPicker *self)
+brasero_tool_color_picker_response (GtkWidget *widget,
+                                    GtkResponseType response,
+                                    BraseroToolColorPicker *self)
 {
 	BraseroToolColorPickerPrivate *priv;
 	GtkColorSelection *selection;
 
 	priv = BRASERO_TOOL_COLOR_PICKER_PRIVATE (self);
 
-	selection = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (priv->dialog)->colorsel);
-	gtk_color_selection_get_current_color (selection, &priv->color);
+	if (response == GTK_RESPONSE_OK) {
+		selection = GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (priv->dialog)));
+		gtk_color_selection_get_current_color (selection, &priv->color);
+
+		g_signal_emit (self,
+			       tool_color_picker_signals[COLOR_SET_SIGNAL],
+			       0);
+	}
+
 	gtk_widget_destroy (priv->dialog);
 	priv->dialog = NULL;
-
-	g_signal_emit (self,
-		       tool_color_picker_signals[COLOR_SET_SIGNAL],
-		       0);
 }
 
 static void
@@ -163,7 +167,7 @@ brasero_tool_color_picker_clicked (BraseroToolColorPicker *self,
 	priv = BRASERO_TOOL_COLOR_PICKER_PRIVATE (self);
 
 	dialog = gtk_color_selection_dialog_new (_("Pick a Color"));
-	selection = GTK_COLOR_SELECTION (GTK_COLOR_SELECTION_DIALOG (dialog)->colorsel);
+	selection = GTK_COLOR_SELECTION (gtk_color_selection_dialog_get_color_selection (GTK_COLOR_SELECTION_DIALOG (dialog)));
 	gtk_color_selection_set_current_color (selection, &priv->color);
 
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
@@ -172,17 +176,13 @@ brasero_tool_color_picker_clicked (BraseroToolColorPicker *self,
 		gtk_window_set_modal (GTK_WINDOW (dialog), gtk_window_get_modal (GTK_WINDOW (toplevel)));
 	}
 
-	g_signal_connect (GTK_COLOR_SELECTION_DIALOG (dialog)->ok_button,
-			  "clicked",
-			  G_CALLBACK (brasero_tool_color_picker_ok_clicked),
-			  self);
-	g_signal_connect (GTK_COLOR_SELECTION_DIALOG (dialog)->cancel_button,
-			  "clicked",
-			  G_CALLBACK (brasero_tool_color_picker_cancel_clicked),
+	g_signal_connect (GTK_COLOR_SELECTION_DIALOG (dialog),
+			  "response",
+			  G_CALLBACK (brasero_tool_color_picker_response),
 			  self);
 	g_signal_connect (dialog,
 			  "destroy",
-			  G_CALLBACK (brasero_tool_color_picker_cancel_clicked),
+			  G_CALLBACK (brasero_tool_color_picker_destroy),
 			  self);
 
 	priv->dialog = dialog;
@@ -194,7 +194,6 @@ static void
 brasero_tool_color_picker_init (BraseroToolColorPicker *object)
 {
 	BraseroToolColorPickerPrivate *priv;
-	GtkWidget *frame;
 
 	priv = BRASERO_TOOL_COLOR_PICKER_PRIVATE (object);
 
@@ -207,19 +206,15 @@ brasero_tool_color_picker_init (BraseroToolColorPicker *object)
 	gtk_widget_show (priv->label);
 	gtk_tool_button_set_label_widget (GTK_TOOL_BUTTON (object), priv->label);
 
-	frame = gtk_frame_new (NULL);
-	gtk_frame_set_shadow_type (GTK_FRAME (frame), GTK_SHADOW_ETCHED_OUT);
-	gtk_widget_show (frame);
-
-	priv->icon = gtk_alignment_new (0.5, 0.5, 1., 1.);
+	priv->icon = gtk_image_new ();
 	gtk_widget_show (priv->icon);
 	g_signal_connect (priv->icon,
 			  "expose-event",
 			  G_CALLBACK (brasero_tool_color_picker_expose),
 			  object);
-	gtk_container_add (GTK_CONTAINER (frame), priv->icon);
 
-	gtk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (object), frame);
+	/* This function expects a GtkMisc object!! */
+	gtk_tool_button_set_icon_widget (GTK_TOOL_BUTTON (object), priv->icon);
 }
 
 static void

@@ -25,13 +25,14 @@ noinst_PROGRAMS =
 DISTCHECK_CONFIGURE_FLAGS =		\
 	--disable-scrollkeeper		\
 	--enable-gtk-doc			\
-	--with-nautilusdir='$${libdir}/nautilus/extensions-2.0-distcheck'
+	--with-nautilusdir='$${libdir}/nautilus/extensions-2.0-distcheck'	\
+	--with-girdir='$${datadir}/girdir-distcheck/'						\
+	--with-typelibdir='$${libdir}/typelibdir-distcheck'
 
 DISTCLEANFILES = \
 	intltool-extract \
 	intltool-merge \
-	intltool-update		\
-	gtk-doc.make
+	intltool-update
 
 pkgconfigdir = $(libdir)/pkgconfig
 pkgconfig_DATA = libbrasero-media.pc libbrasero-burn.pc

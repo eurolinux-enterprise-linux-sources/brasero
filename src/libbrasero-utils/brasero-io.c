@@ -42,6 +42,8 @@
 
 #include <gio/gio.h>
 
+#include <gdk/gdkx.h>
+
 #include <gtk/gtk.h>
 
 #ifdef BUILD_PLAYLIST
@@ -100,6 +102,9 @@ struct _BraseroIOPrivate
 
 	guint progress_id;
 	GSList *progress;
+
+	BraseroIOGetParentWinCb win_callback;
+	gpointer win_user_data;
 };
 
 #define BRASERO_IO_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BRASERO_TYPE_IO, BraseroIOPrivate))
@@ -246,12 +251,6 @@ brasero_io_job_progress_report_stop (BraseroIO *self,
 	}
 
 	g_mutex_unlock (priv->lock);
-}
-
-const gchar *
-brasero_io_job_progress_get_current (BraseroIOJobProgress *progress)
-{
-	return g_strdup (progress->current);
 }
 
 guint
@@ -601,11 +600,19 @@ brasero_io_mount_enclosing_volume (BraseroIO *self,
 				   GError **error)
 {
 	GMount *mounted;
+	GtkWindow *parent;
+	BraseroIOPrivate *priv;
 	GMountOperation *operation;
 	BraseroIOMount mount = { NULL, };
 
-	/* FIXME: need a way to get a parent window for the operation */
-	operation = gtk_mount_operation_new (NULL);
+	priv = BRASERO_IO_PRIVATE (self);
+
+	if (priv->win_callback)
+		parent = priv->win_callback (priv->win_user_data);
+
+	if (parent)
+		operation = gtk_mount_operation_new (parent);
+
 	g_file_mount_enclosing_volume (file,
 				       G_MOUNT_MOUNT_NONE,
 				       operation,
@@ -849,6 +856,17 @@ brasero_io_set_metadata_attributes (GFileInfo *info,
 		g_file_info_set_attribute_string (info, BRASERO_IO_COMPOSER, metadata->composer);
 
 	g_file_info_set_attribute_boolean (info, BRASERO_IO_HAS_AUDIO, metadata->has_audio);
+	if (metadata->has_audio) {
+		if (metadata->channels)
+			g_file_info_set_attribute_int32 (info, BRASERO_IO_CHANNELS, metadata->channels);
+
+		if (metadata->rate)
+			g_file_info_set_attribute_int32 (info, BRASERO_IO_RATE, metadata->rate);
+
+		if (metadata->has_dts)
+			g_file_info_set_attribute_boolean (info, BRASERO_IO_HAS_DTS, TRUE);
+	}
+
 	g_file_info_set_attribute_boolean (info, BRASERO_IO_HAS_VIDEO, metadata->has_video);
 	g_file_info_set_attribute_boolean (info, BRASERO_IO_IS_SEEKABLE, metadata->is_seekable);
 	if (metadata->snapshot)
@@ -2371,6 +2389,24 @@ brasero_io_job_base_free (BraseroIOJobBase *base)
 		g_free (methods);
 }
 
+static int
+ brasero_io_xid_for_metadata (gpointer user_data)
+{
+	BraseroIOPrivate *priv;
+
+	priv = BRASERO_IO_PRIVATE (user_data);
+	if (priv->win_callback) {
+		int xid;
+		GtkWindow *parent;
+
+		parent = priv->win_callback (priv->win_user_data);
+		xid = gdk_x11_drawable_get_xid (GDK_DRAWABLE (GTK_WIDGET (parent)->window));
+		return xid;
+	}
+
+	return 0;
+}
+
 static void
 brasero_io_init (BraseroIO *object)
 {
@@ -2387,8 +2423,10 @@ brasero_io_init (BraseroIO *object)
 	 * a thread. */
 	metadata = brasero_metadata_new ();
 	priv->metadatas = g_slist_prepend (priv->metadatas, metadata);
+	brasero_metadata_set_get_xid_callback (metadata, brasero_io_xid_for_metadata, object);
 	metadata = brasero_metadata_new ();
 	priv->metadatas = g_slist_prepend (priv->metadatas, metadata);
+	brasero_metadata_set_get_xid_callback (metadata, brasero_io_xid_for_metadata, object);
 }
 
 static gboolean
@@ -2396,9 +2434,9 @@ brasero_io_free_async_queue (BraseroAsyncTaskManager *manager,
 			     gpointer callback_data,
 			     gpointer NULL_data)
 {
-	BraseroIOJob *job = callback_data;
-
-	brasero_io_job_free (TRUE, job);
+	/* don't do anything here, the async task manager
+	 * will destroy the job anyway.
+	 */
 	return TRUE;
 }
 
@@ -2477,11 +2515,12 @@ brasero_io_finalize (GObject *object)
 			mount = iter->data;
 
 			BRASERO_UTILS_LOG ("Unmountin volume");
-			g_mount_unmount (mount,
-					 G_MOUNT_UNMOUNT_NONE,
-					 NULL,
-					 NULL,
-					 NULL);
+			g_mount_unmount_with_operation (mount,
+					 		G_MOUNT_UNMOUNT_NONE,
+							NULL,
+					 		NULL,
+					 		NULL,
+					 		NULL);
 			g_object_unref (mount);
 		}
 	}
@@ -2506,4 +2545,18 @@ brasero_io_shutdown (void)
 		g_object_unref (singleton);
 		singleton = NULL;
 	}
+}
+
+void
+brasero_io_set_parent_window_callback (BraseroIOGetParentWinCb callback,
+                                       gpointer user_data)
+{
+	BraseroIOPrivate *priv;
+	BraseroIO *self;
+
+	self = brasero_io_get_default ();
+	priv = BRASERO_IO_PRIVATE (self);
+	priv->win_callback = callback;
+	priv->win_user_data = user_data;
+	g_object_unref (self);
 }

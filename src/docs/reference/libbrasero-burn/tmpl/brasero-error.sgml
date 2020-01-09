@@ -17,6 +17,9 @@ brasero-error
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### ENUM BraseroBurnError ##### -->
 <para>
 
@@ -50,14 +53,17 @@ brasero-error
 @BRASERO_BURN_ERROR_MEDIUM_NOT_REWRITABLE: 
 @BRASERO_BURN_ERROR_MEDIUM_NEED_RELOADING: 
 @BRASERO_BURN_ERROR_BAD_CHECKSUM: 
+@BRASERO_BURN_ERROR_MISSING_APP_AND_PLUGIN: 
 @BRASERO_BURN_WARNING_CHECKSUM: 
 @BRASERO_BURN_WARNING_INSERT_AFTER_COPY: 
+@BRASERO_BURN_ERROR_TMP_DIRECTORY: 
 
 <!-- ##### FUNCTION brasero_burn_quark ##### -->
 <para>
 
 </para>
 
+@void: 
 @Returns: 
 
 

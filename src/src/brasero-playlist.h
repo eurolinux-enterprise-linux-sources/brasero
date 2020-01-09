@@ -37,6 +37,7 @@
 #include <gtk/gtk.h>
 
 G_BEGIN_DECLS
+
 #define BRASERO_TYPE_PLAYLIST         (brasero_playlist_get_type ())
 #define BRASERO_PLAYLIST(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_PLAYLIST, BraseroPlaylist))
 #define BRASERO_PLAYLIST_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_PLAYLIST, BraseroPlaylistClass))
@@ -54,8 +55,8 @@ typedef struct {
 	GtkVBoxClass parent_class;
 } BraseroPlaylistClass;
 
-GType brasero_playlist_get_type ();
-GtkWidget *brasero_playlist_new ();
+GType brasero_playlist_get_type (void);
+GtkWidget *brasero_playlist_new (void);
 
 G_END_DECLS
 

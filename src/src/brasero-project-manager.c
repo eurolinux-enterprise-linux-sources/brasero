@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 /***************************************************************************
  *            brasero-project-manager.c
  *
@@ -51,7 +53,7 @@
 #include "brasero-project-type-chooser.h"
 
 #ifdef BUILD_SEARCH
-#include "brasero-search-beagle.h"
+#include "brasero-search.h"
 #endif
 
 #ifdef BUILD_PLAYLIST
@@ -89,13 +91,6 @@ static void
 brasero_project_manager_open_cb (GtkAction *action, BraseroProjectManager *manager);
 
 static void
-brasero_project_manager_switch (BraseroProjectManager *manager,
-				BraseroProjectType type,
-				GSList *uris,
-				const gchar *uri,
-				gboolean reset);
-
-void
 brasero_project_manager_selected_uris_changed (BraseroURIContainer *container,
 					       BraseroProjectManager *manager);
 
@@ -112,13 +107,13 @@ static GtkActionEntry entries [] = {
 	{"NewData", "media-optical-data-new", N_("New _Data Project"), NULL,
 	 N_("Create a CD/DVD containing any type of data that can only be read on a computer"), G_CALLBACK (brasero_project_manager_new_data_prj_cb)},
 	{"NewVideo", "media-optical-video-new", N_("New _Video Project"), NULL,
-	 N_("Create a video DVD or a SVCD that are readable on TV readers"), G_CALLBACK (brasero_project_manager_new_video_prj_cb)},
-	{"NewCopy", "media-optical-copy", N_("Copy _Disc..."), NULL,
+	 N_("Create a video DVD or an SVCD that are readable on TV readers"), G_CALLBACK (brasero_project_manager_new_video_prj_cb)},
+	{"NewCopy", "media-optical-copy", N_("Copy _Disc…"), NULL,
 	 N_("Create a 1:1 copy of an audio CD or a data CD/DVD on your hard disk or on another CD/DVD"), G_CALLBACK (brasero_project_manager_new_copy_prj_cb)},
-	{"NewIso", "iso-image-burn", N_("_Burn Image..."), NULL,
+	{"NewIso", "iso-image-burn", N_("_Burn Image…"), NULL,
 	 N_("Burn an existing CD/DVD image to disc"), G_CALLBACK (brasero_project_manager_new_iso_prj_cb)},
 
-	{"Open", GTK_STOCK_OPEN, N_("_Open..."), NULL,
+	{"Open", GTK_STOCK_OPEN, N_("_Open…"), NULL,
 	 N_("Open a project"), G_CALLBACK (brasero_project_manager_open_cb)},
 };
 
@@ -223,7 +218,13 @@ brasero_project_manager_new_cover_cb (GtkAction *action,
 
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (manager));
 	dialog = brasero_jacket_edit_dialog_new (toplevel, &edit);
-	gtk_dialog_run (GTK_DIALOG (dialog));
+
+	/* This strange hack is a way to workaround #568358.
+	 * At one point we'll need to hide the dialog which means it
+	 * will anwer with a GTK_RESPONSE_NONE */
+	while (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_NONE)
+		gtk_widget_show (GTK_WIDGET (dialog));
+
 	gtk_widget_destroy (dialog);
 }
 
@@ -460,7 +461,7 @@ brasero_project_manager_selected_uris_changed (BraseroURIContainer *container,
 						   manager);
 }
 
-void
+static void
 brasero_project_manager_sidepane_changed (BraseroLayout *layout,
 					  gboolean visible,
 					  BraseroProjectManager *manager)
@@ -504,11 +505,9 @@ brasero_project_manager_register_ui (BraseroProjectManager *manager,
    	brasero_layout_register_ui (BRASERO_LAYOUT (manager->priv->layout), ui_manager);
 }
 
-static void
+void
 brasero_project_manager_switch (BraseroProjectManager *manager,
 				BraseroProjectType type,
-				GSList *uris,
-				const gchar *uri,
 				gboolean reset)
 {
 	GtkWidget *toplevel;
@@ -519,8 +518,43 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 	if (manager->priv->type == BRASERO_PROJECT_TYPE_AUDIO
 	||  manager->priv->type == BRASERO_PROJECT_TYPE_DATA
 	||  manager->priv->type == BRASERO_PROJECT_TYPE_VIDEO) {
-		if (!brasero_project_confirm_switch (BRASERO_PROJECT (manager->priv->project)))
+		BraseroBurnResult result;
+		gboolean keep_files = FALSE;
+
+		if (type == BRASERO_PROJECT_TYPE_AUDIO
+		||  type == BRASERO_PROJECT_TYPE_DATA
+		||  type == BRASERO_PROJECT_TYPE_VIDEO) {
+			if (manager->priv->type != type
+			&& (((manager->priv->type == BRASERO_PROJECT_TYPE_AUDIO ||
+			      manager->priv->type == BRASERO_PROJECT_TYPE_VIDEO) &&
+			     type == BRASERO_PROJECT_TYPE_DATA)
+			||  manager->priv->type == BRASERO_PROJECT_TYPE_DATA))
+				keep_files = TRUE;
+		}
+
+		result = brasero_project_confirm_switch (BRASERO_PROJECT (manager->priv->project), keep_files);
+		if (result == BRASERO_BURN_CANCEL)
 			return;
+
+		if (result == BRASERO_BURN_RETRY) {
+			if (manager->priv->type == BRASERO_PROJECT_TYPE_AUDIO
+			||  manager->priv->type == BRASERO_PROJECT_TYPE_VIDEO)
+				type = brasero_project_convert_to_data (BRASERO_PROJECT (manager->priv->project));
+			else if (manager->priv->type == BRASERO_PROJECT_TYPE_DATA) {
+				BraseroProjectType new_type;
+
+				/* Keep type untouched */
+				new_type = brasero_project_convert_to_stream (BRASERO_PROJECT (manager->priv->project),
+									      type == BRASERO_PROJECT_TYPE_VIDEO);
+				if (new_type == BRASERO_PROJECT_TYPE_INVALID)
+					type = new_type;
+			}
+
+			if (type != BRASERO_PROJECT_TYPE_INVALID)
+				reset = FALSE;
+			else
+				reset = TRUE;
+		}
 	}
 
 	if (manager->priv->status_ctx) {
@@ -551,11 +585,11 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 
 		if (reset) {
 			/* tell the BraseroProject object that we want an audio selection */
-			brasero_project_set_audio (BRASERO_PROJECT (manager->priv->project), uris);
+			brasero_project_set_audio (BRASERO_PROJECT (manager->priv->project));
 		}
 
 		if (toplevel)
-			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero - New Audio Disc Project"));
+			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero — New Audio Disc Project"));
 	}
 	else if (type == BRASERO_PROJECT_TYPE_DATA) {
 		brasero_layout_load (BRASERO_LAYOUT (manager->priv->layout), BRASERO_LAYOUT_DATA);
@@ -565,11 +599,11 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 
 		if (reset) {
 			/* tell the BraseroProject object that we want a data selection */
-			brasero_project_set_data (BRASERO_PROJECT (manager->priv->project), uris);
+			brasero_project_set_data (BRASERO_PROJECT (manager->priv->project));
 		}
 
 		if (toplevel)
-			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero - New Data Disc Project"));
+			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero — New Data Disc Project"));
 	}
 	else if (type == BRASERO_PROJECT_TYPE_VIDEO) {
 		brasero_layout_load (BRASERO_LAYOUT (manager->priv->layout), BRASERO_LAYOUT_VIDEO);
@@ -579,11 +613,11 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 
 		if (reset) {
 			/* tell the BraseroProject object that we want a data selection */
-			brasero_project_set_video (BRASERO_PROJECT (manager->priv->project), uris);
+			brasero_project_set_video (BRASERO_PROJECT (manager->priv->project));
 		}
 
 		if (toplevel)
-			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero - New Video Disc Project"));
+			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero — New Video Disc Project"));
 	}
 	else if (type == BRASERO_PROJECT_TYPE_ISO) {
 		brasero_layout_load (BRASERO_LAYOUT (manager->priv->layout), BRASERO_LAYOUT_NONE);
@@ -593,14 +627,12 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 		gtk_action_set_sensitive (action, FALSE);
 
 		if (toplevel)
-			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero - New Image File"));
+			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero — New Image File"));
 
 		brasero_project_manager_switch (manager,
 						BRASERO_PROJECT_TYPE_INVALID,
-						NULL,
-						NULL,
 						TRUE);
-		brasero_app_burn_image (brasero_app_get_default (), uri);
+		brasero_app_image (brasero_app_get_default (), NULL, NULL, FALSE);
 	}
 	else if (type == BRASERO_PROJECT_TYPE_COPY) {
 		brasero_layout_load (BRASERO_LAYOUT (manager->priv->layout), BRASERO_LAYOUT_NONE);
@@ -610,14 +642,12 @@ brasero_project_manager_switch (BraseroProjectManager *manager,
 		gtk_action_set_sensitive (action, FALSE);
 
 		if (toplevel)
-			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero - Disc Copy"));
+			gtk_window_set_title (GTK_WINDOW (toplevel), _("Brasero — Disc Copy"));
 
 		brasero_project_manager_switch (manager,
 						BRASERO_PROJECT_TYPE_INVALID,
-						NULL,
-						NULL,
 						TRUE);
-		brasero_app_copy_disc (brasero_app_get_default (), uri, NULL);
+		brasero_app_copy_disc (brasero_app_get_default (), NULL, NULL, NULL, FALSE);
 	}
 }
 
@@ -626,156 +656,61 @@ brasero_project_manager_type_changed_cb (BraseroProjectTypeChooser *chooser,
 					 BraseroProjectType type,
 					 BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, type, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, type, TRUE);
 }
 
 static void
 brasero_project_manager_new_empty_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, TRUE);
 }
 
 static void
 brasero_project_manager_new_audio_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_AUDIO, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_AUDIO, TRUE);
 }
 
 static void
 brasero_project_manager_new_data_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_DATA, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_DATA, TRUE);
 }
 
 static void
 brasero_project_manager_new_video_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_VIDEO, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_VIDEO, TRUE);
 }
 
 static void
 brasero_project_manager_new_copy_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_COPY, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_COPY, TRUE);
 }
 
 static void
 brasero_project_manager_new_iso_prj_cb (GtkAction *action, BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_ISO, NULL, NULL, TRUE);
-}
-
-void
-brasero_project_manager_data (BraseroProjectManager *manager,
-			      GSList *uris,
-			      gboolean burn)
-{
-	gchar *burn_URI = NULL;
-
-	/* always add the contents of burn:/// URI if list is empty */
-	if (!uris) {
-		burn_URI = g_strdup ("burn:///");
-		uris = g_slist_prepend (NULL, burn_URI);
-	}
-
-	if (burn) {
-		brasero_project_set_data (BRASERO_PROJECT (manager->priv->project), uris);
-		brasero_project_burn (BRASERO_PROJECT (manager->priv->project));
-	}
-	else
-		brasero_project_manager_switch (manager,
-						BRASERO_PROJECT_TYPE_DATA,
-						uris,
-						NULL,
-						TRUE);
-
-	if (burn_URI) {
-		g_slist_free (uris);
-		g_free (burn_URI);
-	}
-}
-
-void
-brasero_project_manager_audio (BraseroProjectManager *manager,
-			       GSList *uris,
-			       gboolean burn)
-{
-	if (burn) {
-		brasero_project_set_audio (BRASERO_PROJECT (manager->priv->project), uris);
-		brasero_project_burn (BRASERO_PROJECT (manager->priv->project));
-	}
-	else
-		brasero_project_manager_switch (manager,
-						BRASERO_PROJECT_TYPE_AUDIO,
-						uris,
-						NULL,
-						TRUE);
-}
-
-void
-brasero_project_manager_video (BraseroProjectManager *manager,
-			       GSList *uris,
-			       gboolean burn)
-{
-	if (burn) {
-		brasero_project_set_video (BRASERO_PROJECT (manager->priv->project), uris);
-		brasero_project_burn (BRASERO_PROJECT (manager->priv->project));
-	}
-	else
-		brasero_project_manager_switch (manager,
-						BRASERO_PROJECT_TYPE_VIDEO,
-						uris,
-						NULL,
-						TRUE);
-}
-
-void
-brasero_project_manager_copy (BraseroProjectManager *manager,
-			      const gchar *device,
-			      const gchar *cover)
-{
-	brasero_project_manager_switch (manager,
-					BRASERO_PROJECT_TYPE_COPY,
-					NULL,
-					device,
-					TRUE);
-}
-
-void
-brasero_project_manager_iso (BraseroProjectManager *manager,
-			     const gchar *uri)
-{
-	brasero_project_manager_switch (manager,
-					BRASERO_PROJECT_TYPE_ISO,
-					NULL,
-					uri,
-					TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_ISO, TRUE);
 }
 
 gboolean
 brasero_project_manager_open_session (BraseroProjectManager *manager,
-                                      BraseroSessionCfg *session,
-                                      gboolean burn)
+                                      BraseroSessionCfg *session)
 {
 	GtkAction *action;
 	BraseroProjectType type;
 
 	type = brasero_project_open_session (BRASERO_PROJECT (manager->priv->project), session);
 	if (type == BRASERO_PROJECT_TYPE_INVALID) {
-		brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, NULL, NULL, TRUE);
+		brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, TRUE);
 		return FALSE;
 	}
 
 	brasero_project_manager_switch (manager,
 					type,
-					NULL,
-					NULL,
 					FALSE);
-
-	if (burn) {
-		brasero_project_burn (BRASERO_PROJECT (manager->priv->project));
-		return TRUE;
-	}
 
 	action = gtk_action_group_get_action (manager->priv->action_group, "NewChoose");
 	gtk_action_set_sensitive (action, TRUE);
@@ -826,7 +761,7 @@ brasero_project_manager_recent_clicked_cb (BraseroProjectTypeChooser *chooser,
 void
 brasero_project_manager_empty (BraseroProjectManager *manager)
 {
-	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, NULL, NULL, TRUE);
+	brasero_project_manager_switch (manager, BRASERO_PROJECT_TYPE_INVALID, TRUE);
 }
 
 static void
@@ -839,6 +774,7 @@ brasero_project_manager_last_saved_clicked_cb (BraseroProjectTypeChooser *choose
 
 		uri = g_filename_to_uri (path, NULL, NULL);
 		brasero_app_open_project (brasero_app_get_default (),
+					  NULL,
 		                          uri,
 		                          FALSE, // not a playlist
 		                          FALSE, // should work so don't warn user

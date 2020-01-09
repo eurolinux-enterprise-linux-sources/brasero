@@ -89,13 +89,15 @@ brasero_eject_dialog_activate (GtkDialog *dialog,
 	}*/
 	if (!brasero_drive_eject (drive, TRUE, &error)) {
 		gchar *string;
+		gchar *display_name;
 
-		string = g_strdup_printf (_("The disc in \"%s\" cannot be ejected"),
-		                          brasero_drive_get_display_name (drive));
+		display_name = brasero_drive_get_display_name (drive);
+		string = g_strdup_printf (_("The disc in \"%s\" cannot be ejected"), display_name);
+		g_free (display_name);
 
 		brasero_app_alert (brasero_app_get_default (),
 		                   string,
-		                   error?error->message:_("An unknown error occured"),
+		                   error?error->message:_("An unknown error occurred"),
 		                   GTK_MESSAGE_ERROR);
 
 		if (error)

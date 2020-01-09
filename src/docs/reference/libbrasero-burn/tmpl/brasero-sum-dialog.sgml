@@ -17,6 +17,9 @@ BraseroSumDialog
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroSumDialog ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroSumDialog
 
 </para>
 
+@void: 
 @Returns: 
 
 

@@ -17,11 +17,15 @@ brasero-status
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroStatus ##### -->
 <para>
 
 </para>
 
+@parent_instance: 
 
 <!-- ##### ENUM BraseroStatusType ##### -->
 <para>
@@ -38,15 +42,8 @@ brasero-status
 
 </para>
 
+@void: 
 @Returns: 
-
-
-<!-- ##### FUNCTION brasero_status_free ##### -->
-<para>
-
-</para>
-
-@status: 
 
 
 <!-- ##### FUNCTION brasero_status_get_result ##### -->

@@ -48,13 +48,20 @@
 #include <libburn/libburn.h>
 
 #include "burn-libburnia.h"
-#include "burn-libisofs.h"
 #include "burn-job.h"
 #include "brasero-units.h"
 #include "brasero-plugin-registration.h"
 #include "burn-libburn-common.h"
 #include "brasero-track-data.h"
 #include "brasero-track-image.h"
+
+
+#define BRASERO_TYPE_LIBISOFS         (brasero_libisofs_get_type ())
+#define BRASERO_LIBISOFS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_LIBISOFS, BraseroLibisofs))
+#define BRASERO_LIBISOFS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_LIBISOFS, BraseroLibisofsClass))
+#define BRASERO_IS_LIBISOFS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_LIBISOFS))
+#define BRASERO_IS_LIBISOFS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_LIBISOFS))
+#define BRASERO_LIBISOFS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_LIBISOFS, BraseroLibisofsClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroLibisofs, brasero_libisofs, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -318,7 +325,7 @@ brasero_libisofs_create_image (BraseroLibisofs *self,
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("Libisofs could not be initialized."));
+			     _("libisofs could not be initialized."));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -597,7 +604,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 	grafts = g_slist_sort (grafts, brasero_libisofs_sort_graft_points);
 
 	/* add global exclusions */
-	for (excluded = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (track), FALSE);
+	for (excluded = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (track));
 	     excluded; excluded = excluded->next) {
 		gchar *uri, *local;
 
@@ -717,7 +724,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 							 result);
 					priv->error = g_error_new (BRASERO_BURN_ERROR,
 								   BRASERO_BURN_ERROR_GENERAL,
-								   _("Libisofs reported an error while creating directory \"%s\""),
+								   _("libisofs reported an error while creating directory \"%s\""),
 								   graft->path);
 					g_free (path_name);
 					goto end;
@@ -732,7 +739,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 							 result);
 					priv->error = g_error_new (BRASERO_BURN_ERROR,
 								   BRASERO_BURN_ERROR_GENERAL,
-								   _("Libisofs reported an error while adding contents to directory \"%s\" (%x)"),
+								   _("libisofs reported an error while adding contents to directory \"%s\" (%x)"),
 								   graft->path,
 								   result);
 					g_free (path_name);
@@ -755,7 +762,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 							 err);
 					priv->error = g_error_new (BRASERO_BURN_ERROR,
 								   BRASERO_BURN_ERROR_GENERAL,
-								   _("Libisofs reported an error while adding file at path \"%s\""),
+								   _("libisofs reported an error while adding file at path \"%s\""),
 								   graft->path);
 					g_free (path_name);
 					goto end;
@@ -771,7 +778,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 								 err);
 						priv->error = g_error_new (BRASERO_BURN_ERROR,
 									   BRASERO_BURN_ERROR_GENERAL,
-									   _("Libisofs reported an error while adding file at path \"%s\""),
+									   _("libisofs reported an error while adding file at path \"%s\""),
 									   graft->path);
 						g_free (path_name);
 						goto end;
@@ -784,7 +791,7 @@ brasero_libisofs_create_volume_thread (gpointer data)
 		else if (iso_tree_add_new_dir (ISO_DIR (parent), path_name, NULL) < 0) {
 			priv->error = g_error_new (BRASERO_BURN_ERROR,
 						   BRASERO_BURN_ERROR_GENERAL,
-						   _("Libisofs reported an error while creating directory \"%s\""),
+						   _("libisofs reported an error while creating directory \"%s\""),
 						   graft->path);
 			g_free (path_name);
 			goto end;
@@ -858,7 +865,7 @@ brasero_libisofs_create_volume (BraseroLibisofs *self, GError **error)
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("Libisofs could not be initialized."));
+			     _("libisofs could not be initialized."));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -1027,17 +1034,17 @@ brasero_libisofs_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_libisofs_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_libisofs_export_caps (BraseroPlugin *plugin)
 {
 	GSList *output;
 	GSList *input;
 
 	brasero_plugin_define (plugin,
 			       "libisofs",
-			       _("Libisofs creates disc images from files"),
+			       _("Creates disc images from a file selection"),
 			       "Philippe Rouquier",
-			       0);
+			       3);
 
 	brasero_plugin_set_flags (plugin,
 				  BRASERO_MEDIUM_CDR|
@@ -1084,6 +1091,4 @@ brasero_libisofs_export_caps (BraseroPlugin *plugin, gchar **error)
 	g_slist_free (output);
 
 	brasero_plugin_register_group (plugin, _(LIBBURNIA_DESCRIPTION));
-
-	return BRASERO_BURN_OK;
 }

@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-brasero-tags.html" title="brasero-tags">
 <link rel="next" href="libbrasero-burn-brasero-enums.html" title="brasero-enums">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -41,20 +37,19 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-burn-brasero-status.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">                    <a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a>;
-enum                <a href="libbrasero-burn-brasero-status.html#BraseroStatusType">BraseroStatusType</a>;
-<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *     <a href="libbrasero-burn-brasero-status.html#brasero-status-new">brasero_status_new</a>                  (void);
-void                <a href="libbrasero-burn-brasero-status.html#brasero-status-free">brasero_status_free</a>                 (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-brasero-status.html#brasero-status-get-result">brasero_status_get_result</a>           (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble">gdouble</a>             <a href="libbrasero-burn-brasero-status.html#brasero-status-get-progress">brasero_status_get_progress</a>         (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> *            <a href="libbrasero-burn-brasero-status.html#brasero-status-get-error">brasero_status_get_error</a>            (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             <a href="libbrasero-burn-brasero-status.html#brasero-status-get-current-action">brasero_status_get_current_action</a>   (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-void                <a href="libbrasero-burn-brasero-status.html#brasero-status-set-completed">brasero_status_set_completed</a>        (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-void                <a href="libbrasero-burn-brasero-status.html#brasero-status-set-not-ready">brasero_status_set_not_ready</a>        (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble">gdouble</a> progress,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *current_action);
-void                <a href="libbrasero-burn-brasero-status.html#brasero-status-set-error">brasero_status_set_error</a>            (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> *error);
+<pre class="synopsis">                    <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus">BraseroStatus</a>;
+enum                <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatusType" title="enum BraseroStatusType">BraseroStatusType</a>;
+<a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="returnvalue">BraseroStatus</span></a> *     <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-new" title="brasero_status_new ()">brasero_status_new</a>                  (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-result" title="brasero_status_get_result ()">brasero_status_get_result</a>           (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="returnvalue">gdouble</span></a>             <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-progress" title="brasero_status_get_progress ()">brasero_status_get_progress</a>         (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> *            <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-error" title="brasero_status_get_error ()">brasero_status_get_error</a>            (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-current-action" title="brasero_status_get_current_action ()">brasero_status_get_current_action</a>   (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-set-completed" title="brasero_status_set_completed ()">brasero_status_set_completed</a>        (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-set-not-ready" title="brasero_status_set_not_ready ()">brasero_status_set_not_ready</a>        (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> progress</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *current_action</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-set-error" title="brasero_status_set_error ()">brasero_status_set_error</a>            (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -66,7 +61,10 @@ void                <a href="libbrasero-burn-brasero-status.html#brasero-status-
 <a name="libbrasero-burn-brasero-status.details"></a><h2>Details</h2>
 <div class="refsect2" title="BraseroStatus">
 <a name="BraseroStatus"></a><h3>BraseroStatus</h3>
-<pre class="programlisting">typedef struct _BraseroStatus BraseroStatus;</pre>
+<pre class="programlisting">typedef struct {
+	GObject parent_instance;
+} BraseroStatus;
+</pre>
 <p>
 </p>
 </div>
@@ -86,30 +84,15 @@ void                <a href="libbrasero-burn-brasero-status.html#brasero-status-
 <hr>
 <div class="refsect2" title="brasero_status_new ()">
 <a name="brasero-status-new"></a><h3>brasero_status_new ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *     brasero_status_new                  (void);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="returnvalue">BraseroStatus</span></a> *     brasero_status_new                  (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a> structure.
-Free it with <a href="libbrasero-burn-brasero-status.html#brasero-status-free"><code class="function">brasero_status_free()</code></a>.</p>
+Creates a new <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> object.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a> pointer.
-</td>
-</tr></tbody>
-</table></div>
-</div>
-<hr>
-<div class="refsect2" title="brasero_status_free ()">
-<a name="brasero-status-free"></a><h3>brasero_status_free ()</h3>
-<pre class="programlisting">void                brasero_status_free                 (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
-<p>
-Frees <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a> structure.</p>
-<div class="variablelist"><table border="0">
-<col align="left" valign="top">
-<tbody><tr>
-<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -117,21 +100,22 @@ Frees <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="t
 <hr>
 <div class="refsect2" title="brasero_status_get_result ()">
 <a name="brasero-status-get-result"></a><h3>brasero_status_get_result ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_status_get_result           (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_status_get_result           (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
 After an object (see <code class="function">brasero_burn_track_get_status()</code>) has
-been requested its status, this function returns that status.</p>
+been requested its status, this function returns that status.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if the object is ready.
 BRASERO_BURN_NOT_READY if some time should be given to the object before it is ready.
 BRASERO_BURN_ERR if there is an error.
@@ -143,21 +127,22 @@ BRASERO_BURN_ERR if there is an error.
 <hr>
 <div class="refsect2" title="brasero_status_get_progress ()">
 <a name="brasero-status-get-progress"></a><h3>brasero_status_get_progress ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble">gdouble</a>             brasero_status_get_progress         (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="returnvalue">gdouble</span></a>             brasero_status_get_progress         (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
-If <a href="libbrasero-burn-brasero-status.html#brasero-status-get-result"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_NOT_READY,
-this function returns the progress regarding the operation completion.</p>
+If <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-result" title="brasero_status_get_result ()"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_NOT_READY,
+this function returns the progress regarding the operation completion.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a>
 </td>
 </tr>
 </tbody>
@@ -166,21 +151,22 @@ this function returns the progress regarding the operation completion.</p>
 <hr>
 <div class="refsect2" title="brasero_status_get_error ()">
 <a name="brasero-status-get-error"></a><h3>brasero_status_get_error ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> *            brasero_status_get_error            (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="returnvalue">GError</span></a> *            brasero_status_get_error            (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
-If <a href="libbrasero-burn-brasero-status.html#brasero-status-get-result"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_ERR,
-this function returns the error.</p>
+If <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-result" title="brasero_status_get_result ()"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_ERR,
+this function returns the error.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
 </td>
 </tr>
 </tbody>
@@ -189,22 +175,23 @@ this function returns the error.</p>
 <hr>
 <div class="refsect2" title="brasero_status_get_current_action ()">
 <a name="brasero-status-get-current-action"></a><h3>brasero_status_get_current_action ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             brasero_status_get_current_action   (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             brasero_status_get_current_action   (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
-If <a href="libbrasero-burn-brasero-status.html#brasero-status-get-result"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_NOT_READY,
+If <a class="link" href="libbrasero-burn-brasero-status.html#brasero-status-get-result" title="brasero_status_get_result ()"><code class="function">brasero_status_get_result()</code></a> returned BRASERO_BURN_NOT_READY,
 this function returns a string describing the operation currently performed.
-Free the string when it is not needed anymore.</p>
+Free the string when it is not needed anymore.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>.
 </td>
 </tr>
 </tbody>
@@ -213,14 +200,15 @@ Free the string when it is not needed anymore.</p>
 <hr>
 <div class="refsect2" title="brasero_status_set_completed ()">
 <a name="brasero-status-set-completed"></a><h3>brasero_status_set_completed ()</h3>
-<pre class="programlisting">void                brasero_status_set_completed        (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_status_set_completed        (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
-Sets the status for a request to BRASERO_BURN_OK.</p>
+Sets the status for a request to BRASERO_BURN_OK.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -228,29 +216,30 @@ Sets the status for a request to BRASERO_BURN_OK.</p>
 <hr>
 <div class="refsect2" title="brasero_status_set_not_ready ()">
 <a name="brasero-status-set-not-ready"></a><h3>brasero_status_set_not_ready ()</h3>
-<pre class="programlisting">void                brasero_status_set_not_ready        (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble">gdouble</a> progress,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *current_action);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_status_set_not_ready        (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> progress</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *current_action</code></em>);</pre>
 <p>
 Sets the status for a request to BRASERO_BURN_NOT_READY.
 Allows to set a string describing the operation currently performed
-as well as the progress regarding the operation completion.</p>
+as well as the progress regarding the operation completion.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>progress</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> or -1.0.
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gdouble"><span class="type">gdouble</span></a> or -1.0.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>current_action</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL.
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL.
 </td>
 </tr>
 </tbody>
@@ -259,21 +248,22 @@ as well as the progress regarding the operation completion.</p>
 <hr>
 <div class="refsect2" title="brasero_status_set_error ()">
 <a name="brasero-status-set-error"></a><h3>brasero_status_set_error ()</h3>
-<pre class="programlisting">void                brasero_status_set_error            (<a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> *error);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_status_set_error            (<em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> *error</code></em>);</pre>
 <p>
-Sets the status for a request to BRASERO_BURN_ERR.</p>
+Sets the status for a request to BRASERO_BURN_ERR.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-status.html#BraseroStatus"><span class="type">BraseroStatus</span></a>.
+<td>a <a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> or NULL.
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> or NULL.
 </td>
 </tr>
 </tbody>
@@ -283,6 +273,6 @@ Sets the status for a request to BRASERO_BURN_ERR.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

@@ -109,7 +109,7 @@ brasero_file_filtered_activate (GtkExpander *self)
 	brasero_file_filtered_update (BRASERO_FILE_FILTERED (self));
 }
 
-void
+static void
 brasero_file_filtered_row_inserted (GtkTreeModel *model,
 				    GtkTreePath *treepath,
 				    GtkTreeIter *iter,
@@ -118,7 +118,7 @@ brasero_file_filtered_row_inserted (GtkTreeModel *model,
 	brasero_file_filtered_update (self);
 }
 
-void
+static void
 brasero_file_filtered_row_deleted (GtkTreeModel *model,
 				   GtkTreePath *treepath,
 				   BraseroFileFiltered *self)
@@ -143,7 +143,7 @@ brasero_file_filtered_option_pressed_cb (GtkButton *button,
 					      NULL);
 	option = brasero_filter_option_new ();
 	gtk_widget_show (option);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), option, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), option, FALSE, FALSE, 0);
 	gtk_widget_show (dialog);
 
 	gtk_dialog_run (GTK_DIALOG (dialog));
@@ -303,7 +303,7 @@ brasero_file_filtered_init (BraseroFileFiltered *object)
 	gtk_widget_set_sensitive (priv->restore, FALSE);
 	gtk_widget_set_tooltip_text (priv->restore, _("Restore the selected files"));
 
-	button = gtk_button_new_with_mnemonic (_("_Options..."));
+	button = gtk_button_new_with_mnemonic (_("_Options…"));
 	gtk_widget_show (button);
 	gtk_box_pack_start (GTK_BOX (vbox), button, FALSE, FALSE, 0);
 	g_signal_connect (button,

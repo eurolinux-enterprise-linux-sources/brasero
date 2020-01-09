@@ -510,6 +510,8 @@ brasero_job_check_output_volume_space (BraseroJob *self,
 	filesystem = g_file_info_get_attribute_string (info, G_FILE_ATTRIBUTE_FILESYSTEM_TYPE);
 	BRASERO_BURN_LOG ("%s filesystem detected", filesystem);
 
+	brasero_job_get_session_output_size (self, NULL, &output_size);
+
 	if (output_size >= 2147483648ULL
 	&&  filesystem
 	&& !strcmp (filesystem, "msdos")) {
@@ -579,13 +581,14 @@ static BraseroBurnResult
 brasero_job_set_output_file (BraseroJob *self,
 			     GError **error)
 {
+	BraseroTrackType *session_output;
 	BraseroBurnSession *session;
 	BraseroBurnResult result;
 	BraseroJobPrivate *priv;
-	BraseroBurnFlag flags;
 	goffset output_size = 0;
 	gchar *image = NULL;
 	gchar *toc = NULL;
+	gboolean is_last;
 
 	priv = BRASERO_JOB_PRIVATE (self);
 
@@ -601,13 +604,14 @@ brasero_job_set_output_file (BraseroJob *self,
 	/* if (!output_size)
 		return BRASERO_BURN_OK; */
 
-	flags = brasero_burn_session_get_flags (session);
-	if (priv->type.type == BRASERO_TRACK_TYPE_IMAGE) {
-		BraseroImageFormat format;
+	/* check if that's the last task */
+	session_output = brasero_track_type_new ();
+	brasero_burn_session_get_output_type (session, session_output);
+	is_last = brasero_track_type_equal (session_output, &priv->type);
+	brasero_track_type_free (session_output);
 
-		/* check if that's the last task */
-		format = brasero_burn_session_get_output_format (session);
-		if (priv->type.subtype.img_format == format) {
+	if (priv->type.type == BRASERO_TRACK_TYPE_IMAGE) {
+		if (is_last) {
 			BraseroTrackType input = { 0, };
 
 			result = brasero_burn_session_get_output (session,
@@ -672,7 +676,7 @@ brasero_job_set_output_file (BraseroJob *self,
 	priv->output->image = image;
 	priv->output->toc = toc;
 
-	if (flags & BRASERO_BURN_FLAG_CHECK_SIZE)
+	if (brasero_burn_session_get_flags (session) & BRASERO_BURN_FLAG_CHECK_SIZE)
 		return brasero_job_check_output_volume_space (self, error);
 
 	return result;
@@ -761,7 +765,7 @@ brasero_job_item_start (BraseroTaskItem *item,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured (%s)"),
+				     _("An internal error occurred (%s)"),
 				     g_strerror (errsv));
 
 			return BRASERO_BURN_ERR;
@@ -1017,8 +1021,8 @@ brasero_job_finished_session (BraseroJob *self)
 		return brasero_task_ctx_finished (priv->ctx);
 
 	if (!brasero_job_is_first_active (self)) {
-		/* This job is apparently a go between job. It should
-		 * only call for a stop on an error. */
+		/* This job is apparently a go between job.
+		 * It should only call for a stop on an error. */
 		BRASERO_JOB_LOG (self, "is not a leader");
 		error = g_error_new (BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_PLUGIN_MISBEHAVIOR,
@@ -1039,10 +1043,10 @@ brasero_job_finished_session (BraseroJob *self)
 						       error);
 	}
 
-	/* this job is finished but it's not the leader so the
-	 * task is not finished. Close the pipe on one side to
-	 * let the next job know that there isn't any more data
-	 * to be expected */
+	/* this job is finished but it's not the leader so
+	 * the task is not finished. Close the pipe on
+	 * one side to let the next job know that there
+	 * isn't any more data to be expected */
 	result = brasero_job_disconnect (self, &error);
 	g_object_unref (priv->ctx);
 	priv->ctx = NULL;
@@ -1212,7 +1216,7 @@ brasero_job_set_nonblocking_fd (int fd, GError **error)
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 	}
@@ -1221,7 +1225,7 @@ brasero_job_set_nonblocking_fd (int fd, GError **error)
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("An internal error occured"));
+			     _("An internal error occurred"));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -1278,8 +1282,6 @@ brasero_job_get_done_tracks (BraseroJob *self, GSList **tracks)
 	BraseroJobPrivate *priv;
 
 	BRASERO_JOB_DEBUG (self);
-
-	g_return_val_if_fail (tracks != NULL, BRASERO_BURN_ERR);
 
 	/* tracks already done are those that are in session */
 	priv = BRASERO_JOB_PRIVATE (self);

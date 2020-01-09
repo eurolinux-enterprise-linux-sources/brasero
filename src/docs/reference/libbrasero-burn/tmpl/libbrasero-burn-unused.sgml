@@ -1,0 +1,41 @@
+<!-- ##### ENUM BraseroTrackDataType ##### -->
+<para>
+
+</para>
+
+@BRASERO_TRACK_TYPE_NONE: 
+@BRASERO_TRACK_TYPE_STREAM: 
+@BRASERO_TRACK_TYPE_DATA: 
+@BRASERO_TRACK_TYPE_IMAGE: 
+@BRASERO_TRACK_TYPE_DISC: 
+
+<!-- ##### FUNCTION brasero_status_free ##### -->
+<para>
+
+</para>
+
+@status: 
+
+<!-- ##### FUNCTION brasero_track_data_get_excluded ##### -->
+<para>
+
+</para>
+
+@track: 
+@copy: 
+@Returns: 
+
+<!-- ##### FUNCTION brasero_track_data_get_paths ##### -->
+<para>
+
+</para>
+
+@track: 
+@use_joliet: 
+@grafts_path: 
+@excluded_path: 
+@emptydir: 
+@videodir: 
+@error: 
+@Returns: 
+

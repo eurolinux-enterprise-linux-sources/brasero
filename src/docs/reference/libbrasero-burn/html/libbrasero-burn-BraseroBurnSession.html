@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-BraseroTrackImageCfg.html" title="BraseroTrackImageCfg">
 <link rel="next" href="libbrasero-burn-BraseroSessionSpan.html" title="BraseroSessionSpan">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -44,94 +40,95 @@
 <pre class="synopsis">
 #include &lt;brasero-session.h&gt;
 
-                    <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a>;
-                    <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSessionClass">BraseroBurnSessionClass</a>;
-<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> * <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-new">brasero_burn_session_new</a>           ();
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-track">brasero_burn_session_add_track</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *new_track,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *sibling);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-move-track">brasero_burn_session_move_track</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *sibling);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-track">brasero_burn_session_remove_track</a>   (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tracks">brasero_burn_session_get_tracks</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-status">brasero_burn_session_get_status</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-size">brasero_burn_session_get_size</a>       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-input-type">brasero_burn_session_get_input_type</a> (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-lookup">brasero_burn_session_tag_lookup</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
-                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> **value);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-add">brasero_burn_session_tag_add</a>        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
-                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> *value);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-remove">brasero_burn_session_tag_remove</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);
-<a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burner">brasero_burn_session_get_burner</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-void                <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner">brasero_burn_session_set_burner</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *drive);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-image-output-full">brasero_burn_session_set_image_output_full</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> format,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *image,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *toc);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output">brasero_burn_session_get_output</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> **image,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> **toc);
-<a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output-format">brasero_burn_session_get_output_format</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-void                <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-flags">brasero_burn_session_set_flags</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);
-void                <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-flag">brasero_burn_session_add_flag</a>       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);
-void                <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-flag">brasero_burn_session_remove_flag</a>    (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a>     <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-flags">brasero_burn_session_get_flags</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-tmpdir">brasero_burn_session_set_tmpdir</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *path);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tmpdir">brasero_burn_session_get_tmpdir</a>     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burn-flags">brasero_burn_session_get_burn_flags</a> (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *supported,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *compulsory);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-blank-flags">brasero_burn_session_get_blank_flags</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *supported,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *compulsory);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-blank">brasero_burn_session_can_blank</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-burn">brasero_burn_session_can_burn</a>       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_flags);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-input-supported">brasero_burn_session_input_supported</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *input,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_flags);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-output-supported">brasero_burn_session_output_supported</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *output);
-<a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-required-media-type">brasero_burn_session_get_required_media_type</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a>               <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-possible-output-formats">brasero_burn_session_get_possible_output_formats</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> *formats);
-<a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-default-output-format">brasero_burn_session_get_default_output_format</a>
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-label">brasero_burn_session_get_label</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
-void                <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-label">brasero_burn_session_set_label</a>      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *label);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-rate">brasero_burn_session_set_rate</a>       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> rate);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-rate">brasero_burn_session_get_rate</a>       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);
+                    <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession">BraseroBurnSession</a>;
+                    <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSessionClass" title="BraseroBurnSessionClass">BraseroBurnSessionClass</a>;
+<a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="returnvalue">BraseroBurnSession</span></a> * <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-new" title="brasero_burn_session_new ()">brasero_burn_session_new</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-track" title="brasero_burn_session_add_track ()">brasero_burn_session_add_track</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *new_track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *sibling</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-move-track" title="brasero_burn_session_move_track ()">brasero_burn_session_move_track</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *sibling</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-track" title="brasero_burn_session_remove_track ()">brasero_burn_session_remove_track</a>   (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *track</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tracks" title="brasero_burn_session_get_tracks ()">brasero_burn_session_get_tracks</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-status" title="brasero_burn_session_get_status ()">brasero_burn_session_get_status</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-size" title="brasero_burn_session_get_size ()">brasero_burn_session_get_size</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> *blocks</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> *bytes</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-input-type" title="brasero_burn_session_get_input_type ()">brasero_burn_session_get_input_type</a> (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *type</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-lookup" title="brasero_burn_session_tag_lookup ()">brasero_burn_session_tag_lookup</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> **value</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-add" title="brasero_burn_session_tag_add ()">brasero_burn_session_tag_add</a>        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-remove" title="brasero_burn_session_tag_remove ()">brasero_burn_session_tag_remove</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>);
+<a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="returnvalue">BraseroDrive</span></a> *      <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burner" title="brasero_burn_session_get_burner ()">brasero_burn_session_get_burner</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()">brasero_burn_session_set_burner</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> *drive</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-image-output-full" title="brasero_burn_session_set_image_output_full ()">brasero_burn_session_set_image_output_full</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a> format</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *image</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *toc</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output" title="brasero_burn_session_get_output ()">brasero_burn_session_get_output</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **image</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **toc</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="returnvalue">BraseroImageFormat</span></a>  <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output-format" title="brasero_burn_session_get_output_format ()">brasero_burn_session_get_output_format</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-flags" title="brasero_burn_session_set_flags ()">brasero_burn_session_set_flags</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-flag" title="brasero_burn_session_add_flag ()">brasero_burn_session_add_flag</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-flag" title="brasero_burn_session_remove_flag ()">brasero_burn_session_remove_flag</a>    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="returnvalue">BraseroBurnFlag</span></a>     <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-flags" title="brasero_burn_session_get_flags ()">brasero_burn_session_get_flags</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-tmpdir" title="brasero_burn_session_set_tmpdir ()">brasero_burn_session_set_tmpdir</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);
+const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tmpdir" title="brasero_burn_session_get_tmpdir ()">brasero_burn_session_get_tmpdir</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burn-flags" title="brasero_burn_session_get_burn_flags ()">brasero_burn_session_get_burn_flags</a> (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *supported</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *compulsory</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-blank-flags" title="brasero_burn_session_get_blank_flags ()">brasero_burn_session_get_blank_flags</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *supported</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *compulsory</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-blank" title="brasero_burn_session_can_blank ()">brasero_burn_session_can_blank</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-burn" title="brasero_burn_session_can_burn ()">brasero_burn_session_can_burn</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_flags</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-input-supported" title="brasero_burn_session_input_supported ()">brasero_burn_session_input_supported</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *input</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_flags</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-output-supported" title="brasero_burn_session_output_supported ()">brasero_burn_session_output_supported</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *output</code></em>);
+<a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="returnvalue">BraseroMedia</span></a>        <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-required-media-type" title="brasero_burn_session_get_required_media_type ()">brasero_burn_session_get_required_media_type</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-possible-output-formats" title="brasero_burn_session_get_possible_output_formats ()">brasero_burn_session_get_possible_output_formats</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a> *formats</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="returnvalue">BraseroImageFormat</span></a>  <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-default-output-format" title="brasero_burn_session_get_default_output_format ()">brasero_burn_session_get_default_output_format</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-label" title="brasero_burn_session_get_label ()">brasero_burn_session_get_label</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-label" title="brasero_burn_session_set_label ()">brasero_burn_session_set_label</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-rate" title="brasero_burn_session_set_rate ()">brasero_burn_session_set_rate</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> rate</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-rate" title="brasero_burn_session_get_rate ()">brasero_burn_session_get_rate</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
 <a name="libbrasero-burn-BraseroBurnSession.description"></a><h2>Description</h2>
 <p>
-This object stores all parameters for all operations performed by <a href="libbrasero-burn-BraseroBurn.html#BraseroBurn"><span class="type">BraseroBurn</span></a> such as
+This object stores all parameters for all operations performed by <a class="link" href="libbrasero-burn-BraseroBurn.html#BraseroBurn" title="BraseroBurn"><span class="type">BraseroBurn</span></a> such as
 burning, blanking and checksuming. To have this object configured automatically see
-<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>.</p>
+<a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="libbrasero-burn-BraseroBurnSession.details"></a><h2>Details</h2>
@@ -162,8 +159,8 @@ burning, blanking and checksuming. To have this object configured automatically 
 
 	/** Signals **/
 	void			(*flags_changed) (BraseroBurnSession *session);
-	void			(*tag_changed) (BraseroBurnSession *session,
-					                   const gchar *tag);
+	void			(*tag_changed)		(BraseroBurnSession *session,
+					                 const gchar *tag);
 	void			(*track_added)		(BraseroBurnSession *session,
 							 BraseroTrack *track);
 	void			(*track_removed) (BraseroBurnSession *session,
@@ -181,14 +178,15 @@ burning, blanking and checksuming. To have this object configured automatically 
 <hr>
 <div class="refsect2" title="brasero_burn_session_new ()">
 <a name="brasero-burn-session-new"></a><h3>brasero_burn_session_new ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> * brasero_burn_session_new           ();</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="returnvalue">BraseroBurnSession</span></a> * brasero_burn_session_new           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Returns a new <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object.</p>
+Returns a new <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
+<td> a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
 </td>
 </tr></tbody>
 </table></div>
@@ -196,35 +194,34 @@ Returns a new <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSessio
 <hr>
 <div class="refsect2" title="brasero_burn_session_add_track ()">
 <a name="brasero-burn-session-add-track"></a><h3>brasero_burn_session_add_track ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_add_track      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *new_track,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *sibling);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_add_track      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *new_track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *sibling</code></em>);</pre>
 <p>
 Inserts a new track after <em class="parameter"><code>sibling</code></em> or appended if <em class="parameter"><code>sibling</code></em> is NULL. If <em class="parameter"><code>track</code></em> is NULL then all tracks
 already in <em class="parameter"><code>session</code></em> will be removed.
-NOTE: if there are already <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> objects inserted in the session and if they are not
-of the same type as <em class="parameter"><code>new_track</code></em> then they will be removed before the insertion of <em class="parameter"><code>new_track</code></em>.</p>
+NOTE: if there are already <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> objects inserted in the session and if they are not
+of the same type as <em class="parameter"><code>new_track</code></em> then they will be removed before the insertion of <em class="parameter"><code>new_track</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>new_track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL
-</td>
+<td> a <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sibling</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL
-</td>
+<td> a <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully inserted or BRASERO_BURN_ERR otherwise.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully inserted or BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
 </tbody>
@@ -233,32 +230,32 @@ of the same type as <em class="parameter"><code>new_track</code></em> then they 
 <hr>
 <div class="refsect2" title="brasero_burn_session_move_track ()">
 <a name="brasero-burn-session-move-track"></a><h3>brasero_burn_session_move_track ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_move_track     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *sibling);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_move_track     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *sibling</code></em>);</pre>
 <p>
-Moves <em class="parameter"><code>track</code></em> after <em class="parameter"><code>sibling</code></em>; if <em class="parameter"><code>sibling</code></em> is NULL then it is appended.</p>
+Moves <em class="parameter"><code>track</code></em> after <em class="parameter"><code>sibling</code></em>; if <em class="parameter"><code>sibling</code></em> is NULL then it is appended.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>sibling</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL
-</td>
+<td> a <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully moved or BRASERO_BURN_ERR otherwise.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully moved or BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
 </tbody>
@@ -267,26 +264,27 @@ Moves <em class="parameter"><code>track</code></em> after <em class="parameter">
 <hr>
 <div class="refsect2" title="brasero_burn_session_remove_track ()">
 <a name="brasero-burn-session-remove-track"></a><h3>brasero_burn_session_remove_track ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_remove_track   (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_remove_track   (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> *track</code></em>);</pre>
 <p>
-Removes <em class="parameter"><code>track</code></em> from <em class="parameter"><code>session</code></em>.</p>
+Removes <em class="parameter"><code>track</code></em> from <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully removed or BRASERO_BURN_ERR otherwise.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if the track was successfully removed or BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
 </tbody>
@@ -295,21 +293,22 @@ Removes <em class="parameter"><code>track</code></em> from <em class="parameter"
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_tracks ()">
 <a name="brasero-burn-session-get-tracks"></a><h3>brasero_burn_session_get_tracks ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            brasero_burn_session_get_tracks     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *            brasero_burn_session_get_tracks     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
-Returns the list of <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> added to <em class="parameter"><code>session</code></em>.</p>
+Returns the list of <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> added to <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> or <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> object. Do not unref the objects in the list nor destroy the list.
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> or <a class="link" href="libbrasero-burn-BraseroTrack.html#BraseroTrack" title="BraseroTrack"><span class="type">BraseroTrack</span></a> object. Do not unref the objects in the list nor destroy the list.
+. <acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> BraseroBurn.Track. <acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym> BraseroBurn.Track. </td>
 </tr>
 </tbody>
 </table></div>
@@ -317,26 +316,27 @@ Returns the list of <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><sp
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_status ()">
 <a name="brasero-burn-session-get-status"></a><h3>brasero_burn_session_get_status ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_status     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_status     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-status.html#BraseroStatus" title="BraseroStatus"><span class="type">BraseroStatus</span></a> *status</code></em>);</pre>
 <p>
-Sets <em class="parameter"><code>status</code></em> to reflect whether <em class="parameter"><code>session</code></em> is ready to be used.</p>
+Sets <em class="parameter"><code>status</code></em> to reflect whether <em class="parameter"><code>session</code></em> is ready to be used.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
-<td> a <span class="type">BraseroTrackStatus</span>
+<td>a <span class="type">BraseroTrackStatus</span>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful
 BRASERO_BURN_NOT_READY if <em class="parameter"><code>track</code></em> needs more time for processing
 BRASERO_BURN_ERR if something is wrong or if it is empty
@@ -348,32 +348,33 @@ BRASERO_BURN_ERR if something is wrong or if it is empty
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_size ()">
 <a name="brasero-burn-session-get-size"></a><h3>brasero_burn_session_get_size ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_size       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_size       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> *blocks</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> *bytes</code></em>);</pre>
 <p>
-Returns the size of the data contained by <em class="parameter"><code>session</code></em> in bytes or in sectors</p>
+Returns the size of the data contained by <em class="parameter"><code>session</code></em> in bytes or in sectors
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful
 BRASERO_BURN_NOT_READY if <em class="parameter"><code>track</code></em> needs more time for processing the size
 BRASERO_BURN_ERR if something is wrong or if it is empty
@@ -385,26 +386,27 @@ BRASERO_BURN_ERR if something is wrong or if it is empty
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_input_type ()">
 <a name="brasero-burn-session-get-input-type"></a><h3>brasero_burn_session_get_input_type ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_input_type (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_input_type (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *type</code></em>);</pre>
 <p>
-Sets <em class="parameter"><code>type</code></em> to reflect the type of data contained in <em class="parameter"><code>session</code></em></p>
+Sets <em class="parameter"><code>type</code></em> to reflect the type of data contained in <em class="parameter"><code>session</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> or NULL
+<td>a <a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful
 </td>
 </tr>
@@ -414,34 +416,35 @@ BRASERO_BURN_OK if it was successful
 <hr>
 <div class="refsect2" title="brasero_burn_session_tag_lookup ()">
 <a name="brasero-burn-session-tag-lookup"></a><h3>brasero_burn_session_tag_lookup ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_tag_lookup     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
-                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> **value);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_tag_lookup     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> **value</code></em>);</pre>
 <p>
 Retrieves a value associated with <em class="parameter"><code>session</code></em> through
 <code class="function">brasero_session_tag_add()</code> and stores it in <em class="parameter"><code>value</code></em>. Do
-not destroy <em class="parameter"><code>value</code></em> afterwards as it is not a copy.</p>
+not destroy <em class="parameter"><code>value</code></em> afterwards as it is not a copy.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if the retrieval was successful
 BRASERO_BURN_ERR otherwise
 </td>
@@ -452,36 +455,37 @@ BRASERO_BURN_ERR otherwise
 <hr>
 <div class="refsect2" title="brasero_burn_session_tag_add ()">
 <a name="brasero-burn-session-tag-add"></a><h3>brasero_burn_session_tag_add ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_tag_add        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
-                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> *value);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_tag_add        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *value</code></em>);</pre>
 <p>
 Associates a new <em class="parameter"><code>tag</code></em> with <em class="parameter"><code>session</code></em>. This can be used
 to pass arbitrary information for plugins, like parameters
 for video discs, ...
-NOTE: the <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object takes ownership of <em class="parameter"><code>value</code></em>.
-See brasero-tags.h for a list of knowns tags.</p>
+NOTE: the <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object takes ownership of <em class="parameter"><code>value</code></em>.
+See brasero-tags.h for a list of knowns tags.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *
+<td>a <a href="/usr/share/gtk-doc/html/gobject/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful,
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -492,27 +496,28 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_tag_remove ()">
 <a name="brasero-burn-session-tag-remove"></a><h3>brasero_burn_session_tag_remove ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_tag_remove     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_tag_remove     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *tag</code></em>);</pre>
 <p>
 Removes a value associated with <em class="parameter"><code>session</code></em> through
-<code class="function">brasero_session_tag_add()</code>.</p>
+<code class="function">brasero_session_tag_add()</code>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if the retrieval was successful
 BRASERO_BURN_ERR otherwise
 </td>
@@ -523,21 +528,21 @@ BRASERO_BURN_ERR otherwise
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_burner ()">
 <a name="brasero-burn-session-get-burner"></a><h3>brasero_burn_session_get_burner ()</h3>
-<pre class="programlisting"><a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      brasero_burn_session_get_burner     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="returnvalue">BraseroDrive</span></a> *      brasero_burn_session_get_burner     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
-Returns the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> that should be used to burn the session contents.</p>
+Returns the <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> that should be used to burn the session contents.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. Do not unref after use.
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. Do not unref after use.. <acronym title="Don't free data after the code is done."><span class="acronym">transfer none</span></acronym>. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 </tbody>
 </table></div>
@@ -545,21 +550,22 @@ Returns the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#Bras
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_burner ()">
 <a name="brasero-burn-session-set-burner"></a><h3>brasero_burn_session_set_burner ()</h3>
-<pre class="programlisting">void                brasero_burn_session_set_burner     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *drive);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_burn_session_set_burner     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> *drive</code></em>);</pre>
 <p>
-Sets the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> that should be used to burn the session contents.</p>
+Sets the <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> that should be used to burn the session contents.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
-<td> a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>
 </td>
 </tr>
 </tbody>
@@ -568,11 +574,11 @@ Sets the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#Brasero
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_image_output_full ()">
 <a name="brasero-burn-session-set-image-output-full"></a><h3>brasero_burn_session_set_image_output_full ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_set_image_output_full
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> format,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *image,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *toc);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_set_image_output_full
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a> format</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *image</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *toc</code></em>);</pre>
 <p>
 When the contents of <em class="parameter"><code>session</code></em> should be written to a
 file, this function sets the different parameters of this
@@ -580,34 +586,33 @@ image like its path (and the one of the associated toc if
 necessary) and its format.
 </p>
 <p>
-NOTE: after a call to this function the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> for
-<em class="parameter"><code>session</code></em> will be the fake <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>.</p>
+NOTE: after a call to this function the <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> for
+<em class="parameter"><code>session</code></em> will be the fake <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>image</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>toc</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it was successfully set;
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it was successfully set;
 BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
@@ -617,9 +622,9 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_output ()">
 <a name="brasero-burn-session-get-output"></a><h3>brasero_burn_session_get_output ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_output     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> **image,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> **toc);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_output     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **image</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> **toc</code></em>);</pre>
 <p>
 When the contents of <em class="parameter"><code>session</code></em> should be written to a
 file then this function returns the image path (and if
@@ -627,30 +632,29 @@ necessary a toc path).
 <em class="parameter"><code>image</code></em> and <em class="parameter"><code>toc</code></em> should be freed if not used anymore.
 </p>
 <p>
-NOTE: before using this function a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
-set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a> and it should be the
-fake drive (see <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#brasero-drive-is-fake"><code class="function">brasero_drive_is_fake()</code></a>).</p>
+NOTE: before using this function a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
+set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a> and it should be the
+fake drive (see <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#brasero-drive-is-fake"><code class="function">brasero_drive_is_fake()</code></a>).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>.
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>image</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> to store the image path or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. <acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>toc</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> to store the toc path or NULL.. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. <acronym title="Parameter for returning results. Default is transfer full."><span class="acronym">out</span></acronym>. </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful; BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
@@ -660,27 +664,28 @@ BRASERO_BURN_OK if it was successful; BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_output_format ()">
 <a name="brasero-burn-session-get-output-format"></a><h3>brasero_burn_session_get_output_format ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  brasero_burn_session_get_output_format
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="returnvalue">BraseroImageFormat</span></a>  brasero_burn_session_get_output_format
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
 When the contents of <em class="parameter"><code>session</code></em> should be written to a
 file then this function returns the format of the image to write.
 </p>
 <p>
-NOTE: before using this function a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
-set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a> and it should be the
-fake drive (see <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#brasero-drive-is-fake"><code class="function">brasero_drive_is_fake()</code></a>).</p>
+NOTE: before using this function a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
+set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a> and it should be the
+fake drive (see <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#brasero-drive-is-fake"><code class="function">brasero_drive_is_fake()</code></a>).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>. The format of the image to be written.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>. The format of the image to be written.
 </td>
 </tr>
 </tbody>
@@ -689,21 +694,22 @@ fake drive (see <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_flags ()">
 <a name="brasero-burn-session-set-flags"></a><h3>brasero_burn_session_set_flags ()</h3>
-<pre class="programlisting">void                brasero_burn_session_set_flags      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_burn_session_set_flags      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);</pre>
 <p>
-Replaces the current flags set in <em class="parameter"><code>session</code></em> with <em class="parameter"><code>flags</code></em>.</p>
+Replaces the current flags set in <em class="parameter"><code>session</code></em> with <em class="parameter"><code>flags</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 </tbody>
@@ -712,21 +718,22 @@ Replaces the current flags set in <em class="parameter"><code>session</code></em
 <hr>
 <div class="refsect2" title="brasero_burn_session_add_flag ()">
 <a name="brasero-burn-session-add-flag"></a><h3>brasero_burn_session_add_flag ()</h3>
-<pre class="programlisting">void                brasero_burn_session_add_flag       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_burn_session_add_flag       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);</pre>
 <p>
-Merges the current flags set in <em class="parameter"><code>session</code></em> with <em class="parameter"><code>flags</code></em>.</p>
+Merges the current flags set in <em class="parameter"><code>session</code></em> with <em class="parameter"><code>flags</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 </tbody>
@@ -735,21 +742,22 @@ Merges the current flags set in <em class="parameter"><code>session</code></em> 
 <hr>
 <div class="refsect2" title="brasero_burn_session_remove_flag ()">
 <a name="brasero-burn-session-remove-flag"></a><h3>brasero_burn_session_remove_flag ()</h3>
-<pre class="programlisting">void                brasero_burn_session_remove_flag    (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_burn_session_remove_flag    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);</pre>
 <p>
-Removes <em class="parameter"><code>flags</code></em> from the current flags set for <em class="parameter"><code>session</code></em>.</p>
+Removes <em class="parameter"><code>flags</code></em> from the current flags set for <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 </tbody>
@@ -758,20 +766,21 @@ Removes <em class="parameter"><code>flags</code></em> from the current flags set
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_flags ()">
 <a name="brasero-burn-session-get-flags"></a><h3>brasero_burn_session_get_flags ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a>     brasero_burn_session_get_flags      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="returnvalue">BraseroBurnFlag</span></a>     brasero_burn_session_get_flags      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
-Returns the current flags set for <em class="parameter"><code>session</code></em>.</p>
+Returns the current flags set for <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>.
 </td>
 </tr>
 </tbody>
@@ -780,27 +789,28 @@ Returns the current flags set for <em class="parameter"><code>session</code></em
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_tmpdir ()">
 <a name="brasero-burn-session-set-tmpdir"></a><h3>brasero_burn_session_set_tmpdir ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_set_tmpdir     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *path);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_set_tmpdir     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *path</code></em>);</pre>
 <p>
 Sets the path of the directory in which to write temporary directories and files.
-If set to NULL then the result of <a href="http://library.gnome.org/devel/glib/unstable/glib-Miscellaneous-Utility-Functions.html#g-get-tmp-dir"><code class="function">g_get_tmp_dir()</code></a> will be used.</p>
+If set to NULL then the result of <a href="/usr/share/gtk-doc/html/glib/glib-Miscellaneous-Utility-Functions.html#g-get-tmp-dir"><code class="function">g_get_tmp_dir()</code></a> will be used.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>path</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it was successfully set;
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it was successfully set;
 BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
@@ -810,20 +820,21 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_tmpdir ()">
 <a name="brasero-burn-session-get-tmpdir"></a><h3>brasero_burn_session_get_tmpdir ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_burn_session_get_tmpdir     (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       brasero_burn_session_get_tmpdir     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
-Returns the path of the directory in which to write temporary directories and files.</p>
+Returns the path of the directory in which to write temporary directories and files.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>. The path to the temporary directory.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>. The path to the temporary directory.
 </td>
 </tr>
 </tbody>
@@ -832,36 +843,37 @@ Returns the path of the directory in which to write temporary directories and fi
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_burn_flags ()">
 <a name="brasero-burn-session-get-burn-flags"></a><h3>brasero_burn_session_get_burn_flags ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_burn_flags (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *supported,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *compulsory);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_burn_flags (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *supported</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *compulsory</code></em>);</pre>
 <p>
 Given the various parameters stored in <em class="parameter"><code>session</code></em>, this function
 stores:
 - the flags that can be used (<em class="parameter"><code>supported</code></em>)
 - the flags that must be used (<em class="parameter"><code>compulsory</code></em>)
-when writing <em class="parameter"><code>session</code></em> to a disc.</p>
+when writing <em class="parameter"><code>session</code></em> to a disc.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>supported</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> or NULL
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compulsory</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> or NULL
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> or NULL
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if the retrieval was successful.
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -872,37 +884,38 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_blank_flags ()">
 <a name="brasero-burn-session-get-blank-flags"></a><h3>brasero_burn_session_get_blank_flags ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_get_blank_flags
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *supported,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> *compulsory);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_get_blank_flags
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *supported</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> *compulsory</code></em>);</pre>
 <p>
 Given the various parameters stored in <em class="parameter"><code>session</code></em>,
 stores in <em class="parameter"><code>supported</code></em> and <em class="parameter"><code>compulsory</code></em>, the flags
 that can be used (<em class="parameter"><code>supported</code></em>) and must be used
 (<em class="parameter"><code>compulsory</code></em>) when blanking the medium in the
-<a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>).</p>
+<a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>supported</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>compulsory</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if the retrieval was successful.
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -913,23 +926,24 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_can_blank ()">
 <a name="brasero-burn-session-can-blank"></a><h3>brasero_burn_session_can_blank ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_can_blank      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_can_blank      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
 Given the various parameters stored in <em class="parameter"><code>session</code></em>, this
 function checks whether the medium in the
-<a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>)
-can be blanked.</p>
+<a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>)
+can be blanked.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it is possible.
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -940,31 +954,31 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_can_burn ()">
 <a name="brasero-burn-session-can-burn"></a><h3>brasero_burn_session_can_burn ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_can_burn       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_flags);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_can_burn       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_flags</code></em>);</pre>
 <p>
 Given the various parameters stored in <em class="parameter"><code>session</code></em>, this
 function checks whether the data contained in <em class="parameter"><code>session</code></em>
-can be burnt to the medium in the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set 
-through <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>).
-If <em class="parameter"><code>use_flags</code></em> is set to TRUE the flags are taken into
-account, otherwise they are not.</p>
+can be burnt to the medium in the <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set 
+through <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>).
+If <em class="parameter"><code>check_flags</code></em> determine the behavior of this function.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>use_flags</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+<td><p><span class="term"><em class="parameter"><code>check_flags</code></em> :</span></p></td>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it is possible.
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -975,38 +989,39 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_input_supported ()">
 <a name="brasero-burn-session-input-supported"></a><h3>brasero_burn_session_input_supported ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_input_supported
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *input,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_flags);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_input_supported
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *input</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> check_flags</code></em>);</pre>
 <p>
 Given the various parameters stored in <em class="parameter"><code>session</code></em>, this
 function checks whether a session with the data type
-<em class="parameter"><code>type</code></em> could be burnt to the medium in the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set 
-through <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>).
-If <em class="parameter"><code>use_flags</code></em> is TRUE, then flags are taken into account
-and are not if it is FALSE.</p>
+<em class="parameter"><code>type</code></em> could be burnt to the medium in the <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> (set 
+through <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>).
+If <em class="parameter"><code>check_flags</code></em> is <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a>, then flags are taken into account
+and are not if it is <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#FALSE:CAPS"><code class="literal">FALSE</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>input</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a>
 </td>
 </tr>
 <tr>
-<td><p><span class="term"><em class="parameter"><code>use_flags</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+<td><p><span class="term"><em class="parameter"><code>check_flags</code></em> :</span></p></td>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it is possible.
 BRASERO_BURN_ERR otherwise.
 </td>
@@ -1017,23 +1032,24 @@ BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_output_supported ()">
 <a name="brasero-burn-session-output-supported"></a><h3>brasero_burn_session_output_supported ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_output_supported
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *output);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_output_supported
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *output</code></em>);</pre>
 <p>
 Make sure that the image type or medium type defined in <em class="parameter"><code>output</code></em> can be
-created/burnt given the parameters and the current data set in <em class="parameter"><code>session</code></em>.</p>
+created/burnt given the parameters and the current data set in <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>output</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> *
+<td>a <a class="link" href="libbrasero-burn-brasero-track-type.html#BraseroTrackType" title="BraseroTrackType"><span class="type">BraseroTrackType</span></a> *
 </td>
 </tr>
 <tr>
@@ -1047,22 +1063,23 @@ created/burnt given the parameters and the current data set in <em class="parame
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_required_media_type ()">
 <a name="brasero-burn-session-get-required-media-type"></a><h3>brasero_burn_session_get_required_media_type ()</h3>
-<pre class="programlisting"><a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        brasero_burn_session_get_required_media_type
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="returnvalue">BraseroMedia</span></a>        brasero_burn_session_get_required_media_type
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
 Return the medium types that could be used to burn
-<em class="parameter"><code>session</code></em>.</p>
+<em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
+<td> a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
 </td>
 </tr>
 </tbody>
@@ -1071,28 +1088,29 @@ Return the medium types that could be used to burn
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_possible_output_formats ()">
 <a name="brasero-burn-session-get-possible-output-formats"></a><h3>brasero_burn_session_get_possible_output_formats ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a>               brasero_burn_session_get_possible_output_formats
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> *formats);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="returnvalue">guint</span></a>               brasero_burn_session_get_possible_output_formats
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a> *formats</code></em>);</pre>
 <p>
 Returns the disc image types that could be set to create
-an image given the current state of <em class="parameter"><code>session</code></em>.</p>
+an image given the current state of <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>formats</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>. The number of formats available.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint"><span class="type">guint</span></a>. The number of formats available.
 </td>
 </tr>
 </tbody>
@@ -1101,22 +1119,23 @@ an image given the current state of <em class="parameter"><code>session</code></
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_default_output_format ()">
 <a name="brasero-burn-session-get-default-output-format"></a><h3>brasero_burn_session_get_default_output_format ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  brasero_burn_session_get_default_output_format
-                                                        (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="returnvalue">BraseroImageFormat</span></a>  brasero_burn_session_get_default_output_format
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
 Returns the default disc image type that should be set to create
-an image given the current state of <em class="parameter"><code>session</code></em>.</p>
+an image given the current state of <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
 </td>
 </tr>
 </tbody>
@@ -1125,20 +1144,21 @@ an image given the current state of <em class="parameter"><code>session</code></
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_label ()">
 <a name="brasero-burn-session-get-label"></a><h3>brasero_burn_session_get_label ()</h3>
-<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_burn_session_get_label      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *       brasero_burn_session_get_label      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
-Returns the label (a string) set for <em class="parameter"><code>session</code></em>.</p>
+Returns the label (a string) set for <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL. Do not free after use.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL. Do not free after use.
 </td>
 </tr>
 </tbody>
@@ -1147,22 +1167,22 @@ Returns the label (a string) set for <em class="parameter"><code>session</code><
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_label ()">
 <a name="brasero-burn-session-set-label"></a><h3>brasero_burn_session_set_label ()</h3>
-<pre class="programlisting">void                brasero_burn_session_set_label      (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *label);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_burn_session_set_label      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *label</code></em>);</pre>
 <p>
-Sets the label for <em class="parameter"><code>session</code></em>.</p>
+Sets the label for <em class="parameter"><code>session</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>label</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
-</td>
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a>. <acronym title="NULL is ok, both for passing and for returning."><span class="acronym">allow-none</span></acronym>. </td>
 </tr>
 </tbody>
 </table></div>
@@ -1170,28 +1190,29 @@ Sets the label for <em class="parameter"><code>session</code></em>.</p>
 <hr>
 <div class="refsect2" title="brasero_burn_session_set_rate ()">
 <a name="brasero-burn-session-set-rate"></a><h3>brasero_burn_session_set_rate ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_session_set_rate       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> rate);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_burn_session_set_rate       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> rate</code></em>);</pre>
 <p>
 Sets the speed at which the medium should be burnt.
-NOTE: before using this function a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
-set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>.</p>
+NOTE: before using this function a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
+set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>rate</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
 BRASERO_BURN_OK if it was successful; BRASERO_BURN_ERR otherwise.
 </td>
 </tr>
@@ -1201,22 +1222,23 @@ BRASERO_BURN_OK if it was successful; BRASERO_BURN_ERR otherwise.
 <hr>
 <div class="refsect2" title="brasero_burn_session_get_rate ()">
 <a name="brasero-burn-session-get-rate"></a><h3>brasero_burn_session_get_rate ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             brasero_burn_session_get_rate       (<a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession">BraseroBurnSession</a> *session);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             brasero_burn_session_get_rate       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> *session</code></em>);</pre>
 <p>
 Returns the speed at which the medium should be burnt.
-NOTE: before using this function a <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
-set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>.</p>
+NOTE: before using this function a <a href="/usr/share/gtk-doc/html/libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> should have been
+set with <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> or 0.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> or 0.
 </td>
 </tr>
 </tbody>
@@ -1225,11 +1247,11 @@ set with <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-s
 </div>
 <div class="refsect1" title="See Also">
 <a name="libbrasero-burn-BraseroBurnSession.see-also"></a><h2>See Also</h2>
-<a href="libbrasero-burn-BraseroBurn.html#BraseroBurn"><span class="type">BraseroBurn</span></a>, <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<a class="link" href="libbrasero-burn-BraseroBurn.html#BraseroBurn" title="BraseroBurn"><span class="type">BraseroBurn</span></a>, <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

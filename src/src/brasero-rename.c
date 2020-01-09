@@ -118,17 +118,17 @@ brasero_rename_delete_string (BraseroRename *self,
 {
 	BraseroRenamePrivate *priv;
 	const gchar *text;
-	gchar *occurence;
+	gchar *occurrence;
 
 	priv = BRASERO_RENAME_PRIVATE (self);
 
 	text = gtk_entry_get_text (GTK_ENTRY (priv->delete_entry));
-	occurence = g_strstr_len (name, -1, text);
+	occurrence = g_strstr_len (name, -1, text);
 
-	if (!occurence)
+	if (!occurrence)
 		return NULL;
 
-	return g_strdup_printf ("%.*s%s", (int) (occurence - name), name, occurence + strlen (text));
+	return g_strdup_printf ("%.*s%s", (int) (occurrence - name), name, occurrence + strlen (text));
 }
 
 static gchar *
@@ -138,18 +138,18 @@ brasero_rename_substitute_string (BraseroRename *self,
 	BraseroRenamePrivate *priv;
 	const gchar *joker;
 	const gchar *text;
-	gchar *occurence;
+	gchar *occurrence;
 
 	priv = BRASERO_RENAME_PRIVATE (self);
 
 	text = gtk_entry_get_text (GTK_ENTRY (priv->substitute_entry));
-	occurence = g_strstr_len (name, -1, text);
+	occurrence = g_strstr_len (name, -1, text);
 
-	if (!occurence)
+	if (!occurrence)
 		return NULL;
 
 	joker = gtk_entry_get_text (GTK_ENTRY (priv->joker_entry));
-	return g_strdup_printf ("%.*s%s%s", (int) (occurence - name), name, joker, occurence + strlen (text));
+	return g_strdup_printf ("%.*s%s%s", (int) (occurrence - name), name, joker, occurrence + strlen (text));
 }
 
 static gchar *
@@ -167,6 +167,30 @@ brasero_rename_number_string (BraseroRename *self,
 	return g_strdup_printf ("%s%i%s", left, priv->number ++, right);
 }
 
+static gchar *
+brasero_rename_sequence_string (BraseroRename *self,
+                                const gchar *name,
+                                guint item_num,
+                                guint nb_items)
+{
+	BraseroRenamePrivate *priv;
+	gboolean is_at_end;
+
+	priv = BRASERO_RENAME_PRIVATE (self);
+
+	is_at_end = gtk_combo_box_get_active (GTK_COMBO_BOX (priv->insert_combo)) != 0;
+
+	if (nb_items < 10){
+		return g_strdup_printf ("%i%s", item_num, name);
+	} else if (nb_items < 100){
+		return g_strdup_printf ("%02i%s", item_num, name);       
+	} else if (nb_items < 1000){
+		return g_strdup_printf ("%03i%s", item_num, name);       
+	} else {
+		return g_strdup_printf ("%04i%s", item_num, name); 
+	}
+}
+
 gboolean
 brasero_rename_do (BraseroRename *self,
 		   GtkTreeSelection *selection,
@@ -176,8 +200,10 @@ brasero_rename_do (BraseroRename *self,
 	BraseroRenamePrivate *priv;
 	GtkTreeModel *model;
 	GList *selected;
+	guint item_num;
+	guint nb_items;
 	GList *item;
-	guint mode;
+	gint mode;
 
 	priv = BRASERO_RENAME_PRIVATE (self);
 	mode = gtk_combo_box_get_active (GTK_COMBO_BOX (priv->combo));
@@ -187,7 +213,11 @@ brasero_rename_do (BraseroRename *self,
 		return TRUE;
 
 	selected = gtk_tree_selection_get_selected_rows (selection, &model);
-	for (item = selected; item; item = item->next) {
+
+	nb_items = g_list_length (selected);
+	item_num = 0;
+
+	for (item = selected; item; item = item->next, item_num ++) {
 		GtkTreePath *treepath;
 		GtkTreeIter iter;
 		gboolean result;
@@ -214,6 +244,9 @@ redo:
 			break;
 		case 3:
 			new_name = brasero_rename_number_string (self, name);
+			break;
+		case 4:
+			new_name = brasero_rename_sequence_string (self, name, item_num, nb_items);
 			break;
 		default:
 			new_name = NULL;
@@ -249,7 +282,9 @@ brasero_rename_type_changed (GtkComboBox *combo,
 	BraseroRenamePrivate *priv;
 
 	priv = BRASERO_RENAME_PRIVATE (self);
-	if (gtk_combo_box_get_active (combo) == -1) {
+
+	if (gtk_combo_box_get_active (combo) - priv->show_default < 0
+	||  gtk_combo_box_get_active (combo) - priv->show_default == 4) {
 		gtk_widget_hide (priv->notebook);
 		return;
 	}
@@ -286,6 +321,7 @@ brasero_rename_init (BraseroRename *object)
 	gtk_combo_box_append_text (GTK_COMBO_BOX (priv->combo), _("Delete text"));
 	gtk_combo_box_append_text (GTK_COMBO_BOX (priv->combo), _("Substitute text"));
 	gtk_combo_box_append_text (GTK_COMBO_BOX (priv->combo), _("Number files according to a pattern"));
+	gtk_combo_box_append_text (GTK_COMBO_BOX (priv->combo), _("Insert number sequence at beginning"));
 
 	g_signal_connect (priv->combo,
 			  "changed",
@@ -314,7 +350,7 @@ brasero_rename_init (BraseroRename *object)
 
 	/* Translators: This finishes previous action "Insert". It goes like
 	 * this: "Insert" [Entry] "at the beginning". */
-	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("at the begining"));
+	gtk_combo_box_append_text (GTK_COMBO_BOX (combo), _("at the beginning"));
 
 	/* Translators: This finishes previous action "Insert". It goes like
 	 * this: "Insert" [Entry] "at the end". */
@@ -329,7 +365,7 @@ brasero_rename_init (BraseroRename *object)
 	gtk_widget_show (hbox);
 	gtk_notebook_append_page (GTK_NOTEBOOK (priv->notebook), hbox, NULL);
 
-	label = gtk_label_new (_("Delete every occurence of"));
+	label = gtk_label_new (_("Delete every occurrence of"));
 	gtk_widget_show (label);
 	gtk_box_pack_start (GTK_BOX (hbox), label, FALSE, FALSE, 0);
 

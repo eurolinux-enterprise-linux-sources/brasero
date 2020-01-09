@@ -41,7 +41,6 @@
 #include <gmodule.h>
 
 #include "burn-cdrtools.h"
-#include "burn-readcd.h"
 #include "burn-process.h"
 #include "burn-job.h"
 #include "brasero-plugin-registration.h"
@@ -50,6 +49,14 @@
 
 #include "burn-volume.h"
 #include "brasero-drive.h"
+
+
+#define BRASERO_TYPE_READCD         (brasero_readcd_get_type ())
+#define BRASERO_READCD(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_READCD, BraseroReadcd))
+#define BRASERO_READCD_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_READCD, BraseroReadcdClass))
+#define BRASERO_IS_READCD(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_READCD))
+#define BRASERO_IS_READCD_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_READCD))
+#define BRASERO_READCD_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_READCD, BraseroReadcdClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroReadcd, brasero_readcd, BRASERO_TYPE_PROCESS, BraseroProcess);
 static GObjectClass *parent_class = NULL;
@@ -120,7 +127,7 @@ brasero_readcd_read_stderr (BraseroProcess *process, const gchar *line)
 		brasero_job_error (BRASERO_JOB (process),
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_GENERAL,
-						_("An internal error occured")));
+						_("An internal error occurred")));
 	}
 	else if (strstr (line, "No space left on device")) {
 		/* This is necessary as readcd won't return an error code on exit */
@@ -370,7 +377,7 @@ brasero_readcd_set_argv (BraseroProcess *process,
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("An internal error occured"));
+			     _("An internal error occurred"));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -441,23 +448,17 @@ brasero_readcd_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_readcd_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_readcd_export_caps (BraseroPlugin *plugin)
 {
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	brasero_plugin_define (plugin,
 			       "readcd",
-			       _("Use readcd to create disc images"),
+			       _("Copies any disc to a disc image"),
 			       "Philippe Rouquier",
 			       0);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("readcd", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	/* that's for clone mode only The only one to copy audio */
 	output = brasero_caps_image_new (BRASERO_PLUGIN_IO_ACCEPT_FILE,
@@ -500,6 +501,15 @@ brasero_readcd_export_caps (BraseroPlugin *plugin, gchar **error)
 	g_slist_free (input);
 
 	brasero_plugin_register_group (plugin, _(CDRTOOLS_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 2, 0, -1};
+	brasero_plugin_test_app (plugin,
+	                         "readcd",
+	                         "--version",
+	                         "readcd %d.%d",
+	                         version);
 }

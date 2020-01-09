@@ -23,7 +23,7 @@ INCLUDES = \
 	$(BRASERO_DBUS_CFLAGS)						\
 	$(BRASERO_LIBUNIQUE_CFLAGS)                                     \
 	$(BRASERO_LIBXML_CFLAGS)					\
-	$(BRASERO_BEAGLE_CFLAGS)					\
+	$(BRASERO_SEARCH_CFLAGS)					\
 	$(BRASERO_PL_PARSER_CFLAGS)					\
 	$(BRASERO_LIBUNIQUE_CFLAGS)					\
 	$(BRASERO_SM_CFLAGS)
@@ -44,14 +44,6 @@ brasero_SOURCES = \
 	main.c		\
 	brasero-utils.h		\
 	brasero-utils.c         \
-	brasero-search-entry.c         \
-	brasero-search-entry.h         \
-	brasero-search-beagle.c         \
-	brasero-search-beagle.h         \
-	brasero-mime-filter.c         \
-	brasero-mime-filter.h         \
-	brasero-playlist.c         \
-	brasero-playlist.h         \
 	brasero-player.c         \
 	brasero-player.h         \
 	brasero-eject-dialog.c		\
@@ -123,7 +115,41 @@ brasero_SOURCES = \
 	eggsmclient.c        \
 	eggsmclient.h        \
 	eggsmclient-private.h        \
-	eggsmclient-xsmp.c
+	eggsmclient-xsmp.c        \
+	brasero-setting.h        \
+	brasero-setting.c        \
+	brasero-search-engine.h        \
+	brasero-search-engine.c
+
+if BUILD_PLAYLIST
+brasero_SOURCES += \
+	brasero-playlist.c         \
+	brasero-playlist.h
+
+endif
+
+if BUILD_TRACKER
+brasero_SOURCES += \
+		   brasero-search-tracker.h	\
+		   brasero-search-tracker.c
+endif
+
+if BUILD_BEAGLE
+brasero_SOURCES += 				\
+		   brasero-search-beagle.h	\
+		   brasero-search-beagle.c
+endif
+
+if BUILD_SEARCH
+
+brasero_SOURCES += \
+		   brasero-mime-filter.c         \
+		   brasero-mime-filter.h         \
+		   brasero-search-entry.c         \
+		   brasero-search-entry.h         \
+		   brasero-search.h		\
+		   brasero-search.c
+endif
 
 brasero_LDADD =						\
 	$(top_builddir)/libbrasero-media/libbrasero-media.la	\
@@ -140,7 +166,7 @@ brasero_LDADD =						\
 	$(BRASERO_DBUS_LIBS)		\
 	$(BRASERO_LIBUNIQUE_LIBS)	\
 	$(BRASERO_LIBXML_LIBS)		\
-	$(BRASERO_BEAGLE_LIBS)		\
+	$(BRASERO_SEARCH_LIBS)		\
 	$(BRASERO_PL_PARSER_LIBS)	\
 	$(BRASERO_LIBUNIQUE_LIBS)	\
 	$(BRASERO_SM_LIBS)

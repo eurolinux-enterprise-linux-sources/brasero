@@ -50,8 +50,15 @@
 #include "brasero-plugin-registration.h"
 #include "burn-job.h"
 #include "burn-process.h"
-#include "burn-vcdimager.h"
 #include "brasero-track-stream.h"
+
+
+#define BRASERO_TYPE_VCD_IMAGER             (brasero_vcd_imager_get_type ())
+#define BRASERO_VCD_IMAGER(obj)             (G_TYPE_CHECK_INSTANCE_CAST ((obj), BRASERO_TYPE_VCD_IMAGER, BraseroVcdImager))
+#define BRASERO_VCD_IMAGER_CLASS(klass)     (G_TYPE_CHECK_CLASS_CAST ((klass), BRASERO_TYPE_VCD_IMAGER, BraseroVcdImagerClass))
+#define BRASERO_IS_VCD_IMAGER(obj)          (G_TYPE_CHECK_INSTANCE_TYPE ((obj), BRASERO_TYPE_VCD_IMAGER))
+#define BRASERO_IS_VCD_IMAGER_CLASS(klass)  (G_TYPE_CHECK_CLASS_TYPE ((klass), BRASERO_TYPE_VCD_IMAGER))
+#define BRASERO_VCD_IMAGER_GET_CLASS(obj)   (G_TYPE_INSTANCE_GET_CLASS ((obj), BRASERO_TYPE_VCD_IMAGER, BraseroVcdImagerClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroVcdImager, brasero_vcd_imager, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -439,15 +446,6 @@ brasero_vcd_imager_set_argv (BraseroProcess *process,
 	return BRASERO_BURN_OK;
 }
 
-static BraseroBurnResult
-brasero_vcd_imager_post (BraseroJob *job)
-{
-	BraseroVcdImagerPrivate *priv;
-
-	priv = BRASERO_VCD_IMAGER_PRIVATE (job);
-	return brasero_job_finished_session (job);
-}
-
 static void
 brasero_vcd_imager_init (BraseroVcdImager *object)
 {}
@@ -470,27 +468,21 @@ brasero_vcd_imager_class_init (BraseroVcdImagerClass *klass)
 	process_class->stdout_func = brasero_vcd_imager_read_stdout;
 	process_class->stderr_func = brasero_vcd_imager_read_stderr;
 	process_class->set_argv = brasero_vcd_imager_set_argv;
-	process_class->post = brasero_vcd_imager_post;
+	process_class->post = brasero_job_finished_session;
 }
 
-static BraseroBurnResult
-brasero_vcd_imager_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_vcd_imager_export_caps (BraseroPlugin *plugin)
 {
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	/* NOTE: it seems that cdrecord can burn cue files on the fly */
 	brasero_plugin_define (plugin,
 			       "vcdimager",
-			       _("Use vcdimager to create SVCDs"),
+			       _("Creates disc images suitable for SVCDs"),
 			       "Philippe Rouquier",
 			       1);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("vcdimager", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_FILE,
 					BRASERO_AUDIO_FORMAT_MP2|
@@ -533,6 +525,15 @@ brasero_vcd_imager_export_caps (BraseroPlugin *plugin, gchar **error)
 				  BRASERO_MEDIUM_HAS_AUDIO,
 				  BRASERO_BURN_FLAG_NONE,
 				  BRASERO_BURN_FLAG_NONE);
-	return BRASERO_BURN_OK;
 }
 
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 0, 7, 0};
+	brasero_plugin_test_app (plugin,
+	                         "vcdimager",
+	                         "--version",
+	                         "vcdimager (GNU VCDImager) %d.%d.%d",
+	                         version);
+}

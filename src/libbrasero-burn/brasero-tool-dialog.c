@@ -37,13 +37,14 @@
 
 #include <gtk/gtk.h>
 
+#include "brasero-tool-dialog.h"
+#include "brasero-tool-dialog-private.h"
+
 #include "brasero-progress.h"
 #include "brasero-medium-selection.h"
-#include "brasero-tool-dialog.h"
 
 #include "brasero-misc.h"
 
-#include "brasero-session.h"
 #include "brasero-burn.h"
 
 #include "brasero-medium.h"
@@ -180,11 +181,11 @@ brasero_tool_dialog_get_burn (BraseroToolDialog *self)
 
 	priv->burn = brasero_burn_new ();
 	g_signal_connect (priv->burn,
-			  "progress_changed",
+			  "progress-changed",
 			  G_CALLBACK (brasero_tool_dialog_progress_changed),
 			  self);
 	g_signal_connect (priv->burn,
-			  "action_changed",
+			  "action-changed",
 			  G_CALLBACK (brasero_tool_dialog_action_changed),
 			  self);
 
@@ -200,6 +201,7 @@ brasero_tool_dialog_run (BraseroToolDialog *self)
 	BraseroMedium *medium;
 	BraseroMedia media;
 	GdkCursor *cursor;
+	GdkWindow *window;
 
 	priv = BRASERO_TOOL_DIALOG_PRIVATE (self);
 	medium = brasero_medium_selection_get_active (BRASERO_MEDIUM_SELECTION (priv->selector));
@@ -210,7 +212,8 @@ brasero_tool_dialog_run (BraseroToolDialog *self)
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->button), FALSE);
 
 	cursor = gdk_cursor_new (GDK_WATCH);
-	gdk_window_set_cursor (GTK_WIDGET (self)->window, cursor);
+	window = gtk_widget_get_window (GTK_WIDGET (self));
+	gdk_window_set_cursor (window, cursor);
 	gdk_cursor_unref (cursor);
 
 	gtk_button_set_label (GTK_BUTTON (priv->cancel), GTK_STOCK_CANCEL);
@@ -250,7 +253,7 @@ brasero_tool_dialog_run (BraseroToolDialog *self)
 
 end:
 
-	gdk_window_set_cursor (GTK_WIDGET (self)->window, NULL);
+	gdk_window_set_cursor (window, NULL);
 	gtk_button_set_label (GTK_BUTTON (priv->cancel), GTK_STOCK_CLOSE);
 
 	gtk_widget_set_sensitive (priv->upper_box, TRUE);
@@ -407,6 +410,9 @@ brasero_tool_dialog_cancel_dialog (GtkWidget *toplevel)
 					  GTK_BUTTONS_NONE,
 					  _("Do you really want to quit?"));
 
+	gtk_window_set_icon_name (GTK_WINDOW (message),
+	                          gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
+
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						  _("Interrupting the process may make disc unusable."));
 	gtk_dialog_add_buttons (GTK_DIALOG (message),
@@ -517,12 +523,11 @@ static void
 brasero_tool_dialog_init (BraseroToolDialog *obj)
 {
 	GtkWidget *title;
+	GtkWidget *content_area;
 	gchar *title_str;
 	BraseroToolDialogPrivate *priv;
 
 	priv = BRASERO_TOOL_DIALOG_PRIVATE (obj);
-
-	gtk_window_set_icon_name (GTK_WINDOW (obj), "brasero");
 
 	gtk_dialog_set_has_separator (GTK_DIALOG (obj), FALSE);
 
@@ -547,7 +552,8 @@ brasero_tool_dialog_init (BraseroToolDialog *obj)
 						  BRASERO_MEDIA_TYPE_AUDIO|
 						  BRASERO_MEDIA_TYPE_DATA);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox),
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (obj));
+	gtk_box_pack_start (GTK_BOX (content_area),
 			    priv->upper_box,
 			    FALSE,
 			    FALSE,
@@ -558,6 +564,12 @@ brasero_tool_dialog_init (BraseroToolDialog *obj)
 	gtk_container_set_border_width (GTK_CONTAINER (priv->lower_box), 12);
 	gtk_widget_set_sensitive (priv->lower_box, FALSE);
 	gtk_widget_show (priv->lower_box);
+
+	gtk_box_pack_start (GTK_BOX (content_area),
+			    priv->lower_box,
+			    FALSE,
+			    FALSE,
+			    0);
 
 	title_str = g_strdup_printf ("<b>%s</b>", _("Progress"));
 	title = gtk_label_new (title_str);
@@ -579,14 +591,8 @@ brasero_tool_dialog_init (BraseroToolDialog *obj)
 		      "show-info", FALSE,
 		      NULL);
 
-	gtk_box_pack_start (GTK_BOX (priv->lower_box),
+	gtk_box_pack_start (GTK_BOX (content_area),
 			    priv->progress,
-			    FALSE,
-			    FALSE,
-			    0);
-
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox),
-			    priv->lower_box,
 			    FALSE,
 			    FALSE,
 			    0);

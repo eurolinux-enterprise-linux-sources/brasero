@@ -18,7 +18,8 @@ INCLUDES = \
 	$(BRASERO_GIO_CFLAGS)						\
 	$(BRASERO_GTK_CFLAGS)						\
 	$(BRASERO_GSTREAMER_CFLAGS)					\
-	$(BRASERO_DBUS_CFLAGS)
+	$(BRASERO_DBUS_CFLAGS)                                          \
+	$(BRASERO_CANBERRA_CFLAGS)
 
 GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
 RECMARSHALFILES = libbrasero-marshal.h libbrasero-marshal.c
@@ -67,7 +68,8 @@ libbrasero_burn_la_LIBADD =					\
 	$(BRASERO_GCONF_LIBS)					\
 	$(BRASERO_GTK_LIBS)					\
 	$(BRASERO_GSTREAMER_LIBS)	\
-	$(BRASERO_DBUS_LIBS)
+	$(BRASERO_DBUS_LIBS)                                    \
+	$(BRASERO_CANBERRA_LIBS)
 
 libbrasero_burn_la_LDFLAGS =					\
 	-version-info $(LIBBRASERO_LT_VERSION)			\
@@ -192,7 +194,8 @@ libbrasero_burn_la_SOURCES = 		\
 	brasero-video-options.h                 \
 	brasero-video-options.c                 \
 	brasero-session-span.h                 \
-	brasero-session-span.c
+	brasero-session-span.c                 \
+	brasero-plugin-private.h                 
 
 if BUILD_INOTIFY
 libbrasero_burn_la_SOURCES += brasero-file-monitor.c brasero-file-monitor.h
@@ -202,8 +205,59 @@ EXTRA_DIST =			\
 	libbrasero-marshal.list
 #	libbrasero-burn.symbols
 
+if HAVE_INTROSPECTION
+girdir = $(INTROSPECTION_GIRDIR)
+gir_DATA = BraseroBurn-1.0.gir
+
+typelibsdir = $(INTROSPECTION_TYPELIBDIR)
+typelibs_DATA = BraseroBurn-1.0.typelib
+
+BraseroBurn-1.0.gir: libbrasero-burn.la $(INTROSPECTION_SCANNER)
+	$(INTROSPECTION_SCANNER) -v --namespace=BraseroBurn --nsversion=1.0 \
+	    -I$(top_srcdir)/libbrasero-media	\
+	    -I$(top_builddir)/libbrasero-media	\
+	    -I$(top_srcdir)/libbrasero-burn		\
+	    -I$(top_builddir)/libbrasero-burn	\
+            --include=Gtk-2.0 \
+            --add-include-path=$(top_builddir)/libbrasero-media	\
+	    --include=BraseroMedia-1.0 \
+	    --library=brasero-burn \
+	    --libtool="$(LIBTOOL)" \
+            --output $@ \
+            --pkg=gtk+-2.0  \
+	    --strip-prefix=Brasero	\
+            $(top_srcdir)/libbrasero-burn/brasero-tags.h						\
+            $(top_srcdir)/libbrasero-burn/brasero-enums.h						\
+            $(top_srcdir)/libbrasero-burn/brasero-error.h						\
+            $(top_srcdir)/libbrasero-burn/brasero-status.h					\
+            $(top_builddir)/libbrasero-burn/brasero-burn-lib.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-track-type.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-track.h						\
+            $(top_srcdir)/libbrasero-burn/brasero-track-data.h                 			\
+            $(top_srcdir)/libbrasero-burn/brasero-track-data-cfg.h				\
+            $(top_srcdir)/libbrasero-burn/brasero-track-disc.h                 			\
+            $(top_srcdir)/libbrasero-burn/brasero-track-stream.h                 			\
+            $(top_srcdir)/libbrasero-burn/brasero-track-stream-cfg.h             			\
+            $(top_srcdir)/libbrasero-burn/brasero-track-image.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-track-image-cfg.h				\
+            $(top_srcdir)/libbrasero-burn/brasero-session.h                 			\
+            $(top_srcdir)/libbrasero-burn/brasero-session-span.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-session-cfg.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-burn.h						\
+            $(top_srcdir)/libbrasero-burn/brasero-burn-options.h        			        \
+            $(top_srcdir)/libbrasero-burn/brasero-burn-dialog.h					\
+            $(top_srcdir)/libbrasero-burn/brasero-tool-dialog.h					\
+	    $(top_srcdir)/libbrasero-burn/brasero-sum-dialog.h					\
+	    $(top_srcdir)/libbrasero-burn/*.c	    
+
+BraseroBurn-1.0.typelib: $(gir_DATA) $(INTROSPECTION_COMPILER)
+	$(INTROSPECTION_COMPILER) $(top_builddir)/libbrasero-burn/$(gir_DATA) --shared-library=libbrasero-burn -o $(typelibs_DATA) --includedir=$(top_builddir)/libbrasero-media
+endif
+
 CLEANFILES =			\
-	$(RECMARSHALFILES)
+	$(RECMARSHALFILES)  \
+	$(gir_DATA)         \
+	$(typelibs_DATA)
 
 
 -include $(top_srcdir)/git.mk

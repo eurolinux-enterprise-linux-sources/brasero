@@ -47,6 +47,7 @@
 #include "brasero-enums.h"
 #include "brasero-session.h"
 #include "brasero-status-dialog.h"
+#include "burn-plugin-manager.h"
 
 typedef struct _BraseroStatusDialogPrivate BraseroStatusDialogPrivate;
 struct _BraseroStatusDialogPrivate
@@ -56,6 +57,11 @@ struct _BraseroStatusDialogPrivate
 	GtkWidget *action;
 
 	guint id;
+
+	guint accept_2G_files:1;
+	guint reject_2G_files:1;
+	guint accept_deep_files:1;
+	guint reject_deep_files:1;
 };
 
 #define BRASERO_STATUS_DIALOG_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BRASERO_TYPE_STATUS_DIALOG, BraseroStatusDialogPrivate))
@@ -67,6 +73,11 @@ enum {
 
 G_DEFINE_TYPE (BraseroStatusDialog, brasero_status_dialog, GTK_TYPE_MESSAGE_DIALOG);
 
+enum {
+	USER_INTERACTION,
+	LAST_SIGNAL
+};
+static guint brasero_status_dialog_signals [LAST_SIGNAL] = { 0 };
 
 static void
 brasero_status_dialog_update (BraseroStatusDialog *self,
@@ -140,6 +151,15 @@ brasero_status_dialog_update (BraseroStatusDialog *self,
 	g_free (string);
 }
 
+static void
+brasero_status_dialog_session_ready (BraseroStatusDialog *dialog)
+{
+	BraseroStatusDialogPrivate *priv;
+
+	priv = BRASERO_STATUS_DIALOG_PRIVATE (dialog);
+	gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
+}
+
 static gboolean
 brasero_status_dialog_wait_for_ready_state (BraseroStatusDialog *dialog)
 {
@@ -152,15 +172,15 @@ brasero_status_dialog_wait_for_ready_state (BraseroStatusDialog *dialog)
 	status = brasero_status_new ();
 	result = brasero_burn_session_get_status (priv->session, status);
 
-	if (result != BRASERO_BURN_NOT_READY) {
-		gtk_dialog_response (GTK_DIALOG (dialog), GTK_RESPONSE_OK);
-		brasero_status_free (status);
+	if (result != BRASERO_BURN_NOT_READY && result != BRASERO_BURN_RUNNING) {
+		brasero_status_dialog_session_ready (dialog);
+		g_object_unref (status);
 		priv->id = 0;
 		return FALSE;
 	}
 
 	brasero_status_dialog_update (dialog, status);
-	brasero_status_free (status);
+	g_object_unref (status);
 	return TRUE;
 }
 
@@ -172,32 +192,57 @@ brasero_status_dialog_deep_directory_cb (BraseroTrackDataCfg *project,
 	gint answer;
 	gchar *string;
 	GtkWidget *message;
+	GtkWindow *transient_win;
+	BraseroStatusDialogPrivate *priv;
+
+	priv = BRASERO_STATUS_DIALOG_PRIVATE (dialog);
+
+	if (priv->accept_deep_files)
+		return TRUE;
+
+	if (priv->reject_deep_files)
+		return FALSE;
+
+	g_signal_emit (dialog,
+	               brasero_status_dialog_signals [USER_INTERACTION],
+	               0);
 
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
 	string = g_strdup_printf (_("Do you really want to add \"%s\" to the selection?"), name);
-	message = gtk_message_dialog_new (GTK_WINDOW (dialog),
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
+	transient_win = gtk_window_get_transient_for (GTK_WINDOW (dialog));
+	message = gtk_message_dialog_new (transient_win,
+	                                  GTK_DIALOG_DESTROY_WITH_PARENT|
 					  GTK_DIALOG_MODAL,
 					  GTK_MESSAGE_WARNING,
 					  GTK_BUTTONS_NONE,
 					  string);
 	g_free (string);
 
+	if (gtk_window_get_icon_name (GTK_WINDOW (dialog)))
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (GTK_WINDOW (dialog)));
+	else if (transient_win)
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (transient_win));
+
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						  _("The children of this directory will have 7 parent directories."
 						    "\nBrasero can create an image of such a file hierarchy and burn it; but the disc may not be readable on all operating systems."
-						    "\nNOTE: Such a file hierarchy is known to work on linux."));
+						    "\nNote: Such a file hierarchy is known to work on Linux."));
 
-	gtk_dialog_add_button (GTK_DIALOG (message), GTK_STOCK_CANCEL, GTK_RESPONSE_NO);
-	gtk_dialog_add_button (GTK_DIALOG (message), _("_Add File"), GTK_RESPONSE_YES);
+	gtk_dialog_add_button (GTK_DIALOG (message), _("Ne_ver Add Such File"), GTK_RESPONSE_REJECT);
+	gtk_dialog_add_button (GTK_DIALOG (message), _("Al_ways Add Such File"), GTK_RESPONSE_ACCEPT);
 
 	answer = gtk_dialog_run (GTK_DIALOG (message));
 	gtk_widget_destroy (message);
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 
-	return (answer != GTK_RESPONSE_YES);
+	priv->accept_deep_files = (answer == GTK_RESPONSE_ACCEPT);
+	priv->reject_deep_files = (answer == GTK_RESPONSE_REJECT);
+
+	return (answer != GTK_RESPONSE_YES && answer != GTK_RESPONSE_ACCEPT);
 }
 
 static gboolean
@@ -208,32 +253,57 @@ brasero_status_dialog_2G_file_cb (BraseroTrackDataCfg *track,
 	gint answer;
 	gchar *string;
 	GtkWidget *message;
+	GtkWindow *transient_win;
+	BraseroStatusDialogPrivate *priv;
+
+	priv = BRASERO_STATUS_DIALOG_PRIVATE (dialog);
+
+	if (priv->accept_2G_files)
+		return TRUE;
+
+	if (priv->reject_2G_files)
+		return FALSE;
+
+	g_signal_emit (dialog,
+	               brasero_status_dialog_signals [USER_INTERACTION],
+	               0);
 
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
-	string = g_strdup_printf (_("Do you really want to add \"%s\" to the selection and use the third version of ISO9660 standard to support it?"), name);
-	message = gtk_message_dialog_new (GTK_WINDOW (dialog),
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
+	string = g_strdup_printf (_("Do you really want to add \"%s\" to the selection and use the third version of the ISO9660 standard to support it?"), name);
+	transient_win = gtk_window_get_transient_for (GTK_WINDOW (dialog));
+	message = gtk_message_dialog_new (transient_win,
+	                                  GTK_DIALOG_DESTROY_WITH_PARENT|
 					  GTK_DIALOG_MODAL,
 					  GTK_MESSAGE_WARNING,
 					  GTK_BUTTONS_NONE,
 					  string);
 	g_free (string);
 
-	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
-						  _("The size of the file is over 2 GiB. Files larger than 2 GiB are not supported by ISO9660 standard in its first and second versions (the most widespread ones)."
-						    "\nIt is recommended to use the third version of ISO9660 standard which is supported by most of the operating systems including Linux and all versions of Windows ©."
-						    "\nHowever MacOS X cannot read images created with version 3 of ISO9660 standard."));
+	if (gtk_window_get_icon_name (GTK_WINDOW (dialog)))
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (GTK_WINDOW (dialog)));
+	else if (transient_win)
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (transient_win));
 
-	gtk_dialog_add_button (GTK_DIALOG (message), GTK_STOCK_CANCEL, GTK_RESPONSE_NO);
-	gtk_dialog_add_button (GTK_DIALOG (message), _("_Add File"), GTK_RESPONSE_YES);
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+						  _("The size of the file is over 2 GiB. Files larger than 2 GiB are not supported by the ISO9660 standard in its first and second versions (the most widespread ones)."
+						    "\nIt is recommended to use the third version of the ISO9660 standard, which is supported by most operating systems, including Linux and all versions of Windows ©."
+						    "\nHowever, Mac OS X cannot read images created with version 3 of the ISO9660 standard."));
+
+	gtk_dialog_add_button (GTK_DIALOG (message), _("Ne_ver Add Such File"), GTK_RESPONSE_REJECT);
+	gtk_dialog_add_button (GTK_DIALOG (message), _("Al_ways Add Such File"), GTK_RESPONSE_ACCEPT);
 
 	answer = gtk_dialog_run (GTK_DIALOG (message));
 	gtk_widget_destroy (message);
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 
-	return (answer != GTK_RESPONSE_YES);
+	priv->accept_2G_files = (answer == GTK_RESPONSE_ACCEPT);
+	priv->reject_2G_files = (answer == GTK_RESPONSE_REJECT);
+
+	return (answer != GTK_RESPONSE_YES && answer != GTK_RESPONSE_ACCEPT);
 }
 
 static void
@@ -241,17 +311,30 @@ brasero_status_dialog_joliet_rename_cb (BraseroTrackData *track,
 					BraseroStatusDialog *dialog)
 {
 	GtkResponseType answer;
+	GtkWindow *transient_win;
 	GtkWidget *message;
 	gchar *secondary;
 
+	g_signal_emit (dialog,
+	               brasero_status_dialog_signals [USER_INTERACTION],
+	               0);
+
 	gtk_widget_hide (GTK_WIDGET (dialog));
 
-	message = gtk_message_dialog_new (GTK_WINDOW (dialog),
+	transient_win = gtk_window_get_transient_for (GTK_WINDOW (dialog));
+	message = gtk_message_dialog_new (transient_win,
 					  GTK_DIALOG_DESTROY_WITH_PARENT|
 					  GTK_DIALOG_MODAL,
 					  GTK_MESSAGE_WARNING,
 					  GTK_BUTTONS_NONE,
 					  _("Should files be renamed to be fully Windows-compatible?"));
+
+	if (gtk_window_get_icon_name (GTK_WINDOW (dialog)))
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (GTK_WINDOW (dialog)));
+	else if (transient_win)
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (transient_win));
 
 	secondary = g_strdup_printf ("%s\n%s",
 				     _("Some files don't have a suitable name for a fully Windows-compatible CD."),
@@ -290,8 +373,9 @@ brasero_status_dialog_wait_for_session (BraseroStatusDialog *dialog)
 	/* Make sure we really need to run this dialog */
 	status = brasero_status_new ();
 	result = brasero_burn_session_get_status (priv->session, status);
-	if (result != BRASERO_BURN_NOT_READY) {
-		brasero_status_free (status);
+	if (result != BRASERO_BURN_NOT_READY && result != BRASERO_BURN_RUNNING) {
+		brasero_status_dialog_session_ready (dialog);
+		g_object_unref (status);
 		return;
 	}
 
@@ -324,7 +408,7 @@ brasero_status_dialog_wait_for_session (BraseroStatusDialog *dialog)
 	brasero_track_type_free (track_type);
 
 	brasero_status_dialog_update (dialog, status);
-	brasero_status_free (status);
+	g_object_unref (status);
 	priv->id = g_timeout_add (200,
 				  (GSourceFunc) brasero_status_dialog_wait_for_ready_state,
 				  dialog);
@@ -458,6 +542,17 @@ brasero_status_dialog_class_init (BraseroStatusDialogClass *klass)
 							      "The session to work with",
 							      BRASERO_TYPE_BURN_SESSION,
 							      G_PARAM_READWRITE|G_PARAM_CONSTRUCT_ONLY));
+
+	brasero_status_dialog_signals [USER_INTERACTION] =
+	    g_signal_new ("user_interaction",
+			  BRASERO_TYPE_STATUS_DIALOG,
+			  G_SIGNAL_RUN_LAST|G_SIGNAL_ACTION|G_SIGNAL_NO_RECURSE,
+			  0,
+			  NULL,
+			  NULL,
+			  g_cclosure_marshal_VOID__VOID,
+			  G_TYPE_NONE,
+			  0);
 }
 
 GtkWidget *

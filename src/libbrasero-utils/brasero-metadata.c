@@ -46,15 +46,11 @@
 #include <gst/pbutils/missing-plugins.h>
 #include <gst/tag/tag.h>
 
-#include "brasero-metadata.h"
 #include "brasero-misc.h"
+#include "brasero-metadata.h"
 
-#define BRASERO_METADATA_INITIAL_STATE		GST_STATE_PAUSED
-
-
-G_DEFINE_TYPE(BraseroMetadata, brasero_metadata, G_TYPE_OBJECT)
-
-#define BRASERO_METADATA_SILENCE_INTERVAL		100000000
+#define BRASERO_METADATA_SILENCE_INTERVAL		100000000LL
+#define BRASERO_METADATA_INITIAL_STATE			GST_STATE_PAUSED
 
 struct BraseroMetadataPrivate {
 	GstElement *pipeline;
@@ -89,6 +85,9 @@ struct BraseroMetadataPrivate {
 
 	gint listeners;
 
+	BraseroMetadataGetXidCb xid_callback;
+	gpointer xid_user_data;
+
 	guint started:1;
 	guint moved_forward:1;
 	guint prev_level_mes:1;
@@ -115,7 +114,7 @@ static guint brasero_metadata_signals [LAST_SIGNAL] = { 0 };
 	(!((flags) & BRASERO_METADATA_FLAG_SILENCES) &&				\
 	((flags) & BRASERO_METADATA_FLAG_FAST))
 
-static GObjectClass *parent_class = NULL;
+G_DEFINE_TYPE (BraseroMetadata, brasero_metadata, G_TYPE_OBJECT)
 
 static GSList *downloading = NULL;
 static GSList *downloaded = NULL;
@@ -123,6 +122,29 @@ static GSList *downloaded = NULL;
 static gboolean
 brasero_metadata_completed (BraseroMetadata *self);
 
+static int
+brasero_metadata_get_xid (BraseroMetadata *metadata)
+{
+	BraseroMetadataPrivate *priv;
+
+	priv = BRASERO_METADATA_PRIVATE (metadata);
+	if (!priv->xid_callback)
+		return 0;
+
+	return priv->xid_callback (priv->xid_user_data);
+}
+
+void
+brasero_metadata_set_get_xid_callback (BraseroMetadata *metadata,
+                                       BraseroMetadataGetXidCb callback,
+                                       gpointer user_data)
+{
+	BraseroMetadataPrivate *priv;
+
+	priv = BRASERO_METADATA_PRIVATE (metadata);
+	priv->xid_callback = callback;
+	priv->xid_user_data = user_data;
+}
 
 struct _BraseroMetadataGstDownload {
 	gchar *detail;
@@ -191,6 +213,9 @@ brasero_metadata_info_copy (BraseroMetadataInfo *dest,
 	if (!dest || !src)
 		return;
 
+	dest->has_dts = src->has_dts;
+	dest->rate = src->rate;
+	dest->channels = src->channels;
 	dest->isrc = src->isrc;
 	dest->len = src->len;
 	dest->is_seekable = src->is_seekable;
@@ -234,7 +259,6 @@ brasero_metadata_info_copy (BraseroMetadataInfo *dest,
 
 		dest->silences = g_slist_append (dest->silences, copy);
 	}
-
 }
 
 static void
@@ -635,15 +659,14 @@ brasero_metadata_install_missing_plugins (BraseroMetadata *self)
 	/* FIXME: we'd need the main window here to set it modal */
 
 	context = gst_install_plugins_context_new ();
+	gst_install_plugins_context_set_xid (context, brasero_metadata_get_xid (self));
 	status = gst_install_plugins_async ((gchar **) details->pdata,
 					    context,
 					    brasero_metadata_install_plugins_result,
 					    downloads);
 
 	gst_install_plugins_context_free (context);
-
-	/* FIXME: shouldn't we free the array as well? */
-	g_ptr_array_free (details, FALSE);
+	g_ptr_array_free (details, TRUE);
 
 	BRASERO_UTILS_LOG ("Download status %i", status);
 
@@ -803,6 +826,79 @@ brasero_metadata_get_mime_type (BraseroMetadata *self)
 
 	if (!strcmp (mime, "application/x-id3"))
 		priv->info->type = g_strdup ("audio/mpeg");
+	else if (!strcmp (mime, "audio/x-wav")) {
+		GstElement *wavparse = NULL;
+		gpointer element = NULL;
+		GstIteratorResult res;
+		GstIterator *iter;
+
+		priv->info->type = g_strdup (mime);
+
+		/* make sure it doesn't have dts inside */
+		iter = gst_bin_iterate_recurse (GST_BIN (priv->decode));
+
+		res = gst_iterator_next (iter, &element);
+		while (res == GST_ITERATOR_OK) {
+			gchar *name;
+
+			name = gst_object_get_name (GST_OBJECT (element));
+			if (name) {
+				if (!strncmp (name, "wavparse", 8)) {
+					wavparse = element;
+					g_free (name);
+					break;
+				}
+				g_free (name);
+			}
+
+			gst_object_unref (element);
+			element = NULL;
+
+			res = gst_iterator_next (iter, &element);
+		}
+		gst_iterator_free (iter);
+
+		if (wavparse) {
+			GstPad *src_pad;
+
+			iter = gst_element_iterate_src_pads (wavparse);
+
+			res = gst_iterator_next (iter, (gpointer *) &src_pad);
+			while (res == GST_ITERATOR_OK) {
+				GstCaps *src_caps;
+
+				src_caps = gst_pad_get_caps (src_pad);
+				if (src_caps) {
+					GstStructure *structure;
+
+					structure = gst_caps_get_structure (src_caps, 0);
+					if (structure) {
+						const gchar *name;
+
+						name = gst_structure_get_name (structure);
+						priv->info->has_dts = (g_strrstr (name, "audio/x-dts") != NULL);
+						if (priv->info->has_dts) {
+							gst_object_unref (src_pad);
+							gst_caps_unref (src_caps);
+							src_pad = NULL;
+							break;
+						}
+					}
+					gst_caps_unref (src_caps);
+				}
+
+				gst_object_unref (src_pad);
+				src_pad = NULL;
+
+				res = gst_iterator_next (iter,  (gpointer *) &src_pad);
+			}
+
+			gst_iterator_free (iter);
+			gst_object_unref (wavparse);
+		}
+
+		BRASERO_UTILS_LOG ("Wav file has dts: %s", priv->info->has_dts? "yes":"no");
+	}
 	else
 		priv->info->type = g_strdup (mime);
 
@@ -1039,7 +1135,7 @@ brasero_metadata_get_duration (BraseroMetadata *self,
 			BRASERO_GET_BASENAME_FOR_DISPLAY (priv->info->uri, name);
 			priv->error = g_error_new (BRASERO_UTILS_ERROR,
 						   BRASERO_UTILS_ERROR_GENERAL,
-						   _("\"%s\" could not be handled by Gstreamer."),
+						   _("\"%s\" could not be handled by GStreamer."),
 						   name);
 			g_free (name);
 		}
@@ -1047,7 +1143,7 @@ brasero_metadata_get_duration (BraseroMetadata *self,
 		return brasero_metadata_completed (self);
 	}
 
-	BRASERO_UTILS_LOG ("found duration %lli for %s", duration, priv->info->uri);
+	BRASERO_UTILS_LOG ("Found duration %lli for %s", duration, priv->info->uri);
 
 	priv->info->len = duration;
 	return brasero_metadata_success (self);
@@ -1072,7 +1168,7 @@ brasero_metadata_mp3_bus_messages (GstBus *bus,
 	case GST_MESSAGE_ERROR:
 		/* save the error message */
 		gst_message_parse_error (msg, &error, &debug_string);
-		BRASERO_UTILS_LOG ("Gstreamer error - mp3 - (%s)", debug_string);
+		BRASERO_UTILS_LOG ("GStreamer error - mp3 - (%s)", debug_string);
 		g_free (debug_string);
 		if (!priv->error && error)
 			priv->error = error;
@@ -1214,7 +1310,7 @@ brasero_metadata_bus_messages (GstBus *bus,
 	case GST_MESSAGE_ERROR:
 		/* save the error message */
 		gst_message_parse_error (msg, &error, &debug_string);
-		BRASERO_UTILS_LOG ("Gstreamer error (%s)", debug_string);
+		BRASERO_UTILS_LOG ("GStreamer error (%s)", debug_string);
 		g_free (debug_string);
 		if (!priv->error && error)
 			priv->error = error;
@@ -1274,6 +1370,23 @@ brasero_metadata_create_audio_pipeline (BraseroMetadata *self)
 		 * around after the bin they've been added to is destroyed
 		 * NOTE: now we destroy the pipeline every time which means
 		 * that it doesn't really matter. */
+		if (!priv->level) {
+			priv->level = gst_element_factory_make ("level", NULL);
+			if (!priv->level) {
+				priv->error = g_error_new (BRASERO_UTILS_ERROR,
+							   BRASERO_UTILS_ERROR_GENERAL,
+							   _("%s element could not be created"),
+							   "\"Level\"");
+				gst_object_unref (priv->audio);
+				priv->audio = NULL;
+				return FALSE;
+			}
+			g_object_set (priv->level,
+				      "message", TRUE,
+				      "interval", (guint64) BRASERO_METADATA_SILENCE_INTERVAL,
+				      NULL);
+		}
+
 		gst_object_ref (priv->convert);
 		gst_object_ref (priv->level);
 		gst_object_ref (priv->sink);
@@ -1283,10 +1396,17 @@ brasero_metadata_create_audio_pipeline (BraseroMetadata *self)
 				  priv->level,
 				  priv->sink,
 				  NULL);
-		gst_element_link_many (priv->convert,
-				       priv->level,
-				       priv->sink,
-				       NULL);
+
+		if (!gst_element_link_many (priv->convert,
+		                            priv->level,
+		                            priv->sink,
+		                            NULL)) {
+			BRASERO_UTILS_LOG ("Impossible to link elements");
+			gst_object_unref (priv->audio);
+			priv->audio = NULL;
+			return FALSE;
+		}
+
 		audio_pad = gst_element_get_static_pad (priv->convert, "sink");
 	}
 	else if (priv->flags & BRASERO_METADATA_FLAG_THUMBNAIL) {
@@ -1301,10 +1421,16 @@ brasero_metadata_create_audio_pipeline (BraseroMetadata *self)
 				  priv->convert,
 				  priv->sink,
 				  NULL);
-		gst_element_link_many (queue,
-				       priv->convert,
-				       priv->sink,
-				       NULL);
+		if (!gst_element_link_many (queue,
+		                            priv->convert,
+		                            priv->sink,
+		                            NULL)) {
+			BRASERO_UTILS_LOG ("Impossible to link elements");
+			gst_object_unref (priv->audio);
+			priv->audio = NULL;
+			return FALSE;
+		}
+
 		audio_pad = gst_element_get_static_pad (queue, "sink");
 	}
 	else {
@@ -1316,7 +1442,13 @@ brasero_metadata_create_audio_pipeline (BraseroMetadata *self)
 		gst_object_ref (priv->sink);
 		gst_bin_add (GST_BIN (priv->audio), priv->sink);
 
-		gst_element_link (queue, priv->sink);
+		if (!gst_element_link (queue, priv->sink)) {
+			BRASERO_UTILS_LOG ("Impossible to link elements");
+			gst_object_unref (priv->audio);
+			priv->audio = NULL;
+			return FALSE;
+		}
+
 		audio_pad = gst_element_get_static_pad (queue, "sink");
 	}
 
@@ -1370,10 +1502,16 @@ brasero_metadata_create_video_pipeline (BraseroMetadata *self)
 	gst_bin_add (GST_BIN (priv->video), queue);
 
 	/* link elements */
-	gst_element_link_many (queue,
-			       colorspace,
-			       priv->snapshot,
-			       NULL);
+	if (!gst_element_link_many (queue,
+	                            colorspace,
+	                            priv->snapshot,
+	                            NULL)) {
+		gst_object_unref (priv->video);
+		priv->video = NULL;
+
+		BRASERO_UTILS_LOG ("Impossible to link elements");
+		return FALSE;
+	}
 
 	video_pad = gst_element_get_static_pad (queue, "sink");
 	gst_element_add_pad (priv->video, gst_ghost_pad_new ("sink", video_pad));
@@ -1441,6 +1579,70 @@ brasero_metadata_link_dummy_pad (BraseroMetadata *self,
 }
 
 static void
+brasero_metadata_audio_caps (BraseroMetadata *self,
+                             GstCaps *caps)
+{
+	int i;
+	int num_caps;
+	BraseroMetadataPrivate *priv;
+
+	priv = BRASERO_METADATA_PRIVATE (self);
+
+	num_caps = gst_caps_get_size (caps);
+	for (i = 0; i < num_caps; i++) {
+		const GstStructure *structure;
+
+		structure = gst_caps_get_structure (caps, i);
+		if (!structure)
+			continue;
+
+		if (gst_structure_has_field (structure, "channels")) {
+			if (gst_structure_get_field_type (structure, "channels") == G_TYPE_INT) {
+				priv->info->channels = 0;
+				gst_structure_get_int (structure, "channels", &priv->info->channels);
+
+				BRASERO_UTILS_LOG ("Number of channels %i", priv->info->channels);
+			}
+			else if (gst_structure_get_field_type (structure, "channels") == GST_TYPE_INT_RANGE) {
+				const GValue *value;
+
+				value = gst_structure_get_value (structure, "channels");
+				if (value) {
+					priv->info->channels = gst_value_get_int_range_max (value);
+					BRASERO_UTILS_LOG ("Number of channels %i", priv->info->channels);
+				}
+			}
+			else if (gst_structure_get_field_type (structure, "channels") != G_TYPE_INVALID) {
+				BRASERO_UTILS_LOG ("Unhandled type for channel prop %s",
+				                   g_type_name (gst_structure_get_field_type (structure, "channels")));
+			}
+		}
+
+		if (gst_structure_has_field (structure, "rate")) {
+			if (gst_structure_get_field_type (structure, "rate") == G_TYPE_INT) {
+				priv->info->rate = 0;
+				gst_structure_get_int (structure, "rate", &priv->info->rate);
+
+				BRASERO_UTILS_LOG ("Rate %i", priv->info->rate);
+			}
+			else if (gst_structure_get_field_type (structure, "rate") == GST_TYPE_INT_RANGE) {
+				const GValue *value;
+
+				value = gst_structure_get_value (structure, "rate");
+				if (value) {
+					priv->info->rate = gst_value_get_int_range_max (value);
+					BRASERO_UTILS_LOG ("Rate %i", priv->info->rate);
+				}
+			}
+			else if (gst_structure_get_field_type (structure, "rate") != G_TYPE_INVALID) {
+				BRASERO_UTILS_LOG ("Unhandled type for rate prop %s",
+				                   g_type_name (gst_structure_get_field_type (structure, "rate")));
+			}
+		}
+	}
+}
+
+static void
 brasero_metadata_new_decoded_pad_cb (GstElement *decode,
 				     GstPad *pad,
 				     gboolean is_lastpad, /* deprecated */
@@ -1475,6 +1677,7 @@ brasero_metadata_new_decoded_pad_cb (GstElement *decode,
 	priv->info->has_video |= has_video;
 
 	if (has_audio && !priv->audio_linked) {
+		brasero_metadata_audio_caps (self, caps);
 		brasero_metadata_create_audio_pipeline (self);
 		sink = gst_element_get_static_pad (priv->audio, "sink");
 		if (sink && !GST_PAD_IS_LINKED (sink)) {
@@ -1562,19 +1765,6 @@ brasero_metadata_create_pipeline (BraseroMetadata *self)
 					   "\"Audioconvert\"");
 		return FALSE;
 	}
-
-	priv->level = gst_element_factory_make ("level", NULL);
-	if (!priv->level) {
-		priv->error = g_error_new (BRASERO_UTILS_ERROR,
-					   BRASERO_UTILS_ERROR_GENERAL,
-					   _("%s element could not be created"),
-					   "\"Level\"");
-		return FALSE;
-	}
-	g_object_set (priv->level,
-		      "message", TRUE,
-		      "interval", (guint64) BRASERO_METADATA_SILENCE_INTERVAL,
-		      NULL);
 
 	priv->sink = gst_element_factory_make ("fakesink", NULL);
 	if (priv->sink == NULL) {
@@ -1685,8 +1875,11 @@ brasero_metadata_set_uri (BraseroMetadata *self,
 
 	priv->flags = flags;
 	if (!brasero_metadata_set_new_uri (self, uri)) {
-		g_propagate_error (error, priv->error);
-		priv->error = NULL;
+		if (priv->error) {
+			BRASERO_UTILS_LOG ("Failed to set new URI %s", priv->error->message);
+			g_propagate_error (error, priv->error);
+			priv->error = NULL;
+		}
 
 		brasero_metadata_info_free (priv->info);
 		priv->info = NULL;
@@ -1728,6 +1921,7 @@ brasero_metadata_get_info_async (BraseroMetadata *self,
 		g_object_unref (self);
 
 		if (priv->error) {
+			BRASERO_UTILS_LOG ("Failed to set new URI %s", priv->error->message);
 			g_error_free (priv->error);
 			priv->error = NULL;
 		}
@@ -1908,7 +2102,7 @@ brasero_metadata_finalize (GObject *object)
 		priv->mutex = NULL;
 	}
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (brasero_metadata_parent_class)->finalize (object);
 }
 
 static void
@@ -1971,8 +2165,6 @@ static void
 brasero_metadata_class_init (BraseroMetadataClass *klass)
 {
 	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-
-	parent_class = g_type_class_peek_parent (klass);
 
 	g_type_class_add_private (klass, sizeof (BraseroMetadataPrivate));
 

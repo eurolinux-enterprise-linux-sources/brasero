@@ -35,7 +35,14 @@
 
 G_BEGIN_DECLS
 
-#define CDRTOOLS_DESCRIPTION		N_("Cdrtools burning suite")
+#define CDRTOOLS_DESCRIPTION		N_("cdrtools burning suite")
+
+/**
+ * This is a tag to be used to communicate additional information
+ * between cdda2wav and cdrecord. It's a string and should be
+ * used to tag tracks.
+ */
+#define BRASERO_CDRTOOLS_TRACK_INF_FILE	"track::audio::cdrecord::inf_file"
 
 G_END_DECLS
 

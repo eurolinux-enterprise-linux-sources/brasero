@@ -17,6 +17,9 @@ BraseroTrackStreamCfg
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroTrackStreamCfg ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroTrackStreamCfg
 
 </para>
 
+@void: 
 @Returns: 
 
 

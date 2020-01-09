@@ -181,9 +181,7 @@
 	<para>effacer des CD-RW et des DVD-RW ;</para>
       </listitem>
       <listitem>
-	<para>
-	  Check the integrity of discs and disc images
-	</para>
+	<para>vérifier l'intégrité des disques et des images de disques.</para>
       </listitem>
     </itemizedlist>
   </sect1>
@@ -237,7 +235,7 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Cette fenêtre est le point de départ de tous vos projets. C'est ici que vous pouvez cliquer sur le type de projet souhaité. Si vous avez créé d'autres projets avec <application>Brasero</application>, vous pouvez les sélectionner dans la liste <guilabel>Choisissez un projet récemment ouvert</guilabel> (voir <xref linkend="brasero-open-recent-project"/> pour plus d'informations).</para>
+    <para>Cette fenêtre est le point de départ de tous vos projets. C'est ici que vous pouvez cliquer sur le type de projet souhaité. Si vous avez créé d'autres projets avec <application>Brasero</application>, vous pouvez les sélectionner dans la liste <guilabel>Projets récents</guilabel> (voir <xref linkend="brasero-open-recent-project"/> pour plus d'informations).</para>
     </sect2>
   </sect1>
 
@@ -860,7 +858,7 @@
 	  <para>Choisissez <menuchoice><guimenu>Projet</guimenu><guisubmenu>Projets récents</guisubmenu></menuchoice> et sélectionnez le projet que vous voulez ouvrir.</para>
 	</listitem>
 	<listitem>
-	  <para>Dans la fenêtre principale, cliquez sur le projet que vous voulez ouvrir, sous <guilabel>Choisissez un projet récemment ouvert</guilabel>.</para>
+	  <para>Dans la fenêtre principale, cliquez sur le projet que vous voulez ouvrir, sous <guilabel>Projets récents</guilabel>.</para>
 	</listitem>
       </itemizedlist></para>
     <para>Pour ouvrir un projet qui n'apparaît pas parmi les <guilabel>Projets récents</guilabel>, choisissez <menuchoice><guimenu>Projet</guimenu><guimenuitem>Ouvrir</guimenuitem></menuchoice> et sélectionnez le projet.</para>

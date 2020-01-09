@@ -30,7 +30,7 @@
       <year>2008</year>
       <year>2009</year>
       <holder>Dokumentační projekt Ubuntu</holder> 
-    </copyright><copyright><year>2009</year><holder>Adrian Guniš (andygun696@gmail.com)</holder></copyright> 
+    </copyright><copyright><year>2009, 2010</year><holder>Adrian Guniš (andygun696@gmail.com)</holder></copyright> 
 <!-- translators: uncomment this:
 
   <copyright>
@@ -235,7 +235,7 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Toto okno je výchozím bodem pro všechny vaše projekty. Zde můžete kliknout na projekt, který si přejete spustit. Pokud jste už vytvořili jiné projekty pomocí <application>Brasero</application>, budete je moci spustit z nabídky <guilabel>Zvolit nedávno otevřené projekty</guilabel> (chcete-li zjistit více informací, podívejte se do <xref linkend="brasero-open-recent-project"/>).</para>
+    <para>Toto okno je výchozím bodem pro všechny vaše projekty. Zde můžete kliknout na projekt, který si přejete spustit. Pokud jste už vytvořili jiné projekty pomocí <application>Brasero</application>, budete je moci spustit v sekci <guilabel>Nedávné projekty</guilabel> (chcete-li zjistit více informací, podívejte se do <xref linkend="brasero-open-recent-project"/>).</para>
     </sect2>
   </sect1>
 
@@ -858,7 +858,7 @@
 	  <para>Zvolte <menuchoice><guimenu>Projekt</guimenu><guisubmenu>Nedávné projekty</guisubmenu></menuchoice> a vyberte projekt, který chcete otevřít.</para>
 	</listitem>
 	<listitem>
-	  <para>V hlavním okně v sekci <guilabel>Zvolit nedávno otevřené projekty</guilabel> klikněte na projekt, který chcete otevřít.</para>
+	  <para>V hlavním okně v sekci <guilabel>Nedávné projekty</guilabel> klikněte na projekt, který chcete otevřít.</para>
 	</listitem>
       </itemizedlist></para>
     <para>Pro otevření projektu, který se nenachází v seznamu <guilabel>Nedávné projekty</guilabel>, zvolte <menuchoice><guimenu>Projekt</guimenu><guimenuitem>Otevřít</guimenuitem></menuchoice> a vyberte soubor projektu.</para>

@@ -3,10 +3,11 @@
 	<mime-type type="application/x-brasero">
 		<sub-class-of type="application/xml"/>
 		<comment>Brasero project file</comment>
+		<comment xml:lang="af">Brasero-projeklêer</comment>
 		<comment xml:lang="ar">ملف مشروع براسيرو</comment>
 		<comment xml:lang="as">Brasero প্ৰকল্প নথিপত্ৰ</comment>
 		<comment xml:lang="ast">Ficheru de proyeutu Brasero</comment>
-		<comment xml:lang="be">Файл праэкта</comment>
+		<comment xml:lang="be">Файл праекта Brasero</comment>
 		<comment xml:lang="bg">Файл с проект на Brasero</comment>
 		<comment xml:lang="bn">ব্রাসেরো প্রকল্প ফাইল</comment>
 		<comment xml:lang="bn_IN">Brasero প্রজেক্ট ফাইল</comment>
@@ -29,6 +30,7 @@
 		<comment xml:lang="he">קובץ פרויקט Brasero</comment>
 		<comment xml:lang="hi">ब्रैसेरो परियोजना फाइल</comment>
 		<comment xml:lang="hu">Brasero projektfájl</comment>
+		<comment xml:lang="id">Brasero file proyek</comment>
 		<comment xml:lang="it">File progetto brasero</comment>
 		<comment xml:lang="ja">Brasero のプロジェクト・ファイル</comment>
 		<comment xml:lang="kn">Brasero ಪರಿಯೋಜನೆ ಕಡತ</comment>
@@ -38,9 +40,11 @@
 		<comment xml:lang="lv">Brasero projekta fails</comment>
 		<comment xml:lang="mk">Датотека за проект од Brasero</comment>
 		<comment xml:lang="ml">ബ്രസേറോ സംരംഭ ഫയല്‍</comment>
-		<comment xml:lang="mr">Brasero प्रकल्प फाइल</comment>
+		<comment xml:lang="mr">ब्रेसेरो प्रकल्प फाइल</comment>
 		<comment xml:lang="nb">Brasero prosjektfil</comment>
+		<comment xml:lang="nds">Braseroprojektdatei</comment>
 		<comment xml:lang="nl">Brasero-projectbestand</comment>
+		<comment xml:lang="nn">Brasero-prosjektfil</comment>
 		<comment xml:lang="or">Brasero ପ୍ରକଳ୍ପ ଫାଇଲ</comment>
 		<comment xml:lang="pa">ਬਰਾਸੀਰੋ ਪਰੋਜੈੱਕਟ ਫਾਇਲ</comment>
 		<comment xml:lang="pl">Plik projektu programu Brasero</comment>

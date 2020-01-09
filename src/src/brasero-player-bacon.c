@@ -37,48 +37,19 @@
 
 #include <gtk/gtk.h>
 
-#include <gconf/gconf-client.h>
-
 #include <gst/gst.h>
 #include <gst/interfaces/xoverlay.h>
 
 #include "brasero-player-bacon.h"
- 
-static void brasero_player_bacon_class_init(BraseroPlayerBaconClass *klass);
-static void brasero_player_bacon_init(BraseroPlayerBacon *sp);
-static void brasero_player_bacon_finalize(GObject *object);
-static void brasero_player_bacon_destroy (GtkObject *object);
+#include "brasero-setting.h"
 
-static void brasero_player_bacon_set_property (GObject *obj,
-					       guint prop_id,
-					       const GValue *value,
-					       GParamSpec *pspec);
-static void brasero_player_bacon_get_property (GObject *obj,
-					       guint prop_id,
-					       GValue *value,
-					       GParamSpec *pspec);
-
-static void brasero_player_bacon_realize (GtkWidget *widget);
-static void brasero_player_bacon_unrealize (GtkWidget *widget);
-static void brasero_player_bacon_map (GtkWidget *widget);
-static void brasero_player_bacon_unmap (GtkWidget *widget);
-
-static gboolean brasero_player_bacon_expose (GtkWidget *widget,
-					     GdkEventExpose *event);
-static void brasero_player_bacon_size_request (GtkWidget *widget,
-					       GtkRequisition *requisition);
-static void brasero_player_bacon_size_allocate (GtkWidget *widget,
-						GtkAllocation *allocation);
-
-static gboolean brasero_player_bacon_bus_messages (GstBus *bus,
-						   GstMessage *msg,
-						   BraseroPlayerBacon *bacon);
 
 struct BraseroPlayerBaconPrivate {
 	GstElement *pipe;
 	GstState state;
 
 	GstXOverlay *xoverlay;
+	XID xid;
 
 	gchar *uri;
 	gint64 end;
@@ -94,87 +65,10 @@ typedef enum {
 	EOF_SIGNAL,
 	LAST_SIGNAL
 } BraseroPlayerBaconSignalType;
+
 static guint brasero_player_bacon_signals [LAST_SIGNAL] = { 0 };
 
-#define GCONF_PLAYER_VOLUME	"/apps/brasero/display/volume"
-
-static GObjectClass *parent_class = NULL;
-
-GType
-brasero_player_bacon_get_type (void)
-{
-	static GType type = 0;
-
-	if(type == 0) {
-		static const GTypeInfo our_info = {
-			sizeof (BraseroPlayerBaconClass),
-			NULL,
-			NULL,
-			(GClassInitFunc)brasero_player_bacon_class_init,
-			NULL,
-			NULL,
-			sizeof (BraseroPlayerBacon),
-			0,
-			(GInstanceInitFunc)brasero_player_bacon_init,
-		};
-
-		type = g_type_register_static (GTK_TYPE_WIDGET, 
-					       "BraseroPlayerBacon",
-					       &our_info,
-					       0);
-	}
-
-	return type;
-}
-
-static void
-brasero_player_bacon_class_init (BraseroPlayerBaconClass *klass)
-{
-	GObjectClass *object_class = G_OBJECT_CLASS(klass);
-	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (klass);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-	parent_class = g_type_class_peek_parent(klass);
-
-	object_class->finalize = brasero_player_bacon_finalize;
-	object_class->set_property = brasero_player_bacon_set_property;
-	object_class->get_property = brasero_player_bacon_get_property;
-	gtk_object_class->destroy = brasero_player_bacon_destroy;
-
-	widget_class->expose_event = brasero_player_bacon_expose;
-	widget_class->map = brasero_player_bacon_map;
-	widget_class->unmap = brasero_player_bacon_unmap;
-	widget_class->realize = brasero_player_bacon_realize;
-	widget_class->unrealize = brasero_player_bacon_unrealize;
-	widget_class->size_request = brasero_player_bacon_size_request;
-	widget_class->size_allocate = brasero_player_bacon_size_allocate;
-
-	brasero_player_bacon_signals [STATE_CHANGED_SIGNAL] = 
-			g_signal_new ("state-change",
-				      G_TYPE_FROM_CLASS (klass),
-				      G_SIGNAL_RUN_LAST,
-				      G_STRUCT_OFFSET (BraseroPlayerBaconClass, state_changed),
-				      NULL, NULL,
-				      g_cclosure_marshal_VOID__INT,
-				      G_TYPE_NONE, 1, G_TYPE_INT);
-
-	brasero_player_bacon_signals [EOF_SIGNAL] = 
-			g_signal_new ("eof",
-				      G_TYPE_FROM_CLASS (klass),
-				      G_SIGNAL_RUN_LAST,
-				      G_STRUCT_OFFSET (BraseroPlayerBaconClass, eof),
-				      NULL, NULL,
-				      g_cclosure_marshal_VOID__VOID,
-				      G_TYPE_NONE, 0);
-
-	g_object_class_install_property (object_class,
-					 PROP_URI,
-					 g_param_spec_string ("uri",
-							      "The uri of the media",
-							      "The uri of the media",
-							      NULL,
-							      G_PARAM_READWRITE));
-}
+G_DEFINE_TYPE (BraseroPlayerBacon, brasero_player_bacon, GTK_TYPE_WIDGET)
 
 static void
 brasero_player_bacon_set_property (GObject *obj,
@@ -220,68 +114,45 @@ brasero_player_bacon_get_property (GObject *obj,
 static void
 brasero_player_bacon_realize (GtkWidget *widget)
 {
+	GdkWindow *window;
+	gint attributes_mask;
+	GtkAllocation allocation;
 	GdkWindowAttr attributes;
 	BraseroPlayerBacon *bacon;
-	gint attributes_mask;
 
 	bacon = BRASERO_PLAYER_BACON (widget);
 
 	attributes.window_type = GDK_WINDOW_CHILD;
-	attributes.x = widget->allocation.x;
-	attributes.y = widget->allocation.y;
-	attributes.width = widget->allocation.width;
-	attributes.height = widget->allocation.height;
+
+	gtk_widget_get_allocation (widget, &allocation);
+	attributes.x = 0;
+	attributes.y = 0;
+	attributes.width = allocation.width;
+	attributes.height = allocation.height;
 	attributes.wclass = GDK_INPUT_OUTPUT;
 	attributes.visual = gtk_widget_get_visual (widget);
 	attributes.colormap = gtk_widget_get_colormap (widget);
 	attributes.event_mask = gtk_widget_get_events (widget);
-	attributes.event_mask |= GDK_EXPOSURE_MASK;
+	attributes.event_mask |= GDK_EXPOSURE_MASK|GDK_BUTTON_PRESS_MASK;
 	attributes_mask = GDK_WA_X | GDK_WA_Y | GDK_WA_COLORMAP;
 
-	widget->window = gdk_window_new (gtk_widget_get_parent_window (widget),
-					 &attributes,
-					 attributes_mask);
-	gdk_window_set_user_data (widget->window, widget);
-
-	widget->style = gtk_style_attach (widget->style, widget->window);
+	gtk_widget_set_window (widget, gdk_window_new (gtk_widget_get_parent_window (widget),
+						       &attributes,
+						       attributes_mask));
+	window = gtk_widget_get_window (widget);
+	gdk_window_set_user_data (window, widget);
+	gdk_window_show (gtk_widget_get_window (widget));
+	gtk_widget_style_attach (widget);
 	//gtk_style_set_background (widget->style, widget->window, GTK_STATE_NORMAL);
-	
-	GTK_WIDGET_SET_FLAGS (widget, GTK_REALIZED);
-}
 
-static void
-brasero_player_bacon_unrealize (GtkWidget *widget)
-{
-	BraseroPlayerBacon *bacon;
-
-	bacon = BRASERO_PLAYER_BACON (widget);
-
-	if (GTK_WIDGET_CLASS (parent_class)->unrealize)
-		GTK_WIDGET_CLASS (parent_class)->unrealize (widget);
-}
-
-static void
-brasero_player_bacon_map (GtkWidget *widget)
-{
-	g_return_if_fail (widget != NULL);
-	gdk_window_show (widget->window);
-
-	GTK_WIDGET_SET_FLAGS (widget, GTK_MAPPED);
-}
-
-static void
-brasero_player_bacon_unmap (GtkWidget *widget)
-{
-	g_return_if_fail (widget != NULL);
-	gdk_window_hide (widget->window);
-
-	GTK_WIDGET_UNSET_FLAGS (widget, GTK_MAPPED);
+	gtk_widget_set_realized (widget, TRUE);
 }
 
 static gboolean
 brasero_player_bacon_expose (GtkWidget *widget, GdkEventExpose *event)
 {
 	BraseroPlayerBacon *bacon;
+	GdkWindow *window;
 
 	if (event && event->count > 0)
 		return TRUE;
@@ -289,13 +160,17 @@ brasero_player_bacon_expose (GtkWidget *widget, GdkEventExpose *event)
 	g_return_val_if_fail (widget != NULL, FALSE);
 	bacon = BRASERO_PLAYER_BACON (widget);
 
+	window = gtk_widget_get_window (widget);
+	if (window)
+		bacon->priv->xid = gdk_x11_drawable_get_xid (GDK_DRAWABLE (window));
+
 	if (bacon->priv->xoverlay
 	&&  GST_IS_X_OVERLAY (bacon->priv->xoverlay)
 	&&  bacon->priv->state >= GST_STATE_PAUSED) {
 		gst_x_overlay_expose (bacon->priv->xoverlay);
 	}
-	else if (widget->window)
-		gdk_window_clear (widget->window);
+	else if (window)
+		gdk_window_clear (window);
 
 	return TRUE;
 }
@@ -312,8 +187,8 @@ brasero_player_bacon_size_request (GtkWidget *widget,
 	requisition->width = PLAYER_BACON_WIDTH;
 	requisition->height = PLAYER_BACON_HEIGHT;
 
-	if (GTK_WIDGET_CLASS (parent_class)->size_request)
-		GTK_WIDGET_CLASS (parent_class)->size_request (widget, requisition);
+	if (GTK_WIDGET_CLASS (brasero_player_bacon_parent_class)->size_request)
+		GTK_WIDGET_CLASS (brasero_player_bacon_parent_class)->size_request (widget, requisition);
 }
 
 static void
@@ -327,7 +202,7 @@ brasero_player_bacon_size_allocate (GtkWidget *widget,
 	g_return_if_fail (widget != NULL);
 	bacon = BRASERO_PLAYER_BACON (widget);
 
-	if (!GTK_WIDGET_REALIZED (widget))
+	if (!gtk_widget_get_realized (widget))
 		return;
 
 	if (bacon->priv->xoverlay) {
@@ -345,80 +220,15 @@ brasero_player_bacon_size_allocate (GtkWidget *widget,
 		screen_x = allocation->x + (allocation->width - (gint) screen_width) / 2;
 		screen_y = allocation->y + (allocation->height - (gint) screen_height) / 2;
 	
-		gdk_window_move_resize (widget->window,
+		gdk_window_move_resize (gtk_widget_get_window (widget),
 					screen_x,
 					screen_y,
 					(gint) screen_width,
 					(gint) screen_height);
-		widget->allocation = *allocation;
+		gtk_widget_set_allocation (widget, allocation);
 	}
-	else if (GTK_WIDGET_CLASS (parent_class)->size_allocate)
-		GTK_WIDGET_CLASS (parent_class)->size_allocate (widget, allocation);
-}
-
-static void
-brasero_player_bacon_destroy (GtkObject *obj)
-{
-	BraseroPlayerBacon *cobj;
-
-	cobj = BRASERO_PLAYER_BACON (obj);
-
-	/* save volume */
-	if (cobj->priv->pipe) {
-		GConfClient *client;
-		gdouble volume;
-
-		client = gconf_client_get_default ();
-		g_object_get (cobj->priv->pipe,
-			      "volume", &volume,
-			      NULL);
-
-		volume = gconf_client_set_int (client,
-					       GCONF_PLAYER_VOLUME,
-					       (gint) (volume * 100.0),
-					       NULL);
-		g_object_unref (client);
-    }
-
-	if (cobj->priv->xoverlay
-	&&  GST_IS_X_OVERLAY (cobj->priv->xoverlay)) {
-		cobj->priv->xoverlay = NULL;
-	}
-
-	if (cobj->priv->pipe) {
-		gst_element_set_state (cobj->priv->pipe, GST_STATE_NULL);
-		gst_object_unref (GST_OBJECT (cobj->priv->pipe));
-		cobj->priv->pipe = NULL;
-	}
-
-	if (cobj->priv->uri) {
-		g_free (cobj->priv->uri);
-		cobj->priv->uri = NULL;
-	}
-
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		GTK_OBJECT_CLASS (parent_class)->destroy (obj);
-}
-
-static void
-brasero_player_bacon_finalize (GObject *object)
-{
-	BraseroPlayerBacon *cobj;
-
-	cobj = BRASERO_PLAYER_BACON (object);
-
-	g_free (cobj->priv);
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-GtkWidget *
-brasero_player_bacon_new (void)
-{
-	BraseroPlayerBacon *obj;
-	
-	obj = BRASERO_PLAYER_BACON (g_object_new (BRASERO_TYPE_PLAYER_BACON, NULL));
-	
-	return GTK_WIDGET (obj);
+	else if (GTK_WIDGET_CLASS (brasero_player_bacon_parent_class)->size_allocate)
+		GTK_WIDGET_CLASS (brasero_player_bacon_parent_class)->size_allocate (widget, allocation);
 }
 
 static GstBusSyncReply
@@ -427,7 +237,6 @@ brasero_player_bacon_bus_messages_handler (GstBus *bus,
 					   BraseroPlayerBacon *bacon)
 {
 	const GstStructure *structure;
-	XID window;
 
 	structure = gst_message_get_structure (message);
 	if (!structure)
@@ -437,9 +246,10 @@ brasero_player_bacon_bus_messages_handler (GstBus *bus,
 		return GST_BUS_PASS;
 	}
 
-	window = GDK_WINDOW_XWINDOW (GTK_WIDGET (bacon)->window);
+	/* NOTE: apparently GDK does not like to be asked to retrieve the XID
+	 * in a thread so we do it in the callback of the expose event. */
 	bacon->priv->xoverlay = GST_X_OVERLAY (GST_MESSAGE_SRC (message));
-	gst_x_overlay_set_xwindow_id (bacon->priv->xoverlay, window);
+	gst_x_overlay_set_xwindow_id (bacon->priv->xoverlay, bacon->priv->xid);
 
 	return GST_BUS_DROP;
 }
@@ -448,6 +258,7 @@ static void
 brasero_player_bacon_clear_pipe (BraseroPlayerBacon *bacon)
 {
 	bacon->priv->xoverlay = NULL;
+
 	bacon->priv->state = GST_STATE_NULL;
 
 	if (bacon->priv->pipe) {
@@ -676,8 +487,8 @@ brasero_player_bacon_setup_pipe (BraseroPlayerBacon *bacon)
 {
 	GstElement *video_sink, *audio_sink;
 	GstBus *bus = NULL;
-	GConfClient *client;
 	gdouble volume;
+	gpointer value;
 
 	bacon->priv->pipe = gst_element_factory_make ("playbin", NULL);
 	if (!bacon->priv->pipe) {
@@ -717,18 +528,19 @@ brasero_player_bacon_setup_pipe (BraseroPlayerBacon *bacon)
 	gst_object_unref (bus);
 
 	/* set saved volume */
-	client = gconf_client_get_default ();
-	volume = gconf_client_get_int (client, GCONF_PLAYER_VOLUME, NULL);
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_PLAYER_VOLUME,
+	                           &value);
+	volume = GPOINTER_TO_INT (value);
 	volume = CLAMP (volume, 0, 500);
 	g_object_set (bacon->priv->pipe,
 		      "volume", (gdouble) volume / 100.0,
 		      NULL);
-	g_object_unref (client);
 
 	return;
 
 error:
-	g_warning ("player creation error");
+	g_message ("player creation error");
 	brasero_player_bacon_clear_pipe (bacon);
 	g_signal_emit (bacon,
 		       brasero_player_bacon_signals [STATE_CHANGED_SIGNAL],
@@ -740,8 +552,111 @@ error:
 static void
 brasero_player_bacon_init (BraseroPlayerBacon *obj)
 {
-	GTK_WIDGET_UNSET_FLAGS (GTK_WIDGET (obj), GTK_DOUBLE_BUFFERED);
+	gtk_widget_set_double_buffered (GTK_WIDGET (obj), FALSE);
 
 	obj->priv = g_new0 (BraseroPlayerBaconPrivate, 1);
 	brasero_player_bacon_setup_pipe (obj);
+}
+
+static void
+brasero_player_bacon_destroy (GtkObject *obj)
+{
+	BraseroPlayerBacon *cobj;
+
+	cobj = BRASERO_PLAYER_BACON (obj);
+
+	/* save volume */
+	if (cobj->priv->pipe) {
+		gdouble volume;
+
+		g_object_get (cobj->priv->pipe,
+			      "volume", &volume,
+			      NULL);
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_PLAYER_VOLUME,
+		                           GINT_TO_POINTER ((gint)(volume * 100)));
+	}
+
+	if (cobj->priv->xoverlay
+	&&  GST_IS_X_OVERLAY (cobj->priv->xoverlay))
+		cobj->priv->xoverlay = NULL;
+
+	if (cobj->priv->pipe) {
+		gst_element_set_state (cobj->priv->pipe, GST_STATE_NULL);
+		gst_object_unref (GST_OBJECT (cobj->priv->pipe));
+		cobj->priv->pipe = NULL;
+	}
+
+	if (cobj->priv->uri) {
+		g_free (cobj->priv->uri);
+		cobj->priv->uri = NULL;
+	}
+
+	if (GTK_OBJECT_CLASS (brasero_player_bacon_parent_class)->destroy)
+		GTK_OBJECT_CLASS (brasero_player_bacon_parent_class)->destroy (obj);
+}
+
+static void
+brasero_player_bacon_finalize (GObject *object)
+{
+	BraseroPlayerBacon *cobj;
+
+	cobj = BRASERO_PLAYER_BACON (object);
+
+	g_free (cobj->priv);
+	G_OBJECT_CLASS (brasero_player_bacon_parent_class)->finalize (object);
+}
+
+static void
+brasero_player_bacon_class_init (BraseroPlayerBaconClass *klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS(klass);
+	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	object_class->finalize = brasero_player_bacon_finalize;
+	object_class->set_property = brasero_player_bacon_set_property;
+	object_class->get_property = brasero_player_bacon_get_property;
+	gtk_object_class->destroy = brasero_player_bacon_destroy;
+
+	widget_class->expose_event = brasero_player_bacon_expose;
+	widget_class->realize = brasero_player_bacon_realize;
+	widget_class->size_request = brasero_player_bacon_size_request;
+	widget_class->size_allocate = brasero_player_bacon_size_allocate;
+
+	brasero_player_bacon_signals [STATE_CHANGED_SIGNAL] = 
+			g_signal_new ("state-change",
+				      G_TYPE_FROM_CLASS (klass),
+				      G_SIGNAL_RUN_LAST,
+				      G_STRUCT_OFFSET (BraseroPlayerBaconClass, state_changed),
+				      NULL, NULL,
+				      g_cclosure_marshal_VOID__INT,
+				      G_TYPE_NONE, 1, G_TYPE_INT);
+
+	brasero_player_bacon_signals [EOF_SIGNAL] = 
+			g_signal_new ("eof",
+				      G_TYPE_FROM_CLASS (klass),
+				      G_SIGNAL_RUN_LAST,
+				      G_STRUCT_OFFSET (BraseroPlayerBaconClass, eof),
+				      NULL, NULL,
+				      g_cclosure_marshal_VOID__VOID,
+				      G_TYPE_NONE, 0);
+
+	g_object_class_install_property (object_class,
+					 PROP_URI,
+					 g_param_spec_string ("uri",
+							      "The uri of the media",
+							      "The uri of the media",
+							      NULL,
+							      G_PARAM_READWRITE));
+}
+
+GtkWidget *
+brasero_player_bacon_new (void)
+{
+	BraseroPlayerBacon *obj;
+	
+	obj = BRASERO_PLAYER_BACON (g_object_new (BRASERO_TYPE_PLAYER_BACON, NULL));
+	
+	return GTK_WIDGET (obj);
 }

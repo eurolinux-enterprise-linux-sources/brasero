@@ -34,6 +34,7 @@
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
+#include <glib-object.h>
 
 #include <gtk/gtk.h>
 
@@ -88,8 +89,8 @@ brasero_jacket_edit_print_page (GtkPrintOperation *operation,
 
 	priv = BRASERO_JACKET_EDIT_PRIVATE (self);
 
-	y = brasero_jacket_view_print (BRASERO_JACKET_VIEW (priv->front), context, 0, 0);
-	brasero_jacket_view_print (BRASERO_JACKET_VIEW (priv->back), context, 0, y + 20);
+	y = brasero_jacket_view_print (BRASERO_JACKET_VIEW (priv->front), context, 0., 0.);
+	brasero_jacket_view_print (BRASERO_JACKET_VIEW (priv->back), context, 0., y + 20.);
 }
 
 static void
@@ -107,8 +108,10 @@ brasero_jacket_edit_print_pressed_cb (GtkButton *button,
 	BraseroJacketEditPrivate *priv;
 	GtkPrintOperationResult res;
 	GtkPrintOperation *print;
+	GtkPrintSettings *settings;
 	GError *error = NULL;
 	GtkWidget *toplevel;
+	gchar *path;
 
 	priv = BRASERO_JACKET_EDIT_PRIVATE (self);
 	print = gtk_print_operation_new ();
@@ -122,10 +125,28 @@ brasero_jacket_edit_print_pressed_cb (GtkButton *button,
 			  self);
 
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
+
+	path = g_build_path (G_DIR_SEPARATOR_S, g_get_user_config_dir (), "brasero", "print-settings", NULL);
+	settings = gtk_print_settings_new_from_file (path, NULL);
+	if (settings) {
+		gtk_print_operation_set_print_settings (print, settings);
+		g_object_unref (settings);
+	}
+
+	/* NOTE: when a dialog is hidden while it was run by gtk_dialog_run ()
+	 * a response will be sent (GTK_RESPONSE_NONE) */
+	gtk_widget_hide (toplevel);
 	res = gtk_print_operation_run (print,
 				       GTK_PRINT_OPERATION_ACTION_PRINT_DIALOG,
-				       GTK_WINDOW (toplevel),
+				       gtk_window_get_transient_for (GTK_WINDOW (toplevel)),
 				       &error);
+
+	if (res == GTK_PRINT_OPERATION_RESULT_APPLY) {
+		settings = gtk_print_operation_get_print_settings (print);
+		gtk_print_settings_to_file (settings, path, NULL);
+		g_free (path);
+	}
+
 	g_object_unref (print);
 }
 
@@ -553,6 +574,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	GtkWidget *vbox;
 	GtkWidget *item;
 	GtkWidget *view;
+	GtkStyle *style;
 
 	priv = BRASERO_JACKET_EDIT_PRIVATE (object);
 
@@ -563,6 +585,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 
 	/* Items */
 	item = GTK_WIDGET (gtk_tool_button_new_from_stock (GTK_STOCK_PRINT));
+	gtk_widget_set_tooltip_text (item, _("Print"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -577,6 +600,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	item = GTK_WIDGET (gtk_tool_button_new (NULL, _("Bac_kground Properties")));
 	gtk_tool_button_set_icon_name (GTK_TOOL_BUTTON (item), "background");
 	gtk_tool_button_set_use_underline (GTK_TOOL_BUTTON (item), TRUE);
+	gtk_widget_set_tooltip_text (item, _("Background properties"));
 	gtk_widget_show (item);
 	gtk_widget_set_sensitive (item, FALSE);
 	g_signal_connect (item,
@@ -591,6 +615,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (item), 0);
 
 	item = GTK_WIDGET (gtk_radio_tool_button_new_from_stock (NULL, GTK_STOCK_JUSTIFY_RIGHT));
+	gtk_widget_set_tooltip_text (item, _("Align right"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -600,6 +625,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	priv->right = item;
 
 	item = GTK_WIDGET (gtk_radio_tool_button_new_from_stock (gtk_radio_tool_button_get_group (GTK_RADIO_TOOL_BUTTON (priv->right)), GTK_STOCK_JUSTIFY_CENTER));
+	gtk_widget_set_tooltip_text (item, _("Center"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -609,6 +635,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	priv->center = item;
 
 	item = GTK_WIDGET (gtk_radio_tool_button_new_from_stock (gtk_radio_tool_button_get_group (GTK_RADIO_TOOL_BUTTON (priv->right)), GTK_STOCK_JUSTIFY_LEFT));
+	gtk_widget_set_tooltip_text (item, _("Align left"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -622,6 +649,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (item), 0);
 
 	item = GTK_WIDGET (gtk_toggle_tool_button_new_from_stock (GTK_STOCK_UNDERLINE));
+	gtk_widget_set_tooltip_text (item, _("Underline"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -631,6 +659,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	priv->underline = item;
 
 	item = GTK_WIDGET (gtk_toggle_tool_button_new_from_stock (GTK_STOCK_ITALIC));
+	gtk_widget_set_tooltip_text (item, _("Italic"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -640,6 +669,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	priv->italic = item;
 
 	item = GTK_WIDGET (gtk_toggle_tool_button_new_from_stock (GTK_STOCK_BOLD));
+	gtk_widget_set_tooltip_text (item, _("Bold"));
 	gtk_widget_show (item);
 	g_signal_connect (item,
 			  "clicked",
@@ -665,6 +695,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 
 	item = GTK_WIDGET (gtk_tool_item_new ());
 	gtk_widget_show (item);
+	gtk_widget_set_tooltip_text (item, _("Font family and size"));
 	gtk_container_add (GTK_CONTAINER (item), priv->fonts);
 	gtk_tool_item_set_expand (GTK_TOOL_ITEM (item), FALSE);
 	gtk_toolbar_insert (GTK_TOOLBAR (toolbar), GTK_TOOL_ITEM (item), 0);
@@ -672,6 +703,7 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 	priv->colours = brasero_tool_color_picker_new ();
 	brasero_tool_color_picker_set_text (BRASERO_TOOL_COLOR_PICKER (priv->colours),
 					    _("_Text Color"));
+	gtk_widget_set_tooltip_text (priv->colours, _("Text color"));
 	gtk_widget_show (priv->colours);
 	g_signal_connect (priv->colours,
 			  "color-set",
@@ -720,11 +752,12 @@ brasero_jacket_edit_init (BraseroJacketEdit *object)
 
 	gtk_box_pack_start (GTK_BOX (main_box), view, FALSE, FALSE, 0);
 
-	if (pango_font_description_get_set_fields (priv->front->style->font_desc) & PANGO_FONT_MASK_SIZE) {
+	style = gtk_widget_get_style (priv->front);
+	if (pango_font_description_get_set_fields (style->font_desc) & PANGO_FONT_MASK_SIZE) {
 		guint size;
 		gchar string [8] = { 0, };
 
-		size = pango_font_description_get_size (priv->front->style->font_desc);
+		size = pango_font_description_get_size (style->font_desc);
 		sprintf (string, "%i", size);
 		brasero_jacket_font_set_name (BRASERO_JACKET_FONT (priv->fonts), "Sans 12");
 	}
@@ -814,7 +847,7 @@ brasero_jacket_edit_dialog_new (GtkWidget *toplevel,
 	contents = brasero_jacket_edit_new ();
 	gtk_widget_show (contents);
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (window)->vbox), contents, TRUE, TRUE, 0);
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (window))), contents, TRUE, TRUE, 0);
 	if (contents_ret)
 		*contents_ret = BRASERO_JACKET_EDIT (contents);
 

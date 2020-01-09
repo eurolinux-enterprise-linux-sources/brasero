@@ -17,6 +17,9 @@ brasero-burn-lib
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO LIBBRASERO_BURN_VERSION_MAJOR ##### -->
 <para>
 
@@ -60,6 +63,7 @@ brasero-burn-lib
 
 </para>
 
+@void: 
 
 
 <!-- ##### FUNCTION brasero_burn_library_get_option_group ##### -->
@@ -67,6 +71,7 @@ brasero-burn-lib
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -75,6 +80,7 @@ brasero-burn-lib
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -83,6 +89,7 @@ brasero-burn-lib
 
 </para>
 
+@void: 
 @Returns: 
 
 

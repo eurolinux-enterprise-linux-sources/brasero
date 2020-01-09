@@ -32,6 +32,7 @@
 #define _BRASERO_IO_H_
 
 #include <glib-object.h>
+#include <gtk/gtk.h>
 
 #include "brasero-async-task-manager.h"
 
@@ -83,6 +84,11 @@ typedef enum {
 #define BRASERO_IO_HAS_AUDIO		"metadata::has_audio"
 #define BRASERO_IO_HAS_VIDEO		"metadata::has_video"
 #define BRASERO_IO_IS_SEEKABLE		"metadata::is_seekable"
+
+#define BRASERO_IO_HAS_DTS			"metadata::audio::wav::has_dts"
+
+#define BRASERO_IO_CHANNELS		"metadata::audio::channels"
+#define BRASERO_IO_RATE				"metadata::audio::rate"
 
 #define BRASERO_IO_DIR_CONTENTS_ADDR	"image::directory::address"
 
@@ -162,6 +168,13 @@ brasero_io_return_result (const BraseroIOJobBase *base,
 			  GFileInfo *info,
 			  GError *error,
 			  BraseroIOResultCallbackData *callback_data);
+
+
+typedef GtkWindow *	(* BraseroIOGetParentWinCb)	(gpointer user_data);
+
+void
+brasero_io_set_parent_window_callback (BraseroIOGetParentWinCb callback,
+                                       gpointer user_data);
 
 void
 brasero_io_shutdown (void);

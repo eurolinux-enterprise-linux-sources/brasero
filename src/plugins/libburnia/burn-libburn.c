@@ -52,9 +52,16 @@
 #include "brasero-plugin-registration.h"
 #include "burn-libburn-common.h"
 #include "burn-libburnia.h"
-#include "burn-libburn.h"
 #include "brasero-track-image.h"
 #include "brasero-track-stream.h"
+
+
+#define BRASERO_TYPE_LIBBURN         (brasero_libburn_get_type ())
+#define BRASERO_LIBBURN(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_LIBBURN, BraseroLibburn))
+#define BRASERO_LIBBURN_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_LIBBURN, BraseroLibburnClass))
+#define BRASERO_IS_LIBBURN(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_LIBBURN))
+#define BRASERO_IS_LIBBURN_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_LIBBURN))
+#define BRASERO_LIBBURN_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_LIBBURN, BraseroLibburnClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroLibburn, brasero_libburn, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -232,7 +239,7 @@ brasero_libburn_add_track (struct burn_session *session,
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("Libburn track could not be created"));
+			     _("libburn track could not be created"));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -240,7 +247,7 @@ brasero_libburn_add_track (struct burn_session *session,
 		g_set_error (error,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
-			     _("Libburn track could not be created"));
+			     _("libburn track could not be created"));
 		return BRASERO_BURN_ERR;
 	}
 
@@ -706,7 +713,7 @@ brasero_libburn_start_erase (BraseroLibburn *self,
 			     BRASERO_BURN_ERROR,
 			     BRASERO_BURN_ERROR_GENERAL,
 			     /* Translators: %s is the error returned by libburn */
-			     _("An internal error occured (%s)"),
+			     _("An internal error occurred (%s)"),
 			     reasons);
 		return BRASERO_BURN_ERR;
 	}
@@ -845,7 +852,7 @@ brasero_libburn_clock_tick (BraseroJob *job)
 		brasero_job_error (job,
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_WRITE_MEDIUM,
-						_("An error occured while writing to disc")));
+						_("An error occurred while writing to disc")));
 		return BRASERO_BURN_OK;
 	}
 
@@ -876,7 +883,7 @@ brasero_libburn_clock_tick (BraseroJob *job)
 		brasero_job_error (job,
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_WRITE_MEDIUM,
-						_("An error occured while writing to disc")));
+						_("An error occurred while writing to disc")));
 		return BRASERO_BURN_OK;
 	}
 
@@ -925,8 +932,8 @@ brasero_libburn_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_libburn_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_libburn_export_caps (BraseroPlugin *plugin)
 {
 	const BraseroMedia media_cd = BRASERO_MEDIUM_CD|
 				      BRASERO_MEDIUM_REWRITABLE|
@@ -963,7 +970,7 @@ brasero_libburn_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	brasero_plugin_define (plugin,
 			       "libburn",
-			       _("Libburn burns CD(RW), DVD+/-(RW)"),
+			       _("Burns, blanks and formats CDs, DVDs and BDs"),
 			       "Philippe Rouquier",
 			       15);
 
@@ -988,8 +995,7 @@ brasero_libburn_export_caps (BraseroPlugin *plugin, gchar **error)
 	/* audio support for CDs only */
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
 					BRASERO_PLUGIN_IO_ACCEPT_FILE,
-					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100);
+					BRASERO_AUDIO_FORMAT_RAW_LITTLE_ENDIAN);
 	
 	output = brasero_caps_disc_new (media_cd);
 	brasero_plugin_link_caps (plugin, output, input);
@@ -1080,5 +1086,4 @@ brasero_libburn_export_caps (BraseroPlugin *plugin, gchar **error)
 					BRASERO_BURN_FLAG_NONE);
 
 	brasero_plugin_register_group (plugin, _(LIBBURNIA_DESCRIPTION));
-	return BRASERO_BURN_OK;
 }

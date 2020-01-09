@@ -48,8 +48,15 @@
 #include "burn-process.h"
 #include "brasero-plugin-registration.h"
 #include "burn-cdrkit.h"
-#include "burn-genisoimage.h"
 #include "brasero-track-data.h"
+
+
+#define BRASERO_TYPE_GENISOIMAGE         (brasero_genisoimage_get_type ())
+#define BRASERO_GENISOIMAGE(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_GENISOIMAGE, BraseroGenisoimage))
+#define BRASERO_GENISOIMAGE_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_GENISOIMAGE, BraseroGenisoimageClass))
+#define BRASERO_IS_GENISOIMAGE(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_GENISOIMAGE))
+#define BRASERO_IS_GENISOIMAGE_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_GENISOIMAGE))
+#define BRASERO_GENISOIMAGE_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_GENISOIMAGE, BraseroGenisoimageClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroGenisoimage, brasero_genisoimage, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -86,7 +93,7 @@ brasero_genisoimage_read_stdout (BraseroProcess *process, const gchar *line)
 	if (action == BRASERO_JOB_ACTION_SIZE)
 		return brasero_genisoimage_read_isosize (process, line);
 
-	return TRUE;
+	return BRASERO_BURN_OK;
 }
 
 static BraseroBurnResult
@@ -305,13 +312,12 @@ brasero_genisoimage_set_argv_image (BraseroGenisoimage *genisoimage,
 		return result;
 	}
 
-	result = brasero_track_data_get_paths (BRASERO_TRACK_DATA (track),
-					       (image_fs & BRASERO_IMAGE_FS_JOLIET) != 0,
-					       grafts_path,
-					       excluded_path,
-					       emptydir,
-					       videodir,
-					       error);
+	result = brasero_track_data_write_to_paths (BRASERO_TRACK_DATA (track),
+	                                            grafts_path,
+	                                            excluded_path,
+	                                            emptydir,
+	                                            videodir,
+	                                            error);
 	g_free (emptydir);
 
 	if (result != BRASERO_BURN_OK) {
@@ -361,7 +367,7 @@ brasero_genisoimage_set_argv_image (BraseroGenisoimage *genisoimage,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 
@@ -511,23 +517,18 @@ brasero_genisoimage_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_genisoimage_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_genisoimage_export_caps (BraseroPlugin *plugin)
 {
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	brasero_plugin_define (plugin,
 			       "genisoimage",
-			       _("Use genisoimage to create images from a file selection"),
+	                       /* Translators: image is a disc image here */
+			       _("Creates disc images from a file selection"),
 			       "Philippe Rouquier",
 			       1);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("genisoimage", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	brasero_plugin_set_flags (plugin,
 				  BRASERO_MEDIUM_CDR|
@@ -578,6 +579,15 @@ brasero_genisoimage_export_caps (BraseroPlugin *plugin, gchar **error)
 	g_slist_free (output);
 
 	brasero_plugin_register_group (plugin, _(CDRKIT_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 1, 1, 0};
+	brasero_plugin_test_app (plugin,
+	                         "genisoimage",
+	                         "--version",
+	                         "genisoimage %d.%d.%d (Linux)",
+	                         version);
 }

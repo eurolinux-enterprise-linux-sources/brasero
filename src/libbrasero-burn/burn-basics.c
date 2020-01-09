@@ -54,6 +54,7 @@
 #include "brasero-medium-monitor.h"
 
 #include "brasero-burn-lib.h"
+#include "burn-caps.h"
 
 static BraseroPluginManager *plugin_manager = NULL;
 static BraseroMediumMonitor *medium_manager = NULL;
@@ -86,11 +87,12 @@ brasero_burn_action_to_string (BraseroBurnAction action)
 							N_("Transcoding song"),
 							N_("Preparing to write"),
 							N_("Writing leadin"),
-							N_("Writing CD-TEXT information"),
+							N_("Writing CD-Text information"),
 							N_("Finalizing"),
 							N_("Writing leadout"),
 						        N_("Starting to record"),
-							N_("Success") };
+							N_("Success"),
+							N_("Ejecting medium")};
 	return _(strings [action]);
 }
 
@@ -206,6 +208,19 @@ brasero_caps_list_dump (void)
 	g_object_unref (self);
 }
 
+/**
+ * brasero_burn_library_start:
+ * @argc: an #int.
+ * @argv: a #char **.
+ *
+ * Starts the library. This function must be called
+ * before using any of the functions.
+ *
+ * Rename to: init
+ *
+ * Returns: a #gboolean
+ **/
+
 gboolean
 brasero_burn_library_start (int *argc,
                             char **argv [])
@@ -227,11 +242,11 @@ brasero_burn_library_start (int *argc,
 	g_setenv ("DBUS_SESSION_BUS_ADDRESS", "autolaunch:", TRUE);
 #endif
 
-	/* Initialize external libraries (threads... */
+	/* Initialize external libraries (threads...) */
 	if (!g_thread_supported ())
 		g_thread_init (NULL);
 
-	/* ... and Gstreamer) */
+	/* ... and GStreamer) */
 	if (!gst_init_check (argc, argv, NULL))
 		return FALSE;
 
@@ -279,7 +294,7 @@ brasero_burn_caps_get_default ()
  * This function returns the list of plugins that 
  * are available to libbrasero-burn.
  *
- * Returns: a #GSList that must be destroyed when not needed and each object unreffed.
+ * Returns: (element-type GObject.Object) (transfer full):a #GSList that must be destroyed when not needed and each object unreffed.
  **/
 
 GSList *
@@ -289,6 +304,15 @@ brasero_burn_library_get_plugins_list (void)
 	return brasero_plugin_manager_get_plugins_list (plugin_manager);
 }
 
+/**
+ * brasero_burn_library_stop:
+ *
+ * Stop the library. Don't use any of the functions or
+ * objects afterwards
+ *
+ * Rename to: deinit
+ *
+ **/
 void
 brasero_burn_library_stop (void)
 {
@@ -316,6 +340,15 @@ brasero_burn_library_stop (void)
 	gconf_client_remove_dir (client, "/apps/brasero", NULL);
 }
 
+/**
+ * brasero_burn_library_can_checksum:
+ *
+ * Checks whether the library can do any kind of
+ * checksum at all.
+ *
+ * Returns: a #gboolean
+ */
+
 gboolean
 brasero_burn_library_can_checksum (void)
 {
@@ -338,7 +371,7 @@ brasero_burn_library_can_checksum (void)
 			BraseroCapsLink *link;
 
 			link = links->data;
-			if (brasero_caps_link_active (link)) {
+			if (brasero_caps_link_active (link, 0)) {
 				g_object_unref (self);
 				return TRUE;
 			}
@@ -348,6 +381,15 @@ brasero_burn_library_can_checksum (void)
 	g_object_unref (self);
 	return FALSE;
 }
+
+/**
+ * brasero_burn_library_input_supported:
+ * @type: a #BraseroTrackType
+ *
+ * Checks whether @type can be used as input.
+ *
+ * Returns: a #BraseroBurnResult
+ */
 
 BraseroBurnResult
 brasero_burn_library_input_supported (BraseroTrackType *type)
@@ -434,7 +476,8 @@ brasero_burn_library_get_media_capabilities (BraseroMedia media)
 			BraseroPlugin *plugin;
 
 			plugin = plugins->data;
-			if (brasero_plugin_get_active (plugin)) {
+			/* Ignore plugin errors */
+			if (brasero_plugin_get_active (plugin, TRUE)) {
 				/* this link is valid */
 				active = TRUE;
 				break;

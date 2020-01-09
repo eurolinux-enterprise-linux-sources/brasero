@@ -40,24 +40,16 @@
 
 G_BEGIN_DECLS
 
-/**
- * Functions meant to become public API
- */
-
-BraseroBurnResult
-brasero_burn_session_set_image_output_format (BraseroBurnSession *self,
-					    BraseroImageFormat format);
-BraseroBurnResult
-brasero_burn_session_tag_add_int (BraseroBurnSession *self,
-                                  const gchar *tag,
-                                  gint value);
-gint
-brasero_burn_session_tag_lookup_int (BraseroBurnSession *self,
-                                     const gchar *tag);
 
 /**
  * Some convenience functions used internally
  */
+
+BraseroBurnResult
+brasero_caps_session_get_image_flags (BraseroTrackType *input,
+                                     BraseroTrackType *output,
+                                     BraseroBurnFlag *supported,
+                                     BraseroBurnFlag *compulsory);
 
 goffset
 brasero_burn_session_get_available_medium_space (BraseroBurnSession *session);
@@ -122,9 +114,6 @@ brasero_burn_session_get_tmp_image_type_same_src_dest (BraseroBurnSession *sessi
 const gchar *
 brasero_burn_session_get_log_path (BraseroBurnSession *session);
 
-void
-brasero_burn_session_set_log_path (BraseroBurnSession *session,
-				   const gchar *session_path);
 gboolean
 brasero_burn_session_start (BraseroBurnSession *session);
 

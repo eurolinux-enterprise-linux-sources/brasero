@@ -35,11 +35,20 @@
 
 G_BEGIN_DECLS
 
+/* NOTE: the order has a meaning here and is used for sorting */
+typedef enum {
+	BRASERO_TRACK_TYPE_NONE				= 0,
+	BRASERO_TRACK_TYPE_DATA,
+	BRASERO_TRACK_TYPE_IMAGE,
+	BRASERO_TRACK_TYPE_STREAM,
+	BRASERO_TRACK_TYPE_DISC,
+} BraseroTrackDataType;
+
 struct _BraseroTrackType {
 	BraseroTrackDataType type;
 	union {
 		BraseroImageFormat img_format;		/* used with IMAGE type */
-		BraseroMedia media;			/* used with DISC types */
+		BraseroMedia media;					/* used with DISC types */
 		BraseroImageFS fs_type;
 		BraseroStreamFormat stream_format;
 	} subtype;

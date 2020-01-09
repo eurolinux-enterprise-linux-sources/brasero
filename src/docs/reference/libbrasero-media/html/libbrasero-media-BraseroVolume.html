@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
 <link rel="prev" href="libbrasero-media-BraseroMedium.html" title="BraseroMedium">
 <link rel="next" href="libbrasero-media-BraseroMediumSelection.html" title="BraseroMediumSelection">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-media">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -41,22 +37,22 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-media-BraseroVolume.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">                    <a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a>;
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             <a href="libbrasero-media-BraseroVolume.html#brasero-volume-get-name">brasero_volume_get_name</a>             (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);
-<a href="http://library.gnome.org/devel/gio/unstable/GIcon.html">GIcon</a> *             <a href="libbrasero-media-BraseroVolume.html#brasero-volume-get-icon">brasero_volume_get_icon</a>             (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);
-<a href="http://library.gnome.org/devel/gio/unstable/GVolume.html">GVolume</a> *           <a href="libbrasero-media-BraseroVolume.html#brasero-volume-get-gvolume">brasero_volume_get_gvolume</a>          (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroVolume.html#brasero-volume-is-mounted">brasero_volume_is_mounted</a>           (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             <a href="libbrasero-media-BraseroVolume.html#brasero-volume-get-mount-point">brasero_volume_get_mount_point</a>      (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroVolume.html#brasero-volume-umount">brasero_volume_umount</a>               (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> wait,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroVolume.html#brasero-volume-mount">brasero_volume_mount</a>                (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html">GtkWindow</a> *parent_window,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> wait,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);
-void                <a href="libbrasero-media-BraseroVolume.html#brasero-volume-cancel-current-operation">brasero_volume_cancel_current_operation</a>
-                                                        (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);
+<pre class="synopsis">                    <a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume">BraseroVolume</a>;
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-get-name" title="brasero_volume_get_name ()">brasero_volume_get_name</a>             (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/gio/GIcon.html"><span class="returnvalue">GIcon</span></a> *             <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-get-icon" title="brasero_volume_get_icon ()">brasero_volume_get_icon</a>             (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/gio/GVolume.html"><span class="returnvalue">GVolume</span></a> *           <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-get-gvolume" title="brasero_volume_get_gvolume ()">brasero_volume_get_gvolume</a>          (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-is-mounted" title="brasero_volume_is_mounted ()">brasero_volume_is_mounted</a>           (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-get-mount-point" title="brasero_volume_get_mount_point ()">brasero_volume_get_mount_point</a>      (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-umount" title="brasero_volume_umount ()">brasero_volume_umount</a>               (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> wait</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-mount" title="brasero_volume_mount ()">brasero_volume_mount</a>                (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"><span class="type">GtkWindow</span></a> *parent_window</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> wait</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-media-BraseroVolume.html#brasero-volume-cancel-current-operation" title="brasero_volume_cancel_current_operation ()">brasero_volume_cancel_current_operation</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -78,20 +74,22 @@ void                <a href="libbrasero-media-BraseroVolume.html#brasero-volume-
 <hr>
 <div class="refsect2" title="brasero_volume_get_name ()">
 <a name="brasero-volume-get-name"></a><h3>brasero_volume_get_name ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             brasero_volume_get_name             (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             brasero_volume_get_name             (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);</pre>
 <p>
-Returns a string that can be displayed to represent the volume²</p>
+Returns a string that can be displayed to represent the volume²
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a> *
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *. Free when not needed anymore.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *. Free when not needed anymore.
 
 </td>
 </tr>
@@ -101,20 +99,22 @@ Returns a string that can be displayed to represent the volume²</p>
 <hr>
 <div class="refsect2" title="brasero_volume_get_icon ()">
 <a name="brasero-volume-get-icon"></a><h3>brasero_volume_get_icon ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/gio/unstable/GIcon.html">GIcon</a> *             brasero_volume_get_icon             (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/gio/GIcon.html"><span class="returnvalue">GIcon</span></a> *             brasero_volume_get_icon             (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);</pre>
 <p>
-Returns a GIcon pointer for the volume.</p>
+Returns a GIcon pointer for the volume.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a> *
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gio/unstable/GIcon.html"><span class="type">GIcon</span></a>*
+<td> a <a href="/usr/share/gtk-doc/html/gio/GIcon.html"><span class="type">GIcon</span></a>*
 
 </td>
 </tr>
@@ -124,20 +124,22 @@ Returns a GIcon pointer for the volume.</p>
 <hr>
 <div class="refsect2" title="brasero_volume_get_gvolume ()">
 <a name="brasero-volume-get-gvolume"></a><h3>brasero_volume_get_gvolume ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/gio/unstable/GVolume.html">GVolume</a> *           brasero_volume_get_gvolume          (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/gio/GVolume.html"><span class="returnvalue">GVolume</span></a> *           brasero_volume_get_gvolume          (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);</pre>
 <p>
-Gets the corresponding <a href="http://library.gnome.org/devel/gio/unstable/GVolume.html"><span class="type">GVolume</span></a> for <em class="parameter"><code>volume</code></em>.</p>
+Gets the corresponding <a href="/usr/share/gtk-doc/html/gio/GVolume.html"><span class="type">GVolume</span></a> for <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a>
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/gio/unstable/GVolume.html"><span class="type">GVolume</span></a> *.
+<td> a <a href="/usr/share/gtk-doc/html/gio/GVolume.html"><span class="type">GVolume</span></a> *.
 
 </td>
 </tr>
@@ -147,20 +149,22 @@ Gets the corresponding <a href="http://library.gnome.org/devel/gio/unstable/GVol
 <hr>
 <div class="refsect2" title="brasero_volume_is_mounted ()">
 <a name="brasero-volume-is-mounted"></a><h3>brasero_volume_is_mounted ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_volume_is_mounted           (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_volume_is_mounted           (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);</pre>
 <p>
-Returns whether the volume is currently mounted.</p>
+Returns whether the volume is currently mounted.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a>
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is mounted.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is mounted.
 
 </td>
 </tr>
@@ -170,26 +174,29 @@ Returns whether the volume is currently mounted.</p>
 <hr>
 <div class="refsect2" title="brasero_volume_get_mount_point ()">
 <a name="brasero-volume-get-mount-point"></a><h3>brasero_volume_get_mount_point ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             brasero_volume_get_mount_point      (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             brasero_volume_get_mount_point      (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
-Returns the path for mount point for <em class="parameter"><code>volume</code></em>.</p>
+Returns the path for mount point for <em class="parameter"><code>volume</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a>
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
 
 </td>
 </tr>
@@ -199,33 +206,37 @@ Returns the path for mount point for <em class="parameter"><code>volume</code></
 <hr>
 <div class="refsect2" title="brasero_volume_umount ()">
 <a name="brasero-volume-umount"></a><h3>brasero_volume_umount ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_volume_umount               (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> wait,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_volume_umount               (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> wait</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Unmount <em class="parameter"><code>volume</code></em>. If wait is set to TRUE, then block (in a GMainLoop) until
-the operation finishes.</p>
+the operation finishes.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a>
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>wait</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the operation succeeded.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the operation succeeded.
 
 </td>
 </tr>
@@ -235,41 +246,46 @@ the operation finishes.</p>
 <hr>
 <div class="refsect2" title="brasero_volume_mount ()">
 <a name="brasero-volume-mount"></a><h3>brasero_volume_mount ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_volume_mount                (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume,
-                                                         <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html">GtkWindow</a> *parent_window,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> wait,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_volume_mount                (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"><span class="type">GtkWindow</span></a> *parent_window</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> wait</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
 <p>
 Mount <em class="parameter"><code>volume</code></em>. If wait is set to TRUE, then block (in a GMainLoop) until
 the operation finishes.
 <em class="parameter"><code>parent_window</code></em> is used if an authentification is needed. Then the authentification
-dialog will be set modal.</p>
+dialog will be set modal.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a> *
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>parent_window</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/gtk/unstable/GtkWindow.html"><span class="type">GtkWindow</span></a> *
+<td>
+<a href="/usr/share/gtk-doc/html/gtk/GtkWindow.html"><span class="type">GtkWindow</span></a> *
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>wait</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
-<td> <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
+<td>
+<a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the operation succeeded.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the operation succeeded.
 
 </td>
 </tr>
@@ -279,15 +295,17 @@ dialog will be set modal.</p>
 <hr>
 <div class="refsect2" title="brasero_volume_cancel_current_operation ()">
 <a name="brasero-volume-cancel-current-operation"></a><h3>brasero_volume_cancel_current_operation ()</h3>
-<pre class="programlisting">void                brasero_volume_cancel_current_operation
-                                                        (<a href="libbrasero-media-BraseroVolume.html#BraseroVolume">BraseroVolume</a> *volume);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_volume_cancel_current_operation
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *volume</code></em>);</pre>
 <p>
-Cancels all operations currently running for <em class="parameter"><code>volume</code></em></p>
+Cancels all operations currently running for <em class="parameter"><code>volume</code></em>
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>volume</code></em> :</span></p></td>
-<td> <a href="libbrasero-media-BraseroVolume.html#BraseroVolume"><span class="type">BraseroVolume</span></a> *
+<td>
+<a class="link" href="libbrasero-media-BraseroVolume.html#BraseroVolume" title="BraseroVolume"><span class="type">BraseroVolume</span></a> *
 </td>
 </tr></tbody>
 </table></div>
@@ -296,6 +314,6 @@ Cancels all operations currently running for <em class="parameter"><code>volume<
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

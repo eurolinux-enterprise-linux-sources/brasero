@@ -51,10 +51,17 @@
 #include "burn-job.h"
 #include "burn-process.h"
 #include "brasero-drive.h"
-#include "burn-growisofs.h"
 #include "burn-growisofs-common.h"
 #include "brasero-track-data.h"
 #include "brasero-track-image.h"
+
+
+#define BRASERO_TYPE_GROWISOFS         (brasero_growisofs_get_type ())
+#define BRASERO_GROWISOFS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_GROWISOFS, BraseroGrowisofs))
+#define BRASERO_GROWISOFS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_GROWISOFS, BraseroGrowisofsClass))
+#define BRASERO_IS_GROWISOFS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_GROWISOFS))
+#define BRASERO_IS_GROWISOFS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_GROWISOFS))
+#define BRASERO_GROWISOFS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_GROWISOFS, BraseroGrowisofsClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroGrowisofs, brasero_growisofs, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -131,10 +138,9 @@ brasero_growisofs_read_stderr (BraseroProcess *process, const gchar *line)
 			   (gdouble) 100.0;
 
 		brasero_job_set_progress (BRASERO_JOB (process), fraction);
-
 		brasero_job_get_current_action (BRASERO_JOB (process), &action);
-		if (action == BRASERO_BURN_ACTION_BLANKING
-		&&  fraction >= 0.01) {
+
+		if (action == BRASERO_BURN_ACTION_BLANKING && fraction >= 0.01) {
 			/* we nullified 1% of the medium (more than 65536)
 			 * that's enough to make the filesystem unusable and
 			 * looking blank. A signal SIGTERM will be sent to stop
@@ -336,13 +342,12 @@ brasero_growisofs_set_mkisofs_argv (BraseroGrowisofs *growisofs,
 		return result;
 	}
 
-	result = brasero_track_data_get_paths (BRASERO_TRACK_DATA (track),
-					       (fs_type & BRASERO_IMAGE_FS_JOLIET) != 0,
-					       grafts_path,
-					       excluded_path,
-					       emptydir,
-					       videodir,
-					       error);
+	result = brasero_track_data_write_to_paths (BRASERO_TRACK_DATA (track),
+	                                            grafts_path,
+	                                            excluded_path,
+	                                            emptydir,
+	                                            videodir,
+	                                            error);
 	g_free (emptydir);
 
 	if (result != BRASERO_BURN_OK) {
@@ -627,6 +632,11 @@ brasero_growisofs_set_argv (BraseroProcess *process,
 		if (!BRASERO_IS_TRACK_DATA (track))
 			return BRASERO_BURN_NOT_SUPPORTED;
 
+		/* If another job is piping data to us leave it to the job to 
+		 * retrieve the data size. */
+		if (brasero_job_get_fd_in (BRASERO_JOB (process), NULL) == BRASERO_BURN_OK)
+			return BRASERO_BURN_NOT_SUPPORTED;
+
 		result = brasero_growisofs_set_argv_record (BRASERO_GROWISOFS (process),
 							    argv,
 							    error);
@@ -643,6 +653,7 @@ brasero_growisofs_set_argv (BraseroProcess *process,
 
 	return result;
 }
+
 static void
 brasero_growisofs_class_init (BraseroGrowisofsClass *klass)
 {
@@ -726,12 +737,11 @@ brasero_growisofs_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_growisofs_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_growisofs_export_caps (BraseroPlugin *plugin)
 {
 	BraseroPluginConfOption *use_dao;
 	gboolean use_dao_gconf_key;
-	BraseroBurnResult result;
 	GSList *input_symlink;
 	GSList *input_joliet;
 	GConfClient *client;
@@ -740,14 +750,9 @@ brasero_growisofs_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	brasero_plugin_define (plugin,
 			       "growisofs",
-			       _("Growisofs burns DVDs"),
+			       _("Burns and blanks DVDs and BDs"),
 			       "Philippe Rouquier",
 			       7);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("growisofs", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	/* growisofs can write images to any type of BD/DVD-R as long as it's blank */
 	input = brasero_caps_image_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
@@ -924,6 +929,15 @@ brasero_growisofs_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_add_conf_option (plugin, use_dao); 
 
 	brasero_plugin_register_group (plugin, _(GROWISOFS_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 5, 0, -1};
+	brasero_plugin_test_app (plugin,
+	                         "growisofs",
+	                         "--version",
+	                         "* %*s by <appro@fy.chalmers.se>, version %d.%d,",
+	                         version);
 }

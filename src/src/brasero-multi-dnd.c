@@ -24,6 +24,8 @@
 
 #include <gtk/gtk.h>
 
+#include "brasero-multi-dnd.h"
+
 #include "brasero-track-data-cfg.h"
 #include "eggtreemultidnd.h"
 
@@ -60,7 +62,7 @@ brasero_multi_DND_drag_data_get (EggTreeMultiDragSource *drag_source,
 	GList *iter;
 	gint i;
 
-	if (selection_data->target != gdk_atom_intern ("text/uri-list", TRUE))
+	if (gtk_selection_data_get_target (selection_data) != gdk_atom_intern ("text/uri-list", TRUE))
 		return TRUE;
 
 	for (iter = path_list; iter && iter->data; iter = iter->next) {
@@ -160,7 +162,7 @@ brasero_data_track_cfg_multi_DND_drag_data_get (EggTreeMultiDragSource *drag_sou
 						GList *path_list,
 						GtkSelectionData *selection_data)
 {
-	if (selection_data->target == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
+	if (gtk_selection_data_get_target (selection_data) == gdk_atom_intern (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, TRUE)) {
 		gtk_selection_data_set (selection_data,
 					gdk_atom_intern_static_string (BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST),
 					8,
@@ -198,31 +200,27 @@ static const GInterfaceInfo brasero_data_track_cfg_multi_DND_drag_source_info = 
 	NULL
 };
 
+gboolean
+brasero_enable_multi_DND_for_model_type (GType type)
+{
+	g_type_add_interface_static (type,
+				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
+				     &multi_DND_drag_source_info);
+	return TRUE;
+}
+
 void
 brasero_enable_multi_DND (void)
 {
-	GType object_type;
-
-	object_type = gtk_tree_model_filter_get_type ();
-	g_type_add_interface_static (object_type,
+	g_type_add_interface_static (GTK_TYPE_TREE_MODEL_SORT,
 				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
 				     &multi_DND_drag_source_info);
-
-	object_type = gtk_tree_model_sort_get_type ();
-	g_type_add_interface_static (object_type,
+	g_type_add_interface_static (GTK_TYPE_TREE_STORE,
 				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
 				     &multi_DND_drag_source_info);
-
-	object_type = gtk_tree_store_get_type ();
-	g_type_add_interface_static (object_type,
+	g_type_add_interface_static (GTK_TYPE_LIST_STORE,
 				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
 				     &multi_DND_drag_source_info);
-
-	object_type = gtk_list_store_get_type ();
-	g_type_add_interface_static (object_type,
-				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
-				     &multi_DND_drag_source_info);
-
 	g_type_add_interface_static (BRASERO_TYPE_TRACK_DATA_CFG,
 				     EGG_TYPE_TREE_MULTI_DRAG_SOURCE,
 				     &brasero_data_track_cfg_multi_DND_drag_source_info);

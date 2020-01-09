@@ -37,7 +37,9 @@
 #include <gtk/gtk.h>
 
 #include "eggtreemultidnd.h"
+#include "brasero-multi-dnd.h"
 
+#include "brasero-setting.h"
 #include "brasero-file-chooser.h"
 #include "brasero-uri-container.h"
 #include "brasero-layout-object.h"
@@ -123,6 +125,108 @@ brasero_file_chooser_class_init (BraseroFileChooserClass *klass)
 	object_class->finalize = brasero_file_chooser_finalize;
 }
 
+static void
+brasero_file_chooser_position_percent (GObject *object,
+                                       gint width,
+                                       gint position)
+{
+	gint percent;
+
+	percent = position * 10000;
+	if (percent % width) {
+		percent /= width;
+		percent ++;
+	}
+	else
+		percent /= width;
+
+	if (GPOINTER_TO_INT (g_object_get_data (object, "is-stock-file-chooser")))
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_STOCK_FILE_CHOOSER_PERCENT,
+		                           GINT_TO_POINTER (percent));
+	else
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_BRASERO_FILE_CHOOSER_PERCENT,
+		                           GINT_TO_POINTER (percent));
+}
+
+static void
+brasero_file_chooser_position_changed (GObject *object,
+                                       GParamSpec *param_spec,
+                                       gpointer NULL_data)
+{
+	GtkAllocation allocation = {0, 0};
+	gint position;
+
+	gtk_widget_get_allocation (GTK_WIDGET (object), &allocation);
+	position = gtk_paned_get_position (GTK_PANED (object));
+	brasero_file_chooser_position_percent (object, allocation.width, position);
+}
+
+static void
+brasero_file_chooser_allocation_changed (GtkWidget *widget,
+                                         GtkAllocation *allocation,
+                                         gpointer NULL_data)
+{
+	gint position;
+	gint width;
+
+	/* See if it's the first allocation. If so set the position and don't
+	 * save it */
+	if (GPOINTER_TO_INT (g_object_get_data (G_OBJECT (widget), "position_set")) == FALSE) {
+		gpointer percent;
+		GtkWidget *toplevel;
+
+		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (widget));
+		if (G_TYPE_FROM_INSTANCE (toplevel) == GTK_TYPE_FILE_CHOOSER_DIALOG) {
+			g_object_set_data (G_OBJECT (widget), "is-stock-file-chooser", GINT_TO_POINTER (1));
+			brasero_setting_get_value (brasero_setting_get_default (),
+				                   BRASERO_SETTING_STOCK_FILE_CHOOSER_PERCENT,
+				                   &percent);
+		}
+		else
+			brasero_setting_get_value (brasero_setting_get_default (),
+				                   BRASERO_SETTING_BRASERO_FILE_CHOOSER_PERCENT,
+				                   &percent);
+
+		if (GPOINTER_TO_INT (percent) >= 0) {
+			position = allocation->width * GPOINTER_TO_INT (percent) / 10000;
+			gtk_paned_set_position (GTK_PANED (widget), position);
+		}
+		else
+			gtk_paned_set_position (GTK_PANED (widget), 30 * allocation->width / 100);
+
+		/* Don't connect to position signal until it was first allocated */
+		g_object_set_data (G_OBJECT (widget), "position_set", GINT_TO_POINTER (TRUE));
+		g_signal_connect (widget,
+		                  "notify::position",
+		                  G_CALLBACK (brasero_file_chooser_position_changed),
+		                  NULL);
+		return;
+	}
+
+	position = gtk_paned_get_position (GTK_PANED (widget));
+	width = allocation->width;
+
+	brasero_file_chooser_position_percent (G_OBJECT (widget), width, position);
+}
+
+static void
+brasero_file_chooser_notify_model (GtkTreeView *treeview,
+                                   GParamSpec *pspec,
+                                   gpointer NULL_data)
+{
+	GtkTreeModel *model;
+
+	model = gtk_tree_view_get_model (treeview);
+	if (model && !EGG_IS_TREE_MULTI_DRAG_SOURCE (model)) {
+		GType type;
+
+		type = G_OBJECT_TYPE (model);
+		brasero_enable_multi_DND_for_model_type (type);
+	}
+}
+
 void
 brasero_file_chooser_customize (GtkWidget *widget, gpointer null_data)
 {
@@ -141,8 +245,23 @@ brasero_file_chooser_customize (GtkWidget *widget, gpointer null_data)
 
 		if (found
 		&&  gtk_tree_selection_get_mode (gtk_tree_view_get_selection (GTK_TREE_VIEW (widget))) == GTK_SELECTION_MULTIPLE) {
-			gtk_tree_view_set_rubber_banding (GTK_TREE_VIEW (widget), TRUE);
+			GtkTreeModel *model;
+
+			/* This is done because GtkFileChooser does not use a
+			 * GtkListStore or GtkTreeStore any more. */
 			egg_tree_multi_drag_add_drag_support (GTK_TREE_VIEW (widget));
+			model = gtk_tree_view_get_model (GTK_TREE_VIEW (widget));
+			if (model) {
+				GType type;
+
+				type = G_OBJECT_TYPE (model);
+				brasero_enable_multi_DND_for_model_type (type);
+			}
+			else
+				g_signal_connect (widget,
+				                  "notify::model",
+				                  G_CALLBACK (brasero_file_chooser_notify_model),
+				                  NULL);
 		}
 	}
 	else if (GTK_IS_BUTTON (widget)) {
@@ -162,7 +281,7 @@ brasero_file_chooser_customize (GtkWidget *widget, gpointer null_data)
 			GtkWidget *parent;
 
 			/* This is to avoid having the left part too small */
-			parent = widget->parent;
+			parent = gtk_widget_get_parent (widget);
 			width = parent->requisition.width;
 			height = parent->requisition.height;
 			gtk_widget_size_request (parent, &request);
@@ -189,7 +308,13 @@ brasero_file_chooser_customize (GtkWidget *widget, gpointer null_data)
 					 TRUE,
 					 TRUE);
 			g_object_unref (left);
+
+			g_signal_connect (widget,
+			                  "size-allocate",
+			                  G_CALLBACK (brasero_file_chooser_allocation_changed),
+			                  NULL);
 		}
+
 		gtk_container_foreach (GTK_CONTAINER (widget),
 				       brasero_file_chooser_customize,
 				       NULL);

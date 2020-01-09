@@ -10,6 +10,7 @@ INCLUDES = \
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED)						\
 	$(BRASERO_GLIB_CFLAGS)						\
+	$(BRASERO_GMODULE_EXPORT_CFLAGS)					\
 	$(BRASERO_GIO_CFLAGS)						\
 	$(BRASERO_GTK_CFLAGS)
 
@@ -35,11 +36,12 @@ libbraseromediainclude_HEADERS =	\
 	brasero-medium-selection.h	\
 	brasero-drive-selection.h
 
-libbrasero_media_la_LIBADD =					\
-	$(BRASERO_GLIB_LIBS)					\
-	$(BRASERO_GTHREAD_LIBS)				\
-	$(BRASERO_GIO_LIBS)					\
-	$(BRASERO_GTK_LIBS)					\
+libbrasero_media_la_LIBADD =                                     \
+	$(BRASERO_GLIB_LIBS)                                     \
+	$(BRASERO_GMODULE_EXPORT_LIBS)                                     \
+	$(BRASERO_GTHREAD_LIBS)                                     \
+	$(BRASERO_GIO_LIBS)                                     \
+	$(BRASERO_GTK_LIBS)                                     \
 	$(BRASERO_SCSI_LIBS)
 
 libbrasero_media_la_LDFLAGS =					\
@@ -94,7 +96,6 @@ libbrasero_media_la_SOURCES =		\
 	scsi-read-cd.h	\
 	scsi-read-cd.c	\
 	scsi-device.h         \
-	scsi-eject.c         \
 	scsi-mech-status.c         \
 	scsi-mech-status.h         \
 	scsi-write-page.h         \
@@ -150,12 +151,43 @@ if HAVE_USCSI_H
 libbrasero_media_la_SOURCES += scsi-uscsi.c
 endif
 
+if HAVE_INTROSPECTION
+girdir = $(INTROSPECTION_GIRDIR)
+gir_DATA = BraseroMedia-1.0.gir
+
+typelibsdir = $(INTROSPECTION_TYPELIBDIR)
+typelibs_DATA = BraseroMedia-1.0.typelib
+
+BraseroMedia-1.0.gir: libbrasero-media.la $(INTROSPECTION_SCANNER)
+	$(INTROSPECTION_SCANNER) -v --namespace=BraseroMedia --nsversion=1.0 \
+            --include=Gtk-2.0 \
+	    -I$(top_srcdir)/libbrasero-media	\
+	    --library=brasero-media \
+	    --libtool="$(LIBTOOL)" \
+            --output $@ \
+            --pkg=gtk+-2.0  \
+	    --strip-prefix=Brasero	\
+            $(top_srcdir)/libbrasero-media/brasero-drive.h			\
+	    $(top_srcdir)/libbrasero-media/brasero-medium-monitor.h		\
+	    $(top_builddir)/libbrasero-media/brasero-media.h			\
+	    $(top_srcdir)/libbrasero-media/brasero-units.h			\
+	    $(top_srcdir)/libbrasero-media/brasero-medium.h			\
+	    $(top_srcdir)/libbrasero-media/brasero-volume.h		\
+	    $(top_srcdir)/libbrasero-media/brasero-medium-selection.h	\
+	    $(top_srcdir)/libbrasero-media/brasero-drive-selection.h	\
+            $(top_srcdir)/libbrasero-media/*.c	    
+
+BraseroMedia-1.0.typelib: $(gir_DATA) $(INTROSPECTION_COMPILER)
+	$(INTROSPECTION_COMPILER) $(top_builddir)/libbrasero-media/$(gir_DATA) --shared-library=libbrasero-media -o $(typelibs_DATA)
+endif
+
 EXTRA_DIST =			\
 	libbrasero-marshal.list
 #	libbrasero-media.symbols
 
 CLEANFILES =			\
-	$(RECMARSHALFILES)
-	
+	$(RECMARSHALFILES)  \
+	$(gir_DATA)         \
+	$(typelibs_DATA)
 
 -include $(top_srcdir)/git.mk

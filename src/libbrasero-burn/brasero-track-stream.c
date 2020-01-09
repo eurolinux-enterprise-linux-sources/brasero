@@ -69,6 +69,10 @@ brasero_track_stream_set_source_real (BraseroTrackStream *track,
 		g_free (priv->uri);
 
 	priv->uri = g_strdup (uri);
+
+	/* Since that's a new URI chances are, the end point is different */
+	priv->end = 0;
+
 	return BRASERO_BURN_OK;
 }
 
@@ -77,7 +81,10 @@ brasero_track_stream_set_source_real (BraseroTrackStream *track,
  * @track: a #BraseroTrackStream
  * @uri: a #gchar
  *
- * Sets the stream (song or video) uri. 
+ * Sets the stream (song or video) uri.
+ *
+ * Note: it resets the end point of the track to 0 but keeps start point and gap
+ * unchanged.
  *
  * Return value: a #BraseroBurnResult. BRASERO_BURN_OK if it is successful.
  **/
@@ -403,7 +410,7 @@ brasero_track_stream_get_status (BraseroTrack *track,
 	return BRASERO_BURN_OK;
 }
 
-static BraseroTrackDataType
+static BraseroBurnResult
 brasero_track_stream_get_track_type (BraseroTrack *track,
 				     BraseroTrackType *type)
 {
@@ -411,13 +418,10 @@ brasero_track_stream_get_track_type (BraseroTrack *track,
 
 	priv = BRASERO_TRACK_STREAM_PRIVATE (track);
 
-	if (!type)
-		return BRASERO_TRACK_TYPE_STREAM;
-
 	brasero_track_type_set_has_stream (type);
 	brasero_track_type_set_stream_format (type, priv->format);
 
-	return BRASERO_TRACK_TYPE_STREAM;
+	return BRASERO_BURN_OK;
 }
 
 static void

@@ -43,7 +43,8 @@ void
 brasero_plugin_set_active (BraseroPlugin *plugin, gboolean active);
 
 gboolean
-brasero_plugin_get_active (BraseroPlugin *plugin);
+brasero_plugin_get_active (BraseroPlugin *plugin,
+                           gboolean ignore_errors);
 
 const gchar *
 brasero_plugin_get_name (BraseroPlugin *plugin);
@@ -69,54 +70,23 @@ brasero_plugin_get_icon_name (BraseroPlugin *plugin);
 gchar *
 brasero_plugin_get_gconf_priority_key (BraseroPlugin *plugin);
 
-const gchar *
-brasero_plugin_get_error (BraseroPlugin *plugin);
+typedef struct _BraseroPluginError BraseroPluginError;
+struct _BraseroPluginError {
+	BraseroPluginErrorType type;
+	gchar *detail;
+};
+
+GSList *
+brasero_plugin_get_errors (BraseroPlugin *plugin);
+
+gchar *
+brasero_plugin_get_error_string (BraseroPlugin *plugin);
 
 gboolean
 brasero_plugin_get_compulsory (BraseroPlugin *plugin);
 
 guint
 brasero_plugin_get_priority (BraseroPlugin *plugin);
-
-gboolean
-brasero_plugin_check_image_flags (BraseroPlugin *plugin,
-				  BraseroMedia media,
-				  BraseroBurnFlag current);
-gboolean
-brasero_plugin_check_blank_flags (BraseroPlugin *plugin,
-				  BraseroMedia media,
-				  BraseroBurnFlag current);
-gboolean
-brasero_plugin_check_record_flags (BraseroPlugin *plugin,
-				   BraseroMedia media,
-				   BraseroBurnFlag current);
-gboolean
-brasero_plugin_check_media_restrictions (BraseroPlugin *plugin,
-					 BraseroMedia media);
-
-gboolean
-brasero_plugin_get_image_flags (BraseroPlugin *plugin,
-			        BraseroMedia media,
-				BraseroBurnFlag current,
-			        BraseroBurnFlag *supported,
-			        BraseroBurnFlag *compulsory);
-gboolean
-brasero_plugin_get_blank_flags (BraseroPlugin *plugin,
-				BraseroMedia media,
-				BraseroBurnFlag current,
-				BraseroBurnFlag *supported,
-				BraseroBurnFlag *compulsory);
-gboolean
-brasero_plugin_get_record_flags (BraseroPlugin *plugin,
-				 BraseroMedia media,
-				 BraseroBurnFlag current,
-				 BraseroBurnFlag *supported,
-				 BraseroBurnFlag *compulsory);
-
-gboolean
-brasero_plugin_get_process_flags (BraseroPlugin *plugin,
-				  BraseroPluginProcessFlag *flags);
-
 
 /** 
  * This is to find out what are the capacities of a plugin 

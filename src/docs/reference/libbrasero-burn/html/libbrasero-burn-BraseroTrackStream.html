@@ -6,19 +6,15 @@
 <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
 <link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="prev" href="libbrasero-burn-BraseroTrackDataCfg.html" title="BraseroTrackDataCfg">
+<link rel="prev" href="libbrasero-burn-brasero-track-data-cfg.html" title="BraseroTrackDataCfg">
 <link rel="next" href="libbrasero-burn-BraseroTrackStreamCfg.html" title="BraseroTrackStreamCfg">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
 <tr valign="middle">
-<td><a accesskey="p" href="libbrasero-burn-BraseroTrackDataCfg.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="p" href="libbrasero-burn-brasero-track-data-cfg.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
 <td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
 <td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
 <th width="100%" align="center">Libbrasero-burn Reference Manual</th>
@@ -41,24 +37,24 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-burn-BraseroTrackStream.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">                    <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a>;
-<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> * <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-new">brasero_track_stream_new</a>           (void);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-source">brasero_track_stream_set_source</a>     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *uri);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-format">brasero_track_stream_set_format</a>     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a> format);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-boundaries">brasero_track_stream_set_boundaries</a> (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> start,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> end,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> gap);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-source">brasero_track_stream_get_source</a>     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> uri);
-<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-length">brasero_track_stream_get_length</a>     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *length);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-start">brasero_track_stream_get_start</a>      (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-end">brasero_track_stream_get_end</a>        (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-gap">brasero_track_stream_get_gap</a>        (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);
-<a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>  <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-format">brasero_track_stream_get_format</a>    (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);
+<pre class="synopsis">                    <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream">BraseroTrackStream</a>;
+<a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="returnvalue">BraseroTrackStream</span></a> * <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-new" title="brasero_track_stream_new ()">brasero_track_stream_new</a>           (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-source" title="brasero_track_stream_set_source ()">brasero_track_stream_set_source</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-format" title="brasero_track_stream_set_format ()">brasero_track_stream_set_format</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a> format</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-boundaries" title="brasero_track_stream_set_boundaries ()">brasero_track_stream_set_boundaries</a> (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> start</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> end</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> gap</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-source" title="brasero_track_stream_get_source ()">brasero_track_stream_get_source</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> uri</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-length" title="brasero_track_stream_get_length ()">brasero_track_stream_get_length</a>     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *length</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-start" title="brasero_track_stream_get_start ()">brasero_track_stream_get_start</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-end" title="brasero_track_stream_get_end ()">brasero_track_stream_get_end</a>        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-gap" title="brasero_track_stream_get_gap ()">brasero_track_stream_get_gap</a>        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);
+<a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="returnvalue">BraseroStreamFormat</span></a>  <a class="link" href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-format" title="brasero_track_stream_get_format ()">brasero_track_stream_get_format</a>    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -80,18 +76,19 @@
 <hr>
 <div class="refsect2" title="brasero_track_stream_new ()">
 <a name="brasero-track-stream-new"></a><h3>brasero_track_stream_new ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> * brasero_track_stream_new           (void);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="returnvalue">BraseroTrackStream</span></a> * brasero_track_stream_new           (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> object.
+Creates a new <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> object.
 </p>
 <p>
 This type of tracks is used to burn audio or
-video files.</p>
+video files.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> object.
+<td> a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> object.
 </td>
 </tr></tbody>
 </table></div>
@@ -99,26 +96,31 @@ video files.</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_set_source ()">
 <a name="brasero-track-stream-set-source"></a><h3>brasero_track_stream_set_source ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_stream_set_source     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *uri);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_track_stream_set_source     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>);</pre>
 <p>
-Sets the stream (song or video) uri.</p>
+Sets the stream (song or video) uri.
+</p>
+<p>
+Note: it resets the end point of the track to 0 but keeps start point and gap
+unchanged.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
 </td>
 </tr>
 </tbody>
@@ -127,26 +129,27 @@ Sets the stream (song or video) uri.</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_set_format ()">
 <a name="brasero-track-stream-set-format"></a><h3>brasero_track_stream_set_format ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_stream_set_format     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a> format);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_track_stream_set_format     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a> format</code></em>);</pre>
 <p>
-Sets the format of the stream.</p>
+Sets the format of the stream.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
 </td>
 </tr>
 </tbody>
@@ -155,39 +158,40 @@ Sets the format of the stream.</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_set_boundaries ()">
 <a name="brasero-track-stream-set-boundaries"></a><h3>brasero_track_stream_set_boundaries ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_stream_set_boundaries (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> start,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> end,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a> gap);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_track_stream_set_boundaries (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> start</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> end</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> gap</code></em>);</pre>
 <p>
 Sets the boundaries of the stream (where it starts, ends in the file;
-how long is the gap with the next track) in nano seconds.</p>
+how long is the gap with the next track) in nano seconds.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>start</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>end</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>gap</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> or -1 to ignore
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.
 </td>
 </tr>
 </tbody>
@@ -196,27 +200,28 @@ how long is the gap with the next track) in nano seconds.</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_source ()">
 <a name="brasero-track-stream-get-source"></a><h3>brasero_track_stream_get_source ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             brasero_track_stream_get_source     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> uri);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *             brasero_track_stream_get_source     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a> uri</code></em>);</pre>
 <p>
 This function returns the path or the URI (if <em class="parameter"><code>uri</code></em> is TRUE)
-of the stream (song or video file).</p>
+of the stream (song or video file).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>uri</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>.
 </td>
 </tr>
 </tbody>
@@ -225,28 +230,29 @@ of the stream (song or video file).</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_length ()">
 <a name="brasero-track-stream-get-length"></a><h3>brasero_track_stream_get_length ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_stream_get_length     (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track,
-                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *length);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>   brasero_track_stream_get_length     (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>,
+                                                         <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *length</code></em>);</pre>
 <p>
 This function returns the length of the stream (in nano seconds)
 taking into account the start and end time as well as the length
-of the gap. It stores it in <em class="parameter"><code>length</code></em>.</p>
+of the gap. It stores it in <em class="parameter"><code>length</code></em>.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>length</code></em> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
+<td>a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if <em class="parameter"><code>length</code></em> was set.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if <em class="parameter"><code>length</code></em> was set.
 </td>
 </tr>
 </tbody>
@@ -255,20 +261,21 @@ of the gap. It stores it in <em class="parameter"><code>length</code></em>.</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_start ()">
 <a name="brasero-track-stream-get-start"></a><h3>brasero_track_stream_get_start ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             brasero_track_stream_get_start      (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             brasero_track_stream_get_start      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);</pre>
 <p>
-This function returns start time in the stream (in nano seconds).</p>
+This function returns start time in the stream (in nano seconds).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
 </td>
 </tr>
 </tbody>
@@ -277,20 +284,21 @@ This function returns start time in the stream (in nano seconds).</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_end ()">
 <a name="brasero-track-stream-get-end"></a><h3>brasero_track_stream_get_end ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             brasero_track_stream_get_end        (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             brasero_track_stream_get_end        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);</pre>
 <p>
-This function returns end time in the stream (in nano seconds).</p>
+This function returns end time in the stream (in nano seconds).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
 </td>
 </tr>
 </tbody>
@@ -299,20 +307,21 @@ This function returns end time in the stream (in nano seconds).</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_gap ()">
 <a name="brasero-track-stream-get-gap"></a><h3>brasero_track_stream_get_gap ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             brasero_track_stream_get_gap        (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="returnvalue">guint64</span></a>             brasero_track_stream_get_gap        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);</pre>
 <p>
-This function returns length of the gap (in nano seconds).</p>
+This function returns length of the gap (in nano seconds).
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
 </td>
 </tr>
 </tbody>
@@ -321,20 +330,21 @@ This function returns length of the gap (in nano seconds).</p>
 <hr>
 <div class="refsect2" title="brasero_track_stream_get_format ()">
 <a name="brasero-track-stream-get-format"></a><h3>brasero_track_stream_get_format ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>  brasero_track_stream_get_format    (<a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream">BraseroTrackStream</a> *track);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="returnvalue">BraseroStreamFormat</span></a>  brasero_track_stream_get_format    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a> *track</code></em>);</pre>
 <p>
-This function returns the format of the stream.</p>
+This function returns the format of the stream.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream" title="BraseroTrackStream"><span class="type">BraseroTrackStream</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>.
+<td> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>.
 </td>
 </tr>
 </tbody>
@@ -344,6 +354,6 @@ This function returns the format of the stream.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

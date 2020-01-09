@@ -44,11 +44,18 @@
 #include "brasero-units.h"
 #include "burn-job.h"
 #include "brasero-plugin-registration.h"
-#include "burn-uri.h"
 
 #include "brasero-track.h"
 #include "brasero-track-data.h"
 #include "brasero-track-image.h"
+
+
+#define BRASERO_TYPE_BURN_URI         (brasero_burn_uri_get_type ())
+#define BRASERO_BURN_URI(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_BURN_URI, BraseroBurnURI))
+#define BRASERO_BURN_URI_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_BURN_URI, BraseroBurnURIClass))
+#define BRASERO_IS_BURN_URI(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_BURN_URI))
+#define BRASERO_IS_BURN_URI_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_BURN_URI))
+#define BRASERO_BURN_URI_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_BURN_URI, BraseroBurnURIClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroBurnURI, brasero_burn_uri, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -491,7 +498,7 @@ brasero_burn_uri_thread (gpointer data)
 	grafts = g_slist_reverse (grafts);
 
 	/* remove all excluded starting by burn:// from the list */
-	for (src = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (current), FALSE); src; src = src->next) {
+	for (src = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (current)); src; src = src->next) {
 		gchar *uri;
 
 		uri = src->data;
@@ -727,8 +734,8 @@ brasero_burn_uri_init (BraseroBurnURI *obj)
 	priv->cond = g_cond_new ();
 }
 
-static BraseroBurnResult
-brasero_burn_uri_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_burn_uri_export_caps (BraseroPlugin *plugin)
 {
 	GSList *caps;
 
@@ -737,7 +744,7 @@ brasero_burn_uri_export_caps (BraseroPlugin *plugin, gchar **error)
 				* which will be translated only when it needs
 				* displaying. */
 			       N_("CD/DVD Creator Folder"),
-			       _("Allows to burn files added to \"CD/DVD Creator Folder\" in Nautilus"),
+			       _("Allows files added to the \"CD/DVD Creator Folder\" in Nautilus to be burned"),
 			       "Philippe Rouquier",
 			       11);
 
@@ -751,6 +758,4 @@ brasero_burn_uri_export_caps (BraseroPlugin *plugin, gchar **error)
 	g_slist_free (caps);
 
 	brasero_plugin_set_process_flags (plugin, BRASERO_PLUGIN_RUN_PREPROCESSING);
-
-	return BRASERO_BURN_OK;
 }

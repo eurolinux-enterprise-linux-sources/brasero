@@ -80,8 +80,8 @@ static ItemDescription items [] = {
 	"media-optical-data-new",
 	BRASERO_PROJECT_TYPE_DATA},
        {N_("_Video project"),
-	N_("Create a video DVD or a SVCD"),
-	N_("Create a video DVD or a SVCD that are readable on TV readers"),
+	N_("Create a video DVD or an SVCD"),
+	N_("Create a video DVD or an SVCD that are readable on TV readers"),
 	"media-optical-video-new",
 	BRASERO_PROJECT_TYPE_VIDEO},
        {N_("Disc _copy"),
@@ -304,7 +304,7 @@ brasero_project_type_chooser_build_recent (BraseroProjectTypeChooser *self,
 				  self);
 
 		gtk_widget_show (link);
-		gtk_widget_set_tooltip_text (link, _("Load the last project that was not burnt and not saved"));
+		gtk_widget_set_tooltip_text (link, _("Load the last project that was not burned and not saved"));
 		gtk_box_pack_start (GTK_BOX (self->priv->recent_box), link, FALSE, TRUE, 0);
 
 		gtk_size_group_add_widget (group, link);
@@ -550,18 +550,18 @@ brasero_project_type_expose_event (GtkWidget *widget, GdkEventExpose *event)
 
 	chooser = BRASERO_PROJECT_TYPE_CHOOSER (widget);
 
-	if (GTK_WIDGET_DRAWABLE (widget))
+	if (gtk_widget_is_drawable (widget))
 	{
 		(* GTK_WIDGET_CLASS (parent_class)->expose_event) (widget, event);
 
-		if (!GTK_WIDGET_NO_WINDOW (widget)) {
-			if (!GTK_WIDGET_APP_PAINTABLE (widget)
+		if (gtk_widget_get_has_window (widget)) {
+			if (!gtk_widget_get_app_paintable (widget)
 			&&  chooser->priv->background) {
 				int width, offset = 150;
 
 				width = gdk_pixbuf_get_width (chooser->priv->background);
-				gdk_draw_pixbuf (widget->window,
-					         widget->style->white_gc,
+				gdk_draw_pixbuf (gtk_widget_get_window (widget),
+					         gtk_widget_get_style (widget)->white_gc,
 						 chooser->priv->background,
 						 offset,
 						 0,

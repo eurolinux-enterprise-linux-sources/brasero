@@ -36,6 +36,8 @@
 
 #include "brasero-media-private.h"
 
+#include "scsi-mmc2.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -176,6 +178,7 @@ brasero_mmc2_get_configuration_feature (BraseroDeviceHandle *handle,
 	BraseroScsiResult res;
 	int hdr_size = 0;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 	g_return_val_if_fail (data != NULL, BRASERO_SCSI_FAILURE);
 	g_return_val_if_fail (size != NULL, BRASERO_SCSI_FAILURE);
 
@@ -209,6 +212,7 @@ brasero_mmc2_get_profile (BraseroDeviceHandle *handle,
 	BraseroGetConfigCDB *cdb;
 	BraseroScsiResult res;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 	g_return_val_if_fail (profile != NULL, BRASERO_SCSI_FAILURE);
 
 	cdb = brasero_scsi_command_new (&info, handle);

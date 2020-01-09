@@ -55,6 +55,7 @@ G_BEGIN_DECLS
 #define BRASERO_TRACK_STREAM_TITLE_TAG			"track::stream::info::title"
 #define BRASERO_TRACK_STREAM_COMPOSER_TAG		"track::stream::info::composer"
 #define BRASERO_TRACK_STREAM_ARTIST_TAG			"track::stream::info::artist"
+#define BRASERO_TRACK_STREAM_ALBUM_TAG			"track::stream::info::album"
 #define BRASERO_TRACK_STREAM_THUMBNAIL_TAG		"track::stream::snapshot"
 #define BRASERO_TRACK_STREAM_MIME_TAG			"track::stream::mime"
 
@@ -84,7 +85,8 @@ G_BEGIN_DECLS
 /**
  * Define the audio streams for a DVD
  */
-#define BRASERO_DVD_STREAM_FORMAT		"session::DVD::stream::format"
+#define BRASERO_DVD_STREAM_FORMAT		"session::DVD::stream::format"			/* Int */
+#define BRASERO_SESSION_STREAM_AUDIO_FORMAT	"session::stream::audio::format"	/* Int */
 
 /**
  * Define the format: whether VCD or SVCD

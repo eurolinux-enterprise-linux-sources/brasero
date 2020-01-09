@@ -87,13 +87,13 @@ brasero_medium_properties_drive_properties (BraseroMediumProperties *self)
 	medium_prop = brasero_drive_properties_new (BRASERO_SESSION_CFG (priv->session));
 	gtk_widget_show (medium_prop);
 
-	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
-
 	drive = brasero_burn_session_get_burner (priv->session);
 	display_name = brasero_drive_get_display_name (drive);
+
 	header = g_strdup_printf (_("Properties of %s"), display_name);
 	g_free (display_name);
 
+	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (self));
 	dialog = gtk_dialog_new_with_buttons (header,
 					      GTK_WINDOW (toplevel),
 					      GTK_DIALOG_MODAL|
@@ -102,6 +102,9 @@ brasero_medium_properties_drive_properties (BraseroMediumProperties *self)
 					      GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
 					      NULL);
 	g_free (header);
+
+	gtk_window_set_icon_name (GTK_WINDOW (dialog),
+	                          gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
 
 	box = gtk_dialog_get_content_area (GTK_DIALOG (dialog));
 	gtk_box_pack_start (GTK_BOX (box), medium_prop, TRUE, TRUE, 0);
@@ -133,6 +136,8 @@ brasero_medium_properties_wrong_extension (BraseroSessionCfg *session,
 					 GTK_BUTTONS_NONE,
 					 _("Do you really want to keep the current extension for the disc image name?"));
 
+	gtk_window_set_icon_name (GTK_WINDOW (dialog),
+	                          gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
 		
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("If you choose to keep it, programs may not be able to recognize the file type properly."));
@@ -173,6 +178,9 @@ brasero_medium_properties_image_properties (BraseroMediumProperties *self)
 	gtk_window_set_transient_for (GTK_WINDOW (priv->medium_prop), GTK_WINDOW (toplevel));
 	gtk_window_set_destroy_with_parent (GTK_WINDOW (priv->medium_prop), TRUE);
 	gtk_window_set_position (GTK_WINDOW (toplevel), GTK_WIN_POS_CENTER_ON_PARENT);
+
+	gtk_window_set_icon_name (GTK_WINDOW (priv->medium_prop),
+	                          gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
 
 	/* and here we go ... run the thing */
 	gtk_widget_show (priv->medium_prop);

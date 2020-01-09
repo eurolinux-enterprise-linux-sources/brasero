@@ -55,11 +55,18 @@
 #include "burn-process.h"
 #include "brasero-plugin-registration.h"
 #include "burn-cdrtools.h"
-#include "burn-cdrecord.h"
 
 #include "brasero-tags.h"
 #include "brasero-track-image.h"
 #include "brasero-track-stream.h"
+
+
+#define BRASERO_TYPE_CD_RECORD         (brasero_cdrecord_get_type ())
+#define BRASERO_CD_RECORD(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_CD_RECORD, BraseroCDRecord))
+#define BRASERO_CD_RECORD_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_CD_RECORD, BraseroCDRecordClass))
+#define BRASERO_IS_CD_RECORD(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_CD_RECORD))
+#define BRASERO_IS_CD_RECORD_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_CD_RECORD))
+#define BRASERO_CD_RECORD_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_CD_RECORD, BraseroCDRecordClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroCDRecord, brasero_cdrecord, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -107,13 +114,13 @@ brasero_cdrecord_stderr_read (BraseroProcess *process, const gchar *line)
 						BRASERO_BURN_ERROR_MEDIUM_SPACE,
 						_("Not enough space available on the disc")));
 	}
-	else if (strstr (line ,"cdrecord: A write error occured")
+	else if (strstr (line ,"cdrecord: A write error occurred")
 	     ||  strstr (line, "Could not write Lead-in")
 	     ||  strstr (line, "Cannot fixate disk")) {
 		brasero_job_error (BRASERO_JOB (process),
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_WRITE_MEDIUM,
-						_("An error occured while writing to disc")));
+						_("An error occurred while writing to disc")));
 	}
 	else if (strstr (line, "DMA speed too slow") != NULL) {
 		brasero_job_error (BRASERO_JOB (process),
@@ -196,13 +203,13 @@ brasero_cdrecord_stderr_read (BraseroProcess *process, const gchar *line)
 	**/
 
 	/** For these we'd rather have a message saying "cdrecord failed"
-	 *  as an internal error occured says nothing/even less
+	 *  as an internal error occurred says nothing/even less
 	else if (strstr (line, "Bad file descriptor. read error on input file")
 	     ||  strstr (line, "Input buffer error, aborting")) {
 		brasero_job_error (BRASERO_JOB (process),
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_GENERAL,
-						_("An internal error occured")));
+						_("An internal error occurred")));
 	}
 
 	**/
@@ -253,6 +260,33 @@ brasero_cdrecord_compute (BraseroCDRecord *cdrecord,
 	g_free (action_string);
 }
 
+static void
+brasero_cdrecord_set_rate (BraseroProcess *process,
+                           int speed_1,
+                           int speed_2)
+{
+	gdouble current_rate = -1.0;
+	BraseroMedia media;
+
+	if (brasero_job_get_media (BRASERO_JOB (process), &media) != BRASERO_BURN_OK)
+		return;
+
+	if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_CD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) CD_RATE;
+	else if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_DVD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) DVD_RATE;
+	else if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_BD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) BD_RATE;
+
+	brasero_job_set_rate (BRASERO_JOB (process), current_rate);
+}
+
 static BraseroBurnResult
 brasero_cdrecord_stdout_read (BraseroProcess *process, const gchar *line)
 {
@@ -266,14 +300,12 @@ brasero_cdrecord_stdout_read (BraseroProcess *process, const gchar *line)
 	priv = BRASERO_CD_RECORD_PRIVATE (cdrecord);
 
 	if (sscanf (line, "Track %2u: %d of %d MB written (fifo %d%%) [buf %d%%] %d.%dx.",
-		    &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7) {
-		gdouble current_rate;
+		    &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7 ||
+	    /* This is for DVD+R */
+	    sscanf (line, "Track %2u:    %d of %d MB written (fifo  %d%%) [buf  %d%%] |%*s  %*s|   %d.%dx.",
+	            &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7) {
 
-		current_rate = (gdouble) ((gdouble) speed_1 +
-			       (gdouble) speed_2 / 10.0) *
-			       (gdouble) CD_RATE;
-		brasero_job_set_rate (BRASERO_JOB (cdrecord), current_rate);
-
+		brasero_cdrecord_set_rate (process, speed_1, speed_2);
 		priv->current_track_written = (goffset) mb_written * (goffset) 1048576LL;
 		brasero_cdrecord_compute (cdrecord,
 					  mb_written,
@@ -283,15 +315,11 @@ brasero_cdrecord_stdout_read (BraseroProcess *process, const gchar *line)
 		brasero_job_start_progress (BRASERO_JOB (cdrecord), FALSE);
 	} 
 	else if (sscanf (line, "Track %2u:    %d MB written (fifo %d%%) [buf  %d%%]  %d.%dx.",
+			 &track, &mb_written, &fifo, &buf, &speed_1, &speed_2) == 6 ||
+	         sscanf (line, "Track %2u:    %d MB written (fifo %d%%) [buf  %d%%] |%*s  %*s|   %d.%dx.",
 			 &track, &mb_written, &fifo, &buf, &speed_1, &speed_2) == 6) {
-		gdouble current_rate;
 
-		/* this line is printed when cdrecord writes on the fly */
-		current_rate = (gdouble) ((gdouble) speed_1 +
-			       (gdouble) speed_2 / 10.0) *
-			       (gdouble) CD_RATE;
-		brasero_job_set_rate (BRASERO_JOB (cdrecord), current_rate);
-
+				 brasero_cdrecord_set_rate (process, speed_1, speed_2);
 		priv->current_track_written = (goffset) mb_written * (goffset) 1048576LL;
 		if (brasero_job_get_fd_in (BRASERO_JOB (cdrecord), NULL) == BRASERO_BURN_OK) {
 			goffset bytes = 0;
@@ -680,7 +708,7 @@ error:
 	g_set_error (error,
 		     BRASERO_BURN_ERROR,
 		     BRASERO_BURN_ERROR_GENERAL,
-		     _("An internal error occured (%s)"), 
+		     _("An internal error occurred (%s)"), 
 		     g_strerror (errsv));
 
 	return BRASERO_BURN_ERR;
@@ -710,19 +738,31 @@ brasero_cdrecord_write_infs (BraseroCDRecord *cdrecord,
 	for (iter = tracks; iter; iter = iter->next) {
 		goffset sectors;
 		BraseroTrack *track;
+		const gchar *track_inf;
 
 		track = iter->data;
-		result = brasero_cdrecord_write_inf (cdrecord,
-						     argv,
-						     track,
-						     tmpdir,
-						     album,
-						     index,
-						     start,
-						     (iter->next == NULL),
-						     error);
-		if (result != BRASERO_BURN_OK)
-			return result;
+
+		track_inf = brasero_track_tag_lookup_string (track, BRASERO_CDRTOOLS_TRACK_INF_FILE);
+		if (track_inf) {
+			BRASERO_JOB_LOG (cdrecord, "Already existing .inf file");
+
+			/* There is already an .inf file associated with this track */
+			if (argv)
+				g_ptr_array_add (argv, g_strdup (track_inf));
+		}
+		else {
+			result = brasero_cdrecord_write_inf (cdrecord,
+							     argv,
+							     track,
+							     tmpdir,
+							     album,
+							     index,
+							     start,
+							     (iter->next == NULL),
+							     error);
+			if (result != BRASERO_BURN_OK)
+				return result;
+		}
 
 		index ++;
 		sectors = 0;
@@ -797,7 +837,7 @@ brasero_cdrecord_set_argv_record (BraseroCDRecord *cdrecord,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 		
@@ -812,7 +852,7 @@ brasero_cdrecord_set_argv_record (BraseroCDRecord *cdrecord,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 
@@ -841,7 +881,6 @@ brasero_cdrecord_set_argv_record (BraseroCDRecord *cdrecord,
 			}
 		}
 		else if (brasero_track_type_get_has_stream (type)) {
-			g_ptr_array_add (argv, g_strdup ("-swab"));
 			g_ptr_array_add (argv, g_strdup ("-audio"));
 			g_ptr_array_add (argv, g_strdup ("-useinfo"));
 			g_ptr_array_add (argv, g_strdup ("-text"));
@@ -865,7 +904,6 @@ brasero_cdrecord_set_argv_record (BraseroCDRecord *cdrecord,
 
 		g_ptr_array_add (argv, g_strdup ("fs=16m"));
 		g_ptr_array_add (argv, g_strdup ("-audio"));
-		g_ptr_array_add (argv, g_strdup ("-swab"));
 		g_ptr_array_add (argv, g_strdup ("-pad"));
 	
 		g_ptr_array_add (argv, g_strdup ("-useinfo"));
@@ -956,6 +994,10 @@ brasero_cdrecord_set_argv_record (BraseroCDRecord *cdrecord,
 			parent = g_path_get_dirname (cuepath);
 			brasero_process_set_working_directory (BRASERO_PROCESS (cdrecord), parent);
 			g_free (parent);
+
+			/* we need to check endianness */
+			if (brasero_track_image_need_byte_swap (BRASERO_TRACK_IMAGE (track)))
+				g_ptr_array_add (argv, g_strdup ("-swab"));
 
 			g_ptr_array_add (argv, g_strdup ("fs=16m"));
 
@@ -1134,8 +1176,8 @@ brasero_cdrecord_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_cdrecord_export_caps (BraseroPlugin *plugin)
 {
 	BraseroPluginConfOption *immed, *minbuf;
 	const BraseroMedia media = BRASERO_MEDIUM_CD|
@@ -1161,21 +1203,15 @@ brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
 				      BRASERO_MEDIUM_HAS_AUDIO|
 				      BRASERO_MEDIUM_HAS_DATA|
 				      BRASERO_MEDIUM_BLANK;
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	/* NOTE: it seems that cdrecord can burn cue files on the fly */
 	brasero_plugin_define (plugin,
 			       "cdrecord",
-			       _("Use cdrecord to burn CDs and DVDs"),
+			       _("Burns, blanks and formats CDs, DVDs and BDs"),
 			       "Philippe Rouquier",
 			       1);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("cdrecord", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	/* for recording */
 	input = brasero_caps_image_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
@@ -1195,7 +1231,6 @@ brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
 					BRASERO_PLUGIN_IO_ACCEPT_FILE,
 					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100|
 					BRASERO_METADATA_INFO);
 
 	brasero_plugin_link_caps (plugin, output, input);
@@ -1203,8 +1238,7 @@ brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
 					BRASERO_PLUGIN_IO_ACCEPT_FILE,
-					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100);
+					BRASERO_AUDIO_FORMAT_RAW);
 
 	brasero_plugin_link_caps (plugin, output, input);
 	g_slist_free (output);
@@ -1388,10 +1422,10 @@ brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	/* add some configure options */
 	immed = brasero_plugin_conf_option_new (GCONF_KEY_IMMEDIATE_FLAG,
-						_("Enable \"-immed\" flag (see cdrecord manual)"),
+						_("Enable the \"-immed\" flag (see cdrecord manual)"),
 						BRASERO_PLUGIN_OPTION_BOOL);
 	minbuf = brasero_plugin_conf_option_new (GCONF_KEY_MINBUF_VALUE,
-						 _("Minimum drive buffer fill ratio (in %%)(see cdrecord manual):"),
+						 _("Minimum drive buffer fill ratio (in %%) (see cdrecord manual):"),
 						 BRASERO_PLUGIN_OPTION_INT);
 	brasero_plugin_conf_option_int_set_range (minbuf, 25, 95);
 
@@ -1399,6 +1433,15 @@ brasero_cdrecord_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_add_conf_option (plugin, immed);
 
 	brasero_plugin_register_group (plugin, _(CDRTOOLS_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 2, 0, -1};
+	brasero_plugin_test_app (plugin,
+	                         "cdrecord",
+	                         "--version",
+	                         "Cdrecord-ProDVD-ProBD-Clone %d.%d",
+	                         version);
 }

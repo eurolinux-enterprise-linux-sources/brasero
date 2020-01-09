@@ -237,7 +237,14 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Aquesta finestra és el punt d'inici de tots els vostres projectes. Des d'aquí podeu fer clic al tipus de projecte que voleu iniciar. Si heu creat altres projectes amb el <application>Brasero</application>, podreu seleccionar-los des de l'entrada de menú <guilabel>Seleccioneu un projecte obert recentment</guilabel> (per a obtenir més informació vegeu la <xref linkend="brasero-open-recent-project"/>).</para>
+    <para>
+	This window is the starting point for all of your projects.
+	You can click on the project type you wish to start from here.
+	If you have created other projects with <application>Brasero</application>, you will be
+	able to select them from the <guilabel>Recent
+	projects</guilabel> (see <xref linkend="brasero-open-recent-project"/> for more
+	information).
+      </para>
     </sect2>
   </sect1>
 
@@ -656,7 +663,13 @@
 	</para>
 	<para>
 	  <note>
-	    <para>Si teniu més d'una unitat al sistema, podeu utilitzar-ne una com a unitat font i l'altra com a unitat de destinació. Si no ho feu, se us sol·licitarà que expulseu el CD o DVD que esteu copiant i que inseriu un suport verge.</para>
+	    <para>
+	      If you have more than one drive on your system, you can
+	      use one drive as the source drive and the other as the
+	      destination drive. If you do not, you will be prompted
+	      to remove the CD or DVD you are copying and insert a
+	      blank media.
+	    </para>
 	  </note>
 	</para>
       </sect3>
@@ -860,7 +873,11 @@
 	  <para>Trieu <menuchoice><guimenu>Projecte</guimenu><guisubmenu>Projectes recents</guisubmenu></menuchoice> i seleccioneu el projecte que vulgueu obrir.</para>
 	</listitem>
 	<listitem>
-	  <para>Des de la finestra principal, feu clic al projecte que vulgueu obrir sota <guilabel>Seleccioneu un projecte obert recentment</guilabel>.</para>
+	  <para>
+	    From the main window, click on the project you want to open
+	    under <guilabel>Recent
+	    projects</guilabel>.
+	  </para>
 	</listitem>
       </itemizedlist></para>
     <para>Per a obrir un projecte que no aparegui a <guilabel>Projectes recents</guilabel>, trieu <menuchoice><guimenu>Projecte</guimenu><guimenuitem>Obre</guimenuitem></menuchoice> i seleccioneu-ne el fitxer de projecte.</para>

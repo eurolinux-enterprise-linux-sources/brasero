@@ -37,11 +37,14 @@
 
 #include <gtk/gtk.h>
 
+#include <canberra-gtk.h>
+
 #include "brasero-misc.h"
 
 #include "burn-basics.h"
 
 #include "brasero-session.h"
+#include "brasero-session-helper.h"
 #include "brasero-burn.h"
 
 #include "burn-plugin-manager.h"
@@ -78,7 +81,7 @@ brasero_blank_dialog_set_button (BraseroBurnSession *session,
 {
 	if (flag & supported) {
 		if (compulsory & flag) {
-			if (GTK_WIDGET_SENSITIVE (button))
+			if (gtk_widget_get_sensitive (button))
 				saved = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
 			gtk_widget_set_sensitive (button, FALSE);
@@ -87,7 +90,7 @@ brasero_blank_dialog_set_button (BraseroBurnSession *session,
 			brasero_burn_session_add_flag (session, flag);
 		}
 		else {
-			if (!GTK_WIDGET_SENSITIVE (button)) {
+			if (!gtk_widget_get_sensitive (button)) {
 				gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (button), saved);
 
 				if (saved)
@@ -100,7 +103,7 @@ brasero_blank_dialog_set_button (BraseroBurnSession *session,
 		}
 	}
 	else {
-		if (GTK_WIDGET_SENSITIVE (button))
+		if (gtk_widget_get_sensitive (button))
 			saved = gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (button));
 
 		gtk_widget_set_sensitive (button, FALSE);
@@ -200,6 +203,7 @@ brasero_blank_dialog_activate (BraseroToolDialog *dialog,
 	priv = BRASERO_BLANK_DIALOG_PRIVATE (self);
 
 	burn = brasero_tool_dialog_get_burn (dialog);
+	brasero_burn_session_start (priv->session);
 	result = brasero_burn_blank (burn,
 				     priv->session,
 				     &error);
@@ -219,6 +223,9 @@ brasero_blank_dialog_activate (BraseroToolDialog *dialog,
 						 * means there was an error while
 						 * blanking. */
 						   _("Error while blanking."));
+
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (GTK_WINDOW (self)));
 
 		button = brasero_utils_make_button (_("Blank _Again"),
 						    NULL,
@@ -259,6 +266,9 @@ brasero_blank_dialog_activate (BraseroToolDialog *dialog,
 						  GTK_BUTTONS_NONE,
 						  _("The disc was successfully blanked."));
 
+		gtk_window_set_icon_name (GTK_WINDOW (message),
+					  gtk_window_get_icon_name (GTK_WINDOW (self)));
+
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 							  _("The disc is ready for use."));
 
@@ -274,6 +284,12 @@ brasero_blank_dialog_activate (BraseroToolDialog *dialog,
 		gtk_dialog_add_button (GTK_DIALOG (message),
 				       GTK_STOCK_CLOSE,
 				       GTK_RESPONSE_CLOSE);
+
+		gtk_widget_show (GTK_WIDGET (message));
+		ca_gtk_play_for_widget (GTK_WIDGET (message), 0,
+					CA_PROP_EVENT_ID, "complete-media-format",
+					CA_PROP_EVENT_DESCRIPTION, _("The disc was successfully blanked."),
+					NULL);
 
 		answer = gtk_dialog_run (GTK_DIALOG (message));
 		gtk_widget_destroy (message);
@@ -387,7 +403,7 @@ brasero_blank_dialog_init (BraseroBlankDialog *obj)
 					   obj);
 
 	priv->fast = gtk_check_button_new_with_mnemonic (_("_Fast blanking"));
-	gtk_widget_set_tooltip_text (priv->fast, _("Activate fast blanking by opposition to a longer thorough blanking"));
+	gtk_widget_set_tooltip_text (priv->fast, _("Activate fast blanking, as opposed to a longer, thorough blanking"));
 	g_signal_connect (priv->fast,
 			  "clicked",
 			  G_CALLBACK (brasero_blank_dialog_fast_toggled),
@@ -400,7 +416,7 @@ brasero_blank_dialog_init (BraseroBlankDialog *obj)
 	brasero_blank_dialog_device_opts_setup (obj);
 
 	/* if fast blank is supported check it by default */
-	if (GTK_WIDGET_IS_SENSITIVE (priv->fast))
+	if (gtk_widget_is_sensitive (priv->fast))
 		gtk_toggle_button_set_active (GTK_TOGGLE_BUTTON (priv->fast), TRUE);
 }
 

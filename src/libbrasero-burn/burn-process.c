@@ -91,55 +91,11 @@ struct _BraseroProcessPrivate {
 
 	guint watch;
 	guint return_status;
+
+	guint process_finished:1;
 };
 
 #define BRASERO_PROCESS_PRIVATE(o)  (G_TYPE_INSTANCE_GET_PRIVATE ((o), BRASERO_TYPE_PROCESS, BraseroProcessPrivate))
-
-static GObjectClass *parent_class = NULL;
-
-/* This is a helper function for plugins at load time */
-
-gboolean
-brasero_process_check_path (const gchar *name,
-			    gchar **error)
-{
-	gchar *prog_path;
-
-	/* First see if this plugin can be used, i.e. if cdrecord is in
-	 * the path */
-	prog_path = g_find_program_in_path (name);
-	if (!prog_path) {
-		*error = g_strdup_printf (_("\"%s\" could not be found in the path"), name);
-		return BRASERO_BURN_ERR;
-	}
-
-	if (!g_file_test (prog_path, G_FILE_TEST_IS_EXECUTABLE)) {
-		g_free (prog_path);
-		*error = g_strdup_printf (_("\"%s\" could not be found in the path"), name);
-		return BRASERO_BURN_ERR;
-	}
-
-	/* make sure that's not a symlink pointing to something with another
-	 * name like wodim.
-	 * NOTE: we used to test the target and see if it had the same name as
-	 * the symlink with GIO. The problem is, when the symlink pointed to
-	 * another symlink, then GIO didn't follow that other symlink. And in
-	 * the end it didn't work. So forbid all symlink. */
-	if (g_file_test (prog_path, G_FILE_TEST_IS_SYMLINK)) {
-		*error = g_strdup_printf (_("\"%s\" is a symbolic link pointing to another program. Use the target program instead"), name);
-		g_free (prog_path);
-		return BRASERO_BURN_ERR;
-	}
-	/* Make sure it's a regular file */
-	else if (!g_file_test (prog_path, G_FILE_TEST_IS_REGULAR)) {
-		*error = g_strdup_printf (_("\"%s\" could not be found in the path"), name);
-		g_free (prog_path);
-		return BRASERO_BURN_ERR;
-	}
-
-	g_free (prog_path);
-	return BRASERO_BURN_OK;
-}
 
 void
 brasero_process_deferred_error (BraseroProcess *self,
@@ -199,60 +155,49 @@ brasero_process_ask_argv (BraseroJob *job,
 	return BRASERO_BURN_OK;
 }
 
-static BraseroBurnResult
-brasero_process_finished (BraseroProcess *self)
+static void
+brasero_process_add_automatic_track (BraseroProcess *self)
 {
 	BraseroBurnResult result;
 	BraseroTrack *track = NULL;
 	BraseroTrackType *type = NULL;
 	BraseroJobAction action = BRASERO_BURN_ACTION_NONE;
 	BraseroProcessPrivate *priv = BRASERO_PROCESS_PRIVATE (self);
-	BraseroProcessClass *klass = BRASERO_PROCESS_GET_CLASS (self);
-	
-	/* check if an error went undetected */
-	if (priv->return_status) {
-		if (priv->error) {
-			brasero_job_error (BRASERO_JOB (self),
-					   g_error_new (BRASERO_BURN_ERROR,
-							BRASERO_BURN_ERROR_GENERAL,
-						        /* Translators: %s is the name of the brasero element */
-							_("Process \"%s\" ended with an error code (%i)"),
-							G_OBJECT_TYPE_NAME (self),
-							priv->return_status));
-		}
-		else {
-			brasero_job_error (BRASERO_JOB (self), priv->error);
-			priv->error = NULL;
-		}
 
-		return BRASERO_BURN_OK;
-	}
-	else if (priv->error) {
-		g_error_free (priv->error);
-		priv->error = NULL;
-	}
+	/* On error, don't automatically add a track */
+	if (priv->return_status)
+		return;
 
-	if (brasero_job_get_fd_out (BRASERO_JOB (self), NULL) == BRASERO_BURN_OK) {
-		klass->post (BRASERO_JOB (self));
-		return BRASERO_BURN_OK;
-	}
+	/* See if the plugin already added some new
+	 * tracks while it was running; if so, don't add it
+	 * automatically */
+	if (brasero_job_get_done_tracks (BRASERO_JOB (self), NULL) == BRASERO_BURN_OK)
+		return;
 
-	/* only for the last running job with imaging action */
+	/* Only the last running job when it images to a
+	 * file should add a track.
+	 * NOTE: the last job in a task is the one that
+	 * does not pipe anything. */
+	if (brasero_job_get_fd_out (BRASERO_JOB (self), NULL) == BRASERO_BURN_OK)
+		return;
+
 	brasero_job_get_action (BRASERO_JOB (self), &action);
-	if (action != BRASERO_JOB_ACTION_IMAGE) {
-		klass->post (BRASERO_JOB (self));
-		return BRASERO_BURN_OK;
-	}
+	if (action != BRASERO_JOB_ACTION_IMAGE)
+		return;
 
+	/* Now add a new track */
 	type = brasero_track_type_new ();
 	result = brasero_job_get_output_type (BRASERO_JOB (self), type);
-
-	if (result != BRASERO_BURN_OK || brasero_track_type_get_has_medium (type)) {
+	if (result != BRASERO_BURN_OK) {
 		brasero_track_type_free (type);
-		klass->post (BRASERO_JOB (self));
-		return BRASERO_BURN_OK;
+		return;
 	}
 
+	BRASERO_JOB_LOG (self, "Automatically adding track");
+
+	/* NOTE: we are only able to handle the two
+	 * following track types. For other ones, the
+	 * plugin is supposed to handle that itself */
 	if (brasero_track_type_get_has_image (type)) {
 		gchar *toc = NULL;
 		gchar *image = NULL;
@@ -294,15 +239,52 @@ brasero_process_finished (BraseroProcess *self)
 		 * need it anymore. BraseroTaskCtx refs it. */
 		g_object_unref (track);
 	}
+}
 
-	klass->post (BRASERO_JOB (self));
-	return BRASERO_BURN_OK;
+static BraseroBurnResult
+brasero_process_finished (BraseroProcess *self)
+{
+	BraseroProcessPrivate *priv = BRASERO_PROCESS_PRIVATE (self);
+	BraseroProcessClass *klass = BRASERO_PROCESS_GET_CLASS (self);
+
+	priv->process_finished = TRUE;
+
+	/* check if an error went undetected */
+	if (priv->return_status) {
+		if (priv->error) {
+			brasero_job_error (BRASERO_JOB (self),
+					   g_error_new (BRASERO_BURN_ERROR,
+							BRASERO_BURN_ERROR_GENERAL,
+						        /* Translators: %s is the name of the brasero element */
+							_("Process \"%s\" ended with an error code (%i)"),
+							G_OBJECT_TYPE_NAME (self),
+							priv->return_status));
+		}
+		else {
+			brasero_job_error (BRASERO_JOB (self), priv->error);
+			priv->error = NULL;
+		}
+
+		return BRASERO_BURN_OK;
+	}
+
+	/* This is a deferred error that is an error that
+	 * was by a plugin and that should be only used
+	 * if the process finishes with a bad return value */
+	if (priv->error) {
+		g_error_free (priv->error);
+		priv->error = NULL;
+	}
+
+	/* Tell the world we're done */
+	return klass->post (BRASERO_JOB (self));
 }
 
 static gboolean
 brasero_process_watch_child (gpointer data)
 {
 	int status;
+	BraseroBurnResult result;
 	BraseroProcessPrivate *priv = BRASERO_PROCESS_PRIVATE (data);
 
 	if (waitpid (priv->pid, &status, WNOHANG) <= 0)
@@ -314,9 +296,33 @@ brasero_process_watch_child (gpointer data)
 	 * error message or simply decide all went well, in one word override */
 	priv->return_status = WEXITSTATUS (status);
 	priv->watch = 0;
+	priv->pid = 0;
 
 	BRASERO_JOB_LOG (data, "process finished with status %i", WEXITSTATUS (status));
-	brasero_process_finished (BRASERO_PROCESS (data));
+
+	result = brasero_process_finished (data);
+	if (result == BRASERO_BURN_RETRY) {
+		GError *error = NULL;
+		BraseroJobClass *job_class;
+
+		priv->process_finished = FALSE;
+
+		job_class = BRASERO_JOB_GET_CLASS (data);
+		if (job_class->stop) {
+			result = job_class->stop (data, &error);
+			if (result != BRASERO_BURN_OK) {
+				brasero_job_error (data, error);
+				return FALSE;
+			}
+		}
+
+		if (job_class->start) {
+			/* we were asked by the plugin to restart it */
+			result = job_class->start (data, &error);
+			if (result != BRASERO_BURN_OK)
+				brasero_job_error (data, error);
+		}
+	}
 
 	return FALSE;
 }
@@ -626,7 +632,9 @@ brasero_process_start (BraseroJob *job, GError **error)
 	read_stdout = (klass->stdout_func &&
 		       brasero_job_get_fd_out (BRASERO_JOB (process), NULL) != BRASERO_BURN_OK);
 
+	priv->process_finished = FALSE;
 	priv->return_status = 0;
+
 	if (!g_spawn_async_with_pipes (priv->working_directory,
 				       (gchar **) priv->argv->pdata,
 				       (gchar **) envp,
@@ -669,24 +677,28 @@ brasero_process_stop (BraseroJob *job,
 	priv = BRASERO_PROCESS_PRIVATE (process);
 
 	if (priv->watch) {
-		/* if the child is still running at this stage that means that
-		 * we were cancelled or that we decided to stop ourselves so
+		/* if the child is still running at this stage 
+		 * that means that we were cancelled or
+		 * that we decided to stop ourselves so
 		 * don't check the returned value */
 		g_source_remove (priv->watch);
 		priv->watch = 0;
 	}
 
-	/* it might happen that the slave detected an error triggered by the master
-	 * BEFORE the master so we finish reading whatever is in the pipes to see: 
-	 * fdsink will notice cdrecord closed the pipe before cdrecord reports it */
+	/* it might happen that the slave detected an
+	 * error triggered by the master BEFORE the
+	 * master so we finish reading whatever is in
+	 * the pipes to see: fdsink will notice cdrecord
+	 * closed the pipe before cdrecord reports it */
 	if (priv->pid) {
 		GPid pid;
 
 		pid = priv->pid;
 		priv->pid = 0;
 
-		/* Reminder: -1 is here to send the signal to all children of
-		 * the process with pid as well */
+		/* Reminder: -1 is here to send the signal
+		 * to all children of the process with pid as
+		 * well */
 		if (pid > 0 && kill ((-1) * pid, SIGTERM) == -1 && errno != ESRCH) {
 			BRASERO_JOB_LOG (process, 
 					 "process (%s) couldn't be killed: terminating",
@@ -787,6 +799,10 @@ brasero_process_stop (BraseroJob *job,
 		priv->error = NULL;
 	}
 
+	/* See if we need to automatically add a track */
+	if (priv->process_finished)
+		brasero_process_add_automatic_track (BRASERO_PROCESS (job));
+
 	return result;
 }
 
@@ -865,7 +881,7 @@ brasero_process_finalize (GObject *object)
 		priv->working_directory = NULL;
 	}
 
-	G_OBJECT_CLASS (parent_class)->finalize (object);
+	G_OBJECT_CLASS (brasero_process_parent_class)->finalize (object);
 }
 
 static void
@@ -876,7 +892,6 @@ brasero_process_class_init (BraseroProcessClass *klass)
 
 	g_type_class_add_private (klass, sizeof (BraseroProcessPrivate));
 
-	parent_class = g_type_class_peek_parent(klass);
 	object_class->finalize = brasero_process_finalize;
 
 	job_class->start = brasero_process_start;

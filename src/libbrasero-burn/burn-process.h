@@ -67,7 +67,7 @@ typedef struct {
 	BraseroBurnResult      	(*post)       	(BraseroJob *job);
 } BraseroProcessClass;
 
-GType brasero_process_get_type();
+GType brasero_process_get_type (void);
 
 /**
  * This function allows to set an error that is used if the process doesn't 
@@ -76,13 +76,6 @@ GType brasero_process_get_type();
 void
 brasero_process_deferred_error (BraseroProcess *process,
 				GError *error);
-
-/**
- * helper function for plugins
- */
-gboolean
-brasero_process_check_path (const gchar *name,
-			    gchar **error);
 
 void
 brasero_process_set_working_directory (BraseroProcess *process,

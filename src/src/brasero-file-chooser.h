@@ -52,8 +52,8 @@ typedef struct {
 	GtkAlignmentClass parent_class;
 } BraseroFileChooserClass;
 
-GType brasero_file_chooser_get_type ();
-GtkWidget *brasero_file_chooser_new ();
+GType brasero_file_chooser_get_type (void);
+GtkWidget *brasero_file_chooser_new (void);
 
 void
 brasero_file_chooser_customize (GtkWidget *widget,

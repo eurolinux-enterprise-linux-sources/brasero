@@ -352,8 +352,21 @@ brasero_video_options_set_session (BraseroVideoOptions *options,
 	if (session) {
 		priv->session = g_object_ref (session);
 		brasero_video_options_update (options);
-		brasero_video_options_update_from_tag (options, BRASERO_VIDEO_OUTPUT_FRAMERATE);
-		brasero_video_options_update_from_tag (options, BRASERO_VIDEO_OUTPUT_ASPECT);
+
+		if (brasero_burn_session_tag_lookup (session, BRASERO_VIDEO_OUTPUT_FRAMERATE, NULL) == BRASERO_BURN_OK)
+			brasero_video_options_update_from_tag (options, BRASERO_VIDEO_OUTPUT_FRAMERATE);
+
+		/* If session has tag update UI otherwise update _from_ UI */
+		if (brasero_burn_session_tag_lookup (session, BRASERO_VIDEO_OUTPUT_ASPECT, NULL) == BRASERO_BURN_OK)
+			brasero_video_options_update_from_tag (options, BRASERO_VIDEO_OUTPUT_ASPECT);
+		else if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->button_4_3)))
+			brasero_burn_session_tag_add_int (priv->session,
+			                                  BRASERO_VIDEO_OUTPUT_ASPECT,
+	        			                  BRASERO_VIDEO_ASPECT_4_3);
+		else
+			brasero_burn_session_tag_add_int (priv->session,
+				                          BRASERO_VIDEO_OUTPUT_ASPECT,
+				                          BRASERO_VIDEO_ASPECT_16_9);
 
 		g_signal_connect (priv->session,
 		                  "output-changed",
@@ -448,7 +461,7 @@ brasero_video_options_init (BraseroVideoOptions *object)
 
 	button1 = gtk_radio_button_new_with_mnemonic (NULL, _("_NTSC"));
 	priv->button_ntsc = button1;
-	gtk_widget_set_tooltip_text (button1, _("Format used mostly on the North American Continent"));
+	gtk_widget_set_tooltip_text (button1, _("Format used mostly on the North American continent"));
 	g_signal_connect (button1,
 			  "toggled",
 			  G_CALLBACK (brasero_video_options_NTSC),
@@ -503,8 +516,7 @@ brasero_video_options_init (BraseroVideoOptions *object)
 			  GTK_FILL,
 			  0, 0);
 
-	button1 = gtk_radio_button_new_with_mnemonic (NULL,
-						      _("_4:3"));
+	button1 = gtk_radio_button_new_with_mnemonic (NULL, _("_4:3"));
 	g_signal_connect (button1,
 			  "toggled",
 			  G_CALLBACK (brasero_video_options_4_3),
@@ -547,7 +559,7 @@ brasero_video_options_init (BraseroVideoOptions *object)
 			  GTK_FILL,
 			  0, 0);
 
-	button1 = gtk_radio_button_new_with_mnemonic_from_widget (NULL, _("Create a SVCD"));
+	button1 = gtk_radio_button_new_with_mnemonic_from_widget (NULL, _("Create an SVCD"));
 	priv->svcd_button = button1;
 	gtk_table_attach (GTK_TABLE (table),
 			  button1,

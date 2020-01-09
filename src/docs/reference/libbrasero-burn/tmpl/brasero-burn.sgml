@@ -17,6 +17,9 @@ BraseroBurn
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroBurn ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroBurn
 
 </para>
 
+@void: 
 @Returns: 
 
 

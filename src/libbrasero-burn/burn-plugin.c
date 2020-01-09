@@ -37,18 +37,23 @@
 #include <glib.h>
 #include <glib-object.h>
 #include <gmodule.h>
+#include <glib/gi18n-lib.h>
+
+#include <gst/gst.h>
 
 #include <gconf/gconf-client.h>
 
 #include "brasero-media-private.h"
 
+#include "brasero-media.h"
+
 #include "burn-basics.h"
 #include "burn-debug.h"
 #include "brasero-plugin.h"
+#include "brasero-plugin-private.h"
 #include "brasero-plugin-information.h"
 #include "brasero-plugin-registration.h"
 #include "burn-caps.h"
-#include "brasero-media.h"
 
 #define BRASERO_PLUGIN_PRIORITY_KEY			"/apps/brasero/config/priority"
 
@@ -91,7 +96,7 @@ struct _BraseroPluginPrivate
 
 	GSList *options;
 
-	gchar *error;
+	GSList *errors;
 
 	GType type;
 	gchar *path;
@@ -137,6 +142,155 @@ enum
 static GTypeModuleClass* parent_class = NULL;
 static guint plugin_signals [LAST_SIGNAL] = { 0 };
 
+static void
+brasero_plugin_error_free (BraseroPluginError *error)
+{
+	g_free (error->detail);
+	g_free (error);
+}
+
+void
+brasero_plugin_add_error (BraseroPlugin *plugin,
+                          BraseroPluginErrorType type,
+                          const gchar *detail)
+{
+	BraseroPluginError *error;
+	BraseroPluginPrivate *priv;
+
+	g_return_if_fail (BRASERO_IS_PLUGIN (plugin));
+
+	priv = BRASERO_PLUGIN_PRIVATE (plugin);
+
+	error = g_new0 (BraseroPluginError, 1);
+	error->detail = g_strdup (detail);
+	error->type = type;
+
+	priv->errors = g_slist_prepend (priv->errors, error);
+}
+
+void
+brasero_plugin_test_gstreamer_plugin (BraseroPlugin *plugin,
+                                      const gchar *name)
+{
+	GstElement *element;
+
+	/* Let's see if we've got the plugins we need */
+	element = gst_element_factory_make (name, NULL);
+	if (!element)
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_MISSING_GSTREAMER_PLUGIN,
+		                          name);
+	else
+		gst_object_unref (element);
+}
+
+void
+brasero_plugin_test_app (BraseroPlugin *plugin,
+                         const gchar *name,
+                         const gchar *version_arg,
+                         const gchar *version_format,
+                         gint version [3])
+{
+	gchar *standard_output = NULL;
+	gchar *standard_error = NULL;
+	guint major, minor, sub;
+	gchar *prog_path;
+	GPtrArray *argv;
+	gboolean res;
+	int i;
+
+	/* First see if this plugin can be used, i.e. if cdrecord is in
+	 * the path */
+	prog_path = g_find_program_in_path (name);
+	if (!prog_path) {
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_MISSING_APP,
+		                          name);
+		return;
+	}
+
+	if (!g_file_test (prog_path, G_FILE_TEST_IS_EXECUTABLE)) {
+		g_free (prog_path);
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_MISSING_APP,
+		                          name);
+		return;
+	}
+
+	/* make sure that's not a symlink pointing to something with another
+	 * name like wodim.
+	 * NOTE: we used to test the target and see if it had the same name as
+	 * the symlink with GIO. The problem is, when the symlink pointed to
+	 * another symlink, then GIO didn't follow that other symlink. And in
+	 * the end it didn't work. So forbid all symlink. */
+	if (g_file_test (prog_path, G_FILE_TEST_IS_SYMLINK)) {
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_SYMBOLIC_LINK_APP,
+		                          name);
+		g_free (prog_path);
+		return;
+	}
+	/* Make sure it's a regular file */
+	else if (!g_file_test (prog_path, G_FILE_TEST_IS_REGULAR)) {
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_MISSING_APP,
+		                          name);
+		g_free (prog_path);
+		return;
+	}
+
+	if (!version_arg) {
+		g_free (prog_path);
+		return;
+	}
+
+	/* Check version */
+	argv = g_ptr_array_new ();
+	g_ptr_array_add (argv, prog_path);
+	g_ptr_array_add (argv, (gchar *) version_arg);
+	g_ptr_array_add (argv, NULL);
+
+	res = g_spawn_sync (NULL,
+	                    (gchar **) argv->pdata,
+	                    NULL,
+	                    0,
+	                    NULL,
+	                    NULL,
+	                    &standard_output,
+	                    &standard_error,
+	                    NULL,
+	                    NULL);
+
+	g_ptr_array_free (argv, TRUE);
+	g_free (prog_path);
+
+	if (!res) {
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_WRONG_APP_VERSION,
+		                          name);
+		return;
+	}
+
+	for (i = 0; i < 3 && version [i] >= 0; i++);
+
+	if ((standard_output && sscanf (standard_output, version_format, &major, &minor, &sub) == i)
+	||  (standard_error && sscanf (standard_error, version_format, &major, &minor, &sub) == i)) {
+		if (major < version [0]
+		||  (version [1] >= 0 && minor < version [1])
+		||  (version [2] >= 0 && sub < version [2]))
+			brasero_plugin_add_error (plugin,
+						  BRASERO_PLUGIN_ERROR_WRONG_APP_VERSION,
+						  name);
+	}
+	else
+		brasero_plugin_add_error (plugin,
+		                          BRASERO_PLUGIN_ERROR_WRONG_APP_VERSION,
+		                          name);
+
+	g_free (standard_output);
+	g_free (standard_error);
+}
+
 void
 brasero_plugin_set_compulsory (BraseroPlugin *self,
 			       gboolean compulsory)
@@ -165,10 +319,10 @@ brasero_plugin_set_active (BraseroPlugin *self, gboolean active)
 
 	priv = BRASERO_PLUGIN_PRIVATE (self);
 
-	was_active = brasero_plugin_get_active (self);
+	was_active = brasero_plugin_get_active (self, FALSE);
 	priv->active = active;
 
-	now_active = brasero_plugin_get_active (self);
+	now_active = brasero_plugin_get_active (self, FALSE);
 	if (was_active == now_active)
 		return;
 
@@ -183,17 +337,23 @@ brasero_plugin_set_active (BraseroPlugin *self, gboolean active)
 }
 
 gboolean
-brasero_plugin_get_active (BraseroPlugin *self)
+brasero_plugin_get_active (BraseroPlugin *plugin,
+                           gboolean ignore_errors)
 {
 	BraseroPluginPrivate *priv;
 
-	priv = BRASERO_PLUGIN_PRIVATE (self);
+	priv = BRASERO_PLUGIN_PRIVATE (plugin);
+
+	if (priv->type == G_TYPE_NONE)
+		return FALSE;
 
 	if (priv->priority < 0)
 		return FALSE;
 
-	if (priv->type == G_TYPE_NONE)
-		return FALSE;
+	if (priv->errors) {
+		if (!ignore_errors)
+			return FALSE;
+	}
 
 	return priv->active;
 }
@@ -215,10 +375,6 @@ brasero_plugin_cleanup_definition (BraseroPlugin *self)
 	priv->copyright = NULL;
 	g_free (priv->website);
 	priv->website = NULL;
-	if (priv->error) {
-		g_free (priv->error);
-		priv->error = NULL;
-	}
 }
 
 /**
@@ -478,13 +634,82 @@ brasero_plugin_get_group (BraseroPlugin *self)
 	return priv->group;
 }
 
-const gchar *
-brasero_plugin_get_error (BraseroPlugin *self)
+/**
+ * brasero_plugin_get_errors:
+ * @plugin: a #BraseroPlugin.
+ *
+ * This function returns a list of all errors that
+ * prevents the plugin from working properly.
+ *
+ * Returns: a #GSList of #BraseroPluginError structures or %NULL.
+ * It must not be freed.
+ **/
+
+GSList *
+brasero_plugin_get_errors (BraseroPlugin *plugin)
 {
 	BraseroPluginPrivate *priv;
 
-	priv = BRASERO_PLUGIN_PRIVATE (self);
-	return priv->error;
+	g_return_val_if_fail (BRASERO_IS_PLUGIN (plugin), NULL);
+	priv = BRASERO_PLUGIN_PRIVATE (plugin);
+	return priv->errors;
+}
+
+gchar *
+brasero_plugin_get_error_string (BraseroPlugin *plugin)
+{
+	gchar *error_string = NULL;
+	BraseroPluginPrivate *priv;
+	GString *string;
+	GSList *iter;
+
+	g_return_val_if_fail (BRASERO_IS_PLUGIN (plugin), NULL);
+
+	priv = BRASERO_PLUGIN_PRIVATE (plugin);
+
+	string = g_string_new (NULL);
+	for (iter = priv->errors; iter; iter = iter->next) {
+		BraseroPluginError *error;
+
+		error = iter->data;
+		switch (error->type) {
+			case BRASERO_PLUGIN_ERROR_MISSING_APP:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("\"%s\" could not be found in the path"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_MISSING_GSTREAMER_PLUGIN:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("\"%s\" GStreamer plugin could not be found"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_WRONG_APP_VERSION:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("The version of \"%s\" is too old"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_SYMBOLIC_LINK_APP:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("\"%s\" is a symbolic link pointing to another program"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_MISSING_LIBRARY:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("\"%s\" could not be found"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_LIBRARY_VERSION:
+				g_string_append_c (string, '\n');
+				g_string_append_printf (string, _("The version of \"%s\" is too old"), error->detail);
+				break;
+			case BRASERO_PLUGIN_ERROR_MODULE:
+				g_string_append_c (string, '\n');
+				g_string_append (string, error->detail);
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	error_string = string->str;
+	g_string_free (string, FALSE);
+	return error_string;
 }
 
 static BraseroPluginFlags *
@@ -580,7 +805,6 @@ brasero_plugin_get_all_flags (GSList *flags_list,
 
 	flags = brasero_plugin_get_flags (flags_list, media);
 	if (!flags) {
-
 		if (supported_retval)
 			*supported_retval = BRASERO_BURN_FLAG_NONE;
 		if (compulsory_retval)
@@ -905,6 +1129,10 @@ brasero_plugin_get_gtype (BraseroPlugin *self)
 	BraseroPluginPrivate *priv;
 
 	priv = BRASERO_PLUGIN_PRIVATE (self);
+
+	if (priv->errors)
+		return G_TYPE_NONE;
+
 	return priv->type;
 }
 
@@ -928,7 +1156,6 @@ brasero_plugin_unload (GTypeModule *module)
 static gboolean
 brasero_plugin_load_real (BraseroPlugin *plugin) 
 {
-	gchar *error = NULL;
 	BraseroPluginPrivate *priv;
 	BraseroPluginRegisterType register_func;
 
@@ -942,7 +1169,8 @@ brasero_plugin_load_real (BraseroPlugin *plugin)
 
 	priv->handle = g_module_open (priv->path, G_MODULE_BIND_LAZY);
 	if (!priv->handle) {
-		priv->error = g_strdup (g_module_error ());
+		brasero_plugin_add_error (plugin, BRASERO_PLUGIN_ERROR_MODULE, g_module_error ());
+		BRASERO_BURN_LOG ("Module %s can't be loaded: g_module_open failed ()", priv->name);
 		return FALSE;
 	}
 
@@ -952,13 +1180,7 @@ brasero_plugin_load_real (BraseroPlugin *plugin)
 		return FALSE;
 	}
 
-	priv->type = register_func (plugin, &error);
-	if (error) {
-		if (priv->error)
-			g_free (priv->error);
-		priv->error = error;
-	}
-
+	priv->type = register_func (plugin);
 	brasero_burn_debug_setup_module (priv->handle);
 	return TRUE;
 }
@@ -997,14 +1219,58 @@ brasero_plugin_priority_changed (GConfClient *client,
 	else
 		priv->priority = gconf_value_get_int (value);
 
-	is_active = brasero_plugin_get_active (self);
+	is_active = brasero_plugin_get_active (self, FALSE);
 
 	g_object_notify (G_OBJECT (self), "priority");
-	if (is_active != brasero_plugin_get_active (self))
+	if (is_active != brasero_plugin_get_active (self, FALSE))
 		g_signal_emit (self,
 			       plugin_signals [ACTIVATED_SIGNAL],
 			       0,
-			       brasero_plugin_get_active (self));
+			       is_active);
+}
+
+typedef void	(* BraseroPluginCheckConfig)	(BraseroPlugin *plugin);
+
+/**
+ * brasero_plugin_check_plugin_ready:
+ * @plugin: a #BraseroPlugin.
+ *
+ * Ask a plugin to check whether it can operate.
+ * brasero_plugin_can_operate () should be called
+ * afterwards to know whether it can operate or not.
+ *
+ **/
+void
+brasero_plugin_check_plugin_ready (BraseroPlugin *plugin)
+{
+	GModule *handle;
+	BraseroPluginPrivate *priv;
+	BraseroPluginCheckConfig function = NULL;
+
+	g_return_if_fail (BRASERO_IS_PLUGIN (plugin));
+	priv = BRASERO_PLUGIN_PRIVATE (plugin);
+
+	if (priv->errors) {
+		g_slist_foreach (priv->errors, (GFunc) brasero_plugin_error_free, NULL);
+		g_slist_free (priv->errors);
+		priv->errors = NULL;
+	}
+
+	handle = g_module_open (priv->path, 0);
+	if (!handle) {
+		brasero_plugin_add_error (plugin, BRASERO_PLUGIN_ERROR_MODULE, g_module_error ());
+		BRASERO_BURN_LOG ("Module %s can't be loaded: g_module_open failed ()", priv->name);
+		return;
+	}
+
+	if (!g_module_symbol (handle, "brasero_plugin_check_config", (gpointer) &function)) {
+		g_module_close (handle);
+		BRASERO_BURN_LOG ("Module %s has no check config function", priv->name);
+		return;
+	}
+
+	function (BRASERO_PLUGIN (plugin));
+	g_module_close (handle);
 }
 
 static void
@@ -1016,34 +1282,31 @@ brasero_plugin_init_real (BraseroPlugin *object)
 	GConfClient *client;
 	gchar *priority_path;
 	BraseroPluginPrivate *priv;
-	BraseroPluginRegisterType function;
+	BraseroPluginRegisterType function = NULL;
 
 	priv = BRASERO_PLUGIN_PRIVATE (object);
 
 	g_type_module_set_name (G_TYPE_MODULE (object), priv->name);
 
-	handle = g_module_open (priv->name, 0);
+	handle = g_module_open (priv->path, 0);
 	if (!handle) {
-		BRASERO_BURN_LOG ("Module can't be loaded: g_module_open failed");
+		brasero_plugin_add_error (object, BRASERO_PLUGIN_ERROR_MODULE, g_module_error ());
+		BRASERO_BURN_LOG ("Module %s (at %s) can't be loaded: g_module_open failed ()", priv->name, priv->path);
 		return;
 	}
 
 	if (!g_module_symbol (handle, "brasero_plugin_register", (gpointer) &function)) {
 		g_module_close (handle);
-		BRASERO_BURN_LOG ("Module can't be loaded: no register function");
+		BRASERO_BURN_LOG ("Module %s can't be loaded: no register function, priv->name", priv->name);
 		return;
 	}
 
-	priv->type = function (BRASERO_PLUGIN (object), &priv->error);
+	priv->type = function (object);
 	if (priv->type == G_TYPE_NONE) {
 		g_module_close (handle);
-		BRASERO_BURN_LOG ("Module encountered an error while registering its capabilities:\n%s",
-				  priv->error ? priv->error:"unknown error");
+		BRASERO_BURN_LOG ("Module %s encountered an error while registering its capabilities", priv->name);
 		return;
 	}
-
-	BRASERO_BURN_LOG ("Module %s successfully loaded", priv->name);
-	g_module_close (handle);
 
 	/* now see if we need to override the hardcoded priority of the plugin */
 	client = gconf_client_get_default ();
@@ -1076,6 +1339,11 @@ brasero_plugin_init_real (BraseroPlugin *object)
 	/* No need to emit notify:: here */
 	g_free (priority_path);
 	g_object_unref (client);
+
+	/* Check if it can operate */
+	brasero_plugin_check_plugin_ready (object);
+
+	g_module_close (handle);
 }
 
 static void
@@ -1120,9 +1388,10 @@ brasero_plugin_finalize (GObject *object)
 		g_object_unref (client);
 	}
 
-	if (priv->error) {
-		g_free (priv->error);
-		priv->error = NULL;
+	if (priv->errors) {
+		g_slist_foreach (priv->errors, (GFunc) brasero_plugin_error_free, NULL);
+		g_slist_free (priv->errors);
+		priv->errors = NULL;
 	}
 
 	G_OBJECT_CLASS (parent_class)->finalize (object);
@@ -1207,7 +1476,6 @@ brasero_plugin_class_init (BraseroPluginClass *klass)
 	object_class->set_property = brasero_plugin_set_property;
 	object_class->get_property = brasero_plugin_get_property;
 
-	parent_class = G_TYPE_MODULE_CLASS (g_type_class_peek_parent (klass));
 	module_class->load = brasero_plugin_load;
 	module_class->unload = brasero_plugin_unload;
 

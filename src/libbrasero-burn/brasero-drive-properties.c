@@ -64,7 +64,6 @@ struct _BraseroDrivePropertiesPrivate
 	GtkWidget *multi;
 	GtkWidget *burnproof;
 	GtkWidget *notmp;
-	GtkWidget *eject;
 
 	GtkWidget *tmpdir;
 };
@@ -99,23 +98,6 @@ brasero_drive_properties_no_tmp_toggled (GtkToggleButton *button,
 	else
 		brasero_session_cfg_remove_flags (priv->session,
 						  BRASERO_BURN_FLAG_NO_TMP_FILES);
-}
-
-static void
-brasero_drive_properties_eject_toggled (GtkToggleButton *button,
-					BraseroDriveProperties *self)
-{
-	BraseroDrivePropertiesPrivate *priv;
-
-	priv = BRASERO_DRIVE_PROPERTIES_PRIVATE (self);
-
-	/* retrieve the flags */
-	if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (priv->eject)))
-		brasero_session_cfg_add_flags (priv->session,
-					       BRASERO_BURN_FLAG_EJECT);
-	else
-		brasero_session_cfg_remove_flags (priv->session,
-						  BRASERO_BURN_FLAG_EJECT);
 }
 
 static void
@@ -229,7 +211,7 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 
 	file = g_file_new_for_commandline_arg (path);
 	if (!file)
-		return FALSE;
+		return TRUE;
 
 	info = g_file_query_info (file,
 				  G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE,
@@ -254,6 +236,9 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 						 GTK_BUTTONS_NONE,
 						 _("Do you really want to choose this location?"));
 
+		gtk_window_set_icon_name (GTK_WINDOW (dialog),
+					  gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
+
 		string = g_strdup_printf ("%s.", error->message);
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", string);
 		g_error_free (error);
@@ -270,10 +255,10 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 
 		g_object_unref (info);
 		g_object_unref (file);
-		if (answer == GTK_RESPONSE_OK)
-			return FALSE;
+		if (answer != GTK_RESPONSE_OK)
+			return TRUE;
 
-		return TRUE;
+		return FALSE;
 	}
 
 	if (!g_file_info_get_attribute_boolean (info, G_FILE_ATTRIBUTE_ACCESS_CAN_WRITE)) {
@@ -290,6 +275,9 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 						 GTK_BUTTONS_NONE,
 						 _("Do you really want to choose this location?"));
 
+		gtk_window_set_icon_name (GTK_WINDOW (dialog),
+					  gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
+
 		string = g_strdup_printf ("%s.", _("You do not have the required permission to write at this location"));
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), "%s", string);
 		g_free (string);
@@ -305,10 +293,10 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 
 		g_object_unref (info);
 		g_object_unref (file);
-		if (answer == GTK_RESPONSE_OK)
-			return FALSE;
+		if (answer != GTK_RESPONSE_OK)
+			return TRUE;
 
-		return TRUE;
+		return FALSE;
 	}
 
 	g_object_unref (info);
@@ -326,7 +314,7 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 	 * filesystems have a maximum file size limit of 4 GiB and more than
 	 * often we need a temporary file size of 4 GiB or more. */
 	filesystem = g_file_info_get_attribute_string (info, G_FILE_ATTRIBUTE_FILESYSTEM_TYPE);
-	if (filesystem && !strcmp (filesystem, "msdos")) {
+	if (!g_strcmp0 (filesystem, "msdos")) {
 		gint answer;
 		GtkWidget *dialog;
 		GtkWidget *toplevel;
@@ -338,6 +326,9 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 						 GTK_MESSAGE_WARNING,
 						 GTK_BUTTONS_NONE,
 						 _("Do you really want to choose this location?"));
+
+		gtk_window_set_icon_name (GTK_WINDOW (dialog),
+					  gtk_window_get_icon_name (GTK_WINDOW (toplevel)));
 
 		gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 							  _("The filesystem on this volume does not support large files (size over 2 GiB)."
@@ -353,8 +344,8 @@ brasero_drive_properties_check_tmpdir (BraseroDriveProperties *self,
 		gtk_widget_destroy (dialog);
 
 		g_object_unref (info);
-		if (answer == GTK_RESPONSE_OK)
-			return FALSE;
+		if (answer != GTK_RESPONSE_OK)
+			return TRUE;
 	}
 	else if (info)
 		g_object_unref (info);
@@ -474,12 +465,6 @@ brasero_drive_properties_set_flags (BraseroDriveProperties *self,
 						   supported,
 						   compulsory);
 	brasero_drive_properties_set_toggle_state (self,
-						   priv->eject,
-						   BRASERO_BURN_FLAG_EJECT,
-						   flags,
-						   supported,
-						   compulsory);						   
-	brasero_drive_properties_set_toggle_state (self,
 						   priv->burnproof,
 						   BRASERO_BURN_FLAG_BURNPROOF,
 						   flags,
@@ -544,20 +529,20 @@ brasero_drive_properties_format_disc_speed (BraseroMedia media,
 
 	if (media & BRASERO_MEDIUM_DVD)
 		/* Translators %s.1f is the speed used to burn */
-		text = g_strdup_printf (_("%.1f x (DVD)"),
+		text = g_strdup_printf (_("%.1f\303\227 (DVD)"),
 					BRASERO_RATE_TO_SPEED_DVD (rate));
 	else if (media & BRASERO_MEDIUM_CD)
 		/* Translators %s.1f is the speed used to burn */
-		text = g_strdup_printf (_("%.1f x (CD)"),
+		text = g_strdup_printf (_("%.1f\303\227 (CD)"),
 					BRASERO_RATE_TO_SPEED_CD (rate));
 	else if (media & BRASERO_MEDIUM_BD)
 		/* Translators %s.1f is the speed used to burn */
-		text = g_strdup_printf (_("%.1f x (BD)"),
+		text = g_strdup_printf (_("%.1f\303\227 (BD)"),
 					BRASERO_RATE_TO_SPEED_BD (rate));
 	else
 		/* Translators %s.1f is the speed used to burn for every medium
 		 * type*/
-		text = g_strdup_printf (_("%.1f x (BD) %.1f x (DVD) %.1f x (CD)"),
+		text = g_strdup_printf (_("%.1f\303\227 (BD) %.1f\303\227 (DVD) %.1f\303\227 (CD)"),
 					BRASERO_RATE_TO_SPEED_BD (rate),
 					BRASERO_RATE_TO_SPEED_DVD (rate),
 					BRASERO_RATE_TO_SPEED_CD (rate));
@@ -604,7 +589,7 @@ brasero_drive_properties_set_drive (BraseroDriveProperties *self,
 
 	gtk_list_store_append (GTK_LIST_STORE (model), &iter);
 	gtk_list_store_set (GTK_LIST_STORE (model), &iter,
-			    TEXT_COL, _("Max speed"),
+			    TEXT_COL, _("Maximum speed"),
 			    RATE_COL, rates [0],
 			    -1);
 
@@ -744,12 +729,10 @@ brasero_drive_properties_init (BraseroDriveProperties *object)
 					NULL);
 
 	priv->dummy = gtk_check_button_new_with_mnemonic (_("_Simulate before burning"));
-	gtk_widget_set_tooltip_text (priv->dummy, _("Brasero will simulate the burning and if it is successful, go on with actual burning after 10 seconds"));
+	gtk_widget_set_tooltip_text (priv->dummy, _("Brasero will simulate the burning and, if it is successful, go on with actual burning after 10 seconds"));
 	gtk_widget_show (priv->dummy);
 	priv->burnproof = gtk_check_button_new_with_mnemonic (_("Use burn_proof (decrease the risk of failures)"));
 	gtk_widget_show (priv->burnproof);
-	priv->eject = gtk_check_button_new_with_mnemonic (_("_Eject after burning"));
-	gtk_widget_show (priv->eject);
 	priv->notmp = gtk_check_button_new_with_mnemonic (_("Burn the image directly _without saving it to disc"));
 	gtk_widget_show (priv->notmp);
 	priv->multi = gtk_check_button_new_with_mnemonic (_("Leave the disc _open to add other files later"));
@@ -764,10 +747,6 @@ brasero_drive_properties_init (BraseroDriveProperties *object)
 			  "toggled",
 			  G_CALLBACK (brasero_drive_properties_burnproof_toggled),
 			  object);
-	g_signal_connect (priv->eject,
-			  "toggled",
-			  G_CALLBACK (brasero_drive_properties_eject_toggled),
-			  object);
 	g_signal_connect (priv->multi,
 			  "toggled",
 			  G_CALLBACK (brasero_drive_properties_multi_toggled),
@@ -780,7 +759,6 @@ brasero_drive_properties_init (BraseroDriveProperties *object)
 	string = g_strdup_printf ("<b>%s</b>", _("Options"));
 	gtk_box_pack_start (GTK_BOX (vbox),
 			    brasero_utils_pack_properties (string,
-							   priv->eject,
 							   priv->dummy,
 							   priv->burnproof,
 							   priv->multi,

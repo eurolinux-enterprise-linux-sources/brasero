@@ -17,6 +17,9 @@ BraseroTrackImage
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroTrackImage ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroTrackImage
 
 </para>
 
+@void: 
 @Returns: 
 
 

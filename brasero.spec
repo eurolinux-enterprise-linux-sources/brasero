@@ -1,19 +1,18 @@
 Name:      brasero
-Version:   2.28.3
-Release:   6%{?dist}
+Version:   2.30.3
+Release:   3%{?dist}
 Summary:   Gnome CD/DVD burning application
 Group:     Applications/Multimedia
 License:   GPLv2+
 URL:       http://www.gnome.org/projects/brasero/
-Source0:   http://ftp.gnome.org/pub/GNOME/sources/brasero/2.28/%{name}-%{version}.tar.bz2
+Source0:   https://download.gnome.org/sources/brasero/2.31/%{name}-%{version}.tar.bz2
+# https://bugzilla.redhat.com/show_bug.cgi?id=1319694
 Source1:   nautilus-burn-icons.tar.bz2
 
-# upstream translations
-# https://bugzilla.redhat.com/show_bug.cgi?id=576069
-Patch0: brasero-translations.patch
-
 # Make docs show up in rarian/yelp
-Patch1: brasero-doc-category.patch
+Patch0: brasero-doc-category.patch
+# https://bugzilla.redhat.com/show_bug.cgi?id=817649
+Patch1: brasero-2.30.3-bd-read.patch
 
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
@@ -37,6 +36,7 @@ BuildRequires:  libisofs-devel >= 0.6.4
 BuildRequires:  nautilus-devel >= 2.22.2
 BuildRequires:  libSM-devel
 BuildRequires:  unique-devel
+BuildRequires:  libcanberra-devel
 
 # needed explicit require, please see bug 596833
 Requires:  brasero-libs = %{version}-%{release}
@@ -99,8 +99,8 @@ developing brasero applications.
 
 %prep
 %setup -q
-%patch0 -p1 -b .translations
-%patch1 -p1 -b .doc-category
+%patch0 -p1 -b .doc-category
+%patch1 -p1 -b .bd-read
 
 %build
 %configure \
@@ -125,8 +125,9 @@ find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 
 %find_lang %{name}
 
-sed -i 's/cd:x/cd;x/' $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
-sed -i -e 's/Icon=brasero/Icon=nautilus-burn/' \
+sed -i -e 's/cd:x/cd;x/' -e 's/Icon=brasero/Icon=nautilus-burn/' \
+    $RPM_BUILD_ROOT%{_datadir}/applications/%{name}.desktop
+sed -i -e 's/Icon=system-file-manager/Icon=nautilus-burn/' \
     $RPM_BUILD_ROOT%{_datadir}/applications/%{name}-nautilus.desktop
 
 desktop-file-install --vendor ""                   \
@@ -223,6 +224,15 @@ fi
 
 
 %changelog
+* Mon Mar 21 2016 David King <dking@redhat.com> - 2.30.3-3
+- Use nautilus-burn icon for brasero and brasero-nautilus (#1319694)
+
+* Mon Mar 21 2016 David King <dking@redhat.com> - 2.30.3-2
+- Add patch to enable reading BD media (#817649)
+
+* Mon Jan 18 2016 David King <dking@redhat.com> - 2.30.3-1
+- Update to 2.30.3 (#817649)
+
 * Fri May 28 2010 Tomas Bzatek <tbzatek@redhat.com> 2.28.3-6
 - Fix requires in subpackages
 

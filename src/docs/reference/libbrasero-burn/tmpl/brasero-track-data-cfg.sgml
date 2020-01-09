@@ -17,6 +17,9 @@ BraseroTrackDataCfg
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### MACRO BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST ##### -->
 <para>
 
@@ -56,6 +59,7 @@ BraseroTrackDataCfg
 
 </para>
 
+@void: 
 @Returns: 
 
 

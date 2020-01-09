@@ -67,8 +67,32 @@ brasero_caps_link_free (BraseroCapsLink *link)
 	g_free (link);
 }
 
+BraseroBurnResult
+brasero_caps_link_check_recorder_flags_for_input (BraseroCapsLink *link,
+                                                  BraseroBurnFlag session_flags)
+{
+	if (brasero_track_type_get_has_image (&link->caps->type)) {
+		BraseroImageFormat format;
+
+		format = brasero_track_type_get_image_format (&link->caps->type);
+		if (format == BRASERO_IMAGE_FORMAT_CUE
+		||  format == BRASERO_IMAGE_FORMAT_CDRDAO) {
+			if ((session_flags & BRASERO_BURN_FLAG_DAO) == 0)
+				return BRASERO_BURN_NOT_SUPPORTED;
+		}
+		else if (format == BRASERO_IMAGE_FORMAT_CLONE) {
+			/* RAW write mode should (must) only be used in this case */
+			if ((session_flags & BRASERO_BURN_FLAG_RAW) == 0)
+				return BRASERO_BURN_NOT_SUPPORTED;
+		}
+	}
+
+	return BRASERO_BURN_OK;
+}
+
 gboolean
-brasero_caps_link_active (BraseroCapsLink *link)
+brasero_caps_link_active (BraseroCapsLink *link,
+                          gboolean ignore_plugin_errors)
 {
 	GSList *iter;
 
@@ -78,11 +102,42 @@ brasero_caps_link_active (BraseroCapsLink *link)
 		BraseroPlugin *plugin;
 
 		plugin = iter->data;
-		if (brasero_plugin_get_active (plugin))
+		if (brasero_plugin_get_active (plugin, ignore_plugin_errors))
 			return TRUE;
 	}
 
 	return FALSE;
+}
+
+BraseroPlugin *
+brasero_caps_link_need_download (BraseroCapsLink *link)
+{
+	GSList *iter;
+	BraseroPlugin *plugin_ret = NULL;
+
+	/* See if for link to be active, we need to 
+	 * download additional apps/libs/.... */
+	for (iter = link->plugins; iter; iter = iter->next) {
+		BraseroPlugin *plugin;
+
+		plugin = iter->data;
+
+		/* If a plugin can be used without any
+		 * error then that means that the link
+		 * can be followed without additional
+		 * download. */
+		if (brasero_plugin_get_active (plugin, FALSE))
+			return NULL;
+
+		if (brasero_plugin_get_active (plugin, TRUE)) {
+			if (!plugin_ret)
+				plugin_ret = plugin;
+			else if (brasero_plugin_get_priority (plugin) > brasero_plugin_get_priority (plugin_ret))
+				plugin_ret = plugin;
+		}
+	}
+
+	return plugin_ret;
 }
 
 static void
@@ -115,7 +170,8 @@ brasero_caps_has_active_input (BraseroCaps *caps,
 		if (link->caps != input)
 			continue;
 
-		if (brasero_caps_link_active (link))
+		/* Ignore plugin errors */
+		if (brasero_caps_link_active (link, TRUE))
 			return TRUE;
 	}
 
@@ -207,7 +263,7 @@ brasero_burn_caps_find_start_caps (BraseroBurnCaps *self,
 		if (!brasero_caps_is_compatible_type (caps, output))
 			continue;
 
-		if (caps->type.type == BRASERO_TRACK_TYPE_DISC
+		if (brasero_track_type_get_has_medium (&caps->type)
 		|| (caps->flags & BRASERO_PLUGIN_IO_ACCEPT_FILE))
 			return caps;
 	}

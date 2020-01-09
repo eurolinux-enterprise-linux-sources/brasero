@@ -196,18 +196,20 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 	GtkWidget *label;
 	GtkWidget *table;
 	GtkWidget *frame;
+	GtkWidget *content_area;
 	BraseroMultiSongPropsPrivate *priv;
 
 	priv = BRASERO_MULTI_SONG_PROPS_PRIVATE (object);
 
 	gtk_dialog_set_has_separator (GTK_DIALOG (object), FALSE);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (object)->vbox), 0);
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (object));
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (object))), 0);
 	gtk_window_set_default_size (GTK_WINDOW (object), 400, 200);
 
 	priv->title = brasero_rename_new ();
 	gtk_widget_show (priv->title);
 	gtk_widget_set_tooltip_text (priv->title,
-				     _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+				     _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 
 	title = g_strdup_printf ("<b>%s</b>", _("Song titles"));
 	frame = brasero_utils_pack_properties (title, priv->title, NULL);
@@ -215,11 +217,11 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 
 	gtk_widget_show (frame);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (object)->vbox),
-						frame,
-						FALSE,
-						FALSE,
-						0);
+	gtk_box_pack_start (GTK_BOX (content_area),
+			    frame,
+			    FALSE,
+			    FALSE,
+			    0);
 
 	table = gtk_table_new (3, 2, FALSE);
 	gtk_widget_show (table);
@@ -232,11 +234,11 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 
 	gtk_widget_show (frame);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (object)->vbox),
-						frame,
-						FALSE,
-						FALSE,
-						0);
+	gtk_box_pack_start (GTK_BOX (content_area),
+			    frame,
+			    FALSE,
+			    FALSE,
+			    0);
 
 	label = gtk_label_new (_("Artist:"));
 	gtk_widget_show (label);
@@ -248,7 +250,7 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 	gtk_entry_set_text (GTK_ENTRY (priv->artist), _("<Keep current values>"));
 	gtk_table_attach_defaults (GTK_TABLE (table), priv->artist, 1, 2, 1, 2);
 	gtk_widget_set_tooltip_text (priv->artist,
-				     _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+				     _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 	g_signal_connect (priv->artist,
 			  "focus-in-event",
 			  G_CALLBACK (brasero_multi_song_props_entry_focus_in),
@@ -269,7 +271,7 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 	gtk_entry_set_text (GTK_ENTRY (priv->composer), _("<Keep current values>"));
 	gtk_table_attach_defaults (GTK_TABLE (table), priv->composer, 1, 2, 2, 3);
 	gtk_widget_set_tooltip_text (priv->composer,
-				     _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+				     _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 	g_signal_connect (priv->composer,
 			  "focus-in-event",
 			  G_CALLBACK (brasero_multi_song_props_entry_focus_in),
@@ -311,7 +313,7 @@ brasero_multi_song_props_init (BraseroMultiSongProps *object)
 
 	gtk_widget_show (frame);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (object)->vbox), frame, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), frame, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Pause length:"));
 	gtk_widget_show (label);

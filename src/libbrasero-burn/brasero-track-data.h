@@ -37,11 +37,19 @@
 
 G_BEGIN_DECLS
 
-struct _BraseroGraftPt {
+/**
+ * BraseroGraftPt:
+ * @uri: a URI
+ * @path: a file path
+ *
+ * A pair of strings describing:
+ * @uri the actual current location of the file
+ * @path the path of the file on the future ISO9660/UDF/... filesystem
+ **/
+typedef struct _BraseroGraftPt {
 	gchar *uri;
 	gchar *path;
-};
-typedef struct _BraseroGraftPt BraseroGraftPt;
+} BraseroGraftPt;
 
 void
 brasero_graft_point_free (BraseroGraftPt *graft);
@@ -65,6 +73,15 @@ struct _BraseroTrackDataClass
 	BraseroTrackClass parent_class;
 
 	/* virtual functions */
+
+	/**
+	 * set_source:
+	 * @track: a #BraseroTrackData.
+	 * @grafts: (element-type BraseroBurn.GraftPt) (transfer full): a #GSList of #BraseroGraftPt.
+	 * @unreadable: (element-type utf8) (transfer full) (allow-none): a #GSList of URIs (as strings) or %NULL.
+	 *
+	 * Return value: a #BraseroBurnResult
+	 **/
 	BraseroBurnResult	(*set_source)		(BraseroTrackData *track,
 							 GSList *grafts,
 							 GSList *unreadable);
@@ -115,10 +132,13 @@ GSList *
 brasero_track_data_get_grafts (BraseroTrackData *track);
 
 GSList *
+brasero_track_data_get_excluded_list (BraseroTrackData *track);
+
+G_GNUC_DEPRECATED GSList *
 brasero_track_data_get_excluded (BraseroTrackData *track,
 				 gboolean copy);
 
-BraseroBurnResult
+G_GNUC_DEPRECATED BraseroBurnResult
 brasero_track_data_get_paths (BraseroTrackData *track,
 			      gboolean use_joliet,
 			      const gchar *grafts_path,
@@ -126,6 +146,14 @@ brasero_track_data_get_paths (BraseroTrackData *track,
 			      const gchar *emptydir,
 			      const gchar *videodir,
 			      GError **error);
+
+BraseroBurnResult
+brasero_track_data_write_to_paths (BraseroTrackData *track,
+                                   const gchar *grafts_path,
+                                   const gchar *excluded_path,
+                                   const gchar *emptydir,
+                                   const gchar *videodir,
+                                   GError **error);
 
 BraseroBurnResult
 brasero_track_data_get_file_num (BraseroTrackData *track,

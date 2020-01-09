@@ -82,7 +82,7 @@ enum {
 static void
 brasero_drive_selection_buildable_init (GtkBuildableIface *iface)
 {
-  parent_buildable_iface = g_type_interface_peek_parent (iface);
+	parent_buildable_iface = g_type_interface_peek_parent (iface);
 }  
 
 G_DEFINE_TYPE_WITH_CODE (BraseroDriveSelection, brasero_drive_selection, GTK_TYPE_COMBO_BOX, G_IMPLEMENT_INTERFACE (GTK_TYPE_BUILDABLE, brasero_drive_selection_buildable_init));
@@ -324,7 +324,7 @@ brasero_drive_selection_show_type (BraseroDriveSelection *selector,
 
 			drive = item->data;
 
-			drive_name =  brasero_drive_get_display_name (drive);
+			drive_name = brasero_drive_get_display_name (drive);
 
 			if (!brasero_drive_is_fake (drive)) {
 				GDrive *gdrive;
@@ -371,9 +371,9 @@ brasero_drive_selection_drive_added_cb (BraseroMediumMonitor *monitor,
 					BraseroDriveSelection *self)
 {
 	BraseroDriveSelectionPrivate *priv;
+	gchar *drive_name = NULL;
 	gboolean add = FALSE;
 	GtkTreeModel *model;
-	gchar *drive_name;
 	GIcon *drive_icon;
 	GtkTreeIter iter;
 

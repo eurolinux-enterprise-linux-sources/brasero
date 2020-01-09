@@ -52,9 +52,16 @@
 
 #include "burn-job.h"
 #include "brasero-plugin-registration.h"
-#include "burn-local-image.h"
 #include "brasero-xfer.h"
 #include "brasero-track-image.h"
+
+
+#define BRASERO_TYPE_LOCAL_TRACK         (brasero_local_track_get_type ())
+#define BRASERO_LOCAL_TRACK(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_LOCAL_TRACK, BraseroLocalTrack))
+#define BRASERO_LOCAL_TRACK_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_LOCAL_TRACK, BraseroLocalTrackClass))
+#define BRASERO_IS_LOCAL_TRACK(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_LOCAL_TRACK))
+#define BRASERO_IS_LOCAL_TRACK_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_LOCAL_TRACK))
+#define BRASERO_LOCAL_TRACK_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_LOCAL_TRACK, BraseroLocalTrackClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroLocalTrack, brasero_local_track, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -399,7 +406,7 @@ brasero_local_track_update_track (BraseroLocalTrack *self)
 		/* Translate the globally excluded.
 		 * NOTE: if we can't find a parent for an excluded URI that
 		 * means it shouldn't be included. */
-		unreadable = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (current), FALSE);
+		unreadable = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (current));
 		for (; unreadable; unreadable = next) {
 			gchar *new_uri;
 
@@ -891,8 +898,8 @@ brasero_local_track_init (BraseroLocalTrack *obj)
 	priv->cond = g_cond_new ();
 }
 
-static BraseroBurnResult
-brasero_local_track_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_local_track_export_caps (BraseroPlugin *plugin)
 {
 	GSList *caps;
 
@@ -901,7 +908,7 @@ brasero_local_track_export_caps (BraseroPlugin *plugin, gchar **error)
 				* which will be translated only when it needs
 				* displaying. */
 			       N_("File Downloader"),
-			       _("Allows to burn files not stored locally"),
+			       _("Allows files not stored locally to be burned"),
 			       "Philippe Rouquier",
 			       10);
 
@@ -912,30 +919,28 @@ brasero_local_track_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	caps = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_FILE,
 				       BRASERO_AUDIO_FORMAT_UNDEFINED|
-				       BRASERO_AUDIO_FORMAT_4_CHANNEL|
+	                               BRASERO_AUDIO_FORMAT_DTS|
 				       BRASERO_AUDIO_FORMAT_RAW|
+				       BRASERO_AUDIO_FORMAT_RAW_LITTLE_ENDIAN|
 				       BRASERO_VIDEO_FORMAT_UNDEFINED|
 				       BRASERO_VIDEO_FORMAT_VCD|
 				       BRASERO_VIDEO_FORMAT_VIDEO_DVD|
 				       BRASERO_AUDIO_FORMAT_AC3|
 				       BRASERO_AUDIO_FORMAT_MP2|
-				       BRASERO_AUDIO_FORMAT_44100|
-				       BRASERO_AUDIO_FORMAT_48000|
 				       BRASERO_METADATA_INFO);
 	brasero_plugin_process_caps (plugin, caps);
 	g_slist_free (caps);
 
 	caps = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_FILE,
 				       BRASERO_AUDIO_FORMAT_UNDEFINED|
-				       BRASERO_AUDIO_FORMAT_4_CHANNEL|
+	                               BRASERO_AUDIO_FORMAT_DTS|
 				       BRASERO_AUDIO_FORMAT_RAW|
+				       BRASERO_AUDIO_FORMAT_RAW_LITTLE_ENDIAN|
 				       BRASERO_VIDEO_FORMAT_UNDEFINED|
 				       BRASERO_VIDEO_FORMAT_VCD|
 				       BRASERO_VIDEO_FORMAT_VIDEO_DVD|
 				       BRASERO_AUDIO_FORMAT_AC3|
-				       BRASERO_AUDIO_FORMAT_MP2|
-				       BRASERO_AUDIO_FORMAT_44100|
-				       BRASERO_AUDIO_FORMAT_48000);
+				       BRASERO_AUDIO_FORMAT_MP2);
 	brasero_plugin_process_caps (plugin, caps);
 	g_slist_free (caps);
 	caps = brasero_caps_data_new (BRASERO_IMAGE_FS_ANY);
@@ -945,6 +950,4 @@ brasero_local_track_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_set_process_flags (plugin, BRASERO_PLUGIN_RUN_PREPROCESSING);
 
 	brasero_plugin_set_compulsory (plugin, FALSE);
-
-	return BRASERO_BURN_OK;
 }

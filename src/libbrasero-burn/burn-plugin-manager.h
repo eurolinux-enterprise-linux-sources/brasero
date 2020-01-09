@@ -35,6 +35,8 @@
 #include <glib-object.h>
 #include <gmodule.h>
 
+#include "brasero-plugin.h"
+
 G_BEGIN_DECLS
 
 #define BRASERO_TYPE_PLUGIN_MANAGER             (brasero_plugin_manager_get_type ())
@@ -50,6 +52,9 @@ typedef struct _BraseroPluginManager BraseroPluginManager;
 struct _BraseroPluginManagerClass
 {
 	GObjectClass parent_class;
+
+	/* <Signals>*/
+	void	(*caps_changed)	(BraseroPluginManager *manager);
 };
 
 struct _BraseroPluginManager

@@ -49,8 +49,15 @@
 #include "burn-process.h"
 #include "brasero-plugin-registration.h"
 #include "burn-cdrtools.h"
-#include "burn-mkisofs.h"
 #include "brasero-track-data.h"
+
+
+#define BRASERO_TYPE_MKISOFS         (brasero_mkisofs_get_type ())
+#define BRASERO_MKISOFS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_MKISOFS, BraseroMkisofs))
+#define BRASERO_MKISOFS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_MKISOFS, BraseroMkisofsClass))
+#define BRASERO_IS_MKISOFS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_MKISOFS))
+#define BRASERO_IS_MKISOFS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_MKISOFS))
+#define BRASERO_MKISOFS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_MKISOFS, BraseroMkisofsClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroMkisofs, brasero_mkisofs, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -87,7 +94,7 @@ brasero_mkisofs_read_stdout (BraseroProcess *process, const gchar *line)
 	if (action == BRASERO_JOB_ACTION_SIZE)
 		return brasero_mkisofs_read_isosize (process, line);
 
-	return TRUE;
+	return BRASERO_BURN_OK;
 }
 
 static BraseroBurnResult
@@ -302,13 +309,12 @@ brasero_mkisofs_set_argv_image (BraseroMkisofs *mkisofs,
 		return result;
 	}
 
-	result = brasero_track_data_get_paths (BRASERO_TRACK_DATA (track),
-					       (image_fs & BRASERO_IMAGE_FS_JOLIET) != 0,
-					       grafts_path,
-					       excluded_path,
-					       emptydir,
-					       videodir,
-					       error);
+	result = brasero_track_data_write_to_paths (BRASERO_TRACK_DATA (track),
+	                                            grafts_path,
+	                                            excluded_path,
+	                                            emptydir,
+	                                            videodir,
+	                                            error);
 	g_free (emptydir);
 
 	if (result != BRASERO_BURN_OK) {
@@ -362,7 +368,7 @@ brasero_mkisofs_set_argv_image (BraseroMkisofs *mkisofs,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 
@@ -516,23 +522,17 @@ brasero_mkisofs_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_mkisofs_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_mkisofs_export_caps (BraseroPlugin *plugin)
 {
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	brasero_plugin_define (plugin,
 			       "mkisofs",
-			       _("Use mkisofs to create image from a file selection"),
+			       _("Creates disc images from a file selection"),
 			       "Philippe Rouquier",
-			       0);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("mkisofs", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
+			       2);
 
 	brasero_plugin_set_flags (plugin,
 				  BRASERO_MEDIUM_CDR|
@@ -583,6 +583,15 @@ brasero_mkisofs_export_caps (BraseroPlugin *plugin, gchar **error)
 	g_slist_free (output);
 
 	brasero_plugin_register_group (plugin, _(CDRTOOLS_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 2, 0, -1};
+	brasero_plugin_test_app (plugin,
+	                         "mkisofs",
+	                         "--version",
+	                         "mkisofs %d.%d",
+	                         version);
 }

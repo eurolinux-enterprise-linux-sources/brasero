@@ -52,7 +52,8 @@ struct _BraseroPluginClass {
 
 	/* Signals */
 	void	(* loaded)	(BraseroPlugin *plugin);
-	void	(* activated)	(BraseroPlugin *plugin);
+	void	(* activated)	(BraseroPlugin *plugin,
+			                  gboolean active);
 };
 
 struct _BraseroPlugin {
@@ -61,11 +62,8 @@ struct _BraseroPlugin {
 
 GType brasero_plugin_get_type (void) G_GNUC_CONST;
 
-BraseroPlugin *
-brasero_plugin_new (const gchar *path);
-
 GType
-brasero_plugin_get_gtype (BraseroPlugin *plugin);
+brasero_plugin_get_gtype (BraseroPlugin *self);
 
 /**
  * Plugin configure options

@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-BraseroSessionSpan.html" title="BraseroSessionSpan">
 <link rel="next" href="libbrasero-burn-BraseroBurnOptions.html" title="BraseroBurnOptions">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -35,7 +31,7 @@
 <div class="refnamediv"><table width="100%"><tr>
 <td valign="top">
 <h2><span class="refentrytitle"><a name="libbrasero-burn-BraseroSessionCfg.top_of_page"></a>BraseroSessionCfg</span></h2>
-<p>BraseroSessionCfg — Configure automatically a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object</p>
+<p>BraseroSessionCfg — Configure automatically a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object</p>
 </td>
 <td valign="top" align="right"></td>
 </tr></table></div>
@@ -44,31 +40,32 @@
 <pre class="synopsis">
 #include &lt;brasero-session-cfg.h&gt;
 
-                    <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a>;
-#define             <a href="libbrasero-burn-BraseroSessionCfg.html#BRASERO-DRIVE-PROPERTIES-FLAGS:CAPS">BRASERO_DRIVE_PROPERTIES_FLAGS</a>
-enum                <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError">BraseroSessionError</a>;
-#define             <a href="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-IS-VALID:CAPS">BRASERO_SESSION_IS_VALID</a>            (result_MACRO)
-<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> * <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-new">brasero_session_cfg_new</a>             (void);
-<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError">BraseroSessionError</a>  <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-get-error">brasero_session_cfg_get_error</a>      (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);
-void                <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-add-flags">brasero_session_cfg_add_flags</a>       (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);
-void                <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-remove-flags">brasero_session_cfg_remove_flags</a>    (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-supported">brasero_session_cfg_is_supported</a>    (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flag);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-compulsory">brasero_session_cfg_is_compulsory</a>   (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flag);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-has-default-output-path">brasero_session_cfg_has_default_output_path</a>
-                                                        (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);
-void                <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-enable">brasero_session_cfg_enable</a>          (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);
-void                <a href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-disable">brasero_session_cfg_disable</a>         (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);
+                    <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg">BraseroSessionCfg</a>;
+#define             <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BRASERO-DRIVE-PROPERTIES-FLAGS:CAPS" title="BRASERO_DRIVE_PROPERTIES_FLAGS">BRASERO_DRIVE_PROPERTIES_FLAGS</a>
+enum                <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError" title="enum BraseroSessionError">BraseroSessionError</a>;
+#define             <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-IS-VALID:CAPS" title="BRASERO_SESSION_IS_VALID()">BRASERO_SESSION_IS_VALID</a>            (result_MACRO)
+<a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="returnvalue">BraseroSessionCfg</span></a> * <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-new" title="brasero_session_cfg_new ()">brasero_session_cfg_new</a>             (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError" title="enum BraseroSessionError"><span class="returnvalue">BraseroSessionError</span></a>  <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-get-error" title="brasero_session_cfg_get_error ()">brasero_session_cfg_get_error</a>      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-add-flags" title="brasero_session_cfg_add_flags ()">brasero_session_cfg_add_flags</a>       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-remove-flags" title="brasero_session_cfg_remove_flags ()">brasero_session_cfg_remove_flags</a>    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-supported" title="brasero_session_cfg_is_supported ()">brasero_session_cfg_is_supported</a>    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flag</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-compulsory" title="brasero_session_cfg_is_compulsory ()">brasero_session_cfg_is_compulsory</a>   (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flag</code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-has-default-output-path" title="brasero_session_cfg_has_default_output_path ()">brasero_session_cfg_has_default_output_path</a>
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-enable" title="brasero_session_cfg_enable ()">brasero_session_cfg_enable</a>          (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-disable" title="brasero_session_cfg_disable ()">brasero_session_cfg_disable</a>         (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);
 </pre>
 </div>
 <div class="refsect1" title="Description">
 <a name="libbrasero-burn-BraseroSessionCfg.description"></a><h2>Description</h2>
 <p>
 This object configures automatically a session reacting to any change
-made to the various parameters.</p>
+made to the various parameters.
+</p>
 </div>
 <div class="refsect1" title="Details">
 <a name="libbrasero-burn-BraseroSessionCfg.details"></a><h2>Details</h2>
@@ -127,14 +124,15 @@ made to the various parameters.</p>
 <hr>
 <div class="refsect2" title="brasero_session_cfg_new ()">
 <a name="brasero-session-cfg-new"></a><h3>brasero_session_cfg_new ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> * brasero_session_cfg_new             (void);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="returnvalue">BraseroSessionCfg</span></a> * brasero_session_cfg_new             (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
-Creates a new <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> object.</p>
+Creates a new <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> object.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> object.
+<td> a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> object.
 </td>
 </tr></tbody>
 </table></div>
@@ -142,21 +140,22 @@ Creates a new <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"
 <hr>
 <div class="refsect2" title="brasero_session_cfg_get_error ()">
 <a name="brasero-session-cfg-get-error"></a><h3>brasero_session_cfg_get_error ()</h3>
-<pre class="programlisting"><a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError">BraseroSessionError</a>  brasero_session_cfg_get_error      (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);</pre>
+<pre class="programlisting"><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError" title="enum BraseroSessionError"><span class="returnvalue">BraseroSessionError</span></a>  brasero_session_cfg_get_error      (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);</pre>
 <p>
 This function returns the current status and if
-autoconfiguration is/was successful.</p>
+autoconfiguration is/was successful.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError"><span class="type">BraseroSessionError</span></a>.
+<td> a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError" title="enum BraseroSessionError"><span class="type">BraseroSessionError</span></a>.
 </td>
 </tr>
 </tbody>
@@ -165,21 +164,22 @@ autoconfiguration is/was successful.</p>
 <hr>
 <div class="refsect2" title="brasero_session_cfg_add_flags ()">
 <a name="brasero-session-cfg-add-flags"></a><h3>brasero_session_cfg_add_flags ()</h3>
-<pre class="programlisting">void                brasero_session_cfg_add_flags       (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_session_cfg_add_flags       (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);</pre>
 <p>
-Adds all flags from <em class="parameter"><code>flags</code></em> that are supported.</p>
+Adds all flags from <em class="parameter"><code>flags</code></em> that are supported.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 </tbody>
@@ -188,21 +188,22 @@ Adds all flags from <em class="parameter"><code>flags</code></em> that are suppo
 <hr>
 <div class="refsect2" title="brasero_session_cfg_remove_flags ()">
 <a name="brasero-session-cfg-remove-flags"></a><h3>brasero_session_cfg_remove_flags ()</h3>
-<pre class="programlisting">void                brasero_session_cfg_remove_flags    (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flags);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_session_cfg_remove_flags    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flags</code></em>);</pre>
 <p>
-Removes all flags that are not compulsory.</p>
+Removes all flags that are not compulsory.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flags</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 </tbody>
@@ -211,26 +212,27 @@ Removes all flags that are not compulsory.</p>
 <hr>
 <div class="refsect2" title="brasero_session_cfg_is_supported ()">
 <a name="brasero-session-cfg-is-supported"></a><h3>brasero_session_cfg_is_supported ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_session_cfg_is_supported    (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flag);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_session_cfg_is_supported    (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flag</code></em>);</pre>
 <p>
-Checks whether a particular flag is supported.</p>
+Checks whether a particular flag is supported.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flag</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is supported;
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is supported;
 FALSE otherwise.
 </td>
 </tr>
@@ -240,26 +242,27 @@ FALSE otherwise.
 <hr>
 <div class="refsect2" title="brasero_session_cfg_is_compulsory ()">
 <a name="brasero-session-cfg-is-compulsory"></a><h3>brasero_session_cfg_is_compulsory ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_session_cfg_is_compulsory   (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg,
-                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a> flag);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_session_cfg_is_compulsory   (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>,
+                                                         <em class="parameter"><code><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a> flag</code></em>);</pre>
 <p>
-Checks whether a particular flag is compulsory.</p>
+Checks whether a particular flag is compulsory.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>flag</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
+<td>a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag"><span class="type">BraseroBurnFlag</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is compulsory;
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it is compulsory;
 FALSE otherwise.
 </td>
 </tr>
@@ -269,23 +272,24 @@ FALSE otherwise.
 <hr>
 <div class="refsect2" title="brasero_session_cfg_has_default_output_path ()">
 <a name="brasero-session-cfg-has-default-output-path"></a><h3>brasero_session_cfg_has_default_output_path ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_session_cfg_has_default_output_path
-                                                        (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>            brasero_session_cfg_has_default_output_path
+                                                        (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);</pre>
 <p>
 This function returns whether the path returned
-by <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output"><code class="function">brasero_burn_session_get_output()</code></a> is an 
-automatically created one.</p>
+by <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output" title="brasero_burn_session_get_output ()"><code class="function">brasero_burn_session_get_output()</code></a> is an 
+automatically created one.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody>
 <tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr>
 <tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the path(s)
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the path(s)
 creation is handled by <em class="parameter"><code>session</code></em>, FALSE if it was
 set.
 </td>
@@ -296,14 +300,15 @@ set.
 <hr>
 <div class="refsect2" title="brasero_session_cfg_enable ()">
 <a name="brasero-session-cfg-enable"></a><h3>brasero_session_cfg_enable ()</h3>
-<pre class="programlisting">void                brasero_session_cfg_enable          (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_session_cfg_enable          (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);</pre>
 <p>
-This function (re)-enables autoconfiguration</p>
+This function (re)-enables autoconfiguration
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -311,14 +316,15 @@ This function (re)-enables autoconfiguration</p>
 <hr>
 <div class="refsect2" title="brasero_session_cfg_disable ()">
 <a name="brasero-session-cfg-disable"></a><h3>brasero_session_cfg_disable ()</h3>
-<pre class="programlisting">void                brasero_session_cfg_disable         (<a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg">BraseroSessionCfg</a> *cfg);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_session_cfg_disable         (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a> *cfg</code></em>);</pre>
 <p>
-This function disables autoconfiguration</p>
+This function disables autoconfiguration
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><em class="parameter"><code>cfg</code></em> :</span></p></td>
-<td> a <a href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
+<td>a <a class="link" href="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg" title="BraseroSessionCfg"><span class="type">BraseroSessionCfg</span></a>
 </td>
 </tr></tbody>
 </table></div>
@@ -326,11 +332,11 @@ This function disables autoconfiguration</p>
 </div>
 <div class="refsect1" title="See Also">
 <a name="libbrasero-burn-BraseroSessionCfg.see-also"></a><h2>See Also</h2>
-<a href="libbrasero-burn-BraseroBurn.html#BraseroBurn"><span class="type">BraseroBurn</span></a>, <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
+<a class="link" href="libbrasero-burn-BraseroBurn.html#BraseroBurn" title="BraseroBurn"><span class="type">BraseroBurn</span></a>, <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="BraseroBurnSession"><span class="type">BraseroBurnSession</span></a>
 </div>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

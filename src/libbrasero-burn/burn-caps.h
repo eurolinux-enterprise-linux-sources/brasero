@@ -38,6 +38,7 @@
 #include "brasero-track-type.h"
 #include "brasero-track-type-private.h"
 #include "brasero-plugin.h"
+#include "brasero-plugin-information.h"
 #include "brasero-plugin-registration.h"
 
 G_BEGIN_DECLS
@@ -89,12 +90,16 @@ typedef struct {
 	GObjectClass parent_class;
 } BraseroBurnCapsClass;
 
-GType brasero_burn_caps_get_type();
+GType brasero_burn_caps_get_type (void);
 
-BraseroBurnCaps *brasero_burn_caps_get_default ();
+BraseroBurnCaps *brasero_burn_caps_get_default (void);
+
+BraseroPlugin *
+brasero_caps_link_need_download (BraseroCapsLink *link);
 
 gboolean
-brasero_caps_link_active (BraseroCapsLink *link);
+brasero_caps_link_active (BraseroCapsLink *link,
+                          gboolean ignore_plugin_errors);
 
 gboolean
 brasero_burn_caps_is_input (BraseroBurnCaps *self,
@@ -107,6 +112,10 @@ brasero_burn_caps_find_start_caps (BraseroBurnCaps *self,
 gboolean
 brasero_caps_is_compatible_type (const BraseroCaps *caps,
 				 const BraseroTrackType *type);
+
+BraseroBurnResult
+brasero_caps_link_check_recorder_flags_for_input (BraseroCapsLink *link,
+                                                  BraseroBurnFlag session_flags);
 
 G_END_DECLS
 

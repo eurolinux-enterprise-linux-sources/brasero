@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
 <link rel="prev" href="ch01.html" title="API Reference for Libbrasero-media">
 <link rel="next" href="libbrasero-media-brasero-units.html" title="brasero-units">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-media">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -41,45 +37,46 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-media-brasero-media.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">#define             <a href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MAJOR:CAPS">LIBBRASERO_MEDIA_VERSION_MAJOR</a>
-#define             <a href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MINOR:CAPS">LIBBRASERO_MEDIA_VERSION_MINOR</a>
-#define             <a href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MICRO:CAPS">LIBBRASERO_MEDIA_VERSION_MICRO</a>
-#define             <a href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-AGE:CAPS">LIBBRASERO_MEDIA_AGE</a>
-#define             <a href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-INSTALL:CAPS">LIBBRASERO_MEDIA_INSTALL</a>
-void                <a href="libbrasero-media-brasero-media.html#brasero-media-library-start">brasero_media_library_start</a>         (void);
-void                <a href="libbrasero-media-brasero-media.html#brasero-media-library-stop">brasero_media_library_stop</a>          (void);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup">GOptionGroup</a> *      <a href="libbrasero-media-brasero-media.html#brasero-media-get-option-group">brasero_media_get_option_group</a>      (void);
-<a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark">GQuark</a>              <a href="libbrasero-media-brasero-media.html#brasero-media-quark">brasero_media_quark</a>                 (void);
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIA-ERROR:CAPS">BRASERO_MEDIA_ERROR</a>
-enum                <a href="libbrasero-media-brasero-media.html#BraseroMediaError">BraseroMediaError</a>;
-enum                <a href="libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>;
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDROM:CAPS">BRASERO_MEDIUM_CDROM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDR:CAPS">BRASERO_MEDIUM_CDR</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDRW:CAPS">BRASERO_MEDIUM_CDRW</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-ROM:CAPS">BRASERO_MEDIUM_DVD_ROM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR:CAPS">BRASERO_MEDIUM_DVDR</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW:CAPS">BRASERO_MEDIUM_DVDRW</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-RESTRICTED:CAPS">BRASERO_MEDIUM_DVDRW_RESTRICTED</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-DL:CAPS">BRASERO_MEDIUM_DVDR_DL</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-JUMP-DL:CAPS">BRASERO_MEDIUM_DVDR_JUMP_DL</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS:CAPS">BRASERO_MEDIUM_DVDR_PLUS</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS:CAPS">BRASERO_MEDIUM_DVDRW_PLUS</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS-DL:CAPS">BRASERO_MEDIUM_DVDR_PLUS_DL</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS-DL:CAPS">BRASERO_MEDIUM_DVDRW_PLUS_DL</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-RAM:CAPS">BRASERO_MEDIUM_DVD_RAM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BD-ROM:CAPS">BRASERO_MEDIUM_BD_ROM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM:CAPS">BRASERO_MEDIUM_BDR_SRM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM-POW:CAPS">BRASERO_MEDIUM_BDR_SRM_POW</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-RANDOM:CAPS">BRASERO_MEDIUM_BDR_RANDOM</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDRE:CAPS">BRASERO_MEDIUM_BDRE</a>
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-VALID:CAPS">BRASERO_MEDIUM_VALID</a>                (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-TYPE:CAPS">BRASERO_MEDIUM_TYPE</a>                 (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-ATTR:CAPS">BRASERO_MEDIUM_ATTR</a>                 (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-STATUS:CAPS">BRASERO_MEDIUM_STATUS</a>               (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-SUBTYPE:CAPS">BRASERO_MEDIUM_SUBTYPE</a>              (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-INFO:CAPS">BRASERO_MEDIUM_INFO</a>                 (media)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-IS:CAPS">BRASERO_MEDIUM_IS</a>                   (media, type)
-#define             <a href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-RANDOM-WRITABLE:CAPS">BRASERO_MEDIUM_RANDOM_WRITABLE</a>      (media)
+<pre class="synopsis">#define             <a class="link" href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MAJOR:CAPS" title="LIBBRASERO_MEDIA_VERSION_MAJOR">LIBBRASERO_MEDIA_VERSION_MAJOR</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MINOR:CAPS" title="LIBBRASERO_MEDIA_VERSION_MINOR">LIBBRASERO_MEDIA_VERSION_MINOR</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MICRO:CAPS" title="LIBBRASERO_MEDIA_VERSION_MICRO">LIBBRASERO_MEDIA_VERSION_MICRO</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-AGE:CAPS" title="LIBBRASERO_MEDIA_AGE">LIBBRASERO_MEDIA_AGE</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-INSTALL:CAPS" title="LIBBRASERO_MEDIA_INSTALL">LIBBRASERO_MEDIA_INSTALL</a>
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-media-brasero-media.html#brasero-media-library-start" title="brasero_media_library_start ()">brasero_media_library_start</a>         (<em class="parameter"><code><span class="type">void</span></code></em>);
+<span class="returnvalue">void</span>                <a class="link" href="libbrasero-media-brasero-media.html#brasero-media-library-stop" title="brasero_media_library_stop ()">brasero_media_library_stop</a>          (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionGroup"><span class="returnvalue">GOptionGroup</span></a> *      <a class="link" href="libbrasero-media-brasero-media.html#brasero-media-get-option-group" title="brasero_media_get_option_group ()">brasero_media_get_option_group</a>      (<em class="parameter"><code><span class="type">void</span></code></em>);
+<a href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              <a class="link" href="libbrasero-media-brasero-media.html#brasero-media-quark" title="brasero_media_quark ()">brasero_media_quark</a>                 (<em class="parameter"><code><span class="type">void</span></code></em>);
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIA-ERROR:CAPS" title="BRASERO_MEDIA_ERROR">BRASERO_MEDIA_ERROR</a>
+enum                <a class="link" href="libbrasero-media-brasero-media.html#BraseroMediaError" title="enum BraseroMediaError">BraseroMediaError</a>;
+enum                <a class="link" href="libbrasero-media-brasero-media.html#BraseroMedia" title="enum BraseroMedia">BraseroMedia</a>;
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDROM:CAPS" title="BRASERO_MEDIUM_CDROM">BRASERO_MEDIUM_CDROM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDR:CAPS" title="BRASERO_MEDIUM_CDR">BRASERO_MEDIUM_CDR</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDRW:CAPS" title="BRASERO_MEDIUM_CDRW">BRASERO_MEDIUM_CDRW</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-ROM:CAPS" title="BRASERO_MEDIUM_DVD_ROM">BRASERO_MEDIUM_DVD_ROM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR:CAPS" title="BRASERO_MEDIUM_DVDR">BRASERO_MEDIUM_DVDR</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW:CAPS" title="BRASERO_MEDIUM_DVDRW">BRASERO_MEDIUM_DVDRW</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-RESTRICTED:CAPS" title="BRASERO_MEDIUM_DVDRW_RESTRICTED">BRASERO_MEDIUM_DVDRW_RESTRICTED</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-DL:CAPS" title="BRASERO_MEDIUM_DVDR_DL">BRASERO_MEDIUM_DVDR_DL</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-JUMP-DL:CAPS" title="BRASERO_MEDIUM_DVDR_JUMP_DL">BRASERO_MEDIUM_DVDR_JUMP_DL</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS:CAPS" title="BRASERO_MEDIUM_DVDR_PLUS">BRASERO_MEDIUM_DVDR_PLUS</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS:CAPS" title="BRASERO_MEDIUM_DVDRW_PLUS">BRASERO_MEDIUM_DVDRW_PLUS</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS-DL:CAPS" title="BRASERO_MEDIUM_DVDR_PLUS_DL">BRASERO_MEDIUM_DVDR_PLUS_DL</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS-DL:CAPS" title="BRASERO_MEDIUM_DVDRW_PLUS_DL">BRASERO_MEDIUM_DVDRW_PLUS_DL</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-RAM:CAPS" title="BRASERO_MEDIUM_DVD_RAM">BRASERO_MEDIUM_DVD_RAM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BD-ROM:CAPS" title="BRASERO_MEDIUM_BD_ROM">BRASERO_MEDIUM_BD_ROM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM:CAPS" title="BRASERO_MEDIUM_BDR_SRM">BRASERO_MEDIUM_BDR_SRM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM-POW:CAPS" title="BRASERO_MEDIUM_BDR_SRM_POW">BRASERO_MEDIUM_BDR_SRM_POW</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-RANDOM:CAPS" title="BRASERO_MEDIUM_BDR_RANDOM">BRASERO_MEDIUM_BDR_RANDOM</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDRE:CAPS" title="BRASERO_MEDIUM_BDRE">BRASERO_MEDIUM_BDRE</a>
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-VALID:CAPS" title="BRASERO_MEDIUM_VALID()">BRASERO_MEDIUM_VALID</a>                (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-TYPE:CAPS" title="BRASERO_MEDIUM_TYPE()">BRASERO_MEDIUM_TYPE</a>                 (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-ATTR:CAPS" title="BRASERO_MEDIUM_ATTR()">BRASERO_MEDIUM_ATTR</a>                 (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-STATUS:CAPS" title="BRASERO_MEDIUM_STATUS()">BRASERO_MEDIUM_STATUS</a>               (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-SUBTYPE:CAPS" title="BRASERO_MEDIUM_SUBTYPE()">BRASERO_MEDIUM_SUBTYPE</a>              (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-INFO:CAPS" title="BRASERO_MEDIUM_INFO()">BRASERO_MEDIUM_INFO</a>                 (media)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-IS:CAPS" title="BRASERO_MEDIUM_IS()">BRASERO_MEDIUM_IS</a>                   (media,
+                                                         type)
+#define             <a class="link" href="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-RANDOM-WRITABLE:CAPS" title="BRASERO_MEDIUM_RANDOM_WRITABLE()">BRASERO_MEDIUM_RANDOM_WRITABLE</a>      (media)
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -126,30 +123,42 @@ enum                <a href="libbrasero-media-brasero-media.html#BraseroMedia">B
 <hr>
 <div class="refsect2" title="brasero_media_library_start ()">
 <a name="brasero-media-library-start"></a><h3>brasero_media_library_start ()</h3>
-<pre class="programlisting">void                brasero_media_library_start         (void);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_media_library_start         (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+Initialize the library.
+</p>
+<p>
+You should call this function before using any other from the library.
+</p>
+<p>
+Rename to: init
 </p>
 </div>
 <hr>
 <div class="refsect2" title="brasero_media_library_stop ()">
 <a name="brasero-media-library-stop"></a><h3>brasero_media_library_stop ()</h3>
-<pre class="programlisting">void                brasero_media_library_stop          (void);</pre>
+<pre class="programlisting"><span class="returnvalue">void</span>                brasero_media_library_stop          (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
+De-initialize the library once you do not need the library anymore.
+</p>
+<p>
+Rename to: deinit
 </p>
 </div>
 <hr>
 <div class="refsect2" title="brasero_media_get_option_group ()">
 <a name="brasero-media-get-option-group"></a><h3>brasero_media_get_option_group ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup">GOptionGroup</a> *      brasero_media_get_option_group      (void);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionGroup"><span class="returnvalue">GOptionGroup</span></a> *      brasero_media_get_option_group      (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 Returns a GOptionGroup for the commandline arguments recognized by libbrasero-media.
-You should add this to your GOptionContext if your are using <a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#g-option-context-parse"><code class="function">g_option_context_parse()</code></a>
-to parse your commandline arguments.</p>
+You should add this to your GOptionContext if your are using <a href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#g-option-context-parse"><code class="function">g_option_context_parse()</code></a>
+to parse your commandline arguments.
+</p>
 <div class="variablelist"><table border="0">
 <col align="left" valign="top">
 <tbody><tr>
 <td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
-<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup"><span class="type">GOptionGroup</span></a> *
+<td> a <a href="/usr/share/gtk-doc/html/glib/glib-Commandline-option-parser.html#GOptionGroup"><span class="type">GOptionGroup</span></a> *
 </td>
 </tr></tbody>
 </table></div>
@@ -157,7 +166,7 @@ to parse your commandline arguments.</p>
 <hr>
 <div class="refsect2" title="brasero_media_quark ()">
 <a name="brasero-media-quark"></a><h3>brasero_media_quark ()</h3>
-<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Quarks.html#GQuark">GQuark</a>              brasero_media_quark                 (void);</pre>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Quarks.html#GQuark"><span class="returnvalue">GQuark</span></a>              brasero_media_quark                 (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>
 </p>
 <div class="variablelist"><table border="0">
@@ -175,7 +184,8 @@ to parse your commandline arguments.</p>
 <pre class="programlisting">#define BRASERO_MEDIA_ERROR brasero_media_quark()
 </pre>
 <p>
-The GQuark used for BraseroMediaError</p>
+The GQuark used for BraseroMediaError
+</p>
 </div>
 <hr>
 <div class="refsect2" title="enum BraseroMediaError">
@@ -187,7 +197,8 @@ The GQuark used for BraseroMediaError</p>
 } BraseroMediaError;
 </pre>
 <p>
-Error codes returned by libbrasero-media</p>
+Error codes returned by libbrasero-media
+</p>
 </div>
 <hr>
 <div class="refsect2" title="enum BraseroMedia">
@@ -243,7 +254,8 @@ Error codes returned by libbrasero-media</p>
 </pre>
 <p>
 This enum allows to define all characteristics for a media (closed, writable, ...)
-and identify all types of optical media.</p>
+and identify all types of optical media.
+</p>
 </div>
 <hr>
 <div class="refsect2" title="BRASERO_MEDIUM_CDROM">
@@ -515,6 +527,6 @@ and identify all types of optical media.</p>
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

@@ -33,8 +33,6 @@
 
 #include <gtk/gtk.h>
 
-#include <gconf/gconf-client.h>
-
 #include "brasero-misc.h"
 
 #include "eggtreemultidnd.h"
@@ -60,7 +58,7 @@
 #include "brasero-session.h"
 
 #include "brasero-volume.h"
-
+#include "brasero-setting.h"
 
 typedef struct _BraseroDataDiscPrivate BraseroDataDiscPrivate;
 struct _BraseroDataDiscPrivate
@@ -124,11 +122,11 @@ static GtkActionEntry entries [] = {
 	{"ContextualMenu", NULL, N_("Menu")},
 	{"OpenFile", GTK_STOCK_OPEN, NULL, NULL, N_("Open the selected files"),
 	 G_CALLBACK (brasero_data_disc_open_activated_cb)},
-	{"RenameData", NULL, N_("R_ename..."), NULL, N_("Rename the selected file"),
+	{"RenameData", NULL, N_("R_ename…"), NULL, N_("Rename the selected file"),
 	 G_CALLBACK (brasero_data_disc_rename_activated_cb)},
 	{"DeleteData", GTK_STOCK_REMOVE, NULL, NULL, N_("Remove the selected files from the project"),
 	 G_CALLBACK (brasero_data_disc_delete_activated_cb)},
-	{"PasteData", GTK_STOCK_PASTE, NULL, NULL, N_("Add the files stored in the clipboard"),
+	{"PasteData", NULL, N_("Paste files"), NULL, N_("Add the files stored in the clipboard"),
 	 G_CALLBACK (brasero_data_disc_paste_activated_cb)},
 	{"NewFolder", "folder-new", N_("New _Folder"), NULL, N_("Create a new empty folder"),
 	 G_CALLBACK (brasero_data_disc_new_folder_clicked_cb)},
@@ -164,8 +162,6 @@ enum {
 	TARGET_URIS_LIST,
 };
 
-#define GCONF_COLUMN_KEY				"/apps/brasero/display/data_column"
-#define GCONF_COLUMN_ORDER_KEY		"/apps/brasero/display/data_sort_order"
 
 static GtkTargetEntry ntables_cd [] = {
 	{BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST, GTK_TARGET_SAME_WIDGET, TREE_MODEL_ROW},
@@ -215,7 +211,7 @@ brasero_data_disc_import_failure_dialog (BraseroDataDisc *disc,
 {
 	brasero_app_alert (brasero_app_get_default (),
 			   _("The session could not be imported."),
-			   error?error->message:_("An unknown error occured"),
+			   error?error->message:_("An unknown error occurred"),
 			   GTK_MESSAGE_WARNING);
 }
 
@@ -257,7 +253,7 @@ brasero_data_disc_import_session_cb (GtkToggleAction *action,
 	if (!medium)
 		return;
 
-	brasero_notify_message_remove (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_MULTISESSION);
+	brasero_notify_message_remove (priv->message, BRASERO_NOTIFY_CONTEXT_MULTISESSION);
 	res = brasero_data_disc_import_session (self,
 						medium,
 						gtk_toggle_action_get_active (action));
@@ -533,7 +529,7 @@ brasero_data_disc_project_loading_cb (BraseroTrackDataCfg *project,
 	priv = BRASERO_DATA_DISC_PRIVATE (self);
 	priv->loading = TRUE;
 
-	message = brasero_notify_get_message_by_context_id (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_LOADING);
+	message = brasero_notify_get_message_by_context_id (priv->message, BRASERO_NOTIFY_CONTEXT_LOADING);
 	if (!message)
 		return;
 
@@ -552,7 +548,7 @@ brasero_data_disc_project_loaded_cb (BraseroTrackDataCfg *project,
 	priv = BRASERO_DATA_DISC_PRIVATE (self);
 	priv->loading = FALSE;
 
-	message = brasero_notify_get_message_by_context_id (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_LOADING);
+	message = brasero_notify_get_message_by_context_id (priv->message, BRASERO_NOTIFY_CONTEXT_LOADING);
 	if (!message)
 		return;
 
@@ -564,18 +560,18 @@ brasero_data_disc_project_loaded_cb (BraseroTrackDataCfg *project,
 		brasero_disc_message_set_secondary (BRASERO_DISC_MESSAGE (message),
 						    _("Discard the current modified project"));
 
-		brasero_disc_message_set_image (BRASERO_DISC_MESSAGE (message),GTK_STOCK_DIALOG_WARNING);
+		gtk_info_bar_set_message_type (GTK_INFO_BAR (message), GTK_MESSAGE_WARNING);
+
 		brasero_disc_message_set_progress_active (BRASERO_DISC_MESSAGE (message), FALSE);
-		brasero_notify_button_add (BRASERO_NOTIFY (priv->message),
-					   BRASERO_DISC_MESSAGE (message),
-					   _("_Discard"),
-					   _("Discard the current modified project"),
-					   GTK_RESPONSE_CANCEL);
-		brasero_notify_button_add (BRASERO_NOTIFY (priv->message),
-					   BRASERO_DISC_MESSAGE (message),
-					   _("_Continue"),
-					   _("Continue with the current modified project"),
-					   GTK_RESPONSE_OK);
+		gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+								      _("_Discard"),
+							    	      GTK_RESPONSE_CANCEL),
+					     _("Discard the current modified project"));
+
+		gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+								      _("_Continue"),
+							    	      GTK_RESPONSE_OK),
+					     _("Continue with the current modified project"));
 
 		brasero_disc_message_add_errors (BRASERO_DISC_MESSAGE (message),
 						 priv->load_errors);
@@ -595,10 +591,8 @@ static gboolean
 brasero_data_disc_launch_image (gpointer data)
 {
 	gchar *uri = data;
-	GtkWidget *manager;
 
-	manager = brasero_app_get_project_manager (brasero_app_get_default ());
-	brasero_project_manager_iso (BRASERO_PROJECT_MANAGER (manager), uri);
+	brasero_app_image (brasero_app_get_default (), NULL, uri, FALSE);
 	g_free (uri);
 
 	return FALSE;
@@ -625,14 +619,14 @@ brasero_data_disc_image_uri_cb (BraseroTrackDataCfg *vfs,
 
 	name = brasero_utils_get_uri_name (uri);
 	/* Translators: %s is the name of the image */
-	string = g_strdup_printf (_("There is only one selected file (\"%s\"). It is the image of a disc and its contents can be burnt."), name);
+	string = g_strdup_printf (_("There is only one selected file (\"%s\"). It is the image of a disc and its contents can be burned"), name);
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog), string);
 	g_free (string);
 	g_free (name);
 
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Burn as _File"), GTK_RESPONSE_NO);
+	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Burn as _Data"), GTK_RESPONSE_NO);
 
-	button = brasero_utils_make_button (_("Burn _Contents..."),
+	button = brasero_utils_make_button (_("Burn as _Image"),
 	                                    NULL,
 					    "media-optical-burn",
 					    GTK_ICON_SIZE_BUTTON);
@@ -795,7 +789,7 @@ brasero_data_disc_name_collision_cb (BraseroTrackDataCfg *project,
 	g_free (string);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-	                                          _("A file with this name already exists in the folder.  Replacing it will overwrite its content (on the disc only)."));
+	                                          _("A file with this name already exists in the folder.  Replacing it will overwrite its content on the disc to be burnt."));
 
 	/* Translators: Keep means we're keeping the files that already existed
 	 * in the project.
@@ -842,7 +836,7 @@ brasero_data_disc_2G_file_cb (BraseroTrackDataCfg *project,
 	if (priv->reject_deep_files)
 		return FALSE;
 
-	string = g_strdup_printf (_("Do you really want to add \"%s\" to the selection and use the third version of ISO9660 standard to support it?"), name);
+	string = g_strdup_printf (_("Do you really want to add \"%s\" to the selection and use the third version of the ISO9660 standard to support it?"), name);
 	dialog = brasero_app_dialog (brasero_app_get_default (),
 				     string,
 				     GTK_BUTTONS_NONE,
@@ -850,13 +844,11 @@ brasero_data_disc_2G_file_cb (BraseroTrackDataCfg *project,
 	g_free (string);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
-						  _("The size of the file is over 2 GiB. Files larger than 2 GiB are not supported by ISO9660 standard in its first and second versions (the most widespread ones)."
-						    "\nIt is recommended to use the third version of ISO9660 standard which is supported by most of the operating systems including Linux and all versions of Windows ©."
-						    "\nHowever MacOS X cannot read images created with version 3 of ISO9660 standard."));
+						  _("The size of the file is over 2 GiB. Files larger than 2 GiB are not supported by the ISO9660 standard in its first and second versions (the most widespread ones)."
+						    "\nIt is recommended to use the third version of the ISO9660 standard, which is supported by most operating systems, including Linux and all versions of Windows ©."
+						    "\nHowever, Mac OS X cannot read images created with version 3 of the ISO9660 standard."));
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Ne_ver Add Such File"), GTK_RESPONSE_REJECT);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_NO);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Add File"), GTK_RESPONSE_YES);
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Al_ways Add Such File"), GTK_RESPONSE_ACCEPT);
 
 	gtk_widget_show_all (dialog);
@@ -897,11 +889,9 @@ brasero_data_disc_deep_directory_cb (BraseroTrackDataCfg *project,
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (dialog),
 						  _("The children of this directory will have 7 parent directories."
 						    "\nBrasero can create an image of such a file hierarchy and burn it; but the disc may not be readable on all operating systems."
-						    "\nNOTE: Such a file hierarchy is known to work on linux."));
+						    "\nNote: Such a file hierarchy is known to work on Linux."));
 
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Ne_ver Add Such File"), GTK_RESPONSE_REJECT);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), GTK_STOCK_CANCEL, GTK_RESPONSE_NO);
-	gtk_dialog_add_button (GTK_DIALOG (dialog), _("_Add File"), GTK_RESPONSE_YES);
 	gtk_dialog_add_button (GTK_DIALOG (dialog), _("Al_ways Add Such File"), GTK_RESPONSE_ACCEPT);
 
 	gtk_widget_show_all (dialog);
@@ -1082,7 +1072,7 @@ brasero_data_disc_remove_available_medium (BraseroDataDisc *self,
 	action = gtk_action_group_get_action (priv->import_group, action_name);
 	g_free (action_name);
 
-	brasero_notify_message_remove (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_MULTISESSION);
+	brasero_notify_message_remove (priv->message, BRASERO_NOTIFY_CONTEXT_MULTISESSION);
 
 	merge_id = GPOINTER_TO_INT (g_object_get_data (G_OBJECT (action), BRASERO_DATA_DISC_MERGE_ID));
 	gtk_ui_manager_remove_ui (priv->manager, merge_id);
@@ -1116,8 +1106,8 @@ brasero_data_disc_session_available_cb (BraseroTrackDataCfg *session,
 		/* ask user */
 		volume_name = brasero_volume_get_name (BRASERO_VOLUME (medium));
 		/* Translators: %s is the name of the volume to import */
-		string = g_strdup_printf (_("Do you want to import the session from \'%s\'?"), volume_name);
-		message = brasero_notify_message_add (BRASERO_NOTIFY (priv->message),
+		string = g_strdup_printf (_("Do you want to import the session from \"%s\"?"), volume_name);
+		message = brasero_notify_message_add (priv->message,
 						      string,
 						      _("That way, old files from previous sessions will be usable after burning."),
 						      10000,
@@ -1125,14 +1115,11 @@ brasero_data_disc_session_available_cb (BraseroTrackDataCfg *session,
 		g_free (volume_name);
 		g_free (string);
 
-		brasero_disc_message_set_image (BRASERO_DISC_MESSAGE (message),
-						GTK_STOCK_DIALOG_INFO);
-
-		brasero_notify_button_add (BRASERO_NOTIFY (priv->message),
-					   BRASERO_DISC_MESSAGE (message),
-					   _("I_mport Session"),
-					   _("Click here to import its contents"),
-					   GTK_RESPONSE_OK);
+		gtk_info_bar_set_message_type (GTK_INFO_BAR (message), GTK_MESSAGE_INFO);
+		gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+								      _("I_mport Session"),
+							    	      GTK_RESPONSE_OK),
+					     _("Click here to import its contents"));
 
 		/* no need to ref the medium since its removal would cause the
 		 * hiding of the message it's associated with */
@@ -1204,11 +1191,30 @@ brasero_data_disc_clear (BraseroDisc *disc)
 
 	priv->overburning = FALSE;
 
- 	brasero_notify_message_remove (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_SIZE);
-	brasero_notify_message_remove (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_LOADING);
-	brasero_notify_message_remove (BRASERO_NOTIFY (priv->message), BRASERO_NOTIFY_CONTEXT_MULTISESSION);
+ 	brasero_notify_message_remove (priv->message, BRASERO_NOTIFY_CONTEXT_SIZE);
+	brasero_notify_message_remove (priv->message, BRASERO_NOTIFY_CONTEXT_LOADING);
+	brasero_notify_message_remove (priv->message, BRASERO_NOTIFY_CONTEXT_MULTISESSION);
 
 	brasero_track_data_cfg_reset (priv->project);
+}
+
+static GSList *
+brasero_data_disc_convert_tree_paths_to_references (GtkTreeModel *model,
+                                            	    GList *treepaths)
+{
+	GList *iter;
+	GSList *retval = NULL;
+
+	for (iter = treepaths; iter; iter = iter->next) {
+		GtkTreePath *treepath;
+		GtkTreeRowReference *reference;
+
+		treepath = iter->data;
+		reference = gtk_tree_row_reference_new (model, treepath);
+		retval = g_slist_prepend (retval, reference);
+	}
+
+	return retval;
 }
 
 static void
@@ -1217,23 +1223,33 @@ brasero_data_disc_delete_selected (BraseroDisc *disc)
 	BraseroDataDiscPrivate *priv;
 	GtkTreeSelection *selection;
 	GtkTreePath *cursorpath;
-	GList *list, *iter;
+	GSList *references;
+	GSList *iter;
+	GList *list;
 
 	priv = BRASERO_DATA_DISC_PRIVATE (disc);
 
 	/* we must start by the end for the treepaths to point to valid rows */
 	selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->tree));
 	list = gtk_tree_selection_get_selected_rows (selection, NULL);
-	list = g_list_reverse (list);
 
 	gtk_tree_view_get_cursor (GTK_TREE_VIEW (priv->tree),
 				  &cursorpath,
 				  NULL);
 
-	for (iter = list; iter; iter = iter->next) {
+	/* Since we are going to modify the model by suppressing the selected
+	 * rows, take a safe approach and convert all tree paths into references */
+	references = brasero_data_disc_convert_tree_paths_to_references (GTK_TREE_MODEL (priv->project), list);
+	g_list_foreach (list, (GFunc) gtk_tree_path_free, NULL);
+	g_list_free (list);
+
+	for (iter = references; iter; iter = iter->next) {
+		GtkTreeRowReference *reference;
 		GtkTreePath *treepath;
 
-		treepath = iter->data;
+		reference = iter->data;
+		treepath = gtk_tree_row_reference_get_path (reference);
+
 		if (cursorpath && !gtk_tree_path_compare (cursorpath, treepath)) {
 			GtkTreePath *tmp_path;
 
@@ -1249,9 +1265,11 @@ brasero_data_disc_delete_selected (BraseroDisc *disc)
 		}
 
 		brasero_track_data_cfg_remove (BRASERO_TRACK_DATA_CFG (priv->project), treepath);
- 		gtk_tree_path_free (treepath);
+
+ 		gtk_tree_row_reference_free (reference);
+		gtk_tree_path_free (treepath);
 	}
-	g_list_free (list);
+	g_slist_free (references);
 
 	if (cursorpath)
 		gtk_tree_path_free (cursorpath);
@@ -1307,20 +1325,16 @@ brasero_data_disc_sort_column_changed (GtkTreeSortable *sortable,
                                        BraseroDataDisc *disc)
 {
 	GtkSortType sort_order;
-	GConfClient *client;
 	gint sort_column;
 
 	gtk_tree_sortable_get_sort_column_id (sortable, &sort_column, &sort_order);
 
-	client = gconf_client_get_default ();
-	gconf_client_set_int (client,
-	                      GCONF_COLUMN_KEY,
-	                      sort_column,
-	                      NULL);
-	gconf_client_set_int (client,
-	                      GCONF_COLUMN_ORDER_KEY,
-	                      sort_order,
-	                      NULL);
+	brasero_setting_set_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_DATA_DISC_COLUMN,
+	                           GINT_TO_POINTER (sort_column));
+	brasero_setting_set_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_DATA_DISC_COLUMN_ORDER,
+	                           GINT_TO_POINTER (sort_order));
 }
 
 static BraseroDiscResult
@@ -1329,23 +1343,25 @@ brasero_data_disc_set_track (BraseroDataDisc *disc,
 {
 	BraseroMedium *loaded_medium;
 	BraseroDataDiscPrivate *priv;
+	BraseroBurnResult result;
 	BraseroStatus *status;
 	GtkWidget *message;
-	GConfClient *client;
 	gint sort_column;
+	gpointer value;
 	gint sort_order;
 
 	priv = BRASERO_DATA_DISC_PRIVATE (disc);
 
 	priv->project = g_object_ref (track);
 
-	client = gconf_client_get_default ();
-	sort_column = gconf_client_get_int (client,
-	                                    GCONF_COLUMN_KEY,
-	                                    NULL);
-	sort_order = gconf_client_get_int (client,
-	                                   GCONF_COLUMN_ORDER_KEY,
-	                                   NULL);
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_DATA_DISC_COLUMN,
+	                           &value);
+	sort_column = GPOINTER_TO_INT (value);
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_DATA_DISC_COLUMN_ORDER,
+	                           &value);
+	sort_order = GPOINTER_TO_INT (value);
 
 	if ((sort_column == BRASERO_DATA_TREE_MODEL_SIZE
 	||   sort_column == BRASERO_DATA_TREE_MODEL_MIME_DESC
@@ -1355,7 +1371,6 @@ brasero_data_disc_set_track (BraseroDataDisc *disc,
 		gtk_tree_sortable_set_sort_column_id (GTK_TREE_SORTABLE (track),
 						      sort_column,
 						      sort_order);
-	g_object_unref (client);
 
 	/* filtered files */
 	priv->filter = brasero_file_filtered_new (priv->project);
@@ -1469,34 +1484,34 @@ brasero_data_disc_set_track (BraseroDataDisc *disc,
 
 	status = brasero_status_new ();
 	brasero_track_get_status (BRASERO_TRACK (track), status);
-
-	if (brasero_status_get_result (status) == BRASERO_BURN_OK) {
-		brasero_status_free (status);
+	result = brasero_status_get_result (status);
+	if (result == BRASERO_BURN_OK || result == BRASERO_BURN_RUNNING) {
+		g_object_unref (status);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->tree), TRUE);
 		gtk_widget_set_sensitive (GTK_WIDGET (priv->filter), TRUE);
 		return BRASERO_DISC_OK;
 	}
 
-	if (brasero_status_get_result (status) != BRASERO_BURN_NOT_READY) {
-		brasero_status_free (status);
+	if (result != BRASERO_BURN_NOT_READY) {
+		g_object_unref (status);
 		return BRASERO_DISC_ERROR_UNKNOWN;
 	}
 
-	message = brasero_notify_message_add (BRASERO_NOTIFY (priv->message),
+	message = brasero_notify_message_add (priv->message,
 					      _("Please wait while the project is loading."),
 					      NULL,
 					      -1,
 					      BRASERO_NOTIFY_CONTEXT_LOADING);
 
-	brasero_disc_message_set_image (BRASERO_DISC_MESSAGE (message),GTK_STOCK_DIALOG_INFO);
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message), GTK_MESSAGE_INFO);
 	brasero_disc_message_set_progress (BRASERO_DISC_MESSAGE (message),
 					   brasero_status_get_progress (status));
 
-	brasero_notify_button_add (BRASERO_NOTIFY (priv->message),
-				   BRASERO_DISC_MESSAGE (message),
-				   _("_Cancel Loading"),
-				   _("Cancel loading current project"),
-				   GTK_RESPONSE_CANCEL);
+	gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+							      _("_Cancel Loading"),
+						    	      GTK_RESPONSE_CANCEL),
+				     _("Cancel loading current project"));
+
 	g_signal_connect (message,
 			  "response",
 			  G_CALLBACK (brasero_data_disc_message_response_cb),
@@ -1505,7 +1520,7 @@ brasero_data_disc_set_track (BraseroDataDisc *disc,
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->tree), FALSE);
 	gtk_widget_set_sensitive (GTK_WIDGET (priv->filter), FALSE);
 
-	brasero_status_free (status);
+	g_object_unref (status);
 	return BRASERO_DISC_OK;
 }
 
@@ -1917,7 +1932,7 @@ brasero_data_disc_rename_activated (BraseroDataDisc *disc)
 
 		gtk_widget_show (frame);
 
-		gtk_box_pack_start (GTK_BOX (GTK_DIALOG (dialog)->vbox), frame, TRUE, TRUE, 0);
+		gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (dialog))), frame, TRUE, TRUE, 0);
 		gtk_widget_show (dialog);
 
 		answer = gtk_dialog_run (GTK_DIALOG (dialog));
@@ -2098,7 +2113,12 @@ brasero_data_disc_button_pressed_cb (GtkTreeView *tree,
 
 	priv = BRASERO_DATA_DISC_PRIVATE (self);
 
-	if (GTK_WIDGET_REALIZED (priv->tree)) {
+	/* Avoid minding signals that happen out of the tree area (like in the 
+	 * headers for example) */
+	if (event->window != gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree)))
+		return FALSE;
+
+	if (gtk_widget_get_realized (priv->tree)) {
 		result = gtk_tree_view_get_path_at_pos (GTK_TREE_VIEW (priv->tree),
 							event->x,
 							event->y,

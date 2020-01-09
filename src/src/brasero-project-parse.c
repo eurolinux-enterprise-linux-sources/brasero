@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 /***************************************************************************
  *            brasero-project-parse.c
  *
@@ -212,6 +214,8 @@ _read_audio_track (xmlDocPtr project,
                         unescaped_uri = g_uri_unescape_string ((char *) uri, NULL);
                         g_free (uri);
 
+			/* Note: this must come before brasero_track_stream_set_boundaries ()
+			 * or we will reset the end point to 0 */
 			brasero_track_stream_set_source (BRASERO_TRACK_STREAM (track), unescaped_uri);
 
 			/* For the moment pretend it is a video file. Since it is BraseroTrackStreamCfg, that
@@ -236,9 +240,9 @@ _read_audio_track (xmlDocPtr project,
 				goto error;
 
                         brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
-                                                                                     -1,
-                                                                                     -1,
-                                                                                     g_ascii_strtoull (silence, NULL, 10));
+                                                             -1,
+                                                             -1,
+                                                             g_ascii_strtoull (silence, NULL, 10));
 			g_free (silence);
 		}
 		else if (!xmlStrcmp (uris->name, (const xmlChar *) "start")) {
@@ -251,9 +255,9 @@ _read_audio_track (xmlDocPtr project,
 				goto error;
 
                         brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
-                                                                                     -1,
-                                                                                     g_ascii_strtoull (start, NULL, 10),
-                                                                                     -1);
+                                                             g_ascii_strtoull (start, NULL, 10),
+                                                             -1,
+                                                             -1);
 			g_free (start);
 		}
 		else if (!xmlStrcmp (uris->name, (const xmlChar *) "end")) {
@@ -266,9 +270,9 @@ _read_audio_track (xmlDocPtr project,
 				goto error;
 
                         brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
-                                                                                      g_ascii_strtoull (end, NULL, 10),
-                                                                                      -1,
-                                                                                      -1);
+                                                             -1,
+                                                             g_ascii_strtoull (end, NULL, 10),
+                                                             -1);
 			g_free (end);
 		}
 		else if (!xmlStrcmp (uris->name, (const xmlChar *) "title")) {
@@ -773,7 +777,7 @@ _save_data_track_xml (xmlTextWriter *project,
 	}
 
 	/* save excluded uris */
-	iter = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (track), FALSE);
+	iter = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (track));
 	for (; iter; iter = iter->next) {
 		xmlChar *escaped;
 
@@ -824,7 +828,7 @@ brasero_project_save_project_xml (BraseroBurnSession *session,
 
 	success = xmlTextWriterStartDocument (project,
 					      NULL,
-					      "UTF8",
+					      "UTF-8",
 					      NULL);
 	if (success < 0)
 		goto error;
@@ -1054,21 +1058,6 @@ error:
 
 #ifdef BUILD_PLAYLIST
 
-static void
-brasero_project_save_audio_playlist_entry (GtkTreeModel *model,
-					   GtkTreeIter *iter,
-					   gchar **uri,
-					   gchar **title,
-					   gboolean *custom_title,
-					   gpointer user_data)
-{
-	gtk_tree_model_get (model, iter,
-			    0, uri,
-			    1, title,
-			    2, custom_title,
-			    -1);
-}
-
 gboolean
 brasero_project_save_audio_project_playlist (BraseroBurnSession *session,
 					     const gchar *uri,
@@ -1076,34 +1065,33 @@ brasero_project_save_audio_project_playlist (BraseroBurnSession *session,
 {
 	TotemPlParserType pl_type;
 	TotemPlParser *parser;
-	GtkListStore *model;
-	GtkTreeIter t_iter;
+	TotemPlPlaylist *playlist;
+	TotemPlPlaylistIter pl_iter;
 	gboolean result;
+	GFile *file;
 	GSList *iter;
-	gchar *path;
 
-    	path = g_filename_from_uri (uri, NULL, NULL);
-    	if (!path)
-		return FALSE;
-
+	file = g_file_new_for_uri (uri);
 	parser = totem_pl_parser_new ();
+	playlist = totem_pl_playlist_new ();
 
-	/* create and populate treemodel */
-	model = gtk_list_store_new (3, G_TYPE_STRING, G_TYPE_STRING, G_TYPE_BOOLEAN);
+	/* populate playlist */
 	iter = brasero_burn_session_get_tracks (session);
 	for (; iter; iter = iter->next) {
 		BraseroTrackStream *track;
+		const gchar *title;
 		gchar *uri;
 
 		track = iter->data;
 
 		uri = brasero_track_stream_get_source (track, TRUE);
-		gtk_list_store_append (model, &t_iter);
-		gtk_list_store_set (model, &t_iter,
-				    0, uri,
-				    1, brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_TITLE_TAG),
-				    2, TRUE,
-				    -1);
+		title = brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_TITLE_TAG);
+
+		totem_pl_playlist_append (playlist, &pl_iter);
+		totem_pl_playlist_set (playlist, &pl_iter,
+				       TOTEM_PL_PARSER_FIELD_URI, uri,
+				       TOTEM_PL_PARSER_FIELD_TITLE, title,
+				       NULL);
 		g_free (uri);
 	}
 
@@ -1124,18 +1112,13 @@ brasero_project_save_audio_project_playlist (BraseroBurnSession *session,
 			break;
 	}
 
-	result = totem_pl_parser_write_with_title (parser,
-						   GTK_TREE_MODEL (model),
-						   brasero_project_save_audio_playlist_entry,
-						   path,
-						   brasero_burn_session_get_label (session),
-						   pl_type,
-						   NULL,
-						   NULL);
+	result = totem_pl_parser_save (parser, playlist, file,
+				       brasero_burn_session_get_label (session),
+				       type, NULL);
 
-	g_object_unref (model);
+	g_object_unref (playlist);
 	g_object_unref (parser);
-	g_free (path);
+	g_object_unref (file);
 
 	return result;
 }

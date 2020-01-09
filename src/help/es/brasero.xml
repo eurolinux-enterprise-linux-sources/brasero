@@ -30,7 +30,7 @@
       <year>2008</year>
       <year>2009</year>
       <holder>Proyecto de documentación de Ubuntu</holder> 
-    </copyright><copyright><year>2008-2009</year><holder>Jorge González (jorgegonz@svn.gnome.org)</holder></copyright> 
+    </copyright><copyright><year>2008-2010</year><holder>Jorge González (jorgegonz@svn.gnome.org)</holder></copyright> 
 <!-- translators: uncomment this:
 
   <copyright>
@@ -235,7 +235,7 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Esta ventana es el punto de inicio para todos sus proyectos. Desde aquí puede pulsar sobre el tipo de proyecto que desea iniciar. Si ya ha creado otros proyectos con <application>Brasero</application>, podrá seleccionarlos desde <guilabel>Elegir un proyecto abierto recientemente</guilabel> (para obtener más información consulte <xref linkend="brasero-open-recent-project"/>).</para>
+    <para>Esta ventana es el punto de inicio para todos sus proyectos. Desde aquí puede pulsar sobre el tipo de proyecto que quiere iniciar. Si ya ha creado otros proyectos con <application>Brasero</application>, podrá seleccionarlos desde <guilabel>Proyectos recientes</guilabel> (para obtener más información consulte <xref linkend="brasero-open-recent-project"/>).</para>
     </sect2>
   </sect1>
 
@@ -858,7 +858,7 @@
 	  <para>Elija <menuchoice><guimenu>Proyecto</guimenu><guisubmenu>Proyectos recientes</guisubmenu></menuchoice> y seleccione el proyecto que quiere abrir.</para>
 	</listitem>
 	<listitem>
-	  <para>Desde la ventana principal pulse el proyecto que quiere abrir bajo <guilabel>Elegir un proyecto recientemente abierto</guilabel>.</para>
+	  <para>Desde la ventana principal pulse el proyecto que quiere abrir bajo <guilabel>Proyectos recientes</guilabel>.</para>
 	</listitem>
       </itemizedlist></para>
     <para>Para abrir un proyecto que no aparece en <guilabel>Proyectos recientes</guilabel> elija <menuchoice><guimenu>Proyecto</guimenu><guimenuitem>Abrir</guimenuitem></menuchoice> y seleccione el archivo del proyecto.</para>

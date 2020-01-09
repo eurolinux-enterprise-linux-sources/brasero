@@ -55,11 +55,18 @@
 #include "burn-process.h"
 #include "brasero-plugin-registration.h"
 #include "burn-cdrkit.h"
-#include "burn-wodim.h"
 
 #include "brasero-tags.h"
 #include "brasero-track-image.h"
 #include "brasero-track-stream.h"
+
+
+#define BRASERO_TYPE_WODIM         (brasero_wodim_get_type ())
+#define BRASERO_WODIM(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_WODIM, BraseroWodim))
+#define BRASERO_WODIM_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_WODIM, BraseroWodimClass))
+#define BRASERO_IS_WODIM(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_WODIM))
+#define BRASERO_IS_WODIM_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_WODIM))
+#define BRASERO_WODIM_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_WODIM, BraseroWodimClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroWodim, brasero_wodim, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -195,13 +202,13 @@ brasero_wodim_stderr_read (BraseroProcess *process, const gchar *line)
 	**/
 
 	/** For these we'd rather have a message saying "cdrecord failed"
-	 *  as an internal error occured says nothing/even less
+	 *  as an internal error occurred says nothing/even less
 	else if (strstr (line, "Bad file descriptor. read error on input file")
 	     ||  strstr (line, "Input buffer error, aborting")) {
 		brasero_job_error (BRASERO_JOB (process),
 				   g_error_new (BRASERO_BURN_ERROR,
 						BRASERO_BURN_ERROR_GENERAL,
-						_("An internal error occured")));
+						_("An internal error occurred")));
 	}
 
 	**/
@@ -264,6 +271,33 @@ brasero_wodim_compute (BraseroWodim *wodim,
 	}
 }
 
+static void
+brasero_wodim_set_rate (BraseroProcess *process,
+                        int speed_1,
+                        int speed_2)
+{
+	gdouble current_rate = -1.0;
+	BraseroMedia media;
+
+	if (brasero_job_get_media (BRASERO_JOB (process), &media) != BRASERO_BURN_OK)
+		return;
+
+	if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_CD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) CD_RATE;
+	else if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_DVD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) DVD_RATE;
+	else if (BRASERO_MEDIUM_IS (media, BRASERO_MEDIUM_BD))
+		current_rate = (gdouble) ((gdouble) speed_1 +
+			       (gdouble) speed_2 / 10.0) *
+			       (gdouble) BD_RATE;
+
+	brasero_job_set_rate (BRASERO_JOB (process), current_rate);
+}
+
 static BraseroBurnResult
 brasero_wodim_stdout_read (BraseroProcess *process, const gchar *line)
 {
@@ -277,14 +311,11 @@ brasero_wodim_stdout_read (BraseroProcess *process, const gchar *line)
 	priv = BRASERO_WODIM_PRIVATE (wodim);
 
 	if (sscanf (line, "Track %2u: %d of %d MB written (fifo %d%%) [buf %d%%] %d.%dx.",
-		    &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7) {
-		gdouble current_rate;
-
-		current_rate = (gdouble) ((gdouble) speed_1 +
-			       (gdouble) speed_2 / 10.0) *
-			       (gdouble) CD_RATE;
-		brasero_job_set_rate (BRASERO_JOB (wodim), current_rate);
-
+		    &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7 ||
+	    /* This is for DVD+R */
+	    sscanf (line, "Track %2u:    %d of %d MB written (fifo  %d%%) [buf  %d%%] |%*s  %*s|   %d.%dx.",
+	            &track, &mb_written, &mb_total, &fifo, &buf, &speed_1, &speed_2) == 7) {
+		brasero_wodim_set_rate (process, speed_1, speed_2);
 		priv->current_track_written = (goffset) mb_written * (goffset) 1048576LL;
 		brasero_wodim_compute (wodim,
 				       mb_written,
@@ -294,15 +325,11 @@ brasero_wodim_stdout_read (BraseroProcess *process, const gchar *line)
 		brasero_job_start_progress (BRASERO_JOB (wodim), FALSE);
 	} 
 	else if (sscanf (line, "Track %2u:    %d MB written (fifo %d%%) [buf  %d%%]  %d.%dx.",
+			 &track, &mb_written, &fifo, &buf, &speed_1, &speed_2) == 6 ||
+	         sscanf (line, "Track %2u:    %d MB written (fifo %d%%) [buf  %d%%] |%*s  %*s|   %d.%dx.",
 			 &track, &mb_written, &fifo, &buf, &speed_1, &speed_2) == 6) {
-		gdouble current_rate;
-
 		/* this line is printed when wodim writes on the fly */
-		current_rate = (gdouble) ((gdouble) speed_1 +
-			       (gdouble) speed_2 / 10.0) *
-			       (gdouble) CD_RATE;
-		brasero_job_set_rate (BRASERO_JOB (wodim), current_rate);
-
+		brasero_wodim_set_rate (process, speed_1, speed_2);
 		priv->current_track_written = (goffset) mb_written * (goffset) 1048576LL;
 		if (brasero_job_get_fd_in (BRASERO_JOB (wodim), NULL) == BRASERO_BURN_OK) {
 			goffset bytes = 0;
@@ -697,7 +724,7 @@ error:
 	g_set_error (error,
 		     BRASERO_BURN_ERROR,
 		     BRASERO_BURN_ERROR_GENERAL,
-		     _("An internal error occured"));
+		     _("An internal error occurred"));
 
 	return BRASERO_BURN_ERR;
 }
@@ -812,7 +839,7 @@ brasero_wodim_set_argv_record (BraseroWodim *wodim,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 		
@@ -827,7 +854,7 @@ brasero_wodim_set_argv_record (BraseroWodim *wodim,
 			g_set_error (error,
 				     BRASERO_BURN_ERROR,
 				     BRASERO_BURN_ERROR_GENERAL,
-				     _("An internal error occured"));
+				     _("An internal error occurred"));
 			return BRASERO_BURN_ERR;
 		}
 
@@ -857,7 +884,6 @@ brasero_wodim_set_argv_record (BraseroWodim *wodim,
 			/* NOTE: when we don't want wodim to use stdin then we
 			 * give the audio file on the command line. Otherwise we
 			 * use the .inf */
-			g_ptr_array_add (argv, g_strdup ("-swab"));
 			g_ptr_array_add (argv, g_strdup ("-audio"));
 			g_ptr_array_add (argv, g_strdup ("-useinfo"));
 			g_ptr_array_add (argv, g_strdup ("-text"));
@@ -881,7 +907,6 @@ brasero_wodim_set_argv_record (BraseroWodim *wodim,
 
 		g_ptr_array_add (argv, g_strdup ("fs=16m"));
 		g_ptr_array_add (argv, g_strdup ("-audio"));
-		g_ptr_array_add (argv, g_strdup ("-swab"));
 		g_ptr_array_add (argv, g_strdup ("-pad"));
 	
 		g_ptr_array_add (argv, g_strdup ("-useinfo"));
@@ -972,6 +997,10 @@ brasero_wodim_set_argv_record (BraseroWodim *wodim,
 			parent = g_path_get_dirname (cuepath);
 			brasero_process_set_working_directory (BRASERO_PROCESS (wodim), parent);
 			g_free (parent);
+
+			/* we need to check endianness */
+			if (brasero_track_image_need_byte_swap (BRASERO_TRACK_IMAGE (track)))
+				g_ptr_array_add (argv, g_strdup ("-swab"));
 
 			g_ptr_array_add (argv, g_strdup ("fs=16m"));
 
@@ -1212,8 +1241,8 @@ brasero_wodim_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_wodim_export_caps (BraseroPlugin *plugin)
 {
 	BraseroPluginConfOption *immed, *minbuf;
 	const BraseroMedia media = BRASERO_MEDIUM_CD|
@@ -1240,21 +1269,15 @@ brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
 				      BRASERO_MEDIUM_HAS_AUDIO|
 				      BRASERO_MEDIUM_HAS_DATA|
 				      BRASERO_MEDIUM_BLANK;
-	BraseroBurnResult result;
 	GSList *output;
 	GSList *input;
 
 	/* NOTE: it seems that cdrecord can burn cue files on the fly */
 	brasero_plugin_define (plugin,
 			       "wodim",
-			       _("Use wodim to burn CDs and DVDs"),
+			       _("Burns, blanks and formats CDs and DVDs"),
 			       "Philippe Rouquier",
 			       0);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("wodim", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	/* for recording */
 	input = brasero_caps_image_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
@@ -1274,7 +1297,6 @@ brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
 					BRASERO_PLUGIN_IO_ACCEPT_FILE,
 					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100|
 					BRASERO_METADATA_INFO);
 
 	brasero_plugin_link_caps (plugin, output, input);
@@ -1282,8 +1304,7 @@ brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	input = brasero_caps_audio_new (BRASERO_PLUGIN_IO_ACCEPT_PIPE|
 					BRASERO_PLUGIN_IO_ACCEPT_FILE,
-					BRASERO_AUDIO_FORMAT_RAW|
-					BRASERO_AUDIO_FORMAT_44100);
+					BRASERO_AUDIO_FORMAT_RAW);
 
 	brasero_plugin_link_caps (plugin, output, input);
 	g_slist_free (output);
@@ -1398,7 +1419,7 @@ brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	/* add some configure options */
 	immed = brasero_plugin_conf_option_new (GCONF_KEY_IMMEDIATE_FLAG,
-						_("Enable \"-immed\" flag (see wodim manual)"),
+						_("Enable the \"-immed\" flag (see wodim manual)"),
 						BRASERO_PLUGIN_OPTION_BOOL);
 	minbuf = brasero_plugin_conf_option_new (GCONF_KEY_MINBUF_VALUE,
 						 _("Minimum drive buffer fill ratio (in %) (see wodim manual):"),
@@ -1409,5 +1430,15 @@ brasero_wodim_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_add_conf_option (plugin, immed);
 
 	brasero_plugin_register_group (plugin, _(CDRKIT_DESCRIPTION));
-	return BRASERO_BURN_OK;
+}
+
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 1, 1, 0};
+	brasero_plugin_test_app (plugin,
+	                         "wodim",
+	                         "--version",
+	                         "Cdrecord-yelling-line-to-tell-frontends-to-use-it-like-version %*s \nWodim %d.%d.%d",
+	                         version);
 }

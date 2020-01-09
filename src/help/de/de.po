@@ -1,11 +1,11 @@
 # German translation of the Brasero documentation.
-# Mario Blättermann <mariobl@gnome.org>, 2008, 2009.
+# Mario Blättermann <mariobl@gnome.org>, 2008-2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: brasero\n"
-"POT-Creation-Date: 2009-03-09 20:29+0000\n"
-"PO-Revision-Date: 2009-03-10 22:33+0100\n"
+"Project-Id-Version: brasero doc master\n"
+"POT-Creation-Date: 2010-03-04 13:24+0000\n"
+"PO-Revision-Date: 2010-03-08 12:50+0100\n"
 "Last-Translator: Mario Blättermann <mariobl@gnome.org>\n"
 "Language-Team: German <gnome-de@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -384,13 +384,13 @@ msgid ""
 "This window is the starting point for all of your projects. You can click on "
 "the project type you wish to start from here. If you have created other "
 "projects with <application>Brasero</application>, you will be able to select "
-"them from the <guilabel>Choose a recently opened project</guilabel> (see "
-"<xref linkend=\"brasero-open-recent-project\"/> for more information)."
+"them from the <guilabel>Recent projects</guilabel> (see <xref linkend="
+"\"brasero-open-recent-project\"/> for more information)."
 msgstr ""
 "Dieses Fenster ist der Ausgangspunkt für alle Ihre Projekte. Sie können von "
 "hier aus das Projekt anklicken, das Sie starten wollen. Falls Sie mit "
 "<application>Brasero</application> bereits andere Projekte erstellt haben, "
-"können Sie diese in <guilabel>Wählen Sie ein zuletzt geöffnetes Projekt</"
+"können Sie diese in den <guilabel>Zuletzt geöffneten Projekten</"
 "guilabel> auswählen. Weitere Informationen hierzu finden Sie in <xref "
 "linkend=\"brasero-open-recent-project\"/>."
 
@@ -1053,7 +1053,7 @@ msgstr ""
 
 #: C/brasero.xml:1076(para)
 msgid ""
-"If you have more that one drive on your system, you can use one drive as the "
+"If you have more than one drive on your system, you can use one drive as the "
 "source drive and the other as the destination drive. If you do not, you will "
 "be prompted to remove the CD or DVD you are copying and insert a blank media."
 msgstr ""
@@ -1331,9 +1331,9 @@ msgstr ""
 #: C/brasero.xml:1415(para)
 msgid ""
 "From the main window, click on the project you want to open under "
-"<guilabel>Choose a recently opened project</guilabel>."
+"<guilabel>Recent projects</guilabel>."
 msgstr ""
-"Klicken Sie im Bereich <guilabel>Wählen Sie ein zuletzt geöffnetes Projekt</"
+"Klicken Sie im Bereich <guilabel>Zuletzt geöffnete Projekte</"
 "guilabel> des Hauptfensters auf ein Projekt, das Sie öffnen wollen."
 
 #: C/brasero.xml:1402(para)
@@ -1835,10 +1835,10 @@ msgstr ""
 "sein, weitere Anwendungen auf Ihrem System zu installieren. Weitere "
 "Informationen finden Sie in der Dokumentation zu Ihrem Betriebssystem."
 
-#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2.
+#. Put one translator per line, in the form of NAME <EMAIL>, YEAR1, YEAR2
 #: C/brasero.xml:0(None)
 msgid "translator-credits"
-msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009"
+msgstr "Mario Blättermann <mariobl@gnome.org>, 2008, 2009, 2010"
 
 #~ msgid "local-track"
 #~ msgstr "local-track"

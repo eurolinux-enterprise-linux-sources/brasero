@@ -39,6 +39,8 @@
 
 #include "brasero-misc.h"
 
+#include "burn-debug.h"
+
 #include "brasero-track-stream-cfg.h"
 #include "brasero-io.h"
 #include "brasero-tags.h"
@@ -104,8 +106,8 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
 				     GFileInfo *info,
 				     gpointer user_data)
 {
-	guint64 len;
 	GFile *file;
+	guint64 len;
 	GObject *snapshot;
 	BraseroTrackStreamCfgPrivate *priv;
 
@@ -115,23 +117,6 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
 	/* Check the return status for this file */
 	if (error) {
 		priv->error = g_error_copy (error);
-		brasero_track_changed (BRASERO_TRACK (obj));
-		return;
-	}
-
-	/* Also make sure it's duration is appropriate (!= 0) */
-	len = g_file_info_get_attribute_uint64 (info, BRASERO_IO_LEN);
-	if (len <= 0) {
-		gchar *name;
-
-		BRASERO_GET_BASENAME_FOR_DISPLAY (uri, name);
-		priv->error = g_error_new (BRASERO_BURN_ERROR,
-					   BRASERO_BURN_ERROR_GENERAL,
-					   /* Translators: %s is the name of the file */
-					   _("\"%s\" is not suitable for audio or video media"),
-					   name);
-		g_free (name);
-
 		brasero_track_changed (BRASERO_TRACK (obj));
 		return;
 	}
@@ -177,6 +162,23 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
 		return;
 	}
 
+	/* Also make sure it's duration is appropriate (!= 0) */
+	len = g_file_info_get_attribute_uint64 (info, BRASERO_IO_LEN);
+	if (len <= 0) {
+		gchar *name;
+
+		BRASERO_GET_BASENAME_FOR_DISPLAY (uri, name);
+		priv->error = g_error_new (BRASERO_BURN_ERROR,
+					   BRASERO_BURN_ERROR_GENERAL,
+					   /* Translators: %s is the name of the file */
+					   _("\"%s\" is not suitable for audio or video media"),
+					   name);
+		g_free (name);
+
+		brasero_track_changed (BRASERO_TRACK (obj));
+		return;
+	}
+
 	if (g_file_info_get_is_symlink (info)) {
 		gchar *sym_uri;
 
@@ -187,20 +189,51 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
 		g_free (sym_uri);
 	}
 
-	if (BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_format)
+	/* Check whether the stream is wav+dts as it can be burnt as such */
+	if (g_file_info_get_attribute_boolean (info, BRASERO_IO_HAS_DTS)) {
+		BRASERO_BURN_LOG ("Track has DTS");
+		BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_format (BRASERO_TRACK_STREAM (obj), 
+		                                                                                BRASERO_AUDIO_FORMAT_DTS|
+		                                                                                BRASERO_METADATA_INFO);
+	}
+	else if (BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_format)
 		BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_format (BRASERO_TRACK_STREAM (obj),
-												(g_file_info_get_attribute_boolean (info, BRASERO_IO_HAS_VIDEO)?
-												 BRASERO_VIDEO_FORMAT_UNDEFINED:BRASERO_AUDIO_FORMAT_NONE)|
-												(g_file_info_get_attribute_boolean (info, BRASERO_IO_HAS_AUDIO)?
-												 BRASERO_AUDIO_FORMAT_UNDEFINED:BRASERO_AUDIO_FORMAT_NONE)|
-												BRASERO_METADATA_INFO);
+		                                                                                (g_file_info_get_attribute_boolean (info, BRASERO_IO_HAS_VIDEO)?
+		                                                                                 BRASERO_VIDEO_FORMAT_UNDEFINED:BRASERO_AUDIO_FORMAT_NONE)|
+		                                                                                (g_file_info_get_attribute_boolean (info, BRASERO_IO_HAS_AUDIO)?
+		                                                                                 BRASERO_AUDIO_FORMAT_UNDEFINED:BRASERO_AUDIO_FORMAT_NONE)|
+		                                                                                BRASERO_METADATA_INFO);
 
-	/* size */
-	if (BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_boundaries)
-		BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_boundaries (BRASERO_TRACK_STREAM (obj),
-												    0,
-												    len,
-												    0);
+	/* Size/length. Only set when end value has not been already set.
+	 * Fix #607752 -  audio track start and end points are overwritten after
+	 * being read from a project file.
+	 * We don't want to set a new len if one has been set already. Nevertheless
+	 * if the length we detected is smaller than the one that was set we go
+	 * for the new one. */
+	if (BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_boundaries) {
+		gint64 min_start;
+
+		/* Make sure that the start value is coherent */
+		min_start = (len - BRASERO_MIN_STREAM_LENGTH) >= 0? (len - BRASERO_MIN_STREAM_LENGTH):0;
+		if (min_start && brasero_track_stream_get_start (BRASERO_TRACK_STREAM (obj)) > min_start) {
+			BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_boundaries (BRASERO_TRACK_STREAM (obj),
+													    min_start,
+													    -1,
+													    -1);
+		}
+
+		if (brasero_track_stream_get_end (BRASERO_TRACK_STREAM (obj)) > len
+		||  brasero_track_stream_get_end (BRASERO_TRACK_STREAM (obj)) <= 0) {
+			/* Don't set either gap or start to make sure we don't remove
+			 * values set by project parser or values set from the beginning
+			 * Fix #607752 -  audio track start and end points are overwritten
+			 * after being read from a project file */
+			BRASERO_TRACK_STREAM_CLASS (brasero_track_stream_cfg_parent_class)->set_boundaries (BRASERO_TRACK_STREAM (obj),
+													    -1,
+													    len,
+													    -1);
+		}
+	}
 
 	snapshot = g_file_info_get_attribute_object (info, BRASERO_IO_THUMBNAIL);
 	if (snapshot) {
@@ -256,6 +289,11 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
 		brasero_track_tag_add_string (BRASERO_TRACK (obj),
 					      BRASERO_TRACK_STREAM_ARTIST_TAG,
 					      g_file_info_get_attribute_string (info, BRASERO_IO_ARTIST));
+	if (g_file_info_get_attribute_string (info, BRASERO_IO_ALBUM)
+	&& !brasero_track_tag_lookup_string (BRASERO_TRACK (obj), BRASERO_TRACK_STREAM_ALBUM_TAG))
+		brasero_track_tag_add_string (BRASERO_TRACK (obj),
+					      BRASERO_TRACK_STREAM_ALBUM_TAG,
+					      g_file_info_get_attribute_string (info, BRASERO_IO_ALBUM));
 	if (g_file_info_get_attribute_string (info, BRASERO_IO_COMPOSER)
 	&& !brasero_track_tag_lookup_string (BRASERO_TRACK (obj), BRASERO_TRACK_STREAM_COMPOSER_TAG))
 		brasero_track_tag_add_string (BRASERO_TRACK (obj),

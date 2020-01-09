@@ -112,6 +112,10 @@ BraseroDriveCaps
 brasero_drive_get_caps (BraseroDrive *drive);
 
 gboolean
+brasero_drive_can_write_media (BraseroDrive *drive,
+                               BraseroMedia media);
+
+gboolean
 brasero_drive_can_write (BraseroDrive *drive);
 
 gboolean
@@ -137,6 +141,10 @@ brasero_drive_lock (BraseroDrive *drive,
 		    gchar **reason_for_failure);
 gboolean
 brasero_drive_unlock (BraseroDrive *drive);
+
+gboolean
+brasero_drive_is_locked (BraseroDrive *drive,
+                         gchar **reason);
 
 G_END_DECLS
 

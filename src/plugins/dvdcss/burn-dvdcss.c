@@ -48,12 +48,19 @@
 
 #include "burn-job.h"
 #include "brasero-plugin-registration.h"
-#include "burn-dvdcss.h"
 #include "burn-dvdcss-private.h"
 #include "burn-volume.h"
 #include "brasero-medium.h"
 #include "brasero-track-image.h"
 #include "brasero-track-disc.h"
+
+
+#define BRASERO_TYPE_DVDCSS         (brasero_dvdcss_get_type ())
+#define BRASERO_DVDCSS(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_DVDCSS, BraseroDvdcss))
+#define BRASERO_DVDCSS_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_DVDCSS, BraseroDvdcssClass))
+#define BRASERO_IS_DVDCSS(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_DVDCSS))
+#define BRASERO_IS_DVDCSS_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_DVDCSS))
+#define BRASERO_DVDCSS_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_DVDCSS, BraseroDvdcssClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroDvdcss, brasero_dvdcss, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -75,10 +82,10 @@ typedef struct _BraseroDvdcssPrivate BraseroDvdcssPrivate;
 static GObjectClass *parent_class = NULL;
 
 static gboolean
-brasero_dvdcss_library_init (GError **error)
+brasero_dvdcss_library_init (BraseroPlugin *plugin)
 {
-	GModule *module;
 	gpointer address;
+	GModule *module;
 	gchar *dvdcss_interface_2 = NULL;
 
 	if (css_ready)
@@ -91,53 +98,46 @@ brasero_dvdcss_library_init (GError **error)
 
 	if (!g_module_symbol (module, "dvdcss_interface_2", &address))
 		goto error_version;
-
 	dvdcss_interface_2 = address;
+
 	if (!g_module_symbol (module, "dvdcss_open", &address))
-		goto error_loading;
+		goto error_version;
 	dvdcss_open = address;
 
 	if (!g_module_symbol (module, "dvdcss_close", &address))
-		goto error_loading;
+		goto error_version;
 	dvdcss_close = address;
 
 	if (!g_module_symbol (module, "dvdcss_read", &address))
-		goto error_loading;
+		goto error_version;
 	dvdcss_read = address;
 
 	if (!g_module_symbol (module, "dvdcss_seek", &address))
-		goto error_loading;
+		goto error_version;
 	dvdcss_seek = address;
 
 	if (!g_module_symbol (module, "dvdcss_error", &address))
-		goto error_loading;
+		goto error_version;
 	dvdcss_error = address;
+
+	if (plugin) {
+		g_module_close (module);
+		return TRUE;
+	}
 
 	css_ready = TRUE;
 	return TRUE;
 
 error_doesnt_exist:
-	g_set_error (error,
-		     BRASERO_BURN_ERROR,
-		     BRASERO_BURN_ERROR_GENERAL,
-		     _("Encrypted DVD: please install libdvdcss version 1.2.x"));
+	brasero_plugin_add_error (plugin,
+	                          BRASERO_PLUGIN_ERROR_MISSING_LIBRARY,
+	                          "libdvdcss.so.2");
 	return FALSE;
 
 error_version:
-	g_set_error (error,
-		     BRASERO_BURN_ERROR,
-		     BRASERO_BURN_ERROR_GENERAL,
-		     _("Libdvdcss version %s is not supported.\nPlease install libdvdcss version 1.2.x"),
-		     dvdcss_interface_2);
-	g_module_close (module);
-	return FALSE;
-
-
-error_loading:
-	g_set_error (error,
-		     BRASERO_BURN_ERROR,
-		     BRASERO_BURN_ERROR_GENERAL,
-		     _("Libdvdcss could not be loaded properly"));
+	brasero_plugin_add_error (plugin,
+	                          BRASERO_PLUGIN_ERROR_LIBRARY_VERSION,
+	                          "libdvdcss.so.2");
 	g_module_close (module);
 	return FALSE;
 }
@@ -558,7 +558,7 @@ brasero_dvdcss_start (BraseroJob *job,
 	if (priv->thread)
 		return BRASERO_BURN_RUNNING;
 
-	if (!brasero_dvdcss_library_init (error))
+	if (!brasero_dvdcss_library_init (NULL))
 		return BRASERO_BURN_ERR;
 
 	g_mutex_lock (priv->mutex);
@@ -665,27 +665,18 @@ brasero_dvdcss_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_dvdcss_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_dvdcss_export_caps (BraseroPlugin *plugin)
 {
-	GError *gerror = NULL;
 	GSList *output;
 	GSList *input;
 
 	brasero_plugin_define (plugin,
 			       "dvdcss",
-			       _("Dvdcss allows to read css encrypted video DVDs"),
+	                       /* Translators: image is not a picture but a disc image */
+			       _("Copies css encrypted Video DVDs to a disc image"),
 			       "Philippe Rouquier",
 			       0);
-
-	/* see if libdvdcss can be initted */
-	if (!brasero_dvdcss_library_init (&gerror)) {
-		if (gerror) {
-			*error = g_strdup (gerror->message);
-			g_error_free (gerror);
-		}
-		return BRASERO_BURN_ERR;
-	}
 
 	/* to my knowledge, css can only be applied to pressed discs so no need
 	 * to specify anything else but ROM */
@@ -703,6 +694,10 @@ brasero_dvdcss_export_caps (BraseroPlugin *plugin, gchar **error)
 
 	g_slist_free (input);
 	g_slist_free (output);
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	brasero_dvdcss_library_init (plugin);
 }

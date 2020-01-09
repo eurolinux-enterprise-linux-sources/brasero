@@ -17,6 +17,9 @@ BraseroTrackData
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroGraftPt ##### -->
 <para>
 
@@ -54,6 +57,7 @@ BraseroTrackData
 
 </para>
 
+@void: 
 @Returns: 
 
 
@@ -114,31 +118,6 @@ BraseroTrackData
 </para>
 
 @track: 
-@Returns: 
-
-
-<!-- ##### FUNCTION brasero_track_data_get_excluded ##### -->
-<para>
-
-</para>
-
-@track: 
-@copy: 
-@Returns: 
-
-
-<!-- ##### FUNCTION brasero_track_data_get_paths ##### -->
-<para>
-
-</para>
-
-@track: 
-@use_joliet: 
-@grafts_path: 
-@excluded_path: 
-@emptydir: 
-@videodir: 
-@error: 
 @Returns: 
 
 

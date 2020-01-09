@@ -1,9 +1,9 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT(brasero, 2.28.3)
+AC_INIT([brasero],[2.30.3])
 AC_CONFIG_SRCDIR(src/main.c)
 
 BRASERO_MAJOR_VERSION=2
-BRASERO_MINOR_VERSION=28
+BRASERO_MINOR_VERSION=30
 BRASERO_SUB=3
 BRASERO_VERSION=$BRASERO_MAJOR_VERSION.$BRASERO_MINOR_VERSION.$BRASERO_SUB
 
@@ -43,10 +43,17 @@ AM_INIT_AUTOMAKE([foreign])
 
 m4_ifdef([AM_SILENT_RULES],[AM_SILENT_RULES([yes])])
 
-AM_CONFIG_HEADER(config.h)
+AC_CONFIG_HEADERS([config.h])
+
+AC_DISABLE_STATIC
+LT_INIT
 
 AM_MAINTAINER_MODE
 
+
+dnl **************** documentation *****************************
+GNOME_DOC_INIT
+GTK_DOC_CHECK([1.12])
 
 dnl ***************** GNOME MACROS *****************************
 
@@ -60,9 +67,6 @@ dnl GNOME_DEBUG_CHECK
 GNOME_MAINTAINER_MODE_DEFINES
 
 dnl ***************** GENERAL **********************************
-
-AC_DISABLE_STATIC
-AM_PROG_LIBTOOL
 
 dnl ** reminder: the following set CFLAGS to -O2 -g if empty
 AC_PROG_CC
@@ -116,7 +120,7 @@ elif test x"$has_scsiio" = x"yes"; then
 elif test x"$has_uscsi" = x"yes"; then
 	:
 else
-	AC_ERROR([Support Linux SG, FreeBSD CAM, NetBSD SCSIPI, Solaris USCSI. No supported SCSI interface headers could not be found.])
+	AC_MSG_ERROR([Support Linux SG, FreeBSD CAM, NetBSD SCSIPI, Solaris USCSI. No supported SCSI interface headers could not be found.])
 fi
 
 AM_CONDITIONAL(HAVE_CAM_LIB_H, test x"$has_cam" = "xyes")
@@ -129,21 +133,20 @@ dnl ***************** LARGE FILE SUPPORT ***********************
 AC_SYS_LARGEFILE
 
 dnl ********** Required libraries **********************
-GLIB_REQUIRED=2.15.6
+GLIB_REQUIRED=2.22.0
 GTHREAD_REQUIRED=2.6.0
 GMODULE_REQUIRED=2.6.0
-GIO_REQUIRED=2.15.5
+GMODULE_EXPORT_REQUIRED=2.6.0
+GIO_REQUIRED=2.22.0
 GDK_REQUIRED=2.6.0
-GTK_REQUIRED=2.16.0
+GTK_REQUIRED=2.19.7
 GCONF_REQUIRED=2.0.0
 GSTREAMER_REQUIRED=0.10.15
 GSTREAMER_BASE_REQUIRED=0.10.0
 LIBXML2_REQUIRED=2.6.0
 LIBUNIQUE_REQUIRED=1.0.0
 DBUS_REQUIRED=0.7.2
-
-GTK_DOC_CHECK([1.3])
-GNOME_DOC_INIT
+CANBERRA_REQUIRED=0.1
 
 dnl ** used by brasero and one plugin
 PKG_CHECK_MODULES(BRASERO_GSTREAMER, 			\
@@ -204,6 +207,12 @@ PKG_CHECK_MODULES(BRASERO_GMODULE,		\
 AC_SUBST(BRASERO_GMODULE_CFLAGS)
 AC_SUBST(BRASERO_GMODULE_LIBS)
 
+PKG_CHECK_MODULES(BRASERO_GMODULE_EXPORT,		\
+	gmodule-export-2.0 >= $GMODULE_EXPORT_REQUIRED)
+
+AC_SUBST(BRASERO_GMODULE_EXPORT_CFLAGS)
+AC_SUBST(BRASERO_GMODULE_EXPORT_LIBS)
+
 PKG_CHECK_MODULES(BRASERO_GTK,			\
 	gdk-2.0 >= $GDK_REQUIRED		\
 	gtk+-2.0 >= $GTK_REQUIRED)
@@ -222,6 +231,13 @@ PKG_CHECK_MODULES(BRASERO_SM,			\
 
 AC_SUBST(BRASERO_SM_CFLAGS)
 AC_SUBST(BRASERO_SM_LIBS)
+
+PKG_CHECK_MODULES(BRASERO_CANBERRA,		\
+	libcanberra >= $CANBERRA_REQUIRED       \
+	libcanberra-gtk >= $CANBERRA_REQUIRED)
+
+AC_SUBST(BRASERO_CANBERRA_CFLAGS)
+AC_SUBST(BRASERO_CANBERRA_LIBS)
 
 dnl ****************Nautilus**********************************
 NAUTILUS_REQUIRED=2.22.2
@@ -299,6 +315,19 @@ else
 fi
 AM_CONDITIONAL(BUILD_CDRTOOLS, test x"$build_cdrtools" = "xyes")
 
+dnl **************** check for cdrdao **********************
+AC_ARG_ENABLE(cdrdao,
+			AS_HELP_STRING([--enable-cdrdao],[Build cdrdao plugins [[default=yes]]]),
+			[build_cdrdao=$enableval],
+			[build_cdrdao="yes"])
+
+if test x"$build_cdrdao" = "xyes"; then
+	AC_DEFINE(BUILD_CDRDAO, 1, [define if you  want to build cdrdao plugins])
+else
+	build_cdrdao="no"
+fi
+AM_CONDITIONAL(BUILD_CDRDAO, test x"$build_cdrdao" = "xyes")
+
 dnl **************** check for cdrkit ************************
 AC_ARG_ENABLE(cdrkit,
 			AS_HELP_STRING([--enable-cdrkit],[Build cdrkit plugins [[default=yes]]]),
@@ -311,6 +340,19 @@ else
 	build_cdrkit="no"
 fi
 AM_CONDITIONAL(BUILD_CDRKIT, test x"$build_cdrkit" = "xyes")
+
+dnl **************** check for growisofs ************************
+AC_ARG_ENABLE(growisofs,
+			AS_HELP_STRING([--enable-growisofs],[Build growisofs plugins [[default=yes]]]),
+			[build_growisofs=$enableval],
+			[build_growisofs="yes"])
+
+if test x"$build_growisofs" = "xyes"; then
+	AC_DEFINE(BUILD_GROWISOFS, 1, [define if you  want to build growisofs plugins])
+else
+	build_growisofs="no"
+fi
+AM_CONDITIONAL(BUILD_GROWISOFS, test x"$build_growisofs" = "xyes")
 
 dnl ****************check for libnotify (optional)**************
 dnl disable because not used any more
@@ -335,29 +377,72 @@ dnl AM_CONDITIONAL(HAVE_LIBNOTIFY, test x"$build_libnotify" = "xyes")
 
 dnl ****************check for search (optional)**************
 BEAGLE_REQUIRED=0.3.0
+TRACKER_REQUIRED=0.8.0
 
 AC_ARG_ENABLE(search,
-			AS_HELP_STRING([--enable-search],[Build search pane (if beagle is available) [[default=yes]]]),
-			[enable_search=$enableval],
+			AS_HELP_STRING([--enable-search],[Build search pane (if a search backend is available) [[default=auto]]]),
+			[case "$enableval" in
+				"auto")    enable_search="yes" ;;
+				"yes")     enable_search="yes" ;;
+				"no")      enable_search="no" ;;
+				"tracker") enable_search="tracker" ;;
+				"beagle")  enable_search="beagle" ;;
+				*)         echo "Unknown option"; exit 2 ;;
+			esac],
 			[enable_search="yes"])
 
-if test x"$enable_search" = "xyes"; then
-	PKG_CHECK_MODULES(BRASERO_BEAGLE, libbeagle-1.0 >= $BEAGLE_REQUIRED, build_beagle=yes, build_beagle=no)
-else
-	build_beagle="no"
-fi
-
-if test x"$build_beagle" = "xyes"; then
+if test x"$enable_search" = "xtracker"; then
+	PKG_CHECK_MODULES(BRASERO_SEARCH, tracker-client-0.8 >= $TRACKER_REQUIRED)
 	AC_DEFINE(BUILD_SEARCH, 1, [define if you  want to use search pane])
-	
-	AC_SUBST(BRASERO_BEAGLE_CFLAGS)
-	AC_SUBST(BRASERO_BEAGLE_LIBS)
+	AC_DEFINE(BUILD_TRACKER, 1, [define if you  want to use search pane])
+	AC_SUBST(BRASERO_SEARCH_CFLAGS)
+	AC_SUBST(BRASERO_SEARCH_LIBS)
+	build_beagle="no"
+	build_tracker="yes"
+	build_search="yes"
+elif test x"$enable_search" = "xbeagle"; then
+	PKG_CHECK_MODULES(BRASERO_SEARCH, libbeagle-1.0 >= $BEAGLE_REQUIRED)
+	AC_DEFINE(BUILD_SEARCH, 1, [define if you  want to use search pane])
+	AC_DEFINE(BUILD_BEAGLE, 1, [define if you  want to use search pane])
+	AC_SUBST(BRASERO_SEARCH_CFLAGS)
+	AC_SUBST(BRASERO_SEARCH_LIBS)
+	build_beagle="yes"
+	build_tracker="no"
+	build_search="yes"
+elif test x"$enable_search" = "xyes"; then
+	PKG_CHECK_MODULES(BRASERO_SEARCH, tracker-client-0.8 >= $TRACKER_REQUIRED, build_search=yes, build_search=no)
+	if test x"$build_search" = "xyes"; then
+		AC_DEFINE(BUILD_SEARCH, 1, [define if you  want to use search pane])
+		AC_DEFINE(BUILD_TRACKER, 1, [define if you  want to use search pane])
+
+		AC_SUBST(BRASERO_SEARCH_CFLAGS)
+		AC_SUBST(BRASERO_SEARCH_LIBS)
+
+		build_beagle="no"
+		build_tracker="yes"
+	else 
+		PKG_CHECK_MODULES(BRASERO_SEARCH, libbeagle-1.0 >= $BEAGLE_REQUIRED, build_search=yes, build_search=no)
+		if test x"$build_search" = "xyes"; then
+			AC_DEFINE(BUILD_SEARCH, 1, [define if you  want to use search pane])
+			AC_DEFINE(BUILD_BEAGLE, 1, [define if you  want to use search pane])
+
+			AC_SUBST(BRASERO_SEARCH_CFLAGS)
+			AC_SUBST(BRASERO_SEARCH_LIBS)
+
+			build_beagle="yes"
+			build_tracker="no"
+		fi
+	fi
+else
+	build_search="no"
 fi
 
 AM_CONDITIONAL(BUILD_SEARCH, test x"$build_search" = "xyes")
+AM_CONDITIONAL(BUILD_BEAGLE, test x"$build_beagle" = "xyes")
+AM_CONDITIONAL(BUILD_TRACKER, test x"$build_tracker" = "xyes")
 
 dnl ****************check for playlist (optional)**************
-TOTEM_REQUIRED=2.22.0
+TOTEM_REQUIRED=2.29.1
 
 AC_ARG_ENABLE(playlist,
 			AS_HELP_STRING([--enable-playlist],[Build playlist pane (if totem is available)[[default=yes]]]),
@@ -412,6 +497,81 @@ if test x"$enable_inotify" = "xyes"; then
 fi
 AM_CONDITIONAL(BUILD_INOTIFY, test x"$enable_inotify" = "xyes")
 
+dnl ****** GObject Introspection **********************
+dnl This is a copy of the m4 function in gobject-introspection package
+dnl but it was modified so the install path can be forced with a command
+dnl line parameter. This is to be able to use make distcheck.
+
+GOBJECT_INTROSPECTION_REQUIRED=0.6.3
+
+AC_ARG_ENABLE(introspection,
+                  AS_HELP_STRING([--enable-introspection[=@<:@no/auto/yes@:>@]], [Enable introspection for this build]),
+		  [enable_introspection=$enableval],
+		  [enable_introspection="auto"])
+
+AC_ARG_WITH(girdir,
+			AS_HELP_STRING([--with-girdir=DIR],[Installation path for .gir files @<:@auto@:>@]),
+			[ac_with_girdir=$withval],
+			[ac_with_girdir=""])
+
+AC_ARG_WITH(typelibdir,
+			AS_HELP_STRING([--with-typelibdir=DIR],[Installation path for .typelib files @<:@auto@:>@]),
+			[ac_with_typelibdir=$withval],
+			[ac_with_typelibdir=""])
+
+AC_MSG_CHECKING([for gobject-introspection])
+
+dnl presence/version checking
+AS_CASE([$enable_introspection],
+    [no], [dnl
+        found_introspection="no (disabled, use --enable-introspection to enable)"
+    ],dnl
+    [yes],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0],,
+                         AC_MSG_ERROR([gobject-introspection-1.0 is not installed]))
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED],
+                         found_introspection=yes,
+                         AC_MSG_ERROR([You need to have gobject-introspection >= $1 installed to build AC_PACKAGE_NAME]))
+    ],dnl
+    [auto],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED], found_introspection=yes, found_introspection=no)
+    ],dnl
+    [dnl	
+        AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
+])dnl
+
+AC_MSG_RESULT([$found_introspection])
+
+INTROSPECTION_SCANNER=
+INTROSPECTION_COMPILER=
+INTROSPECTION_GENERATE=
+INTROSPECTION_GIRDIR=
+INTROSPECTION_TYPELIBDIR=
+if test "x$found_introspection" = "xyes"; then
+	INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
+	INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
+	INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
+
+	if test "${ac_with_girdir}" = ""; then
+		ac_with_girdir=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
+	fi
+	INTROSPECTION_GIRDIR=${ac_with_girdir}
+	AC_MSG_NOTICE([installing .gir files in ${INTROSPECTION_GIRDIR}])
+
+	if test "${ac_with_typelibdir}" = ""; then
+		ac_with_typelibdir="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
+	fi
+	INTROSPECTION_TYPELIBDIR=${ac_with_typelibdir}
+	AC_MSG_NOTICE([installing .typelib files in ${INTROSPECTION_TYPELIBDIR}])
+fi
+AC_SUBST(INTROSPECTION_SCANNER)
+AC_SUBST(INTROSPECTION_COMPILER)
+AC_SUBST(INTROSPECTION_GENERATE)
+AC_SUBST(INTROSPECTION_GIRDIR)
+AC_SUBST(INTROSPECTION_TYPELIBDIR)
+
+AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
+
 dnl ****** Update mime, desktop and icon caches *******
 AC_ARG_ENABLE(caches,
 			AS_HELP_STRING([--enable-caches],[Run update-* to update mime, desktop and icon caches when installing [[default=yes]]]),
@@ -435,13 +595,9 @@ else
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${prefix}/${DATADIRNAME}/locale", [Location of package locale files])
 fi
 
-dnl ***** API docs **********************
-GTK_DOC_CHECK(1.9)
-
 dnl ***** GCONF *************************
 
-AC_ARG_ENABLE(schemas-install,AC_HELP_STRING([--disable-schemas-install],
-					     [Disable installation of the gconf schemas]))
+AC_ARG_ENABLE(schemas-install,AS_HELP_STRING([--disable-schemas-install],[Disable installation of the gconf schemas]))
 
 AM_CONDITIONAL(SCHEMAS_INSTALL, test x$enable_schemas_install != xno)
 
@@ -453,7 +609,7 @@ AM_GCONF_SOURCE_2
 
 dnl ****** END ***********************
 
-AC_OUTPUT([
+AC_CONFIG_FILES([
 Makefile
 libbrasero-media.pc
 libbrasero-burn.pc
@@ -476,6 +632,7 @@ libbrasero-utils/Makefile
 libbrasero-burn/Makefile
 libbrasero-burn/brasero-burn-lib.h
 plugins/Makefile
+plugins/audio2cue/Makefile
 plugins/cdrdao/Makefile
 plugins/cdrkit/Makefile
 plugins/cdrtools/Makefile
@@ -490,6 +647,7 @@ plugins/vcdimager/Makefile
 po/Makefile.in
 src/Makefile
 ])
+AC_OUTPUT
 
 echo
 echo
@@ -502,12 +660,15 @@ echo "Version: $BRASERO_VERSION
 	Update caches: ${enable_caches}
 	Build Nautilus extension : ${build_nautilus}
 	Build inotify: ${enable_inotify}
-	Build search pane : ${build_beagle}
+	Build search pane : ${build_search}
 	Build playlist pane : ${build_totem}
 	Build Preview pane : ${enable_preview}
+	Build cdrdao plugins : ${build_cdrdao}
 	Build cdrtools plugins : ${build_cdrtools}
 	Build cdrkit plugins : ${build_cdrkit}
+	Build growisofs plugins : ${build_growisofs}
 	Build libburnia plugins : ${build_libburnia}
+	Build GObject-Introspection : ${found_introspection}
 "
 echo
 echo

@@ -184,7 +184,99 @@ brasero_marshal_INT__STRING (GClosure     *closure,
   g_value_set_int (return_value, v_return);
 }
 
-/* INT:OBJECT,INT,INT (./libbrasero-marshal.list:4) */
+/* INT:OBJECT (./libbrasero-marshal.list:4) */
+extern void brasero_marshal_INT__OBJECT (GClosure     *closure,
+                                         GValue       *return_value,
+                                         guint         n_param_values,
+                                         const GValue *param_values,
+                                         gpointer      invocation_hint,
+                                         gpointer      marshal_data);
+void
+brasero_marshal_INT__OBJECT (GClosure     *closure,
+                             GValue       *return_value G_GNUC_UNUSED,
+                             guint         n_param_values,
+                             const GValue *param_values,
+                             gpointer      invocation_hint G_GNUC_UNUSED,
+                             gpointer      marshal_data)
+{
+  typedef gint (*GMarshalFunc_INT__OBJECT) (gpointer     data1,
+                                            gpointer     arg_1,
+                                            gpointer     data2);
+  register GMarshalFunc_INT__OBJECT callback;
+  register GCClosure *cc = (GCClosure*) closure;
+  register gpointer data1, data2;
+  gint v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 2);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+  callback = (GMarshalFunc_INT__OBJECT) (marshal_data ? marshal_data : cc->callback);
+
+  v_return = callback (data1,
+                       g_marshal_value_peek_object (param_values + 1),
+                       data2);
+
+  g_value_set_int (return_value, v_return);
+}
+
+/* INT:INT,STRING (./libbrasero-marshal.list:5) */
+extern void brasero_marshal_INT__INT_STRING (GClosure     *closure,
+                                             GValue       *return_value,
+                                             guint         n_param_values,
+                                             const GValue *param_values,
+                                             gpointer      invocation_hint,
+                                             gpointer      marshal_data);
+void
+brasero_marshal_INT__INT_STRING (GClosure     *closure,
+                                 GValue       *return_value G_GNUC_UNUSED,
+                                 guint         n_param_values,
+                                 const GValue *param_values,
+                                 gpointer      invocation_hint G_GNUC_UNUSED,
+                                 gpointer      marshal_data)
+{
+  typedef gint (*GMarshalFunc_INT__INT_STRING) (gpointer     data1,
+                                                gint         arg_1,
+                                                gpointer     arg_2,
+                                                gpointer     data2);
+  register GMarshalFunc_INT__INT_STRING callback;
+  register GCClosure *cc = (GCClosure*) closure;
+  register gpointer data1, data2;
+  gint v_return;
+
+  g_return_if_fail (return_value != NULL);
+  g_return_if_fail (n_param_values == 3);
+
+  if (G_CCLOSURE_SWAP_DATA (closure))
+    {
+      data1 = closure->data;
+      data2 = g_value_peek_pointer (param_values + 0);
+    }
+  else
+    {
+      data1 = g_value_peek_pointer (param_values + 0);
+      data2 = closure->data;
+    }
+  callback = (GMarshalFunc_INT__INT_STRING) (marshal_data ? marshal_data : cc->callback);
+
+  v_return = callback (data1,
+                       g_marshal_value_peek_int (param_values + 1),
+                       g_marshal_value_peek_string (param_values + 2),
+                       data2);
+
+  g_value_set_int (return_value, v_return);
+}
+
+/* INT:OBJECT,INT,INT (./libbrasero-marshal.list:6) */
 extern void brasero_marshal_INT__OBJECT_INT_INT (GClosure     *closure,
                                                  GValue       *return_value,
                                                  guint         n_param_values,
@@ -233,7 +325,7 @@ brasero_marshal_INT__OBJECT_INT_INT (GClosure     *closure,
   g_value_set_int (return_value, v_return);
 }
 
-/* INT:POINTER,BOOLEAN (./libbrasero-marshal.list:5) */
+/* INT:POINTER,BOOLEAN (./libbrasero-marshal.list:7) */
 extern void brasero_marshal_INT__POINTER_BOOLEAN (GClosure     *closure,
                                                   GValue       *return_value,
                                                   guint         n_param_values,
@@ -280,7 +372,7 @@ brasero_marshal_INT__POINTER_BOOLEAN (GClosure     *closure,
   g_value_set_int (return_value, v_return);
 }
 
-/* BOOLEAN:VOID (./libbrasero-marshal.list:6) */
+/* BOOLEAN:VOID (./libbrasero-marshal.list:8) */
 extern void brasero_marshal_BOOLEAN__VOID (GClosure     *closure,
                                            GValue       *return_value,
                                            guint         n_param_values,
@@ -323,7 +415,7 @@ brasero_marshal_BOOLEAN__VOID (GClosure     *closure,
   g_value_set_boolean (return_value, v_return);
 }
 
-/* BOOLEAN:STRING (./libbrasero-marshal.list:7) */
+/* BOOLEAN:STRING (./libbrasero-marshal.list:9) */
 extern void brasero_marshal_BOOLEAN__STRING (GClosure     *closure,
                                              GValue       *return_value,
                                              guint         n_param_values,
@@ -368,7 +460,7 @@ brasero_marshal_BOOLEAN__STRING (GClosure     *closure,
   g_value_set_boolean (return_value, v_return);
 }
 
-/* BOOLEAN:POINTER (./libbrasero-marshal.list:8) */
+/* BOOLEAN:POINTER (./libbrasero-marshal.list:10) */
 extern void brasero_marshal_BOOLEAN__POINTER (GClosure     *closure,
                                               GValue       *return_value,
                                               guint         n_param_values,
@@ -413,7 +505,7 @@ brasero_marshal_BOOLEAN__POINTER (GClosure     *closure,
   g_value_set_boolean (return_value, v_return);
 }
 
-/* VOID:INT,STRING (./libbrasero-marshal.list:9) */
+/* VOID:INT,STRING (./libbrasero-marshal.list:11) */
 extern void brasero_marshal_VOID__INT_STRING (GClosure     *closure,
                                               GValue       *return_value,
                                               guint         n_param_values,
@@ -456,7 +548,7 @@ brasero_marshal_VOID__INT_STRING (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,STRING (./libbrasero-marshal.list:10) */
+/* VOID:POINTER,STRING (./libbrasero-marshal.list:12) */
 extern void brasero_marshal_VOID__POINTER_STRING (GClosure     *closure,
                                                   GValue       *return_value,
                                                   guint         n_param_values,
@@ -499,7 +591,7 @@ brasero_marshal_VOID__POINTER_STRING (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,POINTER (./libbrasero-marshal.list:11) */
+/* VOID:POINTER,POINTER (./libbrasero-marshal.list:13) */
 extern void brasero_marshal_VOID__POINTER_POINTER (GClosure     *closure,
                                                    GValue       *return_value,
                                                    guint         n_param_values,
@@ -542,7 +634,7 @@ brasero_marshal_VOID__POINTER_POINTER (GClosure     *closure,
             data2);
 }
 
-/* VOID:OBJECT,BOOLEAN (./libbrasero-marshal.list:12) */
+/* VOID:OBJECT,BOOLEAN (./libbrasero-marshal.list:14) */
 extern void brasero_marshal_VOID__OBJECT_BOOLEAN (GClosure     *closure,
                                                   GValue       *return_value,
                                                   guint         n_param_values,
@@ -585,7 +677,7 @@ brasero_marshal_VOID__OBJECT_BOOLEAN (GClosure     *closure,
             data2);
 }
 
-/* VOID:OBJECT,UINT (./libbrasero-marshal.list:13) */
+/* VOID:OBJECT,UINT (./libbrasero-marshal.list:15) */
 extern void brasero_marshal_VOID__OBJECT_UINT (GClosure     *closure,
                                                GValue       *return_value,
                                                guint         n_param_values,
@@ -628,7 +720,7 @@ brasero_marshal_VOID__OBJECT_UINT (GClosure     *closure,
             data2);
 }
 
-/* VOID:BOOLEAN,BOOLEAN (./libbrasero-marshal.list:14) */
+/* VOID:BOOLEAN,BOOLEAN (./libbrasero-marshal.list:16) */
 extern void brasero_marshal_VOID__BOOLEAN_BOOLEAN (GClosure     *closure,
                                                    GValue       *return_value,
                                                    guint         n_param_values,
@@ -671,7 +763,7 @@ brasero_marshal_VOID__BOOLEAN_BOOLEAN (GClosure     *closure,
             data2);
 }
 
-/* VOID:DOUBLE,DOUBLE,LONG (./libbrasero-marshal.list:15) */
+/* VOID:DOUBLE,DOUBLE,LONG (./libbrasero-marshal.list:17) */
 extern void brasero_marshal_VOID__DOUBLE_DOUBLE_LONG (GClosure     *closure,
                                                       GValue       *return_value,
                                                       guint         n_param_values,
@@ -716,7 +808,7 @@ brasero_marshal_VOID__DOUBLE_DOUBLE_LONG (GClosure     *closure,
             data2);
 }
 
-/* VOID:POINTER,UINT,POINTER (./libbrasero-marshal.list:16) */
+/* VOID:POINTER,UINT,POINTER (./libbrasero-marshal.list:18) */
 extern void brasero_marshal_VOID__POINTER_UINT_POINTER (GClosure     *closure,
                                                         GValue       *return_value,
                                                         guint         n_param_values,

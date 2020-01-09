@@ -227,13 +227,18 @@ brasero_task_ctx_get_stored_tracks (BraseroTaskCtx *self,
 {
 	BraseroTaskCtxPrivate *priv;
 
-	g_return_val_if_fail (tracks != NULL, BRASERO_BURN_ERR);
-
 	priv = BRASERO_TASK_CTX_PRIVATE (self);
 	if (!priv->current_track)
 		return BRASERO_BURN_ERR;
 
-	*tracks = priv->tracks;
+	if (tracks)
+		*tracks = priv->tracks;
+
+	/* If no track has been added let the caller
+	 * know with BRASERO_BURN_NOT_READY */
+	if (!priv->tracks)
+		return BRASERO_BURN_NOT_READY;
+
 	return BRASERO_BURN_OK;
 }
 
@@ -311,6 +316,7 @@ brasero_task_ctx_set_next_track (BraseroTaskCtx *self)
 	priv->session_bytes += priv->track_bytes;
 	priv->track_bytes = 0;
 	priv->last_written = 0;
+	priv->progress = 0;
 
 	if (priv->current_track)
 		g_object_unref (priv->current_track);
@@ -676,15 +682,14 @@ brasero_task_ctx_set_progress (BraseroTaskCtx *self,
 		return BRASERO_BURN_OK;
 	}
 
-	if (!priv->timer)
-		return BRASERO_BURN_OK;
+	if (priv->timer) {
+		elapsed = g_timer_elapsed (priv->timer, NULL);
 
-	elapsed = g_timer_elapsed (priv->timer, NULL);
-
-	if ((elapsed - priv->last_elapsed) > 0.5) {
-		priv->last_progress = priv->progress;
-		priv->last_elapsed = priv->current_elapsed;
-		priv->current_elapsed = elapsed;
+		if ((elapsed - priv->last_elapsed) > 0.5) {
+			priv->last_progress = priv->progress;
+			priv->last_elapsed = priv->current_elapsed;
+			priv->current_elapsed = elapsed;
+		}
 	}
 
 	if (priv->progress < progress)

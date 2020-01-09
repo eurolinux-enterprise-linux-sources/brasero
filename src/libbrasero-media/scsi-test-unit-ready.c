@@ -32,6 +32,8 @@
 #  include <config.h>
 #endif
 
+#include "scsi-spc1.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -56,6 +58,8 @@ brasero_spc1_test_unit_ready (BraseroDeviceHandle *handle,
 {
 	BraseroTestUnitReadyCDB *cdb;
 	BraseroScsiResult res;
+
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
 
 	cdb = brasero_scsi_command_new (&info, handle);
 	res = brasero_scsi_command_issue_sync (cdb,

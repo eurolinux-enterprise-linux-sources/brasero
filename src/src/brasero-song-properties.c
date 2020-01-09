@@ -150,10 +150,11 @@ brasero_song_props_init (BraseroSongProps *obj)
 	GtkWidget *table;
 	GtkWidget *frame;
 	GtkWidget *alignment;
+	GtkWidget *content_area;
 
 	obj->priv = g_new0 (BraseroSongPropsPrivate, 1);
 	gtk_dialog_set_has_separator (GTK_DIALOG (obj), FALSE);
-	gtk_box_set_spacing (GTK_BOX (GTK_DIALOG (obj)->vbox), 0);
+	gtk_box_set_spacing (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (obj))), 0);
 	gtk_window_set_default_size (GTK_WINDOW (obj), 400, 300);
 
 	table = gtk_table_new (4, 2, FALSE);
@@ -162,13 +163,14 @@ brasero_song_props_init (BraseroSongProps *obj)
 
 	frame = brasero_utils_pack_properties ("", table, NULL);
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox),
+	content_area = gtk_dialog_get_content_area (GTK_DIALOG (obj));
+	gtk_box_pack_start (GTK_BOX (content_area),
 			    frame,
 			    FALSE,
 			    FALSE,
 			    0);
 
-	obj->priv->label = gtk_frame_get_label_widget (GTK_FRAME (frame));
+	obj->priv->label = brasero_utils_properties_get_label (frame);
 	gtk_label_set_single_line_mode (GTK_LABEL (obj->priv->label), FALSE);
 	gtk_label_set_use_markup (GTK_LABEL (obj->priv->label), TRUE);
 	gtk_label_set_line_wrap (GTK_LABEL (obj->priv->label), TRUE);
@@ -183,7 +185,7 @@ brasero_song_props_init (BraseroSongProps *obj)
 	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 0, 1, GTK_FILL, GTK_FILL, 0, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), obj->priv->title, 1, 2, 0, 1);
 	gtk_widget_set_tooltip_text (obj->priv->title,
-			      _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+			      _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 
 	label = gtk_label_new (_("Artist:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -195,7 +197,7 @@ brasero_song_props_init (BraseroSongProps *obj)
 	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 1, 2, GTK_FILL, GTK_FILL, 0, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), obj->priv->artist, 1, 2, 1, 2);
 	gtk_widget_set_tooltip_text (obj->priv->artist,
-				     _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+				     _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 
 	label = gtk_label_new (_("Composer:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -207,7 +209,7 @@ brasero_song_props_init (BraseroSongProps *obj)
 	gtk_table_attach (GTK_TABLE (table), label, 0, 1, 2, 3, GTK_FILL, GTK_FILL, 0, 0);
 	gtk_table_attach_defaults (GTK_TABLE (table), obj->priv->composer, 1, 2, 2, 3);
 	gtk_widget_set_tooltip_text (obj->priv->composer,
-			      _("This information will be written to the disc using CD-TEXT technology. It can be read and displayed by some audio CD players."));
+			      _("This information will be written to the disc using CD-Text technology. It can be read and displayed by some audio CD players."));
 
 	label = gtk_label_new ("ISRC:");
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -229,7 +231,7 @@ brasero_song_props_init (BraseroSongProps *obj)
 	g_free (title_str);
 
 	gtk_container_set_border_width (GTK_CONTAINER (frame), 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox), frame, FALSE, FALSE, 0);
+	gtk_box_pack_start (GTK_BOX (content_area), frame, FALSE, FALSE, 0);
 
 	label = gtk_label_new (_("Song start:"));
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.5);
@@ -412,7 +414,7 @@ brasero_song_props_set_properties (BraseroSongProps *self,
 	g_signal_handlers_block_by_func (self->priv->end,
 					 brasero_song_props_end_changed_cb,
 					 self);
-	brasero_time_button_set_max (BRASERO_TIME_BUTTON (self->priv->end), length);
+	brasero_time_button_set_max (BRASERO_TIME_BUTTON (self->priv->end), start + length);
 	brasero_time_button_set_value (BRASERO_TIME_BUTTON (self->priv->end), end);
 	g_signal_handlers_unblock_by_func (self->priv->end,
 	        			   brasero_song_props_end_changed_cb,

@@ -30,16 +30,13 @@
 
 #include <gtk/gtk.h>
 
-#include <libxml/xmlerror.h>
-#include <libxml/xmlwriter.h>
-#include <libxml/parser.h>
-#include <libxml/xmlstring.h>
-
 #include <unique/unique.h>
 
 #include "brasero-misc.h"
+#include "brasero-io.h"
 
 #include "brasero-app.h"
+#include "brasero-setting.h"
 #include "brasero-blank-dialog.h"
 #include "brasero-sum-dialog.h"
 #include "brasero-eject-dialog.h"
@@ -53,10 +50,13 @@
 #include "brasero-burn.h"
 #include "brasero-track-disc.h"
 #include "brasero-track-image.h"
+#include "brasero-track-data-cfg.h"
+#include "brasero-track-stream-cfg.h"
 #include "brasero-track-image-cfg.h"
 #include "brasero-session.h"
 #include "brasero-burn-lib.h"
 
+#include "brasero-status-dialog.h"
 #include "brasero-burn-options.h"
 #include "brasero-burn-dialog.h"
 #include "brasero-jacket-edit.h"
@@ -66,6 +66,8 @@
 typedef struct _BraseroAppPrivate BraseroAppPrivate;
 struct _BraseroAppPrivate
 {
+	BraseroSetting *setting;
+
 	GdkWindow *parent;
 
 	GtkWidget *mainwin;
@@ -84,12 +86,9 @@ struct _BraseroAppPrivate
 
 	guint tooltip_ctx;
 
-	gint width;
-	gint height;
-
 	gchar *saved_contents;
 
-	guint is_maximised:1;
+	guint is_maximized:1;
 	guint mainwin_running:1;
 };
 
@@ -97,10 +96,6 @@ struct _BraseroAppPrivate
 
 
 G_DEFINE_TYPE (BraseroApp, brasero_app, G_TYPE_OBJECT);
-
-
-#define SESSION_VERSION "0.1"
-#define BRASERO_SESSION_TMP_SESSION_PATH	"brasero.session"
 
 /**
  * Menus and toolbar
@@ -125,15 +120,15 @@ static GtkActionEntry entries[] = {
 	{"HelpMenu", NULL, N_("_Help")},
 
 	{"Plugins", NULL, N_("P_lugins"), NULL,
-	 N_("Choose plugins for brasero"), G_CALLBACK (on_prefs_cb)},
+	 N_("Choose plugins for Brasero"), G_CALLBACK (on_prefs_cb)},
 
 	{"Eject", "media-eject", N_("E_ject"), NULL,
 	 N_("Eject a disc"), G_CALLBACK (on_eject_cb)},
 
-	{"Blank", "media-optical-blank", N_("_Blank..."), NULL,
+	{"Blank", "media-optical-blank", N_("_Blank…"), NULL,
 	 N_("Blank a disc"), G_CALLBACK (on_erase_cb)},
 
-	{"Check", NULL, N_("_Check Integrity..."), NULL,
+	{"Check", NULL, N_("_Check Integrity…"), NULL,
 	 N_("Check data integrity of disc"), G_CALLBACK (on_integrity_check_cb)},
 
 	{"Quit", GTK_STOCK_QUIT, NULL, NULL,
@@ -198,17 +193,10 @@ brasero_app_get_path (const gchar *name)
 static gboolean
 brasero_app_load_window_state (BraseroApp *app)
 {
-	gchar *height_str = NULL;
-	gchar *width_str = NULL;
-	gchar *state_str = NULL;
-	gchar *version = NULL;
-	gint height;
 	gint width;
+	gint height;
 	gint state = 0;
-
-	gchar *session_path;
-	xmlNodePtr item;
-	xmlDocPtr session = NULL;
+	gpointer value;
 
 	GdkScreen *screen;
 	GdkRectangle rect;
@@ -221,185 +209,37 @@ brasero_app_load_window_state (BraseroApp *app)
 	/* Make sure that on first run the window has a default size of at least
 	 * 85% of the screen (hardware not GTK+) */
 	screen = gtk_window_get_screen (GTK_WINDOW (priv->mainwin));
-	monitor = gdk_screen_get_monitor_at_window (screen, GTK_WIDGET (priv->mainwin)->window);
+	monitor = gdk_screen_get_monitor_at_window (screen, gtk_widget_get_window (GTK_WIDGET (priv->mainwin)));
 	gdk_screen_get_monitor_geometry (screen, monitor, &rect);
-	width = rect.width / 100 * 85;
-	height = rect.height / 100 * 85;
 
-	session_path = brasero_app_get_path (BRASERO_SESSION_TMP_SESSION_PATH);
-	if (!session_path)
-		goto end;
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_WIN_WIDTH,
+	                           &value);
+	width = GPOINTER_TO_INT (value);
 
-	session = xmlParseFile (session_path);
-	g_free (session_path);
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_WIN_HEIGHT,
+	                           &value);
+	height = GPOINTER_TO_INT (value);
 
-	if (!session)
-		goto end;
+	brasero_setting_get_value (brasero_setting_get_default (),
+	                           BRASERO_SETTING_WIN_MAXIMIZED,
+	                           &value);
+	state = GPOINTER_TO_INT (value);
 
-	item = xmlDocGetRootElement (session);
-	if (!item)
-		goto end;
-
-	if (xmlStrcmp (item->name, (const xmlChar *) "Session") || item->next)
-		goto end;
-
-	item = item->children;
-	while (item) {
-		if (!xmlStrcmp (item->name, (const xmlChar *) "version")) {
-			if (version)
-				goto end;
-
-			version = (char *) xmlNodeListGetString (session,
-								 item->xmlChildrenNode,
-								 1);
-		}
-		else if (!xmlStrcmp (item->name, (const xmlChar *) "width")) {
-			if (width_str)
-				goto end;
-
-			width_str = (char *) xmlNodeListGetString (session,
-								   item->xmlChildrenNode,
-								   1);
-		}
-		else if (!xmlStrcmp (item->name, (const xmlChar *) "height")) {
-			if (height_str)
-				goto end;
-
-			height_str = (char *) xmlNodeListGetString (session,
-								    item->xmlChildrenNode,
-								    1);
-		}
-		else if (!xmlStrcmp (item->name, (const xmlChar *) "state")) {
-			if (state_str)
-				goto end;
-
-			state_str = (char *) xmlNodeListGetString (session,
-								   item->xmlChildrenNode,
-								   1);
-		}
-		else if (item->type == XML_ELEMENT_NODE)
-			goto end;
-
-		item = item->next;
-	}
-
-	if (!version || strcmp (version, SESSION_VERSION))
-		goto end;
-
-	/* restore the window state */
-	if (height_str)
-		height = (int) g_strtod (height_str, NULL);
-
-	if (width_str)
-		width = (int) g_strtod (width_str, NULL);
-
-	if (state_str)
-		state = (int) g_strtod (state_str, NULL);
-
-end:
-	if (height_str)
-		g_free (height_str);
-
-	if (width_str)
-		g_free (width_str);
-
-	if (state_str)
-		g_free (state_str);
-
-	if (version)
-		g_free (version);
-
-	xmlFreeDoc (session);
-
-	if (width && height)
+	if (width > 0 && height > 0)
 		gtk_window_resize (GTK_WINDOW (priv->mainwin),
 				   width,
 				   height);
+	else
+		gtk_window_resize (GTK_WINDOW (priv->mainwin),
+		                   rect.width / 100 *85,
+		                   rect.height / 100 * 85);
 
 	if (state)
 		gtk_window_maximize (GTK_WINDOW (priv->mainwin));
 
 	return TRUE;
-}
-
-void
-brasero_app_save_window_state (BraseroApp *app)
-{
-	gint success;
-	gchar *session_path;
-	xmlTextWriter *session;
-	BraseroAppPrivate *priv;
-
-	priv = BRASERO_APP_PRIVATE (app);
-
-	/* now save the state of the window */
-	session_path = brasero_app_get_path (BRASERO_SESSION_TMP_SESSION_PATH);
-	if (!session_path)
-		return;
-
-	/* write information */
-	session = xmlNewTextWriterFilename (session_path, 0);
-	if (!session) {
-		g_free (session_path);
-		return;
-	}
-
-	xmlTextWriterSetIndent (session, 1);
-	xmlTextWriterSetIndentString (session, (xmlChar *) "\t");
-
-	success = xmlTextWriterStartDocument (session,
-					      NULL,
-					      NULL,
-					      NULL);
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterStartElement (session,
-					     (xmlChar *) "Session");
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterWriteElement (session,
-					     (xmlChar *) "version",
-					     (xmlChar *) SESSION_VERSION);
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterWriteFormatElement (session,
-						   (xmlChar *) "width",
-						   "%i",
-						   priv->width);
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterWriteFormatElement (session,
-						   (xmlChar *) "height",
-						   "%i",
-						   priv->height);
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterWriteFormatElement (session,
-						   (xmlChar *) "state",
-						   "%i",
-						   priv->is_maximised);
-	if (success < 0)
-		goto error;
-
-	success = xmlTextWriterEndElement (session);
-	if (success < 0)
-		goto error;
-
-	xmlTextWriterEndDocument (session);
-	xmlFreeTextWriter (session);
-	g_free (session_path);
-	return;
-
-error:
-	xmlTextWriterEndDocument (session);
-	xmlFreeTextWriter (session);
-	g_remove (session_path);
-	g_free (session_path);
 }
 
 /**
@@ -516,7 +356,7 @@ brasero_app_dialog (BraseroApp *app,
 	if (!toplevel && priv->parent) {
 		gtk_widget_realize (GTK_WIDGET (dialog));
 		gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-		gdk_window_set_transient_for (GTK_WIDGET (dialog)->window, priv->parent);
+		gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (dialog)), priv->parent);
 	}
 
 	if (is_on_top) {
@@ -565,7 +405,7 @@ brasero_app_alert (BraseroApp *app,
 
 		gtk_widget_realize (GTK_WIDGET (alert));
 		gtk_window_set_modal (GTK_WINDOW (alert), TRUE);
-		gdk_window_set_transient_for (GTK_WIDGET (alert)->window, priv->parent);
+		gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (alert)), priv->parent);
 	}
 
 	if (is_on_top) {
@@ -640,7 +480,6 @@ on_delete_cb (GtkWidget *window, GdkEvent *event, BraseroApp *app)
 	if (brasero_app_save_contents (app, TRUE))
 		return TRUE;
 
-	brasero_app_save_window_state (app);
 	return FALSE;
 }
 
@@ -654,10 +493,8 @@ on_exit_cb (GtkAction *action, BraseroApp *app)
 	if (brasero_app_save_contents (app, TRUE))
 		return;
 
-	if (priv->mainwin) {
-		brasero_app_save_window_state (app);
+	if (priv->mainwin)
 		gtk_widget_destroy (GTK_WIDGET (priv->mainwin));
-	}
 }
 
 gboolean
@@ -676,13 +513,13 @@ brasero_app_set_parent (BraseroApp *app,
 	BraseroAppPrivate *priv;
 
 	priv = BRASERO_APP_PRIVATE (app);
-
 	priv->parent = gdk_window_foreign_new (parent_xid);
 }
 
 gboolean
 brasero_app_burn (BraseroApp *app,
-		  BraseroBurnSession *session)
+		  BraseroBurnSession *session,
+		  gboolean multi)
 {
 	gboolean success;
 	GtkWidget *dialog;
@@ -692,11 +529,17 @@ brasero_app_burn (BraseroApp *app,
 
 	/* now setup the burn dialog */
 	dialog = brasero_burn_dialog_new ();
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
+
 	priv->burn_dialog = dialog;
 
 	brasero_app_set_toplevel (app, GTK_WINDOW (dialog));
-	success = brasero_burn_dialog_run (BRASERO_BURN_DIALOG (dialog), session);
-
+	if (!multi)
+		success = brasero_burn_dialog_run (BRASERO_BURN_DIALOG (dialog),
+						   BRASERO_BURN_SESSION (session));
+	else
+		success = brasero_burn_dialog_run_multi (BRASERO_BURN_DIALOG (dialog),
+							 BRASERO_BURN_SESSION (session));
 	priv->burn_dialog = NULL;
 
 	/* The destruction of the dialog will bring the main window forward */
@@ -709,58 +552,100 @@ brasero_app_burn_options (BraseroApp *app,
 			  BraseroSessionCfg *session)
 {
 	GtkWidget *dialog;
-	GtkResponseType result;
+	GtkResponseType answer;
 
 	dialog = brasero_burn_options_new (session);
 	brasero_app_set_toplevel (app, GTK_WINDOW (dialog));
-	result = gtk_dialog_run (GTK_DIALOG (dialog));
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
+
+	answer = gtk_dialog_run (GTK_DIALOG (dialog));
 
 	/* The destruction of the dialog will bring the main window forward */
 	gtk_widget_destroy (dialog);
-	return (result == GTK_RESPONSE_OK);
+	if (answer == GTK_RESPONSE_OK)
+		return BRASERO_BURN_OK;
+
+	if (answer == GTK_RESPONSE_ACCEPT)
+		return BRASERO_BURN_RETRY;
+
+	return BRASERO_BURN_CANCEL;
+
 }
 
-void
-brasero_app_burn_image (BraseroApp *app,
-			const gchar *uri)
+static void
+brasero_app_session_burn (BraseroApp *app,
+			  BraseroSessionCfg *session,
+			  gboolean burn)
 {
-	BraseroSessionCfg *session;
-	BraseroTrackImageCfg *track;
+	/* We need to have a drive to start burning immediately */
+	if (burn && brasero_burn_session_get_burner (BRASERO_BURN_SESSION (session))) {
+		BraseroStatus *status;
+		BraseroBurnResult result;
 
-	/* setup, show, and run options dialog */
-	session = brasero_session_cfg_new ();
+		status = brasero_status_new ();
+		brasero_burn_session_get_status (BRASERO_BURN_SESSION (session), status);
 
-	track = brasero_track_image_cfg_new ();
-	if (uri)
-		brasero_track_image_cfg_set_source (track, uri);
+		result = brasero_status_get_result (status);
+		if (result == BRASERO_BURN_NOT_READY || result == BRASERO_BURN_RUNNING) {
+			GtkWidget *status_dialog;
 
-	brasero_burn_session_add_track (BRASERO_BURN_SESSION (session),
-					BRASERO_TRACK (track),
-					NULL);
+			status_dialog = brasero_status_dialog_new (BRASERO_BURN_SESSION (session), NULL);
+			gtk_dialog_run (GTK_DIALOG (status_dialog));
+			gtk_widget_destroy (status_dialog);
 
-	if (brasero_app_burn_options (app, session))
-		brasero_app_burn (app, BRASERO_BURN_SESSION (session));
+			brasero_burn_session_get_status (BRASERO_BURN_SESSION (session), status);
+			result = brasero_status_get_result (status);
+		}
+		g_object_unref (status);
 
-	g_object_unref (session);
+		if (result == BRASERO_BURN_CANCEL)
+			return;
+
+		if (result != BRASERO_BURN_OK) {
+			GError *error;
+
+			error = brasero_status_get_error (status);
+			brasero_app_alert (app,
+					   _("Error while burning."),
+					   error? error->message:"",
+					   GTK_MESSAGE_ERROR);
+			if (error)
+				g_error_free (error);
+
+			return;
+		}
+
+		brasero_app_burn (app, BRASERO_BURN_SESSION (session), FALSE);
+	}
+	else {
+		BraseroBurnResult result;
+
+		result = brasero_app_burn_options (app, session);
+		if (result == BRASERO_BURN_OK || result == BRASERO_BURN_RETRY)
+			brasero_app_burn (app, BRASERO_BURN_SESSION (session), (result == BRASERO_BURN_RETRY));
+	}
 }
 
 void
 brasero_app_copy_disc (BraseroApp *app,
+		       BraseroDrive *burner,
 		       const gchar *device,
-		       const gchar *cover)
+		       const gchar *cover,
+		       gboolean burn)
 {
+	BraseroTrackDisc *track = NULL;
 	BraseroSessionCfg *session;
-	BraseroTrackDisc *track;
+	BraseroDrive *drive = NULL;
 
 	session = brasero_session_cfg_new ();
 	track = brasero_track_disc_new ();
 	brasero_burn_session_add_track (BRASERO_BURN_SESSION (session),
 					BRASERO_TRACK (track),
 					NULL);
+	g_object_unref (track);
 
 	/* if a device is specified then get the corresponding medium */
 	if (device) {
-		BraseroDrive *drive;
 		BraseroMediumMonitor *monitor;
 
 		monitor = brasero_medium_monitor_get_default ();
@@ -783,35 +668,293 @@ brasero_app_copy_disc (BraseroApp *app,
 					      value);
 	}
 
-	if (brasero_app_burn_options (app, session))
-		brasero_app_burn (app, BRASERO_BURN_SESSION (session));
+	brasero_burn_session_set_burner (BRASERO_BURN_SESSION (session), burner);
+	brasero_app_session_burn (app, session, burn);
+	g_object_unref (session);
+}
 
+void
+brasero_app_image (BraseroApp *app,
+		   BraseroDrive *burner,
+		   const gchar *uri_arg,
+		   gboolean burn)
+{
+	BraseroSessionCfg *session;
+	BraseroTrackImageCfg *track = NULL;
+
+	/* setup, show, and run options dialog */
+	session = brasero_session_cfg_new ();
+	track = brasero_track_image_cfg_new ();
+	brasero_burn_session_add_track (BRASERO_BURN_SESSION (session),
+					BRASERO_TRACK (track),
+					NULL);
+	g_object_unref (track);
+
+	if (uri_arg) {
+		GFile *file;
+		gchar *uri;
+
+		file = g_file_new_for_commandline_arg (uri_arg);
+		uri = g_file_get_uri (file);
+		g_object_unref (file);
+
+		brasero_track_image_cfg_set_source (track, uri);
+		g_free (uri);
+	}
+
+	brasero_burn_session_set_burner (BRASERO_BURN_SESSION (session), burner);
+	brasero_app_session_burn (app, session, burn);
+	g_object_unref (session);
+}
+
+static void
+brasero_app_process_session (BraseroApp *app,
+			     BraseroSessionCfg *session,
+			     gboolean burn)
+{
+	if (!burn) {
+		GtkWidget *manager;
+		BraseroAppPrivate *priv;
+
+		priv = BRASERO_APP_PRIVATE (app);
+		if (!priv->mainwin)
+			brasero_app_create_mainwin (app);
+
+		manager = brasero_app_get_project_manager (app);
+		brasero_project_manager_open_session (BRASERO_PROJECT_MANAGER (manager), session);
+	}
+	else
+		brasero_app_session_burn (app, session, TRUE);
+}
+
+void
+brasero_app_burn_uri (BraseroApp *app,
+		      BraseroDrive *burner,
+		      gboolean burn)
+{
+	GFileEnumerator *enumerator;
+	BraseroSessionCfg *session;
+	BraseroTrackDataCfg *track;
+	GFileInfo *info = NULL;
+	GError *error = NULL;
+	GFile *file;
+
+	/* Here we get the contents from the burn:// URI and add them
+	 * individually to the data project. This is done in case it is
+	 * empty no to start the "Getting Project Size" dialog and then
+	 * show the "Project is empty" dialog. Do this synchronously as:
+	 * - we only want the top nodes which reduces time needed
+	 * - it's always local
+	 * - windows haven't been shown yet
+	 * NOTE: don't use any file specified on the command line. */
+	file = g_file_new_for_uri ("burn://");
+	enumerator = g_file_enumerate_children (file,
+						G_FILE_ATTRIBUTE_STANDARD_NAME,
+						G_FILE_QUERY_INFO_NONE,
+						NULL,
+						&error);
+	if (!enumerator) {
+		gchar *string;
+
+		if (error) {
+			string = g_strdup (error->message);
+			g_error_free (error);
+		}
+		else
+			string = g_strdup (_("An internal error occurred"));
+
+		brasero_app_alert (app,
+				   _("Error while loading the project"),
+				   string,
+				   GTK_MESSAGE_ERROR);
+
+		g_free (string);
+		g_object_unref (file);
+		return;
+	}
+
+	session = brasero_session_cfg_new ();
+
+	track = brasero_track_data_cfg_new ();
+	brasero_burn_session_add_track (BRASERO_BURN_SESSION (session), BRASERO_TRACK (track), NULL);
+	g_object_unref (track);
+
+	while ((info = g_file_enumerator_next_file (enumerator, NULL, &error)) != NULL) {
+		gchar *uri;
+
+		uri = g_strconcat ("burn:///", g_file_info_get_name (info), NULL);
+		g_object_unref (info);
+
+		brasero_track_data_cfg_add (track, uri, NULL);
+		g_free (uri);
+	}
+
+	g_object_unref (enumerator);
+	g_object_unref (file);
+
+	if (error) {
+		g_object_unref (session);
+
+		/* NOTE: this check errors in g_file_enumerator_next_file () */
+		brasero_app_alert (app,
+				   _("Error while loading the project"),
+				   error->message,
+				   GTK_MESSAGE_ERROR);
+		return;
+	}
+
+	if (gtk_tree_model_iter_n_children (GTK_TREE_MODEL (track), NULL) == 0) {
+	        g_object_unref (session);
+		brasero_app_alert (app,
+				   _("Please add files to the project."),
+				   _("The project is empty"),
+				   GTK_MESSAGE_ERROR);
+		return;
+	}
+
+	brasero_burn_session_set_burner (BRASERO_BURN_SESSION (session), burner);
+	brasero_app_process_session (app, session, burn);
+	g_object_unref (session);
+}
+
+void
+brasero_app_data (BraseroApp *app,
+		  BraseroDrive *burner,
+		  gchar * const *uris,
+		  gboolean burn)
+{
+	BraseroTrackDataCfg *track;
+	BraseroSessionCfg *session;
+	BraseroAppPrivate *priv;
+	int i, num;
+
+	priv = BRASERO_APP_PRIVATE (app);
+
+	if (!uris) {
+		GtkWidget *manager;
+
+		if (burn) {
+			brasero_app_alert (app,
+					   _("Please add files to the project."),
+					   _("The project is empty"),
+					   GTK_MESSAGE_ERROR);
+			return;
+		}
+
+		if (!priv->mainwin)
+			brasero_app_create_mainwin (app);
+
+		manager = brasero_app_get_project_manager (app);
+		brasero_project_manager_switch (BRASERO_PROJECT_MANAGER (manager),
+						BRASERO_PROJECT_TYPE_DATA,
+						TRUE);
+		return;
+	}
+
+	session = brasero_session_cfg_new ();
+	track = brasero_track_data_cfg_new ();
+	brasero_burn_session_add_track (BRASERO_BURN_SESSION (session), BRASERO_TRACK (track), NULL);
+	g_object_unref (track);
+
+	num = g_strv_length ((gchar **) uris);
+	for (i = 0; i < num; i ++) {
+		GFile *file;
+		gchar *uri;
+
+		file = g_file_new_for_commandline_arg (uris [i]);
+		uri = g_file_get_uri (file);
+		g_object_unref (file);
+
+		/* Ignore the return value */
+		brasero_track_data_cfg_add (track, uri, NULL);
+		g_free (uri);
+	}
+
+	brasero_burn_session_set_burner (BRASERO_BURN_SESSION (session), burner);
+	brasero_app_process_session (app, session, burn);
+	g_object_unref (session);
+}
+
+void
+brasero_app_stream (BraseroApp *app,
+		    BraseroDrive *burner,
+		    gchar * const *uris,
+		    gboolean is_video,
+		    gboolean burn)
+{
+	BraseroSessionCfg *session;
+	BraseroAppPrivate *priv;
+	int i, num;
+
+	priv = BRASERO_APP_PRIVATE (app);
+
+	session = brasero_session_cfg_new ();
+
+	if (!uris) {
+		GtkWidget *manager;
+
+		if (burn) {
+			brasero_app_alert (app,
+					   _("Please add files to the project."),
+					   _("The project is empty"),
+					   GTK_MESSAGE_ERROR);
+			return;
+		}
+
+		if (!priv->mainwin)
+			brasero_app_create_mainwin (app);
+
+		manager = brasero_app_get_project_manager (app);
+		brasero_project_manager_switch (BRASERO_PROJECT_MANAGER (manager),
+						is_video? BRASERO_PROJECT_TYPE_VIDEO:BRASERO_PROJECT_TYPE_AUDIO,
+						TRUE);
+		return;
+	}
+
+	num = g_strv_length ((gchar **) uris);
+	for (i = 0; i < num; i ++) {
+		BraseroTrackStreamCfg *track;
+		GFile *file;
+		gchar *uri;
+
+		file = g_file_new_for_commandline_arg (uris [i]);
+		uri = g_file_get_uri (file);
+		g_object_unref (file);
+
+		track = brasero_track_stream_cfg_new ();
+		brasero_track_stream_set_source (BRASERO_TRACK_STREAM (track), uri);
+		g_free (uri);
+
+		if (is_video)
+			brasero_track_stream_set_format (BRASERO_TRACK_STREAM (track),
+			                                 BRASERO_VIDEO_FORMAT_UNDEFINED);
+
+		brasero_burn_session_add_track (BRASERO_BURN_SESSION (session), BRASERO_TRACK (track), NULL);
+		g_object_unref (track);
+	}
+
+	brasero_burn_session_set_burner (BRASERO_BURN_SESSION (session), burner);
+	brasero_app_process_session (app, session, burn);
 	g_object_unref (session);
 }
 
 void
 brasero_app_blank (BraseroApp *app,
-		   const gchar *device)
+		   BraseroDrive *burner,
+		   gboolean burn)
 {
 	BraseroBlankDialog *dialog;
 	BraseroAppPrivate *priv;
 
 	priv = BRASERO_APP_PRIVATE (app);
 	dialog = brasero_blank_dialog_new ();
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
 
-	if (device) {
-		BraseroDrive *drive;
+	if (burner) {
 		BraseroMedium *medium;
-		BraseroMediumMonitor *monitor;
 
-		monitor = brasero_medium_monitor_get_default ();
-		drive = brasero_medium_monitor_get_drive (monitor, device);
-		g_object_unref (monitor);
-
-		medium = brasero_drive_get_medium (drive);
-
+		medium = brasero_drive_get_medium (burner);
 		brasero_tool_dialog_set_medium (BRASERO_TOOL_DIALOG (dialog), medium);
-		g_object_unref (drive);
 	}
 
 	priv->tool_dialog = GTK_WIDGET (dialog);
@@ -820,7 +963,7 @@ brasero_app_blank (BraseroApp *app,
 
 		if (priv->parent) {
 			gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-			gdk_window_set_transient_for (GTK_WIDGET (dialog)->window, priv->parent);
+			gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (dialog)), priv->parent);
 		}
 	}
 	else {
@@ -842,7 +985,7 @@ brasero_app_blank (BraseroApp *app,
 static void
 on_erase_cb (GtkAction *action, BraseroApp *app)
 {
-	brasero_app_blank (app, NULL);
+	brasero_app_blank (app, NULL, FALSE);
 }
 
 static void
@@ -855,6 +998,7 @@ on_eject_cb (GtkAction *action, BraseroApp *app)
 	priv = BRASERO_APP_PRIVATE (app);
 
 	dialog = brasero_eject_dialog_new ();
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
 
 	/* FIXME! This is a bad idea and needs fixing */
 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (priv->mainwin));
@@ -872,7 +1016,8 @@ on_eject_cb (GtkAction *action, BraseroApp *app)
 
 void
 brasero_app_check (BraseroApp *app,
-		   const gchar *device)
+		   BraseroDrive *burner,
+		   gboolean burn)
 {
 	BraseroSumDialog *dialog;
 	BraseroAppPrivate *priv;
@@ -880,21 +1025,15 @@ brasero_app_check (BraseroApp *app,
 	priv = BRASERO_APP_PRIVATE (app);
 
 	dialog = brasero_sum_dialog_new ();
+	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
+
 	priv->tool_dialog = GTK_WIDGET (dialog);
 
-	if (device) {
-		BraseroDrive *drive;
+	if (burner) {
 		BraseroMedium *medium;
-		BraseroMediumMonitor *monitor;
 
-		monitor = brasero_medium_monitor_get_default ();
-		drive = brasero_medium_monitor_get_drive (monitor, device);
-		g_object_unref (monitor);
-
-		medium = brasero_drive_get_medium (drive);
-
+		medium = brasero_drive_get_medium (burner);
 		brasero_tool_dialog_set_medium (BRASERO_TOOL_DIALOG (dialog), medium);
-		g_object_unref (drive);
 	}
 
 	if (!priv->mainwin) {
@@ -902,7 +1041,7 @@ brasero_app_check (BraseroApp *app,
 
 		if (priv->parent) {
 			gtk_window_set_modal (GTK_WINDOW (dialog), TRUE);
-			gdk_window_set_transient_for (GTK_WIDGET (dialog)->window, priv->parent);
+			gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (dialog)), priv->parent);
 		}
 	}
 	else {
@@ -924,7 +1063,7 @@ brasero_app_check (BraseroApp *app,
 static void
 on_integrity_check_cb (GtkAction *action, BraseroApp *app)
 {
-	brasero_app_check (app, NULL);
+	brasero_app_check (app, NULL, FALSE);
 }
 
 static void
@@ -948,7 +1087,7 @@ brasero_app_set_toplevel (BraseroApp *app, GtkWindow *window)
 	if (!priv->mainwin_running) {
 		if (priv->parent) {
 			gtk_widget_realize (GTK_WIDGET (window));
-			gdk_window_set_transient_for (GTK_WIDGET (window)->window, priv->parent);
+			gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (window)), priv->parent);
 		}
 		else {
 			gtk_window_set_skip_taskbar_hint (GTK_WINDOW (window), FALSE);
@@ -1046,7 +1185,7 @@ on_about_cb (GtkAction *action, BraseroApp *app)
 			       "program-name", "Brasero",
 			       "comments", comments,
 			       "version", VERSION,
-			       "copyright", "Copyright © 2005-2008 Philippe Rouquier",
+			       "copyright", "Copyright © 2005-2010 Philippe Rouquier",
 			       "authors", authors,
 			       "documenters", documenters,
 			       "website", "http://www.gnome.org/projects/brasero",
@@ -1101,10 +1240,18 @@ on_window_state_changed_cb (GtkWidget *widget,
 
 	priv = BRASERO_APP_PRIVATE (app);
 
-	if (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED)
-		priv->is_maximised = 1;
-	else
-		priv->is_maximised = 0;
+	if (event->new_window_state & GDK_WINDOW_STATE_MAXIMIZED) {
+		priv->is_maximized = 1;
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_WIN_MAXIMIZED,
+		                           GINT_TO_POINTER (1));
+	}
+	else {
+		priv->is_maximized = 0;
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_WIN_MAXIMIZED,
+		                           GINT_TO_POINTER (0));
+	}
 
 	return FALSE;
 }
@@ -1118,9 +1265,13 @@ on_configure_event_cb (GtkWidget *widget,
 
 	priv = BRASERO_APP_PRIVATE (app);
 
-	if (!priv->is_maximised) {
-		priv->width = event->width;
-		priv->height = event->height;
+	if (!priv->is_maximized) {
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_WIN_WIDTH,
+		                           GINT_TO_POINTER (event->width));
+		brasero_setting_set_value (brasero_setting_get_default (),
+		                           BRASERO_SETTING_WIN_HEIGHT,
+		                           GINT_TO_POINTER (event->height));
 	}
 
 	return FALSE;
@@ -1128,6 +1279,7 @@ on_configure_event_cb (GtkWidget *widget,
 
 gboolean
 brasero_app_open_project (BraseroApp *app,
+			  BraseroDrive *burner,
                           const gchar *uri,
                           gboolean is_playlist,
                           gboolean warn_user,
@@ -1143,23 +1295,22 @@ brasero_app_open_project (BraseroApp *app,
 #ifdef BUILD_PLAYLIST
 
 	if (is_playlist) {
-		if (!brasero_project_open_audio_playlist_project (uri, BRASERO_BURN_SESSION (session), warn_user))
+		if (!brasero_project_open_audio_playlist_project (uri,
+								  BRASERO_BURN_SESSION (session),
+								  warn_user))
 			return FALSE;
 	}
 	else
 
 #endif
 	
-	if (!brasero_project_open_project_xml (uri, BRASERO_BURN_SESSION (session), warn_user))
+	if (!brasero_project_open_project_xml (uri,
+					       BRASERO_BURN_SESSION (session),
+					       warn_user))
 		return FALSE;
 
-	if (!priv->projects) {
-		brasero_app_create_mainwin (app);
-		brasero_project_manager_open_session (BRASERO_PROJECT_MANAGER (priv->projects), session, burn);
-		brasero_app_run_mainwin (app);
-	}
-	else
-		brasero_project_manager_open_session (BRASERO_PROJECT_MANAGER (priv->projects), session, burn);
+	brasero_app_process_session (app, session, burn);
+	g_object_unref (session);
 
 	return TRUE;
 }
@@ -1183,7 +1334,12 @@ brasero_app_open_by_mime (BraseroApp *app,
 	 * installed, it's returned as application/xml, so check that too. */
 	if (!strcmp (mime, "application/x-brasero")
 	||  !strcmp (mime, "application/xml"))
-		return brasero_app_open_project (app, uri, FALSE, warn_user, FALSE);
+		return brasero_app_open_project (app,
+						 NULL,
+						 uri,
+						 FALSE,
+						 warn_user,
+						 FALSE);
 
 #ifdef BUILD_PLAYLIST
 
@@ -1191,7 +1347,12 @@ brasero_app_open_by_mime (BraseroApp *app,
 	     ||  !strcmp (mime, "audio/x-ms-asx")
 	     ||  !strcmp (mime, "audio/x-mp3-playlist")
 	     ||  !strcmp (mime, "audio/x-mpegurl"))
-		return brasero_app_open_project (app, uri, TRUE,  warn_user, FALSE);
+		return brasero_app_open_project (app,
+						 NULL,
+						 uri,
+						 TRUE,
+						 warn_user,
+						 FALSE);
 
 #endif
 
@@ -1199,11 +1360,7 @@ brasero_app_open_by_mime (BraseroApp *app,
 	     ||  !strcmp (mime, "application/x-cdrdao-toc")
 	     ||  !strcmp (mime, "application/x-toc")
 	     ||  !strcmp (mime, "application/x-cue")) {
-		if (priv->projects)
-			brasero_project_manager_iso (BRASERO_PROJECT_MANAGER (priv->projects), uri);
-		else
-			brasero_app_burn_image (app, uri);
-
+		brasero_app_image (app, NULL, uri, FALSE);
 		return TRUE;
 	}
 
@@ -1627,7 +1784,7 @@ brasero_app_create_mainwin (BraseroApp *app)
 
 	if (priv->parent) {
 		gtk_window_set_modal (GTK_WINDOW (priv->mainwin), TRUE);
-		gdk_window_set_transient_for (GTK_WIDGET (priv->mainwin)->window, priv->parent);
+		gdk_window_set_transient_for (gtk_widget_get_window (GTK_WIDGET (priv->mainwin)), priv->parent);
 	}
 
 	brasero_app_load_window_state (app);
@@ -1688,18 +1845,44 @@ brasero_app_run_mainwin (BraseroApp *app)
 	return TRUE;
 }
 
+static GtkWindow *
+brasero_app_get_io_parent_window (gpointer user_data)
+{
+	BraseroAppPrivate *priv;
+
+	priv = BRASERO_APP_PRIVATE (user_data);
+	if (!priv->mainwin) {
+		if (priv->parent)
+			return GTK_WINDOW (priv->parent);
+	}
+	else {
+		GtkWidget *toplevel;
+
+		toplevel = gtk_widget_get_toplevel (GTK_WIDGET (priv->mainwin));
+		return GTK_WINDOW (toplevel);
+	}
+
+	return NULL;
+}
+
 static void
 brasero_app_init (BraseroApp *object)
 {
 	BraseroAppPrivate *priv;
 
+	priv = BRASERO_APP_PRIVATE (object);
+
+	/* Load settings */
+	priv->setting = brasero_setting_get_default ();
+	brasero_setting_load (priv->setting);
+
 	/* Connect to session */
 	brasero_session_connect (object);
 
-	priv = BRASERO_APP_PRIVATE (object);
-
-	g_set_application_name (_("Brasero Disc Burner"));
+	g_set_application_name (_("Disc Burner"));
 	gtk_window_set_default_icon_name ("brasero");
+
+	brasero_io_set_parent_window_callback (brasero_app_get_io_parent_window, object);
 }
 
 static void
@@ -1708,6 +1891,10 @@ brasero_app_finalize (GObject *object)
 	BraseroAppPrivate *priv;
 
 	priv = BRASERO_APP_PRIVATE (object);
+
+	brasero_setting_save (priv->setting);
+	g_object_unref (priv->setting);
+	priv->setting = NULL;
 
 	brasero_session_disconnect (BRASERO_APP (object));
 

@@ -43,6 +43,7 @@
 #include <gdk/gdk.h>
 
 #include "brasero-media-private.h"
+#include "brasero-drive-priv.h"
 
 #include "brasero-medium.h"
 #include "brasero-drive.h"
@@ -62,7 +63,7 @@
 
 
 const gchar *types [] = {	N_("File"),
-				N_("CDROM"),
+				N_("CD-ROM"),
 				N_("CD-R"),
 				N_("CD-RW"),
 				N_("DVD-ROM"),
@@ -1479,6 +1480,11 @@ brasero_medium_get_page_2A_write_speed_desc (BraseroMedium *self,
 
 	desc = page_2A->wr_spd_desc;
 	for (i = 0; i < desc_num; i ++) {
+		/* It happens (I have such a drive) that it returns descriptors
+		 * with the same speeds each (in this case the maximum) */
+		if (i > 0 && priv->wr_speeds [i-1] == BRASERO_GET_16 (desc [i].speed))
+			continue;
+
 		priv->wr_speeds [i] = BRASERO_GET_16 (desc [i].speed);
 		max_wrt = MAX (max_wrt, priv->wr_speeds [i]);
 	}
@@ -1566,12 +1572,26 @@ brasero_medium_track_written_SAO (BraseroDeviceHandle *handle,
 				  int track_num,
 				  int track_start)
 {
+	BraseroScsiErrCode error = BRASERO_SCSI_ERROR_NONE;
 	unsigned char buffer [2048];
 	BraseroScsiResult result;
 
 	BRASERO_MEDIA_LOG ("Checking for TDBs in track pregap.");
 
-	/* The two following sectors are readable */
+	/* To avoid blocking try to check whether it is readable */
+	result = brasero_mmc1_read_block (handle,
+					  TRUE,
+					  BRASERO_SCSI_BLOCK_TYPE_ANY,
+					  BRASERO_SCSI_BLOCK_HEADER_NONE,
+					  BRASERO_SCSI_BLOCK_NO_SUBCHANNEL,
+					  track_start - 1,
+					  1,
+					  NULL,
+					  0,
+					  &error);
+	if (result != BRASERO_SCSI_OK || error != BRASERO_SCSI_ERROR_NONE)
+		return TRUE;
+
 	result = brasero_mmc1_read_block (handle,
 					  TRUE,
 					  BRASERO_SCSI_BLOCK_TYPE_ANY,
@@ -1581,9 +1601,8 @@ brasero_medium_track_written_SAO (BraseroDeviceHandle *handle,
 					  1,
 					  buffer,
 					  sizeof (buffer),
-					  NULL);
-
-	if (result == BRASERO_SCSI_OK) {
+					  &error);
+	if (result == BRASERO_SCSI_OK && error == BRASERO_SCSI_ERROR_NONE) {
 		int i;
 
 		if (buffer [0] != 'T' || buffer [1] != 'D' || buffer [2] != 'I') {
@@ -1698,8 +1717,8 @@ brasero_medium_track_get_info (BraseroMedium *self,
 	     &&  (priv->info & BRASERO_MEDIUM_CD)
 	     && !(priv->info & BRASERO_MEDIUM_ROM)) {
 		BRASERO_MEDIA_LOG ("Data track belongs to first session of multisession CD. "
-				  "Checking for real size (%i sectors currently).",
-				  track->blocks_num);
+				   "Checking for real size (%i sectors currently).",
+				   track->blocks_num);
 
 		/* we test the pregaps blocks for TDB: these are special blocks
 		 * filling the pregap of a track when it was recorded as TAO or
@@ -2009,6 +2028,9 @@ brasero_medium_get_sessions_info (BraseroMedium *self,
 	BRASERO_MEDIA_LOG ("Reading Toc");
 
 	priv = BRASERO_MEDIUM_PRIVATE (self);
+
+tryagain:
+
 	result = brasero_mmc1_read_toc_formatted (handle,
 						  0,
 						  &toc,
@@ -2017,6 +2039,20 @@ brasero_medium_get_sessions_info (BraseroMedium *self,
 	if (result != BRASERO_SCSI_OK) {
 		BRASERO_MEDIA_LOG ("READ TOC failed");
 		return FALSE;
+	}
+
+	if (priv->probe_cancelled) {
+		g_free (toc);
+		return FALSE;
+	}
+
+	/* My drive with some Video CDs gets a size of 2 (basically the size
+	 * member of the structure) without any error. Consider the drive is not
+	 * ready and needs retrying */
+	if (size < sizeof (BraseroScsiFormattedTocData)) {
+		g_free (toc);
+		toc = NULL;
+		goto tryagain;
 	}
 
 	num = (size - sizeof (BraseroScsiFormattedTocData)) /
@@ -2342,7 +2378,7 @@ brasero_medium_get_medium_type (BraseroMedium *self,
 						 &size,
 						 NULL);
 		if (result != BRASERO_SCSI_OK) {
-			/* CDROM */
+			/* CD-ROM */
 			priv->info = BRASERO_MEDIUM_CDROM;
 			priv->type = types [1];
 		}
@@ -2701,7 +2737,7 @@ _next_CD_TEXT_pack (BraseroScsiCDTextData *cd_text,
 	       cd_text->pack [current].type != BRASERO_SCSI_CD_TEXT_UPC_EAN_ISRC &&
 	       cd_text->pack [current].type != BRASERO_SCSI_CD_TEXT_BLOCK_SIZE) {
 		current ++;
-		if (current > max)
+		if (current >= max)
 			return -1;
 	}
 
@@ -2755,10 +2791,19 @@ brasero_medium_read_CD_TEXT (BraseroMedium *self,
 		return;
 	}
 
-	/* Get the number of CD-Text Data Packs */
-	num = (BRASERO_GET_16 (cd_text->hdr->len) -
-	      (sizeof (BraseroScsiTocPmaAtipHdr) - sizeof (cd_text->hdr->len)))  /
-	       sizeof (BraseroScsiCDTextPackData);
+	/* Get the number of CD-Text Data Packs.
+	 * Some drives seem to report an idiotic cd_text->hdr->len. So use size
+	 * to be on a safer side. */
+	if (size < sizeof (BraseroScsiTocPmaAtipHdr)) {
+		g_free (cd_text);
+		return;
+	}
+
+	num = (size - sizeof (BraseroScsiTocPmaAtipHdr)) / sizeof (BraseroScsiCDTextPackData);
+	if (num <= 0) {
+		g_free (cd_text);
+		return;
+	}
 
 	priv = BRASERO_MEDIUM_PRIVATE (self);
 
@@ -2930,6 +2975,17 @@ brasero_medium_init_real (BraseroMedium *object,
 	}
 }
 
+gboolean
+brasero_medium_probing (BraseroMedium *medium)
+{
+	BraseroMediumPrivate *priv;
+
+	g_return_val_if_fail (BRASERO_IS_MEDIUM (medium), FALSE);
+
+	priv = BRASERO_MEDIUM_PRIVATE (medium);
+	return priv->probe != NULL;
+}
+
 static gboolean
 brasero_medium_probed (gpointer data)
 {
@@ -3034,11 +3090,12 @@ brasero_medium_probe_thread (gpointer self)
 
 end:
 
+	g_mutex_lock (priv->mutex);
+
+	priv->probe = NULL;
 	if (!priv->probe_cancelled)
 		priv->probe_id = g_idle_add (brasero_medium_probed, self);
 
-	g_mutex_lock (priv->mutex);
-	priv->probe = NULL;
 	g_cond_broadcast (priv->cond);
 	g_mutex_unlock (priv->mutex);
 
@@ -3251,14 +3308,6 @@ brasero_medium_class_init (BraseroMediumClass *klass)
 	                                                      G_PARAM_READWRITE | G_PARAM_CONSTRUCT_ONLY));
 }
 
-
-/* This function is not public API yet because it was too
- * late; so use it internally for now. It's mainly for 
- * convenience.*/
-gboolean
-brasero_drive_can_write_media (BraseroDrive *drive,
-                               BraseroMedia media);
-
 /**
  * brasero_medium_can_be_written:
  * @medium: #BraseroMedium
@@ -3325,6 +3374,8 @@ brasero_medium_can_be_rewritten (BraseroMedium *medium)
  *
  * Gets whether the medium supports SAO.
  *
+ * Since 2.29
+ *
  * Return value: a #gboolean. TRUE if the medium can use SAO write mode , FALSE otherwise.
  *
  **/
@@ -3344,6 +3395,8 @@ brasero_medium_can_use_sao (BraseroMedium *medium)
  * @medium: #BraseroMedium
  *
  * Gets whether the medium supports TAO.
+ *
+ * Since 2.29
  *
  * Return value: a #gboolean. TRUE if the medium can use TAO write mode, FALSE otherwise.
  *
@@ -3425,7 +3478,7 @@ brasero_medium_can_use_burnfree (BraseroMedium *medium)
  *
  * Gets the #BraseroDrive in which the medium is inserted.
  *
- * Return value: a #BraseroDrive. No need to unref after use.
+ * Return value: (transfer none): a #BraseroDrive. No need to unref after use.
  *
  **/
 BraseroDrive *

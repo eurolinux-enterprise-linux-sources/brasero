@@ -58,8 +58,8 @@ typedef struct {
 	void		(*ready)	(BraseroPlayer *player);
 } BraseroPlayerClass;
 
-GType brasero_player_get_type ();
-GtkWidget *brasero_player_new ();
+GType brasero_player_get_type (void);
+GtkWidget *brasero_player_new (void);
 
 void
 brasero_player_set_uri (BraseroPlayer *player,

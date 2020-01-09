@@ -30,7 +30,7 @@
       <year>2008</year>
       <year>2009</year>
       <holder>Ubuntu-Dokumentationsprojekt</holder> 
-    </copyright><copyright><year>2008, 2009</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright> 
+    </copyright><copyright><year>2008, 2009, 2010</year><holder>Mario Blättermann (mariobl@gnome.org)</holder></copyright> 
 <!-- translators: uncomment this:
 
   <copyright>
@@ -235,7 +235,7 @@
     </figure>
     <!-- ==== End of Figure ==== -->
 
-    <para>Dieses Fenster ist der Ausgangspunkt für alle Ihre Projekte. Sie können von hier aus das Projekt anklicken, das Sie starten wollen. Falls Sie mit <application>Brasero</application> bereits andere Projekte erstellt haben, können Sie diese in <guilabel>Wählen Sie ein zuletzt geöffnetes Projekt</guilabel> auswählen. Weitere Informationen hierzu finden Sie in <xref linkend="brasero-open-recent-project"/>.</para>
+    <para>Dieses Fenster ist der Ausgangspunkt für alle Ihre Projekte. Sie können von hier aus das Projekt anklicken, das Sie starten wollen. Falls Sie mit <application>Brasero</application> bereits andere Projekte erstellt haben, können Sie diese in den <guilabel>Zuletzt geöffneten Projekten</guilabel> auswählen. Weitere Informationen hierzu finden Sie in <xref linkend="brasero-open-recent-project"/>.</para>
     </sect2>
   </sect1>
 
@@ -858,7 +858,7 @@
 	  <para>Wählen Sie <menuchoice><guimenu>Projekt</guimenu><guisubmenu>Letzte Projekte</guisubmenu></menuchoice> und wählen Sie ein Projekt, welches Sie öffnen wollen.</para>
 	</listitem>
 	<listitem>
-	  <para>Klicken Sie im Bereich <guilabel>Wählen Sie ein zuletzt geöffnetes Projekt</guilabel> des Hauptfensters auf ein Projekt, das Sie öffnen wollen.</para>
+	  <para>Klicken Sie im Bereich <guilabel>Zuletzt geöffnete Projekte</guilabel> des Hauptfensters auf ein Projekt, das Sie öffnen wollen.</para>
 	</listitem>
       </itemizedlist></para>
     <para>Um ein Projekt zu öffnen, welches nicht in <guilabel>Letzte Projekte</guilabel> erscheint, wählen Sie <menuchoice><guimenu>Projekt</guimenu><guimenuitem>Öffnen</guimenuitem></menuchoice> und wählen die Projektdatei aus.</para>

@@ -17,6 +17,9 @@ BraseroMediumMonitor
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroMediumMonitor ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroMediumMonitor
 
 </para>
 
+@void: 
 @Returns: 
 
 

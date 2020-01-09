@@ -36,6 +36,8 @@
 
 #include "brasero-media-private.h"
 
+#include "scsi-mmc1.h"
+
 #include "scsi-error.h"
 #include "scsi-utils.h"
 #include "scsi-base.h"
@@ -100,6 +102,8 @@ brasero_mmc1_read_disc_information_std (BraseroDeviceHandle *handle,
 	int request_size;
 	int buffer_size;
 
+	g_return_val_if_fail (handle != NULL, BRASERO_SCSI_FAILURE);
+
 	if (!info_return || !size) {
 		BRASERO_SCSI_SET_ERRCODE (error, BRASERO_SCSI_BAD_ARGUMENT);
 		return BRASERO_SCSI_FAILURE;
@@ -146,6 +150,12 @@ end:
 	return res;
 }
 
+#if 0
+
+/* These functions are not used for now but may
+ * be one day. So keep them around but turn 
+ * them off to avoid build warnings */
+ 
 BraseroScsiResult
 brasero_mmc5_read_disc_information_tracks (BraseroDeviceHandle *handle,
 					   BraseroScsiTrackResInfo *info_return,
@@ -183,3 +193,5 @@ brasero_mmc5_read_disc_information_pows (BraseroDeviceHandle *handle,
 	brasero_scsi_command_free (cdb);
 	return res;
 }
+
+#endif

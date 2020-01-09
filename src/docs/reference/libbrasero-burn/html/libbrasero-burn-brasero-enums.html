@@ -8,12 +8,8 @@
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-brasero-status.html" title="brasero-status">
 <link rel="next" href="libbrasero-burn-brasero-track-type.html" title="brasero-track-type">
-<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.14 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
-<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
-<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
-<link rel="index" href="api-index-full.html" title="API Index">
-<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
 <table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
@@ -41,17 +37,18 @@
 </tr></table></div>
 <div class="refsynopsisdiv" title="Synopsis">
 <a name="libbrasero-burn-brasero-enums.synopsis"></a><h2>Synopsis</h2>
-<pre class="synopsis">enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>;
-enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a>;
-enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnAction">BraseroBurnAction</a>;
-enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>;
-enum                <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>;
-#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-AUDIO:CAPS">BRASERO_STREAM_FORMAT_AUDIO</a>         (stream_FORMAT)
-#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-VIDEO:CAPS">BRASERO_STREAM_FORMAT_VIDEO</a>         (stream_FORMAT)
-#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-MIN-STREAM-LENGTH:CAPS">BRASERO_MIN_STREAM_LENGTH</a>
-#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-LENGTH:CAPS">BRASERO_STREAM_LENGTH</a>               (start_MACRO, end_MACRO)
-#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS">BRASERO_STREAM_FORMAT_HAS_VIDEO</a>     (format_MACRO)
-enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>;
+<pre class="synopsis">enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult">BraseroBurnResult</a>;
+enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag" title="enum BraseroBurnFlag">BraseroBurnFlag</a>;
+enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnAction" title="enum BraseroBurnAction">BraseroBurnAction</a>;
+enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFS" title="enum BraseroImageFS">BraseroImageFS</a>;
+enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat" title="enum BraseroStreamFormat">BraseroStreamFormat</a>;
+#define             <a class="link" href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-AUDIO:CAPS" title="BRASERO_STREAM_FORMAT_AUDIO()">BRASERO_STREAM_FORMAT_AUDIO</a>         (stream_FORMAT)
+#define             <a class="link" href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-VIDEO:CAPS" title="BRASERO_STREAM_FORMAT_VIDEO()">BRASERO_STREAM_FORMAT_VIDEO</a>         (stream_FORMAT)
+#define             <a class="link" href="libbrasero-burn-brasero-enums.html#BRASERO-MIN-STREAM-LENGTH:CAPS" title="BRASERO_MIN_STREAM_LENGTH">BRASERO_MIN_STREAM_LENGTH</a>
+#define             <a class="link" href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-LENGTH:CAPS" title="BRASERO_STREAM_LENGTH()">BRASERO_STREAM_LENGTH</a>               (start_MACRO,
+                                                         end_MACRO)
+#define             <a class="link" href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS" title="BRASERO_STREAM_FORMAT_HAS_VIDEO()">BRASERO_STREAM_FORMAT_HAS_VIDEO</a>     (format_MACRO)
+enum                <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat">BraseroImageFormat</a>;
 </pre>
 </div>
 <div class="refsect1" title="Description">
@@ -175,17 +172,25 @@ enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageForm
 <pre class="programlisting">typedef enum {
 	BRASERO_AUDIO_FORMAT_NONE		= 0,
 	BRASERO_AUDIO_FORMAT_UNDEFINED		= 1,
-	BRASERO_AUDIO_FORMAT_4_CHANNEL		= 1 &lt;&lt; 1,
+	BRASERO_AUDIO_FORMAT_DTS		= 1 &lt;&lt; 1,
 	BRASERO_AUDIO_FORMAT_RAW		= 1 &lt;&lt; 2,
 	BRASERO_AUDIO_FORMAT_AC3		= 1 &lt;&lt; 3,
 	BRASERO_AUDIO_FORMAT_MP2		= 1 &lt;&lt; 4,
+
 	BRASERO_AUDIO_FORMAT_44100		= 1 &lt;&lt; 5,
 	BRASERO_AUDIO_FORMAT_48000		= 1 &lt;&lt; 6,
+
+
 	BRASERO_VIDEO_FORMAT_UNDEFINED		= 1 &lt;&lt; 7,
 	BRASERO_VIDEO_FORMAT_VCD		= 1 &lt;&lt; 8,
 	BRASERO_VIDEO_FORMAT_VIDEO_DVD		= 1 &lt;&lt; 9,
 
-	BRASERO_METADATA_INFO			= 1 &lt;&lt; 10
+	BRASERO_METADATA_INFO			= 1 &lt;&lt; 10,
+
+	BRASERO_AUDIO_FORMAT_RAW_LITTLE_ENDIAN  = 1 &lt;&lt; 11,
+
+	/* Deprecated */
+	BRASERO_AUDIO_FORMAT_4_CHANNEL		= 0
 } BraseroStreamFormat;
 </pre>
 <p>
@@ -194,7 +199,7 @@ enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageForm
 <hr>
 <div class="refsect2" title="BRASERO_STREAM_FORMAT_AUDIO()">
 <a name="BRASERO-STREAM-FORMAT-AUDIO:CAPS"></a><h3>BRASERO_STREAM_FORMAT_AUDIO()</h3>
-<pre class="programlisting">#define BRASERO_STREAM_FORMAT_AUDIO(stream_FORMAT) ((stream_FORMAT) &amp; 0x007F)
+<pre class="programlisting">#define BRASERO_STREAM_FORMAT_AUDIO(stream_FORMAT) ((stream_FORMAT) &amp; 0x087F)
 </pre>
 <p>
 </p>
@@ -290,6 +295,6 @@ enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageForm
 </div>
 <div class="footer">
 <hr>
-          Generated by GTK-Doc V1.12</div>
+          Generated by GTK-Doc V1.14</div>
 </body>
 </html>

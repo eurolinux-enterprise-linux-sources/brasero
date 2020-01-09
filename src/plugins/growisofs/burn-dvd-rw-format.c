@@ -47,8 +47,15 @@
 #include "burn-job.h"
 #include "burn-process.h"
 #include "brasero-medium.h"
-#include "burn-dvd-rw-format.h"
 #include "burn-growisofs-common.h"
+
+
+#define BRASERO_TYPE_DVD_RW_FORMAT         (brasero_dvd_rw_format_get_type ())
+#define BRASERO_DVD_RW_FORMAT(o)           (G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_DVD_RW_FORMAT, BraseroDvdRwFormat))
+#define BRASERO_DVD_RW_FORMAT_CLASS(k)     (G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_DVD_RW_FORMAT, BraseroDvdRwFormatClass))
+#define BRASERO_IS_DVD_RW_FORMAT(o)        (G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_DVD_RW_FORMAT))
+#define BRASERO_IS_DVD_RW_FORMAT_CLASS(k)  (G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_DVD_RW_FORMAT))
+#define BRASERO_DVD_RW_FORMAT_GET_CLASS(o) (G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_DVD_RW_FORMAT, BraseroDvdRwFormatClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroDvdRwFormat, brasero_dvd_rw_format, BRASERO_TYPE_PROCESS, BraseroProcess);
 
@@ -163,8 +170,8 @@ brasero_dvd_rw_format_finalize (GObject *object)
 	G_OBJECT_CLASS (parent_class)->finalize (object);
 }
 
-static BraseroBurnResult
-brasero_dvd_rw_format_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_dvd_rw_format_export_caps (BraseroPlugin *plugin)
 {
 	/* NOTE: sequential and restricted are added later on demand */
 	const BraseroMedia media = BRASERO_MEDIUM_DVD|
@@ -175,19 +182,13 @@ brasero_dvd_rw_format_export_caps (BraseroPlugin *plugin, gchar **error)
 				   BRASERO_MEDIUM_HAS_DATA|
 				   BRASERO_MEDIUM_UNFORMATTED|
 				   BRASERO_MEDIUM_BLANK;
-	BraseroBurnResult result;
 	GSList *output;
 
 	brasero_plugin_define (plugin,
 			       "dvd+rw-format",
-			       _("Dvd+rw-format blanks and formats DVD+/-R(W)"),
+			       _("Blanks and formats rewritable DVDs and BDs"),
 			       "Philippe Rouquier",
 			       4);
-
-	/* First see if this plugin can be used */
-	result = brasero_process_check_path ("dvd+rw-format", error);
-	if (result != BRASERO_BURN_OK)
-		return result;
 
 	output = brasero_caps_disc_new (media|
 					BRASERO_MEDIUM_BDRE|
@@ -212,6 +213,15 @@ brasero_dvd_rw_format_export_caps (BraseroPlugin *plugin, gchar **error)
 					BRASERO_BURN_FLAG_NONE);
 
 	brasero_plugin_register_group (plugin, _(GROWISOFS_DESCRIPTION));
+}
 
-	return BRASERO_BURN_OK;
+G_MODULE_EXPORT void
+brasero_plugin_check_config (BraseroPlugin *plugin)
+{
+	gint version [3] = { 5, 0, -1};
+	brasero_plugin_test_app (plugin,
+	                         "dvd+rw-format",
+	                         "-v",
+	                         "* BD/DVD±RW/-RAM format utility by <appro@fy.chalmers.se>, version %d.%d",
+	                         version);
 }

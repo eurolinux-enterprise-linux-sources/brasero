@@ -51,12 +51,19 @@
 
 #include "brasero-plugin-registration.h"
 #include "burn-job.h"
-#include "burn-checksum-image.h"
 #include "burn-volume.h"
 #include "brasero-drive.h"
 #include "brasero-track-disc.h"
 #include "brasero-track-image.h"
 #include "brasero-tags.h"
+
+
+#define BRASERO_TYPE_CHECKSUM_IMAGE		(brasero_checksum_image_get_type ())
+#define BRASERO_CHECKSUM_IMAGE(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_CHECKSUM_IMAGE, BraseroChecksumImage))
+#define BRASERO_CHECKSUM_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_CHECKSUM_IMAGE, BraseroChecksumImageClass))
+#define BRASERO_IS_CHECKSUM_IMAGE(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_CHECKSUM_IMAGE))
+#define BRASERO_IS_CHECKSUM_IMAGE_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_CHECKSUM_IMAGE))
+#define BRASERO_CHECKSUM_GET_CLASS(o)		(G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_CHECKSUM_IMAGE, BraseroChecksumImageClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroChecksumImage, brasero_checksum_image, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -698,12 +705,14 @@ brasero_checksum_image_clock_tick (BraseroJob *job)
 	BraseroChecksumImagePrivate *priv;
 
 	priv = BRASERO_CHECKSUM_IMAGE_PRIVATE (job);
+
 	if (!priv->checksum)
 		return BRASERO_BURN_OK;
 
 	if (!priv->total)
 		return BRASERO_BURN_OK;
 
+	brasero_job_start_progress (job, FALSE);
 	brasero_job_set_progress (job,
 				  (gdouble) priv->bytes /
 				  (gdouble) priv->total);
@@ -808,8 +817,8 @@ brasero_checksum_image_class_init (BraseroChecksumImageClass *klass)
 	job_class->clock_tick = brasero_checksum_image_clock_tick;
 }
 
-static BraseroBurnResult
-brasero_checksum_image_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_checksum_image_export_caps (BraseroPlugin *plugin)
 {
 	GSList *input;
 	BraseroPluginConfOption *checksum_type;
@@ -819,7 +828,7 @@ brasero_checksum_image_export_caps (BraseroPlugin *plugin, gchar **error)
 				* which will be translated only when it needs
 				* displaying. */
 			       N_("Image Checksum"),
-			       _("Allows to check data integrity on disc after it is burnt"),
+			       _("Checks disc integrity after it is burnt"),
 			       "Philippe Rouquier",
 			       0);
 
@@ -855,6 +864,4 @@ brasero_checksum_image_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_add_conf_option (plugin, checksum_type);
 
 	brasero_plugin_set_compulsory (plugin, FALSE);
-
-	return BRASERO_BURN_OK;
 }

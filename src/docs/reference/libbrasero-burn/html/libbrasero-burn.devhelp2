@@ -11,8 +11,8 @@
       <sub name="brasero-track-type" link="libbrasero-burn-brasero-track-type.html"/>
       <sub name="BraseroTrack" link="libbrasero-burn-BraseroTrack.html"/>
       <sub name="BraseroTrackDisc" link="libbrasero-burn-BraseroTrackDisc.html"/>
-      <sub name="BraseroTrackData" link="libbrasero-burn-BraseroTrackData.html"/>
-      <sub name="BraseroTrackDataCfg" link="libbrasero-burn-BraseroTrackDataCfg.html"/>
+      <sub name="BraseroTrackData" link="libbrasero-burn-brasero-track-data.html"/>
+      <sub name="BraseroTrackDataCfg" link="libbrasero-burn-brasero-track-data-cfg.html"/>
       <sub name="BraseroTrackStream" link="libbrasero-burn-BraseroTrackStream.html"/>
       <sub name="BraseroTrackStreamCfg" link="libbrasero-burn-BraseroTrackStreamCfg.html"/>
       <sub name="BraseroTrackImage" link="libbrasero-burn-BraseroTrackImage.html"/>
@@ -65,7 +65,6 @@
     <keyword type="struct" name="BraseroStatus" link="libbrasero-burn-brasero-status.html#BraseroStatus"/>
     <keyword type="enum" name="enum BraseroStatusType" link="libbrasero-burn-brasero-status.html#BraseroStatusType"/>
     <keyword type="function" name="brasero_status_new ()" link="libbrasero-burn-brasero-status.html#brasero-status-new"/>
-    <keyword type="function" name="brasero_status_free ()" link="libbrasero-burn-brasero-status.html#brasero-status-free"/>
     <keyword type="function" name="brasero_status_get_result ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-result"/>
     <keyword type="function" name="brasero_status_get_progress ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-progress"/>
     <keyword type="function" name="brasero_status_get_error ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-error"/>
@@ -84,7 +83,6 @@
     <keyword type="macro" name="BRASERO_STREAM_LENGTH()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-LENGTH:CAPS"/>
     <keyword type="macro" name="BRASERO_STREAM_FORMAT_HAS_VIDEO()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS"/>
     <keyword type="enum" name="enum BraseroImageFormat" link="libbrasero-burn-brasero-enums.html#BraseroImageFormat"/>
-    <keyword type="enum" name="enum BraseroTrackDataType" link="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType"/>
     <keyword type="struct" name="BraseroTrackType" link="libbrasero-burn-brasero-track-type.html#BraseroTrackType"/>
     <keyword type="function" name="brasero_track_type_new ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-new"/>
     <keyword type="function" name="brasero_track_type_free ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-free"/>
@@ -129,45 +127,43 @@
     <keyword type="function" name="brasero_track_disc_set_track_num ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-set-track-num"/>
     <keyword type="function" name="brasero_track_disc_get_track_num ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-get-track-num"/>
     <keyword type="function" name="brasero_track_disc_get_medium_type ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-get-medium-type"/>
-    <keyword type="struct" name="BraseroGraftPt" link="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"/>
-    <keyword type="function" name="brasero_graft_point_free ()" link="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-free"/>
-    <keyword type="function" name="brasero_graft_point_copy ()" link="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-copy"/>
-    <keyword type="struct" name="BraseroTrackData" link="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"/>
-    <keyword type="function" name="brasero_track_data_new ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-new"/>
-    <keyword type="function" name="brasero_track_data_set_source ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-source"/>
-    <keyword type="function" name="brasero_track_data_add_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-add-fs"/>
-    <keyword type="function" name="brasero_track_data_rm_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-rm-fs"/>
-    <keyword type="function" name="brasero_track_data_set_data_blocks ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-data-blocks"/>
-    <keyword type="function" name="brasero_track_data_set_file_num ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-file-num"/>
-    <keyword type="function" name="brasero_track_data_get_grafts ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-grafts"/>
-    <keyword type="function" name="brasero_track_data_get_excluded ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-excluded"/>
-    <keyword type="function" name="brasero_track_data_get_paths ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-paths"/>
-    <keyword type="function" name="brasero_track_data_get_file_num ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-file-num"/>
-    <keyword type="function" name="brasero_track_data_get_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-fs"/>
-    <keyword type="macro" name="BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST" link="libbrasero-burn-BraseroTrackDataCfg.html#BRASERO-DND-TARGET-DATA-TRACK-REFERENCE-LIST:CAPS"/>
-    <keyword type="enum" name="enum BraseroTrackDataCfgColumn" link="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfgColumn"/>
-    <keyword type="struct" name="BraseroTrackDataCfg" link="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfg"/>
-    <keyword type="function" name="brasero_track_data_cfg_new ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-new"/>
-    <keyword type="function" name="brasero_track_data_cfg_add ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-add"/>
-    <keyword type="function" name="brasero_track_data_cfg_add_empty_directory ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-add-empty-directory"/>
-    <keyword type="function" name="brasero_track_data_cfg_remove ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-remove"/>
-    <keyword type="function" name="brasero_track_data_cfg_rename ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-rename"/>
-    <keyword type="function" name="brasero_track_data_cfg_reset ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-reset"/>
-    <keyword type="function" name="brasero_track_data_cfg_load_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-load-medium"/>
-    <keyword type="function" name="brasero_track_data_cfg_unload_current_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-unload-current-medium"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_current_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-current-medium"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_available_media ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-available-media"/>
-    <keyword type="function" name="brasero_track_data_cfg_dont_filter_uri ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-dont-filter-uri"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_restored_list ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-restored-list"/>
-    <keyword type="function" name="brasero_track_data_cfg_restore ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-restore"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_filtered_model ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-filtered-model"/>
-    <keyword type="function" name="brasero_track_data_cfg_span ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span"/>
-    <keyword type="function" name="brasero_track_data_cfg_span_again ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-again"/>
-    <keyword type="function" name="brasero_track_data_cfg_span_possible ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-possible"/>
-    <keyword type="function" name="brasero_track_data_cfg_span_stop ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-stop"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_icon ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-icon"/>
-    <keyword type="function" name="brasero_track_data_cfg_get_icon_path ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-icon-path"/>
-    <keyword type="function" name="brasero_track_data_cfg_set_icon ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-set-icon"/>
+    <keyword type="struct" name="BraseroGraftPt" link="libbrasero-burn-brasero-track-data.html#BraseroGraftPt"/>
+    <keyword type="function" name="brasero_graft_point_free ()" link="libbrasero-burn-brasero-track-data.html#brasero-graft-point-free"/>
+    <keyword type="function" name="brasero_graft_point_copy ()" link="libbrasero-burn-brasero-track-data.html#brasero-graft-point-copy"/>
+    <keyword type="struct" name="BraseroTrackData" link="libbrasero-burn-brasero-track-data.html#BraseroTrackData"/>
+    <keyword type="function" name="brasero_track_data_new ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-new"/>
+    <keyword type="function" name="brasero_track_data_set_source ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-set-source"/>
+    <keyword type="function" name="brasero_track_data_add_fs ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-add-fs"/>
+    <keyword type="function" name="brasero_track_data_rm_fs ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-rm-fs"/>
+    <keyword type="function" name="brasero_track_data_set_data_blocks ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-set-data-blocks"/>
+    <keyword type="function" name="brasero_track_data_set_file_num ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-set-file-num"/>
+    <keyword type="function" name="brasero_track_data_get_grafts ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-get-grafts"/>
+    <keyword type="function" name="brasero_track_data_get_file_num ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-get-file-num"/>
+    <keyword type="function" name="brasero_track_data_get_fs ()" link="libbrasero-burn-brasero-track-data.html#brasero-track-data-get-fs"/>
+    <keyword type="macro" name="BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST" link="libbrasero-burn-brasero-track-data-cfg.html#BRASERO-DND-TARGET-DATA-TRACK-REFERENCE-LIST:CAPS"/>
+    <keyword type="enum" name="enum BraseroTrackDataCfgColumn" link="libbrasero-burn-brasero-track-data-cfg.html#BraseroTrackDataCfgColumn"/>
+    <keyword type="struct" name="BraseroTrackDataCfg" link="libbrasero-burn-brasero-track-data-cfg.html#BraseroTrackDataCfg"/>
+    <keyword type="function" name="brasero_track_data_cfg_new ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-new"/>
+    <keyword type="function" name="brasero_track_data_cfg_add ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-add"/>
+    <keyword type="function" name="brasero_track_data_cfg_add_empty_directory ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-add-empty-directory"/>
+    <keyword type="function" name="brasero_track_data_cfg_remove ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-remove"/>
+    <keyword type="function" name="brasero_track_data_cfg_rename ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-rename"/>
+    <keyword type="function" name="brasero_track_data_cfg_reset ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-reset"/>
+    <keyword type="function" name="brasero_track_data_cfg_load_medium ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-load-medium"/>
+    <keyword type="function" name="brasero_track_data_cfg_unload_current_medium ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-unload-current-medium"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_current_medium ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-current-medium"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_available_media ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-available-media"/>
+    <keyword type="function" name="brasero_track_data_cfg_dont_filter_uri ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-dont-filter-uri"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_restored_list ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-restored-list"/>
+    <keyword type="function" name="brasero_track_data_cfg_restore ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-restore"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_filtered_model ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-filtered-model"/>
+    <keyword type="function" name="brasero_track_data_cfg_span ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-span"/>
+    <keyword type="function" name="brasero_track_data_cfg_span_again ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-span-again"/>
+    <keyword type="function" name="brasero_track_data_cfg_span_possible ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-span-possible"/>
+    <keyword type="function" name="brasero_track_data_cfg_span_stop ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-span-stop"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_icon ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-icon"/>
+    <keyword type="function" name="brasero_track_data_cfg_get_icon_path ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-get-icon-path"/>
+    <keyword type="function" name="brasero_track_data_cfg_set_icon ()" link="libbrasero-burn-brasero-track-data-cfg.html#brasero-track-data-cfg-set-icon"/>
     <keyword type="struct" name="BraseroTrackStream" link="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"/>
     <keyword type="function" name="brasero_track_stream_new ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-new"/>
     <keyword type="function" name="brasero_track_stream_set_source ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-source"/>

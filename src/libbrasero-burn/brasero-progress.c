@@ -132,6 +132,7 @@ brasero_burn_progress_create_info (BraseroBurnProgress *obj)
 	if (obj->priv->speed_table) {
 		gtk_widget_destroy (obj->priv->speed_table);
 		obj->priv->speed_table = NULL;
+		obj->priv->speed_label = NULL;
 		obj->priv->speed = NULL;
 	}
 
@@ -180,8 +181,12 @@ brasero_burn_progress_display_session_info (BraseroBurnProgress *obj,
 	gchar *markup;
 	gchar *text;
 
-	if (obj->priv->speed_table)
+	if (obj->priv->speed_table) {
 		gtk_widget_destroy (obj->priv->speed_table);
+		obj->priv->speed_table = NULL;
+		obj->priv->speed_label = NULL;
+		obj->priv->speed = NULL;
+	}
 
 	hrs = time / 3600;
 	time = ((int) time) % 3600;
@@ -220,7 +225,7 @@ brasero_burn_progress_display_session_info (BraseroBurnProgress *obj,
 		else
 			speed = (gfloat) BRASERO_RATE_TO_SPEED_CD (rate);
 
-		text = g_strdup_printf ("%"G_GINT64_FORMAT" KiB/s (%.1f x)", rate / 1024, speed);
+		text = g_strdup_printf ("%"G_GINT64_FORMAT" KiB/s (%.1f\303\227)", rate / 1024, speed);
 		obj->priv->speed = gtk_label_new (text);
 		g_free (text);
 
@@ -453,7 +458,7 @@ brasero_burn_progress_set_status (BraseroBurnProgress *self,
 		else
 			speed = (gfloat) BRASERO_RATE_TO_SPEED_CD (rate);
 
-		text = g_strdup_printf ("%"G_GINT64_FORMAT" KiB/s (%.1f x)", rate / 1024, speed);
+		text = g_strdup_printf ("%"G_GINT64_FORMAT" KiB/s (%.1f\303\227)", rate / 1024, speed);
 		gtk_label_set_text (GTK_LABEL (self->priv->speed), text);
 		g_free (text);
 	}

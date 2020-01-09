@@ -41,11 +41,15 @@
 #include <glib/gstdio.h>
 
 #include <gdk/gdk.h>
+#include <gdk/gdkx.h>
 
 #include <gtk/gtk.h>
 
-#include "brasero-tray.h"
+#include <canberra-gtk.h>
+
 #include "brasero-burn-dialog.h"
+
+#include "brasero-tray.h"
 #include "brasero-session-cfg.h"
 #include "brasero-session-helper.h"
 
@@ -63,16 +67,9 @@
 #include "brasero-drive.h"
 
 #include "brasero-misc.h"
+#include "brasero-pk.h"
 
-
-static void brasero_burn_dialog_class_init (BraseroBurnDialogClass *klass);
-static void brasero_burn_dialog_init (BraseroBurnDialog *obj);
-static void brasero_burn_dialog_finalize (GObject *object);
-static void brasero_burn_dialog_destroy (GtkObject *object);
-
-static gboolean
-brasero_burn_dialog_delete (GtkWidget *widget,
-			    GdkEventAny *event);
+G_DEFINE_TYPE (BraseroBurnDialog, brasero_burn_dialog, GTK_TYPE_DIALOG);
 
 static void
 brasero_burn_dialog_cancel_clicked_cb (GtkWidget *button,
@@ -81,6 +78,7 @@ brasero_burn_dialog_cancel_clicked_cb (GtkWidget *button,
 static void
 brasero_burn_dialog_tray_cancel_cb (BraseroTrayIcon *tray,
 				    BraseroBurnDialog *dialog);
+
 static void
 brasero_burn_dialog_tray_show_dialog_cb (BraseroTrayIcon *tray,
 					 gboolean show,
@@ -89,8 +87,11 @@ brasero_burn_dialog_tray_show_dialog_cb (BraseroTrayIcon *tray,
 typedef struct BraseroBurnDialogPrivate BraseroBurnDialogPrivate;
 struct BraseroBurnDialogPrivate {
 	BraseroBurn *burn;
-	BraseroTrackType input;
 	BraseroBurnSession *session;
+
+	/* This is to remember some settins after ejection */
+	BraseroTrackType input;
+	BraseroMedia media;
 
 	GtkWidget *progress;
 	GtkWidget *header;
@@ -103,6 +104,15 @@ struct BraseroBurnDialogPrivate {
 	gint64 total_size;
 	GSList *rates;
 
+	GMainLoop *loop;
+	gint wait_ready_state_id;
+	GCancellable *cancel_plugin;
+
+	gchar *initial_title;
+	gchar *initial_icon;
+
+	guint num_copies;
+
 	guint is_writing:1;
 	guint is_creating_image:1;
 };
@@ -111,68 +121,17 @@ struct BraseroBurnDialogPrivate {
 
 #define TIMEOUT	10000
 
-static GObjectClass *parent_class = NULL;
-
-GType
-brasero_burn_dialog_get_type ()
-{
-	static GType type = 0;
-
-	if (type == 0) {
-		static const GTypeInfo our_info = {
-			sizeof (BraseroBurnDialogClass),
-			NULL,
-			NULL,
-			(GClassInitFunc) brasero_burn_dialog_class_init,
-			NULL,
-			NULL,
-			sizeof (BraseroBurnDialog),
-			0,
-			(GInstanceInitFunc) brasero_burn_dialog_init,
-		};
-
-		type = g_type_register_static (GTK_TYPE_DIALOG,
-					       "BraseroBurnDialog",
-					       &our_info, 0);
-	}
-
-	return type;
-}
-
 static void
-brasero_burn_dialog_class_init (BraseroBurnDialogClass * klass)
+brasero_burn_dialog_update_media (BraseroBurnDialog *dialog)
 {
-	GObjectClass *object_class = G_OBJECT_CLASS (klass);
-	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (klass);
-	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
-
-	g_type_class_add_private (klass, sizeof (BraseroBurnDialogPrivate));
-
-	parent_class = g_type_class_peek_parent (klass);
-	object_class->finalize = brasero_burn_dialog_finalize;
-	gtk_object_class->destroy = brasero_burn_dialog_destroy;
-	widget_class->delete_event = brasero_burn_dialog_delete;
-}
-
-/**
- * NOTE: if input is DISC then media is the media input
- */
-
-static void
-brasero_burn_dialog_update_info (BraseroBurnDialog *dialog,
-				 BraseroTrackType *input,
-                                 gboolean dummy)
-{
-	BraseroMedia media;
-	gchar *title = NULL;
-	gchar *header = NULL;
 	BraseroBurnDialogPrivate *priv;
+	BraseroMedia media;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
 	if (brasero_burn_session_is_dest_file (priv->session))
 		media = BRASERO_MEDIUM_FILE;
-	else if (priv->input.type != BRASERO_TRACK_TYPE_DISC)
+	else if (!brasero_track_type_get_has_medium (&priv->input))
 		media = brasero_burn_session_get_dest_media (priv->session);
 	else {
 		BraseroMedium *medium;
@@ -184,230 +143,280 @@ brasero_burn_dialog_update_info (BraseroBurnDialog *dialog,
 			media = brasero_medium_get_status (medium);
 	}
 
-	if (media == BRASERO_MEDIUM_FILE) {
+	priv->media = media;
+}
+
+static GtkWidget *
+brasero_burn_dialog_create_message (BraseroBurnDialog *dialog,
+                                    GtkMessageType type,
+                                    GtkButtonsType buttons,
+                                    const gchar *main_message)
+{
+	const gchar *icon_name;
+	GtkWidget *message;
+
+	icon_name = gtk_window_get_icon_name (GTK_WINDOW (dialog));
+	message = gtk_message_dialog_new (GTK_WINDOW (dialog),
+	                                  GTK_DIALOG_DESTROY_WITH_PARENT|
+	                                  GTK_DIALOG_MODAL,
+	                                  type,
+	                                  buttons,
+	                                  "%s", main_message);
+	gtk_window_set_icon_name (GTK_WINDOW (message), icon_name);
+	return message;
+}
+
+static gchar *
+brasero_burn_dialog_create_dialog_title_for_action (BraseroBurnDialog *dialog,
+                                                    const gchar *action,
+                                                    gint percent)
+{
+	gchar *tmp;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	if (priv->initial_title)
+		action = priv->initial_title;
+
+	if (percent >= 0 && percent <= 100) {
+		/* Translators: This string is used in the title bar %s is the action currently performed */
+		tmp = g_strdup_printf (_("%s (%i%% Done)"),
+				       action,
+				       percent);
+	}
+	else 
+		/* Translators: This string is used in the title bar %s is the action currently performed */
+		tmp = g_strdup (action);
+
+	return tmp;
+}
+
+static void
+brasero_burn_dialog_update_title (BraseroBurnDialog *dialog,
+                                  BraseroTrackType *input)
+{
+	gchar *title = NULL;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	if (priv->media == BRASERO_MEDIUM_FILE)
+		title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+		                                                            _("Creating Image"),
+		                                                            -1);
+	else if (priv->media & BRASERO_MEDIUM_DVD) {
+		if (!brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Burning DVD"),
+										    -1);
+		else
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Copying DVD"),
+										    -1);
+	}
+	else if (priv->media & BRASERO_MEDIUM_CD) {
+		if (!brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Burning CD"),
+										    -1);
+		else
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Copying CD"),
+										    -1);
+	}
+	else {
+		if (!brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Burning Disc"),
+										    -1);
+		else
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+										    _("Copying Disc"),
+										    -1);
+	}
+
+	if (title) {
+		gtk_window_set_title (GTK_WINDOW (dialog), title);
+		g_free (title);
+	}
+}
+
+/**
+ * NOTE: if input is DISC then media is the media input
+ */
+
+static void
+brasero_burn_dialog_update_info (BraseroBurnDialog *dialog,
+				 BraseroTrackType *input,
+                                 gboolean dummy)
+{
+	gchar *header = NULL;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	if (priv->media == BRASERO_MEDIUM_FILE) {
 		/* we are creating an image to the hard drive */
 		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 					      "iso-image-new",
 					      GTK_ICON_SIZE_DIALOG);
 
 		header = g_strdup_printf ("<big><b>%s</b></big>", _("Creating image"));
-		title = g_strdup (_("Brasero - Creating Image"));
 	}
-	else if (media & BRASERO_MEDIUM_DVD) {
-		if (input->type == BRASERO_TRACK_TYPE_STREAM
+	else if (priv->media & BRASERO_MEDIUM_DVD) {
+		if (brasero_track_type_get_has_stream (input)
 		&&  BRASERO_STREAM_FORMAT_HAS_VIDEO (input->subtype.stream_format)) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning DVD (Simulation)"));
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of video DVD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning DVD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning video DVD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-video-new",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_DATA) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning DVD (Simulation)"));
+		else if (brasero_track_type_get_has_data (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of data DVD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning DVD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning data DVD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-data-new",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_IMAGE) {
-			if (dummy) {
-				title = g_strdup (_("Burning DVD (Simulation)"));
+		else if (brasero_track_type_get_has_image (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of image to DVD burning"));
-			}
-			else {
-				title = g_strdup (_("Burning DVD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning image to DVD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_DISC) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Copying DVD (Simulation)"));
+		else if (brasero_track_type_get_has_medium (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of data DVD copying"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Copying DVD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Copying data DVD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-copy",
 						      GTK_ICON_SIZE_DIALOG);
 		}
 	}
-	else if (media & BRASERO_MEDIUM_CD) {
-		if (input->type == BRASERO_TRACK_TYPE_STREAM
+	else if (priv->media & BRASERO_MEDIUM_CD) {
+		if (brasero_track_type_get_has_stream (input)
 		&&  BRASERO_STREAM_FORMAT_HAS_VIDEO (input->subtype.stream_format)) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning CD (Simulation)"));
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of (S)VCD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning CD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning (S)VCD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "drive-removable-media",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_STREAM) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning CD (Simulation)"));
+		else if (brasero_track_type_get_has_stream (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of audio CD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning CD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning audio CD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-audio-new",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_DATA) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning CD (Simulation)"));
+		else if (brasero_track_type_get_has_data (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of data CD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning CD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning data CD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-data-new",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_DISC) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Copying CD (Simulation)"));
+		else if (brasero_track_type_get_has_medium (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of CD copying"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Copying CD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Copying CD"));
-			}
 
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical-copy",
 						      GTK_ICON_SIZE_DIALOG);
 		}
-		else if (input->type == BRASERO_TRACK_TYPE_IMAGE) {
-			if (dummy) {
-				title = g_strdup (_("Brasero - Burning CD (Simulation)"));
+		else if (brasero_track_type_get_has_image (input)) {
+			if (dummy)
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of image to CD burning"));
-			}
-			else {
-				title = g_strdup (_("Brasero - Burning CD"));
+			else
 				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning image to CD"));
-			}
 		
 			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
 						      "media-optical",
 						      GTK_ICON_SIZE_DIALOG);
 		}
 	}
-	else if (input->type == BRASERO_TRACK_TYPE_STREAM
-	     &&  BRASERO_STREAM_FORMAT_HAS_VIDEO (input->subtype.stream_format)) {
-		if (dummy) {
-			title = g_strdup (_("Brasero - Burning disc (Simulation)"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of video disc burning"));
-		}
-		else {
-			title = g_strdup (_("Brasero - Burning disc"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning video disc"));
-		}
+	else {
+		if (brasero_track_type_get_has_stream (input)
+		&&  BRASERO_STREAM_FORMAT_HAS_VIDEO (input->subtype.stream_format)) {
+			if (dummy)
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of video disc burning"));
+			else
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning video disc"));
 
-		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
-					      "drive-removable-media",
-					      GTK_ICON_SIZE_DIALOG);
-	}
-	else if (input->type == BRASERO_TRACK_TYPE_STREAM) {
-		if (dummy) {
-			title = g_strdup (_("Brasero - Burning CD (Simulation)"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of audio CD burning"));
+			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
+						      "drive-removable-media",
+						      GTK_ICON_SIZE_DIALOG);
 		}
-		else {
-			title = g_strdup (_("Brasero - Burning CD"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning audio CD"));
-		}
+		else if (brasero_track_type_get_has_stream (input)) {
+			if (dummy)
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of audio CD burning"));
+			else
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning audio CD"));
 
-		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
-					      "drive-removable-media",
-					      GTK_ICON_SIZE_DIALOG);
-	}
-	else if (input->type == BRASERO_TRACK_TYPE_DATA) {
-		if (dummy) {
-			title = g_strdup (_("Brasero - Burning Disc (Simulation)"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of data disc burning"));
+			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
+						      "drive-removable-media",
+						      GTK_ICON_SIZE_DIALOG);
 		}
-		else {
-			title = g_strdup (_("Brasero - Burning Disc"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning data disc"));
-		}
+		else if (brasero_track_type_get_has_data (input)) {
+			if (dummy)
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of data disc burning"));
+			else
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning data disc"));
 
-		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
-					      "drive-removable-media",
-					      GTK_ICON_SIZE_DIALOG);
-	}
-	else if (input->type == BRASERO_TRACK_TYPE_DISC) {
-		if (dummy) {
-			title = g_strdup (_("Brasero - Copying Disc (Simulation)"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of disc copying"));
+			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
+						      "drive-removable-media",
+						      GTK_ICON_SIZE_DIALOG);
 		}
-		else {
-			title = g_strdup (_("Brasero - Copying Disc"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Copying disc"));
-		}
-		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
-					      "drive-removable-media",
-					      GTK_ICON_SIZE_DIALOG);
-	}
-	else if (input->type == BRASERO_TRACK_TYPE_IMAGE) {
-		if (dummy) {
-			title = g_strdup (_("Brasero - Burning Disc (Simulation)"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of image to disc burning"));
-		}
-		else {
-			title = g_strdup (_("Brasero - Burning Disc"));
-			header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning image to disc"));
-		}
+		else if (brasero_track_type_get_has_medium (input)) {
+			if (dummy)
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of disc copying"));
+			else
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Copying disc"));
 
-		gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
-					      "drive-removable-media",
-					      GTK_ICON_SIZE_DIALOG);
-	}
+			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
+						      "drive-removable-media",
+						      GTK_ICON_SIZE_DIALOG);
+		}
+		else if (brasero_track_type_get_has_image (input)) {
+			if (dummy)
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Simulation of image to disc burning"));
+			else
+				header = g_strdup_printf ("<big><b>%s</b></big>", _("Burning image to disc"));
 
-
-	if (title) {
-		gtk_window_set_title (GTK_WINDOW (dialog), title);
-		g_free (title);
+			gtk_image_set_from_icon_name (GTK_IMAGE (priv->image),
+						      "drive-removable-media",
+						      GTK_ICON_SIZE_DIALOG);
+		}
 	}
 
 	gtk_label_set_text (GTK_LABEL (priv->header), header);
 	gtk_label_set_use_markup (GTK_LABEL (priv->header), TRUE);
 	g_free (header);
-
-	/* it may have changed */
-	gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero");
 }
 
 static void
@@ -424,19 +433,18 @@ static gint
 brasero_burn_dialog_wait_for_insertion (BraseroBurnDialog *dialog,
 					BraseroDrive *drive,
 					const gchar *main_message,
-					const gchar *secondary_message)
+					const gchar *secondary_message,
+                                        gboolean sound_clue)
 {
 	gint result;
-	gint added_id;
-	GtkWindow *window;
+	gulong added_id;
 	GtkWidget *message;
 	gboolean hide = FALSE;
 	BraseroBurnDialogPrivate *priv;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
-	window = GTK_WINDOW (dialog);
 
-	if (!GTK_WIDGET_VISIBLE (dialog)) {
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog))) {
 		gtk_widget_show (GTK_WIDGET (dialog));
 		hide = TRUE;
 	}
@@ -444,12 +452,10 @@ brasero_burn_dialog_wait_for_insertion (BraseroBurnDialog *dialog,
 	g_timer_stop (priv->total_time);
 
 	if (secondary_message) {
-		message = gtk_message_dialog_new (window,
-						  GTK_DIALOG_DESTROY_WITH_PARENT|
-						  GTK_DIALOG_MODAL,
-						  GTK_MESSAGE_WARNING,
-						  GTK_BUTTONS_CANCEL,
-						  "%s", main_message);
+		message = brasero_burn_dialog_create_message (dialog,
+		                                              GTK_MESSAGE_WARNING,
+		                                              GTK_BUTTONS_CANCEL,
+		                                              main_message);
 
 		if (secondary_message)
 			gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
@@ -458,9 +464,7 @@ brasero_burn_dialog_wait_for_insertion (BraseroBurnDialog *dialog,
 	else {
 		gchar *string;
 
-		message = gtk_message_dialog_new_with_markup (window,
-							      GTK_DIALOG_DESTROY_WITH_PARENT|
-							      GTK_DIALOG_MODAL,
+		message = brasero_burn_dialog_create_message (dialog,
 							      GTK_MESSAGE_WARNING,
 							      GTK_BUTTONS_CANCEL,
 							      NULL);
@@ -476,6 +480,14 @@ brasero_burn_dialog_wait_for_insertion (BraseroBurnDialog *dialog,
 					   G_CALLBACK (brasero_burn_dialog_wait_for_insertion_cb),
 					   message);
 
+	if (sound_clue) {
+		gtk_widget_show (GTK_WIDGET (message));
+		ca_gtk_play_for_widget (GTK_WIDGET (message), 0,
+		                        CA_PROP_EVENT_ID, "complete-media-burn",
+		                        CA_PROP_EVENT_DESCRIPTION, main_message,
+		                        NULL);
+	}
+
 	result = gtk_dialog_run (GTK_DIALOG (message));
 
 	g_signal_handler_disconnect (drive, added_id);
@@ -484,7 +496,7 @@ brasero_burn_dialog_wait_for_insertion (BraseroBurnDialog *dialog,
 	if (hide)
 		gtk_widget_hide (GTK_WIDGET (dialog));
 
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
 
 	return result;
 }
@@ -521,49 +533,49 @@ brasero_burn_dialog_get_media_type_string (BraseroBurn *burn,
 
 		if ((type & BRASERO_MEDIUM_CD) && !(type & BRASERO_MEDIUM_DVD)) {
 			if (!insert) {
-				if (isosize)
-					message = g_strdup_printf (_("Please replace the disc with a recordable CD with at least %i MiB of free space."), 
+				if (isosize > 0)
+					message = g_strdup_printf (_("Please replace the disc with a writable CD with at least %i MiB of free space."), 
 								   (int) (isosize / 1048576));
 				else
-					message = g_strdup (_("Please replace the disc with a recordable CD."));
+					message = g_strdup (_("Please replace the disc with a writable CD."));
 			}
 			else {
-				if (isosize)
-					message = g_strdup_printf (_("Please insert a recordable CD with at least %i MiB of free space."), 
+				if (isosize > 0)
+					message = g_strdup_printf (_("Please insert a writable CD with at least %i MiB of free space."), 
 								   (int) (isosize / 1048576));
 				else
-					message = g_strdup (_("Please insert a recordable CD."));
+					message = g_strdup (_("Please insert a writable CD."));
 			}
 		}
 		else if (!(type & BRASERO_MEDIUM_CD) && (type & BRASERO_MEDIUM_DVD)) {
 			if (!insert) {
-				if (isosize)
-					message = g_strdup_printf (_("Please replace the disc with a recordable DVD with at least %i MiB of free space."), 
+				if (isosize > 0)
+					message = g_strdup_printf (_("Please replace the disc with a writable DVD with at least %i MiB of free space."), 
 								   (int) (isosize / 1048576));
 				else
-					message = g_strdup (_("Please replace the disc with a recordable DVD."));
+					message = g_strdup (_("Please replace the disc with a writable DVD."));
 			}
 			else {
-				if (isosize)
-					message = g_strdup_printf (_("Please insert a recordable DVD with at least %i MiB of free space."), 
+				if (isosize > 0)
+					message = g_strdup_printf (_("Please insert a writable DVD with at least %i MiB of free space."), 
 								   (int) (isosize / 1048576));
 				else
-					message = g_strdup (_("Please insert a recordable DVD."));
+					message = g_strdup (_("Please insert a writable DVD."));
 			}
 		}
 		else if (!insert) {
 			if (isosize)
-				message = g_strdup_printf (_("Please replace the disc with a recordable CD or DVD with at least %i MiB of free space."), 
+				message = g_strdup_printf (_("Please replace the disc with a writable CD or DVD with at least %i MiB of free space."), 
 							   (int) (isosize / 1048576));
 			else
-				message = g_strdup (_("Please replace the disc with a recordable CD or DVD."));
+				message = g_strdup (_("Please replace the disc with a writable CD or DVD."));
 		}
 		else {
 			if (isosize)
-				message = g_strdup_printf (_("Please insert a recordable CD or DVD with at least %i MiB of free space."), 
+				message = g_strdup_printf (_("Please insert a writable CD or DVD with at least %i MiB of free space."), 
 							   (int) (isosize / 1048576));
 			else
-				message = g_strdup (_("Please insert a recordable CD or DVD."));
+				message = g_strdup (_("Please insert a writable CD or DVD."));
 		}
 	}
 
@@ -591,7 +603,7 @@ brasero_burn_dialog_insert_disc_cb (BraseroBurn *burn,
 
 	if (error == BRASERO_BURN_WARNING_INSERT_AFTER_COPY) {
 		secondary_message = g_strdup (_("An image of the disc has been created on your hard drive."
-						"\nBurning will begin as soon as a recordable disc is inserted."));
+						"\nBurning will begin as soon as a writable disc is inserted."));
 		main_message = brasero_burn_dialog_get_media_type_string (burn, type, FALSE);
 	}
 	else if (error == BRASERO_BURN_WARNING_CHECKSUM) {
@@ -638,12 +650,18 @@ brasero_burn_dialog_insert_disc_cb (BraseroBurn *burn,
 
 	g_free (drive_name);
 
-	result = brasero_burn_dialog_wait_for_insertion (dialog, drive, main_message, secondary_message);
+	result = brasero_burn_dialog_wait_for_insertion (dialog, drive, main_message, secondary_message, FALSE);
 	g_free (main_message);
 	g_free (secondary_message);
 
 	if (result != GTK_RESPONSE_OK)
 		return BRASERO_BURN_CANCEL;
+
+	brasero_burn_dialog_update_media (dialog);
+	brasero_burn_dialog_update_title (dialog, &priv->input);
+	brasero_burn_dialog_update_info (dialog,
+	                                 &priv->input,
+	                                 (brasero_burn_session_get_flags (priv->session) & BRASERO_BURN_FLAG_DUMMY) != 0);
 
 	return BRASERO_BURN_OK;
 }
@@ -657,21 +675,18 @@ brasero_burn_dialog_image_error (BraseroBurn *burn,
 	gint result;
 	gchar *path;
 	gchar *string;
-	GtkWindow *window;
 	GtkWidget *message;
 	gboolean hide = FALSE;
 	BraseroBurnDialogPrivate *priv;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	if (!GTK_WIDGET_VISIBLE (dialog)) {
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog))) {
 		gtk_widget_show (GTK_WIDGET (dialog));
 		hide = TRUE;
 	}
 
 	g_timer_stop (priv->total_time);
-
-	window = GTK_WINDOW (dialog);
 
 	string = g_strdup_printf ("%s. %s",
 				  is_temporary?
@@ -679,13 +694,10 @@ brasero_burn_dialog_image_error (BraseroBurn *burn,
 				  _("The image could not be created at the specified location"),
 				  _("Do you want to specify another location for this session or retry with the current location?"));
 
-	message = gtk_message_dialog_new (window,
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_ERROR,
-					  GTK_BUTTONS_NONE,
-					  "%s",
-					  string);
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_ERROR,
+	                                              GTK_BUTTONS_NONE,
+	                                              string);
 	g_free (string);
 
 	if (error && error->code == BRASERO_BURN_ERROR_DISK_SPACE)
@@ -711,12 +723,12 @@ brasero_burn_dialog_image_error (BraseroBurn *burn,
 		gtk_widget_hide (GTK_WIDGET (dialog));
 
 	if (result == GTK_RESPONSE_OK) {
-		g_timer_start (priv->total_time);
+		g_timer_continue (priv->total_time);
 		return BRASERO_BURN_OK;
 	}
 
 	if (result != GTK_RESPONSE_ACCEPT) {
-		g_timer_start (priv->total_time);
+		g_timer_continue (priv->total_time);
 		return BRASERO_BURN_CANCEL;
 	}
 
@@ -744,7 +756,7 @@ brasero_burn_dialog_image_error (BraseroBurn *burn,
 	result = gtk_dialog_run (GTK_DIALOG (message));
 	if (result != GTK_RESPONSE_OK) {
 		gtk_widget_destroy (message);
-		g_timer_start (priv->total_time);
+		g_timer_continue (priv->total_time);
 		return BRASERO_BURN_CANCEL;
 	}
 
@@ -791,19 +803,20 @@ brasero_burn_dialog_image_error (BraseroBurn *burn,
 
 	g_free (path);
 
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
 	return BRASERO_BURN_OK;
 }
 
 static BraseroBurnResult
-brasero_burn_dialog_loss_warnings_cb (GtkDialog *dialog, 
+brasero_burn_dialog_loss_warnings_cb (BraseroBurnDialog *dialog, 
 				      const gchar *main_message,
 				      const gchar *secondary_message,
 				      const gchar *button_text,
-				      const gchar *button_icon)
+				      const gchar *button_icon,
+                                      const gchar *second_button_text,
+                                      const gchar *second_button_icon)
 {
 	gint result;
-	GtkWindow *window;
 	GtkWidget *button;
 	GtkWidget *message;
 	gboolean hide = FALSE;
@@ -811,23 +824,31 @@ brasero_burn_dialog_loss_warnings_cb (GtkDialog *dialog,
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	if (!GTK_WIDGET_VISIBLE (dialog)) {
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog))) {
 		gtk_widget_show (GTK_WIDGET (dialog));
 		hide = TRUE;
 	}
 
 	g_timer_stop (priv->total_time);
 
-	window = GTK_WINDOW (dialog);
-	message = gtk_message_dialog_new (window,
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_WARNING,
-					  GTK_BUTTONS_NONE,
-					  "%s", main_message);
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_WARNING,
+	                                              GTK_BUTTONS_NONE,
+	                                              main_message);
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						 "%s", secondary_message);
+
+	if (second_button_text) {
+		button = gtk_dialog_add_button (GTK_DIALOG (message),
+						second_button_text,
+						GTK_RESPONSE_YES);
+
+		if (second_button_icon)
+			gtk_button_set_image (GTK_BUTTON (button),
+					      gtk_image_new_from_icon_name (second_button_icon,
+									    GTK_ICON_SIZE_BUTTON));
+	}
 
 	button = gtk_dialog_add_button (GTK_DIALOG (message),
 					_("_Replace Disc"),
@@ -852,7 +873,10 @@ brasero_burn_dialog_loss_warnings_cb (GtkDialog *dialog,
 	if (hide)
 		gtk_widget_hide (GTK_WIDGET (dialog));
 
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
+
+	if (result == GTK_RESPONSE_YES)
+		return BRASERO_BURN_RETRY;
 
 	if (result == GTK_RESPONSE_ACCEPT)
 		return BRASERO_BURN_NEED_RELOAD;
@@ -865,59 +889,63 @@ brasero_burn_dialog_loss_warnings_cb (GtkDialog *dialog,
 
 static BraseroBurnResult
 brasero_burn_dialog_data_loss_cb (BraseroBurn *burn,
-				  GtkDialog *dialog)
+				  BraseroBurnDialog *dialog)
 {
 	return brasero_burn_dialog_loss_warnings_cb (dialog,
 						     _("Do you really want to blank the current disc?"),
 						     _("The disc in the drive holds data."),
 	                                             /* Translators: Blank is a verb here */
 						     _("_Blank Disc"),
-						     "media-optical-blank");
+						     "media-optical-blank",
+	                                             NULL,
+	                                             NULL);
 }
 
 static BraseroBurnResult
 brasero_burn_dialog_previous_session_loss_cb (BraseroBurn *burn,
-					      GtkDialog *dialog)
+					      BraseroBurnDialog *dialog)
 {
 	gchar *secondary;
 	BraseroBurnResult result;
 
 	secondary = g_strdup_printf ("%s\n%s",
-				     _("Already burnt files will be invisible (though still readable)."),
-				     _("Do you want to continue anyway?"));
+				     _("If you import them you will be able to see and use them once the current selection of files is burned."),
+	                             _("If you don't, they will be invisible (though still readable)."));
 				     
 	result = brasero_burn_dialog_loss_warnings_cb (dialog,
-						       _("Appending new files to a multisession disc is not advised."),
+						       _("There are files already burned on this disc. Would you like to import them?"),
 						       secondary,
-						       _("_Continue"),
-						       "media-optical-burn");
+						       _("_Import"), NULL,
+	                                               _("Only _Append"), NULL);
 	g_free (secondary);
 	return result;
 }
 
 static BraseroBurnResult
 brasero_burn_dialog_audio_to_appendable_cb (BraseroBurn *burn,
-					    GtkDialog *dialog)
+					    BraseroBurnDialog *dialog)
 {
 	gchar *secondary;
 	BraseroBurnResult result;
 
 	secondary = g_strdup_printf ("%s\n%s",
-				     _("CD-RW audio discs may not play correctly in older CD players and CD-TEXT won't be written."),
+				     _("CD-RW audio discs may not play correctly in older CD players and CD-Text won't be written."),
 				     _("Do you want to continue anyway?"));
 
 	result = brasero_burn_dialog_loss_warnings_cb (dialog,
 						       _("Appending audio tracks to a CD is not advised."),
 						       secondary,
 						       _("_Continue"),
-						       "media-optical-burn");
+						       "media-optical-burn",
+	                                               NULL,
+	                                               NULL);
 	g_free (secondary);
 	return result;
 }
 
 static BraseroBurnResult
 brasero_burn_dialog_rewritable_cb (BraseroBurn *burn,
-				   GtkDialog *dialog)
+				   BraseroBurnDialog *dialog)
 {
 	gchar *secondary;
 	BraseroBurnResult result;
@@ -930,25 +958,40 @@ brasero_burn_dialog_rewritable_cb (BraseroBurn *burn,
 						       _("Recording audio tracks on a rewritable disc is not advised."),
 						       secondary,
 						       _("_Continue"),
-						       "media-optical-burn");
+						       "media-optical-burn",
+	                                               NULL,
+	                                               NULL);
 	g_free (secondary);
 	return result;
 }
 
+static void
+brasero_burn_dialog_wait_for_ejection_cb (BraseroDrive *drive,
+                                          BraseroMedium *medium,
+                                          GtkDialog *message)
+{
+	/* we might have a dialog waiting for the 
+	 * insertion of a disc if so close it */
+	gtk_dialog_response (GTK_DIALOG (message), GTK_RESPONSE_OK);
+}
+
 static BraseroBurnResult
-brasero_burn_dialog_disable_joliet_cb (BraseroBurn *burn,
-				       GtkDialog *dialog)
+brasero_burn_dialog_eject_failure_cb (BraseroBurn *burn,
+                                      BraseroDrive *drive,
+                                      BraseroBurnDialog *dialog)
 {
 	gint result;
+	gchar *name;
+	gchar *string;
+	gint removal_id;
 	GtkWindow *window;
-	GtkWidget *button;
 	GtkWidget *message;
 	gboolean hide = FALSE;
 	BraseroBurnDialogPrivate *priv;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	if (!GTK_WIDGET_VISIBLE (dialog)) {
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog))) {
 		gtk_widget_show (GTK_WIDGET (dialog));
 		hide = TRUE;
 	}
@@ -956,12 +999,68 @@ brasero_burn_dialog_disable_joliet_cb (BraseroBurn *burn,
 	g_timer_stop (priv->total_time);
 
 	window = GTK_WINDOW (dialog);
-	message = gtk_message_dialog_new (window,
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_WARNING,
-					  GTK_BUTTONS_NONE,
-					  _("Do you want to continue with full Windows compatibility disabled?"));
+
+	name = brasero_drive_get_display_name (drive);
+	/* Translators: %s is the name of a drive */
+	string = g_strdup_printf (_("Please eject the disc from \"%s\" manually."), name);
+	g_free (name);
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_WARNING,
+	                                              GTK_BUTTONS_NONE,
+	                                              string);
+	g_free (string);
+
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+	                                          _("The disc could not be ejected though it needs to be removed for the current operation to continue."));
+
+	gtk_dialog_add_button (GTK_DIALOG (message),
+			       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL);
+
+	/* connect to signals to be warned when media is removed */
+	removal_id = g_signal_connect_after (drive,
+	                                     "medium-removed",
+	                                     G_CALLBACK (brasero_burn_dialog_wait_for_ejection_cb),
+	                                     message);
+
+	result = gtk_dialog_run (GTK_DIALOG (message));
+
+	g_signal_handler_disconnect (drive, removal_id);
+	gtk_widget_destroy (message);
+
+	if (hide)
+		gtk_widget_hide (GTK_WIDGET (dialog));
+
+	g_timer_continue (priv->total_time);
+
+	if (result == GTK_RESPONSE_ACCEPT)
+		return BRASERO_BURN_OK;
+
+	return BRASERO_BURN_CANCEL;
+}
+
+static BraseroBurnResult
+brasero_burn_dialog_disable_joliet_cb (BraseroBurn *burn,
+				       BraseroBurnDialog *dialog)
+{
+	gint result;
+	GtkWidget *button;
+	GtkWidget *message;
+	gboolean hide = FALSE;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog))) {
+		gtk_widget_show (GTK_WIDGET (dialog));
+		hide = TRUE;
+	}
+
+	g_timer_stop (priv->total_time);
+
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_WARNING,
+	                                              GTK_BUTTONS_NONE,
+	                                              _("Do you want to continue with full Windows compatibility disabled?"));
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						  _("Some files don't have a suitable name for a fully Windows-compatible CD."));
@@ -982,7 +1081,7 @@ brasero_burn_dialog_disable_joliet_cb (BraseroBurn *burn,
 	if (hide)
 		gtk_widget_hide (GTK_WIDGET (dialog));
 
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
 
 	if (result != GTK_RESPONSE_OK)
 		return BRASERO_BURN_CANCEL;
@@ -1008,46 +1107,38 @@ brasero_burn_dialog_update_title_writing_progress (BraseroBurnDialog *dialog,
 
 	/* This is used only when actually writing to a disc */
 	if (media == BRASERO_MEDIUM_FILE)
-		title = g_strdup_printf (_("Brasero - Creating Image (%i%% Done)"), percent);
+		title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+		                                                            _("Creating Image"),
+		                                                            percent);
 	else if (media & BRASERO_MEDIUM_DVD) {
-		if (input->type == BRASERO_TRACK_TYPE_DISC) {
-			if (flags & BRASERO_BURN_FLAG_DUMMY)
-				title = g_strdup (_("Brasero - Copying DVD (Simulation)"));
-			else
-				title = g_strdup_printf (_("Brasero - Copying DVD (%i%% Done)"), percent);
-		}
-		else {
-			if (flags & BRASERO_BURN_FLAG_DUMMY)
-				title = g_strdup (_("Brasero - Burning DVD (Simulation)"));
-			else
-				title = g_strdup_printf (_("Brasero - Burning DVD (%i%% Done)"), percent);
-		}
+		if (brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Copying DVD"),
+			                                                            percent);
+		else
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Burning DVD"),
+			                                                            percent);
 	}
 	else if (media & BRASERO_MEDIUM_CD) {
-		if (input->type == BRASERO_TRACK_TYPE_DISC) {
-			if (flags & BRASERO_BURN_FLAG_DUMMY)
-				title = g_strdup (_("Brasero - Copying CD (Simulation)"));
-			else
-				title = g_strdup_printf (_("Brasero - Copying CD (%i%% Done)"), percent);
-		}
-		else {
-			if (flags & BRASERO_BURN_FLAG_DUMMY)
-				title = g_strdup (_("Brasero - Burning CD (simulation)"));
-			else
-				title = g_strdup_printf (_("Brasero - Burning CD (%i%% Done)"), percent);
-		}
-	}
-	else if (input->type == BRASERO_TRACK_TYPE_DISC) {
-		if (flags & BRASERO_BURN_FLAG_DUMMY)
-			title = g_strdup (_("Brasero - Copying Disc (Simulation)"));
+		if (brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Copying CD"),
+			                                                            percent);
 		else
-			title = g_strdup_printf (_("Brasero - Copying Disc (%i%% Done)"), percent);
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Burning CD"),
+			                                                            percent);
 	}
 	else {
-		if (flags & BRASERO_BURN_FLAG_DUMMY)
-			title = g_strdup (_("Brasero - Burning Disc (Simulation)"));
+		if (brasero_track_type_get_has_medium (input))
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Copying Disc"),
+			                                                            percent);
 		else
-			title = g_strdup_printf (_("Brasero - Burning Disc (%i%% Done)"), percent);
+			title = brasero_burn_dialog_create_dialog_title_for_action (dialog,
+			                                                            _("Burning Disc"),
+			                                                            percent);
 	}
 
 	gtk_window_set_title (GTK_WINDOW (dialog), title);
@@ -1211,29 +1302,24 @@ brasero_burn_dialog_dummy_success_cb (BraseroBurn *burn,
 	BraseroBurnDialogPrivate *priv;
 	GtkResponseType answer;
 	GtkWidget *message;
-	GtkWindow *window;
 	GtkWidget *button;
 	gboolean hide;
 	gint id;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	if (!GTK_WIDGET_MAPPED (dialog)) {
+	if (!gtk_widget_get_mapped (GTK_WIDGET (dialog))) {
 		gtk_widget_show (GTK_WIDGET (dialog));
 		hide = TRUE;
-	}
-	else
+	} else
 		hide = FALSE;
 
 	g_timer_stop (priv->total_time);
 
-	window = GTK_WINDOW (dialog);
-	message = gtk_message_dialog_new (window,
-					  GTK_DIALOG_DESTROY_WITH_PARENT|
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_INFO,
-					  GTK_BUTTONS_CANCEL,
-					  _("The simulation was successful."));
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_INFO,
+	                                              GTK_BUTTONS_CANCEL,
+	                                              _("The simulation was successful."));
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						  _("Real disc burning will take place in 10 seconds."));
@@ -1251,6 +1337,12 @@ brasero_burn_dialog_dummy_success_cb (BraseroBurn *burn,
 	gtk_widget_show (GTK_WIDGET (dialog));
 	gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
 
+	gtk_widget_show (GTK_WIDGET (message));
+	ca_gtk_play_for_widget (GTK_WIDGET (message), 0,
+	                        CA_PROP_EVENT_ID, "complete-media-burn-test",
+	                        CA_PROP_EVENT_DESCRIPTION, _("The simulation was successful."),
+	                        NULL);
+
 	answer = gtk_dialog_run (GTK_DIALOG (message));
 	gtk_widget_destroy (message);
 
@@ -1259,12 +1351,18 @@ brasero_burn_dialog_dummy_success_cb (BraseroBurn *burn,
 	if (hide)
 		gtk_widget_hide (GTK_WIDGET (dialog));
 
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
 
 	if (answer == GTK_RESPONSE_OK) {
+		if (priv->initial_icon)
+			gtk_window_set_icon_name (GTK_WINDOW (dialog), priv->initial_icon);
+		else
+			gtk_window_set_icon_name (GTK_WINDOW (dialog), "brasero-00.png");
+
 		brasero_burn_dialog_update_info (dialog,
 		                                 &priv->input,
 		                                 FALSE);
+		brasero_burn_dialog_update_title (dialog, &priv->input);
 
 		if (id)
 			g_source_remove (id);
@@ -1279,141 +1377,6 @@ brasero_burn_dialog_dummy_success_cb (BraseroBurn *burn,
 }
 
 static void
-brasero_burn_dialog_init (BraseroBurnDialog * obj)
-{
-	GtkWidget *box;
-	GtkWidget *vbox;
-	GtkWidget *alignment;
-	BraseroBurnDialogPrivate *priv;
-
-	priv = BRASERO_BURN_DIALOG_PRIVATE (obj);
-
-	gtk_window_set_default_size (GTK_WINDOW (obj), 500, 0);
-
-	gtk_dialog_set_has_separator (GTK_DIALOG (obj), FALSE);
-
-	priv->tray = brasero_tray_icon_new ();
-	g_signal_connect (priv->tray,
-			  "cancel",
-			  G_CALLBACK (brasero_burn_dialog_tray_cancel_cb),
-			  obj);
-	g_signal_connect (priv->tray,
-			  "show-dialog",
-			  G_CALLBACK (brasero_burn_dialog_tray_show_dialog_cb),
-			  obj);
-
-	alignment = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
-	gtk_widget_show (alignment);
-	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 8, 6, 6);
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox),
-			    alignment,
-			    TRUE,
-			    TRUE,
-			    0);
-
-	vbox = gtk_vbox_new (FALSE, 0);
-	gtk_widget_show (vbox);
-	gtk_container_add (GTK_CONTAINER (alignment), vbox);
-
-	box = gtk_hbox_new (FALSE, 0);
-	gtk_widget_show (box);
-	gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
-
-	priv->header = gtk_label_new (NULL);
-	gtk_widget_show (priv->header);
-	gtk_misc_set_alignment (GTK_MISC (priv->header), 0.0, 0.5);
-	gtk_misc_set_padding (GTK_MISC (priv->header), 0, 18);
-	gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, TRUE, 0);
-
-	priv->image = gtk_image_new ();
-	gtk_misc_set_alignment (GTK_MISC (priv->image), 1.0, 0.5);
-	gtk_widget_show (priv->image);
-	gtk_box_pack_start (GTK_BOX (box), priv->image, TRUE, TRUE, 0);
-
-	priv->progress = brasero_burn_progress_new ();
-	gtk_widget_show (priv->progress);
-	gtk_box_pack_start (GTK_BOX (vbox),
-			    priv->progress,
-			    FALSE,
-			    TRUE,
-			    0);
-
-	/* buttons */
-	priv->cancel = gtk_dialog_add_button (GTK_DIALOG (obj),
-					      GTK_STOCK_CANCEL,
-					      GTK_RESPONSE_CANCEL);
-}
-
-static void
-brasero_burn_dialog_destroy (GtkObject * object)
-{
-	BraseroBurnDialogPrivate *priv;
-
-	priv = BRASERO_BURN_DIALOG_PRIVATE (object);
-
-	if (priv->burn) {
-		g_object_unref (priv->burn);
-		priv->burn = NULL;
-	}
-
-	if (GTK_OBJECT_CLASS (parent_class)->destroy)
-		GTK_OBJECT_CLASS (parent_class)->destroy (object);
-}
-
-static void
-brasero_burn_dialog_finalize (GObject * object)
-{
-	BraseroBurnDialogPrivate *priv;
-
-	priv = BRASERO_BURN_DIALOG_PRIVATE (object);
-
-	if (priv->burn) {
-		brasero_burn_cancel (priv->burn, TRUE);
-		g_object_unref (priv->burn);
-		priv->burn = NULL;
-	}
-
-	if (priv->tray) {
-		g_object_unref (priv->tray);
-		priv->tray = NULL;
-	}
-
-	if (priv->session) {
-		g_object_unref (priv->session);
-		priv->session = NULL;
-	}
-
-	if (priv->total_time) {
-		g_timer_destroy (priv->total_time);
-		priv->total_time = NULL;
-	}
-
-	if (priv->rates) {
-		g_slist_free (priv->rates);
-		priv->rates = NULL;
-	}
-
-	G_OBJECT_CLASS (parent_class)->finalize (object);
-}
-
-/**
- * brasero_burn_dialog_new:
- *
- * Creates a new #BraseroBurnDialog object
- *
- * Return value: a #GtkWidget. Unref when it is not needed anymore.
- **/
-GtkWidget *
-brasero_burn_dialog_new (void)
-{
-	BraseroBurnDialog *obj;
-
-	obj = BRASERO_BURN_DIALOG (g_object_new (BRASERO_TYPE_BURN_DIALOG, NULL));
-
-	return GTK_WIDGET (obj);
-}
-
-static void
 brasero_burn_dialog_activity_start (BraseroBurnDialog *dialog)
 {
 	GdkCursor *cursor;
@@ -1425,7 +1388,7 @@ brasero_burn_dialog_activity_start (BraseroBurnDialog *dialog)
 	window = gtk_widget_get_window (GTK_WIDGET (dialog));
 	if (window) {
 		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (window, NULL);
+		gdk_window_set_cursor (window, cursor);
 		gdk_cursor_unref (cursor);
 	}
 
@@ -1461,7 +1424,7 @@ brasero_burn_dialog_activity_stop (BraseroBurnDialog *dialog,
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	gdk_window_set_cursor (GTK_WIDGET (dialog)->window, NULL);
+	gdk_window_set_cursor (gtk_widget_get_window (GTK_WIDGET (dialog)), NULL);
 
 	markup = g_strdup_printf ("<b><big>%s</big></b>", message);
 	gtk_label_set_text (GTK_LABEL (priv->header), markup);
@@ -1483,9 +1446,78 @@ brasero_burn_dialog_activity_stop (BraseroBurnDialog *dialog,
 					  -1,
 					  -1,
 					  -1);
+	/* Restore title */
+	if (priv->initial_title)
+		gtk_window_set_title (GTK_WINDOW (dialog), priv->initial_title);
+	else
+		brasero_burn_dialog_update_title (dialog, &priv->input);
+
+	/* Restore icon */
+	if (priv->initial_icon)
+		gtk_window_set_icon_name (GTK_WINDOW (dialog), priv->initial_icon);
 
 	gtk_widget_show (GTK_WIDGET (dialog));
 	gtk_window_set_urgency_hint (GTK_WINDOW (dialog), TRUE);
+}
+
+static BraseroBurnResult
+brasero_burn_dialog_install_missing_cb (BraseroBurn *burn,
+					BraseroPluginErrorType type,
+					const gchar *detail,
+					gpointer user_data)
+{
+	BraseroBurnDialogPrivate *priv = BRASERO_BURN_DIALOG_PRIVATE (user_data);
+	GCancellable *cancel;
+	BraseroPK *package;
+	GdkWindow *window;
+	gboolean res;
+	int xid = 0;
+
+	gtk_widget_set_sensitive (GTK_WIDGET (user_data), FALSE);
+
+	/* Get the xid */
+	window = gtk_widget_get_window (user_data);
+	xid = gdk_x11_drawable_get_xid (GDK_DRAWABLE (window));
+
+	package = brasero_pk_new ();
+	cancel = g_cancellable_new ();
+	priv->cancel_plugin = cancel;
+	switch (type) {
+		case BRASERO_PLUGIN_ERROR_MISSING_APP:
+			res = brasero_pk_install_missing_app (package, detail, xid, cancel);
+			break;
+
+		case BRASERO_PLUGIN_ERROR_MISSING_LIBRARY:
+			res = brasero_pk_install_missing_library (package, detail, xid, cancel);
+			break;
+
+		case BRASERO_PLUGIN_ERROR_MISSING_GSTREAMER_PLUGIN:
+			res = brasero_pk_install_gstreamer_plugin (package, detail, xid, cancel);
+			break;
+
+		default:
+			res = FALSE;
+			break;
+	}
+
+	if (package) {
+		g_object_unref (package);
+		package = NULL;
+	}
+
+	gtk_widget_set_sensitive (GTK_WIDGET (user_data), TRUE);
+	if (g_cancellable_is_cancelled (cancel)) {
+		g_object_unref (cancel);
+		return BRASERO_BURN_CANCEL;
+	}
+
+	priv->cancel_plugin = NULL;
+	g_object_unref (cancel);
+
+	if (!res)
+		return BRASERO_BURN_ERR;
+
+	return BRASERO_BURN_RETRY;
 }
 
 static BraseroBurnResult
@@ -1500,8 +1532,16 @@ brasero_burn_dialog_setup_session (BraseroBurnDialog *dialog,
 
 	priv->burn = brasero_burn_new ();
 	g_signal_connect (priv->burn,
+			  "install-missing",
+			  G_CALLBACK (brasero_burn_dialog_install_missing_cb),
+			  dialog);
+	g_signal_connect (priv->burn,
 			  "insert-media",
 			  G_CALLBACK (brasero_burn_dialog_insert_disc_cb),
+			  dialog);
+	g_signal_connect (priv->burn,
+			  "eject-failure",
+			  G_CALLBACK (brasero_burn_dialog_eject_failure_cb),
 			  dialog);
 	g_signal_connect (priv->burn,
 			  "location-request",
@@ -1561,11 +1601,7 @@ brasero_burn_dialog_setup_session (BraseroBurnDialog *dialog,
 				      BRASERO_BURN_ACTION_NONE,
 				      NULL);
 
-	if (priv->total_time)
-		g_timer_destroy (priv->total_time);
-
-	priv->total_time = g_timer_new ();
-	g_timer_start (priv->total_time);
+	g_timer_continue (priv->total_time);
 
 	return BRASERO_BURN_OK;
 }
@@ -1573,6 +1609,7 @@ brasero_burn_dialog_setup_session (BraseroBurnDialog *dialog,
 static void
 brasero_burn_dialog_save_log (BraseroBurnDialog *dialog)
 {
+	GError *error;
 	gchar *contents;
 	gchar *path = NULL;
 	GtkWidget *chooser;
@@ -1587,6 +1624,7 @@ brasero_burn_dialog_save_log (BraseroBurnDialog *dialog)
 					       GTK_STOCK_CANCEL, GTK_RESPONSE_CANCEL,
 					       GTK_STOCK_SAVE, GTK_RESPONSE_OK,
 					       NULL);
+	gtk_window_set_icon_name (GTK_WINDOW (chooser), gtk_window_get_icon_name (GTK_WINDOW (dialog)));
 
 	gtk_file_chooser_set_local_only (GTK_FILE_CHOOSER (chooser), TRUE);
 	gtk_file_chooser_set_current_folder (GTK_FILE_CHOOSER (chooser),
@@ -1613,151 +1651,21 @@ brasero_burn_dialog_save_log (BraseroBurnDialog *dialog)
 		return;
 	}
 
-	g_file_get_contents (brasero_burn_session_get_log_path (priv->session),
-			     &contents,
-			     NULL,
-			     NULL);
+	error = NULL;
+	if (!g_file_get_contents (brasero_burn_session_get_log_path (priv->session),
+	                          &contents,
+	                          NULL,
+	                          &error)) {
+		g_warning ("Error while saving log file: %s\n", error? error->message:"none");
+		g_error_free (error);
+		g_free (path);
+		return;
+	}
+	
 	g_file_set_contents (path, contents, -1, NULL);
 
 	g_free (contents);
 	g_free (path);
-}
-
-static void
-brasero_burn_dialog_show_log (BraseroBurnDialog *dialog)
-{
-	gint words_num;
-	GtkWidget *view;
-	GtkTextIter iter;
-	struct stat stats;
-	GtkWidget *message;
-	GtkWidget *scrolled;
-	GtkTextBuffer *text;
-	const gchar *logfile;
-	GtkTextTag *object_tag;
-	GtkTextTag *domain_tag;
-	BraseroBurnDialogPrivate *priv;
-
-	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
-
-	message = gtk_dialog_new_with_buttons (_("Session Log"),
-					       GTK_WINDOW (dialog),
-					       GTK_DIALOG_DESTROY_WITH_PARENT |
-					       GTK_DIALOG_MODAL,
-					       GTK_STOCK_CLOSE, GTK_RESPONSE_CLOSE,
-					       NULL);
-	gtk_window_set_default_size (GTK_WINDOW (message), 500, 375);
-	scrolled = gtk_scrolled_window_new (NULL, NULL);
-	gtk_container_set_border_width (GTK_CONTAINER (scrolled), 6);
-	gtk_scrolled_window_set_policy (GTK_SCROLLED_WINDOW (scrolled),
-					GTK_POLICY_AUTOMATIC,
-					GTK_POLICY_AUTOMATIC);
-	gtk_scrolled_window_set_shadow_type (GTK_SCROLLED_WINDOW (scrolled),
-					     GTK_SHADOW_ETCHED_IN);
-	gtk_box_pack_end (GTK_BOX (GTK_DIALOG (message)->vbox),
-			  scrolled,
-			  TRUE,
-			  TRUE,
-			  0);
-
-	view = gtk_text_view_new ();
-	gtk_text_view_set_editable (GTK_TEXT_VIEW (view), FALSE);
-	gtk_scrolled_window_add_with_viewport (GTK_SCROLLED_WINDOW (scrolled), view);
-
-	/* we better make sure the session log is not too big < 10 MB otherwise
-	 * everything will freeze and will take a huge part of memory. If it is
-	 * bigger then only show the end which is the most relevant. */
-	logfile = brasero_burn_session_get_log_path (priv->session);
-	if (g_stat (logfile, &stats) == -1) {
-		brasero_utils_message_dialog (GTK_WIDGET (dialog),
-					      _("The session log cannot be displayed."),
-					      _("The log file could not be found"),
-					      GTK_MESSAGE_ERROR);
-		gtk_widget_destroy (message);
-		return;
-	}
-
-	text = gtk_text_view_get_buffer (GTK_TEXT_VIEW (view));
-	if (stats.st_size > 1 * 1024 * 1024) {
-		gchar contents [1 * 1024 * 1024];
-		GtkTextIter iter;
-		FILE *file;
-
-		gtk_text_buffer_get_start_iter (text, &iter);
-		gtk_text_buffer_insert (text,
-					&iter,
-					_("This is a excerpt from the session log (the last 10 MiB):\n\n"),
-					-1);
-
-		file = g_fopen (logfile, "r");
-		if (!file) {
-			int errsv = errno;
-
-			brasero_utils_message_dialog (GTK_WIDGET (dialog),
-						      _("The session log cannot be displayed."),
-						      g_strerror (errsv),
-						      GTK_MESSAGE_ERROR);
-			gtk_widget_destroy (message);
-			return;
-		}
-
-		if (fread (contents, 1, sizeof (contents), file) != sizeof (contents)) {
-			int errsv = errno;
-
-			brasero_utils_message_dialog (GTK_WIDGET (dialog),
-						      _("The session log cannot be displayed."),
-						      g_strerror (errsv),
-						      GTK_MESSAGE_ERROR);
-			gtk_widget_destroy (message);
-			return;
-		}
-
-		gtk_text_buffer_insert (text, &iter, contents, sizeof (contents));
-	}
-	else {
-		gchar *contents;
-
-		/* fill the buffer */
-		g_file_get_contents (brasero_burn_session_get_log_path (priv->session),
-				     &contents,
-				     NULL,
-				     NULL);
-		gtk_text_buffer_set_text (text, contents, -1);
-		g_free (contents);
-	}
-
-	/* create tags and apply them */
-	object_tag = gtk_text_buffer_create_tag (text,
-						 NULL,
-						 "foreground", "red",
-						 "weight", PANGO_WEIGHT_BOLD,
-						 NULL);
-	domain_tag = gtk_text_buffer_create_tag (text,
-						 NULL,
-						 "foreground", "blue",
-						 NULL);
-	gtk_text_buffer_get_start_iter (text, &iter);
-	words_num = 0;
-	while (gtk_text_iter_forward_word_end (&iter)) {
-		GtkTextIter start = iter;
-
-		gtk_text_iter_backward_word_start (&start);
-
-		if (words_num == 2)
-			gtk_text_buffer_apply_tag (text, object_tag, &start, &iter);
-		else if (gtk_text_iter_starts_line (&start)) {
-			words_num = 1;
-			gtk_text_buffer_apply_tag (text, domain_tag, &start, &iter);
-		}
-
-		words_num ++;
-	}
-
-	/* run everything */
-	gtk_widget_show_all (scrolled);
-	gtk_dialog_run (GTK_DIALOG (message));
-
-	gtk_widget_destroy (message);
 }
 
 static void
@@ -1768,23 +1676,32 @@ brasero_burn_dialog_notify_error (BraseroBurnDialog *dialog,
 	GtkWidget *button;
 	GtkWidget *message;
 	GtkResponseType response;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	/* Restore title */
+	if (priv->initial_title)
+		gtk_window_set_title (GTK_WINDOW (dialog), priv->initial_title);
+
+	/* Restore icon */
+	if (priv->initial_icon)
+		gtk_window_set_icon_name (GTK_WINDOW (dialog), priv->initial_icon);
 
 	if (error) {
 		secondary =  g_strdup (error->message);
 		g_error_free (error);
 	}
 	else
-		secondary = g_strdup (_("An unknown error occured."));
+		secondary = g_strdup (_("An unknown error occurred."));
 
-	if (!GTK_WIDGET_VISIBLE (dialog))
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog)))
 		gtk_widget_show (GTK_WIDGET (dialog));
 
-	message = gtk_message_dialog_new (GTK_WINDOW (dialog),
-					  GTK_DIALOG_DESTROY_WITH_PARENT |
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_ERROR,
-					  GTK_BUTTONS_NONE,
-					  _("Error while burning."));
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_ERROR,
+	                                              GTK_BUTTONS_NONE,
+	                                              _("Error while burning."));
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
 						  "%s",
@@ -1793,13 +1710,6 @@ brasero_burn_dialog_notify_error (BraseroBurnDialog *dialog,
 
 	button = gtk_dialog_add_button (GTK_DIALOG (message),
 					_("_Save Log"),
-					GTK_RESPONSE_APPLY);
-	gtk_button_set_image (GTK_BUTTON (button),
-			      gtk_image_new_from_stock (GTK_STOCK_SAVE_AS,
-							GTK_ICON_SIZE_BUTTON));
-
-	button = gtk_dialog_add_button (GTK_DIALOG (message),
-					_("_View Log"),
 					GTK_RESPONSE_OK);
 	gtk_button_set_image (GTK_BUTTON (button),
 			      gtk_image_new_from_stock (GTK_STOCK_SAVE_AS,
@@ -1810,18 +1720,155 @@ brasero_burn_dialog_notify_error (BraseroBurnDialog *dialog,
 			       GTK_RESPONSE_CLOSE);
 
 	response = gtk_dialog_run (GTK_DIALOG (message));
-	while (1) {
-		if (response == GTK_RESPONSE_APPLY)
-			brasero_burn_dialog_save_log (dialog);
-		else if (response == GTK_RESPONSE_OK)
-			brasero_burn_dialog_show_log (dialog);
-		else
-			break;
-
+	while (response == GTK_RESPONSE_OK) {
+		brasero_burn_dialog_save_log (dialog);
 		response = gtk_dialog_run (GTK_DIALOG (message));
 	}
 
 	gtk_widget_destroy (message);
+}
+
+static gchar *
+brasero_burn_dialog_get_success_message (BraseroBurnDialog *dialog)
+{
+	BraseroBurnDialogPrivate *priv;
+	BraseroDrive *drive;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	drive = brasero_burn_session_get_burner (priv->session);
+
+	if (brasero_track_type_get_has_stream (&priv->input)) {
+		if (!brasero_drive_is_fake (drive)) {
+			if (BRASERO_STREAM_FORMAT_HAS_VIDEO (brasero_track_type_get_stream_format (&priv->input))) {
+				if (priv->media & BRASERO_MEDIUM_DVD)
+					return g_strdup (_("Video DVD successfully burned"));
+
+				return g_strdup (_("(S)VCD successfully burned"));
+			}
+			else
+				return g_strdup (_("Audio CD successfully burned"));
+		}
+
+		return g_strdup (_("Image successfully created"));
+	}
+	else if (brasero_track_type_get_has_medium (&priv->input)) {
+		if (!brasero_drive_is_fake (drive)) {
+			if (priv->media & BRASERO_MEDIUM_DVD)
+				return g_strdup (_("DVD successfully copied"));
+			else
+				return g_strdup (_("CD successfully copied"));
+		}
+		else {
+			if (priv->media & BRASERO_MEDIUM_DVD)
+				return g_strdup (_("Image of DVD successfully created"));
+			else
+				return g_strdup (_("Image of CD successfully created"));
+		}
+	}
+	else if (brasero_track_type_get_has_image (&priv->input)) {
+		if (!brasero_drive_is_fake (drive)) {
+			if (priv->media & BRASERO_MEDIUM_DVD)
+				return g_strdup (_("Image successfully burned to DVD"));
+			else
+				return g_strdup (_("Image successfully burned to CD"));
+		}
+	}
+	else if (brasero_track_type_get_has_data (&priv->input)) {
+		if (!brasero_drive_is_fake (drive)) {
+			if (priv->media & BRASERO_MEDIUM_DVD)
+				return g_strdup (_("Data DVD successfully burned"));
+			else
+				return g_strdup (_("Data CD successfully burned"));
+		}
+
+		return g_strdup (_("Image successfully created"));
+	}
+
+	return NULL;
+}
+
+static void
+brasero_burn_dialog_update_session_info (BraseroBurnDialog *dialog)
+{
+	gint64 rate;
+	gchar *primary = NULL;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	primary = brasero_burn_dialog_get_success_message (dialog);
+	brasero_burn_dialog_activity_stop (dialog, primary);
+	g_free (primary);
+
+	/* show total required time and average speed */
+	rate = 0;
+	if (priv->rates) {
+		int num = 0;
+		GSList *iter;
+
+		for (iter = priv->rates; iter; iter = iter->next) {
+			rate += GPOINTER_TO_INT (iter->data);
+			num ++;
+		}
+		rate /= num;
+	}
+
+	brasero_burn_progress_display_session_info (BRASERO_BURN_PROGRESS (priv->progress),
+						    g_timer_elapsed (priv->total_time, NULL),
+						    rate,
+						    priv->media,
+						    priv->total_size);
+}
+
+static gboolean
+brasero_burn_dialog_notify_copy_finished (BraseroBurnDialog *dialog,
+                                          GError *error)
+{
+	gulong added_id;
+	BraseroDrive *drive;
+	GtkWidget *message;
+	gchar *main_message;
+	GtkResponseType response;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	brasero_burn_dialog_update_session_info (dialog);
+
+	if (!gtk_widget_get_visible (GTK_WIDGET (dialog)))
+		gtk_widget_show (GTK_WIDGET (dialog));
+
+	main_message = g_strdup_printf (_("Copy #%i has been burned successfully."), priv->num_copies ++);
+	message = brasero_burn_dialog_create_message (dialog,
+	                                              GTK_MESSAGE_INFO,
+	                                              GTK_BUTTONS_CANCEL,
+	                                              main_message);
+
+	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG (message),
+						  "%s",
+						  _("Another copy will start as soon as you insert a new writable disc. If you do not want to burn another copy, press \"Cancel\"."));
+
+	/* connect to signals to be warned when media is inserted */
+	drive = brasero_burn_session_get_burner (priv->session);
+	added_id = g_signal_connect_after (drive,
+					   "medium-added",
+					   G_CALLBACK (brasero_burn_dialog_wait_for_insertion_cb),
+					   message);
+
+	gtk_widget_show (GTK_WIDGET (message));
+	ca_gtk_play_for_widget (GTK_WIDGET (message), 0,
+	                        CA_PROP_EVENT_ID, "complete-media-burn",
+	                        CA_PROP_EVENT_DESCRIPTION, main_message,
+	                        NULL);
+	g_free (main_message);
+
+	response = gtk_dialog_run (GTK_DIALOG (message));
+
+	g_signal_handler_disconnect (drive, added_id);
+	gtk_widget_destroy (message);
+
+	return (response == GTK_RESPONSE_OK);
 }
 
 static gboolean
@@ -1837,7 +1884,12 @@ brasero_burn_dialog_success_run (BraseroBurnDialog *dialog)
 		GtkWidget *window;
 
 		window = brasero_session_edit_cover (priv->session, GTK_WIDGET (dialog));
-		gtk_dialog_run (GTK_DIALOG (window));
+		/* This strange hack is a way to workaround #568358.
+		 * At one point we'll need to hide the dialog which means it
+		 * will anwer with a GTK_RESPONSE_NONE */
+		while (gtk_dialog_run (GTK_DIALOG (dialog)) == GTK_RESPONSE_NONE)
+			gtk_widget_show (GTK_WIDGET (dialog));
+
 		gtk_widget_destroy (window);
 		return FALSE;
 	}
@@ -1845,124 +1897,49 @@ brasero_burn_dialog_success_run (BraseroBurnDialog *dialog)
 	return (answer == GTK_RESPONSE_OK);
 }
 
-static gchar *
-brasero_burn_dialog_get_success_message (BraseroBurnDialog *dialog)
-{
-	BraseroBurnDialogPrivate *priv;
-	BraseroDrive *drive;
-	BraseroMedia media;
-
-	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
-
-	drive = brasero_burn_session_get_burner (priv->session);
-	if (priv->input.type != BRASERO_TRACK_TYPE_DISC)
-		media = brasero_burn_session_get_dest_media (priv->session);
-	else
-		media = priv->input.subtype.media;
-
-	switch (priv->input.type) {
-	case BRASERO_TRACK_TYPE_STREAM:
-		if (BRASERO_STREAM_FORMAT_HAS_VIDEO (priv->input.subtype.stream_format)) {
-			if (media & BRASERO_MEDIUM_DVD)
-				return g_strdup (_("Video DVD successfully burned"));
-
-			return g_strdup (_("(S)VCD successfully burned"));
-		}
-
-		return g_strdup (_("Audio CD successfully burnt"));
-
-	case BRASERO_TRACK_TYPE_DISC:
-		if (!brasero_drive_is_fake (drive)) {
-			if (media & BRASERO_MEDIUM_DVD)
-				return g_strdup (_("DVD successfully copied"));
-			else
-				return g_strdup (_("CD successfully copied"));
-		}
-		else {
-			if (media & BRASERO_MEDIUM_DVD)
-				return g_strdup (_("Image of DVD successfully created"));
-			else
-				return g_strdup (_("Image of CD successfully created"));
-		}
-		break;
-	case BRASERO_TRACK_TYPE_IMAGE:
-		if (!brasero_drive_is_fake (drive)) {
-			if (media & BRASERO_MEDIUM_DVD)
-				return g_strdup (_("Image successfully burnt to DVD"));
-			else
-				return g_strdup (_("Image successfully burnt to CD"));
-		}
-		break;
-	default:
-		if (!brasero_drive_is_fake (drive)) {
-			if (media & BRASERO_MEDIUM_DVD)
-				return g_strdup (_("Data DVD successfully burnt"));
-			else
-				return g_strdup (_("Data CD successfully burnt"));
-		}
-
-		return g_strdup (_("Image successfully created"));
-	}
-
-	return NULL;
-}
-
 static gboolean
 brasero_burn_dialog_notify_success (BraseroBurnDialog *dialog)
 {
-	gint64 rate;
 	gboolean res;
-	BraseroMedia media;
 	gchar *primary = NULL;
-	GtkWidget *make_another = NULL;
-	GtkWidget *create_cover = NULL;
 	BraseroBurnDialogPrivate *priv;
+	GtkWidget *create_cover = NULL;
+	GtkWidget *make_another = NULL;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	primary = brasero_burn_dialog_get_success_message (dialog);
-	brasero_burn_dialog_activity_stop (dialog, primary);
-	g_free (primary);
+	brasero_burn_dialog_update_session_info (dialog);
 
-	/* Don't show the "Make Another Copy" button if:
+	/* Don't show the "Make _More Copies" button if:
 	 * - we wrote to a file
-	 * - we wrote a merged session */
-	if (!brasero_burn_session_is_dest_file (priv->session)
-	&&!(brasero_burn_session_get_flags (priv->session) & BRASERO_BURN_FLAG_MERGE)) {
+	 * - we wrote a merged session
+	 * - we were not already asked for a series of copy */
+	if (!priv->num_copies
+	&&  !brasero_burn_session_is_dest_file (priv->session)
+	&& !(brasero_burn_session_get_flags (priv->session) & BRASERO_BURN_FLAG_MERGE)) {
 		/* Useful button but it shouldn't be used for images */
 		make_another = gtk_dialog_add_button (GTK_DIALOG (dialog),
-						      _("Make _Another Copy"),
+						      _("Make _More Copies"),
 						      GTK_RESPONSE_OK);
 	}
 
-	/* show total required time and average speed */
-	rate = 0;
-	if (priv->rates) {
-		int num = 0;
-		GSList *iter;
-
-		for (iter = priv->rates; iter; iter = iter->next) {
-			rate += GPOINTER_TO_INT (iter->data);
-			num ++;
-		}
-		rate /= num;
-	}
-
-	media = brasero_burn_session_get_dest_media (priv->session);
-	brasero_burn_progress_display_session_info (BRASERO_BURN_PROGRESS (priv->progress),
-						    g_timer_elapsed (priv->total_time, NULL),
-						    rate,
-						    media,
-						    priv->total_size);
-
-	if (priv->input.type == BRASERO_TRACK_TYPE_STREAM
-	|| (priv->input.type == BRASERO_TRACK_TYPE_DISC
-	&& (priv->input.subtype.media & BRASERO_MEDIUM_HAS_AUDIO))) {
+	if (brasero_track_type_get_has_stream (&priv->input)
+	|| (brasero_track_type_get_has_medium (&priv->input)
+	&& (brasero_track_type_get_medium_type (&priv->input) & BRASERO_MEDIUM_HAS_AUDIO))) {
 		/* since we succeed offer the possibility to create cover if that's an audio disc */
 		create_cover = gtk_dialog_add_button (GTK_DIALOG (dialog),
 						      _("_Create Cover"),
 						      GTK_RESPONSE_CLOSE);
 	}
+
+	primary = brasero_burn_dialog_get_success_message (dialog);
+	gtk_widget_show(GTK_WIDGET(dialog));
+	ca_gtk_play_for_widget(GTK_WIDGET(dialog), 0,
+			       CA_PROP_EVENT_ID, "complete-media-burn",
+			       CA_PROP_EVENT_DESCRIPTION, primary,
+			       NULL);
+
+	g_free (primary);
 
 	res = brasero_burn_dialog_success_run (dialog);
 
@@ -2047,10 +2024,7 @@ brasero_burn_dialog_end_session (BraseroBurnDialog *dialog,
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
-	if (priv->total_time)
-		g_timer_stop (priv->total_time);
-
-	brasero_burn_session_stop (priv->session);
+	g_timer_stop (priv->total_time);
 
 	if (result == BRASERO_BURN_CANCEL) {
 		/* nothing to do */
@@ -2058,8 +2032,13 @@ brasero_burn_dialog_end_session (BraseroBurnDialog *dialog,
 	else if (error || result != BRASERO_BURN_OK) {
 		brasero_burn_dialog_notify_error (dialog, error);
 	}
+	else if (priv->num_copies) {
+		retry = brasero_burn_dialog_notify_copy_finished (dialog, error);
+		if (!retry)
+			brasero_burn_dialog_notify_success (dialog);
+	}
 	else {
-		/* see if an image was created. If so, add it to GtkRecent */
+		/* see if an image was created. If so, add it to GtkRecent. */
 		if (brasero_burn_session_is_dest_file (priv->session)) {
 			GSList *tracks;
 
@@ -2073,6 +2052,7 @@ brasero_burn_dialog_end_session (BraseroBurnDialog *dialog,
 		}
 
 		retry = brasero_burn_dialog_notify_success (dialog);
+		priv->num_copies = retry * 2;
 	}
 
 	if (priv->burn) {
@@ -2083,11 +2063,6 @@ brasero_burn_dialog_end_session (BraseroBurnDialog *dialog,
 	if (priv->rates) {
 		g_slist_free (priv->rates);
 		priv->rates = NULL;
-	}
-
-	if (priv->total_time) {
-		g_timer_destroy (priv->total_time);
-		priv->total_time = NULL;
 	}
 
 	return retry;
@@ -2107,6 +2082,7 @@ brasero_burn_dialog_record_spanned_session (BraseroBurnDialog *dialog,
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 	burner = brasero_burn_session_get_burner (priv->session);
 
+	/* Get the messages now as they can change */
 	type = brasero_track_type_new ();
 	brasero_burn_session_get_input_type (priv->session, type);
 	success_message = brasero_burn_dialog_get_success_message (dialog);
@@ -2150,8 +2126,10 @@ brasero_burn_dialog_record_spanned_session (BraseroBurnDialog *dialog,
 
 		res = brasero_burn_dialog_wait_for_insertion (dialog,
 							      burner,
-							      _("Please insert a recordable CD or DVD."),
-							      secondary_message);
+							      _("Please insert a writable CD or DVD."),
+							      secondary_message, 
+		                                              TRUE);
+
 		if (res != GTK_RESPONSE_OK) {
 			g_free (secondary_message);
 			return BRASERO_BURN_CANCEL;
@@ -2162,8 +2140,9 @@ brasero_burn_dialog_record_spanned_session (BraseroBurnDialog *dialog,
 			brasero_drive_eject (burner, FALSE, NULL);
 			res = brasero_burn_dialog_wait_for_insertion (dialog,
 								      burner,
-								      _("Please insert a recordable CD or DVD."),
-								      _("Not enough space available on the disc"));
+								      _("Please insert a writable CD or DVD."),
+								      _("Not enough space available on the disc"),
+			                                              FALSE);
 			if (res != GTK_RESPONSE_OK) {
 				g_free (secondary_message);
 				return BRASERO_BURN_CANCEL;
@@ -2191,9 +2170,10 @@ brasero_burn_dialog_record_session (BraseroBurnDialog *dialog)
 	/* Update info */
 	brasero_burn_dialog_update_info (dialog,
 	                                 &priv->input,
-	                                 (brasero_burn_session_get_flags (BRASERO_BURN_SESSION (priv->session)) & BRASERO_BURN_FLAG_DUMMY) != 0);
+	                                 (brasero_burn_session_get_flags (priv->session) & BRASERO_BURN_FLAG_DUMMY) != 0);
+	brasero_burn_dialog_update_title (dialog, &priv->input);
 
-	/* start the recording session */
+	/* Start the recording session */
 	brasero_burn_dialog_activity_start (dialog);
 	result = brasero_burn_dialog_setup_session (dialog, &error);
 	if (result != BRASERO_BURN_OK)
@@ -2219,17 +2199,18 @@ brasero_burn_dialog_record_session (BraseroBurnDialog *dialog)
 }
 
 static gboolean
-brasero_burn_dialog_wait_for_ready_state (BraseroBurnDialog *dialog)
+brasero_burn_dialog_wait_for_ready_state_cb (BraseroBurnDialog *dialog)
 {
 	BraseroBurnDialogPrivate *priv;
-	BraseroBurnResult result;
 	BraseroStatus *status;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
 	status = brasero_status_new ();
-	result = brasero_burn_session_get_status (priv->session, status);
-	while (brasero_status_get_result (status) == BRASERO_BURN_NOT_READY) {
+	brasero_burn_session_get_status (priv->session, status);
+
+	if (brasero_status_get_result (status) == BRASERO_BURN_NOT_READY
+	||  brasero_status_get_result (status) == BRASERO_BURN_RUNNING) {
 		gdouble progress;
 		gchar *action;
 
@@ -2247,14 +2228,150 @@ brasero_burn_dialog_wait_for_ready_state (BraseroBurnDialog *dialog)
 							   progress,
 							   progress,
 							   -1.0,
-							   brasero_burn_session_get_dest_media (priv->session));
+							   priv->media);
+		g_object_unref (status);
 
+		/* Continue */
+		return TRUE;
+	}
+
+	if (priv->loop)
+		g_main_loop_quit (priv->loop);
+
+	priv->wait_ready_state_id = 0;
+
+	g_object_unref (status);
+	return FALSE;
+}
+
+static gboolean
+brasero_burn_dialog_wait_for_ready_state (BraseroBurnDialog *dialog)
+{
+	BraseroBurnDialogPrivate *priv;
+	BraseroBurnResult result;
+	BraseroStatus *status;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	status = brasero_status_new ();
+	result = brasero_burn_session_get_status (priv->session, status);
+	if (result == BRASERO_BURN_NOT_READY || result == BRASERO_BURN_RUNNING) {
+		GMainLoop *loop;
+
+		loop = g_main_loop_new (NULL, FALSE);
+		priv->loop = loop;
+
+		priv->wait_ready_state_id = g_timeout_add_seconds (1,
+								   (GSourceFunc) brasero_burn_dialog_wait_for_ready_state_cb,
+								   dialog);
+		g_main_loop_run (loop);
+
+		priv->loop = NULL;
+
+		if (priv->wait_ready_state_id) {
+			g_source_remove (priv->wait_ready_state_id);
+			priv->wait_ready_state_id = 0;
+		}
+
+		g_main_loop_unref (loop);
+
+		/* Get the final status */
 		result = brasero_burn_session_get_status (priv->session, status);
 	}
-	brasero_status_free (status);
+
+	g_object_unref (status);
 
 	return (result == BRASERO_BURN_OK);
 }
+
+static gboolean
+brasero_burn_dialog_run_real (BraseroBurnDialog *dialog,
+			      BraseroBurnSession *session)
+{
+	BraseroBurnResult result;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+
+	g_object_ref (session);
+	priv->session = session;
+
+	/* update what we should display */
+	brasero_burn_session_get_input_type (session, &priv->input);
+	brasero_burn_dialog_update_media (dialog);
+
+	/* show it early */
+	gtk_widget_show (GTK_WIDGET (dialog));
+
+	/* wait for ready state */
+	if (!brasero_burn_dialog_wait_for_ready_state (dialog))
+		return FALSE;
+
+	/* disable autoconfiguration */
+	if (BRASERO_IS_SESSION_CFG (priv->session))
+		brasero_session_cfg_disable (BRASERO_SESSION_CFG (priv->session));
+
+	priv->total_time = g_timer_new ();
+	g_timer_stop (priv->total_time);
+
+	priv->initial_title = g_strdup (gtk_window_get_title (GTK_WINDOW (dialog)));
+	priv->initial_icon = g_strdup (gtk_window_get_icon_name (GTK_WINDOW (dialog)));
+
+	do {
+		if (!gtk_widget_get_visible (GTK_WIDGET (dialog)))
+			gtk_widget_show (GTK_WIDGET (dialog));
+
+		result = brasero_burn_dialog_record_session (dialog);
+	} while (result == BRASERO_BURN_RETRY);
+
+	if (priv->initial_title) {
+		g_free (priv->initial_title);
+		priv->initial_title = NULL;
+	}
+
+	if (priv->initial_icon) {
+		g_free (priv->initial_icon);
+		priv->initial_icon = NULL;
+	}
+
+	g_timer_destroy (priv->total_time);
+	priv->total_time = NULL;
+
+	priv->session = NULL;
+	g_object_unref (session);
+
+	/* re-enable autoconfiguration */
+	if (BRASERO_IS_SESSION_CFG (priv->session))
+		brasero_session_cfg_enable (BRASERO_SESSION_CFG (priv->session));
+
+	return (result == BRASERO_BURN_OK);
+}
+
+/**
+ * brasero_burn_dialog_run_multi:
+ * @dialog: a #BraseroBurnDialog
+ * @session: a #BraseroBurnSession
+ *
+ * Start burning the contents of @session. Once a disc is burnt, a dialog
+ * will be shown to the user and wait for a new insertion before starting to burn
+ * again.
+ *
+ * Return value: a #gboolean. TRUE if the operation was successfully carried out, FALSE otherwise.
+ **/
+gboolean
+brasero_burn_dialog_run_multi (BraseroBurnDialog *dialog,
+			       BraseroBurnSession *session)
+{
+	BraseroBurnResult result;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+	priv->num_copies = 1;
+
+	result = brasero_burn_dialog_run_real (dialog, session);
+	return (result == BRASERO_BURN_OK);
+}
+
 
 /**
  * brasero_burn_dialog_run:
@@ -2269,66 +2386,27 @@ gboolean
 brasero_burn_dialog_run (BraseroBurnDialog *dialog,
 			 BraseroBurnSession *session)
 {
-	BraseroMedia media;
 	BraseroBurnResult result;
 	BraseroBurnDialogPrivate *priv;
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
+	priv->num_copies = 0;
 
-	g_object_ref (session);
-	priv->session = session;
-
-	/* wait for ready state */
-	if (!brasero_burn_dialog_wait_for_ready_state (dialog))
-		return FALSE;
-
-	/* disable autoconfiguration */
-	if (BRASERO_IS_SESSION_CFG (priv->session))
-		brasero_session_cfg_disable (BRASERO_SESSION_CFG (priv->session));
-
-	/* update what we should display */
-	brasero_burn_session_get_input_type (session, &priv->input);
-	if (brasero_burn_session_is_dest_file (session))
-		media = BRASERO_MEDIUM_FILE;
-	else if (priv->input.type != BRASERO_TRACK_TYPE_DISC)
-		media = brasero_burn_session_get_dest_media (session);
-	else {
-		BraseroMedium *medium;
-
-		medium = brasero_burn_session_get_src_medium (priv->session);
-		media = brasero_medium_get_status (medium);
-	}
-
-	do {
-		if (!GTK_WIDGET_VISIBLE (dialog))
-			gtk_widget_show (GTK_WIDGET (dialog));
-
-		result = brasero_burn_dialog_record_session (dialog);
-	} while (result == BRASERO_BURN_RETRY);
-
-	priv->session = NULL;
-	g_object_unref (session);
-
-	/* re-enable autoconfiguration */
-	if (BRASERO_IS_SESSION_CFG (priv->session))
-		brasero_session_cfg_enable (BRASERO_SESSION_CFG (priv->session));
-
+	result = brasero_burn_dialog_run_real (dialog, session);
 	return (result == BRASERO_BURN_OK);
 }
 
 static gboolean
-brasero_burn_dialog_cancel_dialog (GtkWidget *toplevel)
+brasero_burn_dialog_cancel_dialog (BraseroBurnDialog *toplevel)
 {
 	gint result;
 	GtkWidget *button;
 	GtkWidget *message;
 
-	message = gtk_message_dialog_new (GTK_WINDOW (toplevel),
-					  GTK_DIALOG_DESTROY_WITH_PARENT |
-					  GTK_DIALOG_MODAL,
-					  GTK_MESSAGE_WARNING,
-					  GTK_BUTTONS_NONE,
-					  _("Do you really want to quit?"));
+	message = brasero_burn_dialog_create_message (toplevel,
+	                                              GTK_MESSAGE_WARNING,
+	                                              GTK_BUTTONS_NONE,
+	                                              _("Do you really want to quit?"));
 
 	gtk_message_dialog_format_secondary_text (GTK_MESSAGE_DIALOG
 						  (message),
@@ -2372,11 +2450,16 @@ brasero_burn_dialog_cancel (BraseroBurnDialog *dialog,
 
 	priv = BRASERO_BURN_DIALOG_PRIVATE (dialog);
 
+	if (priv->loop) {
+		g_main_loop_quit (priv->loop);
+		return TRUE;
+	}
+
 	if (!priv->burn)
 		return TRUE;
 
 	if (brasero_burn_cancel (priv->burn, (force_cancellation == TRUE)) == BRASERO_BURN_DANGEROUS) {
-		if (!brasero_burn_dialog_cancel_dialog (GTK_WIDGET (dialog)))
+		if (!brasero_burn_dialog_cancel_dialog (dialog))
 			return FALSE;
 
 		brasero_burn_cancel (priv->burn, FALSE);
@@ -2436,4 +2519,174 @@ brasero_burn_dialog_tray_show_dialog_cb (BraseroTrayIcon *tray,
 		gtk_widget_show (dialog);
 	else
 		gtk_widget_hide (dialog);
+}
+
+static void
+brasero_burn_dialog_init (BraseroBurnDialog * obj)
+{
+	GtkWidget *box;
+	GtkWidget *vbox;
+	GtkWidget *alignment;
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (obj);
+
+	gtk_window_set_default_size (GTK_WINDOW (obj), 500, 0);
+
+	gtk_dialog_set_has_separator (GTK_DIALOG (obj), FALSE);
+
+	priv->tray = brasero_tray_icon_new ();
+	g_signal_connect (priv->tray,
+			  "cancel",
+			  G_CALLBACK (brasero_burn_dialog_tray_cancel_cb),
+			  obj);
+	g_signal_connect (priv->tray,
+			  "show-dialog",
+			  G_CALLBACK (brasero_burn_dialog_tray_show_dialog_cb),
+			  obj);
+
+	alignment = gtk_alignment_new (0.5, 0.5, 1.0, 1.0);
+	gtk_widget_show (alignment);
+	gtk_alignment_set_padding (GTK_ALIGNMENT (alignment), 6, 8, 6, 6);
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (obj)->vbox),
+			    alignment,
+			    TRUE,
+			    TRUE,
+			    0);
+
+	vbox = gtk_vbox_new (FALSE, 0);
+	gtk_widget_show (vbox);
+	gtk_container_add (GTK_CONTAINER (alignment), vbox);
+
+	box = gtk_hbox_new (FALSE, 0);
+	gtk_widget_show (box);
+	gtk_box_pack_start (GTK_BOX (vbox), box, FALSE, TRUE, 0);
+
+	priv->header = gtk_label_new (NULL);
+	gtk_widget_show (priv->header);
+	gtk_misc_set_alignment (GTK_MISC (priv->header), 0.0, 0.5);
+	gtk_misc_set_padding (GTK_MISC (priv->header), 0, 18);
+	gtk_box_pack_start (GTK_BOX (box), priv->header, FALSE, TRUE, 0);
+
+	priv->image = gtk_image_new ();
+	gtk_misc_set_alignment (GTK_MISC (priv->image), 1.0, 0.5);
+	gtk_widget_show (priv->image);
+	gtk_box_pack_start (GTK_BOX (box), priv->image, TRUE, TRUE, 0);
+
+	priv->progress = brasero_burn_progress_new ();
+	gtk_widget_show (priv->progress);
+	gtk_box_pack_start (GTK_BOX (vbox),
+			    priv->progress,
+			    FALSE,
+			    TRUE,
+			    0);
+
+	/* buttons */
+	priv->cancel = gtk_dialog_add_button (GTK_DIALOG (obj),
+					      GTK_STOCK_CANCEL,
+					      GTK_RESPONSE_CANCEL);
+}
+
+static void
+brasero_burn_dialog_destroy (GtkObject * object)
+{
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (object);
+
+	if (priv->burn) {
+		g_object_unref (priv->burn);
+		priv->burn = NULL;
+	}
+
+	if (GTK_OBJECT_CLASS (brasero_burn_dialog_parent_class)->destroy)
+		GTK_OBJECT_CLASS (brasero_burn_dialog_parent_class)->destroy (object);
+}
+
+static void
+brasero_burn_dialog_finalize (GObject * object)
+{
+	BraseroBurnDialogPrivate *priv;
+
+	priv = BRASERO_BURN_DIALOG_PRIVATE (object);
+
+	if (priv->wait_ready_state_id) {
+		g_source_remove (priv->wait_ready_state_id);
+		priv->wait_ready_state_id = 0;
+	}
+
+	if (priv->cancel_plugin) {
+		g_cancellable_cancel (priv->cancel_plugin);
+		priv->cancel_plugin = NULL;
+	}
+
+	if (priv->initial_title) {
+		g_free (priv->initial_title);
+		priv->initial_title = NULL;
+	}
+
+	if (priv->initial_icon) {
+		g_free (priv->initial_icon);
+		priv->initial_icon = NULL;
+	}
+
+	if (priv->burn) {
+		brasero_burn_cancel (priv->burn, TRUE);
+		g_object_unref (priv->burn);
+		priv->burn = NULL;
+	}
+
+	if (priv->tray) {
+		g_object_unref (priv->tray);
+		priv->tray = NULL;
+	}
+
+	if (priv->session) {
+		g_object_unref (priv->session);
+		priv->session = NULL;
+	}
+
+	if (priv->total_time) {
+		g_timer_destroy (priv->total_time);
+		priv->total_time = NULL;
+	}
+
+	if (priv->rates) {
+		g_slist_free (priv->rates);
+		priv->rates = NULL;
+	}
+
+	G_OBJECT_CLASS (brasero_burn_dialog_parent_class)->finalize (object);
+}
+
+static void
+brasero_burn_dialog_class_init (BraseroBurnDialogClass * klass)
+{
+	GObjectClass *object_class = G_OBJECT_CLASS (klass);
+	GtkObjectClass *gtk_object_class = GTK_OBJECT_CLASS (klass);
+	GtkWidgetClass *widget_class = GTK_WIDGET_CLASS (klass);
+
+	g_type_class_add_private (klass, sizeof (BraseroBurnDialogPrivate));
+
+	object_class->finalize = brasero_burn_dialog_finalize;
+	gtk_object_class->destroy = brasero_burn_dialog_destroy;
+	widget_class->delete_event = brasero_burn_dialog_delete;
+}
+
+/**
+ * brasero_burn_dialog_new:
+ *
+ * Creates a new #BraseroBurnDialog object
+ *
+ * Return value: a #GtkWidget. Unref when it is not needed anymore.
+ **/
+
+GtkWidget *
+brasero_burn_dialog_new (void)
+{
+	BraseroBurnDialog *obj;
+
+	obj = BRASERO_BURN_DIALOG (g_object_new (BRASERO_TYPE_BURN_DIALOG, NULL));
+
+	return GTK_WIDGET (obj);
 }

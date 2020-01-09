@@ -17,6 +17,9 @@ BraseroBlankDialog
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroBlankDialog ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroBlankDialog
 
 </para>
 
+@void: 
 @Returns: 
 
 

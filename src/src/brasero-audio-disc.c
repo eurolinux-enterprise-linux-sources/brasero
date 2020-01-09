@@ -1,3 +1,5 @@
+/* -*- Mode: C; indent-tabs-mode: t; c-basic-offset: 8; tab-width: 8 -*- */
+
 /***************************************************************************
  *            audio-disc.c
  *
@@ -41,6 +43,9 @@
 
 #include "brasero-misc.h"
 #include "brasero-io.h"
+#include "brasero-notify.h"
+
+#include "brasero-units.h"
 
 #include "brasero-tags.h"
 #include "brasero-track-stream-cfg.h"
@@ -130,6 +135,7 @@ struct _BraseroAudioDiscPrivate {
 
 	GtkWidget *tree;
 
+	GtkWidget *message;
 	GtkUIManager *manager;
 	GtkActionGroup *disc_group;
 
@@ -149,15 +155,15 @@ static GtkActionEntry entries[] = {
 	{"ContextualMenu", NULL, N_("Menu")},
 	{"OpenSong", GTK_STOCK_OPEN, NULL, NULL, N_("Open the selected files"),
 	 G_CALLBACK (brasero_audio_disc_open_activated_cb)},
-	{"EditSong", GTK_STOCK_PROPERTIES, N_("_Edit Information..."), NULL, N_("Edit the track information (start, end, author, ...)"),
+	{"EditSong", GTK_STOCK_PROPERTIES, N_("_Edit Information…"), NULL, N_("Edit the track information (start, end, author, etc.)"),
 	 G_CALLBACK (brasero_audio_disc_edit_information_cb)},
 	{"DeleteAudio", GTK_STOCK_REMOVE, NULL, NULL, N_("Remove the selected files from the project"),
 	 G_CALLBACK (brasero_audio_disc_delete_activated_cb)},
-	{"PasteAudio", GTK_STOCK_PASTE, NULL, NULL, N_("Add the files stored in the clipboard"),
+	{"PasteAudio", NULL, N_("Paste files"), NULL, N_("Add the files stored in the clipboard"),
 	 G_CALLBACK (brasero_audio_disc_paste_activated_cb)},
 	{"Pause", "insert-pause", N_("I_nsert a Pause"), NULL, N_("Add a 2 second pause after the track"),
 	 G_CALLBACK (brasero_audio_disc_add_pause_cb)},
-	{"Split", "transform-crop-and-resize", N_("_Split Track..."), NULL, N_("Split the selected track"),
+	{"Split", "transform-crop-and-resize", N_("_Split Track…"), NULL, N_("Split the selected track"),
 	 G_CALLBACK (brasero_audio_disc_split_cb)}
 };
 
@@ -215,9 +221,9 @@ enum {
 	PROP_REJECT_FILE,
 };
 
-/* 1 sec = 75 sectors, len is in nanosecond */
-#define BRASERO_SECTORS_TO_TIME(sectors)	(gint64) (sectors * GST_SECOND / 75)
 #define COL_KEY "column_key"
+
+#define BRASERO_AUDIO_DISC_CONTEXT		1000
 
 static void brasero_audio_disc_iface_disc_init (BraseroDiscIface *iface);
 
@@ -232,6 +238,9 @@ brasero_audio_disc_is_empty (BraseroDisc *disc)
 	GtkTreeModel *model;
 
 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (BRASERO_AUDIO_DISC (disc)->priv->tree));
+	if (!model)
+		return FALSE;
+
 	return gtk_tree_model_iter_n_children (model, NULL) != 0;
 }
 
@@ -300,6 +309,13 @@ brasero_audio_disc_add_ui (BraseroDisc *disc,
 	guint merge_id;
 
 	audio_disc = BRASERO_AUDIO_DISC (disc);
+
+	if (audio_disc->priv->message) {
+		g_object_unref (audio_disc->priv->message);
+		audio_disc->priv->message = NULL;
+	}
+
+	audio_disc->priv->message = g_object_ref (message);
 
 	if (!audio_disc->priv->disc_group) {
 		audio_disc->priv->disc_group = gtk_action_group_new (BRASERO_DISC_ACTION "-audio");
@@ -402,12 +418,12 @@ brasero_audio_disc_init (BraseroAudioDisc *obj)
 							   "text", BRASERO_VIDEO_TREE_MODEL_INDEX,
 							   NULL);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree), column);
-	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_column_set_resizable (column, TRUE);
 
 	/* Other columns */
 	column = gtk_tree_view_column_new ();
 	gtk_tree_view_column_set_resizable (column, TRUE);
-	gtk_tree_view_column_set_min_width (column, 200);
+	gtk_tree_view_column_set_expand (column, TRUE);
 
 	renderer = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, renderer, FALSE);
@@ -440,14 +456,10 @@ brasero_audio_disc_init (BraseroAudioDisc *obj)
 					    "editable", BRASERO_VIDEO_TREE_MODEL_EDITABLE);
 	gtk_tree_view_column_set_title (column, _("Title"));
 	g_object_set (G_OBJECT (column),
-		      "expand", TRUE,
 		      "spacing", 4,
 		      NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree),
-				     column);
-
-	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (obj->priv->tree),
-					   column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree), column);
+	gtk_tree_view_set_expander_column (GTK_TREE_VIEW (obj->priv->tree), column);
 
 	renderer = gtk_cell_renderer_text_new ();
 	g_object_set_data (G_OBJECT (renderer), COL_KEY, BRASERO_TRACK_STREAM_ARTIST_TAG);
@@ -467,8 +479,7 @@ brasero_audio_disc_init (BraseroAudioDisc *obj)
 	column = gtk_tree_view_column_new_with_attributes (_("Artist"), renderer,
 							   "text", BRASERO_VIDEO_TREE_MODEL_ARTIST,
 							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree),
-				     column);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree), column);
 	gtk_tree_view_column_set_resizable (column, TRUE);
 	gtk_tree_view_column_set_min_width (column, 200);
 
@@ -477,9 +488,8 @@ brasero_audio_disc_init (BraseroAudioDisc *obj)
 							   "text", BRASERO_VIDEO_TREE_MODEL_SIZE,
 							  /* "background", BACKGROUND_COL, */
 							   NULL);
-	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree),
-				     column);
-	gtk_tree_view_column_set_resizable (column, FALSE);
+	gtk_tree_view_append_column (GTK_TREE_VIEW (obj->priv->tree), column);
+	gtk_tree_view_column_set_resizable (column, TRUE);
 
 	scroll = gtk_scrolled_window_new (NULL, NULL);
 	gtk_widget_show (scroll);
@@ -517,6 +527,9 @@ brasero_audio_disc_reset_real (BraseroAudioDisc *disc)
 		gtk_tree_path_free (disc->priv->selected_path);
 		disc->priv->selected_path = NULL;
 	}
+
+	if (disc->priv->message)
+		brasero_notify_message_remove (disc->priv->message, BRASERO_AUDIO_DISC_CONTEXT);
 }
 
 static void
@@ -531,6 +544,11 @@ brasero_audio_disc_finalize (GObject *object)
 	brasero_io_job_base_free (cobj->priv->add_playlist);
 	cobj->priv->add_dir = NULL;
 	cobj->priv->add_playlist = NULL;
+
+	if (cobj->priv->message) {
+		g_object_unref (cobj->priv->message);
+		cobj->priv->message = NULL;
+	}
 
 	if (cobj->priv->manager) {
 		g_object_unref (cobj->priv->manager);
@@ -595,7 +613,7 @@ brasero_audio_disc_add_uri_real (BraseroAudioDisc *disc,
 	brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
 					     start,
 					     end,
-					     BRASERO_SECTORS_TO_TIME (gap_sectors));
+					     BRASERO_SECTORS_TO_DURATION (gap_sectors));
 
 	session = brasero_video_tree_model_get_session (BRASERO_VIDEO_TREE_MODEL (store));
 	if (pos > 0) {
@@ -621,7 +639,7 @@ brasero_audio_disc_file_type_error_dialog (BraseroAudioDisc *disc,
 	gchar *name;
 
     	BRASERO_GET_BASENAME_FOR_DISPLAY (uri, name);
-	primary = g_strdup_printf (_("\"%s\" could not be handled by Gstreamer."), name);
+	primary = g_strdup_printf (_("\"%s\" could not be handled by GStreamer."), name);
 	brasero_app_alert (brasero_app_get_default (),
 			   primary,
 			   _("Make sure the appropriate codec is installed"),
@@ -640,7 +658,7 @@ brasero_audio_disc_video_file_dialog (BraseroAudioDisc *disc,
 	gchar *name;
 
     	BRASERO_GET_BASENAME_FOR_DISPLAY (uri, name);
-	string = g_strdup_printf (_("Do you want to add \"%s\" which is a video file?"), name);
+	string = g_strdup_printf (_("Do you want to add \"%s\", which is a video file?"), name);
 	dialog = brasero_app_dialog (brasero_app_get_default (),
 				     string,
 				     GTK_BUTTONS_NONE,
@@ -799,6 +817,67 @@ brasero_audio_disc_unreadable_dialog (BraseroAudioDisc *disc,
 }
 
 static void
+brasero_audio_disc_wav_dts_response_cb (GtkButton *button,
+                                        GtkResponseType response,
+                                        BraseroAudioDisc *disc)
+{
+	BraseroSessionCfg *session;
+	GtkTreeModel *model;
+
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (disc->priv->tree));
+	session = brasero_video_tree_model_get_session (BRASERO_VIDEO_TREE_MODEL (model));
+
+	if (response == GTK_RESPONSE_OK)
+		brasero_burn_session_tag_add_int (BRASERO_BURN_SESSION (session),
+		                                  BRASERO_SESSION_STREAM_AUDIO_FORMAT,
+		                                  BRASERO_AUDIO_FORMAT_DTS);
+}
+
+static void
+brasero_audio_disc_wav_dts_file_dialog (BraseroAudioDisc *disc)
+{
+	GtkWidget *message;
+	BraseroSessionCfg *session;
+	GtkTreeModel *model;
+
+	if (brasero_notify_get_message_by_context_id (disc->priv->message,
+	                                              BRASERO_AUDIO_DISC_CONTEXT))
+		return;
+
+	/* Add a tag (RAW by default) so that we won't try to display this message again */
+	model = gtk_tree_view_get_model (GTK_TREE_VIEW (disc->priv->tree));
+	session = brasero_video_tree_model_get_session (BRASERO_VIDEO_TREE_MODEL (model));
+	brasero_burn_session_tag_add_int (BRASERO_BURN_SESSION (session),
+	                                  BRASERO_SESSION_STREAM_AUDIO_FORMAT,
+	                                  BRASERO_AUDIO_FORMAT_RAW);
+
+	message = brasero_notify_message_add (disc->priv->message,
+					      _("Do you want to create an audio CD with DTS tracks?"),
+					      _("Some of the selected songs are suitable for creating DTS tracks."
+					        "\nThis type of audio CD track provides a higher quality of sound but can only be played by specific digital players."
+					        "\nNote: if you agree, normalization will not be applied to these tracks."),
+					      0,
+					      BRASERO_AUDIO_DISC_CONTEXT);
+
+	gtk_info_bar_set_message_type (GTK_INFO_BAR (message), GTK_MESSAGE_INFO);
+
+	gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+							    						  _("Create _Regular Tracks"),
+							    						  GTK_RESPONSE_NO),
+					     	     _("Click here to burn all songs as regular tracks"));
+
+	gtk_widget_set_tooltip_text (gtk_info_bar_add_button (GTK_INFO_BAR (message),
+							    						  _("Create _DTS Tracks"),
+							    						  GTK_RESPONSE_OK),
+					     	     _("Click here to burn all suitable songs as DTS tracks"));
+
+	g_signal_connect (BRASERO_DISC_MESSAGE (message),
+			  "response",
+			  G_CALLBACK (brasero_audio_disc_wav_dts_response_cb),
+			  disc);
+}
+
+static void
 brasero_audio_disc_session_changed (BraseroSessionCfg *session,
 				    BraseroAudioDisc *self)
 {
@@ -806,12 +885,14 @@ brasero_audio_disc_session_changed (BraseroSessionCfg *session,
 	GSList *tracks;
 	gboolean notready;
 	BraseroStatus *status;
+	gboolean should_use_dts;
 
-	if (!GTK_WIDGET (self)->window)
+	if (!gtk_widget_get_window (GTK_WIDGET (self)))
 		return;
 
 	/* make sure all tracks have video */
 	notready = FALSE;
+	should_use_dts = FALSE;
 	status = brasero_status_new ();
 	tracks = brasero_burn_session_get_tracks (BRASERO_BURN_SESSION (session));
 	for (; tracks; tracks = next) {
@@ -868,7 +949,7 @@ brasero_audio_disc_session_changed (BraseroSessionCfg *session,
 			continue;
 		}
 
-		if (result == BRASERO_BURN_NOT_READY) {
+		if (result == BRASERO_BURN_NOT_READY || result == BRASERO_BURN_RUNNING) {
 			notready = TRUE;
 			continue;
 		}
@@ -888,9 +969,11 @@ brasero_audio_disc_session_changed (BraseroSessionCfg *session,
 			continue;
 		}
 
+		if ((format & BRASERO_AUDIO_FORMAT_DTS) != 0)
+			should_use_dts = TRUE;
+
 		if (BRASERO_STREAM_FORMAT_HAS_VIDEO (format)) {
 			gboolean res;
-
 			gchar *uri;
 
 			uri = brasero_track_stream_get_source (track, TRUE);
@@ -901,7 +984,11 @@ brasero_audio_disc_session_changed (BraseroSessionCfg *session,
 			g_free (uri);
 		}
 	}
-	brasero_status_free (status);
+	g_object_unref (status);
+
+	if (should_use_dts
+	&&  brasero_burn_session_tag_lookup (BRASERO_BURN_SESSION (session), BRASERO_SESSION_STREAM_AUDIO_FORMAT, NULL) != BRASERO_BURN_OK)
+		brasero_audio_disc_wav_dts_file_dialog (self);
 }
 
 static BraseroDiscResult
@@ -911,7 +998,7 @@ brasero_audio_disc_add_uri (BraseroDisc *disc,
 	GtkTreePath *treepath = NULL;
 	BraseroAudioDisc *audio_disc;
 	BraseroDiscResult result;
-g_print ("RECEIVED\n");
+
 	audio_disc = BRASERO_AUDIO_DISC (disc);
 	result = brasero_audio_disc_add_uri_real (audio_disc,
 						  uri,
@@ -1585,7 +1672,7 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
 					   BRASERO_TRACK_STREAM_ISRC_TAG,
 					   isrc);
 
-	if (end - start + BRASERO_SECTORS_TO_TIME (gap) < BRASERO_MIN_STREAM_LENGTH)
+	if (end - start + BRASERO_SECTORS_TO_DURATION (gap) < BRASERO_MIN_STREAM_LENGTH)
 		brasero_audio_disc_short_track_dialog (disc);
 
 	g_free (title);
@@ -1738,8 +1825,14 @@ brasero_audio_disc_button_pressed_cb (GtkTreeView *tree,
 {
 	GtkWidgetClass *widget_class;
 
+	/* Avoid minding signals that happen out of the tree area (like in the 
+	 * headers for example) */
+	if (event->window != gtk_tree_view_get_bin_window (GTK_TREE_VIEW (tree)))
+		return FALSE;
+
 	widget_class = GTK_WIDGET_GET_CLASS (tree);
 
+	/* Check that the click happened in the main window with rows. */
 	if (event->button == 3) {
 		GtkTreeSelection *selection;
 		GtkTreePath *path = NULL;
@@ -1803,7 +1896,7 @@ brasero_audio_disc_button_pressed_cb (GtkTreeView *tree,
 		 * so it can update itself (paticularly its selection) before we have
 		 * a look at it */
 		widget_class->button_press_event (GTK_WIDGET (tree), event);
-		
+
 		if (!treepath) {
 			GtkTreeSelection *selection;
 
@@ -1814,7 +1907,7 @@ brasero_audio_disc_button_pressed_cb (GtkTreeView *tree,
 			gtk_tree_selection_unselect_all (selection);
 			return FALSE;
 		}
-	
+
 		if (!result)
 			return FALSE;
 

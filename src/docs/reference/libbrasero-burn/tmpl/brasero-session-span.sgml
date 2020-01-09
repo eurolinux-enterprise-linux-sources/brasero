@@ -17,6 +17,9 @@ BraseroSessionSpan
 <!-- ##### SECTION Stability_Level ##### -->
 
 
+<!-- ##### SECTION Image ##### -->
+
+
 <!-- ##### STRUCT BraseroSessionSpan ##### -->
 <para>
 
@@ -29,6 +32,7 @@ BraseroSessionSpan
 
 </para>
 
+@void: 
 @Returns: 
 
 

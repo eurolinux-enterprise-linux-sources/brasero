@@ -33,6 +33,7 @@
 #endif
 
 #include <string.h>
+#include <stdio.h>
 
 #include <glib.h>
 #include <glib/gi18n-lib.h>
@@ -54,6 +55,12 @@ static const GOptionEntry options [] = {
 	  NULL },
 	{ NULL }
 };
+
+void
+brasero_media_library_set_debug (gboolean value)
+{
+	debug = value;
+}
 
 static GSList *
 brasero_media_add_to_list (GSList *retval,
@@ -452,8 +459,6 @@ brasero_media_to_string (BraseroMedia media,
 		strcat (buffer, "Unformatted ");
 }
 
-#define BRASERO_MEDIA_LOG_DOMAIN				"BraseroMedia"
-
 /**
  * brasero_media_get_option_group:
  *
@@ -470,7 +475,7 @@ brasero_media_get_option_group (void)
 
 	group = g_option_group_new ("brasero-media",
 				    N_("Brasero optical media library"),
-				    N_("Display options for Brasero-media library"),
+				    N_("Display options for Brasero media library"),
 				    NULL,
 				    NULL);
 	g_option_group_add_entries (group, options);
@@ -488,15 +493,12 @@ brasero_media_message (const gchar *location,
 	if (!debug)
 		return;
 
-	format_real = g_strdup_printf ("At %s: %s",
+	format_real = g_strdup_printf ("BraseroMedia: (at %s) %s\n",
 				       location,
 				       format);
 
 	va_start (arg_list, format);
-	g_logv (BRASERO_MEDIA_LOG_DOMAIN,
-		G_LOG_LEVEL_DEBUG,
-		format_real,
-		arg_list);
+	vprintf (format_real, arg_list);
 	va_end (arg_list);
 
 	g_free (format_real);
@@ -509,12 +511,13 @@ brasero_media_message (const gchar *location,
 static BraseroMediumMonitor *default_monitor = NULL;
 
 /**
- * brasero_media_start:
+ * brasero_media_library_start:
  *
  * Initialize the library.
  *
  * You should call this function before using any other from the library.
  *
+ * Rename to: init
  **/
 void
 brasero_media_library_start (void)
@@ -556,10 +559,11 @@ brasero_media_library_start (void)
 }
 
 /**
- * brasero_media_stop:
+ * brasero_media_library_stop:
  *
  * De-initialize the library once you do not need the library anymore.
  *
+ * Rename to: deinit
  **/
 void
 brasero_media_library_stop (void)

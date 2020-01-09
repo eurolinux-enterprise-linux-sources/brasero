@@ -50,7 +50,6 @@
 #include "scsi-device.h"
 #include "brasero-plugin-registration.h"
 #include "burn-job.h"
-#include "burn-checksum-files.h"
 
 #include "brasero-tags.h"
 #include "brasero-track-data.h"
@@ -61,6 +60,14 @@
 #include "brasero-volume.h"
 
 #include "burn-volume-read.h"
+
+
+#define BRASERO_TYPE_CHECKSUM_FILES		(brasero_checksum_files_get_type ())
+#define BRASERO_CHECKSUM_FILES(o)		(G_TYPE_CHECK_INSTANCE_CAST ((o), BRASERO_TYPE_CHECKSUM_FILES, BraseroChecksumFiles))
+#define BRASERO_CHECKSUM_FILES_CLASS(k)		(G_TYPE_CHECK_CLASS_CAST((k), BRASERO_TYPE_CHECKSUM_FILES, BraseroChecksumFilesClass))
+#define BRASERO_IS_CHECKSUM_FILES(o)		(G_TYPE_CHECK_INSTANCE_TYPE ((o), BRASERO_TYPE_CHECKSUM_FILES))
+#define BRASERO_IS_CHECKSUM_FILES_CLASS(k)	(G_TYPE_CHECK_CLASS_TYPE ((k), BRASERO_TYPE_CHECKSUM_FILES))
+#define BRASERO_CHECKSUM_FILES_GET_CLASS(o)	(G_TYPE_INSTANCE_GET_CLASS ((o), BRASERO_TYPE_CHECKSUM_FILES, BraseroChecksumFilesClass))
 
 BRASERO_PLUGIN_BOILERPLATE (BraseroChecksumFiles, brasero_checksum_files, BRASERO_TYPE_JOB, BraseroJob);
 
@@ -414,6 +421,8 @@ brasero_checksum_files_merge_with_former_session (BraseroChecksumFiles *self,
 	burner = brasero_medium_get_drive (medium);
 	device = brasero_drive_get_device (burner);
 	dev_handle = brasero_device_handle_open (device, FALSE, NULL);
+	if (!dev_handle)
+		return BRASERO_BURN_ERR;
 
 	vol = brasero_volume_source_open_device_handle (dev_handle, error);
 	file = brasero_volume_get_file (vol,
@@ -589,7 +598,7 @@ brasero_checksum_files_create_checksum (BraseroChecksumFiles *self,
 
 	/* we fill a hash table with all the files that are excluded globally */
 	excludedH = g_hash_table_new_full (g_str_hash, g_str_equal, g_free, NULL);
-	iter = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (track), FALSE);
+	iter = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (track));
 	for (; iter; iter = iter->next) {
 		gchar *uri;
 		gchar *path;
@@ -834,6 +843,9 @@ brasero_checksum_files_check_files (BraseroChecksumFiles *self,
 
 	device = brasero_drive_get_device (brasero_medium_get_drive (medium));
 	dev_handle = brasero_device_handle_open (device, FALSE, NULL);
+	if (!dev_handle)
+		return BRASERO_BURN_ERROR;
+
 	vol = brasero_volume_source_open_device_handle (dev_handle, error);
 
 	/* open checksum file */
@@ -1120,6 +1132,7 @@ brasero_checksum_files_end (gpointer data)
 
 	/* let's create a new DATA track with the md5 file created */
 	if (BRASERO_IS_TRACK_DATA (current)) {
+		GSList *iter;
 		GSList *grafts;
 		GSList *excluded;
 		BraseroGraftPt *graft;
@@ -1155,7 +1168,13 @@ brasero_checksum_files_end (gpointer data)
 				 graft->uri);
 
 		new_grafts = g_slist_prepend (new_grafts, graft);
-		excluded = brasero_track_data_get_excluded (BRASERO_TRACK_DATA (current), TRUE);
+		excluded = brasero_track_data_get_excluded_list (BRASERO_TRACK_DATA (current));
+
+		/* Duplicate the list since brasero_track_data_set_source ()
+		 * takes ownership afterwards */
+		excluded = g_slist_copy (excluded);
+		for (iter = excluded; iter; iter = iter->next)
+			iter->data = g_strdup (iter->data);
 
 		track = brasero_track_data_new ();
 		brasero_track_data_add_fs (track, brasero_track_data_get_fs (BRASERO_TRACK_DATA (current)));
@@ -1446,8 +1465,8 @@ brasero_checksum_files_class_init (BraseroChecksumFilesClass *klass)
 	job_class->clock_tick = brasero_checksum_files_clock_tick;
 }
 
-static BraseroBurnResult
-brasero_checksum_files_export_caps (BraseroPlugin *plugin, gchar **error)
+static void
+brasero_checksum_files_export_caps (BraseroPlugin *plugin)
 {
 	GSList *input;
 	BraseroPluginConfOption *checksum_type;
@@ -1457,19 +1476,17 @@ brasero_checksum_files_export_caps (BraseroPlugin *plugin, gchar **error)
 				* which will be translated only when it needs
 				* displaying. */
 			       N_("File Checksum"),
-			       _("Allows to check file integrities on a disc"),
+			       _("Checks file integrities on a disc"),
 			       "Philippe Rouquier",
 			       0);
 
-	/* we can only generate a file for DATA input */
+	/* only generate a file for DATA input */
 	input = brasero_caps_data_new (BRASERO_IMAGE_FS_ANY);
 	brasero_plugin_process_caps (plugin, input);
 	g_slist_free (input);
 
-	/* we can run on initial track or later for whatever a DATA track */
-	brasero_plugin_set_process_flags (plugin,
-					  BRASERO_PLUGIN_RUN_PREPROCESSING|
-					  BRASERO_PLUGIN_RUN_BEFORE_TARGET);
+	/* run on initial track for whatever a DATA track */
+	brasero_plugin_set_process_flags (plugin, BRASERO_PLUGIN_RUN_PREPROCESSING);
 
 	/* For discs, we can only check each files on a disc against an md5sum 
 	 * file (provided we managed to mount the disc).
@@ -1509,6 +1526,4 @@ brasero_checksum_files_export_caps (BraseroPlugin *plugin, gchar **error)
 	brasero_plugin_add_conf_option (plugin, checksum_type);
 
 	brasero_plugin_set_compulsory (plugin, FALSE);
-
-	return BRASERO_BURN_OK;
 }

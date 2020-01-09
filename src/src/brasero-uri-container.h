@@ -57,7 +57,7 @@ typedef struct {
 } BraseroURIContainerIFace;
 
 
-GType brasero_uri_container_get_type();
+GType brasero_uri_container_get_type (void);
 
 gboolean
 brasero_uri_container_get_boundaries (BraseroURIContainer *container,

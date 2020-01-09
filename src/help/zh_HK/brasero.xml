@@ -188,7 +188,7 @@
   
  <!-- ============= Getting Started ========================= -->
   <sect1 id="brasero-gettingstarted" status="review"> 
-    <title>Getting Started</title>
+    <title>開始使用</title>
     <sect2 id="brasero-starting">
       <title>啟動 Brasero</title>
     <para>你可以用下列方式啟動 <application>Brasero</application>：</para>
@@ -374,13 +374,7 @@
 		      <varlistentry>
 			<term><guilabel>讓光碟保持開放以便稍後增加其他資料區段</guilabel></term>
 			<listitem>
-			  <para>
-			    Select this option to create a
-			    <emphasis>multisession</emphasis> disc, so
-			    that it will be possible to add files to
-			    the disc at a later 
-			    date (without erasing it, if it is rewritable).
-			  </para>
+			  <para>選擇這個選項來建立<emphasis>多重區段</emphasis>光碟，這樣就可以在往後繼續將檔案加到這張光碟（如果是可覆寫光碟，也不需要先抹除）。</para>
 			</listitem>
 		      </varlistentry>
 		    </variablelist>
@@ -474,13 +468,7 @@
 		      <varlistentry>
 			<term><guilabel>讓光碟保持開放以便稍後增加其他檔案</guilabel></term>
 			<listitem>
-			  <para>
-			    Select this option to create a
-			    <emphasis>multisession</emphasis> disc, so
-			    that it will be possible to add files to
-			    the disc at a later date (without erasing
-			    it, if it is rewritable).
-			  </para>
+			  <para>選擇這個選項來建立<emphasis>多重區段</emphasis>光碟，這樣就可以在往後繼續將檔案加到這張光碟（如果是可覆寫光碟，也不需要先抹除）。</para>
 			</listitem>
 		      </varlistentry>
 		    </variablelist>

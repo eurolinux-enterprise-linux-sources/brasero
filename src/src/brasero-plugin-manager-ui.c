@@ -40,6 +40,7 @@ fy
 #include "brasero-plugin-manager-ui.h"
 
 #include "brasero-plugin.h"
+#include "brasero-plugin-private.h"
 #include "brasero-plugin-information.h"
 #include "brasero-burn-lib.h"
 #include "brasero-plugin-option.h"
@@ -204,6 +205,7 @@ plugin_manager_ui_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 				     gpointer           data)
 {
 	BraseroPlugin *plugin;
+	gchar *error_string;
 	gchar *text;
 	
 	g_return_if_fail (tree_model != NULL);
@@ -216,13 +218,16 @@ plugin_manager_ui_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 	if (!plugin)
 		return;
 
-	if (brasero_plugin_get_error (plugin))
+	error_string = brasero_plugin_get_error_string (plugin);
+	if (error_string) {
 		text = g_markup_printf_escaped ("<b>%s</b>\n%s\n<i>%s</i>",
 						/* Use the translated name of 
 						 * the plugin. */
 						_(brasero_plugin_get_name (plugin)),
 						brasero_plugin_get_description (plugin),
-						brasero_plugin_get_error (plugin));
+						error_string);
+		g_free (error_string);
+	}
 	else
 		text = g_markup_printf_escaped ("<b>%s</b>\n%s",
 						/* Use the translated name of 
@@ -232,7 +237,7 @@ plugin_manager_ui_view_info_cell_cb (GtkTreeViewColumn *tree_column,
 
 	g_object_set (G_OBJECT (cell),
 		      "markup", text,
-		      "sensitive", brasero_plugin_get_gtype (plugin) != G_TYPE_NONE,
+		      "sensitive", brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin),
 		      NULL);
 
 	g_free (text);
@@ -245,12 +250,16 @@ plugin_manager_ui_view_icon_cell_cb (GtkTreeViewColumn *tree_column,
 				     GtkTreeIter       *iter,
 				     gpointer           data)
 {
+	BraseroPlugin *plugin;
 	
 	g_return_if_fail (tree_model != NULL);
 	g_return_if_fail (tree_column != NULL);
 
+	gtk_tree_model_get (tree_model, iter, PLUGIN_COLUMN, &plugin, -1);
+
 	g_object_set (G_OBJECT (cell),
 		      "visible", FALSE,
+		      "sensitive", brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin),
 		      NULL);
 	return;
 /*
@@ -293,7 +302,6 @@ active_toggled_cb (GtkCellRendererToggle *cell,
 	g_return_if_fail (model != NULL);
 
 	gtk_tree_model_get_iter (model, &iter, path);
-
 	if (&iter != NULL)
 		plugin_manager_ui_toggle_active (&iter, model);
 
@@ -358,14 +366,10 @@ plugin_manager_ui_populate_lists (BraseroPluginManagerUI *pm)
 	for (; plugins; plugins = plugins->next) {
 		plugin = plugins->data;
 
-		if (brasero_plugin_get_gtype (plugin) == G_TYPE_NONE
-		||  brasero_plugin_get_compulsory (plugin))
-			continue;
-
 		gtk_list_store_append (model, &iter);
 		gtk_list_store_set (model, &iter,
-				    ACTIVE_COLUMN, brasero_plugin_get_active (plugin),
-				    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE,
+				    ACTIVE_COLUMN, brasero_plugin_get_active (plugin, 0),
+				    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin),
 				    PLUGIN_COLUMN, plugin,
 				    -1);
 	}
@@ -408,13 +412,17 @@ plugin_manager_ui_set_active (GtkTreeIter  *iter,
 
 	g_return_val_if_fail (plugin != NULL, FALSE);
 
+	if (brasero_plugin_get_gtype (plugin) == G_TYPE_NONE
+	||  brasero_plugin_get_compulsory (plugin))
+		return FALSE;
+
 	brasero_plugin_set_active (plugin, active);
  
 	/* set new value */
 	gtk_list_store_set (GTK_LIST_STORE (model), 
 			    iter, 
-			    ACTIVE_COLUMN, brasero_plugin_get_active (plugin),
-			    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE,
+			    ACTIVE_COLUMN, brasero_plugin_get_active (plugin, 0),
+			    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin),
 			    -1);
 
 	/* search if this plugin appears under other categories
@@ -439,7 +447,7 @@ plugin_manager_ui_set_active (GtkTreeIter  *iter,
 			if (plugin == tmp_plugin) {
 				gtk_list_store_set (GTK_LIST_STORE (model), &child, 
 						    ACTIVE_COLUMN, active,
-						    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE,
+						    AVAILABLE_COLUMN, brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin),
 						    -1);
 				break;
 			}
@@ -461,7 +469,8 @@ plugin_manager_ui_toggle_active (GtkTreeIter  *iter,
 
 	active ^= 1;
 
-	plugin_manager_ui_set_active (iter, model, active);
+	if (!plugin_manager_ui_set_active (iter, model, active))
+		return;
 }
 
 static void
@@ -600,9 +609,9 @@ create_tree_popup_menu (BraseroPluginManagerUI *pm)
 
 	item = gtk_check_menu_item_new_with_mnemonic (_("A_ctivate"));
 	gtk_widget_set_sensitive (item,
-				  brasero_plugin_get_gtype (plugin) != G_TYPE_NONE);	
+				  brasero_plugin_get_gtype (plugin) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin));	
 	gtk_check_menu_item_set_active (GTK_CHECK_MENU_ITEM (item),
-					brasero_plugin_get_active (plugin));
+					brasero_plugin_get_active (plugin, 0));
 	g_signal_connect (item, "toggled",
 			  G_CALLBACK (enable_plugin_menu_cb), pm);
 	gtk_menu_shell_append (GTK_MENU_SHELL (menu), item);					
@@ -644,17 +653,19 @@ menu_position_under_widget (GtkMenu  *menu,
 {
 	GtkWidget *w = GTK_WIDGET (user_data);
 	GtkRequisition requisition;
+	GtkAllocation allocation;
 
-	gdk_window_get_origin (w->window, x, y);
+	gdk_window_get_origin (gtk_widget_get_window (w), x, y);
 	gtk_widget_size_request (GTK_WIDGET (menu), &requisition);
 
+	gtk_widget_get_allocation (w, &allocation);
 	if (gtk_widget_get_direction (w) == GTK_TEXT_DIR_RTL) {
-		*x += w->allocation.x + w->allocation.width - requisition.width;
+		*x += allocation.x + allocation.width - requisition.width;
 	} else {
-		*x += w->allocation.x;
+		*x += allocation.x;
 	}
 
-	*y += w->allocation.y + w->allocation.height;
+	*y += allocation.y + allocation.height;
 
 	*push_in = TRUE;
 }
@@ -683,7 +694,7 @@ menu_position_under_tree_view (GtkMenu  *menu,
 		GtkTreePath *path;
 		GdkRectangle rect;
 
-		gdk_window_get_origin (GTK_WIDGET (tree)->window, x, y);
+		gdk_window_get_origin (gtk_widget_get_window (GTK_WIDGET (tree)), x, y);
 			
 		path = gtk_tree_model_get_path (model, &iter);
 
@@ -795,9 +806,19 @@ model_name_sort_func (GtkTreeModel *model,
 		      gpointer      user_data)
 {
 	BraseroPlugin *plugin1, *plugin2;
+	gboolean active1, active2;
 	
 	gtk_tree_model_get (model, iter1, PLUGIN_COLUMN, &plugin1, -1);
 	gtk_tree_model_get (model, iter2, PLUGIN_COLUMN, &plugin2, -1);
+
+	active1 = brasero_plugin_get_gtype (plugin1) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin1);
+	active2 = brasero_plugin_get_gtype (plugin2) != G_TYPE_NONE && !brasero_plugin_get_compulsory (plugin2);
+
+	if (active1 && !active2)
+		return -1;
+
+	if (active2 && !active1)
+		return 1;
 
 	/* Use the translated name for the plugins */
 	return g_utf8_collate (_(brasero_plugin_get_name (plugin1)),
@@ -835,12 +856,18 @@ plugin_manager_ui_construct_tree (BraseroPluginManagerUI *pm)
 	cell = gtk_cell_renderer_pixbuf_new ();
 	gtk_tree_view_column_pack_start (column, cell, FALSE);
 	g_object_set (cell, "stock-size", GTK_ICON_SIZE_SMALL_TOOLBAR, NULL);
+	gtk_tree_view_column_add_attribute (column,
+	                                    cell,
+	                                    "sensitive", AVAILABLE_COLUMN);
 	gtk_tree_view_column_set_cell_data_func (column, cell,
 						 plugin_manager_ui_view_icon_cell_cb,
 						 pm, NULL);
 	
 	cell = gtk_cell_renderer_text_new ();
 	gtk_tree_view_column_pack_start (column, cell, TRUE);
+	gtk_tree_view_column_add_attribute (column,
+	                                    cell,
+	                                    "sensitive", AVAILABLE_COLUMN);
 	g_object_set (cell, "ellipsize", PANGO_ELLIPSIZE_END, NULL);
 	gtk_tree_view_column_set_cell_data_func (column, cell,
 						 plugin_manager_ui_view_info_cell_cb,
@@ -851,7 +878,6 @@ plugin_manager_ui_construct_tree (BraseroPluginManagerUI *pm)
 
 	/* Last column */
 	cell = gtk_cell_renderer_toggle_new ();
-	g_object_set (cell, "xpad", 6, NULL);
 	g_signal_connect (cell,
 			  "toggled",
 			  G_CALLBACK (active_toggled_cb),
@@ -866,6 +892,7 @@ plugin_manager_ui_construct_tree (BraseroPluginManagerUI *pm)
 	gtk_tree_view_column_set_title (column, PLUGIN_MANAGER_UI_ACTIVE_TITLE);
 	gtk_tree_view_column_set_expand (column, FALSE);
 	gtk_tree_view_append_column (GTK_TREE_VIEW (priv->tree), column);
+	g_object_set (cell, "xpad", 6, NULL);
 
 	/* Sort on the plugin names */
 	gtk_tree_sortable_set_default_sort_func (GTK_TREE_SORTABLE (model),
