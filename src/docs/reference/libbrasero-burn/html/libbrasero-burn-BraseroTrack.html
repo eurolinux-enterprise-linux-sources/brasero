@@ -1,0 +1,546 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BraseroTrack</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="libbrasero-burn-brasero-track-type.html" title="brasero-track-type">
+<link rel="next" href="libbrasero-burn-BraseroTrackDisc.html" title="BraseroTrackDisc">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-burn-brasero-track-type.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-BraseroTrackDisc.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-BraseroTrack.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-BraseroTrack.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BraseroTrack">
+<a name="libbrasero-burn-BraseroTrack"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-BraseroTrack.top_of_page"></a>BraseroTrack</span></h2>
+<p>BraseroTrack</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-BraseroTrack.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a>;
+void                <a href="libbrasero-burn-BraseroTrack.html#brasero-track-changed">brasero_track_changed</a>               (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-get-size">brasero_track_get_size</a>              (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes);
+<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType">BraseroTrackDataType</a>  <a href="libbrasero-burn-BraseroTrack.html#brasero-track-get-track-type">brasero_track_get_track_type</a>      (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-get-status">brasero_track_get_status</a>            (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);
+enum                <a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType">BraseroChecksumType</a>;
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-set-checksum">brasero_track_set_checksum</a>          (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType">BraseroChecksumType</a> type,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *checksum);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-burn-BraseroTrack.html#brasero-track-get-checksum">brasero_track_get_checksum</a>          (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);
+<a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType">BraseroChecksumType</a>  <a href="libbrasero-burn-BraseroTrack.html#brasero-track-get-checksum-type">brasero_track_get_checksum_type</a>    (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add">brasero_track_tag_add</a>               (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> *value);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup">brasero_track_tag_lookup</a>            (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> **value);
+void                <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-copy-missing">brasero_track_tag_copy_missing</a>      (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *dest,
+                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *src);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add-string">brasero_track_tag_add_string</a>        (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *string);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup-string">brasero_track_tag_lookup_string</a>     (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add-int">brasero_track_tag_add_int</a>           (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         int value);
+int                 <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup-int">brasero_track_tag_lookup_int</a>        (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-BraseroTrack.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-BraseroTrack.details"></a><h2>Details</h2>
+<div class="refsect2" title="BraseroTrack">
+<a name="BraseroTrack"></a><h3>BraseroTrack</h3>
+<pre class="programlisting">typedef struct {
+	GObject parent_instance;
+} BraseroTrack;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_changed ()">
+<a name="brasero-track-changed"></a><h3>brasero_track_changed ()</h3>
+<pre class="programlisting">void                brasero_track_changed               (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);</pre>
+<p>
+Used internally in <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> implementations to 
+signal a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a> object has changed.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_get_size ()">
+<a name="brasero-track-get-size"></a><h3>brasero_track_get_size ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_get_size              (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes);</pre>
+<p>
+Returns the size of the data contained by <em class="parameter"><code>track</code></em> in bytes or in sectors</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful
+BRASERO_BURN_NOT_READY if <em class="parameter"><code>track</code></em> needs more time for processing the size
+BRASERO_BURN_ERR if something is wrong or if it is empty
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_get_track_type ()">
+<a name="brasero-track-get-track-type"></a><h3>brasero_track_get_track_type ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType">BraseroTrackDataType</a>  brasero_track_get_track_type      (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Sets <em class="parameter"><code>type</code></em> to reflect the type of data contained in <em class="parameter"><code>track</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> the<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType"><span class="type">BraseroTrackDataType</span></a> of the track
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_get_status ()">
+<a name="brasero-track-get-status"></a><h3>brasero_track_get_status ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_get_status            (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-brasero-status.html#BraseroStatus">BraseroStatus</a> *status);</pre>
+<p>
+Sets <em class="parameter"><code>status</code></em> to reflect whether <em class="parameter"><code>track</code></em> is ready to be used</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>status</code></em> :</span></p></td>
+<td> a <span class="type">BraseroTrackStatus</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful
+BRASERO_BURN_NOT_READY if <em class="parameter"><code>track</code></em> needs more time for processing
+BRASERO_BURN_ERR if something is wrong or if it is empty
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroChecksumType">
+<a name="BraseroChecksumType"></a><h3>enum BraseroChecksumType</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_CHECKSUM_NONE			= 0,
+	BRASERO_CHECKSUM_DETECT			= 1,		/* means the plugin handles detection of checksum type */
+	BRASERO_CHECKSUM_MD5			= 1 &lt;&lt; 1,
+	BRASERO_CHECKSUM_MD5_FILE		= 1 &lt;&lt; 2,
+	BRASERO_CHECKSUM_SHA1			= 1 &lt;&lt; 3,
+	BRASERO_CHECKSUM_SHA1_FILE		= 1 &lt;&lt; 4,
+	BRASERO_CHECKSUM_SHA256			= 1 &lt;&lt; 5,
+	BRASERO_CHECKSUM_SHA256_FILE		= 1 &lt;&lt; 6,
+} BraseroChecksumType;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_set_checksum ()">
+<a name="brasero-track-set-checksum"></a><h3>brasero_track_set_checksum ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_set_checksum          (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType">BraseroChecksumType</a> type,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *checksum);</pre>
+<p>
+Sets a checksum for the track</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType"><span class="type">BraseroChecksumType</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>checksum</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> * holding the checksum
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if the checksum was previously empty or matches the new one
+BRASERO_BURN_ERR otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_get_checksum ()">
+<a name="brasero-track-get-checksum"></a><h3>brasero_track_get_checksum ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_track_get_checksum          (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);</pre>
+<p>
+Get the current checksum (as a string) for the track</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> * (not to be freed) or NULL
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_get_checksum_type ()">
+<a name="brasero-track-get-checksum-type"></a><h3>brasero_track_get_checksum_type ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType">BraseroChecksumType</a>  brasero_track_get_checksum_type    (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track);</pre>
+<p>
+Get the current checksum type for the track if any.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroChecksumType"><span class="type">BraseroChecksumType</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_add ()">
+<a name="brasero-track-tag-add"></a><h3>brasero_track_tag_add ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_tag_add               (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> *value);</pre>
+<p>
+Associates a new <em class="parameter"><code>tag</code></em> with a track. This can be used
+to pass arbitrary information for plugins, like parameters
+for video discs, ...
+See brasero-tags.h for a list of knowns tags.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_lookup ()">
+<a name="brasero-track-tag-lookup"></a><h3>brasero_track_tag_lookup ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_tag_lookup            (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue">GValue</a> **value);</pre>
+<p>
+Retrieves a value associated with <em class="parameter"><code>track</code></em> through
+<a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"><code class="function">brasero_track_tag_add()</code></a> and stores it in <em class="parameter"><code>value</code></em>. Do
+not destroy <em class="parameter"><code>value</code></em> afterwards as it is not a copy</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/gobject/unstable/gobject-Generic-values.html#GValue"><span class="type">GValue</span></a> **
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if the retrieval was successful
+BRASERO_BURN_ERR otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_copy_missing ()">
+<a name="brasero-track-tag-copy-missing"></a><h3>brasero_track_tag_copy_missing ()</h3>
+<pre class="programlisting">void                brasero_track_tag_copy_missing      (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *dest,
+                                                         <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *src);</pre>
+<p>
+Adds all tags of <em class="parameter"><code>dest</code></em> to <em class="parameter"><code>src</code></em> provided they do not
+already exists.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>dest</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>src</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_add_string ()">
+<a name="brasero-track-tag-add-string"></a><h3>brasero_track_tag_add_string ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_tag_add_string        (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *string);</pre>
+<p>
+A wrapper around <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"><code class="function">brasero_track_tag_add()</code></a> to associate
+a string with <em class="parameter"><code>track</code></em>
+See also <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"><code class="function">brasero_track_tag_add()</code></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>string</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_lookup_string ()">
+<a name="brasero-track-tag-lookup-string"></a><h3>brasero_track_tag_lookup_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_track_tag_lookup_string     (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);</pre>
+<p>
+Retrieves a string value associated with <em class="parameter"><code>track</code></em>. This
+is a wrapper around <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup"><code class="function">brasero_track_tag_lookup()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *. The value or NULL otherwise.
+Do not free the string as it is not a copy.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_add_int ()">
+<a name="brasero-track-tag-add-int"></a><h3>brasero_track_tag_add_int ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_tag_add_int           (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag,
+                                                         int value);</pre>
+<p>
+A wrapper around <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"><code class="function">brasero_track_tag_add()</code></a> to associate
+a int value with <em class="parameter"><code>track</code></em>
+See also <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"><code class="function">brasero_track_tag_add()</code></a></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>value</code></em> :</span></p></td>
+<td> a <span class="type">int</span>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_tag_lookup_int ()">
+<a name="brasero-track-tag-lookup-int"></a><h3>brasero_track_tag_lookup_int ()</h3>
+<pre class="programlisting">int                 brasero_track_tag_lookup_int        (<a href="libbrasero-burn-BraseroTrack.html#BraseroTrack">BraseroTrack</a> *track,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *tag);</pre>
+<p>
+Retrieves a int value associated with <em class="parameter"><code>track</code></em>. This
+is a wrapper around <a href="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup"><code class="function">brasero_track_tag_lookup()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrack.html#BraseroTrack"><span class="type">BraseroTrack</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>tag</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <span class="type">int</span>; the value or 0 otherwise
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

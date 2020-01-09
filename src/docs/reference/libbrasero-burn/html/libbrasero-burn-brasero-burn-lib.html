@@ -1,0 +1,235 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>brasero-burn-lib</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="next" href="libbrasero-burn-brasero-error.html" title="brasero-error">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="ch01.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-brasero-error.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-brasero-burn-lib.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-brasero-burn-lib.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="brasero-burn-lib">
+<a name="libbrasero-burn-brasero-burn-lib"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-brasero-burn-lib.top_of_page"></a>brasero-burn-lib</span></h2>
+<p>brasero-burn-lib</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-brasero-burn-lib.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">#define             <a href="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MAJOR:CAPS">LIBBRASERO_BURN_VERSION_MAJOR</a>
+#define             <a href="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MINOR:CAPS">LIBBRASERO_BURN_VERSION_MINOR</a>
+#define             <a href="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MICRO:CAPS">LIBBRASERO_BURN_VERSION_MICRO</a>
+#define             <a href="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-AGE:CAPS">LIBBRASERO_BURN_AGE</a>
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-start">brasero_burn_library_start</a>          (int *argc,
+                                                         char **argv[]);
+void                <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-stop">brasero_burn_library_stop</a>           (void);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup">GOptionGroup</a> *      <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-option-group">brasero_burn_library_get_option_group</a>
+                                                        (void);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-plugins-list">brasero_burn_library_get_plugins_list</a>
+                                                        (void);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-can-checksum">brasero_burn_library_can_checksum</a>   (void);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-input-supported">brasero_burn_library_input_supported</a>
+                                                        (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        <a href="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-media-capabilities">brasero_burn_library_get_media_capabilities</a>
+                                                        (<a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a> media);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-brasero-burn-lib.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-brasero-burn-lib.details"></a><h2>Details</h2>
+<div class="refsect2" title="LIBBRASERO_BURN_VERSION_MAJOR">
+<a name="LIBBRASERO-BURN-VERSION-MAJOR:CAPS"></a><h3>LIBBRASERO_BURN_VERSION_MAJOR</h3>
+<pre class="programlisting">#define             LIBBRASERO_BURN_VERSION_MAJOR</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="LIBBRASERO_BURN_VERSION_MINOR">
+<a name="LIBBRASERO-BURN-VERSION-MINOR:CAPS"></a><h3>LIBBRASERO_BURN_VERSION_MINOR</h3>
+<pre class="programlisting">#define             LIBBRASERO_BURN_VERSION_MINOR</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="LIBBRASERO_BURN_VERSION_MICRO">
+<a name="LIBBRASERO-BURN-VERSION-MICRO:CAPS"></a><h3>LIBBRASERO_BURN_VERSION_MICRO</h3>
+<pre class="programlisting">#define             LIBBRASERO_BURN_VERSION_MICRO</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="LIBBRASERO_BURN_AGE">
+<a name="LIBBRASERO-BURN-AGE:CAPS"></a><h3>LIBBRASERO_BURN_AGE</h3>
+<pre class="programlisting">#define             LIBBRASERO_BURN_AGE</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_start ()">
+<a name="brasero-burn-library-start"></a><h3>brasero_burn_library_start ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_burn_library_start          (int *argc,
+                                                         char **argv[]);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argc</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>argv</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_stop ()">
+<a name="brasero-burn-library-stop"></a><h3>brasero_burn_library_stop ()</h3>
+<pre class="programlisting">void                brasero_burn_library_stop           (void);</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_get_option_group ()">
+<a name="brasero-burn-library-get-option-group"></a><h3>brasero_burn_library_get_option_group ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup">GOptionGroup</a> *      brasero_burn_library_get_option_group
+                                                        (void);</pre>
+<p>
+Returns a GOptionGroup for the commandline arguments recognized by libbrasero-burn.
+You should add this to your GOptionContext if your are using <a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#g-option-context-parse"><code class="function">g_option_context_parse()</code></a>
+to parse your commandline arguments.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Commandline-option-parser.html#GOptionGroup"><span class="type">GOptionGroup</span></a> *
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_get_plugins_list ()">
+<a name="brasero-burn-library-get-plugins-list"></a><h3>brasero_burn_library_get_plugins_list ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            brasero_burn_library_get_plugins_list
+                                                        (void);</pre>
+<p>
+This function returns the list of plugins that 
+are available to libbrasero-burn.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> that must be destroyed when not needed and each object unreffed.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_can_checksum ()">
+<a name="brasero-burn-library-can-checksum"></a><h3>brasero_burn_library_can_checksum ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_burn_library_can_checksum   (void);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_input_supported ()">
+<a name="brasero-burn-library-input-supported"></a><h3>brasero_burn_library_input_supported ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_burn_library_input_supported
+                                                        (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_burn_library_get_media_capabilities ()">
+<a name="brasero-burn-library-get-media-capabilities"></a><h3>brasero_burn_library_get_media_capabilities ()</h3>
+<pre class="programlisting"><a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        brasero_burn_library_get_media_capabilities
+                                                        (<a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a> media);</pre>
+<p>
+Used to test what the library can do based on the medium type.
+Returns BRASERO_MEDIUM_WRITABLE if the disc can be written
+and / or BRASERO_MEDIUM_REWRITABLE if the disc can be erased.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>media</code></em> :</span></p></td>
+<td> a <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Libbrasero-media Reference Manual" link="index.html" author="" name="libbrasero-media">
+  <chapters>
+    <sub name="API Reference for Libbrasero-media" link="ch01.html">
+      <sub name="brasero-media" link="libbrasero-media-brasero-media.html"/>
+      <sub name="brasero-units" link="libbrasero-media-brasero-units.html"/>
+      <sub name="BraseroMediumMonitor" link="libbrasero-media-BraseroMediumMonitor.html"/>
+      <sub name="BraseroDrive" link="libbrasero-media-BraseroDrive.html"/>
+      <sub name="BraseroMedium" link="libbrasero-media-BraseroMedium.html"/>
+      <sub name="BraseroVolume" link="libbrasero-media-BraseroVolume.html"/>
+      <sub name="BraseroMediumSelection" link="libbrasero-media-BraseroMediumSelection.html"/>
+      <sub name="BraseroDriveSelection" link="libbrasero-media-BraseroDriveSelection.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <function name="LIBBRASERO_MEDIA_VERSION_MAJOR" link="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MAJOR:CAPS"/>
+    <function name="LIBBRASERO_MEDIA_VERSION_MINOR" link="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MINOR:CAPS"/>
+    <function name="LIBBRASERO_MEDIA_VERSION_MICRO" link="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-VERSION-MICRO:CAPS"/>
+    <function name="LIBBRASERO_MEDIA_AGE" link="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-AGE:CAPS"/>
+    <function name="LIBBRASERO_MEDIA_INSTALL" link="libbrasero-media-brasero-media.html#LIBBRASERO-MEDIA-INSTALL:CAPS"/>
+    <function name="brasero_media_library_start ()" link="libbrasero-media-brasero-media.html#brasero-media-library-start"/>
+    <function name="brasero_media_library_stop ()" link="libbrasero-media-brasero-media.html#brasero-media-library-stop"/>
+    <function name="brasero_media_get_option_group ()" link="libbrasero-media-brasero-media.html#brasero-media-get-option-group"/>
+    <function name="brasero_media_quark ()" link="libbrasero-media-brasero-media.html#brasero-media-quark"/>
+    <function name="BRASERO_MEDIA_ERROR" link="libbrasero-media-brasero-media.html#BRASERO-MEDIA-ERROR:CAPS"/>
+    <function name="enum BraseroMediaError" link="libbrasero-media-brasero-media.html#BraseroMediaError"/>
+    <function name="enum BraseroMedia" link="libbrasero-media-brasero-media.html#BraseroMedia"/>
+    <function name="BRASERO_MEDIUM_CDROM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDROM:CAPS"/>
+    <function name="BRASERO_MEDIUM_CDR" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDR:CAPS"/>
+    <function name="BRASERO_MEDIUM_CDRW" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-CDRW:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVD_ROM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-ROM:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDR" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDRW" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDRW_RESTRICTED" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-RESTRICTED:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDR_DL" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-DL:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDR_JUMP_DL" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-JUMP-DL:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDR_PLUS" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDRW_PLUS" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDR_PLUS_DL" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDR-PLUS-DL:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVDRW_PLUS_DL" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVDRW-PLUS-DL:CAPS"/>
+    <function name="BRASERO_MEDIUM_DVD_RAM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-DVD-RAM:CAPS"/>
+    <function name="BRASERO_MEDIUM_BD_ROM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BD-ROM:CAPS"/>
+    <function name="BRASERO_MEDIUM_BDR_SRM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM:CAPS"/>
+    <function name="BRASERO_MEDIUM_BDR_SRM_POW" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-SRM-POW:CAPS"/>
+    <function name="BRASERO_MEDIUM_BDR_RANDOM" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDR-RANDOM:CAPS"/>
+    <function name="BRASERO_MEDIUM_BDRE" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-BDRE:CAPS"/>
+    <function name="BRASERO_MEDIUM_VALID()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-VALID:CAPS"/>
+    <function name="BRASERO_MEDIUM_TYPE()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-TYPE:CAPS"/>
+    <function name="BRASERO_MEDIUM_ATTR()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-ATTR:CAPS"/>
+    <function name="BRASERO_MEDIUM_STATUS()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-STATUS:CAPS"/>
+    <function name="BRASERO_MEDIUM_SUBTYPE()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-SUBTYPE:CAPS"/>
+    <function name="BRASERO_MEDIUM_INFO()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-INFO:CAPS"/>
+    <function name="BRASERO_MEDIUM_IS()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-IS:CAPS"/>
+    <function name="BRASERO_MEDIUM_RANDOM_WRITABLE()" link="libbrasero-media-brasero-media.html#BRASERO-MEDIUM-RANDOM-WRITABLE:CAPS"/>
+    <function name="CD_RATE" link="libbrasero-media-brasero-units.html#CD-RATE:CAPS"/>
+    <function name="DVD_RATE" link="libbrasero-media-brasero-units.html#DVD-RATE:CAPS"/>
+    <function name="BD_RATE" link="libbrasero-media-brasero-units.html#BD-RATE:CAPS"/>
+    <function name="BRASERO_SPEED_TO_RATE_CD()" link="libbrasero-media-brasero-units.html#BRASERO-SPEED-TO-RATE-CD:CAPS"/>
+    <function name="BRASERO_SPEED_TO_RATE_DVD()" link="libbrasero-media-brasero-units.html#BRASERO-SPEED-TO-RATE-DVD:CAPS"/>
+    <function name="BRASERO_SPEED_TO_RATE_BD()" link="libbrasero-media-brasero-units.html#BRASERO-SPEED-TO-RATE-BD:CAPS"/>
+    <function name="BRASERO_RATE_TO_SPEED_CD()" link="libbrasero-media-brasero-units.html#BRASERO-RATE-TO-SPEED-CD:CAPS"/>
+    <function name="BRASERO_RATE_TO_SPEED_DVD()" link="libbrasero-media-brasero-units.html#BRASERO-RATE-TO-SPEED-DVD:CAPS"/>
+    <function name="BRASERO_RATE_TO_SPEED_BD()" link="libbrasero-media-brasero-units.html#BRASERO-RATE-TO-SPEED-BD:CAPS"/>
+    <function name="BRASERO_DURATION_TO_BYTES()" link="libbrasero-media-brasero-units.html#BRASERO-DURATION-TO-BYTES:CAPS"/>
+    <function name="BRASERO_DURATION_TO_SECTORS()" link="libbrasero-media-brasero-units.html#BRASERO-DURATION-TO-SECTORS:CAPS"/>
+    <function name="BRASERO_BYTES_TO_SECTORS()" link="libbrasero-media-brasero-units.html#BRASERO-BYTES-TO-SECTORS:CAPS"/>
+    <function name="BRASERO_BYTES_TO_DURATION()" link="libbrasero-media-brasero-units.html#BRASERO-BYTES-TO-DURATION:CAPS"/>
+    <function name="brasero_units_get_time_string ()" link="libbrasero-media-brasero-units.html#brasero-units-get-time-string"/>
+    <function name="brasero_units_get_time_string_from_size ()" link="libbrasero-media-brasero-units.html#brasero-units-get-time-string-from-size"/>
+    <function name="BraseroMediumMonitor" link="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor"/>
+    <function name="brasero_medium_monitor_get_default ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-default"/>
+    <function name="enum BraseroMediaType" link="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType"/>
+    <function name="enum BraseroDriveType" link="libbrasero-media-BraseroMediumMonitor.html#BraseroDriveType"/>
+    <function name="brasero_medium_monitor_get_media ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-media"/>
+    <function name="brasero_medium_monitor_get_drives ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-drives"/>
+    <function name="brasero_medium_monitor_get_drive ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-drive"/>
+    <function name="brasero_medium_monitor_is_probing ()" link="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-is-probing"/>
+    <function name="enum BraseroDriveCaps" link="libbrasero-media-BraseroDrive.html#BraseroDriveCaps"/>
+    <function name="BraseroDrive" link="libbrasero-media-BraseroDrive.html#BraseroDrive"/>
+    <function name="brasero_drive_reprobe ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-reprobe"/>
+    <function name="brasero_drive_get_medium ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-medium"/>
+    <function name="brasero_drive_get_gdrive ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-gdrive"/>
+    <function name="brasero_drive_get_udi ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-udi"/>
+    <function name="brasero_drive_is_fake ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-is-fake"/>
+    <function name="brasero_drive_get_display_name ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-display-name"/>
+    <function name="brasero_drive_get_device ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-device"/>
+    <function name="brasero_drive_get_block_device ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-block-device"/>
+    <function name="brasero_drive_get_bus_target_lun_string ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-bus-target-lun-string"/>
+    <function name="brasero_drive_get_caps ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-get-caps"/>
+    <function name="brasero_drive_can_write ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-write"/>
+    <function name="brasero_drive_can_eject ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-eject"/>
+    <function name="brasero_drive_eject ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-eject"/>
+    <function name="brasero_drive_cancel_current_operation ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-cancel-current-operation"/>
+    <function name="brasero_drive_is_door_open ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-is-door-open"/>
+    <function name="brasero_drive_can_use_exclusively ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-can-use-exclusively"/>
+    <function name="brasero_drive_lock ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-lock"/>
+    <function name="brasero_drive_unlock ()" link="libbrasero-media-BraseroDrive.html#brasero-drive-unlock"/>
+    <function name="BraseroMedium" link="libbrasero-media-BraseroMedium.html#BraseroMedium"/>
+    <function name="brasero_medium_get_status ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-status"/>
+    <function name="brasero_medium_get_max_write_speed ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-max-write-speed"/>
+    <function name="brasero_medium_get_write_speeds ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-write-speeds"/>
+    <function name="brasero_medium_get_free_space ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-free-space"/>
+    <function name="brasero_medium_get_capacity ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-capacity"/>
+    <function name="brasero_medium_get_data_size ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-data-size"/>
+    <function name="brasero_medium_get_next_writable_address ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-next-writable-address"/>
+    <function name="brasero_medium_can_be_rewritten ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-can-be-rewritten"/>
+    <function name="brasero_medium_can_be_written ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-can-be-written"/>
+    <function name="brasero_medium_get_CD_TEXT_title ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-CD-TEXT-title"/>
+    <function name="brasero_medium_get_type_string ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-type-string"/>
+    <function name="brasero_medium_get_tooltip ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-tooltip"/>
+    <function name="brasero_medium_get_drive ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-drive"/>
+    <function name="brasero_medium_get_track_num ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-num"/>
+    <function name="brasero_medium_get_last_data_track_space ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-last-data-track-space"/>
+    <function name="brasero_medium_get_last_data_track_address ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-last-data-track-address"/>
+    <function name="brasero_medium_get_track_space ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-space"/>
+    <function name="brasero_medium_get_track_address ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-address"/>
+    <function name="brasero_medium_can_use_dummy_for_sao ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-dummy-for-sao"/>
+    <function name="brasero_medium_can_use_dummy_for_tao ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-dummy-for-tao"/>
+    <function name="brasero_medium_can_use_burnfree ()" link="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-burnfree"/>
+    <function name="BraseroVolume" link="libbrasero-media-BraseroVolume.html#BraseroVolume"/>
+    <function name="brasero_volume_get_name ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-get-name"/>
+    <function name="brasero_volume_get_icon ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-get-icon"/>
+    <function name="brasero_volume_get_gvolume ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-get-gvolume"/>
+    <function name="brasero_volume_is_mounted ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-is-mounted"/>
+    <function name="brasero_volume_get_mount_point ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-get-mount-point"/>
+    <function name="brasero_volume_umount ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-umount"/>
+    <function name="brasero_volume_mount ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-mount"/>
+    <function name="brasero_volume_cancel_current_operation ()" link="libbrasero-media-BraseroVolume.html#brasero-volume-cancel-current-operation"/>
+    <function name="BraseroMediumSelection" link="libbrasero-media-BraseroMediumSelection.html#BraseroMediumSelection"/>
+    <function name="brasero_medium_selection_new ()" link="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-new"/>
+    <function name="brasero_medium_selection_get_active ()" link="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-get-active"/>
+    <function name="brasero_medium_selection_set_active ()" link="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-set-active"/>
+    <function name="brasero_medium_selection_show_media_type ()" link="libbrasero-media-BraseroMediumSelection.html#brasero-medium-selection-show-media-type"/>
+    <function name="BraseroDriveSelection" link="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection"/>
+    <function name="brasero_drive_selection_new ()" link="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-new"/>
+    <function name="brasero_drive_selection_get_active ()" link="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-get-active"/>
+    <function name="brasero_drive_selection_set_active ()" link="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-set-active"/>
+    <function name="brasero_drive_selection_show_type ()" link="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-show-type"/>
+  </functions>
+</book>

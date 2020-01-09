@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+	<mime-type type="application/x-brasero">
+		<sub-class-of type="application/xml"/>
+		<comment>Brasero project file</comment>
+		<comment xml:lang="ar">ملف مشروع براسيرو</comment>
+		<comment xml:lang="as">Brasero প্ৰকল্প নথিপত্ৰ</comment>
+		<comment xml:lang="ast">Ficheru de proyeutu Brasero</comment>
+		<comment xml:lang="be">Файл праэкта</comment>
+		<comment xml:lang="bg">Файл с проект на Brasero</comment>
+		<comment xml:lang="bn">ব্রাসেরো প্রকল্প ফাইল</comment>
+		<comment xml:lang="bn_IN">Brasero প্রজেক্ট ফাইল</comment>
+		<comment xml:lang="br">Restr raktres Brasero</comment>
+		<comment xml:lang="ca">Fitxer de projecte Brasero</comment>
+		<comment xml:lang="ca@valencia">Fitxer de projecte Brasero</comment>
+		<comment xml:lang="cs">Soubor projektu Brasero</comment>
+		<comment xml:lang="da">Brasero projektfil</comment>
+		<comment xml:lang="de">Brasero Projekt-Datei</comment>
+		<comment xml:lang="dz">བ་ར་སིརོལས་འགུལ་ཡིག་སྣོད།</comment>
+		<comment xml:lang="el">Αρχείο εργασίας του brasero</comment>
+		<comment xml:lang="en_GB">Brasero project file</comment>
+		<comment xml:lang="es">Archivo de proyecto Brasero</comment>
+		<comment xml:lang="et">Brasero projektifail</comment>
+		<comment xml:lang="eu">Brasero proiektu-fitxategia</comment>
+		<comment xml:lang="fi">Braseron projektitiedosto</comment>
+		<comment xml:lang="fr">Fichier de projet Brasero</comment>
+		<comment xml:lang="gl">Ficheiro de proxecto do Brasero</comment>
+		<comment xml:lang="gu">Brasero પ્રોજેક્ટ ફાઈલ</comment>
+		<comment xml:lang="he">קובץ פרויקט Brasero</comment>
+		<comment xml:lang="hi">ब्रैसेरो परियोजना फाइल</comment>
+		<comment xml:lang="hu">Brasero projektfájl</comment>
+		<comment xml:lang="it">File progetto brasero</comment>
+		<comment xml:lang="ja">Brasero のプロジェクト・ファイル</comment>
+		<comment xml:lang="kn">Brasero ಪರಿಯೋಜನೆ ಕಡತ</comment>
+		<comment xml:lang="ko">브라세로 프로젝트 파일</comment>
+		<comment xml:lang="ku">Pela projeyên Brasero</comment>
+		<comment xml:lang="lt">Brasero projekto failas</comment>
+		<comment xml:lang="lv">Brasero projekta fails</comment>
+		<comment xml:lang="mk">Датотека за проект од Brasero</comment>
+		<comment xml:lang="ml">ബ്രസേറോ സംരംഭ ഫയല്‍</comment>
+		<comment xml:lang="mr">Brasero प्रकल्प फाइल</comment>
+		<comment xml:lang="nb">Brasero prosjektfil</comment>
+		<comment xml:lang="nl">Brasero-projectbestand</comment>
+		<comment xml:lang="or">Brasero ପ୍ରକଳ୍ପ ଫାଇଲ</comment>
+		<comment xml:lang="pa">ਬਰਾਸੀਰੋ ਪਰੋਜੈੱਕਟ ਫਾਇਲ</comment>
+		<comment xml:lang="pl">Plik projektu programu Brasero</comment>
+		<comment xml:lang="pt">Ficheiro de projecto do Brasero</comment>
+		<comment xml:lang="pt_BR">Arquivo de projeto do Brasero</comment>
+		<comment xml:lang="ro">Fișier proiect Brasero</comment>
+		<comment xml:lang="ru">Файл проекта</comment>
+		<comment xml:lang="sl">Datoteka projekta za Brasero</comment>
+		<comment xml:lang="sr">Датотека Бразеровог пројекта</comment>
+		<comment xml:lang="sr@latin">Datoteka Brazerovog projekta</comment>
+		<comment xml:lang="sv">Brasero-projektfil</comment>
+		<comment xml:lang="ta">ப்ராஸரோ திட்ட கோப்பு</comment>
+		<comment xml:lang="te">బ్రాసెరో ప్రోజెక్టు ఫైల్</comment>
+		<comment xml:lang="th">แฟ้มโครงการ Brasero</comment>
+		<comment xml:lang="tr">Brasero proje dosyası</comment>
+		<comment xml:lang="uk">Файл проекту</comment>
+		<comment xml:lang="vi">Tập tin dự án Brasero</comment>
+		<comment xml:lang="zh_CN">Brasero 项目文件</comment>
+		<comment xml:lang="zh_HK">Brasero 專案檔案</comment>
+		<comment xml:lang="zh_TW">Brasero 專案檔案</comment>
+		<magic priority="80">
+		      <match value="braseroproject" type="string" offset="0:50"/>
+		</magic>
+	</mime-type>
+</mime-info>

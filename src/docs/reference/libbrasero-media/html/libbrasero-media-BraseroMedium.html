@@ -1,0 +1,694 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BraseroMedium</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-media Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
+<link rel="prev" href="libbrasero-media-BraseroDrive.html" title="BraseroDrive">
+<link rel="next" href="libbrasero-media-BraseroVolume.html" title="BraseroVolume">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-media">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-media-BraseroDrive.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-media Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-media-BraseroVolume.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-media-BraseroMedium.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-media-BraseroMedium.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BraseroMedium">
+<a name="libbrasero-media-BraseroMedium"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-media-BraseroMedium.top_of_page"></a>BraseroMedium</span></h2>
+<p>BraseroMedium</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-media-BraseroMedium.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a>;
+<a href="libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-status">brasero_medium_get_status</a>           (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-max-write-speed">brasero_medium_get_max_write_speed</a>  (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *           <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-write-speeds">brasero_medium_get_write_speeds</a>     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+void                <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-free-space">brasero_medium_get_free_space</a>       (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);
+void                <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-capacity">brasero_medium_get_capacity</a>         (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);
+void                <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-data-size">brasero_medium_get_data_size</a>        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a>              <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-next-writable-address">brasero_medium_get_next_writable_address</a>
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-can-be-rewritten">brasero_medium_can_be_rewritten</a>     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-can-be-written">brasero_medium_can_be_written</a>       (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-CD-TEXT-title">brasero_medium_get_CD_TEXT_title</a>    (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-type-string">brasero_medium_get_type_string</a>      (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-tooltip">brasero_medium_get_tooltip</a>          (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-drive">brasero_medium_get_drive</a>            (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a>               <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-num">brasero_medium_get_track_num</a>        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-last-data-track-space">brasero_medium_get_last_data_track_space</a>
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-last-data-track-address">brasero_medium_get_last_data_track_address</a>
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-space">brasero_medium_get_track_space</a>      (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a> num,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-get-track-address">brasero_medium_get_track_address</a>    (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a> num,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-dummy-for-sao">brasero_medium_can_use_dummy_for_sao</a>
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-dummy-for-tao">brasero_medium_can_use_dummy_for_tao</a>
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroMedium.html#brasero-medium-can-use-burnfree">brasero_medium_can_use_burnfree</a>     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-media-BraseroMedium.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-media-BraseroMedium.details"></a><h2>Details</h2>
+<div class="refsect2" title="BraseroMedium">
+<a name="BraseroMedium"></a><h3>BraseroMedium</h3>
+<pre class="programlisting">typedef struct {
+	GObject parent_instance;
+} BraseroMedium;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_status ()">
+<a name="brasero-medium-get-status"></a><h3>brasero_medium_get_status ()</h3>
+<pre class="programlisting"><a href="libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        brasero_medium_get_status           (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the medium type and state.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_max_write_speed ()">
+<a name="brasero-medium-get-max-write-speed"></a><h3>brasero_medium_get_max_write_speed ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a>             brasero_medium_get_max_write_speed  (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the maximum speed that can be used to write to <em class="parameter"><code>medium</code></em>.
+Note: the speed are in B/sec.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_write_speeds ()">
+<a name="brasero-medium-get-write-speeds"></a><h3>brasero_medium_get_write_speeds ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *           brasero_medium_get_write_speeds     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets an array holding all possible speeds to write to <em class="parameter"><code>medium</code></em>.
+Note: the speed are in B/sec.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a> *.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_free_space ()">
+<a name="brasero-medium-get-free-space"></a><h3>brasero_medium_get_free_space ()</h3>
+<pre class="programlisting">void                brasero_medium_get_free_space       (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);</pre>
+<p>
+Stores in either <em class="parameter"><code>size</code></em> (in bytes) or <em class="parameter"><code>blocks</code></em> (the number of blocks) the space
+on the disc that can be used for writing.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_capacity ()">
+<a name="brasero-medium-get-capacity"></a><h3>brasero_medium_get_capacity ()</h3>
+<pre class="programlisting">void                brasero_medium_get_capacity         (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);</pre>
+<p>
+Stores in either <em class="parameter"><code>size</code></em> (in bytes) or <em class="parameter"><code>blocks</code></em> (the number of blocks) the total
+disc space.
+Note that when the disc is closed this space is the one occupied by data. 
+Otherwise it is the sum of free and used space.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_data_size ()">
+<a name="brasero-medium-get-data-size"></a><h3>brasero_medium_get_data_size ()</h3>
+<pre class="programlisting">void                brasero_medium_get_data_size        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *blocks);</pre>
+<p>
+Stores in either <em class="parameter"><code>size</code></em> (in bytes) or <em class="parameter"><code>blocks</code></em> (the number of blocks) the size
+used to store data (including audio on CDs) on the disc.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a> * or NULL
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_next_writable_address ()">
+<a name="brasero-medium-get-next-writable-address"></a><h3>brasero_medium_get_next_writable_address ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64">gint64</a>              brasero_medium_get_next_writable_address
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the address (block number) that can be used to write a new session on <em class="parameter"><code>medium</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gint64"><span class="type">gint64</span></a>.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_can_be_rewritten ()">
+<a name="brasero-medium-can-be-rewritten"></a><h3>brasero_medium_can_be_rewritten ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_can_be_rewritten     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets whether the medium can be rewritten. Note: it also checks that the drive
+can rewrite the medium type.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the medium can be rewritten, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_can_be_written ()">
+<a name="brasero-medium-can-be-written"></a><h3>brasero_medium_can_be_written ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_can_be_written       (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets whether the medium can be written. It also checks that the medium can
+write the medium.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the medium can be rewritten, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_CD_TEXT_title ()">
+<a name="brasero-medium-get-CD-TEXT-title"></a><h3>brasero_medium_get_CD_TEXT_title ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_medium_get_CD_TEXT_title    (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the CD-TEXT title for <em class="parameter"><code>Medium</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_type_string ()">
+<a name="brasero-medium-get-type-string"></a><h3>brasero_medium_get_type_string ()</h3>
+<pre class="programlisting">const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *       brasero_medium_get_type_string      (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Returns the medium type as a string to be displayed in a UI.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_tooltip ()">
+<a name="brasero-medium-get-tooltip"></a><h3>brasero_medium_get_tooltip ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *             brasero_medium_get_tooltip          (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Returns a tooltip to be displayed in the UI.
+It is of the form {content type} {disc type} in {drive name}.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_drive ()">
+<a name="brasero-medium-get-drive"></a><h3>brasero_medium_get_drive ()</h3>
+<pre class="programlisting"><a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      brasero_medium_get_drive            (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the <a href="libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> in which the medium is inserted.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>. No need to unref after use.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_track_num ()">
+<a name="brasero-medium-get-track-num"></a><h3>brasero_medium_get_track_num ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a>               brasero_medium_get_track_num        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets the number of tracks on the medium.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_last_data_track_space ()">
+<a name="brasero-medium-get-last-data-track-space"></a><h3>brasero_medium_get_last_data_track_space ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_get_last_data_track_space
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);</pre>
+<p>
+Stores in either <em class="parameter"><code>bytes</code></em> (in bytes) or in <em class="parameter"><code>sectors</code></em> (in blocks) the space used by
+the last track on the medium.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sectors</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. Returns TRUE if information could be retrieved.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_last_data_track_address ()">
+<a name="brasero-medium-get-last-data-track-address"></a><h3>brasero_medium_get_last_data_track_address ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_get_last_data_track_address
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);</pre>
+<p>
+Stores in either <em class="parameter"><code>bytes</code></em> (in bytes) or in <em class="parameter"><code>sectors</code></em> (in blocks) the address where
+the last session starts. This is useful when creating a multisession image or
+when reading the contents of this last track.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sectors</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. Returns TRUE if information could be retrieved.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_track_space ()">
+<a name="brasero-medium-get-track-space"></a><h3>brasero_medium_get_track_space ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_get_track_space      (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a> num,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);</pre>
+<p>
+Stores in either <em class="parameter"><code>bytes</code></em> (in bytes) or in <em class="parameter"><code>sectors</code></em> (in blocks) the space used
+by session <em class="parameter"><code>num</code></em> on the disc.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>num</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sectors</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. Returns TRUE if information could be retrieved;
+FALSE otherwise (usually when track <em class="parameter"><code>num</code></em> doesn't exist).
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_get_track_address ()">
+<a name="brasero-medium-get-track-address"></a><h3>brasero_medium_get_track_address ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_get_track_address    (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint">guint</a> num,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *bytes,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> *sectors);</pre>
+<p>
+Stores in either <em class="parameter"><code>bytes</code></em> (in bytes) or in <em class="parameter"><code>sectors</code></em> (in blocks) the address at
+which the session identified by <em class="parameter"><code>num</code></em> starts.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>num</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint"><span class="type">guint</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>bytes</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>sectors</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a> * or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. Returns TRUE if information could be retrieved;
+FALSE otherwise (usually when track <em class="parameter"><code>num</code></em> doesn't exist).
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_can_use_dummy_for_sao ()">
+<a name="brasero-medium-can-use-dummy-for-sao"></a><h3>brasero_medium_can_use_dummy_for_sao ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_can_use_dummy_for_sao
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets whether the medium supports doing a test write with SAO on.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the medium can use SAO write mode during a test write, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_can_use_dummy_for_tao ()">
+<a name="brasero-medium-can-use-dummy-for-tao"></a><h3>brasero_medium_can_use_dummy_for_tao ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_can_use_dummy_for_tao
+                                                        (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets whether the medium supports doing a test write with TAO on.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the medium can use TAO write mode during a test write, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_medium_can_use_burnfree ()">
+<a name="brasero-medium-can-use-burnfree"></a><h3>brasero_medium_can_use_burnfree ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_medium_can_use_burnfree     (<a href="libbrasero-media-BraseroMedium.html#BraseroMedium">BraseroMedium</a> *medium);</pre>
+<p>
+Gets whether the medium supports any burnfree technology.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>medium</code></em> :</span></p></td>
+<td> <a href="libbrasero-media-BraseroMedium.html#BraseroMedium"><span class="type">BraseroMedium</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if the medium can use any burnfree technology, FALSE otherwise.
+
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

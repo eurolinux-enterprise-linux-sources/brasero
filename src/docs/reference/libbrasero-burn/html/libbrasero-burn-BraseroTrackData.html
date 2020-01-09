@@ -1,0 +1,505 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BraseroTrackData</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="libbrasero-burn-BraseroTrackDisc.html" title="BraseroTrackDisc">
+<link rel="next" href="libbrasero-burn-BraseroTrackDataCfg.html" title="BraseroTrackDataCfg">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-burn-BraseroTrackDisc.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-BraseroTrackDataCfg.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-BraseroTrackData.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-BraseroTrackData.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BraseroTrackData">
+<a name="libbrasero-burn-BraseroTrackData"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-BraseroTrackData.top_of_page"></a>BraseroTrackData</span></h2>
+<p>BraseroTrackData</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-BraseroTrackData.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a>;
+void                <a href="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-free">brasero_graft_point_free</a>            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *graft);
+<a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *    <a href="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-copy">brasero_graft_point_copy</a>            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *graft);
+                    <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a>;
+<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *  <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-new">brasero_track_data_new</a>              (void);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-source">brasero_track_data_set_source</a>       (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *grafts,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *unreadable);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-add-fs">brasero_track_data_add_fs</a>           (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fstype);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-rm-fs">brasero_track_data_rm_fs</a>            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fstype);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-data-blocks">brasero_track_data_set_data_blocks</a>  (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> blocks);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-file-num">brasero_track_data_set_file_num</a>     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> number);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-grafts">brasero_track_data_get_grafts</a>       (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-excluded">brasero_track_data_get_excluded</a>     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> copy);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-paths">brasero_track_data_get_paths</a>        (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_joliet,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *grafts_path,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *excluded_path,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *emptydir,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *videodir,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-file-num">brasero_track_data_get_file_num</a>     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *file_num);
+<a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>      <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-fs">brasero_track_data_get_fs</a>           (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-BraseroTrackData.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-BraseroTrackData.details"></a><h2>Details</h2>
+<div class="refsect2" title="BraseroGraftPt">
+<a name="BraseroGraftPt"></a><h3>BraseroGraftPt</h3>
+<pre class="programlisting">typedef struct {
+	gchar *uri;
+	gchar *path;
+} BraseroGraftPt;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_graft_point_free ()">
+<a name="brasero-graft-point-free"></a><h3>brasero_graft_point_free ()</h3>
+<pre class="programlisting">void                brasero_graft_point_free            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *graft);</pre>
+<p>
+Frees <em class="parameter"><code>graft</code></em>. Do not use <em class="parameter"><code>grafts</code></em> afterwards.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>graft</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_graft_point_copy ()">
+<a name="brasero-graft-point-copy"></a><h3>brasero_graft_point_copy ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *    brasero_graft_point_copy            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt">BraseroGraftPt</a> *graft);</pre>
+<p>
+Copies <em class="parameter"><code>graft</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>graft</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BraseroTrackData">
+<a name="BraseroTrackData"></a><h3>BraseroTrackData</h3>
+<pre class="programlisting">typedef struct {
+	BraseroTrack parent_instance;
+} BraseroTrackData;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_new ()">
+<a name="brasero-track-data-new"></a><h3>brasero_track_data_new ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *  brasero_track_data_new              (void);</pre>
+<p>
+Creates a new <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>.
+</p>
+<p>
+This type of tracks is used to create a disc image
+from or burn a selection of files.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_set_source ()">
+<a name="brasero-track-data-set-source"></a><h3>brasero_track_data_set_source ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_set_source       (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *grafts,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *unreadable);</pre>
+<p>
+Sets the lists of grafts points (<em class="parameter"><code>grafts</code></em>) and excluded
+URIs (<em class="parameter"><code>unreadable</code></em>) to be used to create an image.
+</p>
+<p>
+Be careful <em class="parameter"><code>track</code></em> takes ownership of <em class="parameter"><code>grafts</code></em> and
+<em class="parameter"><code>unreadable</code></em> which must not be freed afterwards.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>grafts</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>unreadable</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of URIS as strings
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_add_fs ()">
+<a name="brasero-track-data-add-fs"></a><h3>brasero_track_data_add_fs ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_add_fs           (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fstype);</pre>
+<p>
+Adds one or more parameters determining the file system type
+and various other options to create an image.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fstype</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS"><span class="type">BraseroImageFS</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_rm_fs ()">
+<a name="brasero-track-data-rm-fs"></a><h3>brasero_track_data_rm_fs ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_rm_fs            (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fstype);</pre>
+<p>
+Removes one or more parameters determining the file system type
+and various other options to create an image.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fstype</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS"><span class="type">BraseroImageFS</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_set_data_blocks ()">
+<a name="brasero-track-data-set-data-blocks"></a><h3>brasero_track_data_set_data_blocks ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_set_data_blocks  (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset">goffset</a> blocks);</pre>
+<p>
+Sets the size of the image to be created (in sectors of 2048 bytes).</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>blocks</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#goffset"><span class="type">goffset</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_set_file_num ()">
+<a name="brasero-track-data-set-file-num"></a><h3>brasero_track_data_set_file_num ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_set_file_num     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> number);</pre>
+<p>
+Sets the number of files (not directories) in <em class="parameter"><code>track</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>number</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+BRASERO_BURN_OK if it was successful,
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_get_grafts ()">
+<a name="brasero-track-data-get-grafts"></a><h3>brasero_track_data_get_grafts ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            brasero_track_data_get_grafts       (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_get_excluded ()">
+<a name="brasero-track-data-get-excluded"></a><h3>brasero_track_data_get_excluded ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList">GSList</a> *            brasero_track_data_get_excluded     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> copy);</pre>
+<p>
+Returns a list of URIs which must not be included in
+the image to be created.
+If <em class="parameter"><code>copy</code></em> is TRUE then the <em class="parameter"><code>list</code></em> is a copy and must
+be freed once it is not needed anymore. If FALSE,
+do not free after usage as <em class="parameter"><code>track</code></em> retains ownership.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>copy</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> * or NULL if no
+URI should be excluded.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_get_paths ()">
+<a name="brasero-track-data-get-paths"></a><h3>brasero_track_data_get_paths ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_get_paths        (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a> use_joliet,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *grafts_path,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *excluded_path,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *emptydir,
+                                                         const <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar">gchar</a> *videodir,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError">GError</a> **error);</pre>
+<p>
+Write in <em class="parameter"><code>grafts_path</code></em> (a path to a file) the graft points,
+in <em class="parameter"><code>excluded_path</code></em> (a path to a file) the list of paths to
+be excluded, <em class="parameter"><code>emptydir</code></em> (a path to a file) an empty
+directory to be used for created directories, <em class="parameter"><code>videodir</code></em>
+(a path to a file) for a directory to be used to build the
+the video image.
+</p>
+<p>
+This is mostly for internal use by mkisofs and similar.
+</p>
+<p>
+This function takes care of mangling.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>use_joliet</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>grafts_path</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>excluded_path</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>emptydir</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>videodir</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> or NULL
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>error</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Error-Reporting.html#GError"><span class="type">GError</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_get_file_num ()">
+<a name="brasero-track-data-get-file-num"></a><h3>brasero_track_data_get_file_num ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_track_data_get_file_num     (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track,
+                                                         <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64">guint64</a> *file_num);</pre>
+<p>
+Sets the number of files (not directories) in <em class="parameter"><code>file_num</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>file_num</code></em> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. TRUE if <em class="parameter"><code>file_num</code></em>
+was set, FALSE otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_data_get_fs ()">
+<a name="brasero-track-data-get-fs"></a><h3>brasero_track_data_get_fs ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>      brasero_track_data_get_fs           (<a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData">BraseroTrackData</a> *track);</pre>
+<p>
+Returns a list of <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a>.
+</p>
+<p>
+Do not free after usage as <em class="parameter"><code>track</code></em> retains ownership.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>track</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of <a href="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"><span class="type">BraseroGraftPt</span></a> or NULL if empty.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
+<book xmlns="http://www.devhelp.net/book" title="Libbrasero-burn Reference Manual" link="index.html" author="" name="libbrasero-burn">
+  <chapters>
+    <sub name="API Reference for Libbrasero-burn" link="ch01.html">
+      <sub name="brasero-burn-lib" link="libbrasero-burn-brasero-burn-lib.html"/>
+      <sub name="brasero-error" link="libbrasero-burn-brasero-error.html"/>
+      <sub name="brasero-tags" link="libbrasero-burn-brasero-tags.html"/>
+      <sub name="brasero-status" link="libbrasero-burn-brasero-status.html"/>
+      <sub name="brasero-enums" link="libbrasero-burn-brasero-enums.html"/>
+      <sub name="brasero-track-type" link="libbrasero-burn-brasero-track-type.html"/>
+      <sub name="BraseroTrack" link="libbrasero-burn-BraseroTrack.html"/>
+      <sub name="BraseroTrackDisc" link="libbrasero-burn-BraseroTrackDisc.html"/>
+      <sub name="BraseroTrackData" link="libbrasero-burn-BraseroTrackData.html"/>
+      <sub name="BraseroTrackDataCfg" link="libbrasero-burn-BraseroTrackDataCfg.html"/>
+      <sub name="BraseroTrackStream" link="libbrasero-burn-BraseroTrackStream.html"/>
+      <sub name="BraseroTrackStreamCfg" link="libbrasero-burn-BraseroTrackStreamCfg.html"/>
+      <sub name="BraseroTrackImage" link="libbrasero-burn-BraseroTrackImage.html"/>
+      <sub name="BraseroTrackImageCfg" link="libbrasero-burn-BraseroTrackImageCfg.html"/>
+      <sub name="BraseroBurnSession" link="libbrasero-burn-BraseroBurnSession.html"/>
+      <sub name="BraseroSessionSpan" link="libbrasero-burn-BraseroSessionSpan.html"/>
+      <sub name="BraseroSessionCfg" link="libbrasero-burn-BraseroSessionCfg.html"/>
+      <sub name="BraseroBurnOptions" link="libbrasero-burn-BraseroBurnOptions.html"/>
+      <sub name="BraseroBurn" link="libbrasero-burn-BraseroBurn.html"/>
+      <sub name="BraseroBurnDialog" link="libbrasero-burn-BraseroBurnDialog.html"/>
+      <sub name="BraseroToolDialog" link="libbrasero-burn-BraseroToolDialog.html"/>
+      <sub name="BraseroSumDialog" link="libbrasero-burn-BraseroSumDialog.html"/>
+      <sub name="BraseroBlankDialog" link="libbrasero-burn-BraseroBlankDialog.html"/>
+    </sub>
+    <sub name="Object Hierarchy" link="object-tree.html"/>
+    <sub name="API Index" link="api-index-full.html"/>
+    <sub name="Annotation Glossary" link="annotation-glossary.html"/>
+  </chapters>
+  <functions>
+    <function name="LIBBRASERO_BURN_VERSION_MAJOR" link="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MAJOR:CAPS"/>
+    <function name="LIBBRASERO_BURN_VERSION_MINOR" link="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MINOR:CAPS"/>
+    <function name="LIBBRASERO_BURN_VERSION_MICRO" link="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-VERSION-MICRO:CAPS"/>
+    <function name="LIBBRASERO_BURN_AGE" link="libbrasero-burn-brasero-burn-lib.html#LIBBRASERO-BURN-AGE:CAPS"/>
+    <function name="brasero_burn_library_start ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-start"/>
+    <function name="brasero_burn_library_stop ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-stop"/>
+    <function name="brasero_burn_library_get_option_group ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-option-group"/>
+    <function name="brasero_burn_library_get_plugins_list ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-plugins-list"/>
+    <function name="brasero_burn_library_can_checksum ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-can-checksum"/>
+    <function name="brasero_burn_library_input_supported ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-input-supported"/>
+    <function name="brasero_burn_library_get_media_capabilities ()" link="libbrasero-burn-brasero-burn-lib.html#brasero-burn-library-get-media-capabilities"/>
+    <function name="enum BraseroBurnError" link="libbrasero-burn-brasero-error.html#BraseroBurnError"/>
+    <function name="brasero_burn_quark ()" link="libbrasero-burn-brasero-error.html#brasero-burn-quark"/>
+    <function name="BRASERO_BURN_ERROR" link="libbrasero-burn-brasero-error.html#BRASERO-BURN-ERROR:CAPS"/>
+    <function name="BRASERO_TRACK_MEDIUM_ADDRESS_START_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-MEDIUM-ADDRESS-START-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_MEDIUM_ADDRESS_END_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-MEDIUM-ADDRESS-END-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_MEDIUM_WRONG_CHECKSUM_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-MEDIUM-WRONG-CHECKSUM-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_TITLE_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-TITLE-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_COMPOSER_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-COMPOSER-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_ARTIST_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-ARTIST-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_THUMBNAIL_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-THUMBNAIL-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_MIME_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-MIME-TAG:CAPS"/>
+    <function name="BRASERO_TRACK_STREAM_ISRC_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-TRACK-STREAM-ISRC-TAG:CAPS"/>
+    <function name="BRASERO_DATA_TRACK_SIZE_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-DATA-TRACK-SIZE-TAG:CAPS"/>
+    <function name="BRASERO_STREAM_TRACK_SIZE_TAG" link="libbrasero-burn-brasero-tags.html#BRASERO-STREAM-TRACK-SIZE-TAG:CAPS"/>
+    <function name="BRASERO_COVER_URI" link="libbrasero-burn-brasero-tags.html#BRASERO-COVER-URI:CAPS"/>
+    <function name="BRASERO_DVD_STREAM_FORMAT" link="libbrasero-burn-brasero-tags.html#BRASERO-DVD-STREAM-FORMAT:CAPS"/>
+    <function name="BRASERO_VCD_TYPE" link="libbrasero-burn-brasero-tags.html#BRASERO-VCD-TYPE:CAPS"/>
+    <function name="BRASERO_VIDEO_OUTPUT_FRAMERATE" link="libbrasero-burn-brasero-tags.html#BRASERO-VIDEO-OUTPUT-FRAMERATE:CAPS"/>
+    <function name="BRASERO_VIDEO_OUTPUT_ASPECT" link="libbrasero-burn-brasero-tags.html#BRASERO-VIDEO-OUTPUT-ASPECT:CAPS"/>
+    <function name="BraseroStatus" link="libbrasero-burn-brasero-status.html#BraseroStatus"/>
+    <function name="enum BraseroStatusType" link="libbrasero-burn-brasero-status.html#BraseroStatusType"/>
+    <function name="brasero_status_new ()" link="libbrasero-burn-brasero-status.html#brasero-status-new"/>
+    <function name="brasero_status_free ()" link="libbrasero-burn-brasero-status.html#brasero-status-free"/>
+    <function name="brasero_status_get_result ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-result"/>
+    <function name="brasero_status_get_progress ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-progress"/>
+    <function name="brasero_status_get_error ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-error"/>
+    <function name="brasero_status_get_current_action ()" link="libbrasero-burn-brasero-status.html#brasero-status-get-current-action"/>
+    <function name="brasero_status_set_completed ()" link="libbrasero-burn-brasero-status.html#brasero-status-set-completed"/>
+    <function name="brasero_status_set_not_ready ()" link="libbrasero-burn-brasero-status.html#brasero-status-set-not-ready"/>
+    <function name="brasero_status_set_error ()" link="libbrasero-burn-brasero-status.html#brasero-status-set-error"/>
+    <function name="enum BraseroBurnResult" link="libbrasero-burn-brasero-enums.html#BraseroBurnResult"/>
+    <function name="enum BraseroBurnFlag" link="libbrasero-burn-brasero-enums.html#BraseroBurnFlag"/>
+    <function name="enum BraseroBurnAction" link="libbrasero-burn-brasero-enums.html#BraseroBurnAction"/>
+    <function name="enum BraseroImageFS" link="libbrasero-burn-brasero-enums.html#BraseroImageFS"/>
+    <function name="enum BraseroStreamFormat" link="libbrasero-burn-brasero-enums.html#BraseroStreamFormat"/>
+    <function name="BRASERO_STREAM_FORMAT_AUDIO()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-AUDIO:CAPS"/>
+    <function name="BRASERO_STREAM_FORMAT_VIDEO()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-VIDEO:CAPS"/>
+    <function name="BRASERO_MIN_STREAM_LENGTH" link="libbrasero-burn-brasero-enums.html#BRASERO-MIN-STREAM-LENGTH:CAPS"/>
+    <function name="BRASERO_STREAM_LENGTH()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-LENGTH:CAPS"/>
+    <function name="BRASERO_STREAM_FORMAT_HAS_VIDEO()" link="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS"/>
+    <function name="enum BraseroImageFormat" link="libbrasero-burn-brasero-enums.html#BraseroImageFormat"/>
+    <function name="enum BraseroTrackDataType" link="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType"/>
+    <function name="BraseroTrackType" link="libbrasero-burn-brasero-track-type.html#BraseroTrackType"/>
+    <function name="brasero_track_type_new ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-new"/>
+    <function name="brasero_track_type_free ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-free"/>
+    <function name="brasero_track_type_is_empty ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-is-empty"/>
+    <function name="brasero_track_type_get_has_data ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-data"/>
+    <function name="brasero_track_type_get_has_image ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-image"/>
+    <function name="brasero_track_type_get_has_stream ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-stream"/>
+    <function name="brasero_track_type_get_has_medium ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-medium"/>
+    <function name="brasero_track_type_set_has_data ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-data"/>
+    <function name="brasero_track_type_set_has_image ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-image"/>
+    <function name="brasero_track_type_set_has_stream ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-stream"/>
+    <function name="brasero_track_type_set_has_medium ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-medium"/>
+    <function name="brasero_track_type_get_stream_format ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-stream-format"/>
+    <function name="brasero_track_type_get_image_format ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-image-format"/>
+    <function name="brasero_track_type_get_medium_type ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-medium-type"/>
+    <function name="brasero_track_type_get_data_fs ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-data-fs"/>
+    <function name="brasero_track_type_set_stream_format ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-stream-format"/>
+    <function name="brasero_track_type_set_image_format ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-image-format"/>
+    <function name="brasero_track_type_set_medium_type ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-medium-type"/>
+    <function name="brasero_track_type_set_data_fs ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-data-fs"/>
+    <function name="brasero_track_type_equal ()" link="libbrasero-burn-brasero-track-type.html#brasero-track-type-equal"/>
+    <function name="BraseroTrack" link="libbrasero-burn-BraseroTrack.html#BraseroTrack"/>
+    <function name="brasero_track_changed ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-changed"/>
+    <function name="brasero_track_get_size ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-get-size"/>
+    <function name="brasero_track_get_track_type ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-get-track-type"/>
+    <function name="brasero_track_get_status ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-get-status"/>
+    <function name="enum BraseroChecksumType" link="libbrasero-burn-BraseroTrack.html#BraseroChecksumType"/>
+    <function name="brasero_track_set_checksum ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-set-checksum"/>
+    <function name="brasero_track_get_checksum ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-get-checksum"/>
+    <function name="brasero_track_get_checksum_type ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-get-checksum-type"/>
+    <function name="brasero_track_tag_add ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add"/>
+    <function name="brasero_track_tag_lookup ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup"/>
+    <function name="brasero_track_tag_copy_missing ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-copy-missing"/>
+    <function name="brasero_track_tag_add_string ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add-string"/>
+    <function name="brasero_track_tag_lookup_string ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup-string"/>
+    <function name="brasero_track_tag_add_int ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-add-int"/>
+    <function name="brasero_track_tag_lookup_int ()" link="libbrasero-burn-BraseroTrack.html#brasero-track-tag-lookup-int"/>
+    <function name="BraseroTrackDisc" link="libbrasero-burn-BraseroTrackDisc.html#BraseroTrackDisc"/>
+    <function name="brasero_track_disc_new ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-new"/>
+    <function name="brasero_track_disc_set_drive ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-set-drive"/>
+    <function name="brasero_track_disc_get_drive ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-get-drive"/>
+    <function name="brasero_track_disc_set_track_num ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-set-track-num"/>
+    <function name="brasero_track_disc_get_track_num ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-get-track-num"/>
+    <function name="brasero_track_disc_get_medium_type ()" link="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-get-medium-type"/>
+    <function name="BraseroGraftPt" link="libbrasero-burn-BraseroTrackData.html#BraseroGraftPt"/>
+    <function name="brasero_graft_point_free ()" link="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-free"/>
+    <function name="brasero_graft_point_copy ()" link="libbrasero-burn-BraseroTrackData.html#brasero-graft-point-copy"/>
+    <function name="BraseroTrackData" link="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"/>
+    <function name="brasero_track_data_new ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-new"/>
+    <function name="brasero_track_data_set_source ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-source"/>
+    <function name="brasero_track_data_add_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-add-fs"/>
+    <function name="brasero_track_data_rm_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-rm-fs"/>
+    <function name="brasero_track_data_set_data_blocks ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-data-blocks"/>
+    <function name="brasero_track_data_set_file_num ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-set-file-num"/>
+    <function name="brasero_track_data_get_grafts ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-grafts"/>
+    <function name="brasero_track_data_get_excluded ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-excluded"/>
+    <function name="brasero_track_data_get_paths ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-paths"/>
+    <function name="brasero_track_data_get_file_num ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-file-num"/>
+    <function name="brasero_track_data_get_fs ()" link="libbrasero-burn-BraseroTrackData.html#brasero-track-data-get-fs"/>
+    <function name="BRASERO_DND_TARGET_DATA_TRACK_REFERENCE_LIST" link="libbrasero-burn-BraseroTrackDataCfg.html#BRASERO-DND-TARGET-DATA-TRACK-REFERENCE-LIST:CAPS"/>
+    <function name="enum BraseroTrackDataCfgColumn" link="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfgColumn"/>
+    <function name="BraseroTrackDataCfg" link="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfg"/>
+    <function name="brasero_track_data_cfg_new ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-new"/>
+    <function name="brasero_track_data_cfg_add ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-add"/>
+    <function name="brasero_track_data_cfg_add_empty_directory ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-add-empty-directory"/>
+    <function name="brasero_track_data_cfg_remove ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-remove"/>
+    <function name="brasero_track_data_cfg_rename ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-rename"/>
+    <function name="brasero_track_data_cfg_reset ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-reset"/>
+    <function name="brasero_track_data_cfg_load_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-load-medium"/>
+    <function name="brasero_track_data_cfg_unload_current_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-unload-current-medium"/>
+    <function name="brasero_track_data_cfg_get_current_medium ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-current-medium"/>
+    <function name="brasero_track_data_cfg_get_available_media ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-available-media"/>
+    <function name="brasero_track_data_cfg_dont_filter_uri ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-dont-filter-uri"/>
+    <function name="brasero_track_data_cfg_get_restored_list ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-restored-list"/>
+    <function name="brasero_track_data_cfg_restore ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-restore"/>
+    <function name="brasero_track_data_cfg_get_filtered_model ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-filtered-model"/>
+    <function name="brasero_track_data_cfg_span ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span"/>
+    <function name="brasero_track_data_cfg_span_again ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-again"/>
+    <function name="brasero_track_data_cfg_span_possible ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-possible"/>
+    <function name="brasero_track_data_cfg_span_stop ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-span-stop"/>
+    <function name="brasero_track_data_cfg_get_icon ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-icon"/>
+    <function name="brasero_track_data_cfg_get_icon_path ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-get-icon-path"/>
+    <function name="brasero_track_data_cfg_set_icon ()" link="libbrasero-burn-BraseroTrackDataCfg.html#brasero-track-data-cfg-set-icon"/>
+    <function name="BraseroTrackStream" link="libbrasero-burn-BraseroTrackStream.html#BraseroTrackStream"/>
+    <function name="brasero_track_stream_new ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-new"/>
+    <function name="brasero_track_stream_set_source ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-source"/>
+    <function name="brasero_track_stream_set_format ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-format"/>
+    <function name="brasero_track_stream_set_boundaries ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-set-boundaries"/>
+    <function name="brasero_track_stream_get_source ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-source"/>
+    <function name="brasero_track_stream_get_length ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-length"/>
+    <function name="brasero_track_stream_get_start ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-start"/>
+    <function name="brasero_track_stream_get_end ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-end"/>
+    <function name="brasero_track_stream_get_gap ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-gap"/>
+    <function name="brasero_track_stream_get_format ()" link="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-get-format"/>
+    <function name="BraseroTrackStreamCfg" link="libbrasero-burn-BraseroTrackStreamCfg.html#BraseroTrackStreamCfg"/>
+    <function name="brasero_track_stream_cfg_new ()" link="libbrasero-burn-BraseroTrackStreamCfg.html#brasero-track-stream-cfg-new"/>
+    <function name="BraseroTrackImage" link="libbrasero-burn-BraseroTrackImage.html#BraseroTrackImage"/>
+    <function name="brasero_track_image_new ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-new"/>
+    <function name="brasero_track_image_set_source ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-set-source"/>
+    <function name="brasero_track_image_set_block_num ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-set-block-num"/>
+    <function name="brasero_track_image_get_source ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-get-source"/>
+    <function name="brasero_track_image_get_toc_source ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-get-toc-source"/>
+    <function name="brasero_track_image_get_format ()" link="libbrasero-burn-BraseroTrackImage.html#brasero-track-image-get-format"/>
+    <function name="BraseroTrackImageCfg" link="libbrasero-burn-BraseroTrackImageCfg.html#BraseroTrackImageCfg"/>
+    <function name="brasero_track_image_cfg_new ()" link="libbrasero-burn-BraseroTrackImageCfg.html#brasero-track-image-cfg-new"/>
+    <function name="brasero_track_image_cfg_set_source ()" link="libbrasero-burn-BraseroTrackImageCfg.html#brasero-track-image-cfg-set-source"/>
+    <function name="brasero_track_image_cfg_force_format ()" link="libbrasero-burn-BraseroTrackImageCfg.html#brasero-track-image-cfg-force-format"/>
+    <function name="brasero_track_image_cfg_get_forced_format ()" link="libbrasero-burn-BraseroTrackImageCfg.html#brasero-track-image-cfg-get-forced-format"/>
+    <function name="BraseroBurnSession" link="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"/>
+    <function name="BraseroBurnSessionClass" link="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSessionClass"/>
+    <function name="brasero_burn_session_new ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-new"/>
+    <function name="brasero_burn_session_add_track ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-track"/>
+    <function name="brasero_burn_session_move_track ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-move-track"/>
+    <function name="brasero_burn_session_remove_track ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-track"/>
+    <function name="brasero_burn_session_get_tracks ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tracks"/>
+    <function name="brasero_burn_session_get_status ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-status"/>
+    <function name="brasero_burn_session_get_size ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-size"/>
+    <function name="brasero_burn_session_get_input_type ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-input-type"/>
+    <function name="brasero_burn_session_tag_lookup ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-lookup"/>
+    <function name="brasero_burn_session_tag_add ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-add"/>
+    <function name="brasero_burn_session_tag_remove ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-tag-remove"/>
+    <function name="brasero_burn_session_get_burner ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burner"/>
+    <function name="brasero_burn_session_set_burner ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"/>
+    <function name="brasero_burn_session_set_image_output_full ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-image-output-full"/>
+    <function name="brasero_burn_session_get_output ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output"/>
+    <function name="brasero_burn_session_get_output_format ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-output-format"/>
+    <function name="brasero_burn_session_set_flags ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-flags"/>
+    <function name="brasero_burn_session_add_flag ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-add-flag"/>
+    <function name="brasero_burn_session_remove_flag ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-remove-flag"/>
+    <function name="brasero_burn_session_get_flags ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-flags"/>
+    <function name="brasero_burn_session_set_tmpdir ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-tmpdir"/>
+    <function name="brasero_burn_session_get_tmpdir ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-tmpdir"/>
+    <function name="brasero_burn_session_get_burn_flags ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-burn-flags"/>
+    <function name="brasero_burn_session_get_blank_flags ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-blank-flags"/>
+    <function name="brasero_burn_session_can_blank ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-blank"/>
+    <function name="brasero_burn_session_can_burn ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-can-burn"/>
+    <function name="brasero_burn_session_input_supported ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-input-supported"/>
+    <function name="brasero_burn_session_output_supported ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-output-supported"/>
+    <function name="brasero_burn_session_get_required_media_type ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-required-media-type"/>
+    <function name="brasero_burn_session_get_possible_output_formats ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-possible-output-formats"/>
+    <function name="brasero_burn_session_get_default_output_format ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-default-output-format"/>
+    <function name="brasero_burn_session_get_label ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-label"/>
+    <function name="brasero_burn_session_set_label ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-label"/>
+    <function name="brasero_burn_session_set_rate ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-rate"/>
+    <function name="brasero_burn_session_get_rate ()" link="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-get-rate"/>
+    <function name="BraseroSessionSpan" link="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"/>
+    <function name="brasero_session_span_new ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-new"/>
+    <function name="brasero_session_span_again ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-again"/>
+    <function name="brasero_session_span_possible ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-possible"/>
+    <function name="brasero_session_span_start ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-start"/>
+    <function name="brasero_session_span_next ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next"/>
+    <function name="brasero_session_span_stop ()" link="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-stop"/>
+    <function name="BraseroSessionCfg" link="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionCfg"/>
+    <function name="BRASERO_DRIVE_PROPERTIES_FLAGS" link="libbrasero-burn-BraseroSessionCfg.html#BRASERO-DRIVE-PROPERTIES-FLAGS:CAPS"/>
+    <function name="enum BraseroSessionError" link="libbrasero-burn-BraseroSessionCfg.html#BraseroSessionError"/>
+    <function name="BRASERO_SESSION_IS_VALID()" link="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-IS-VALID:CAPS"/>
+    <function name="brasero_session_cfg_new ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-new"/>
+    <function name="brasero_session_cfg_get_error ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-get-error"/>
+    <function name="brasero_session_cfg_add_flags ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-add-flags"/>
+    <function name="brasero_session_cfg_remove_flags ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-remove-flags"/>
+    <function name="brasero_session_cfg_is_supported ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-supported"/>
+    <function name="brasero_session_cfg_is_compulsory ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-is-compulsory"/>
+    <function name="brasero_session_cfg_has_default_output_path ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-has-default-output-path"/>
+    <function name="brasero_session_cfg_enable ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-enable"/>
+    <function name="brasero_session_cfg_disable ()" link="libbrasero-burn-BraseroSessionCfg.html#brasero-session-cfg-disable"/>
+    <function name="BraseroBurnOptions" link="libbrasero-burn-BraseroBurnOptions.html#BraseroBurnOptions"/>
+    <function name="brasero_burn_options_new ()" link="libbrasero-burn-BraseroBurnOptions.html#brasero-burn-options-new"/>
+    <function name="brasero_burn_options_add_options ()" link="libbrasero-burn-BraseroBurnOptions.html#brasero-burn-options-add-options"/>
+    <function name="BraseroBurn" link="libbrasero-burn-BraseroBurn.html#BraseroBurn"/>
+    <function name="brasero_burn_new ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-new"/>
+    <function name="brasero_burn_record ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-record"/>
+    <function name="brasero_burn_check ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-check"/>
+    <function name="brasero_burn_blank ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-blank"/>
+    <function name="brasero_burn_cancel ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-cancel"/>
+    <function name="brasero_burn_status ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-status"/>
+    <function name="brasero_burn_get_action_string ()" link="libbrasero-burn-BraseroBurn.html#brasero-burn-get-action-string"/>
+    <function name="BraseroBurnDialog" link="libbrasero-burn-BraseroBurnDialog.html#BraseroBurnDialog"/>
+    <function name="brasero_burn_dialog_new ()" link="libbrasero-burn-BraseroBurnDialog.html#brasero-burn-dialog-new"/>
+    <function name="brasero_burn_dialog_run ()" link="libbrasero-burn-BraseroBurnDialog.html#brasero-burn-dialog-run"/>
+    <function name="brasero_burn_dialog_cancel ()" link="libbrasero-burn-BraseroBurnDialog.html#brasero-burn-dialog-cancel"/>
+    <function name="BraseroToolDialog" link="libbrasero-burn-BraseroToolDialog.html#BraseroToolDialog"/>
+    <function name="brasero_tool_dialog_cancel ()" link="libbrasero-burn-BraseroToolDialog.html#brasero-tool-dialog-cancel"/>
+    <function name="brasero_tool_dialog_set_medium ()" link="libbrasero-burn-BraseroToolDialog.html#brasero-tool-dialog-set-medium"/>
+    <function name="BraseroSumDialog" link="libbrasero-burn-BraseroSumDialog.html#BraseroSumDialog"/>
+    <function name="brasero_sum_dialog_new ()" link="libbrasero-burn-BraseroSumDialog.html#brasero-sum-dialog-new"/>
+    <function name="BraseroBlankDialog" link="libbrasero-burn-BraseroBlankDialog.html#BraseroBlankDialog"/>
+    <function name="brasero_blank_dialog_new ()" link="libbrasero-burn-BraseroBlankDialog.html#brasero-blank-dialog-new"/>
+  </functions>
+</book>

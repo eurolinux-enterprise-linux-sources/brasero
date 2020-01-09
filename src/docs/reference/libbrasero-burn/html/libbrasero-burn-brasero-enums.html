@@ -1,0 +1,295 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>brasero-enums</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="libbrasero-burn-brasero-status.html" title="brasero-status">
+<link rel="next" href="libbrasero-burn-brasero-track-type.html" title="brasero-track-type">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-burn-brasero-status.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-brasero-track-type.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-brasero-enums.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-brasero-enums.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="brasero-enums">
+<a name="libbrasero-burn-brasero-enums"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-brasero-enums.top_of_page"></a>brasero-enums</span></h2>
+<p>brasero-enums</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-brasero-enums.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>;
+enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnFlag">BraseroBurnFlag</a>;
+enum                <a href="libbrasero-burn-brasero-enums.html#BraseroBurnAction">BraseroBurnAction</a>;
+enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>;
+enum                <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>;
+#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-AUDIO:CAPS">BRASERO_STREAM_FORMAT_AUDIO</a>         (stream_FORMAT)
+#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-VIDEO:CAPS">BRASERO_STREAM_FORMAT_VIDEO</a>         (stream_FORMAT)
+#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-MIN-STREAM-LENGTH:CAPS">BRASERO_MIN_STREAM_LENGTH</a>
+#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-LENGTH:CAPS">BRASERO_STREAM_LENGTH</a>               (start_MACRO, end_MACRO)
+#define             <a href="libbrasero-burn-brasero-enums.html#BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS">BRASERO_STREAM_FORMAT_HAS_VIDEO</a>     (format_MACRO)
+enum                <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>;
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-brasero-enums.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-brasero-enums.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum BraseroBurnResult">
+<a name="BraseroBurnResult"></a><h3>enum BraseroBurnResult</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_BURN_OK,
+	BRASERO_BURN_ERR,
+	BRASERO_BURN_RETRY,
+	BRASERO_BURN_CANCEL,
+	BRASERO_BURN_RUNNING,
+	BRASERO_BURN_DANGEROUS,
+	BRASERO_BURN_NOT_READY,
+	BRASERO_BURN_NOT_RUNNING,
+	BRASERO_BURN_NEED_RELOAD,
+	BRASERO_BURN_NOT_SUPPORTED,
+} BraseroBurnResult;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroBurnFlag">
+<a name="BraseroBurnFlag"></a><h3>enum BraseroBurnFlag</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_BURN_FLAG_NONE			= 0,
+
+	/* These flags should always be supported */
+	BRASERO_BURN_FLAG_CHECK_SIZE		= 1,
+	BRASERO_BURN_FLAG_NOGRACE		= 1 &lt;&lt; 1,
+	BRASERO_BURN_FLAG_EJECT			= 1 &lt;&lt; 2,
+
+	/* These are of great importance for the result */
+	BRASERO_BURN_FLAG_MERGE			= 1 &lt;&lt; 3,
+	BRASERO_BURN_FLAG_MULTI			= 1 &lt;&lt; 4,
+	BRASERO_BURN_FLAG_APPEND		= 1 &lt;&lt; 5,
+
+	BRASERO_BURN_FLAG_BURNPROOF		= 1 &lt;&lt; 6,
+	BRASERO_BURN_FLAG_NO_TMP_FILES		= 1 &lt;&lt; 7,
+	BRASERO_BURN_FLAG_DUMMY			= 1 &lt;&lt; 8,
+
+	BRASERO_BURN_FLAG_OVERBURN		= 1 &lt;&lt; 9,
+
+	BRASERO_BURN_FLAG_BLANK_BEFORE_WRITE = 1 &lt;&lt; 10,
+	BRASERO_BURN_FLAG_FAST_BLANK		= 1 &lt;&lt; 11,
+
+	/* NOTE: these two are contradictory? */
+	BRASERO_BURN_FLAG_DAO			= 1 &lt;&lt; 13,
+	BRASERO_BURN_FLAG_RAW			= 1 &lt;&lt; 14,
+
+	BRASERO_BURN_FLAG_LAST
+} BraseroBurnFlag;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroBurnAction">
+<a name="BraseroBurnAction"></a><h3>enum BraseroBurnAction</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_BURN_ACTION_NONE		= 0,
+	BRASERO_BURN_ACTION_GETTING_SIZE,
+	BRASERO_BURN_ACTION_CREATING_IMAGE,
+	BRASERO_BURN_ACTION_RECORDING,
+	BRASERO_BURN_ACTION_BLANKING,
+	BRASERO_BURN_ACTION_CHECKSUM,
+	BRASERO_BURN_ACTION_DRIVE_COPY,
+	BRASERO_BURN_ACTION_FILE_COPY,
+	BRASERO_BURN_ACTION_ANALYSING,
+	BRASERO_BURN_ACTION_TRANSCODING,
+	BRASERO_BURN_ACTION_PREPARING,
+	BRASERO_BURN_ACTION_LEADIN,
+	BRASERO_BURN_ACTION_RECORDING_CD_TEXT,
+	BRASERO_BURN_ACTION_FIXATING,
+	BRASERO_BURN_ACTION_LEADOUT,
+	BRASERO_BURN_ACTION_START_RECORDING,
+	BRASERO_BURN_ACTION_FINISHED,
+	BRASERO_BURN_ACTION_EJECTING,
+	BRASERO_BURN_ACTION_LAST
+} BraseroBurnAction;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroImageFS">
+<a name="BraseroImageFS"></a><h3>enum BraseroImageFS</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_IMAGE_FS_NONE			= 0,
+	BRASERO_IMAGE_FS_ISO			= 1,
+	BRASERO_IMAGE_FS_UDF			= 1 &lt;&lt; 1,
+	BRASERO_IMAGE_FS_JOLIET			= 1 &lt;&lt; 2,
+	BRASERO_IMAGE_FS_VIDEO			= 1 &lt;&lt; 3,
+
+	/* The following one conflict with UDF and JOLIET */
+	BRASERO_IMAGE_FS_SYMLINK		= 1 &lt;&lt; 4,
+
+	BRASERO_IMAGE_ISO_FS_LEVEL_3		= 1 &lt;&lt; 5,
+	BRASERO_IMAGE_ISO_FS_DEEP_DIRECTORY = 1 &lt;&lt; 6,
+	BRASERO_IMAGE_FS_ANY			= BRASERO_IMAGE_FS_ISO|
+						  BRASERO_IMAGE_FS_UDF|
+						  BRASERO_IMAGE_FS_JOLIET|
+						  BRASERO_IMAGE_FS_SYMLINK|
+						  BRASERO_IMAGE_ISO_FS_LEVEL_3|
+						  BRASERO_IMAGE_FS_VIDEO|
+						  BRASERO_IMAGE_ISO_FS_DEEP_DIRECTORY
+} BraseroImageFS;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroStreamFormat">
+<a name="BraseroStreamFormat"></a><h3>enum BraseroStreamFormat</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_AUDIO_FORMAT_NONE		= 0,
+	BRASERO_AUDIO_FORMAT_UNDEFINED		= 1,
+	BRASERO_AUDIO_FORMAT_4_CHANNEL		= 1 &lt;&lt; 1,
+	BRASERO_AUDIO_FORMAT_RAW		= 1 &lt;&lt; 2,
+	BRASERO_AUDIO_FORMAT_AC3		= 1 &lt;&lt; 3,
+	BRASERO_AUDIO_FORMAT_MP2		= 1 &lt;&lt; 4,
+	BRASERO_AUDIO_FORMAT_44100		= 1 &lt;&lt; 5,
+	BRASERO_AUDIO_FORMAT_48000		= 1 &lt;&lt; 6,
+	BRASERO_VIDEO_FORMAT_UNDEFINED		= 1 &lt;&lt; 7,
+	BRASERO_VIDEO_FORMAT_VCD		= 1 &lt;&lt; 8,
+	BRASERO_VIDEO_FORMAT_VIDEO_DVD		= 1 &lt;&lt; 9,
+
+	BRASERO_METADATA_INFO			= 1 &lt;&lt; 10
+} BraseroStreamFormat;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BRASERO_STREAM_FORMAT_AUDIO()">
+<a name="BRASERO-STREAM-FORMAT-AUDIO:CAPS"></a><h3>BRASERO_STREAM_FORMAT_AUDIO()</h3>
+<pre class="programlisting">#define BRASERO_STREAM_FORMAT_AUDIO(stream_FORMAT) ((stream_FORMAT) &amp; 0x007F)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>stream_FORMAT</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BRASERO_STREAM_FORMAT_VIDEO()">
+<a name="BRASERO-STREAM-FORMAT-VIDEO:CAPS"></a><h3>BRASERO_STREAM_FORMAT_VIDEO()</h3>
+<pre class="programlisting">#define BRASERO_STREAM_FORMAT_VIDEO(stream_FORMAT) ((stream_FORMAT) &amp; 0x0380)
+</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>stream_FORMAT</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BRASERO_MIN_STREAM_LENGTH">
+<a name="BRASERO-MIN-STREAM-LENGTH:CAPS"></a><h3>BRASERO_MIN_STREAM_LENGTH</h3>
+<pre class="programlisting">#define BRASERO_MIN_STREAM_LENGTH			((gint64) 6 * 1000000000LL)
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BRASERO_STREAM_LENGTH()">
+<a name="BRASERO-STREAM-LENGTH:CAPS"></a><h3>BRASERO_STREAM_LENGTH()</h3>
+<pre class="programlisting">#define             BRASERO_STREAM_LENGTH(start_MACRO, end_MACRO)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>start_MACRO</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>end_MACRO</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="BRASERO_STREAM_FORMAT_HAS_VIDEO()">
+<a name="BRASERO-STREAM-FORMAT-HAS-VIDEO:CAPS"></a><h3>BRASERO_STREAM_FORMAT_HAS_VIDEO()</h3>
+<pre class="programlisting">#define             BRASERO_STREAM_FORMAT_HAS_VIDEO(format_MACRO)</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>format_MACRO</code></em> :</span></p></td>
+<td>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="enum BraseroImageFormat">
+<a name="BraseroImageFormat"></a><h3>enum BraseroImageFormat</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_IMAGE_FORMAT_NONE = 0,
+	BRASERO_IMAGE_FORMAT_BIN = 1,
+	BRASERO_IMAGE_FORMAT_CUE = 1 &lt;&lt; 1,
+	BRASERO_IMAGE_FORMAT_CLONE = 1 &lt;&lt; 2,
+	BRASERO_IMAGE_FORMAT_CDRDAO = 1 &lt;&lt; 3,
+	BRASERO_IMAGE_FORMAT_ANY = BRASERO_IMAGE_FORMAT_BIN|
+	BRASERO_IMAGE_FORMAT_CUE|
+	BRASERO_IMAGE_FORMAT_CDRDAO|
+	BRASERO_IMAGE_FORMAT_CLONE,
+} BraseroImageFormat; 
+</pre>
+<p>
+</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

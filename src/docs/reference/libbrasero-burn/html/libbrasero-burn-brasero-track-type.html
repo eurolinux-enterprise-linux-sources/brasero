@@ -1,0 +1,532 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>brasero-track-type</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="libbrasero-burn-brasero-enums.html" title="brasero-enums">
+<link rel="next" href="libbrasero-burn-BraseroTrack.html" title="BraseroTrack">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-burn-brasero-enums.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-BraseroTrack.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-brasero-track-type.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-brasero-track-type.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="brasero-track-type">
+<a name="libbrasero-burn-brasero-track-type"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-brasero-track-type.top_of_page"></a>brasero-track-type</span></h2>
+<p>brasero-track-type</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-brasero-track-type.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">enum                <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackDataType">BraseroTrackDataType</a>;
+                    <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a>;
+<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *  <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-new">brasero_track_type_new</a>              (void);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-free">brasero_track_type_free</a>             (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-is-empty">brasero_track_type_is_empty</a>         (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-data">brasero_track_type_get_has_data</a>     (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-image">brasero_track_type_get_has_image</a>    (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-stream">brasero_track_type_get_has_stream</a>   (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-medium">brasero_track_type_get_has_medium</a>   (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-data">brasero_track_type_set_has_data</a>     (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-image">brasero_track_type_set_has_image</a>    (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-stream">brasero_track_type_set_has_stream</a>   (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-medium">brasero_track_type_set_has_medium</a>   (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>  <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-stream-format">brasero_track_type_get_stream_format</a>
+                                                        (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-image-format">brasero_track_type_get_image_format</a> (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-medium-type">brasero_track_type_get_medium_type</a>  (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+<a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>      <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-data-fs">brasero_track_type_get_data_fs</a>      (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-stream-format">brasero_track_type_set_stream_format</a>
+                                                        (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a> format);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-image-format">brasero_track_type_set_image_format</a> (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> format);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-medium-type">brasero_track_type_set_medium_type</a>  (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a> media);
+void                <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-data-fs">brasero_track_type_set_data_fs</a>      (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fs_type);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-equal">brasero_track_type_equal</a>            (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type_A,
+                                                         const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type_B);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-brasero-track-type.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-brasero-track-type.details"></a><h2>Details</h2>
+<div class="refsect2" title="enum BraseroTrackDataType">
+<a name="BraseroTrackDataType"></a><h3>enum BraseroTrackDataType</h3>
+<pre class="programlisting">typedef enum {
+	BRASERO_TRACK_TYPE_NONE				= 0,
+	BRASERO_TRACK_TYPE_STREAM,
+	BRASERO_TRACK_TYPE_DATA,
+	BRASERO_TRACK_TYPE_IMAGE,
+	BRASERO_TRACK_TYPE_DISC,
+} BraseroTrackDataType;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="BraseroTrackType">
+<a name="BraseroTrackType"></a><h3>BraseroTrackType</h3>
+<pre class="programlisting">typedef struct _BraseroTrackType BraseroTrackType;</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_new ()">
+<a name="brasero-track-type-new"></a><h3>brasero_track_type_new ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *  brasero_track_type_new              (void);</pre>
+<p>
+Creates a new <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> structure.
+Free it with <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-free"><code class="function">brasero_track_type_free()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> pointer.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_free ()">
+<a name="brasero-track-type-free"></a><h3>brasero_track_type_free ()</h3>
+<pre class="programlisting">void                brasero_track_type_free             (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Frees <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a> structure.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_is_empty ()">
+<a name="brasero-track-type-is-empty"></a><h3>brasero_track_type_is_empty ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_is_empty         (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns TRUE if no type was set.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_has_data ()">
+<a name="brasero-track-type-get-has-data"></a><h3>brasero_track_type_get_has_data ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_get_has_data     (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns TRUE if DATA type (see <a href="libbrasero-burn-BraseroTrackData.html#brasero-track-data-new"><code class="function">brasero_track_data_new()</code></a>) was set.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_has_image ()">
+<a name="brasero-track-type-get-has-image"></a><h3>brasero_track_type_get_has_image ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_get_has_image    (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns TRUE if IMAGE type (see <a href="libbrasero-burn-BraseroTrackStream.html#brasero-track-stream-new"><code class="function">brasero_track_stream_new()</code></a>) was set.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_has_stream ()">
+<a name="brasero-track-type-get-has-stream"></a><h3>brasero_track_type_get_has_stream ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_get_has_stream   (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_has_medium ()">
+<a name="brasero-track-type-get-has-medium"></a><h3>brasero_track_type_get_has_medium ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_get_has_medium   (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns TRUE if MEDIUM type (see <a href="libbrasero-burn-BraseroTrackDisc.html#brasero-track-disc-new"><code class="function">brasero_track_disc_new()</code></a>) was set.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_has_data ()">
+<a name="brasero-track-type-set-has-data"></a><h3>brasero_track_type_set_has_data ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_has_data     (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Set DATA type for <em class="parameter"><code>type</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_has_image ()">
+<a name="brasero-track-type-set-has-image"></a><h3>brasero_track_type_set_has_image ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_has_image    (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Set IMAGE type for <em class="parameter"><code>type</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_has_stream ()">
+<a name="brasero-track-type-set-has-stream"></a><h3>brasero_track_type_set_has_stream ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_has_stream   (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Set STREAM type for <em class="parameter"><code>type</code></em></p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_has_medium ()">
+<a name="brasero-track-type-set-has-medium"></a><h3>brasero_track_type_set_has_medium ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_has_medium   (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Set MEDIUM type for <em class="parameter"><code>type</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_stream_format ()">
+<a name="brasero-track-type-get-stream-format"></a><h3>brasero_track_type_get_stream_format ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a>  brasero_track_type_get_stream_format
+                                                        (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns the format for a stream (song or video)
+when <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-stream"><code class="function">brasero_track_type_get_has_stream()</code></a> returned
+TRUE.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_image_format ()">
+<a name="brasero-track-type-get-image-format"></a><h3>brasero_track_type_get_image_format ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a>  brasero_track_type_get_image_format (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns the format of an image when
+<a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-image"><code class="function">brasero_track_type_get_has_image()</code></a> returned
+TRUE.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_medium_type ()">
+<a name="brasero-track-type-get-medium-type"></a><h3>brasero_track_type_get_medium_type ()</h3>
+<pre class="programlisting"><a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a>        brasero_track_type_get_medium_type  (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns the medium type
+when <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-medium"><code class="function">brasero_track_type_get_has_medium()</code></a> returned
+TRUE.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_get_data_fs ()">
+<a name="brasero-track-type-get-data-fs"></a><h3>brasero_track_type_get_data_fs ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a>      brasero_track_type_get_data_fs      (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type);</pre>
+<p>
+Returns the parameters for the image generation
+when <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-get-has-data"><code class="function">brasero_track_type_get_has_data()</code></a> returned
+TRUE.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS"><span class="type">BraseroImageFS</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_stream_format ()">
+<a name="brasero-track-type-set-stream-format"></a><h3>brasero_track_type_set_stream_format ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_stream_format
+                                                        (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat">BraseroStreamFormat</a> format);</pre>
+<p>
+Sets the <a href="libbrasero-burn-brasero-enums.html#BraseroStreamFormat"><span class="type">BraseroStreamFormat</span></a>. Must be called
+after <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-stream"><code class="function">brasero_track_type_set_has_stream()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_image_format ()">
+<a name="brasero-track-type-set-image-format"></a><h3>brasero_track_type_set_image_format ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_image_format (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat">BraseroImageFormat</a> format);</pre>
+<p>
+Sets the <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>. Must be called
+after <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-image"><code class="function">brasero_track_type_set_has_image()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFormat"><span class="type">BraseroImageFormat</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_medium_type ()">
+<a name="brasero-track-type-set-medium-type"></a><h3>brasero_track_type_set_medium_type ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_medium_type  (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia">BraseroMedia</a> media);</pre>
+<p>
+Sets the <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>. Must be called
+after <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-medium"><code class="function">brasero_track_type_set_has_medium()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>media</code></em> :</span></p></td>
+<td> a <a href="../libbrasero-media/libbrasero-media-brasero-media.html#BraseroMedia"><span class="type">BraseroMedia</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_set_data_fs ()">
+<a name="brasero-track-type-set-data-fs"></a><h3>brasero_track_type_set_data_fs ()</h3>
+<pre class="programlisting">void                brasero_track_type_set_data_fs      (<a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type,
+                                                         <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS">BraseroImageFS</a> fs_type);</pre>
+<p>
+Sets the <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS"><span class="type">BraseroImageFS</span></a>. Must be called
+after <a href="libbrasero-burn-brasero-track-type.html#brasero-track-type-set-has-data"><code class="function">brasero_track_type_set_has_data()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>fs_type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroImageFS"><span class="type">BraseroImageFS</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_track_type_equal ()">
+<a name="brasero-track-type-equal"></a><h3>brasero_track_type_equal ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_track_type_equal            (const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type_A,
+                                                         const <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType">BraseroTrackType</a> *type_B);</pre>
+<p>
+Returns TRUE if <em class="parameter"><code>type_A</code></em> and <em class="parameter"><code>type_B</code></em> represents
+the same type and subtype.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_A</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type_B</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-track-type.html#BraseroTrackType"><span class="type">BraseroTrackType</span></a>.
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

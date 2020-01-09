@@ -1,0 +1,163 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BraseroDriveSelection</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-media Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
+<link rel="prev" href="libbrasero-media-BraseroMediumSelection.html" title="BraseroMediumSelection">
+<link rel="next" href="object-tree.html" title="Object Hierarchy">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-media">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-media-BraseroMediumSelection.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-media Reference Manual</th>
+<td><a accesskey="n" href="object-tree.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-media-BraseroDriveSelection.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-media-BraseroDriveSelection.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BraseroDriveSelection">
+<a name="libbrasero-media-BraseroDriveSelection"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-media-BraseroDriveSelection.top_of_page"></a>BraseroDriveSelection</span></h2>
+<p>BraseroDriveSelection</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-media-BraseroDriveSelection.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a>;
+<a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html">GtkWidget</a>*          <a href="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-new">brasero_drive_selection_new</a>         (void);
+<a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      <a href="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-get-active">brasero_drive_selection_get_active</a>  (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector);
+<a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            <a href="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-set-active">brasero_drive_selection_set_active</a>  (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector,
+                                                         <a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *drive);
+void                <a href="libbrasero-media-BraseroDriveSelection.html#brasero-drive-selection-show-type">brasero_drive_selection_show_type</a>   (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector,
+                                                         <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroDriveType">BraseroDriveType</a> type);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-media-BraseroDriveSelection.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-media-BraseroDriveSelection.details"></a><h2>Details</h2>
+<div class="refsect2" title="BraseroDriveSelection">
+<a name="BraseroDriveSelection"></a><h3>BraseroDriveSelection</h3>
+<pre class="programlisting">typedef struct {
+	GtkComboBox parent_instance;
+} BraseroDriveSelection;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_drive_selection_new ()">
+<a name="brasero-drive-selection-new"></a><h3>brasero_drive_selection_new ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html">GtkWidget</a>*          brasero_drive_selection_new         (void);</pre>
+<p>
+Creates a new <a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection"><span class="type">BraseroDriveSelection</span></a> object</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/gtk/unstable/GtkWidget.html"><span class="type">GtkWidget</span></a>. Unref when it is not needed anymore.
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_drive_selection_get_active ()">
+<a name="brasero-drive-selection-get-active"></a><h3>brasero_drive_selection_get_active ()</h3>
+<pre class="programlisting"><a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *      brasero_drive_selection_get_active  (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector);</pre>
+<p>
+Gets the active drive.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection"><span class="type">BraseroDriveSelection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. Unref when it is not needed anymore.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_drive_selection_set_active ()">
+<a name="brasero-drive-selection-set-active"></a><h3>brasero_drive_selection_set_active ()</h3>
+<pre class="programlisting"><a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean">gboolean</a>            brasero_drive_selection_set_active  (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector,
+                                                         <a href="libbrasero-media-BraseroDrive.html#BraseroDrive">BraseroDrive</a> *drive);</pre>
+<p>
+Sets the active drive. Emits the ::drive-changed signal.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection"><span class="type">BraseroDriveSelection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>drive</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> to set as the active one in the selector
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="http://library.gnome.org/devel/glib/unstable/glib-Basic-Types.html#gboolean"><span class="type">gboolean</span></a>. TRUE if it succeeded, FALSE otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_drive_selection_show_type ()">
+<a name="brasero-drive-selection-show-type"></a><h3>brasero_drive_selection_show_type ()</h3>
+<pre class="programlisting">void                brasero_drive_selection_show_type   (<a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection">BraseroDriveSelection</a> *selector,
+                                                         <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroDriveType">BraseroDriveType</a> type);</pre>
+<p>
+Filters and displays drive corresponding to <em class="parameter"><code>type</code></em>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>selector</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroDriveSelection.html#BraseroDriveSelection"><span class="type">BraseroDriveSelection</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>type</code></em> :</span></p></td>
+<td> a <a href="libbrasero-media-BraseroMediumMonitor.html#BraseroDriveType"><span class="type">BraseroDriveType</span></a>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

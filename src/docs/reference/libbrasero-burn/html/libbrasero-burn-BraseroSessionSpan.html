@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>BraseroSessionSpan</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
+<link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="prev" href="libbrasero-burn-BraseroBurnSession.html" title="BraseroBurnSession">
+<link rel="next" href="libbrasero-burn-BraseroSessionCfg.html" title="BraseroSessionCfg">
+<meta name="generator" content="GTK-Doc V1.12 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="chapter" href="ch01.html" title="API Reference for Libbrasero-burn">
+<link rel="chapter" href="object-tree.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="API Index">
+<link rel="glossary" href="annotation-glossary.html" title="Annotation Glossary">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="libbrasero-burn-BraseroBurnSession.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="ch01.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">Libbrasero-burn Reference Manual</th>
+<td><a accesskey="n" href="libbrasero-burn-BraseroSessionCfg.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#libbrasero-burn-BraseroSessionSpan.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#libbrasero-burn-BraseroSessionSpan.description" class="shortcut">Description</a>
+</td></tr>
+</table>
+<div class="refentry" title="BraseroSessionSpan">
+<a name="libbrasero-burn-BraseroSessionSpan"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="libbrasero-burn-BraseroSessionSpan.top_of_page"></a>BraseroSessionSpan</span></h2>
+<p>BraseroSessionSpan</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="libbrasero-burn-BraseroSessionSpan.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">                    <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a>;
+<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> * <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-new">brasero_session_span_new</a>           (void);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-again">brasero_session_span_again</a>          (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-possible">brasero_session_span_possible</a>       (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-start">brasero_session_span_start</a>          (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);
+<a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next">brasero_session_span_next</a>           (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);
+void                <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-stop">brasero_session_span_stop</a>           (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="libbrasero-burn-BraseroSessionSpan.description"></a><h2>Description</h2>
+<p>
+</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="libbrasero-burn-BraseroSessionSpan.details"></a><h2>Details</h2>
+<div class="refsect2" title="BraseroSessionSpan">
+<a name="BraseroSessionSpan"></a><h3>BraseroSessionSpan</h3>
+<pre class="programlisting">typedef struct {
+	BraseroBurnSession parent_instance;
+} BraseroSessionSpan;
+</pre>
+<p>
+</p>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_new ()">
+<a name="brasero-session-span-new"></a><h3>brasero_session_span_new ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> * brasero_session_span_new           (void);</pre>
+<p>
+Creates a new <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> object.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> object
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_again ()">
+<a name="brasero-session-span-again"></a><h3>brasero_session_span_again ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_session_span_again          (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);</pre>
+<p>
+Checks whether some data were not included during calls to <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next"><code class="function">brasero_session_span_next()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if there is not anymore data.
+BRASERO_BURN_RETRY if the operation was successful and a new <a href="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfg"><span class="type">BraseroTrackDataCfg</span></a> was created.
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_possible ()">
+<a name="brasero-session-span-possible"></a><h3>brasero_session_span_possible ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_session_span_possible       (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);</pre>
+<p>
+Checks if a new <a href="libbrasero-burn-BraseroTrackData.html#BraseroTrackData"><span class="type">BraseroTrackData</span></a> can be created from the files remaining in the tree 
+after calls to <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next"><code class="function">brasero_session_span_next()</code></a>. The maximum size of the data will be the one
+of the medium inserted in the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> set for <em class="parameter"><code>session</code></em> (see <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>).</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if there is not anymore data.
+BRASERO_BURN_RETRY if the operation was successful and a new <a href="libbrasero-burn-BraseroTrackDataCfg.html#BraseroTrackDataCfg"><span class="type">BraseroTrackDataCfg</span></a> was created.
+BRASERO_BURN_ERR otherwise.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_start ()">
+<a name="brasero-session-span-start"></a><h3>brasero_session_span_start ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_session_span_start          (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);</pre>
+<p>
+Get the object ready for spanning a <a href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object. This function
+must be called before <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next"><code class="function">brasero_session_span_next()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if successful.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_next ()">
+<a name="brasero-session-span-next"></a><h3>brasero_session_span_next ()</h3>
+<pre class="programlisting"><a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult">BraseroBurnResult</a>   brasero_session_span_next           (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);</pre>
+<p>
+Sets the next batch of data to be burnt onto the medium inserted in the <a href="../libbrasero-media/libbrasero-media-BraseroDrive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>
+set for <em class="parameter"><code>session</code></em> (see <a href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner"><code class="function">brasero_burn_session_set_burner()</code></a>). Its free space or it capacity
+will be used as the maximum amount of data to be burnt.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a>
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a <a href="libbrasero-burn-brasero-enums.html#BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if successful.
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<hr>
+<div class="refsect2" title="brasero_session_span_stop ()">
+<a name="brasero-session-span-stop"></a><h3>brasero_session_span_stop ()</h3>
+<pre class="programlisting">void                brasero_session_span_stop           (<a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan">BraseroSessionSpan</a> *session);</pre>
+<p>
+Ends and cleans a spanning operation started with <a href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-start"><code class="function">brasero_session_span_start()</code></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody><tr>
+<td><p><span class="term"><em class="parameter"><code>session</code></em> :</span></p></td>
+<td> a <a href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.12</div>
+</body>
+</html>

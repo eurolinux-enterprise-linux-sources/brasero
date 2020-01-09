@@ -1,0 +1,13 @@
+prefix=/usr/local
+exec_prefix=${prefix}
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+gconf_serverdir=${exec_prefix}/libexec
+	
+	
+Name: libbrasero-burn
+Description: Brasero Optical Media Burning library
+Version: 2.28.3
+Requires: glib-2.0 gthread-2.0 gtk+-2.0 dbus-glib-1
+Libs: -L${libdir} -lbrasero-burn
+Cflags: -I${includedir}/brasero/
