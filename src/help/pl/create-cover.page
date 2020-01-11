@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="create-cover" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <desc>Tworzenie wkładki do pudełka.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Tworzenie okładki</title>
+
+  <p>Można używać programu <app>Brasero</app> do tworzenia wkładek do pudełek. Kliknij <guiseq><gui>Narzędzia</gui> <gui>Edytor okładek</gui></guiseq>.</p>
+
+  <note style="tip">
+    <p>Jeśli tworzony jest projekt dźwiękowy i ukończono składanie projektu przed utworzeniem wkładki, to po włączeniu <gui>Edytora okładek</gui> z okna projektu dźwiękowego lista ścieżek zostanie automatycznie dodana do tylnej okładki.</p>
+  </note>
+
+  <note style="important">
+    <p>Zamknięcie <gui>Edytora okładek</gui> spowoduje utratę wprowadzonych zmian.</p>
+  </note>
+
+  <steps>
+    <item>
+      <p>Otwórz <gui>Edytor okładek</gui>.</p>
+    </item>
+    <item>
+      <p>Wybierz formatowanie i wpisz tekst. Można przewinąć w dół, aby zobaczyć boczną i tylną wkładkę do pudełka.</p>
+      <note style="tip">
+        <p>Od razu po włączeniu <gui>Edytora okładek</gui> nie będzie można kliknąć żadnych opcji formatowania tekstu. Kliknij okładkę, aby móc ich użyć.</p>
+      </note>
+    </item>
+    <item>
+      <p>Kliknij ikonę <gui>Właściwości tła</gui> na pasku narzędziowym, aby dodać tło do bieżącej okładki lub kliknij okładkę do modyfikacji prawym przyciskiem myszy i wybierz <gui>Ustaw właściwości tła</gui>. Można wybrać kolor lub obraz.</p>
+      <note style="bug">
+        <p><app>Brasero</app> czasami ulega awarii po kliknięciu przycisku <gui>Zamknij</gui>, jeśli wybrano wyśrodkowany obraz jako tło.</p>
+      </note>
+      <p>Kliknij przycisk <gui>Zamknij</gui>, aby zastosować zmiany i zamknąć okno <gui>Właściwości tła</gui>.</p>
+    </item>
+    <item>
+      <p>Wydrukuj okładkę za pomocą przycisku <gui>Wydrukuj</gui>, położonego w górnym prawym rogu okna.</p>
+    </item>
+  </steps>
+
+</page>

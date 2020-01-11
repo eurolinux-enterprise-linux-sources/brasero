@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
-<!DOCTYPE book PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "">
 <book xmlns="http://www.devhelp.net/book" title="Libbrasero-burn Reference Manual" link="index.html" author="" name="libbrasero-burn" version="2" language="c">
   <chapters>
     <sub name="API Reference for Libbrasero-burn" link="ch01.html">
@@ -411,5 +410,7 @@
     <keyword type="constant" name="BRASERO_SESSION_OVERBURN_NECESSARY" link="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-OVERBURN-NECESSARY:CAPS"/>
     <keyword type="constant" name="BRASERO_SESSION_NOT_SUPPORTED" link="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-NOT-SUPPORTED:CAPS"/>
     <keyword type="constant" name="BRASERO_SESSION_DISC_PROTECTED" link="libbrasero-burn-BraseroSessionCfg.html#BRASERO-SESSION-DISC-PROTECTED:CAPS"/>
+    <keyword type="member" name="BraseroGraftPt.uri" link="libbrasero-burn-brasero-track-data.html#BraseroGraftPt.uri"/>
+    <keyword type="member" name="BraseroGraftPt.path" link="libbrasero-burn-brasero-track-data.html#BraseroGraftPt.path"/>
   </functions>
 </book>

@@ -5,50 +5,53 @@
   <info>
     <link type="guide" xref="index#new-project"/>
     <title type="sort">3</title>
-    <desc>Write a video to a DVD or SVCD.</desc>
+    <desc>Skriv en video till en dvd eller svcd.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Create a video project</title>
+  <title>Skapa ett videoprojekt</title>
 
-  <p><app>Brasero</app> can be used to create video discs for playing in a DVD
-  player or laptop.</p>
+  <p><app>Brasero</app> kan användas för att skapa videoskivor som kan spelas upp i en dvd-spelare eller en bärbar dator.</p>
 
   <steps>
     <item>
-      <p>Click <gui>Video project</gui> on the start page, or select
-      <guiseq><gui>Project</gui><gui>New Project</gui><gui>New Video
-      Project</gui></guiseq>.</p>
+      <p>Klicka på <gui>Videoprojekt</gui> i huvudfönstret eller välj <guiseq><gui>Projekt</gui><gui>Nytt projekt</gui><gui>Nytt videoprojekt</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Add the videos to the project by clicking <gui>Add</gui> in the
-      toolbar and selecting the files. You can also add files by
-      dragging and dropping them onto the project area or by clicking
-      <guiseq><gui>Edit</gui><gui>Add Files</gui></guiseq>.</p>
+      <p>Lägg till videorna till projektet genom att klicka på <gui>Lägg till</gui> i verktygsfältet och välja filerna. Du kan också lägga till filer genom att dra och släppa dem i projektområdet eller genom att klicka <guiseq><gui>Redigera</gui><gui>Lägg till filer</gui></guiseq>.</p>
     </item>
     <item>
-      <p>You can add a title for the disc in the text entry field below the
-      project area.</p>
+      <p>Du kan lägga till en titel för skivan i textinmatningsfältet nedanför projektområdet.</p>
     </item>
     <item>
-      <p>Select the blank disc in the drop down list.</p>
+      <p>Välj den tomma skivan i rullgardinslistan.</p>
     </item>
     <item>
-      <p>Click <gui>Burn...</gui> to continue.</p>
+      <p>Klicka <gui>Bränn…</gui> för att fortsätta.</p>
     </item>
     <item>
-      <p>Select the <gui>Burning speed</gui> from the drop down list, and any
-      other options you may want.</p>
+      <p>Välj <gui>Brännhastighet</gui>en från rullgardinslistan tillsammans med alla andra alternativ som du vill ha.</p>
     </item>
     <item>
-      <p>Click <gui>Burn</gui> to burn a single disc of the project or
-      <gui>Burn Several Copies</gui> to burn your project to multiple discs.</p>
+      <p>Klicka på <gui>Bränn</gui> för att bränna en enstaka skiva av projektet eller <gui>Bränn flera kopior</gui> för att bränna ditt projekt till flera skivor.</p>
     </item>
   </steps>
 

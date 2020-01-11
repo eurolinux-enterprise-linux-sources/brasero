@@ -3,61 +3,59 @@
 
   <info>
     <link type="guide" xref="index#tools"/>
-    <desc>Create an inlay for a jewel case.</desc>
+    <desc>Skapa ett inläggsblad för ett cd-fodral.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Create a cover</title>
+  <title>Skapa ett omslag</title>
 
-  <p>You can use <app>Brasero</app> to create inlays for your jewel cases.
-  Access the creator by clicking <guiseq><gui>Tools</gui>
-  <gui>Cover Editor</gui></guiseq>.</p>
+  <p>Du kan använda <app>Brasero</app> för att skapa inläggsblad till dina cd-fodral. Kom åt omslagsskaparen genom att klicka <guiseq><gui>Verktyg</gui> <gui>Omslagsredigerare</gui></guiseq>.</p>
 
   <note style="tip">
-    <p>If you are creating an audio project and finish putting together the
-    project before creating an inlay, then when you access the <gui>Cover
-    Editor</gui> interface from the audio project window, the tracks will
-    automatically be listed on the back cover.</p>
+    <p>Om du skapar ett ljudprojekt och blir klar med att samla ihop projektet innan du skapar ett inläggsblad kommer spåren listas automatiskt på baksidan då du öppnar gränssnittet för <gui>Omslagsredigeraren</gui> från ljudprojektsfönstret.</p>
   </note>
 
   <note style="important">
-    <p>If you close the <gui>Cover Editor</gui>, your changes will be lost.</p>
+    <p>Om du stänger <gui>Omslagsredigeraren</gui> kommer dina ändringar att gå förlorade.</p>
   </note>
 
   <steps>
     <item>
-      <p>Open the <gui>Cover Editor</gui>.</p>
+      <p>Öppna <gui>Omslagsredigeraren</gui>.</p>
     </item>
     <item>
-      <p>Choose the formatting you wish to use for the text and type the text,
-      scrolling down to see the side and back inlay for the jewel case.</p>
+      <p>Välj formateringen du vill använda för texten och skriv in texten, och rulla ner för att se inläggsbladet för cd-fodralets sida och baksida.</p>
       <note style="tip">
-        <p>When you first see the <gui>Cover Editor</gui> dialog, you will not
-        be able to click on any of the text formatting options. Click on the
-        cover you want to work on to be able to use those.</p>
+        <p>Då du först ser dialogen för <gui>Omslagsredigerare</gui> kommer du inte kunna klicka på några av alternativen för textformatering. Klicka på omslaget du vill arbeta på för att kunna använda dessa.</p>
       </note>
     </item>
     <item>
-      <p>Click the <gui>Background properties</gui> toolbar icon to add a
-      background for the current cover, or right click on the cover you wish to
-      edit and select <gui>Set Background Properties</gui>. You can choose to
-      use a colored background or to select a background image.</p>
+      <p>Klicka på verktygsfältsikonen <gui>Bakgrundsegenskaper</gui> för att lägga till en bakgrund för det aktuella omslaget, eller högerklicka på omslaget du vill redigera och välj <gui>Ställ in bakgrundsegenskaper</gui>. Du kan välja att använda en färgad bakgrund eller välja en bakgrundsbild.</p>
       <note style="bug">
-        <p>If you select a centered background image, <app>Brasero</app>
-	sometimes crashes when you click the <gui>Close</gui> button.</p>
+        <p>Om du väljer en centrerad bakgrundsbild kraschar ibland <app>Brasero</app> när du klickar på <gui>Stäng</gui>-knappen.</p>
       </note>
-      <p>Click the <gui>Close</gui> button to apply the changes and close the
-      <gui>Background Properties</gui> dialog.</p>
+      <p>Klicka på <gui>Stäng</gui>-knappen för att verkställa ändringarna och stäng dialogen <gui>Bakgrundsegenskaper</gui>.</p>
     </item>
     <item>
-      <p>Print the cover using the <gui>Print</gui> button, which is located in
-      the top-right corner of the dialog.</p>
+      <p>Skriv ut omslaget med <gui>Skriv ut</gui>-knappen som finns i det övre högra hörnet av dialogrutan.</p>
     </item>
   </steps>
 

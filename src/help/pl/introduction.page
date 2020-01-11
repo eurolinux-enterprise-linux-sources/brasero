@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="introduction" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index"/>
+    <desc>Wprowadzenie do programu do nagrywania płyt <app>Brasero</app>.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Wprowadzenie</title>
+
+  <p><app>Brasero</app> to program do nagrywania płyt CD i DVD, zaprojektowany tak, aby był łatwy w obsłudze, jednocześnie dostarczając wszystkie narzędzia niezbędne do nagrywania.</p>
+
+  <p><app>Brasero</app> umożliwia:</p>
+  <list>
+    <item><p>Nagrywanie danych na płyty CD i DVD</p></item>
+    <item><p>Nagrywanie dźwiękowych płyt CD z plików dźwiękowych (takich jak Ogg, FLAC i MP3)</p></item>
+    <item><p>Kopiowanie płyt CD i DVD</p></item>
+    <item><p>Tworzenie płyt DVD i SVCD z filmami</p></item>
+    <item><p>Tworzenie plików obrazów i nagrywanie istniejących</p></item>
+    <item><p>Usuwanie zawartości płyt CD-RW i DVD-RW</p></item>
+    <item><p>Sprawdzanie spójności płyt i obrazów płyt</p></item>
+  </list>
+
+  <figure>
+    <title>Główne okno programu <gui>Brasero</gui></title>
+    <media type="image" mime="image/png" src="figures/brasero-main-window.png"/>
+  </figure>
+
+</page>

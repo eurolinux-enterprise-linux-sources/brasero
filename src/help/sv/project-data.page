@@ -3,67 +3,62 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Write data to a CD or DVD.</desc>
+    <desc>Skriv data till en cd eller dvd.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Create a data project</title>
+  <title>Skapa ett dataprojekt</title>
 
-  <p>A data project is used for writing data (for example, files, photos or
-  music) to a disc, without changing those files in any way. This can be useful
-  for transferring files between computers.</p>
+  <p>Ett dataprojekt används för att skriva data (till exempel filer, foton eller musik) till en skiva, utan att ändra dessa filer på något sätt. Detta kan vara användbart för att överföra filer mellan datorer.</p>
 
   <steps>
     <item>
-      <p>Click <gui>Data project</gui> on the start page, or select
-      <guiseq><gui>Project</gui><gui>New Project</gui><gui>New Data
-      Project</gui></guiseq>.</p>
+      <p>Klicka på <gui>Dataprojekt</gui> på startsidan eller välj <guiseq><gui>Projekt</gui><gui>Nytt projekt</gui><gui>Nytt dataprojekt</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Add the desired files to the project by clicking <gui>Add</gui> in the
-      toolbar and selecting the files. You can also add files by
-      dragging and dropping them onto the project area or by clicking
-      <guiseq><gui>Edit</gui><gui>Add Files</gui></guiseq>.</p>
+      <p>Lägg till de önskade filerna till projektet genom att klicka <gui>Lägg till</gui> i verktygsfältet och välja filerna. Du kan också lägga till filer genom att dra och släppa dem till projektområdet eller genom att klicka <guiseq><gui>Redigera</gui><gui>Lägg till filer</gui></guiseq>.</p>
       <note style="tip">
-	<p>You can create folders on the CD to store your data in a more
-	structured manner. To create a folder, click <gui>New Folder</gui> in
-	the toolbar or select <guiseq><gui>Edit</gui><gui>New
-	Folder</gui></guiseq> from the menu bar. You can also create folders
-	inside other folders.</p>
+	<p>Du kan skapa mappar på cd-skivan för att lagra dina data på ett mer strukturerat sätt. För att skapa en mapp, klicka <gui>Ny mapp</gui> i verktygsfältet eller välj <guiseq><gui>Redigera</gui><gui>Ny mapp</gui></guiseq> från menyraden. Du kan också skapa mappar inuti andra mappar.</p>
       </note>
     </item>
     <item>
-      <p>You can add a title for the disc in the text entry field below the
-      project area.</p>
+      <p>Du kan lägga till en titel för skivan i textinmatningsfältet nedanför projektområdet.</p>
     </item>
     <item>
-      <p>Select the blank disc in the drop down list.</p>
+      <p>Välj den tomma skivan i rullgardinslistan.</p>
     </item>
     <item>
-      <p>Click <gui>Burn...</gui> to continue.</p>
+      <p>Klicka <gui>Bränn…</gui> för att fortsätta.</p>
     </item>
     <item>
-      <p>Select the <gui>Burning speed</gui> from the drop down list, and any
-      other options you may want.</p>
+      <p>Välj <gui>Brännhastighet</gui>en från rullgardinslistan tillsammans med alla andra alternativ som du vill ha.</p>
     </item>
     <item>
-      <p>Click <gui>Burn</gui> to burn a single CD of the project or
-      <gui>Burn Several Copies</gui> to burn your project to multiple CDs</p>
+      <p>Klicka på <gui>Bränn</gui> för att bränna en enstaka cd-skiva med projektet eller <gui>Bränn flera kopior</gui> för att bränna ditt projekt till flera cd-skivor</p>
       <note>
-        <p>If you are using a rewritable disc, which already contains data, you
-        will be asked if you want to blank it or insert a different disc.</p>
+        <p>Om du använder en återskrivningsbar skiva som redan innehåller data kommer du tillfrågas om du vill radera den eller mata in en annan skiva.</p>
       </note>
     </item>
   </steps>
 
-  <p>If you are using a rewritable disc and the data is not burned correctly
-  onto it, you may need to do a full (non-fast) blank of the disc before trying
-  again.</p>
+  <p>Om du använder en återskrivningsbar skiva och data inte bränns till den korrekt kan du behöva göra en fullständig (ej snabb) radering av skivan innan du försöker igen.</p>
 
 </page>

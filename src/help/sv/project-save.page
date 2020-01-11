@@ -6,68 +6,67 @@
     <link type="seealso" xref="project-audio"/>
     <link type="seealso" xref="project-video"/>
     <link type="seealso" xref="project-data"/>
-    <desc>Save a project for editing or burning later.</desc>
+    <desc>Spara ett projekt för senare redigering eller bränning.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Save a project</title>
+  <title>Spara ett projekt</title>
 
-  <p>You can save an audio, a data or a video project in <app>Brasero</app> for
-  editing or burning later.</p>
+  <p>Du kan spara ett ljud-, data- eller videoprojekt i <app>Brasero</app> för att redigera eller bränna det senare.</p>
 
   <steps>
     <item>
-      <p>Create the project and add the files you wish to use to the project.</p>
+      <p>Skapa projektet och lägg till filerna du vill använda i projektet.</p>
     </item>
     <item>
-      <p>Click <guiseq><gui>Project</gui><gui>Save</gui></guiseq> to save the
-      project.</p>
+      <p>Klicka <guiseq><gui>Projekt</gui><gui>Spara</gui></guiseq> för att spara projektet.</p>
     </item>
     <item>
-      <p>Enter the name you wish to save the project under, then click
-      <gui>Save</gui> to save the project.</p>
+      <p>Ange namnet du vill spara projektet under och klicka sedan <gui>Spara</gui> för att spara projektet.</p>
     </item>
   </steps>
 
-  <p>There are a number of ways which can be used for opening a saved
-  <app>Brasero</app> project by:</p>
+  <p>Det finns ett antal sätt som kan användas för att öppna ett sparat <app>Brasero</app>-projekt genom att:</p>
 
   <list>
     <item>
-      <p>selecting it from the list on the start page, under
-      <gui>Recent projects</gui></p>
+      <p>välja det från listan på startsidan, under <gui>Tidigare projekt</gui></p>
     </item>
     <item>
-      <p>clicking <guiseq><gui>Project</gui><gui>Recent Projects</gui></guiseq></p>
+      <p>klicka <guiseq><gui>Projekt</gui><gui>Tidigare projekt</gui></guiseq></p>
     </item>
     <item>
-      <p>clicking <guiseq><gui>Project</gui><gui>Open</gui></guiseq> and
-      selecting the project</p>
+      <p>klicka <guiseq><gui>Projekt</gui><gui>Öppna</gui></guiseq> och välja projektet</p>
     </item>
     <item>
-      <p>opening the project from a file browser</p>
+      <p>öppna projektet från en filbläddrare</p>
       <note>
-        <p>Only one instance of <app>Brasero</app> can be opened at any time.
-        If you try to open a second instance, the currently open
-        <app>Brasero</app> window will be focused.</p>
-        <p>If <app>Brasero</app> is already running and you try to open some
-        files with it from <app>Files</app>, the files will be added to the
-        project that you are currently working on.</p>
+        <p>Endast en instans av <app>Brasero</app> kan vara öppen vid ett tillfälle. Om du försöker öppna en andra instans kommer det redan öppna <app>Brasero</app>-fönstret att fokuseras.</p>
+        <p>Om <app>Brasero</app> redan körs och du försöker öppna några filer med det från <app>Files</app> kommer filerna läggas till i projektet som du redan arbetar med.</p>
       </note>
     </item>
   </list>
 
   <note>
-    <p>If you open a saved project, <app>Brasero</app> will treat it as a new
-    project: if you want to save an updated version of the project, it will ask
-    you to enter a name for it, at this point you can overwrite the old version
-    or save it as a new project by entering a different file name.</p>
+    <p>Om du öppnar ett sparat projekt kommer <app>Brasero</app> att behandla det som ett nytt projekt: om du vill spara en uppdaterad version av projektet kommer det be dig att ange ett namn för det. Du kan nu skriva över den gamla versionen eller spara det som ett nytt projekt genom att ange ett annat filnamn.</p>
   </note>
 
 </page>

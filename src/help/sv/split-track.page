@@ -5,73 +5,70 @@
     <link type="guide" xref="index#tools"/>
     <link type="seealso" xref="project-audio"/>
     <revision version="3.2" date="2011-10-20" status="review"/>
-    <desc>Split an audio project track into multiple tracks.</desc>
+    <desc>Dela upp ett ljudprojektspår i flera spår.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Split an audio track</title>
+  <title>Dela upp ett ljudspår</title>
 
-  <p>You can split a single audio track into multiple tracks when you put
-  together an audio project.</p>
+  <p>Du kan dela upp ett ljudspår i flera spår då du sätter ihop ett ljudprojekt.</p>
 
   <steps>
     <item>
-      <p>Start an audio project and add the tracks you wish to use.</p>
+      <p>Starta ett ljudprojekt och lägg till spåren som du vill använda.</p>
     </item>
     <item>
-      <p>Select the track you wish to split by clicking on it, then click either
-      <guiseq><gui>Edit</gui><gui>Split Track…</gui></guiseq> or right click on
-      the track and select <gui>Split Track…</gui> from the menu.</p>
+      <p>Välj spåret som du vill dela upp genom att klicka på det, och klicka sedan antingen <guiseq><gui>Redigera</gui><gui>Dela spår…</gui></guiseq> eller högerklicka på spåret och välj <gui>Dela spår…</gui> från menyn.</p>
     </item>
     <item>
-      <p>Select your preferred method of splitting the tracks:</p>
+      <p>Välj din föredragna metod för att dela spåren:</p>
       <terms>
         <item>
           <title>Dela upp spår manuellt</title>
-          <p>This option allows you to select the exact length of each new
-	  section of the track manually.</p>
+          <p>Detta alternativ låter dig välja den exakta längden på varje ny del av spåret manuellt.</p>
        </item>
        <item>
-          <title>Split track in parts with a fixed length</title>
-          <p>Use this method to split the track into multiple sections of equal
-	  length.</p>
+          <title>Dela spår i delar med fast längd</title>
+          <p>Använd denna metod för att dela upp spåret i flera delar med samma längd.</p>
         </item>
         <item>
-          <title>Split track in a fixed number of parts</title>
-          <p>This method allows you to split the track into a set number of
-	  sections, all of which will be of the same length.</p>
+          <title>Dela spår i fast antal delar</title>
+          <p>Denna metod låter dig dela upp spåret i ett fast antal delar vilka alla kommer ha samma längd.</p>
         </item>
         <item>
           <title>Dela spår vid varje tystnad</title>
-          <p>Select this method for <app>Brasero</app> to auto-detect silences
-	  in the recording and to split the track at those points.</p>
+          <p>Välj denna metod för att <app>Brasero</app> automatiskt ska upptäcka tystnader i inspelningen och dela spåret på dessa punkter.</p>
         </item>
       </terms>
     </item>
     <item>
-      <p>Proceed to split the track by clicking <gui>Slice</gui>.</p>
+      <p>Fortsätt med att dela spåret genom att klicka på <gui>Dela upp</gui>.</p>
       <note>
-        <p>If you try to split a track into a section less than six seconds
-        long, the new section will be padded to make it 6 seconds long. <!--If
-        you try to split a track which is under six seconds long in
-        <app>Brasero</app> version 3.0.0, the track splitter will not work.--></p>
+        <p>Om du försöker dela ett spår så en del blir mindre än sex sekunder lång så kommer den nya delen fyllas ut så att den blir sex sekunder lång.</p>
       </note>
     </item>
     <item>
-      <p>Click <gui>OK</gui> to confirm your track splits and apply the changes.</p>
+      <p>Klicka på <gui>OK</gui> för att bekräfta dina spårdelningar och verkställa ändringarna.</p>
       <note>
-        <p>You can split and merge the same track as many times as you like
-        while you are viewing the split track dialog. Once you confirm your
-        track splitting by clicking <gui>OK</gui>, you will no longer be able to
-        merge the sections you have already split off. To revert the changes,
-        remove the split sections of the track from your project and re-add the
-        track.</p>
+        <p>Du kan dela och sammanfoga samma spår så många gånger som du vill medan du ser på Dela spår-dialogen. Då du väl bekräftar din spårdelning genom att klicka på <gui>OK</gui> kommer du inte längre kunna sammanfoga delarna som du redan har delat av. För att återställa ändringarna, ta bort de spårets avdelade delar från projektet och lägg till spåret på nytt.</p>
       </note>
     </item>
   </steps>

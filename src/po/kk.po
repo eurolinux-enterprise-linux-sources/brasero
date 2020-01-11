@@ -6,10 +6,10 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: brasero master\n"
-"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
+"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
 "product=brasero&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2015-03-02 16:02+0000\n"
-"PO-Revision-Date: 2015-03-03 07:19+0500\n"
+"POT-Creation-Date: 2017-06-28 15:14+0000\n"
+"PO-Revision-Date: 2017-07-27 10:13+0500\n"
 "Last-Translator: Baurzhan Muftakhidinov <baurthefirst@gmail.com>\n"
 "Language-Team: Kazakh <kk_KZ@googlegroups.com>\n"
 "Language: kk\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 1.7.3\n"
+"X-Generator: Poedit 1.8.12\n"
 
 #: ../data/brasero.appdata.xml.in.h:1
 msgid ""
@@ -40,19 +40,19 @@ msgstr "Brasero"
 
 #: ../data/brasero.desktop.in.in.h:2
 msgid "Disc Burner and Copier"
-msgstr ""
+msgstr "Дисктерді жазу және көшіруші"
 
 #: ../data/brasero.desktop.in.in.h:3
 msgid "Create and copy CDs and DVDs"
-msgstr ""
+msgstr "CD мен DVD дисктерін жасау және көшіру"
 
 #: ../data/brasero.desktop.in.in.h:4
 msgid "disc;cdrom;dvd;burn;audio;video;"
-msgstr ""
+msgstr "disc;cdrom;dvd;burn;audio;video;диск;жазу;аудио;видео;"
 
 #: ../data/brasero.desktop.in.in.h:5
 msgid "Brasero Disc Burner"
-msgstr ""
+msgstr "Brasero дисктер жазушысы"
 
 #: ../data/brasero.desktop.in.in.h:6
 msgid "Open a New Window"
@@ -63,16 +63,20 @@ msgid "Burn an Image File"
 msgstr "Бейне файлын жазу"
 
 #: ../data/brasero.desktop.in.in.h:8
+msgid "Copy a Disc"
+msgstr "Дискті көшіру"
+
+#: ../data/brasero.desktop.in.in.h:9
 msgid "Create an Audio Project"
 msgstr "Аудио жобасын жасау"
 
-#: ../data/brasero.desktop.in.in.h:9
+#: ../data/brasero.desktop.in.in.h:10
 msgid "Create a Video Project"
 msgstr "Видео жобасын жасау"
 
 #: ../data/mime/brasero.xml.in.h:1
 msgid "Brasero project file"
-msgstr ""
+msgstr "Brasero жобасы файлы"
 
 #: ../data/org.gnome.brasero.gschema.xml.h:1
 msgid "Should Nautilus extension output debug statements"
@@ -371,24 +375,21 @@ msgstr ""
 
 #. Translators: %s is the name of a missing application
 #: ../libbrasero-burn/brasero-burn.c:1708
-#: ../libbrasero-burn/brasero-burn-options.c:1187
-#: ../src/brasero-project.c:1385
+#: ../libbrasero-burn/brasero-burn-options.c:1187 ../src/brasero-project.c:1385
 #, c-format
 msgid "%s (application)"
 msgstr "%s (қолданба)"
 
 #. Translators: %s is the name of a missing library
 #: ../libbrasero-burn/brasero-burn.c:1714
-#: ../libbrasero-burn/brasero-burn-options.c:1193
-#: ../src/brasero-project.c:1391
+#: ../libbrasero-burn/brasero-burn-options.c:1193 ../src/brasero-project.c:1391
 #, c-format
 msgid "%s (library)"
 msgstr ""
 
 #. Translators: %s is the name of a missing GStreamer plugin
 #: ../libbrasero-burn/brasero-burn.c:1719
-#: ../libbrasero-burn/brasero-burn-options.c:1198
-#: ../src/brasero-project.c:1396
+#: ../libbrasero-burn/brasero-burn-options.c:1198 ../src/brasero-project.c:1396
 #, c-format
 msgid "%s (GStreamer plugin)"
 msgstr ""
@@ -418,18 +419,17 @@ msgstr ""
 #. * disc) where a file from any source will be added
 #. * ("grafted")
 #: ../libbrasero-burn/brasero-burn.c:2846
-#: ../libbrasero-burn/brasero-caps-burn.c:66
-#: ../libbrasero-burn/burn-job.c:1219 ../libbrasero-burn/burn-job.c:1228
+#: ../libbrasero-burn/brasero-caps-burn.c:66 ../libbrasero-burn/burn-job.c:1219
+#: ../libbrasero-burn/burn-job.c:1228
 #: ../libbrasero-burn/burn-mkisofs-base.c:302
 #: ../nautilus/nautilus-burn-extension.c:218
-#: ../plugins/cdrkit/burn-genisoimage.c:368
-#: ../plugins/cdrkit/burn-readom.c:129 ../plugins/cdrkit/burn-readom.c:370
-#: ../plugins/cdrkit/burn-wodim.c:725 ../plugins/cdrkit/burn-wodim.c:837
-#: ../plugins/cdrkit/burn-wodim.c:852 ../plugins/cdrtools/burn-cdrecord.c:835
+#: ../plugins/cdrkit/burn-genisoimage.c:368 ../plugins/cdrkit/burn-readom.c:129
+#: ../plugins/cdrkit/burn-readom.c:370 ../plugins/cdrkit/burn-wodim.c:725
+#: ../plugins/cdrkit/burn-wodim.c:837 ../plugins/cdrkit/burn-wodim.c:852
+#: ../plugins/cdrtools/burn-cdrecord.c:835
 #: ../plugins/cdrtools/burn-cdrecord.c:850
-#: ../plugins/cdrtools/burn-mkisofs.c:368
-#: ../plugins/cdrtools/burn-readcd.c:130 ../plugins/cdrtools/burn-readcd.c:380
-#: ../src/brasero-app.c:786
+#: ../plugins/cdrtools/burn-mkisofs.c:368 ../plugins/cdrtools/burn-readcd.c:130
+#: ../plugins/cdrtools/burn-readcd.c:380 ../src/brasero-app.c:786
 #, c-format
 msgid "An internal error occurred"
 msgstr "Ішкі қате орын алған"
@@ -895,7 +895,7 @@ msgstr "Ағымдағы сессияны сақтау"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1735
 msgid "An unknown error occurred."
-msgstr ""
+msgstr "Белгісіз қате орын алды."
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1743
 #: ../libbrasero-burn/brasero-burn-dialog.c:1761 ../src/brasero-app.c:620
@@ -971,7 +971,6 @@ msgid "Make _More Copies"
 msgstr ""
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1972
-#| msgid "Create a VCD"
 msgid "Create Co_ver"
 msgstr ""
 
@@ -1121,8 +1120,7 @@ msgid "Please insert a disc that is not copy protected."
 msgstr ""
 
 #: ../libbrasero-burn/brasero-burn-options.c:533
-#: ../libbrasero-burn/brasero-burn-options.c:1235
-#: ../src/brasero-project.c:1445
+#: ../libbrasero-burn/brasero-burn-options.c:1235 ../src/brasero-project.c:1445
 msgid "All required applications and libraries are not installed."
 msgstr ""
 
@@ -1176,8 +1174,7 @@ msgstr ""
 msgid "Video Options"
 msgstr ""
 
-#: ../libbrasero-burn/brasero-burn-options.c:795
-#: ../src/brasero-data-disc.c:613
+#: ../libbrasero-burn/brasero-burn-options.c:795 ../src/brasero-data-disc.c:613
 msgid ""
 "Do you want to create a disc from the contents of the image or with the "
 "image file inside?"
@@ -1216,8 +1213,7 @@ msgstr ""
 msgid "Select disc to copy"
 msgstr ""
 
-#: ../libbrasero-burn/brasero-burn-options.c:1229
-#: ../src/brasero-project.c:1439
+#: ../libbrasero-burn/brasero-burn-options.c:1229 ../src/brasero-project.c:1439
 msgid "Please install the following manually and try again:"
 msgstr ""
 
@@ -1647,7 +1643,7 @@ msgstr ""
 #: ../src/brasero-eject-dialog.c:102 ../src/brasero-playlist.c:393
 #: ../src/brasero-project.c:2625
 msgid "An unknown error occurred"
-msgstr ""
+msgstr "Белгісіз қате орын алды"
 
 #: ../libbrasero-burn/brasero-sum-dialog.c:178
 msgid "The file integrity check was performed successfully."
@@ -1975,7 +1971,7 @@ msgid ""
 "free space for the disc image (%ld MiB needed)"
 msgstr ""
 
-#: ../libbrasero-burn/burn-job.c:572 ../plugins/dvdcss/burn-dvdcss.c:365
+#: ../libbrasero-burn/burn-job.c:572 ../plugins/dvdcss/burn-dvdcss.c:362
 #, c-format
 msgid "The size of the volume could not be retrieved"
 msgstr ""
@@ -2268,8 +2264,8 @@ msgstr "Аудио дискі (%s)"
 #. NOTE to translators: the final string must not be over
 #. * 32 _bytes_ otherwise it gets truncated.
 #. * The %s is the date
-#: ../libbrasero-media/brasero-volume.c:421
-#: ../nautilus/nautilus-burn-bar.c:115 ../src/brasero-project-name.c:255
+#: ../libbrasero-media/brasero-volume.c:421 ../nautilus/nautilus-burn-bar.c:115
+#: ../src/brasero-project-name.c:255
 #, c-format
 msgid "Data disc (%s)"
 msgstr ""
@@ -2278,8 +2274,7 @@ msgstr ""
 #: ../libbrasero-media/burn-iso9660.c:167
 #: ../libbrasero-media/burn-iso9660.c:402
 #: ../libbrasero-media/burn-iso9660.c:439
-#: ../libbrasero-media/burn-iso9660.c:488
-#: ../libbrasero-media/burn-volume.c:128
+#: ../libbrasero-media/burn-iso9660.c:488 ../libbrasero-media/burn-volume.c:128
 #, c-format
 msgid "It does not appear to be a valid ISO image"
 msgstr ""
@@ -2434,7 +2429,7 @@ msgstr "Асты сызылған"
 
 #: ../libbrasero-utils/brasero-jacket-edit.c:608
 msgid "Italic"
-msgstr "Көлбеу"
+msgstr "Курсив"
 
 #: ../libbrasero-utils/brasero-jacket-edit.c:618
 msgid "Bold"
@@ -2637,7 +2632,7 @@ msgstr ""
 #: ../plugins/checksum/burn-checksum-files.c:196
 #: ../plugins/checksum/burn-checksum-files.c:219
 #: ../plugins/checksum/burn-checksum-image.c:174
-#: ../plugins/dvdcss/burn-dvdcss.c:216 ../plugins/dvdcss/burn-dvdcss.c:495
+#: ../plugins/dvdcss/burn-dvdcss.c:213 ../plugins/dvdcss/burn-dvdcss.c:492
 #: ../plugins/libburnia/burn-libisofs.c:160
 #: ../plugins/libburnia/burn-libisofs.c:274
 #, c-format
@@ -2925,7 +2920,7 @@ msgstr ""
 #. Translators: %s is the path to a drive. "regionset %s"
 #. * should be left as is just like "DVDCSS_METHOD=title
 #. * brasero --no-existing-session"
-#: ../plugins/dvdcss/burn-dvdcss.c:294
+#: ../plugins/dvdcss/burn-dvdcss.c:291
 #, c-format
 msgid ""
 "Error while retrieving a key used for encryption. You may solve such a "
@@ -2935,26 +2930,26 @@ msgid ""
 "command"
 msgstr ""
 
-#: ../plugins/dvdcss/burn-dvdcss.c:339
+#: ../plugins/dvdcss/burn-dvdcss.c:336
 msgid "Retrieving DVD keys"
-msgstr ""
+msgstr "DVD кілттерін алу"
 
-#: ../plugins/dvdcss/burn-dvdcss.c:374
+#: ../plugins/dvdcss/burn-dvdcss.c:371
 #, c-format
 msgid "Video DVD could not be opened"
 msgstr ""
 
-#: ../plugins/dvdcss/burn-dvdcss.c:395 ../plugins/dvdcss/burn-dvdcss.c:460
-#: ../plugins/dvdcss/burn-dvdcss.c:483
+#: ../plugins/dvdcss/burn-dvdcss.c:392 ../plugins/dvdcss/burn-dvdcss.c:457
+#: ../plugins/dvdcss/burn-dvdcss.c:480
 #, c-format
 msgid "Error while reading video DVD (%s)"
 msgstr ""
 
-#: ../plugins/dvdcss/burn-dvdcss.c:402
+#: ../plugins/dvdcss/burn-dvdcss.c:399
 msgid "Copying video DVD"
 msgstr ""
 
-#: ../plugins/dvdcss/burn-dvdcss.c:695
+#: ../plugins/dvdcss/burn-dvdcss.c:692
 msgid "Copies CSS encrypted video DVDs to a disc image"
 msgstr ""
 
@@ -3166,7 +3161,7 @@ msgstr "_Көмек"
 
 #: ../src/brasero-app.c:130
 msgid "P_lugins"
-msgstr ""
+msgstr "П_лагиндер"
 
 #: ../src/brasero-app.c:131
 msgid "Choose plugins for Brasero"
@@ -3270,7 +3265,7 @@ msgstr ""
 #.
 #: ../src/brasero-app.c:1227
 msgid "translator-credits"
-msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>, 2010"
+msgstr "Baurzhan Muftakhidinov <baurthefirst@gmail.com>"
 
 #: ../src/brasero-app.c:1449
 #, c-format
@@ -3339,7 +3334,7 @@ msgstr "Аялдату"
 
 #: ../src/brasero-audio-disc.c:349
 msgid "Split"
-msgstr ""
+msgstr "Бөлу"
 
 #: ../src/brasero-audio-disc.c:418
 msgid "Track"
@@ -3693,7 +3688,7 @@ msgstr ""
 #. Translators: This is a verb. It's a toolbar button.
 #: ../src/brasero-data-disc.c:1016
 msgid "I_mport"
-msgstr ""
+msgstr "И_мпорттау"
 
 #. Translators: %s is the name of the volume to import
 #: ../src/brasero-data-disc.c:1098
@@ -3784,14 +3779,12 @@ msgstr ""
 msgid "Hide the _filtered file list (%d file)"
 msgid_plural "Hide the _filtered file list (%d files)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../src/brasero-file-filtered.c:83
 #, c-format
 msgid "Show the _filtered file list (%d file)"
 msgid_plural "Show the _filtered file list (%d files)"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../src/brasero-file-filtered.c:135
 msgid "Filter Options"
@@ -3843,7 +3836,7 @@ msgstr ""
 
 #: ../src/brasero-layout.c:104
 msgid "P_review"
-msgstr ""
+msgstr "Ал_дын-ала қарау"
 
 #. Translators: this is an image, a picture, not a "Disc Image"
 #: ../src/brasero-layout.c:106
@@ -3948,7 +3941,6 @@ msgstr ""
 msgid "%d song"
 msgid_plural "%d songs"
 msgstr[0] ""
-msgstr[1] ""
 
 #: ../src/brasero-playlist.c:584
 msgid "Select Playlist"
@@ -3956,7 +3948,7 @@ msgstr ""
 
 #: ../src/brasero-playlist.c:751
 msgid "Playlists"
-msgstr ""
+msgstr "Ойнату тізімдері"
 
 #: ../src/brasero-playlist.c:762
 msgid "Number of Songs"
@@ -3964,7 +3956,7 @@ msgstr ""
 
 #: ../src/brasero-playlist.c:782
 msgid "Genre"
-msgstr ""
+msgstr "Жанры"
 
 #: ../src/brasero-plugin-manager-ui.c:62
 msgid "Plugin"
@@ -4099,7 +4091,7 @@ msgstr ""
 
 #: ../src/brasero-project.c:1912
 msgid "_Discard Changes"
-msgstr ""
+msgstr "Өз_герістерді елемеу"
 
 #: ../src/brasero-project.c:1920
 msgid "Do you want to discard the file selection or add it to the new project?"

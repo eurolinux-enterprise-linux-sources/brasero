@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-save" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <link type="seealso" xref="project-audio"/>
+    <link type="seealso" xref="project-video"/>
+    <link type="seealso" xref="project-data"/>
+    <desc>Zapisywanie projektu do późniejszej modyfikacji lub nagrania.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Zapisywanie projektu</title>
+
+  <p>Można zapiać projekt dźwiękowy, z danymi lub wideo w programie <app>Brasero</app> do późniejszej modyfikacji lub nagrania.</p>
+
+  <steps>
+    <item>
+      <p>Utwórz projekt i dodaj do niego pliki.</p>
+    </item>
+    <item>
+      <p>Kliknij <guiseq><gui>Projekt</gui><gui>Zapisz</gui></guiseq>, aby zapisać projekt.</p>
+    </item>
+    <item>
+      <p>Wpisz nazwę, pod jaką zapisać projekt, a następnie kliknij przycisk <gui>Zapisz</gui>, aby go zapisać.</p>
+    </item>
+  </steps>
+
+  <p>Zapisane projekty programu <app>Brasero</app> można otwierać na kilka sposobów:</p>
+
+  <list>
+    <item>
+      <p>wybierając je z listy na stronie startowej pod nagłówkiem <gui>Ostatnie projekty</gui></p>
+    </item>
+    <item>
+      <p>klikając <guiseq><gui>Projekt</gui><gui>Ostatnie projekty</gui></guiseq></p>
+    </item>
+    <item>
+      <p>klikając <guiseq><gui>Projekt</gui><gui>Otwórz</gui></guiseq> i wybierając projekt</p>
+    </item>
+    <item>
+      <p>otwierając projekt w menedżerze plików</p>
+      <note>
+        <p>Tylko jedno okno programu <app>Brasero</app> może być otwarte w tym samym czasie. Próba uruchomienia drugiego okna spowoduje aktywację obecnie otwartego.</p>
+        <p>Jeśli program <app>Brasero</app> jest już uruchomiony, to otwarcie pliku w menedżerze plików za jego pomocą spowoduje dodanie go do obecnego projektu.</p>
+      </note>
+    </item>
+  </list>
+
+  <note>
+    <p>W przypadku otwarcia zapisanego projektu program <app>Brasero</app> zachowa się tak, jakby to był nowy projekt: zapisanie jego zaktualizowanej wersji wyświetli prośbę o wpisanie nazwy. Można zastąpić poprzednią wersję lub zapisać projekt jako nowy wpisując inną nazwę.</p>
+  </note>
+
+</page>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="split-track" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <link type="seealso" xref="project-audio"/>
+    <revision version="3.2" date="2011-10-20" status="review"/>
+    <desc>Dzielenie ścieżki projektu dźwiękowego na wiele ścieżek.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Dzielenie ścieżki dźwiękowej</title>
+
+  <p>Można podzielić jedną ścieżkę dźwiękową na kilka podczas składania projektu dźwiękowego.</p>
+
+  <steps>
+    <item>
+      <p>Rozpocznij projekt dźwiękowy i dodaj do niego ścieżki.</p>
+    </item>
+    <item>
+      <p>Zaznacz ścieżkę do podzielenia klikając ją, a następnie kliknij <guiseq><gui>Edycja</gui><gui>Podziel ścieżkę…</gui></guiseq> lub kliknij ścieżkę prawym przyciskiem myszy i wybierz <gui>Podziel ścieżkę…</gui> z menu.</p>
+    </item>
+    <item>
+      <p>Wybierz preferowaną metodę dzielenia ścieżek:</p>
+      <terms>
+        <item>
+          <title>Ręczny podział ścieżki</title>
+          <p>Umożliwia ręczne wybranie dokładnej długości każdej nowej sekcji ścieżki.</p>
+       </item>
+       <item>
+          <title>Podział ścieżki na jednakowe fragmenty</title>
+          <p>Umożliwia podzielenie ścieżki na wiele sekcji o jednakowej długości.</p>
+        </item>
+        <item>
+          <title>Podział ścieżki na stałą liczbę fragmentów</title>
+          <p>Umożliwia podzielenie ścieżki na podaną liczbę sekcji, które będą miały tą samą długość.</p>
+        </item>
+        <item>
+          <title>Podział ścieżki przy każdej ciszy</title>
+          <p><app>Brasero</app> automatycznie wykrywa chwile ciszy w nagraniu i dzieli ścieżkę w tych miejscach.</p>
+        </item>
+      </terms>
+    </item>
+    <item>
+      <p>Rozpocznij dzielenie ścieżki klikając przycisk <gui>Podziel</gui>.</p>
+      <note>
+        <p>Jeśli ścieżka ma zostać podzielona na sekcję krótszą niż sześć sekund, to ta sekcja zostanie wydłużona do sześciu sekund.</p>
+      </note>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>OK</gui>, aby potwierdzić podział ścieżki i zastosować zmiany.</p>
+      <note>
+        <p>Można dzielić i łączyć tą samą ścieżkę dowolną liczbę razy, dopóki okno dzielenia jest otwarte. Po potwierdzeniu podziału klikając przycisk <gui>OK</gui> nie będzie już można łączyć wydzielonych sekcji. Aby wycofać zmiany, usuń podzielone sekcje ścieżki z projektu i ponownie dodaj ścieżkę.</p>
+      </note>
+    </item>
+  </steps>
+
+</page>

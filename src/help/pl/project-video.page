@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Current version is crashing for me when I click "Burn" -->
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-video" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <title type="sort">3</title>
+    <desc>Zapisywanie wideo na płycie DVD lub SVCD.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Tworzenie projektu wideo</title>
+
+  <p><app>Brasero</app> może nagrywać płyty wideo do odtwarzania w odtwarzaczu DVD lub na laptopie.</p>
+
+  <steps>
+    <item>
+      <p>Kliknij <gui>Projekt wideo</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nowy projekt wideo</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Dodaj pliki wideo do projektu klikając przycisk <gui>Dodaj</gui> na pasku narzędziowym i wybierając je. Można także dodawać pliki przeciągając je do obszaru projektu lub klikając <guiseq><gui>Edycja</gui><gui>Dodaj pliki</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Można dodać nazwę płyty w polu tekstowym pod obszarem projektu.</p>
+    </item>
+    <item>
+      <p>Wybierz pustą płytę z rozwijanej listy.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj…</gui>, aby kontynuować.</p>
+    </item>
+    <item>
+      <p>Wybierz <gui>Prędkość nagrywania</gui> z rozwijanej listy, a także dowolne inne opcje.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj</gui>, aby nagrać jedną płytę lub przycisk <gui>Nagraj kilka kopii</gui>, aby nagrać projekt na wiele płyt.</p>
+    </item>
+  </steps>
+
+</page>

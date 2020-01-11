@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BraseroTrackImageCfg: Libbrasero-burn Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-BraseroTrackImage.html" title="BraseroTrackImage">
 <link rel="next" href="libbrasero-burn-BraseroBurnSession.html" title="BraseroBurnSession">
-<meta name="generator" content="GTK-Doc V1.21.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroTrackImageCfg.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -76,7 +76,7 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroTrackImageCfg.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -89,8 +89,6 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroTrackImageCfg.description"></a><h2>Description</h2>
-<p>
-</p>
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroTrackImageCfg.functions_details"></a><h2>Functions</h2>
@@ -100,9 +98,8 @@
 brasero_track_image_cfg_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Creates a new <a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#BraseroTrackImageCfg" title="struct BraseroTrackImageCfg"><span class="type">BraseroTrackImageCfg</span></a> object.</p>
 <div class="refsect3">
-<a name="id-1.2.15.6.2.5"></a><h4>Returns</h4>
+<a name="brasero-track-image-cfg-new.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#BraseroTrackImageCfg" title="struct BraseroTrackImageCfg"><span class="type">BraseroTrackImageCfg</span></a> object.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -110,12 +107,12 @@ brasero_track_image_cfg_new (<em class="parameter"><code><span class="type">void
 <a name="brasero-track-image-cfg-set-source"></a><h3>brasero_track_image_cfg_set_source ()</h3>
 <pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>
 brasero_track_image_cfg_set_source (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#BraseroTrackImageCfg" title="struct BraseroTrackImageCfg"><span class="type">BraseroTrackImageCfg</span></a> *track</code></em>,
-                                    <em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>);</pre>
+                                    <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *uri</code></em>);</pre>
 <p>Sets the image uri or path (absolute or relative). <em class="parameter"><code>track</code></em>
  will then identify its format and retrieve its size.</p>
 <div class="refsect3">
-<a name="id-1.2.15.6.3.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-track-image-cfg-set-source.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -129,16 +126,15 @@ brasero_track_image_cfg_set_source (<em class="parameter"><code><a class="link" 
 </tr>
 <tr>
 <td class="parameter_name"><p>uri</p></td>
-<td class="parameter_description"><p>a <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a></p></td>
+<td class="parameter_description"><p>a <a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gchar"><span class="type">gchar</span></a></p></td>
 <td class="parameter_annotations"> </td>
 </tr>
 </tbody>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.15.6.3.6"></a><h4>Returns</h4>
+<a name="brasero-track-image-cfg-set-source.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -153,8 +149,8 @@ If <em class="parameter"><code>format</code></em>
  is BRASERO_IMAGE_FORMAT_NONE then the format of the image
 will be retrieved.</p>
 <div class="refsect3">
-<a name="id-1.2.15.6.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-track-image-cfg-force-format.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -175,9 +171,8 @@ will be retrieved.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.15.6.4.6"></a><h4>Returns</h4>
+<a name="brasero-track-image-cfg-force-format.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -189,8 +184,8 @@ brasero_track_image_cfg_get_forced_format
 <p>This function returns the <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroImageFormat" title="enum BraseroImageFormat"><span class="type">BraseroImageFormat</span></a> that was set for the image.
 See <a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#brasero-track-image-cfg-force-format" title="brasero_track_image_cfg_force_format ()"><code class="function">brasero_track_image_cfg_force_format()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.15.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-track-image-cfg-get-forced-format.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -204,9 +199,8 @@ See <a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#brasero-trac
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.15.6.5.6"></a><h4>Returns</h4>
+<a name="brasero-track-image-cfg-get-forced-format.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if it is successful.</p>
-<p></p>
 </div>
 </div>
 </div>
@@ -218,13 +212,10 @@ See <a class="link" href="libbrasero-burn-BraseroTrackImageCfg.html#brasero-trac
 	BraseroTrackImage parent_instance;
 };
 </pre>
-<p>
-</p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21.1</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

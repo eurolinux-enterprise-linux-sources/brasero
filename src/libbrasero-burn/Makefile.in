@@ -91,6 +91,7 @@ POST_UNINSTALL = :
 build_triplet = @build@
 host_triplet = @host@
 @BUILD_INOTIFY_TRUE@am__append_1 = brasero-file-monitor.c brasero-file-monitor.h
+@HAVE_INTROSPECTION_TRUE@am__append_2 = BraseroBurn-3.@TYPELIB_MIN_VERSION@.gir
 subdir = libbrasero-burn
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -130,7 +131,7 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" \
-	"$(DESTDIR)$(typelibsdir)" "$(DESTDIR)$(headerdir)"
+	"$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(headerdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libbrasero_burn3_la_DEPENDENCIES =  \
@@ -264,7 +265,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-DATA = $(gir_DATA) $(typelibs_DATA)
+DATA = $(nodist_gir_DATA) $(nodist_typelib_DATA)
 HEADERS = $(header_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -383,9 +384,13 @@ INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
 INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
 INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
 INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+INTROSPECTION_CFLAGS = @INTROSPECTION_CFLAGS@
 INTROSPECTION_COMPILER = @INTROSPECTION_COMPILER@
 INTROSPECTION_GENERATE = @INTROSPECTION_GENERATE@
 INTROSPECTION_GIRDIR = @INTROSPECTION_GIRDIR@
+INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
+INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ITSTOOL = @ITSTOOL@
@@ -404,6 +409,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
 LT_REVISION = @LT_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -441,7 +447,7 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
-TYPELIB_VERSION = @TYPELIB_VERSION@
+TYPELIB_MIN_VERSION = @TYPELIB_MIN_VERSION@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WARN_CFLAGS = @WARN_CFLAGS@
@@ -512,6 +518,8 @@ AM_CPPFLAGS = \
 	-I$(top_builddir)/libbrasero-utils/				\
 	-I$(top_srcdir)/libbrasero-media/				\
 	-I$(top_builddir)/libbrasero-media/				\
+	-I$(top_srcdir)/libbrasero-burn/				\
+	-I$(top_builddir)/libbrasero-burn/				\
 	-DBRASERO_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
 	-DBRASERO_PREFIX=\"$(prefix)\"           			\
 	-DBRASERO_SYSCONFDIR=\"$(sysconfdir)\"   			\
@@ -524,10 +532,14 @@ AM_CPPFLAGS = \
 	$(BRASERO_GLIB_CFLAGS)						\
 	$(BRASERO_GIO_CFLAGS)						\
 	$(BRASERO_GTK_CFLAGS)						\
-	$(BRASERO_LIBNOTIFY_CFLAGS) \
+	$(BRASERO_LIBNOTIFY_CFLAGS) 					\
 	$(BRASERO_GSTREAMER_CFLAGS)					\
-	$(BRASERO_CANBERRA_CFLAGS)
+	$(BRASERO_CANBERRA_CFLAGS) 					\
+	-Wno-error=format-nonliteral
 
+CLEANFILES = $(RECMARSHALFILES) $(nodist_gir_DATA) \
+	$(nodist_typelib_DATA)
+EXTRA_DIST = libbrasero-marshal.list
 GLIB_GENMARSHAL = `pkg-config --variable=glib_genmarshal glib-2.0`
 RECMARSHALFILES = libbrasero-marshal.h libbrasero-marshal.c
 headerdir = $(includedir)/brasero3
@@ -626,19 +638,43 @@ libbrasero_burn3_la_SOURCES = libbrasero-marshal.c \
 	brasero-video-options.c brasero-session-span.h \
 	brasero-session-span.c brasero-plugin-private.h \
 	$(am__append_1)
-EXTRA_DIST = \
-	libbrasero-marshal.list
+INTROSPECTION_GIRS = $(am__append_2)
+INTROSPECTION_SCANNER_ARGS = --warn-all
+@HAVE_INTROSPECTION_TRUE@introspected_source = \
+@HAVE_INTROSPECTION_TRUE@	brasero-tags.h \
+@HAVE_INTROSPECTION_TRUE@	brasero-enums.h	\
+@HAVE_INTROSPECTION_TRUE@	brasero-error.h	\
+@HAVE_INTROSPECTION_TRUE@	brasero-status.h brasero-status.c \
+@HAVE_INTROSPECTION_TRUE@        brasero-burn-lib.h \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-type.h brasero-track-type.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track.h	brasero-track.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-data.h brasero-track-data.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-data-cfg.h brasero-track-data-cfg.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-disc.h brasero-track-disc.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-stream.h brasero-track-stream.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-stream-cfg.h brasero-track-stream-cfg.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-image.h brasero-track-image.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-track-image-cfg.h brasero-track-image-cfg.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-session.h brasero-session.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-session-span.h brasero-session-span.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-session-cfg.h brasero-session-cfg.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-burn.h brasero-burn.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-burn-options.h brasero-burn-options.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-burn-dialog.h brasero-burn-dialog.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-tool-dialog.h brasero-tool-dialog.c \
+@HAVE_INTROSPECTION_TRUE@	brasero-sum-dialog.h brasero-sum-dialog.c
 
-#	libbrasero-burn.symbols
-@HAVE_INTROSPECTION_TRUE@girdir = $(INTROSPECTION_GIRDIR)
-@HAVE_INTROSPECTION_TRUE@gir_DATA = BraseroBurn-@TYPELIB_VERSION@.gir
-@HAVE_INTROSPECTION_TRUE@typelibsdir = $(INTROSPECTION_TYPELIBDIR)
-@HAVE_INTROSPECTION_TRUE@typelibs_DATA = BraseroBurn-@TYPELIB_VERSION@.typelib
-CLEANFILES = \
-	$(RECMARSHALFILES)  \
-	$(gir_DATA)         \
-	$(typelibs_DATA)
-
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_NAMESPACE = BraseroBurn
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_VERSION = 3.@TYPELIB_MIN_VERSION@
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_INCLUDES = Gtk-3.0
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_CFLAGS = $(AM_CPPFLAGS)
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_LIBS = libbrasero-burn3.la
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_FILES = $(introspected_source)
+@HAVE_INTROSPECTION_TRUE@BraseroBurn_3_@TYPELIB_MIN_VERSION@_gir_SCANNERFLAGS = --identifier-prefix=Brasero --symbol-prefix=brasero
+girdir = $(datadir)/gir-1.0
+nodist_gir_DATA = $(INTROSPECTION_GIRS)
+typelibdir = $(libdir)/girepository-1.0
+nodist_typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 all: all-am
 
 .SUFFIXES:
@@ -801,9 +837,9 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-girDATA: $(gir_DATA)
+install-nodist_girDATA: $(nodist_gir_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(gir_DATA)'; test -n "$(girdir)" || list=; \
+	@list='$(nodist_gir_DATA)'; test -n "$(girdir)" || list=; \
 	if test -n "$$list"; then \
 	  echo " $(MKDIR_P) '$(DESTDIR)$(girdir)'"; \
 	  $(MKDIR_P) "$(DESTDIR)$(girdir)" || exit 1; \
@@ -817,32 +853,32 @@ install-girDATA: $(gir_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(girdir)" || exit $$?; \
 	done
 
-uninstall-girDATA:
+uninstall-nodist_girDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(gir_DATA)'; test -n "$(girdir)" || list=; \
+	@list='$(nodist_gir_DATA)'; test -n "$(girdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(girdir)'; $(am__uninstall_files_from_dir)
-install-typelibsDATA: $(typelibs_DATA)
+install-nodist_typelibDATA: $(nodist_typelib_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(typelibs_DATA)'; test -n "$(typelibsdir)" || list=; \
+	@list='$(nodist_typelib_DATA)'; test -n "$(typelibdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(typelibsdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(typelibsdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(typelibdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(typelibdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(typelibsdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(typelibsdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(typelibdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(typelibdir)" || exit $$?; \
 	done
 
-uninstall-typelibsDATA:
+uninstall-nodist_typelibDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(typelibs_DATA)'; test -n "$(typelibsdir)" || list=; \
+	@list='$(nodist_typelib_DATA)'; test -n "$(typelibdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(typelibsdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(typelibdir)'; $(am__uninstall_files_from_dir)
 install-headerHEADERS: $(header_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(header_HEADERS)'; test -n "$(headerdir)" || list=; \
@@ -951,7 +987,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(typelibsdir)" "$(DESTDIR)$(headerdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(headerdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -1008,8 +1044,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-girDATA install-headerHEADERS \
-	install-typelibsDATA
+install-data-am: install-headerHEADERS install-nodist_girDATA \
+	install-nodist_typelibDATA
 
 install-dvi: install-dvi-am
 
@@ -1055,8 +1091,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-girDATA uninstall-headerHEADERS \
-	uninstall-libLTLIBRARIES uninstall-typelibsDATA
+uninstall-am: uninstall-headerHEADERS uninstall-libLTLIBRARIES \
+	uninstall-nodist_girDATA uninstall-nodist_typelibDATA
 
 .MAKE: install-am install-strip
 
@@ -1066,16 +1102,17 @@ uninstall-am: uninstall-girDATA uninstall-headerHEADERS \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-girDATA install-headerHEADERS \
-	install-html install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip install-typelibsDATA \
-	installcheck installcheck-am installdirs maintainer-clean \
+	install-exec-am install-headerHEADERS install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-nodist_girDATA \
+	install-nodist_typelibDATA install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-girDATA \
-	uninstall-headerHEADERS uninstall-libLTLIBRARIES \
-	uninstall-typelibsDATA
+	tags tags-am uninstall uninstall-am uninstall-headerHEADERS \
+	uninstall-libLTLIBRARIES uninstall-nodist_girDATA \
+	uninstall-nodist_typelibDATA
 
 .PRECIOUS: Makefile
 
@@ -1084,47 +1121,11 @@ libbrasero-marshal.h: libbrasero-marshal.list
 	( $(GLIB_GENMARSHAL) --prefix=brasero_marshal $(srcdir)/libbrasero-marshal.list --header > libbrasero-marshal.h )
 libbrasero-marshal.c: libbrasero-marshal.h
 	( $(GLIB_GENMARSHAL) --prefix=brasero_marshal $(srcdir)/libbrasero-marshal.list --body --header > libbrasero-marshal.c )
+#	libbrasero-burn.symbols
 
-@HAVE_INTROSPECTION_TRUE@BraseroBurn-@TYPELIB_VERSION@.gir: libbrasero-burn3.la $(INTROSPECTION_SCANNER)
-@HAVE_INTROSPECTION_TRUE@	$(INTROSPECTION_SCANNER) -v --namespace=BraseroBurn --nsversion=1.0 \
-@HAVE_INTROSPECTION_TRUE@	    -I$(top_srcdir)/libbrasero-media	\
-@HAVE_INTROSPECTION_TRUE@	    -I$(top_builddir)/libbrasero-media	\
-@HAVE_INTROSPECTION_TRUE@	    -I$(top_srcdir)/libbrasero-burn		\
-@HAVE_INTROSPECTION_TRUE@	    -I$(top_builddir)/libbrasero-burn	\
-@HAVE_INTROSPECTION_TRUE@            --include=Gtk-3.0 \
-@HAVE_INTROSPECTION_TRUE@            --add-include-path=$(top_builddir)/libbrasero-media	\
-@HAVE_INTROSPECTION_TRUE@	    --include=BraseroMedia-@TYPELIB_VERSION@ \
-@HAVE_INTROSPECTION_TRUE@	    --library=brasero-burn3 \
-@HAVE_INTROSPECTION_TRUE@	    --libtool="$(LIBTOOL)" \
-@HAVE_INTROSPECTION_TRUE@            --output $@ \
-@HAVE_INTROSPECTION_TRUE@            --pkg=gtk+-3.0  \
-@HAVE_INTROSPECTION_TRUE@	    --strip-prefix=Brasero	\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-tags.h						\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-enums.h						\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-error.h						\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-status.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_builddir)/libbrasero-burn/brasero-burn-lib.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-type.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track.h						\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-data.h                 			\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-data-cfg.h				\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-disc.h                 			\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-stream.h                 			\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-stream-cfg.h             			\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-image.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-track-image-cfg.h				\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-session.h                 			\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-session-span.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-session-cfg.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-burn.h						\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-burn-options.h        			        \
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-burn-dialog.h					\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-burn/brasero-tool-dialog.h					\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-burn/brasero-sum-dialog.h					\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-burn/*.c	    
+include $(INTROSPECTION_MAKEFILE)
 
-@HAVE_INTROSPECTION_TRUE@BraseroBurn-@TYPELIB_VERSION@.typelib: $(gir_DATA) $(INTROSPECTION_COMPILER)
-@HAVE_INTROSPECTION_TRUE@	$(INTROSPECTION_COMPILER) $(top_builddir)/libbrasero-burn/$(gir_DATA) --shared-library=libbrasero-burn3 -o $(typelibs_DATA) --includedir=$(top_builddir)/libbrasero-media
+@HAVE_INTROSPECTION_TRUE@BraseroBurn-3.@TYPELIB_MIN_VERSION@.gir: Makefile libbrasero-burn3.la
 
 -include $(top_srcdir)/git.mk
 

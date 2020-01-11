@@ -13,13 +13,19 @@
       <email>kittykat3756@gmail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>크리에이티브 커먼즈 동일조건변경허락 3.0</p>
     </license>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Seong-ho Cho</mal:name>
+      <mal:name>조성호</mal:name>
       <mal:email>darkcircle.0426@gmail.com</mal:email>
-      <mal:years>2011, 2013.</mal:years>
+      <mal:years>2011, 2013, 2016.</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>류창우</mal:name>
+      <mal:email>cwryu@debian.org</mal:email>
+      <mal:years>2015.</mal:years>
     </mal:credit>
   </info>
 
@@ -29,7 +35,7 @@
 
   <steps>
     <item>
-      <p><guiseq><gui>도구</gui><gui>무결성 검사...</gui></guiseq>를 선택합니다.</p>
+      <p><guiseq><gui>도구</gui><gui>올바른지 검사...</gui></guiseq>를 선택합니다.</p>
     </item>
     <item>
       <p>MD5 파일을 준비했다면 <gui>디스크를 점검하려면 MD5 파일 사용</gui> 옵션을 선택할 수 있습니다.</p>

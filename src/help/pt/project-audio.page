@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-audio" xml:lang="pt">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <desc>Criar um projeto de áudio.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Licença Creative Commons Atribuição Compartilhada 3.0</p>
+    </license>
+  </info>
+
+  <title>A gravar um CD de música</title>
+
+  <p>O <app>Brasero</app> pode gravar ficheiros de áudio num CD, que poderá posteriormente usar em leitores de CD e dispositivos do género. Geralmente é melhor usar um CD não-regravável pois nem todos os leitores de CD irão ler CDs regraváveis.</p>
+
+  <steps>
+    <item>
+      <p> Carregue em <gui>Projeto de áudio</gui> na página de início ou selecione <guiseq><gui>Projeto</gui><gui>Novo projeto</gui><gui>Novo projeto de áudio</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Adicione ficheiros de áudio para o projeto carregando em <gui>Adicionar</gui> na barra de ferramentas e selecionando os ficheiros desejados. Também pode adicionar ficheiros arrastando-os e soltando-os dentro da área do projeto ou carregando em <guiseq><gui>Editar</gui><gui>Adicionar ficheiros</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Pode adicionar um título para o CD no campo de entrada de texto abaixo da área de projeto.</p>
+    </item>
+    <item>
+      <p>Selecione o CD vazio na lista suspensa.</p>
+    </item>
+    <item>
+      <p> Carregue em <gui>Gravar...</gui> para continuar.</p>
+    </item>
+    <item>
+      <p>Selecione a <gui>Velocidade de gravação</gui> a partir da lista suspensa, e quaisquer outras opções que deseje.</p>
+    </item>
+    <item>
+      <p> Carregue em <gui>Gravar</gui> para gravar um disco único do projeto ou <gui>Gravar vários discos</gui> para gravar o seu projeto em vários discos.</p>
+    </item>
+  </steps>
+
+  <note>
+    <p>Também pode dividir faixas individuais em várias faixas utilizando a ferramenta <gui>Dividir</gui> e adicionar um intervalo de dois segundos depois de uma faixa usando o botão <gui>Pausar</gui>.</p>
+  </note>
+
+</page>

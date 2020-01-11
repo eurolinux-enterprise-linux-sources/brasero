@@ -3,59 +3,58 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Create an audio project.</desc>
+    <desc>Skapa ett ljudprojekt.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Write a music CD</title>
+  <title>Skriv en musik-cd</title>
 
-  <p><app>Brasero</app> can write audio files to a CD, which you can then use
-  for playing in CD players and so on. It is usually best to
-  use a non-rewritable CD because not all CD players will play rewritable
-  CDs.</p>
+  <p><app>Brasero</app> kan skriva ljudfiler till en cd-skiva, som du sedan kan använda för att spela upp i cd-spelare och så vidare. Det är vanligtvis bäst att använda en icke återskrivningsbar cd-skiva eftersom inte alla cd-spelare kan spela upp återskrivningsbara cd-skivor.</p>
 
   <steps>
     <item>
-      <p>Click <gui>Audio project</gui> on the start page, or select
-      <guiseq><gui>Project</gui><gui>New Project</gui><gui>New Audio
-      Project</gui></guiseq>.</p>
+      <p>Klicka på <gui>Ljudprojekt</gui> på startsidan eller välj <guiseq><gui>Projekt</gui><gui>Nytt projekt</gui><gui>Nytt ljudprojekt</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Add audio files to the project by clicking <gui>Add</gui> in the
-      toolbar and selecting the desired files. You can also add files by
-      dragging and dropping them onto the project area or by clicking
-      <guiseq><gui>Edit</gui><gui>Add Files</gui></guiseq>.</p>
+      <p>Lägg till ljudfiler till projektet genom att klicka på <gui>Lägg till</gui> i verktygsfältet och välja de önskade filerna. Du kan också lägga till filer genom att dra och släppa dem i projektområdet eller genom att klicka <guiseq><gui>Redigera</gui><gui>Lägg till filer</gui></guiseq>.</p>
     </item>
     <item>
-      <p>You can add a title for the CD in the text entry field below the
-      project area.</p>
+      <p>Du kan lägga till en titel för cd-skivan i textinmatningsfältet nedanför projektområdet.</p>
     </item>
     <item>
-      <p>Select the blank CD in the drop down list.</p>
+      <p>Välj den tomma cd-skivan i rullgardinslistan.</p>
     </item>
     <item>
-      <p>Click <gui>Burn...</gui> to continue.</p>
+      <p>Klicka <gui>Bränn…</gui> för att fortsätta.</p>
     </item>
     <item>
-      <p>Select the <gui>Burning speed</gui> from the drop down list, and any
-      other options you may want.</p>
+      <p>Välj <gui>Brännhastighet</gui>en från rullgardinslistan tillsammans med alla andra alternativ som du vill ha.</p>
     </item>
     <item>
-      <p>Click <gui>Burn</gui> to burn a single disc of the project or
-      <gui>Burn Several Copies</gui> to burn your project to multiple discs.</p>
+      <p>Klicka på <gui>Bränn</gui> för att bränna en enstaka skiva av projektet eller <gui>Bränn flera kopior</gui> för att bränna ditt projekt till flera skivor.</p>
     </item>
   </steps>
 
   <note>
-    <p>You can also split individual tracks into multiple tracks using the
-    <gui>Split</gui> tool and add a two second break after a track using the
-    <gui>Pause</gui> button.</p>
+    <p>Du kan också dela upp individuella spår till flera spår genom verktyget <gui>Dela</gui> och lägga till ett två sekunders uppehåll efter ett spår genom <gui>Paus</gui>-knappen.</p>
   </note>
 
 </page>

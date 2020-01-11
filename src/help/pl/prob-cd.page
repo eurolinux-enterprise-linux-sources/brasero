@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="prob-cd" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#troubleshooting"/>
+    <link type="seealso" xref="project-audio"/>
+    <link type="seealso" xref="tools-blank"/>
+    <desc>Odtwarzacz CD lub DVD nie odtwarza moich plików MP3.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Odtwarzacz CD nie odtwarza nagranych płyt</title>
+
+  <p>Jeśli odtwarzacz CD lub wieża stereo nie odtwarza nagranych płyt CD, to prawdopodobnie muzyka nie została poprawnie zapisana na płycie albo użyto projektu z danymi zamiast projektu dźwiękowego.</p>
+
+  <note>
+    <p>Wiele nowych odtwarzaczy CD i DVD potrafi odtwarzać płyty CD z muzyką utworzone za pomocą projektu z danymi, ale większość starszych odtwarzaczy już nie.</p>
+  </note>
+
+  <note>
+    <p>Starsze odtwarzacze CD mogą nie potrafić odtwarzać płyt CD-RW.</p>
+  </note>
+
+  <steps>
+    <item>
+      <p>Jeśli używana jest płyta CD-RW, usuń jej zawartość.</p>
+    </item>
+    <item>
+      <p>Ponownie zapisz płytę CD jako projekt dźwiękowy.</p>
+    </item>
+  </steps>
+
+</page>

@@ -1,13 +1,12 @@
 Name:      brasero
-Version:   3.12.1
-Release:   2%{?dist}
+Version:   3.12.2
+Release:   5%{?dist}
 Summary:   Gnome CD/DVD burning application
-Group:     Applications/Multimedia
+
 # see https://bugzilla.gnome.org/show_bug.cgi?id=683503
 License:   GPLv3+
-URL:       http://www.gnome.org/projects/brasero/
-#VCS: git:git://git.gnome.org/brasero
-Source0:   https://download.gnome.org/sources/brasero/3.12/%{name}-%{version}.tar.xz
+URL:       https://wiki.gnome.org/Apps/Brasero
+Source0:   https://download.gnome.org/sources/brasero/3.12/brasero-%{version}.tar.xz
 # https://bugzilla.gnome.org/show_bug.cgi?id=647838
 # update man page
 Patch0: 0001-Update-the-man-page.patch
@@ -23,7 +22,7 @@ BuildRequires:  libnotify-devel >= 0.7.0
 BuildRequires:  libxml2-devel >= 2.6.0
 BuildRequires:  dbus-glib-devel >= 0.7.2
 BuildRequires:  libxslt
-BuildRequires:  /usr/bin/appstream-util
+BuildRequires:  libappstream-glib
 BuildRequires:  libburn-devel >= 0.4.0
 BuildRequires:  libisofs-devel >= 0.6.4
 BuildRequires:  nautilus-devel >= 2.22.2
@@ -31,7 +30,6 @@ BuildRequires:  libSM-devel
 BuildRequires:  libcanberra-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  tracker-devel
-BuildRequires:  gnome-common
 BuildRequires:  itstool
 BuildRequires:  yelp-tools
 
@@ -51,9 +49,7 @@ desktop.
 
 %package   libs
 Summary:   Libraries for %{name}
-Group:     System Environment/Libraries
 Obsoletes: nautilus-cd-burner-libs < 2.25.4
-
 
 %description libs
 The %{name}-libs package contains the runtime shared libraries for
@@ -62,7 +58,6 @@ The %{name}-libs package contains the runtime shared libraries for
 
 %package   nautilus
 Summary:   Nautilus extension for %{name}
-Group:     User Interface/Desktops
 
 Provides:  nautilus-cd-burner = %{version}-%{release}
 Obsoletes: nautilus-cd-burner < 2.25.4
@@ -74,7 +69,6 @@ The %{name}-nautilus package contains the brasero nautilus extension.
 
 %package        devel
 Summary:        Headers for developing programs that will use %{name}
-Group:          Development/Libraries
 Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
 Obsoletes:      nautilus-cd-burner-devel < 2.25.4
 
@@ -174,7 +168,6 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_libdir}/nautilus/extensions-3.0/*.so
 %{_datadir}/applications/brasero-nautilus.desktop
 
-
 %files devel
 %doc %{_datadir}/gtk-doc/html/libbrasero-media
 %doc %{_datadir}/gtk-doc/html/libbrasero-burn
@@ -186,6 +179,10 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
+* Mon Jun 04 2018 Richard Hughes <rhughes@redhat.com> - 3.12.2-5
+- Update to 3.12.2
+- Resolves: #1569810
+
 * Tue May 19 2015 David King <dking@redhat.com> - 3.12.1-2
 - Rebuild for totem-pl-parser (#1222884)
 

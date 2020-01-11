@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-disc-copy" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <desc>Tworzenie identycznej kopii płyty.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Kopiowanie płyty</title>
+
+  <steps>
+    <item>
+      <p>Kliknij <gui>Skopiuj płytę</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Skopiuj płytę…</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Wybierz płytę do skopiowania z rozwijanej listy pod nagłówkiem <gui>Płyta do skopiowania</gui>. Jeśli komputer ma więcej niż jeden napęd, wszystkie płyty do nich włożone powinny być wyświetlane.</p>
+    </item>
+    <item>
+      <p>Wybierz, czy zrobić kopię na innej płycie lub utworzyć obraz do późniejszego użytku.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Właściwości</gui>, aby wybrać prędkość nagrywania i inne opcje.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Skopiuj</gui>, aby rozpocząć kopiowanie płyty lub <gui>Utwórz kilka kopii</gui>, jeśli planowane jest utworzenie więcej niż jednej kopii.</p>
+      <note>
+	<p>Jeśli kopiowana jest płyta na komputerze z tylko jednym napędem, to zostanie wyświetlona prośba o wymianę płyty na zapisywalną po tymczasowym skopiowaniu zawartości na dysk twardy.</p>
+      </note>
+    </item>
+  </steps>
+
+</page>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="tools-blank" xml:lang="pt">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <desc>Limpe um CD ou DVD regravável apagando-o.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Licença Creative Commons Atribuição Compartilhada 3.0</p>
+    </license>
+  </info>
+
+  <title>Apagar um disco</title>
+
+  <p>Pode preparar um disco regravável, com dados existentes nele, para escrita apagando-o.</p>
+
+  <steps>
+    <item>
+      <p>Selecione <guiseq><gui>Ferramentas</gui><gui>Apagar...</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Se tiver mais do que uma unidade de disco com um disco regravável nele, pode selecionar qual disco deve ser regravado em <gui>Selecione um disco</gui>.</p>
+    </item>
+    <item>
+      <p>Pode selecionar <gui>Apagar rapidamente</gui> para apagar mais rápido o CD.</p>
+      <note>
+        <p>Se tiver problemas ao escrever num disco que apagou rapidamente, tente desabilitar o "apagar rapidamente" e apague novamente.</p>
+      </note>
+    </item>
+    <item>
+      <p> Carregue em <gui>Apagar</gui> para continuar.</p>
+    </item>
+    <item>
+      <p>O disco pode ser ejetado quando a limpeza estiver concluída.</p>
+    </item>
+  </steps>
+
+</page>

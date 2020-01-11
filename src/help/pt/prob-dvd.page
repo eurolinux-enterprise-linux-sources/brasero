@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="prob-dvd" xml:lang="pt">
+
+  <info>
+    <link type="guide" xref="index#troubleshooting"/>
+    <link type="seealso" xref="project-video"/>
+    <link type="seealso" xref="tools-blank"/>
+    <desc>Não consigo escrever num DVD-R ou um DVD-RW.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Licença Creative Commons Atribuição Compartilhada 3.0</p>
+    </license>
+  </info>
+
+  <title>Problema ao criar um DVD</title>
+
+  <p>Alguns tipos de DVD-Rs e DVD-RWs não são compatíveis com todos os gravadores. Verifique os seguintes itens para descobrir se esses podem ser usados com seu gravador.</p>
+
+  <steps>
+    <item>
+      <p>Verifique se a sua unidade de DVD aceita discos DVD+ ou DVD-; se ela está etiquetada como "multi", isto normalmente indica que ambos são aceites. Verifique o disco para ver se é do mesmo tipo da unidade de DVD.</p>
+    </item>
+    <item>
+      <p>Verifique se o seu disco é de camada dupla ou camada simples: algumas unidade de DVD não podem escrever em discos de camada dupla.</p>
+    </item>
+    <item>
+      <p>Se está a tentar utilizar um DVD-R, verifique se ele já foi escrito antes. Se está a utilizar um DVD-RW, tente apagá-lo antes de tentar gravar sobre ele.</p>
+    </item>
+  </steps>
+
+</page>

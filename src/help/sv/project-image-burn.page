@@ -7,7 +7,7 @@
     <link type="seealso" xref="project-disc-copy"/>
     <link type="seealso" xref="project-video"/>
     <revision version="3.3" date="2011-10-14" status="review"/>
-    <desc>Burn an existing disc image to a CD or DVD.</desc>
+    <desc>Bränna en befintlig skivavbildning till en cd eller dvd.</desc>
     <credit type="author">
       <name>Marta Bogdanowicz</name>
       <email>majus85@gmail.com</email>
@@ -17,52 +17,49 @@
       <email>kittykat3756@gmail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Burn image</title>
+  <title>Bränn avbildning</title>
 
-  <p><app>Brasero</app> allows you to burn disc images to a CD or DVD. It
-  supports the following extensions of optical disc images: <file>.iso</file>,
-  <file>.toc</file> and <file>.cue</file>.</p>
+  <p><app>Brasero</app> låter dig bränna skivavbildningar till en cd- eller dvd-skiva. Det stöder följande filändelser för optiska skivavbildningar: <file>.iso</file>, <file>.toc</file> och <file>.cue</file>.</p>
 
   <note style="advanced">
-    <p>Disc images are archive files which contain all the data that is on a CD
-    or DVD. Only one disc image can be on a CD at a time, but each archive can
-    contain as little or as much data as you want, as long as it fits on the
-    disc.</p>
+    <p>Skivavbildningar är arkivfiler som innehåller alla data som finns på en cd eller dvd. Endast en skivavbildning kan finnas på en cd vid varje tillfälle, men varje arkiv kan innehålla så lite eller mycket data som du vill, så länge som det ryms på skivan.</p>
   </note>
 
-  <p>To burn a disc image to a CD or DVD, follow these steps:</p>
+  <p>För att bränna en skivavbildning till en cd- eller dvd-skiva, följ dessa steg:</p>
   <steps>
     <item>
-      <p>Click <gui>Burn image</gui> on the start page or select
-      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Burn image…</gui>
-      </guiseq>.</p>
+      <p>Klicka på <gui>Bränn avbildning</gui> på startsidan eller välj <guiseq><gui>Projekt</gui><gui>Nytt projekt</gui><gui>Bränn avbildning…</gui> </guiseq>.</p>
     </item>
     <item>
-      <p>Select a disc image to write by clicking <gui>Click here to select
-      a disc image</gui>.</p>
+      <p>Välj en skivavbildning att skriva genom att klicka på <gui>Klicka här för att välja en skivavbildning</gui>.</p>
     </item>
     <item>
-      <p>Select the disc that you want to use from drop down list below
-      <gui>Select a disc to write to</gui>. If you have more than one disc
-      drive, all discs which are currently in them should be listed.</p>
-        <note><p>After choosing the disc <app>Brasero</app> shows how much free
-        space will remain on the disc after burning.</p></note>
+      <p>Välj skivan som du vill använda från rullgardinslistan under <gui>Välj en skiva att skriva till</gui>. Om du har mer är en skivenhet bör alla skivor som för tillfället är i dem listas.</p>
+        <note><p>Efter att ha valt skivan visar <app>Brasero</app> hur mycket fritt utrymme som kommer att kvarstå på skivan efter bränning.</p></note>
     </item>
     <item>
-      <p>Click the <gui>Properties</gui> button to select burning speed and
-      other custom options.</p>
+      <p>Klicka på <gui>Egenskaper</gui>-knappen för att välja brännhastighet och andra anpassade alternativ.</p>
     </item>
     <item>
-      <p>Click <gui>Burn</gui> to start burning the image. After this operation
-      you can either finish burning or make the other copy of the image.</p>
+      <p>Klicka på <gui>Bränn</gui> för att börja bränna avbildningen. Efter denna åtgärd kan du antingen sluta bränna eller göra den andra kopian av avbildningen.</p>
         <note>
-          <p>If you are using a re-writable disc, which already contains data,
-          you will be asked if you want to blank it or insert a different
-          disc.</p>
+          <p>Om du använder en återskrivningsbar skiva som redan innehåller data kommer du tillfrågas om du vill radera den eller mata in en annan skiva.</p>
         </note>
     </item>
     <!-- There are some problems with multiple burn. After burning one copy,

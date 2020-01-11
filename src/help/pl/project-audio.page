@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-audio" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <desc>Tworzenie projektu dźwiękowego.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Zapisywanie muzycznych płyt CD</title>
+
+  <p><app>Brasero</app> może nagrywać pliki dźwiękowe na płytach CD do odtwarzania w odtwarzaczach CD i na innych urządzeniach. Zwykle najlepiej jest używać jednorazowych płyt CD, ponieważ nie wszystkie odtwarzacze CD odtwarzają płyty CD do wielokrotnego zapisu.</p>
+
+  <steps>
+    <item>
+      <p>Kliknij <gui>Projekt dźwiękowy</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nowy projekt dźwiękowy</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Dodaj pliki dźwiękowe do projektu klikając przycisk <gui>Dodaj</gui> na pasku narzędziowym i wybierając je. Można także dodawać pliki przeciągając je do obszaru projektu lub klikając <guiseq><gui>Edycja</gui><gui>Dodaj pliki</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Można dodać tytuł płyty CD w polu tekstowym pod obszarem projektu.</p>
+    </item>
+    <item>
+      <p>Wybierz pustą płytę CD z rozwijanej listy.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj…</gui>, aby kontynuować.</p>
+    </item>
+    <item>
+      <p>Wybierz <gui>Prędkość nagrywania</gui> z rozwijanej listy, a także dowolne inne opcje.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj</gui>, aby nagrać jedną płytę lub przycisk <gui>Nagraj kilka kopii</gui>, aby nagrać projekt na wiele płyt.</p>
+    </item>
+  </steps>
+
+  <note>
+    <p>Można także podzielić poszczególne ścieżki na wiele ścieżek za pomocą narzędzia <gui>Dzielenie</gui> oraz dodać dwusekundową przerwę po ścieżce za pomocą narzędzia <gui>Przerwa</gui>.</p>
+  </note>
+
+</page>

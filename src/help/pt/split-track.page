@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="split-track" xml:lang="pt">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <link type="seealso" xref="project-audio"/>
+    <revision version="3.2" date="2011-10-20" status="review"/>
+    <desc>Divida uma faixa de projeto de áudio em múltiplas faixas.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Licença Creative Commons Atribuição Compartilhada 3.0</p>
+    </license>
+  </info>
+
+  <title>Dividir uma faixa de áudio</title>
+
+  <p>Pode dividir uma única faixa de áudio em múltiplas faixas quando juntar um projeto de áudio.</p>
+
+  <steps>
+    <item>
+      <p>Comece um projeto de áudio e adicione as faixas que deseja usar.</p>
+    </item>
+    <item>
+      <p>Selecione a faixa que deseja dividir carregando nela e, então, carregue em <guiseq><gui>Editar</gui><gui>Dividir faixa…</gui></guiseq> ou carregue com o botão direito na faixa e selecione <gui>Dividir faixa…</gui> do menu.</p>
+    </item>
+    <item>
+      <p>Selecione seu método preferido de divisão de faixas:</p>
+      <terms>
+        <item>
+          <title>Dividir faixa manualmente</title>
+          <p>Esta opção permite que selecione a duração exata de cada nova seção da faixa manualmente.</p>
+       </item>
+       <item>
+          <title>Dividir faixa em partes com uma duração fixa</title>
+          <p>Use este método para dividir a faixa em múltiplas seções de igual duração.</p>
+        </item>
+        <item>
+          <title>Dividir faixa num número fixo de partes</title>
+          <p>Este método permite que divida a faixa num número definido de seções, todas com a mesma duração.</p>
+        </item>
+        <item>
+          <title>Dividir faixa para cada silêncio</title>
+          <p>Selecione este método para que <app>Brasero</app> detecte automaticamente silêncios na gravação e divida a faixa nesses pontos.</p>
+        </item>
+      </terms>
+    </item>
+    <item>
+      <p>Realize a divisão da faixa carregando em <gui>Dividir</gui>.</p>
+      <note>
+        <p>Se tentar dividir uma faixa numa seção menor do que seis segundos, a nova seção será preenchida para fazer com que tenha os seis segundos.</p>
+      </note>
+    </item>
+    <item>
+      <p> Carregue em <gui>OK</gui> para confirmar sua divisão de faixa e aplique as alterações.</p>
+      <note>
+        <p>Pode dividir e mesclar a mesma faixa quantas vezes quiser enquanto estiver no diálogo de divisão de faixa. Assim que confirmar a divisão de faixa carregando em <gui>OK</gui>, não poderá mais mesclar as seções que já dividiu. Para reverter as alterações, remova as seções divididas da faixa do projeto e adicione-a novamente.</p>
+      </note>
+    </item>
+  </steps>
+
+</page>

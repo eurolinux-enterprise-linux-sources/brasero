@@ -14,7 +14,7 @@ _X-GNOME-FullName=Brasero Disc Burner
 X-GNOME-Bugzilla-Bugzilla=GNOME
 X-GNOME-Bugzilla-Product=brasero
 X-GNOME-Bugzilla-Component=general
-X-GNOME-Bugzilla-Version=3.12.1
+X-GNOME-Bugzilla-Version=3.12.2
 X-GNOME-UsesNotifications=true
 Actions=Window;Image;Disc;Audio;Video;
 
@@ -27,7 +27,7 @@ _Name=Burn an Image File
 Exec=brasero --image
 
 [Desktop Action Disc]
-Name=Copy a Disc
+_Name=Copy a Disc
 Exec=brasero --copy
 
 [Desktop Action Audio]

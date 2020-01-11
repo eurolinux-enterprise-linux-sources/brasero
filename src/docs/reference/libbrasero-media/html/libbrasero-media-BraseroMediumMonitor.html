@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BraseroMediumMonitor: Libbrasero-media Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="Libbrasero-media Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-media">
 <link rel="prev" href="libbrasero-media-brasero-units.html" title="brasero-units">
 <link rel="next" href="libbrasero-media-brasero-drive.html" title="BraseroDrive">
-<meta name="generator" content="GTK-Doc V1.21.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="libbrasero-media-BraseroMediumMonitor.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -49,7 +49,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
+<a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-media" title="brasero_medium_monitor_get_media ()">brasero_medium_monitor_get_media</a> <span class="c_punctuation">()</span>
@@ -57,7 +57,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
+<a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
 </td>
 <td class="function_name">
 <a class="link" href="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-get-drives" title="brasero_medium_monitor_get_drives ()">brasero_medium_monitor_get_drives</a> <span class="c_punctuation">()</span>
@@ -73,7 +73,7 @@
 </tr>
 <tr>
 <td class="function_type">
-<a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 </td>
 <td class="function_name">
 <a class="link" href="libbrasero-media-BraseroMediumMonitor.html#brasero-medium-monitor-is-probing" title="brasero_medium_monitor_is_probing ()">brasero_medium_monitor_is_probing</a> <span class="c_punctuation">()</span>
@@ -84,7 +84,7 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-media-BraseroMediumMonitor.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -107,8 +107,6 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-media-BraseroMediumMonitor.description"></a><h2>Description</h2>
-<p>
-</p>
 </div>
 <div class="refsect1">
 <a name="libbrasero-media-BraseroMediumMonitor.functions_details"></a><h2>Functions</h2>
@@ -118,21 +116,20 @@
 brasero_medium_monitor_get_default (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Gets the currently active monitor.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.2.5"></a><h4>Returns</h4>
+<a name="brasero-medium-monitor-get-default.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor" title="struct BraseroMediumMonitor"><span class="type">BraseroMediumMonitor</span></a>. Unref when it is not needed anymore.</p>
-<p></p>
 </div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="brasero-medium-monitor-get-media"></a><h3>brasero_medium_monitor_get_media ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
 brasero_medium_monitor_get_media (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor" title="struct BraseroMediumMonitor"><span class="type">BraseroMediumMonitor</span></a> *monitor</code></em>,
                                   <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediaType" title="enum BraseroMediaType"><span class="type">BraseroMediaType</span></a> type</code></em>);</pre>
 <p>Obtains the list of available media that are of the given type.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.3.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-medium-monitor-get-media.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -153,21 +150,21 @@ brasero_medium_monitor_get_media (<em class="parameter"><code><a class="link" hr
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.3.6"></a><h4>Returns</h4>
-<p> a <a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of  <a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="struct BraseroMedium"><span class="type">BraseroMedium</span></a> or NULL. The list must be freed and the element unreffed when finished. </p>
+<a name="brasero-medium-monitor-get-media.returns"></a><h4>Returns</h4>
+<p> a <a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of  <a class="link" href="libbrasero-media-BraseroMedium.html#BraseroMedium" title="struct BraseroMedium"><span class="type">BraseroMedium</span></a> or NULL. The list must be freed and the element unreffed when finished. </p>
 <p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> BraseroMedia.Medium][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="brasero-medium-monitor-get-drives"></a><h3>brasero_medium_monitor_get_drives ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="returnvalue">GSList</span></a> *
 brasero_medium_monitor_get_drives (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor" title="struct BraseroMediumMonitor"><span class="type">BraseroMediumMonitor</span></a> *monitor</code></em>,
                                    <em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroDriveType" title="enum BraseroDriveType"><span class="type">BraseroDriveType</span></a> type</code></em>);</pre>
 <p>Gets the list of available drives that are of the given type.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-medium-monitor-get-drives.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -188,8 +185,8 @@ brasero_medium_monitor_get_drives (<em class="parameter"><code><a class="link" h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.4.6"></a><h4>Returns</h4>
-<p> a <a href="https://developer.gnome.org/glib/unstable/glib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of  <a class="link" href="libbrasero-media-brasero-drive.html#BraseroDrive" title="BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. The list must be freed and the element unreffed when finished. </p>
+<a name="brasero-medium-monitor-get-drives.returns"></a><h4>Returns</h4>
+<p> a <a href="/usr/share/gtk-doc/html/glibglib-Singly-Linked-Lists.html#GSList"><span class="type">GSList</span></a> of  <a class="link" href="libbrasero-media-brasero-drive.html#BraseroDrive" title="BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. The list must be freed and the element unreffed when finished. </p>
 <p><span class="annotation">[<acronym title="Generics and defining elements of containers and arrays."><span class="acronym">element-type</span></acronym> BraseroMedia.Drive][<acronym title="Free data after the code is done."><span class="acronym">transfer full</span></acronym>]</span></p>
 </div>
 </div>
@@ -198,12 +195,12 @@ brasero_medium_monitor_get_drives (<em class="parameter"><code><a class="link" h
 <a name="brasero-medium-monitor-get-drive"></a><h3>brasero_medium_monitor_get_drive ()</h3>
 <pre class="programlisting"><a class="link" href="libbrasero-media-brasero-drive.html#BraseroDrive" title="BraseroDrive"><span class="returnvalue">BraseroDrive</span></a> *
 brasero_medium_monitor_get_drive (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor" title="struct BraseroMediumMonitor"><span class="type">BraseroMediumMonitor</span></a> *monitor</code></em>,
-                                  <em class="parameter"><code>const <a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *device</code></em>);</pre>
+                                  <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *device</code></em>);</pre>
 <p>Returns the <a class="link" href="libbrasero-media-brasero-drive.html#BraseroDrive" title="BraseroDrive"><span class="type">BraseroDrive</span></a> object whose path is <em class="parameter"><code>path</code></em>
 .</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-medium-monitor-get-drive.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -224,20 +221,19 @@ brasero_medium_monitor_get_drive (<em class="parameter"><code><a class="link" hr
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.5.6"></a><h4>Returns</h4>
+<a name="brasero-medium-monitor-get-drive.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-media-brasero-drive.html#BraseroDrive" title="BraseroDrive"><span class="type">BraseroDrive</span></a> or NULL. It should be unreffed when no longer in use.</p>
-<p></p>
 </div>
 </div>
 <hr>
 <div class="refsect2">
 <a name="brasero-medium-monitor-is-probing"></a><h3>brasero_medium_monitor_is_probing ()</h3>
-<pre class="programlisting"><a href="https://developer.gnome.org/glib/unstable/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glibglib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
 brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" href="libbrasero-media-BraseroMediumMonitor.html#BraseroMediumMonitor" title="struct BraseroMediumMonitor"><span class="type">BraseroMediumMonitor</span></a> *monitor</code></em>);</pre>
 <p>Returns if the library is still probing some other media.</p>
 <div class="refsect3">
-<a name="id-1.2.4.6.6.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-medium-monitor-is-probing.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -251,9 +247,8 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.4.6.6.6"></a><h4>Returns</h4>
-<p> <a href="https://developer.gnome.org/glib/unstable/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if it is still probing some media</p>
-<p></p>
+<a name="brasero-medium-monitor-is-probing.returns"></a><h4>Returns</h4>
+<p> <a href="/usr/share/gtk-doc/html/glibglib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if it is still probing some media</p>
 </div>
 </div>
 </div>
@@ -265,17 +260,13 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 	GObject parent_instance;
 };
 </pre>
-<p>
-</p>
 </div>
 <hr>
 <div class="refsect2">
 <a name="BraseroMediaType"></a><h3>enum BraseroMediaType</h3>
-<p>
-</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.3.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="BraseroMediaType.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -284,53 +275,53 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 <tbody>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-NONE:CAPS"></a>BRASERO_MEDIA_TYPE_NONE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-FILE:CAPS"></a>BRASERO_MEDIA_TYPE_FILE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-DATA:CAPS"></a>BRASERO_MEDIA_TYPE_DATA</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-AUDIO:CAPS"></a>BRASERO_MEDIA_TYPE_AUDIO</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-WRITABLE:CAPS"></a>BRASERO_MEDIA_TYPE_WRITABLE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-REWRITABLE:CAPS"></a>BRASERO_MEDIA_TYPE_REWRITABLE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-ANY-IN-BURNER:CAPS"></a>BRASERO_MEDIA_TYPE_ANY_IN_BURNER</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-CD:CAPS"></a>BRASERO_MEDIA_TYPE_CD</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-ALL-BUT-FILE:CAPS"></a>BRASERO_MEDIA_TYPE_ALL_BUT_FILE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-MEDIA-TYPE-ALL:CAPS"></a>BRASERO_MEDIA_TYPE_ALL</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table></div>
@@ -339,11 +330,9 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 <hr>
 <div class="refsect2">
 <a name="BraseroDriveType"></a><h3>enum BraseroDriveType</h3>
-<p>
-</p>
 <div class="refsect3">
-<a name="id-1.2.4.7.4.4"></a><h4>Members</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="BraseroDriveType.members"></a><h4>Members</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="300px" class="enum_members_name">
 <col class="enum_members_description">
@@ -352,33 +341,33 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 <tbody>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-NONE:CAPS"></a>BRASERO_DRIVE_TYPE_NONE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-FILE:CAPS"></a>BRASERO_DRIVE_TYPE_FILE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-WRITER:CAPS"></a>BRASERO_DRIVE_TYPE_WRITER</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-READER:CAPS"></a>BRASERO_DRIVE_TYPE_READER</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-ALL-BUT-FILE:CAPS"></a>BRASERO_DRIVE_TYPE_ALL_BUT_FILE</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 <tr>
 <td class="enum_member_name"><p><a name="BRASERO-DRIVE-TYPE-ALL:CAPS"></a>BRASERO_DRIVE_TYPE_ALL</p></td>
-<td class="enum_member_description"> </td>
-<td class="enum_member_annotations"> </td>
+<td> </td>
+<td> </td>
 </tr>
 </tbody>
 </table></div>
@@ -387,7 +376,6 @@ brasero_medium_monitor_is_probing (<em class="parameter"><code><a class="link" h
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21.1</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>

@@ -221,9 +221,13 @@ INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
 INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
 INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
 INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+INTROSPECTION_CFLAGS = @INTROSPECTION_CFLAGS@
 INTROSPECTION_COMPILER = @INTROSPECTION_COMPILER@
 INTROSPECTION_GENERATE = @INTROSPECTION_GENERATE@
 INTROSPECTION_GIRDIR = @INTROSPECTION_GIRDIR@
+INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
+INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ITSTOOL = @ITSTOOL@
@@ -242,6 +246,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
 LT_REVISION = @LT_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -279,7 +284,7 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
-TYPELIB_VERSION = @TYPELIB_VERSION@
+TYPELIB_MIN_VERSION = @TYPELIB_MIN_VERSION@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WARN_CFLAGS = @WARN_CFLAGS@
@@ -483,9 +488,9 @@ SETUP_FILES = \
 # Other files to distribute
 # e.g. EXTRA_DIST += version.xml.in
 EXTRA_DIST = $(HTML_IMAGES) $(SETUP_FILES) version.xml.in
-DOC_STAMPS = setup-build.stamp scan-build.stamp tmpl-build.stamp sgml-build.stamp \
+DOC_STAMPS = setup-build.stamp scan-build.stamp sgml-build.stamp \
 	html-build.stamp pdf-build.stamp \
-	tmpl.stamp sgml.stamp html.stamp pdf.stamp
+	sgml.stamp html.stamp pdf.stamp
 
 SCANOBJ_FILES = \
 	$(DOC_MODULE).args 	 \
@@ -517,11 +522,6 @@ GTK_DOC_V_SCAN_0 = @echo "  DOC   Scanning header files";
 GTK_DOC_V_INTROSPECT = $(GTK_DOC_V_INTROSPECT_$(V))
 GTK_DOC_V_INTROSPECT_ = $(GTK_DOC_V_INTROSPECT_$(AM_DEFAULT_VERBOSITY))
 GTK_DOC_V_INTROSPECT_0 = @echo "  DOC   Introspecting gobjects";
-
-#### templates ####
-GTK_DOC_V_TMPL = $(GTK_DOC_V_TMPL_$(V))
-GTK_DOC_V_TMPL_ = $(GTK_DOC_V_TMPL_$(AM_DEFAULT_VERBOSITY))
-GTK_DOC_V_TMPL_0 = @echo "  DOC   Rebuilding template files";
 
 #### xml ####
 GTK_DOC_V_XML = $(GTK_DOC_V_XML_$(V))
@@ -762,15 +762,12 @@ setup-build.stamp:
 	    files=`echo $(SETUP_FILES) $(DOC_MODULE).types`; \
 	    if test "x$$files" != "x" ; then \
 	        for file in $$files ; do \
-	            destdir=`dirname $(abs_builddir)/$$file` ;\
+	            destdir=`dirname $(abs_builddir)/$$file`; \
 	            test -d "$$destdir" || mkdir -p "$$destdir"; \
 	            test -f $(abs_srcdir)/$$file && \
 	                cp -pf $(abs_srcdir)/$$file $(abs_builddir)/$$file || true; \
 	        done; \
 	    fi; \
-	    test -d $(abs_srcdir)/tmpl && \
-	        { cp -pR $(abs_srcdir)/tmpl $(abs_builddir)/; \
-	        chmod -R u+w $(abs_builddir)/tmpl; } \
 	fi
 	$(AM_V_at)touch setup-build.stamp
 
@@ -783,7 +780,7 @@ scan-build.stamp: setup-build.stamp $(HFILE_GLOB) $(CFILE_GLOB)
 	$(GTK_DOC_V_INTROSPECT)if grep -l '^..*$$' $(DOC_MODULE).types > /dev/null 2>&1 ; then \
 	    scanobj_options=""; \
 	    gtkdoc-scangobj 2>&1 --help | grep  >/dev/null "\-\-verbose"; \
-	    if test "$(?)" = "0"; then \
+	    if test "$$?" = "0"; then \
 	        if test "x$(V)" = "x1"; then \
 	            scanobj_options="--verbose"; \
 	        fi; \
@@ -800,23 +797,8 @@ scan-build.stamp: setup-build.stamp $(HFILE_GLOB) $(CFILE_GLOB)
 $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt: scan-build.stamp
 	@true
 
-tmpl-build.stamp: setup-build.stamp $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt
-	$(GTK_DOC_V_TMPL)gtkdoc-mktmpl --module=$(DOC_MODULE) $(MKTMPL_OPTIONS)
-	$(AM_V_at)if test "$(abs_srcdir)" != "$(abs_builddir)" ; then \
-	  if test -w $(abs_srcdir) ; then \
-	    cp -pR $(abs_builddir)/tmpl $(abs_srcdir)/; \
-	  fi \
-	fi
-	$(AM_V_at)touch tmpl-build.stamp
-
-tmpl.stamp: tmpl-build.stamp
-	@true
-
-$(srcdir)/tmpl/*.sgml:
-	@true
-
-sgml-build.stamp: tmpl.stamp $(DOC_MODULE)-sections.txt $(srcdir)/tmpl/*.sgml $(expand_content_files)
-	-$(GTK_DOC_V_XML)chmod -R u+w $(srcdir) && _source_dir='' ; \
+sgml-build.stamp: setup-build.stamp $(DOC_MODULE)-decl.txt $(SCANOBJ_FILES) $(HFILE_GLOB) $(CFILE_GLOB) $(DOC_MODULE)-sections.txt $(DOC_MODULE)-overrides.txt $(expand_content_files) xml/gtkdocentities.ent
+	$(GTK_DOC_V_XML)_source_dir='' ; \
 	for i in $(DOC_SOURCE_DIR) ; do \
 	    _source_dir="$${_source_dir} --source-dir=$$i" ; \
 	done ; \
@@ -826,17 +808,28 @@ sgml-build.stamp: tmpl.stamp $(DOC_MODULE)-sections.txt $(srcdir)/tmpl/*.sgml $(
 sgml.stamp: sgml-build.stamp
 	@true
 
+xml/gtkdocentities.ent: Makefile
+	$(GTK_DOC_V_XML)$(MKDIR_P) $(@D) && ( \
+		echo "<!ENTITY package \"$(PACKAGE)\">"; \
+		echo "<!ENTITY package_bugreport \"$(PACKAGE_BUGREPORT)\">"; \
+		echo "<!ENTITY package_name \"$(PACKAGE_NAME)\">"; \
+		echo "<!ENTITY package_string \"$(PACKAGE_STRING)\">"; \
+		echo "<!ENTITY package_tarname \"$(PACKAGE_TARNAME)\">"; \
+		echo "<!ENTITY package_url \"$(PACKAGE_URL)\">"; \
+		echo "<!ENTITY package_version \"$(PACKAGE_VERSION)\">"; \
+	) > $@
+
 html-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files) $(expand_content_files)
 	$(GTK_DOC_V_HTML)rm -rf html && mkdir html && \
 	mkhtml_options=""; \
 	gtkdoc-mkhtml 2>&1 --help | grep  >/dev/null "\-\-verbose"; \
-	if test "$(?)" = "0"; then \
+	if test "$$?" = "0"; then \
 	  if test "x$(V)" = "x1"; then \
 	    mkhtml_options="$$mkhtml_options --verbose"; \
 	  fi; \
 	fi; \
 	gtkdoc-mkhtml 2>&1 --help | grep  >/dev/null "\-\-path"; \
-	if test "$(?)" = "0"; then \
+	if test "$$?" = "0"; then \
 	  mkhtml_options="$$mkhtml_options --path=\"$(abs_srcdir)\""; \
 	fi; \
 	cd html && gtkdoc-mkhtml $$mkhtml_options $(MKHTML_OPTIONS) $(DOC_MODULE) ../$(DOC_MAIN_SGML_FILE)
@@ -856,7 +849,7 @@ pdf-build.stamp: sgml.stamp $(DOC_MAIN_SGML_FILE) $(content_files) $(expand_cont
 	$(GTK_DOC_V_PDF)rm -f $(DOC_MODULE).pdf && \
 	mkpdf_options=""; \
 	gtkdoc-mkpdf 2>&1 --help | grep  >/dev/null "\-\-verbose"; \
-	if test "$(?)" = "0"; then \
+	if test "$$?" = "0"; then \
 	  if test "x$(V)" = "x1"; then \
 	    mkpdf_options="$$mkpdf_options --verbose"; \
 	  fi; \
@@ -890,7 +883,6 @@ distclean-local:
 	    $(DOC_MODULE)-decl-list.txt $(DOC_MODULE)-decl.txt
 	@if test "$(abs_srcdir)" != "$(abs_builddir)" ; then \
 	    rm -f $(SETUP_FILES) $(DOC_MODULE).types; \
-	    rm -rf tmpl; \
 	fi
 
 maintainer-clean-local:
@@ -937,9 +929,7 @@ uninstall-local:
 @HAVE_GTK_DOC_FALSE@	@false
 
 dist-hook: dist-check-gtkdoc all-gtk-doc dist-hook-local
-	@mkdir $(distdir)/tmpl
 	@mkdir $(distdir)/html
-	@-cp ./tmpl/*.sgml $(distdir)/tmpl
 	@cp ./html/* $(distdir)/html
 	@-cp ./$(DOC_MODULE).pdf $(distdir)/
 	@-cp ./$(DOC_MODULE).types $(distdir)/

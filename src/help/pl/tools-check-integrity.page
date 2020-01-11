@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="tools-check-integrity" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#tools"/>
+    <desc>Można sprawdzić spójność płyty po jej nagraniu.</desc>
+    <credit type="author">
+      <name>Paulina Gonzalez</name>
+      <email>pau.gonzalezbr@gmail.com</email>
+    </credit>
+    <credit type="editor">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@gmail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Sprawdzanie spójności płyty</title>
+
+  <p>Po nagraniu płyty CD/DVD za pomocą programu <app>Brasero</app> można sprawdzić jej spójność, aby upewnić się, że pliki na płycie nie są uszkodzone.</p>
+
+  <steps>
+    <item>
+      <p>Wybierz <guiseq><gui>Narzędzia</gui><gui>Sprawdź spójność…</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Można zaznaczyć opcję <gui>Plik MD5 do sprawdzenia płyty</gui> w razie potrzeby.</p>
+	<note style="advanced">
+	<list>
+	<item><p>MD5 („Message-Digest Algorithm 5”) to algorytm kryptograficzny powszechnie używany do sprawdzania spójności danych.</p></item>
+	<item><p>Zaznaczenie tej opcji oznacza, że trzeba wskazać plik MD5 klikając ikonę katalogu poniżej.</p></item>
+	</list>
+	</note>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Sprawdź</gui>, aby kontynuować lub <gui>Zamknij</gui>, aby anulować.</p>
+    </item>
+    <item>
+      <p>Po ukończeniu sprawdzania można kliknąć przycisk <gui>Sprawdź ponownie</gui> lub po prostu <gui>Zamknij</gui>.</p>
+    </item>
+  </steps>
+
+</page>

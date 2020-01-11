@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="prob-dvd" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#troubleshooting"/>
+    <link type="seealso" xref="project-video"/>
+    <link type="seealso" xref="tools-blank"/>
+    <desc>Nie mogę zapisywać płyt DVD-R lub DVD-RW.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Problem podczas tworzenia płyty DVD</title>
+
+  <p>Niektóre rodzaje płyt DVD-R i DVD-RW nie są zgodne ze wszystkimi nagrywarkami. Sprawdź poniższe informacje, aby dowiedzieć się, czy można używać tych płyt z posiadaną nagrywarką.</p>
+
+  <steps>
+    <item>
+      <p>Sprawdź, czy napęd DVD obsługuje płyty DVD+ lub DVD-. Jeśli ma napis „multi”, to zwykle obsługuje oba rodzaje. Sprawdź, czy rodzaj używanej płyty jest zgodny z napędem DVD.</p>
+    </item>
+    <item>
+      <p>Sprawdź, czy płyta jest dwu-, czy jednowarstwowa. Niektóre napędy DVD nie potrafią zapisywać płyt dwuwarstwowych.</p>
+    </item>
+    <item>
+      <p>Jeśli używana jest płyta DVD-R, to sprawdź, czy nie została już nagrana. Jeśli używana jest płyta DVD-RW, to usuń jej zawartość przed zapisaniem.</p>
+    </item>
+  </steps>
+
+</page>

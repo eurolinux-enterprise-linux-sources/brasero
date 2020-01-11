@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-image-burn" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <link type="seealso" xref="project-audio"/>
+    <link type="seealso" xref="project-disc-copy"/>
+    <link type="seealso" xref="project-video"/>
+    <revision version="3.3" date="2011-10-14" status="review"/>
+    <desc>Nagrywanie istniejącego obrazu płyty na płytę CD lub DVD.</desc>
+    <credit type="author">
+      <name>Marta Bogdanowicz</name>
+      <email>majus85@gmail.com</email>
+    </credit>
+    <credit type="editor">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@gmail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Nagrywanie obrazu</title>
+
+  <p><app>Brasero</app> umożliwia nagrywanie obrazów na płyty CD i DVD. Obsługuje formaty obrazów płyt optycznych <file>.iso</file>, <file>.toc</file> i <file>.cue</file>.</p>
+
+  <note style="advanced">
+    <p>Obraz płyty to archiwum zawierające wszystkie dane płyty CD lub DVD. Płyta może zawierać tylko jeden obraz, ale każde archiwum może zawierać tak dużo lub tak mało danych, jak jest potrzebnych (o ile mieszczą się na płycie).</p>
+  </note>
+
+  <p>Aby nagrać obraz na płycie CD lub DVD:</p>
+  <steps>
+    <item>
+      <p>Kliknij <gui>Nagraj obraz</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nagraj obraz…</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Wybierz obraz płyty do zapisania klikając przycisk <gui>Wybierz obraz płyty</gui>.</p>
+    </item>
+    <item>
+      <p>Wybierz płytę z rozwijanej listy pod nagłówkiem <gui>Płyta do nagrania</gui>. Jeśli komputer ma więcej niż jeden napęd, wszystkie płyty do nich włożone powinny być wyświetlane.</p>
+        <note><p>Po wybraniu płyty <app>Brasero</app> wyświetli, ile wolnego miejsca pozostanie na płycie po nagraniu.</p></note>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Właściwości</gui>, aby wybrać prędkość nagrywania i inne opcje.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj</gui>, aby rozpocząć nagrywanie obrazu. Po skończeniu można zakończyć nagrywanie lub utworzyć drugą kopię obrazu.</p>
+        <note>
+          <p>Jeśli używana jest płyta do wielokrotnego zapisu, która już zawiera dane, to zostanie wyświetlone pytanie, czy usunąć jej zawartość lub włożyć inną płytę.</p>
+        </note>
+    </item>
+    <!-- There are some problems with multiple burn. After burning one copy,
+    Brasero asks for manual ejecting and then often doesn't detect it. The same
+    problem appears by putting inside new CD or DVD - Brasero doesn't always
+    detect it. Besides the multiple burn option has the same functionality as
+    Burn - they both allow to burn one or several copies, so one option would be
+    enough.-->
+
+  </steps>
+
+</page>

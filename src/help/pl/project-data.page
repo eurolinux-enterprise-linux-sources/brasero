@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="project-data" xml:lang="pl">
+
+  <info>
+    <link type="guide" xref="index#new-project"/>
+    <desc>Zapisywanie danych na płycie CD lub DVD.</desc>
+    <credit type="author">
+      <name>Ekaterina Gerasimova</name>
+      <email>kittykat3756@googlemail.com</email>
+    </credit>
+    <license>
+      <p>Creative Commons Share Alike 3.0</p>
+    </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Piotr Drąg</mal:name>
+      <mal:email>piotrdrag@gmail.com</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Aviary.pl</mal:name>
+      <mal:email>community-poland@mozilla.org</mal:email>
+      <mal:years>2017</mal:years>
+    </mal:credit>
+  </info>
+
+  <title>Tworzenie projektu z danymi</title>
+
+  <p>Projekt z danymi jest używany do zapisywania danych (na przykład plików, zdjęć i muzyki) na płycie, bez zmieniania tych plików w jakikolwiek sposób. Jest to przydatne do przenoszenia plików między komputerami.</p>
+
+  <steps>
+    <item>
+      <p>Kliknij <gui>Projekt z danymi</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nowy projekt z danymi</gui></guiseq>.</p>
+    </item>
+    <item>
+      <p>Dodaj pliki do projektu klikając przycisk <gui>Dodaj</gui> na pasku narzędziowym i wybierając je. Można także dodawać pliki przeciągając je do obszaru projektu lub klikając <guiseq><gui>Edycja</gui><gui>Dodaj pliki</gui></guiseq>.</p>
+      <note style="tip">
+	<p>Można utworzyć katalogi na płycie w celu przechowywania danych w bardziej uporządkowany sposób. Aby utworzyć katalog, kliknij przycisk <gui>Nowy katalog</gui> na pasku narzędziowym lub wybierz <guiseq><gui>Edycja</gui><gui>Nowy katalog</gui></guiseq> z paska menu. Można także tworzyć katalogi wewnątrz katalogów.</p>
+      </note>
+    </item>
+    <item>
+      <p>Można dodać nazwę płyty w polu tekstowym pod obszarem projektu.</p>
+    </item>
+    <item>
+      <p>Wybierz pustą płytę z rozwijanej listy.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj…</gui>, aby kontynuować.</p>
+    </item>
+    <item>
+      <p>Wybierz <gui>Prędkość nagrywania</gui> z rozwijanej listy, a także dowolne inne opcje.</p>
+    </item>
+    <item>
+      <p>Kliknij przycisk <gui>Nagraj</gui>, aby nagrać jedną płytę lub przycisk <gui>Nagraj kilka kopii</gui>, aby nagrać projekt na wiele płyt.</p>
+      <note>
+        <p>Jeśli używana jest płyta do wielokrotnego zapisu, która już zawiera dane, to zostanie wyświetlone pytanie, czy usunąć jej zawartość lub włożyć inną płytę.</p>
+      </note>
+    </item>
+  </steps>
+
+  <p>Jeśli używana jest płyta do wielokrotnego zapisu, której nagranie się nie powiodło, należy wykonać pełne (wolne) usuwanie zawartości przed ponowną próbą nagrania.</p>
+
+</page>

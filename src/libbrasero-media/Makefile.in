@@ -102,6 +102,7 @@ host_triplet = @host@
 
 # Solaris's USCSI interface
 @HAVE_USCSI_H_TRUE@am__append_4 = scsi-uscsi.c
+@HAVE_INTROSPECTION_TRUE@am__append_5 = BraseroMedia-3.@TYPELIB_MIN_VERSION@.gir
 subdir = libbrasero-media
 ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
 am__aclocal_m4_deps = $(top_srcdir)/configure.ac
@@ -141,7 +142,7 @@ am__uninstall_files_from_dir = { \
          $(am__cd) "$$dir" && rm -f $$files; }; \
   }
 am__installdirs = "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" \
-	"$(DESTDIR)$(typelibsdir)" "$(DESTDIR)$(headerdir)"
+	"$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(headerdir)"
 LTLIBRARIES = $(lib_LTLIBRARIES)
 am__DEPENDENCIES_1 =
 libbrasero_media3_la_DEPENDENCIES = $(am__DEPENDENCIES_1) \
@@ -249,7 +250,7 @@ am__can_run_installinfo = \
     n|no|NO) false;; \
     *) (install-info --version) >/dev/null 2>&1;; \
   esac
-DATA = $(gir_DATA) $(typelibs_DATA)
+DATA = $(nodist_gir_DATA) $(nodist_typelib_DATA)
 HEADERS = $(header_HEADERS)
 am__tagged_files = $(HEADERS) $(SOURCES) $(TAGS_FILES) $(LISP)
 # Read a list of newline-separated strings from the standard input,
@@ -368,9 +369,13 @@ INTLTOOL_V_MERGE = @INTLTOOL_V_MERGE@
 INTLTOOL_V_MERGE_OPTIONS = @INTLTOOL_V_MERGE_OPTIONS@
 INTLTOOL__v_MERGE_ = @INTLTOOL__v_MERGE_@
 INTLTOOL__v_MERGE_0 = @INTLTOOL__v_MERGE_0@
+INTL_MACOSX_LIBS = @INTL_MACOSX_LIBS@
+INTROSPECTION_CFLAGS = @INTROSPECTION_CFLAGS@
 INTROSPECTION_COMPILER = @INTROSPECTION_COMPILER@
 INTROSPECTION_GENERATE = @INTROSPECTION_GENERATE@
 INTROSPECTION_GIRDIR = @INTROSPECTION_GIRDIR@
+INTROSPECTION_LIBS = @INTROSPECTION_LIBS@
+INTROSPECTION_MAKEFILE = @INTROSPECTION_MAKEFILE@
 INTROSPECTION_SCANNER = @INTROSPECTION_SCANNER@
 INTROSPECTION_TYPELIBDIR = @INTROSPECTION_TYPELIBDIR@
 ITSTOOL = @ITSTOOL@
@@ -389,6 +394,7 @@ LTLIBOBJS = @LTLIBOBJS@
 LT_AGE = @LT_AGE@
 LT_CURRENT = @LT_CURRENT@
 LT_REVISION = @LT_REVISION@
+LT_SYS_LIBRARY_PATH = @LT_SYS_LIBRARY_PATH@
 MAINT = @MAINT@
 MAKEINFO = @MAKEINFO@
 MANIFEST_TOOL = @MANIFEST_TOOL@
@@ -426,7 +432,7 @@ SED = @SED@
 SET_MAKE = @SET_MAKE@
 SHELL = @SHELL@
 STRIP = @STRIP@
-TYPELIB_VERSION = @TYPELIB_VERSION@
+TYPELIB_MIN_VERSION = @TYPELIB_MIN_VERSION@
 USE_NLS = @USE_NLS@
 VERSION = @VERSION@
 WARN_CFLAGS = @WARN_CFLAGS@
@@ -492,7 +498,9 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 AM_CPPFLAGS = \
 	-I$(top_srcdir)							\
+	-I$(top_srcdir)/libbrasero-media				\
 	-I$(top_builddir)						\
+	-I$(top_builddir)/libbrasero-media				\
 	-DBRASERO_LOCALE_DIR=\""$(prefix)/$(DATADIRNAME)/locale"\" 	\
 	-DBRASERO_PREFIX=\"$(prefix)\"           			\
 	-DBRASERO_SYSCONFDIR=\"$(sysconfdir)\"   			\
@@ -501,31 +509,34 @@ AM_CPPFLAGS = \
 	$(WARN_CFLAGS)							\
 	$(DISABLE_DEPRECATED)						\
 	$(BRASERO_GLIB_CFLAGS)						\
-	$(BRASERO_GMODULE_EXPORT_CFLAGS)					\
+	$(BRASERO_GMODULE_EXPORT_CFLAGS)				\
 	$(BRASERO_GIO_CFLAGS)						\
 	$(BRASERO_GTK_CFLAGS)
 
 GLIB_GENMARSHAL = `pkg-config --variable=glib_genmarshal glib-2.0`
 RECMARSHALFILES = libbrasero-marshal.h libbrasero-marshal.c
+#	libbrasero-media.symbols
+CLEANFILES = $(nodist_gir_DATA) $(nodist_typelib_DATA) \
+	$(RECMARSHALFILES) $(gir_DATA) $(typelibs_DATA)
+EXTRA_DIST = libbrasero-marshal.list
 headerdir = $(includedir)/brasero3
-header_HEADERS = brasero-drive.h			\
-		brasero-medium-monitor.h		\
-		brasero-media.h			\
-		brasero-units.h			\
-		brasero-medium.h			\
-		brasero-volume.h		\
-		brasero-medium-selection.h	\
-		brasero-drive-selection.h
+header_HEADERS = \
+	brasero-drive.h			\
+	brasero-medium-monitor.h	\
+	brasero-media.h			\
+	brasero-units.h			\
+	brasero-medium.h		\
+	brasero-volume.h		\
+	brasero-medium-selection.h	\
+	brasero-drive-selection.h
 
-lib_LTLIBRARIES = \
-	libbrasero-media3.la
-
+lib_LTLIBRARIES = libbrasero-media3.la
 libbrasero_media3_la_LIBADD = \
-	$(BRASERO_GLIB_LIBS)                                     \
-	$(BRASERO_GMODULE_EXPORT_LIBS)                                     \
-	$(BRASERO_GTHREAD_LIBS)                                     \
-	$(BRASERO_GIO_LIBS)                                     \
-	$(BRASERO_GTK_LIBS)                                     \
+	$(BRASERO_GLIB_LIBS) 		\
+	$(BRASERO_GMODULE_EXPORT_LIBS) 	\
+	$(BRASERO_GTHREAD_LIBS)		\
+	$(BRASERO_GIO_LIBS) 		\
+	$(BRASERO_GTK_LIBS) 		\
 	$(BRASERO_SCSI_LIBS)
 
 libbrasero_media3_la_LDFLAGS = \
@@ -564,19 +575,37 @@ libbrasero_media3_la_SOURCES = libbrasero-marshal.c \
 	scsi-prevent-allow-medium-removal.c scsi-inquiry.h \
 	brasero-drive-priv.h $(am__append_1) $(am__append_2) \
 	$(am__append_3) $(am__append_4)
-@HAVE_INTROSPECTION_TRUE@girdir = $(INTROSPECTION_GIRDIR)
-@HAVE_INTROSPECTION_TRUE@gir_DATA = BraseroMedia-@TYPELIB_VERSION@.gir
-@HAVE_INTROSPECTION_TRUE@typelibsdir = $(INTROSPECTION_TYPELIBDIR)
-@HAVE_INTROSPECTION_TRUE@typelibs_DATA = BraseroMedia-@TYPELIB_VERSION@.typelib
-EXTRA_DIST = \
-	libbrasero-marshal.list
+INTROSPECTION_GIRS = $(am__append_5)
+INTROSPECTION_SCANNER_ARGS = --warn-all
+@HAVE_INTROSPECTION_TRUE@introspected_source = \
+@HAVE_INTROSPECTION_TRUE@	brasero-drive.h			\
+@HAVE_INTROSPECTION_TRUE@	brasero-drive.c			\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium-monitor.h	\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium-monitor.c	\
+@HAVE_INTROSPECTION_TRUE@	brasero-media.h			\
+@HAVE_INTROSPECTION_TRUE@	brasero-media.c			\
+@HAVE_INTROSPECTION_TRUE@	brasero-units.h			\
+@HAVE_INTROSPECTION_TRUE@	brasero-units.c			\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium.h		\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium.c		\
+@HAVE_INTROSPECTION_TRUE@	brasero-volume.h		\
+@HAVE_INTROSPECTION_TRUE@	brasero-volume.c		\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium-selection.h	\
+@HAVE_INTROSPECTION_TRUE@	brasero-medium-selection.c	\
+@HAVE_INTROSPECTION_TRUE@	brasero-drive-selection.h	\
+@HAVE_INTROSPECTION_TRUE@	brasero-drive-selection.c
 
-#	libbrasero-media.symbols
-CLEANFILES = \
-	$(RECMARSHALFILES)  \
-	$(gir_DATA)         \
-	$(typelibs_DATA)
-
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_NAMESPACE = BraseroMedia
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_VERSION = 3.@TYPELIB_MIN_VERSION@
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_INCLUDES = Gtk-3.0
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_CFLAGS = $(AM_CPPFLAGS)
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_LIBS = libbrasero-media3.la
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_FILES = $(introspected_source)
+@HAVE_INTROSPECTION_TRUE@BraseroMedia_3_@TYPELIB_MIN_VERSION@_gir_SCANNERFLAGS = --identifier-prefix=Brasero --symbol-prefix=brasero
+girdir = $(datadir)/gir-1.0
+nodist_gir_DATA = $(INTROSPECTION_GIRS)
+typelibdir = $(libdir)/girepository-1.0
+nodist_typelib_DATA = $(INTROSPECTION_GIRS:.gir=.typelib)
 all: all-am
 
 .SUFFIXES:
@@ -721,9 +750,9 @@ mostlyclean-libtool:
 
 clean-libtool:
 	-rm -rf .libs _libs
-install-girDATA: $(gir_DATA)
+install-nodist_girDATA: $(nodist_gir_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(gir_DATA)'; test -n "$(girdir)" || list=; \
+	@list='$(nodist_gir_DATA)'; test -n "$(girdir)" || list=; \
 	if test -n "$$list"; then \
 	  echo " $(MKDIR_P) '$(DESTDIR)$(girdir)'"; \
 	  $(MKDIR_P) "$(DESTDIR)$(girdir)" || exit 1; \
@@ -737,32 +766,32 @@ install-girDATA: $(gir_DATA)
 	  $(INSTALL_DATA) $$files "$(DESTDIR)$(girdir)" || exit $$?; \
 	done
 
-uninstall-girDATA:
+uninstall-nodist_girDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(gir_DATA)'; test -n "$(girdir)" || list=; \
+	@list='$(nodist_gir_DATA)'; test -n "$(girdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
 	dir='$(DESTDIR)$(girdir)'; $(am__uninstall_files_from_dir)
-install-typelibsDATA: $(typelibs_DATA)
+install-nodist_typelibDATA: $(nodist_typelib_DATA)
 	@$(NORMAL_INSTALL)
-	@list='$(typelibs_DATA)'; test -n "$(typelibsdir)" || list=; \
+	@list='$(nodist_typelib_DATA)'; test -n "$(typelibdir)" || list=; \
 	if test -n "$$list"; then \
-	  echo " $(MKDIR_P) '$(DESTDIR)$(typelibsdir)'"; \
-	  $(MKDIR_P) "$(DESTDIR)$(typelibsdir)" || exit 1; \
+	  echo " $(MKDIR_P) '$(DESTDIR)$(typelibdir)'"; \
+	  $(MKDIR_P) "$(DESTDIR)$(typelibdir)" || exit 1; \
 	fi; \
 	for p in $$list; do \
 	  if test -f "$$p"; then d=; else d="$(srcdir)/"; fi; \
 	  echo "$$d$$p"; \
 	done | $(am__base_list) | \
 	while read files; do \
-	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(typelibsdir)'"; \
-	  $(INSTALL_DATA) $$files "$(DESTDIR)$(typelibsdir)" || exit $$?; \
+	  echo " $(INSTALL_DATA) $$files '$(DESTDIR)$(typelibdir)'"; \
+	  $(INSTALL_DATA) $$files "$(DESTDIR)$(typelibdir)" || exit $$?; \
 	done
 
-uninstall-typelibsDATA:
+uninstall-nodist_typelibDATA:
 	@$(NORMAL_UNINSTALL)
-	@list='$(typelibs_DATA)'; test -n "$(typelibsdir)" || list=; \
+	@list='$(nodist_typelib_DATA)'; test -n "$(typelibdir)" || list=; \
 	files=`for p in $$list; do echo $$p; done | sed -e 's|^.*/||'`; \
-	dir='$(DESTDIR)$(typelibsdir)'; $(am__uninstall_files_from_dir)
+	dir='$(DESTDIR)$(typelibdir)'; $(am__uninstall_files_from_dir)
 install-headerHEADERS: $(header_HEADERS)
 	@$(NORMAL_INSTALL)
 	@list='$(header_HEADERS)'; test -n "$(headerdir)" || list=; \
@@ -871,7 +900,7 @@ check-am: all-am
 check: check-am
 all-am: Makefile $(LTLIBRARIES) $(DATA) $(HEADERS)
 installdirs:
-	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(typelibsdir)" "$(DESTDIR)$(headerdir)"; do \
+	for dir in "$(DESTDIR)$(libdir)" "$(DESTDIR)$(girdir)" "$(DESTDIR)$(typelibdir)" "$(DESTDIR)$(headerdir)"; do \
 	  test -z "$$dir" || $(MKDIR_P) "$$dir"; \
 	done
 install: install-am
@@ -928,8 +957,8 @@ info: info-am
 
 info-am:
 
-install-data-am: install-girDATA install-headerHEADERS \
-	install-typelibsDATA
+install-data-am: install-headerHEADERS install-nodist_girDATA \
+	install-nodist_typelibDATA
 
 install-dvi: install-dvi-am
 
@@ -975,8 +1004,8 @@ ps: ps-am
 
 ps-am:
 
-uninstall-am: uninstall-girDATA uninstall-headerHEADERS \
-	uninstall-libLTLIBRARIES uninstall-typelibsDATA
+uninstall-am: uninstall-headerHEADERS uninstall-libLTLIBRARIES \
+	uninstall-nodist_girDATA uninstall-nodist_typelibDATA
 
 .MAKE: install-am install-strip
 
@@ -986,16 +1015,17 @@ uninstall-am: uninstall-girDATA uninstall-headerHEADERS \
 	distclean-libtool distclean-tags distdir dvi dvi-am html \
 	html-am info info-am install install-am install-data \
 	install-data-am install-dvi install-dvi-am install-exec \
-	install-exec-am install-girDATA install-headerHEADERS \
-	install-html install-html-am install-info install-info-am \
-	install-libLTLIBRARIES install-man install-pdf install-pdf-am \
-	install-ps install-ps-am install-strip install-typelibsDATA \
-	installcheck installcheck-am installdirs maintainer-clean \
+	install-exec-am install-headerHEADERS install-html \
+	install-html-am install-info install-info-am \
+	install-libLTLIBRARIES install-man install-nodist_girDATA \
+	install-nodist_typelibDATA install-pdf install-pdf-am \
+	install-ps install-ps-am install-strip installcheck \
+	installcheck-am installdirs maintainer-clean \
 	maintainer-clean-generic mostlyclean mostlyclean-compile \
 	mostlyclean-generic mostlyclean-libtool pdf pdf-am ps ps-am \
-	tags tags-am uninstall uninstall-am uninstall-girDATA \
-	uninstall-headerHEADERS uninstall-libLTLIBRARIES \
-	uninstall-typelibsDATA
+	tags tags-am uninstall uninstall-am uninstall-headerHEADERS \
+	uninstall-libLTLIBRARIES uninstall-nodist_girDATA \
+	uninstall-nodist_typelibDATA
 
 .PRECIOUS: Makefile
 
@@ -1006,27 +1036,9 @@ libbrasero-marshal.c: libbrasero-marshal.h
 	( $(GLIB_GENMARSHAL) --prefix=brasero_marshal $(srcdir)/libbrasero-marshal.list --body --header > libbrasero-marshal.c )
 	$(AM_LDFLAGS)
 
-@HAVE_INTROSPECTION_TRUE@BraseroMedia-@TYPELIB_VERSION@.gir: libbrasero-media3.la $(INTROSPECTION_SCANNER)
-@HAVE_INTROSPECTION_TRUE@	$(INTROSPECTION_SCANNER) -v --namespace=BraseroMedia --nsversion=1.0 \
-@HAVE_INTROSPECTION_TRUE@            --include=Gtk-3.0 \
-@HAVE_INTROSPECTION_TRUE@	    -I$(top_srcdir)/libbrasero-media	\
-@HAVE_INTROSPECTION_TRUE@	    --library=brasero-media3 \
-@HAVE_INTROSPECTION_TRUE@	    --libtool="$(LIBTOOL)" \
-@HAVE_INTROSPECTION_TRUE@            --output $@ \
-@HAVE_INTROSPECTION_TRUE@            --pkg=gtk+-3.0  \
-@HAVE_INTROSPECTION_TRUE@	    --strip-prefix=Brasero	\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-media/brasero-drive.h			\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-medium-monitor.h		\
-@HAVE_INTROSPECTION_TRUE@	    $(top_builddir)/libbrasero-media/brasero-media.h			\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-units.h			\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-medium.h			\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-volume.h		\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-medium-selection.h	\
-@HAVE_INTROSPECTION_TRUE@	    $(top_srcdir)/libbrasero-media/brasero-drive-selection.h	\
-@HAVE_INTROSPECTION_TRUE@            $(top_srcdir)/libbrasero-media/*.c	    
+include $(INTROSPECTION_MAKEFILE)
 
-@HAVE_INTROSPECTION_TRUE@BraseroMedia-@TYPELIB_VERSION@.typelib: $(gir_DATA) $(INTROSPECTION_COMPILER)
-@HAVE_INTROSPECTION_TRUE@	$(INTROSPECTION_COMPILER) $(top_builddir)/libbrasero-media/$(gir_DATA) --shared-library=libbrasero-media3 -o $(typelibs_DATA)
+@HAVE_INTROSPECTION_TRUE@BraseroMedia-3.@TYPELIB_MIN_VERSION@.gir: Makefile libbrasero-media3.la
 
 -include $(top_srcdir)/git.mk
 

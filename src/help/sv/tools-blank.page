@@ -3,41 +3,50 @@
 
   <info>
     <link type="guide" xref="index#tools"/>
-    <desc>Erase a rewritable CD or DVD by blanking it.</desc>
+    <desc>Töm en återskrivningsbar cd eller dvd genom att radera den.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Share Alike 3.0</p>
+      <p>Creative Commons DelaLika 3.0</p>
     </license>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Daniel Nylander</mal:name>
+      <mal:email>po@danielnylander.se</mal:email>
+      <mal:years>2008, 2009, 2011</mal:years>
+    </mal:credit>
+  
+    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
+      <mal:name>Anders Jonsson</mal:name>
+      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
+      <mal:years>2015</mal:years>
+    </mal:credit>
   </info>
 
-  <title>Blank a disc</title>
+  <title>Radera en skiva</title>
 
-  <p>You can prepare a rewritable disc, with existing data on it, for writing by
-  blanking it.</p>
+  <p>Du kan förbereda en återskrivningsbar skiva med data på för skrivning genom att radera den.</p>
 
   <steps>
     <item>
-      <p>Select <guiseq><gui>Tools</gui><gui>Blank...</gui></guiseq>.</p>
+      <p>Välj <guiseq><gui>Verktyg</gui><gui>Radera…</gui></guiseq>.</p>
     </item>
     <item>
-      <p>If you have more than one disc drive with a rewritable disc in it, you
-      can select which disc to rewrite under <gui>Select a disc</gui>.</p>
+      <p>Om du har mer än en skivenhet med en återskrivningsbar skiva i, så kan du välja vilken skiva som ska skrivas om under <gui>Välj en skiva</gui>.</p>
     </item>
     <item>
-      <p>You can select <gui>Fast blanking</gui> to blank the CD quicker.</p>
+      <p>Du kan välja <gui>Snabb radering</gui> för att radera cd-skivan snabbare.</p>
       <note>
-        <p>If you have problems writing to a disc which you fast blanked, try
-        disabling fast blanking and blank it again.</p>
+        <p>Om du har problem med att skriva till en skiva som du snabbraderat kan du försöka med att inaktivera snabb radering och radera den igen.</p>
       </note>
     </item>
     <item>
-      <p>Click <gui>Blank</gui> to continue.</p>
+      <p>Klicka <gui>Radera</gui> för att fortsätta.</p>
     </item>
     <item>
-      <p>The disc may be ejected when the blanking is complete.</p>
+      <p>Skivan kanske matas ut då raderingen är klar.</p>
     </item>
   </steps>
 

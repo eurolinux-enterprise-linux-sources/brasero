@@ -3,12 +3,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>BraseroSessionSpan: Libbrasero-burn Reference Manual</title>
-<meta name="generator" content="DocBook XSL Stylesheets V1.78.1">
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
 <link rel="home" href="index.html" title="Libbrasero-burn Reference Manual">
 <link rel="up" href="ch01.html" title="API Reference for Libbrasero-burn">
 <link rel="prev" href="libbrasero-burn-BraseroBurnSession.html" title="BraseroBurnSession">
 <link rel="next" href="libbrasero-burn-BraseroSessionCfg.html" title="BraseroSessionCfg">
-<meta name="generator" content="GTK-Doc V1.21.1 (XML mode)">
+<meta name="generator" content="GTK-Doc V1.25 (XML mode)">
 <link rel="stylesheet" href="style.css" type="text/css">
 </head>
 <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
@@ -33,7 +33,7 @@
 </tr></table></div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroSessionSpan.functions"></a><h2>Functions</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="functions_return">
 <col class="functions_name">
@@ -92,7 +92,7 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroSessionSpan.other"></a><h2>Types and Values</h2>
-<div class="informaltable"><table width="100%" border="0">
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="name">
 <col class="description">
@@ -105,8 +105,6 @@
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroSessionSpan.description"></a><h2>Description</h2>
-<p>
-</p>
 </div>
 <div class="refsect1">
 <a name="libbrasero-burn-BraseroSessionSpan.functions_details"></a><h2>Functions</h2>
@@ -116,9 +114,8 @@
 brasero_session_span_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
 <p>Creates a new <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> object.</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.2.5"></a><h4>Returns</h4>
+<a name="brasero-session-span-new.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> object</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -128,8 +125,8 @@ brasero_session_span_new (<em class="parameter"><code><span class="type">void</s
 brasero_session_span_again (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> *session</code></em>);</pre>
 <p>Checks whether some data were not included during calls to <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next" title="brasero_session_span_next ()"><code class="function">brasero_session_span_next()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.3.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-session-span-again.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -143,11 +140,10 @@ brasero_session_span_again (<em class="parameter"><code><a class="link" href="li
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.17.6.3.6"></a><h4>Returns</h4>
+<a name="brasero-session-span-again.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if there is not anymore data.
 BRASERO_BURN_RETRY if the operation was successful and a new <a class="link" href="libbrasero-burn-brasero-track-data-cfg.html#BraseroTrackDataCfg" title="struct BraseroTrackDataCfg"><span class="type">BraseroTrackDataCfg</span></a> was created.
 BRASERO_BURN_ERR otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -157,11 +153,11 @@ BRASERO_BURN_ERR otherwise.</p>
 brasero_session_span_possible (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> *session</code></em>);</pre>
 <p>Checks if a new <a class="link" href="libbrasero-burn-brasero-track-data.html#BraseroTrackData" title="struct BraseroTrackData"><span class="type">BraseroTrackData</span></a> can be created from the files remaining in the tree 
 after calls to <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next" title="brasero_session_span_next ()"><code class="function">brasero_session_span_next()</code></a>. The maximum size of the data will be the one
-of the medium inserted in the <a href="../libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> set for <em class="parameter"><code>session</code></em>
+of the medium inserted in the <a href="../html/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a> set for <em class="parameter"><code>session</code></em>
  (see <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>).</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.4.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-session-span-possible.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -175,11 +171,10 @@ of the medium inserted in the <a href="../libbrasero-media/libbrasero-media-bras
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.17.6.4.6"></a><h4>Returns</h4>
+<a name="brasero-session-span-possible.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if there is not anymore data.
 BRASERO_BURN_RETRY if the operation was successful and a new <a class="link" href="libbrasero-burn-brasero-track-data-cfg.html#BraseroTrackDataCfg" title="struct BraseroTrackDataCfg"><span class="type">BraseroTrackDataCfg</span></a> was created.
 BRASERO_BURN_ERR otherwise.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -190,8 +185,8 @@ brasero_session_span_start (<em class="parameter"><code><a class="link" href="li
 <p>Get the object ready for spanning a <a class="link" href="libbrasero-burn-BraseroBurnSession.html#BraseroBurnSession" title="struct BraseroBurnSession"><span class="type">BraseroBurnSession</span></a> object. This function
 must be called before <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-next" title="brasero_session_span_next ()"><code class="function">brasero_session_span_next()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.5.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-session-span-start.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -205,9 +200,8 @@ must be called before <a class="link" href="libbrasero-burn-BraseroSessionSpan.h
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.17.6.5.6"></a><h4>Returns</h4>
+<a name="brasero-session-span-start.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if successful.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -215,13 +209,13 @@ must be called before <a class="link" href="libbrasero-burn-BraseroSessionSpan.h
 <a name="brasero-session-span-next"></a><h3>brasero_session_span_next ()</h3>
 <pre class="programlisting"><a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="returnvalue">BraseroBurnResult</span></a>
 brasero_session_span_next (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> *session</code></em>);</pre>
-<p>Sets the next batch of data to be burnt onto the medium inserted in the <a href="../libbrasero-media/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>
+<p>Sets the next batch of data to be burnt onto the medium inserted in the <a href="../html/libbrasero-media-brasero-drive.html#BraseroDrive"><span class="type">BraseroDrive</span></a>
 set for <em class="parameter"><code>session</code></em>
  (see <a class="link" href="libbrasero-burn-BraseroBurnSession.html#brasero-burn-session-set-burner" title="brasero_burn_session_set_burner ()"><code class="function">brasero_burn_session_set_burner()</code></a>). Its free space or it capacity
 will be used as the maximum amount of data to be burnt.</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.6.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-session-span-next.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -235,9 +229,8 @@ will be used as the maximum amount of data to be burnt.</p>
 </table></div>
 </div>
 <div class="refsect3">
-<a name="id-1.2.17.6.6.6"></a><h4>Returns</h4>
+<a name="brasero-session-span-next.returns"></a><h4>Returns</h4>
 <p> a <a class="link" href="libbrasero-burn-brasero-enums.html#BraseroBurnResult" title="enum BraseroBurnResult"><span class="type">BraseroBurnResult</span></a>. BRASERO_BURN_OK if successful.</p>
-<p></p>
 </div>
 </div>
 <hr>
@@ -247,8 +240,8 @@ will be used as the maximum amount of data to be burnt.</p>
 brasero_session_span_stop (<em class="parameter"><code><a class="link" href="libbrasero-burn-BraseroSessionSpan.html#BraseroSessionSpan" title="struct BraseroSessionSpan"><span class="type">BraseroSessionSpan</span></a> *session</code></em>);</pre>
 <p>Ends and cleans a spanning operation started with <a class="link" href="libbrasero-burn-BraseroSessionSpan.html#brasero-session-span-start" title="brasero_session_span_start ()"><code class="function">brasero_session_span_start()</code></a>.</p>
 <div class="refsect3">
-<a name="id-1.2.17.6.7.5"></a><h4>Parameters</h4>
-<div class="informaltable"><table width="100%" border="0">
+<a name="brasero-session-span-stop.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
 <colgroup>
 <col width="150px" class="parameters_name">
 <col class="parameters_description">
@@ -271,13 +264,10 @@ brasero_session_span_stop (<em class="parameter"><code><a class="link" href="lib
 	BraseroBurnSession parent_instance;
 };
 </pre>
-<p>
-</p>
 </div>
 </div>
 </div>
 <div class="footer">
-<hr>
-          Generated by GTK-Doc V1.21.1</div>
+<hr>Generated by GTK-Doc V1.25</div>
 </body>
 </html>
