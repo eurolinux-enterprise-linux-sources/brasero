@@ -1,0 +1,151 @@
+From 9c5fe7d9669d9256179f8d284357e14ea0d8bf92 Mon Sep 17 00:00:00 2001
+From: Matthias Clasen <mclasen@redhat.com>
+Date: Tue, 8 Oct 2013 23:49:44 -0400
+Subject: [PATCH] Update the man page
+
+---
+ docs/brasero.1 | 110 ++++++++++++++++++++++++++++++++++++---------------------
+ 1 file changed, 70 insertions(+), 40 deletions(-)
+
+diff --git a/docs/brasero.1 b/docs/brasero.1
+index e7bffb0..8bae046 100644
+--- a/docs/brasero.1
++++ b/docs/brasero.1
+@@ -1,6 +1,6 @@
+-.TH BRASERO 1 "January 11, 2009" "GNOME"
++.TH BRASERO "1" "April 2011" "GNOME"
+ .SH NAME
+-brasero \- Simple and easy to use CD/DVD burning application for the Gnome Desktop
++brasero \- Simple and easy to use CD/DVD burning application for the GNOME Desktop
+ .SH SYNOPSIS
+ .B brasero
+ .RI [ options ]
+@@ -9,57 +9,87 @@ brasero \- Simple and easy to use CD/DVD burning application for the Gnome Deskt
+ .RI ...
+ .br
+ .SH DESCRIPTION
+-This manual page documents briefly the
+-.B brasero
+-command.
+-.PP
+-\fBBrasero\fP is a disc burning application. It is designed to be simple and easy to use.
+-It allows to create data CD/DVD, audio CD, to copy CD/DVD and to burn images. It has some nices features, such as a song, image and video previewer. It can also search for files (thanks to beagle) and display a playlist and its contents.
++\fBBrasero\fP is an easy-to-use application for burning CD-R/Ws and DVD-R/Ws.
++With Brasero you can create data, audio, or video CDs, DVDs, and SVCDs. You can
++copy existing disks, use image files, or create new projects. Brasero includes
++tools such as a media previewer, integrity checker and a cover creator.
+ .SH OPTIONS
+-This program follows the usual GNU command line syntax, with long options starting with two dashes (`-'). A summary of options is included below.
+-For a complete description, see the Info files.
++The following options are supported:
++.SS "Help Options:"
++.TP
++\fB\-h\fR, \fB\-\-help\fR
++Show help options
++.TP
++\fB\-\-help\-all\fR
++Show all help options
++
++.SS "Application Options:"
++.TP
++\fB\-p\fR, \fB\-\-project\fR=\fIPROJECT\fR
++Open the specified project
++.TP
++\fB\-l\fR, \fB\-\-playlist\fR=\fIPLAYLIST\fR
++Open the specified playlist as an audio project
++.TP
++\fB\-\-device\fR=\fIDEVICE\fR PATH
++Set the drive to be used for burning
++.TP
++\fB\-\-image\-file\fR
++Create an image file instead of burning
++.TP
++\fB\-a\fR, \fB\-\-audio\fR
++Open an audio project adding the URIs given on the command line
++.TP
++\fB\-d\fR, \fB\-\-data\fR
++Open a data project adding the URIs given on the command line
++.TP
++\fB\-c\fR, \fB\-\-copy\fR=\fIPATH\fR TO DEVICE
++Copy a disc
+ .TP
+-.B \-p, \-\-project=PROJECT
+-Open the specified project.
++\fB\-j\fR, \fB\-\-cover\fR=\fIPATH\fR TO COVER
++Cover to use
+ .TP
+-.B \-a, \-\-audio
+-Open an empty audio project.
++\fB\-o\fR, \fB\-\-video\fR
++Open a video project adding the URIs given on the command line
+ .TP
+-.B \-d, \-\-data
+-Open an empty data project.
++\fB\-i\fR, \fB\-\-image\fR=\fIPATH\fR TO IMAGE
++URI of an image file to burn (autodetected)
+ .TP
+-.B \-c, \-\-copy=PATH
+-Copy a disc.
++\fB\-e\fR, \fB\-\-empty\fR
++Force Brasero to display the project selection page
+ .TP
+-.B \-j, \-\-cover=PATH
+-Cover to use.
++\fB\-b\fR, \fB\-\-blank\fR=\fIPATH\fR TO DEVICE
++Open the blank disc dialog
+ .TP
+-.B \-o, \-\-video
+-Open a video project adding the URIs given on the command line.
++\fB\-k\fR, \fB\-\-check\fR=\fIPATH\fR TO DEVICE
++Open the check disc dialog
+ .TP
+-.B \-i, \-\-image=PATH
+-Uri of an image file or a cue file to be burnt (autodetected).
++\fB\-n\fR, \fB\-\-ncb\fR
++Burn the contents of the burn:// URI
+ .TP
+-.B \-e,	\-\-empty
+-Force brasero to display the project selection page.
++\fB\-\-immediately\fR
++Start burning immediately
+ .TP
+-.B \-b,	\-\-blank
+-Open the blank disc dialog.
++\fB\-\-no\-existing\-session\fR
++Don't connect to an already\-running instance
+ .TP
+-.B \-k, \-\-check
+-Open the check disc dialog.
++\fB\-r\fR, \fB\-\-burn\-and\-remove\-project\fR=\fIPATH\fR
++Burn the specified project and remove it (mainly useful for integration with 
++other applications)
+ .TP
+-.B \-n, \-\-ncb
+-Open a data project with the contents of burn:/// URI.
++\fB\-x\fR, \fB\-\-transient\-for\fR
++The XID of the parent window
+ .TP
+-.B \-r, \-\-burn-and-remove-project=PATH
+-Burn the specified project and REMOVE it.
++\fB\-\-display\fR=\fIDISPLAY\fR
++X display to use
++.SS "Debugging Options:"
+ .TP
+-.B \-\-display=DISPLAY
+-X display to use.
++\fB\-\-brasero\-media\-debug\fR
++Display debug messages for Brasero media library
+ .TP
+-.B \-?, \-\-help
+-Show summary of options.
++\fB\-g\fR, \fB\-\-brasero\-burn\-debug\fR
++Display debug messages for Brasero burn library
++.SH BUGS
++Please report any \fBbrasero\fP bugs you find to https://bugzilla.gnome.org.
+ .SH AUTHOR
+-Brasero manual page was written by Philippe Rouquier
+-<philippero@libertysurf.fr> and Luis Medinas <lmedinas@gmail.com>.
++Brasero\'s manual page was written by Jeremy Bicha <jeremy@bicha.net>.
+-- 
+1.8.3.1
+
