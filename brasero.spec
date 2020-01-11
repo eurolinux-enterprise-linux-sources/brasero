@@ -1,7 +1,7 @@
 
 Name:      brasero
 Version:   3.8.0
-Release:   3%{?dist}
+Release:   7%{?dist}
 Summary:   Gnome CD/DVD burning application
 Group:     Applications/Multimedia
 # see https://bugzilla.gnome.org/show_bug.cgi?id=683503
@@ -34,6 +34,7 @@ BuildRequires:  autoconf automake libtool
 BuildRequires:  gnome-common
 BuildRequires:  itstool
 BuildRequires:  yelp-tools
+BuildRequires:  brasero-devel
 
 Requires:  dvd+rw-tools
 Requires:  cdrecord
@@ -41,6 +42,7 @@ Requires:  mkisofs
 Requires:  cdda2wav
 %ifnarch s390 s390x
 Requires:  cdrdao
+Requires:  brasero-libs
 %endif
 
 
@@ -55,6 +57,10 @@ Patch1: 0001-Update-the-man-page.patch
 # https://bugzilla.redhat.com/show_bug.cgi?id=861191
 # brasero ignores/discards ISRC
 Patch2: brasero-3.8.0-fix-isrc-tag.patch
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=1030319
+# [brasero] Translations incomplete
+Patch3: complete-l10n.patch
 
 Requires(post):    shared-mime-info
 Requires(postun):  shared-mime-info
@@ -110,6 +116,7 @@ developing brasero applications.
 %patch0 -p1 -b .copy-BD
 %patch1 -p1 -b .man
 %patch2 -p1 -b .fix-isrc-tag
+%patch3 -p2 -b .complete-l10n
 
 # https://bugzilla.gnome.org/show_bug.cgi?id=692664
 sed -i -e '/tracker/ s/0\.14/0.16/g' configure*
@@ -213,6 +220,18 @@ glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
 
 
 %changelog
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 3.8.0-7
+- Mass rebuild 2014-01-24
+
+* Tue Jan  7 2014 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-6
+- Add dep on own library (related: #1045140)
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.8.0-5
+- Mass rebuild 2013-12-27
+
+* Thu Dec  5 2013 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-4
+- Complete translations (related: #1030319)
+
 * Thu Nov  7 2013 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-3
 - Fix ISRC handling (related: #861191)
 
