@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" xml:lang="ca">
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="index" xml:lang="ca">
 
-  <title>
-    <media type="image" src="figures/logo48.png" its:translate="no"/>
-    Brasero Help
-  </title>
+  <title>Ajuda del Brasero</title>
 
   <section id="new-project" style="2column">
     <title>Creació d'un projecte nou</title>

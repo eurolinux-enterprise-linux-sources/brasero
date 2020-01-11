@@ -3,47 +3,44 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Skapa en identisk kopia av en skiva.</desc>
+    <desc>Create an identical copy of a disc.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons DelaLika 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Nylander</mal:name>
-      <mal:email>po@danielnylander.se</mal:email>
-      <mal:years>2008, 2009, 2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Anders Jonsson</mal:name>
-      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
-      <mal:years>2015</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Kopiera skiva</title>
+  <title>Copy disc</title>
 
   <steps>
     <item>
-      <p>Klicka på <gui>Skivkopia</gui> på startsidan eller välj <guiseq><gui>Projekt</gui><gui>Nytt projekt</gui><gui>Kopiera skiva… </gui></guiseq>.</p>
+      <p>Click <gui>Disc copy</gui> on the start page, or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Copy Disc...
+      </gui></guiseq>.</p>
     </item>
     <item>
-      <p>Välj skivan du vill kopiera från rullgardinslistan under <gui>Välj skiva att kopiera</gui>. Om du har mer är en skivenhet bör alla skivor som för tillfället är i dem listas.</p>
+      <p>Select the disc you would like to copy from the drop down list below
+      <gui>Select disc to copy</gui>. If you have more than one disc drive, all
+      discs which are currently in them should be listed.</p>
     </item>
     <item>
-      <p>Välj huruvida du vill skapa en kopia till en annan skiva eller skapa en avbildning för senare användning.</p>
+      <p>Choose whether you want to make a copy to another disc or create an
+      image for later use.</p>
     </item>
     <item>
-      <p>Klicka på <gui>Egenskaper</gui>-knappen för att välja brännhastighet och andra anpassade alternativ.</p>
+      <p>Click the <gui>Properties</gui> button to select burning speed and
+      other custom options.</p>
     </item>
     <item>
-      <p>Klicka på <gui>Kopiera</gui> för att börja kopiera skivan, eller <gui>Gör flera kopior</gui> om du tänker göra mer än en kopia av skivan.</p>
+      <p>Click <gui>Copy</gui> to start copying the disc, or <gui>Make Several
+      Copies</gui>, if you plan to make more than one copy of the disc.</p>
       <note>
-	<p>Om du kopierar skivan och har endast en skivenhet kommer du ombes att ersätta skivan du kopierar med en skrivbar skiva efter att innehållet temporärt har kopierats till din hårddisk.</p>
+	<p>If you are copying the disc and have only one disc drive, you will
+	be asked to replace the disc you are copying with a writable one after
+	the contents are copied temporarily to your hard disk.</p>
       </note>
     </item>
   </steps>

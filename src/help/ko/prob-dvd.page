@@ -11,29 +11,23 @@
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>크리에이티브 커먼즈 동일조건변경허락 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>조성호</mal:name>
+      <mal:name>Seong-ho Cho</mal:name>
       <mal:email>darkcircle.0426@gmail.com</mal:email>
-      <mal:years>2011, 2013, 2016.</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>류창우</mal:name>
-      <mal:email>cwryu@debian.org</mal:email>
-      <mal:years>2015.</mal:years>
+      <mal:years>2011, 2013.</mal:years>
     </mal:credit>
   </info>
 
   <title>DVD를 만드는 문제</title>
 
-  <p>어떤 DVD-R과 DVD-RW 유형은 모든 기록기와의 호환성이 없습니다. 기록기에서 DVD-R과 DVD-RW를 기록할 수 있는지 찾아보려면 다음을 확인해봅니다.</p>
+  <p>어떤 DVD-R과 DVD-RW 유형은 모든 기록기와 호환되지 않습니다. 기록기에서 DVD-R과 DVD-RW를 기록할 수 있는지 찾아보려면 다음을 확인해봅니다.</p>
 
   <steps>
     <item>
-      <p>DVD 드라이브가 DVD+나 DVD- 디스크를 인식할 수 있는지 확인합니다. "멀티" 표시가 있다면, 보통 둘 다 인식함을 나타냅니다. DVD 드라이브의 표시와 디스크의 표시가 같은지 확인합니다.</p>
+      <p>DVD 드라이브가 DVD+나 DVD- 디스크를 인식할 수 있는지 확인합니다. "멀티"라고 표시되어 있다면, 보통 둘 다 인식함을 나타냅니다. DVD 드라이브에서 본 것과 디스크가 같게 보이는지 확인합니다.</p>
     </item>
     <item>
       <p>디스크가 양면인지 단면인지 확인합니다: 어떤 DVD 드라이브는 양면 디스크를 쓸 수 없습니다.</p>

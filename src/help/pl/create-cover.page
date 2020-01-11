@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#tools"/>
-    <desc>Tworzenie wkładki do pudełka.</desc>
+    <desc>Create an inlay for a jewel case.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -11,51 +11,53 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Piotr Drąg</mal:name>
-      <mal:email>piotrdrag@gmail.com</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Aviary.pl</mal:name>
-      <mal:email>community-poland@mozilla.org</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Tworzenie okładki</title>
+  <title>Create a cover</title>
 
-  <p>Można używać programu <app>Brasero</app> do tworzenia wkładek do pudełek. Kliknij <guiseq><gui>Narzędzia</gui> <gui>Edytor okładek</gui></guiseq>.</p>
+  <p>You can use <app>Brasero</app> to create inlays for your jewel cases.
+  Access the creator by clicking <guiseq><gui>Tools</gui>
+  <gui>Cover Editor</gui></guiseq>.</p>
 
   <note style="tip">
-    <p>Jeśli tworzony jest projekt dźwiękowy i ukończono składanie projektu przed utworzeniem wkładki, to po włączeniu <gui>Edytora okładek</gui> z okna projektu dźwiękowego lista ścieżek zostanie automatycznie dodana do tylnej okładki.</p>
+    <p>If you are creating an audio project and finish putting together the
+    project before creating an inlay, then when you access the <gui>Cover
+    Editor</gui> interface from the audio project window, the tracks will
+    automatically be listed on the back cover.</p>
   </note>
 
   <note style="important">
-    <p>Zamknięcie <gui>Edytora okładek</gui> spowoduje utratę wprowadzonych zmian.</p>
+    <p>If you close the <gui>Cover Editor</gui>, your changes will be lost.</p>
   </note>
 
   <steps>
     <item>
-      <p>Otwórz <gui>Edytor okładek</gui>.</p>
+      <p>Open the <gui>Cover Editor</gui>.</p>
     </item>
     <item>
-      <p>Wybierz formatowanie i wpisz tekst. Można przewinąć w dół, aby zobaczyć boczną i tylną wkładkę do pudełka.</p>
+      <p>Choose the formatting you wish to use for the text and type the text,
+      scrolling down to see the side and back inlay for the jewel case.</p>
       <note style="tip">
-        <p>Od razu po włączeniu <gui>Edytora okładek</gui> nie będzie można kliknąć żadnych opcji formatowania tekstu. Kliknij okładkę, aby móc ich użyć.</p>
+        <p>When you first see the <gui>Cover Editor</gui> dialog, you will not
+        be able to click on any of the text formatting options. Click on the
+        cover you want to work on to be able to use those.</p>
       </note>
     </item>
     <item>
-      <p>Kliknij ikonę <gui>Właściwości tła</gui> na pasku narzędziowym, aby dodać tło do bieżącej okładki lub kliknij okładkę do modyfikacji prawym przyciskiem myszy i wybierz <gui>Ustaw właściwości tła</gui>. Można wybrać kolor lub obraz.</p>
+      <p>Click the <gui>Background properties</gui> toolbar icon to add a
+      background for the current cover, or right click on the cover you wish to
+      edit and select <gui>Set Background Properties</gui>. You can choose to
+      use a colored background or to select a background image.</p>
       <note style="bug">
-        <p><app>Brasero</app> czasami ulega awarii po kliknięciu przycisku <gui>Zamknij</gui>, jeśli wybrano wyśrodkowany obraz jako tło.</p>
+        <p>If you select a centered background image, <app>Brasero</app>
+	sometimes crashes when you click the <gui>Close</gui> button.</p>
       </note>
-      <p>Kliknij przycisk <gui>Zamknij</gui>, aby zastosować zmiany i zamknąć okno <gui>Właściwości tła</gui>.</p>
+      <p>Click the <gui>Close</gui> button to apply the changes and close the
+      <gui>Background Properties</gui> dialog.</p>
     </item>
     <item>
-      <p>Wydrukuj okładkę za pomocą przycisku <gui>Wydrukuj</gui>, położonego w górnym prawym rogu okna.</p>
+      <p>Print the cover using the <gui>Print</gui> button, which is located in
+      the top-right corner of the dialog.</p>
     </item>
   </steps>
 

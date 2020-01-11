@@ -1,0 +1,25 @@
+From fa10b25ce7d8a1c39970741ad21051bddb390b1d Mon Sep 17 00:00:00 2001
+From: Tomas Bzatek <tbzatek@redhat.com>
+Date: Thu, 4 Oct 2012 15:33:12 +0200
+Subject: [PATCH] readom: Support reading Blu-ray media
+
+https://bugzilla.gnome.org/show_bug.cgi?id=685492
+---
+ plugins/cdrkit/burn-readom.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/plugins/cdrkit/burn-readom.c b/plugins/cdrkit/burn-readom.c
+index f5459b4..02d7934 100644
+--- a/plugins/cdrkit/burn-readom.c
++++ b/plugins/cdrkit/burn-readom.c
+@@ -476,6 +476,7 @@ brasero_readom_export_caps (BraseroPlugin *plugin)
+ 
+ 	input = brasero_caps_disc_new (BRASERO_MEDIUM_CD|
+ 				       BRASERO_MEDIUM_DVD|
++				       BRASERO_MEDIUM_BD|
+ 				       BRASERO_MEDIUM_DUAL_L|
+ 				       BRASERO_MEDIUM_PLUS|
+ 				       BRASERO_MEDIUM_SEQUENTIAL|
+-- 
+1.7.12.1
+

@@ -11,29 +11,13 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Adrian Guniš</mal:name>
-      <mal:email>andygun696@gmail.com</mal:email>
-      <mal:years>2009, 2010</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Štěpán Šimsa</mal:name>
-      <mal:email>simsa.st@gmail.com</mal:email>
-      <mal:years>2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Marek Černocký</mal:name>
-      <mal:email>marek@manet.cz</mal:email>
-      <mal:years>2013</mal:years>
-    </mal:credit>
   </info>
 
   <title>Vytvořit obal</title>
 
-  <p>Můžete použít aplikaci <app>Brasero</app> pro vytváření štítků do svých obalů na CD. Otevřete editor obalů kliknutím na <guiseq><gui>Nástroje</gui><gui>Editor obalů</gui></guiseq>.</p>
+  <p>You can use <app>Brasero</app> to create inlays for your jewel cases.
+  Access the creator by clicking <guiseq><gui>Tools</gui>
+  <gui>Cover Editor</gui></guiseq>.</p>
 
   <note style="tip">
     <p>Pokud vytváříte hudební projekt a sestavíte projekt před vytvářením štítků do obalů, tak potom, když otevřete prostředí <gui>Editor obalů</gui> z okna hudebního projektu, stopy budou automaticky vypsány na zadním obalu.</p>

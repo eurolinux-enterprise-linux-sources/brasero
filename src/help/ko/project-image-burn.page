@@ -17,19 +17,13 @@
       <email>kittykat3756@gmail.com</email>
     </credit>
     <license>
-      <p>크리에이티브 커먼즈 동일조건변경허락 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>조성호</mal:name>
+      <mal:name>Seong-ho Cho</mal:name>
       <mal:email>darkcircle.0426@gmail.com</mal:email>
-      <mal:years>2011, 2013, 2016.</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>류창우</mal:name>
-      <mal:email>cwryu@debian.org</mal:email>
-      <mal:years>2015.</mal:years>
+      <mal:years>2011, 2013.</mal:years>
     </mal:credit>
   </info>
 
@@ -51,7 +45,7 @@
     </item>
     <item>
       <p><gui>기록할 디스크를 선택하십시오</gui> 아래에 있는 드롭 다운 목록에서 복사하고 싶은 디스크를 선택합니다. 하나 이상의 디스크 드라이브가 있다면, 현재 드라이브에 있는 모든 디스크가 목록에 나타납니다.</p>
-        <note><p>디스크를 선택하면 <app>브라세로</app>에서는 디스크를 굽고 난 후 디스크에 남을 빈 공간을 보여줍니다.</p></note>
+        <note><p>디스크를 선택하면 <app>브라세로</app>에서는 디스크를 굽고 난 후 디스크에 남을 빈 공간이 얼마나 될지 보여줍니다.</p></note>
     </item>
     <item>
       <p><gui>속성</gui> 단추를 눌러 굽기 속도와 다른 사용자 정의 옵션을 선택합니다.</p>

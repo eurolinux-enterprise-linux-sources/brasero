@@ -4,47 +4,22 @@
 #
 # Amitakhya Phukan <aphukan@fedoraproject.org>, 2009.
 # Amitakhya Phukan <aphukan@redhat.com>, 2010.
-# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011, 2012, 2013, 2014.
+# Nilamdyuti Goswami <ngoswami@redhat.com>, 2011, 2012, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: brasero master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=brasero&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2014-01-07 09:11+0000\n"
-"PO-Revision-Date: 2014-01-21 20:01+0630\n"
+"POT-Creation-Date: 2013-03-07 03:41+0000\n"
+"PO-Revision-Date: 2013-03-07 12:36+0530\n"
 "Last-Translator: Nilamdyuti Goswami <ngoswami@redhat.com>\n"
 "Language-Team: Assamese <kde-i18n-doc@kde.org>\n"
-"Language: as\n"
+"Language: as_IN\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
-
-#: ../data/brasero.appdata.xml.in.h:1
-msgid ""
-"Brasero is a application to burn CD/DVD for the GNOME Desktop. It is "
-"designed to be as simple as possible and has some unique features to enable "
-"users to create their discs easily and quickly."
-msgstr ""
-"Brasero হল GNOME ডেস্কটপৰ বাবে CD/DVD বাৰ্ণ কৰাৰ এটা এপ্লিকেচন। ইয়াক যিমান "
-"সম্ভব "
-"সহজ কৰিবলৈ ৰূপাঙ্কণ কৰা হৈছে আৰু ব্যৱহাৰকাৰীসকলে তেওলোকৰ ডিস্কবোৰ সহজতে আৰু "
-"দ্ৰুতভাৱে সৃষ্টি কৰিবলৈ কিছুমান অবিকল্প বৈশিষ্ট্য আছে।"
-
-#: ../data/brasero.appdata.xml.in.h:2
-msgid ""
-"Brasero can create, copy and burn Data and Audio CD/DVDs. It fully supports "
-"CD-TEXT, multisession and joliet extensions. You can simply drag and drop "
-"files from other local applications or from remote shared drives to easily "
-"burn them to a disc."
-msgstr ""
-"Brasero এ তথ্য আৰু অডিঅ' CD/DVDs সৃষ্টি, কপি আৰু বাৰ্ণ কৰিব পাৰে। ই CD-TEXT, "
-"বহুঅধিবেশন "
-"আৰু joilet সম্প্ৰসাৰনসমূহ সম্পূৰ্ণভাৱে সমৰ্থন কৰে। আপুনি ফাইলসমূহক সহজতে এটা "
-"ডিস্কত বাৰ্ণ কৰিবলৈ "
-"অন্য স্থানীয় এপ্লিকেচন অথবা দূৰৱৰ্তী অংশীদাৰী কৰা ড্ৰাইভসমূহৰ পৰা ড্ৰেগ আৰু "
-"ড্ৰপ কৰিব পাৰে।"
 
 #: ../data/brasero.desktop.in.in.h:1
 msgid "Brasero"
@@ -86,11 +61,11 @@ msgstr "এটা ভিডিঅ' প্ৰকল্প সৃষ্টি ক�
 msgid "Brasero project file"
 msgstr "Brasero প্ৰকল্প ফাইল"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:1
+#: ../data/org.gnome.brasero.gschema.xml.in.h:1
 msgid "Should Nautilus extension output debug statements"
 msgstr "Nautilus ৰ সম্প্ৰসাৰণে ডিবাগ বিবৃতিসমূহ আউটপুট কৰিব লাগে নে"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:2
+#: ../data/org.gnome.brasero.gschema.xml.in.h:2
 msgid ""
 "Should Nautilus extension output debug statements. The value should be set "
 "to true if it should."
@@ -99,23 +74,23 @@ msgstr ""
 "ধাৰ্য্য "
 "কৰিব লাগিব যদি ই এনেকুৱা কৰে।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:3
+#: ../data/org.gnome.brasero.gschema.xml.in.h:3
 msgid "The type of checksum used for images"
 msgstr "ছবিসমূহৰ বাবে ব্যৱহৃত checksum ৰ ধৰণ"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:4
+#: ../data/org.gnome.brasero.gschema.xml.in.h:4
 msgid "Set to 0 for MD5, 1 for SHA1 and 2 for SHA256"
 msgstr "MD5 ৰ বাবে ০, SHA1 ৰ বাবে ১ আৰু SHA256 ৰ বাবে ২ ধাৰ্য্য কৰক"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:5
+#: ../data/org.gnome.brasero.gschema.xml.in.h:5
 msgid "The type of checksum used for files"
 msgstr "ফাইলসমূহৰ বাবে ব্যৱহৃত checksum ৰ ধৰণ"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:6
+#: ../data/org.gnome.brasero.gschema.xml.in.h:6
 msgid "Directory to use for temporary files"
 msgstr "অস্থায়ী ফাইলসমূহ ব্যৱহাৰ কৰাৰ কাৰণে ডাইৰেকটৰি"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:7
+#: ../data/org.gnome.brasero.gschema.xml.in.h:7
 msgid ""
 "Contains the path to the directory where brasero should store temporary "
 "files. If that value is empty, the default directory set for glib will be "
@@ -125,11 +100,11 @@ msgstr ""
 "যদি "
 "সেইটো মান ৰিক্ত, তেনেহলে glib ৰ বাবে সংহিত ডাইৰেকটৰি ব্যৱহাৰ কৰা হব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:8
+#: ../data/org.gnome.brasero.gschema.xml.in.h:8
 msgid "Favourite burn engine"
 msgstr "পছন্দৰ বাৰ্ণ  ইঞ্জিন"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:9
+#: ../data/org.gnome.brasero.gschema.xml.in.h:9
 msgid ""
 "Contains the name of the favourite burn engine suite installed. It will be "
 "used if possible."
@@ -137,11 +112,11 @@ msgstr ""
 "ইনস্টল কৰা পছন্দৰ বাৰ্ণ ইঞ্জিন সুইটৰ নাম অন্তৰ্ভুক্ত থাকে। সম্ভৱ হ'লে ইয়াক "
 "ব্যৱহাৰ কৰক।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:10
+#: ../data/org.gnome.brasero.gschema.xml.in.h:10
 msgid "White list of additional plugins to use"
 msgstr "ব্যৱহাৰযোগ্য অতিৰিক্ত প্লাগিনৰ স্বেত তালিকা"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:11
+#: ../data/org.gnome.brasero.gschema.xml.in.h:11
 msgid ""
 "Contains the list of additional plugins Brasero will use to burn discs. If "
 "set to NULL, Brasero will load them all."
@@ -150,11 +125,11 @@ msgstr ""
 "ইয়াত "
 "আছে। মান NULL ধাৰ্য কৰা হ'লে, Brasero দ্বাৰা সকলো প্লাগিন ল'ড কৰক।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:12
+#: ../data/org.gnome.brasero.gschema.xml.in.h:12
 msgid "Enable the \"-immed\" flag with cdrecord"
 msgstr "cdrecord ৰে \"-immed\" ফ্ল্যাগ সামৰ্থবান কৰক"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:13
+#: ../data/org.gnome.brasero.gschema.xml.in.h:13
 msgid ""
 "Whether to use the \"-immed\" flag with cdrecord. Use with caution (set to "
 "true) as it's only a workaround for some drives/setups."
@@ -164,11 +139,11 @@ msgstr ""
 "ড্ৰাইভসমূহ/স্থাপনসমূহৰ "
 "বাবে অকল বিকল্প ব্যৱস্থা উপলব্ধ কৰাৰ উদ্দেশ্যে প্ৰয়োগ কৰা যাব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:14
+#: ../data/org.gnome.brasero.gschema.xml.in.h:14
 msgid "Whether to use the \"-use-the-force-luke=dao\" flag with growisofs"
 msgstr "growisofs ৰ সৈতে \"-use-the-force-luke=dao\" ফ্ল্যাগ ব্যৱহাৰ কৰা হব নে"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:15
+#: ../data/org.gnome.brasero.gschema.xml.in.h:15
 msgid ""
 "Whether to use the \"-use-the-force-luke=dao\" flag with growisofs. Set to "
 "false, brasero won't use it; it may be a workaround for some drives/setups."
@@ -177,21 +152,21 @@ msgstr ""
 "false (সত্য নহয়) নিৰ্ধাৰিত হ'লে, brasero দ্বাৰা ইয়াক ব্যৱহাৰ কৰা নহব; কিছু "
 "ড্ৰাইভসমূহ/স্থাপনসমূহ বিকল্প ব্যৱস্থা ৰূপে ইয়াক ব্যৱহাৰ কৰা হব পাৰে।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:16
+#: ../data/org.gnome.brasero.gschema.xml.in.h:16
 msgid "Used in conjunction with the \"-immed\" flag with cdrecord"
 msgstr ""
 "cdrecord ৰ বাবে \"-immed\" ফ্ল্যাগৰ সৈতে সম্পূৰ্ণ একসম্পূৰ্ণ ব্যৱহাৰ কৰা হয়"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:17
+#: ../data/org.gnome.brasero.gschema.xml.in.h:17
 msgid "Used in conjunction with the \"-immed\" flag with cdrecord."
 msgstr ""
 "cdrecord ৰ বাবে \"-immed\" ফ্ল্যাগৰ সৈতে সম্পূৰ্ণ একসম্পূৰ্ণ ব্যৱহাৰ কৰা হয়"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:18
+#: ../data/org.gnome.brasero.gschema.xml.in.h:18
 msgid "Whether to use the \"--driver generic-mmc-raw\" flag with cdrdao"
 msgstr "cdrdao ৰ সৈতে \"--driver generic-mmc-raw\" ফ্ল্যাগ ব্যৱহাৰ কৰা হব নে"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:19
+#: ../data/org.gnome.brasero.gschema.xml.in.h:19
 msgid ""
 "Whether to use the \"--driver generic-mmc-raw\" flag with cdrdao. Set to "
 "True, brasero will use it; it may be a workaround for some drives/setups."
@@ -202,11 +177,11 @@ msgstr ""
 "মান "
 "সহায়ত বিকল্প ব্যৱস্থা প্ৰয়োগ কৰা যাব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:20
+#: ../data/org.gnome.brasero.gschema.xml.in.h:20
 msgid "The last browsed folder while looking for images to burn"
 msgstr "বাৰ্ণ কৰিব লগিয়া ছবিসমূহৰ বাবে সৰ্বশেষ ব্ৰাউছ কৰা ফোল্ডাৰ"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:21
+#: ../data/org.gnome.brasero.gschema.xml.in.h:21
 msgid ""
 "Contains the absolute path of the directory that was last browsed for images "
 "to burn"
@@ -215,20 +190,20 @@ msgstr ""
 "পথ "
 "অন্তৰ্ভুক্ত কৰে"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:22
+#: ../data/org.gnome.brasero.gschema.xml.in.h:22
 msgid "Enable file preview"
 msgstr "ফাইলৰ পূৰ্বদৰ্শন সক্ৰিয় কৰক"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:23
+#: ../data/org.gnome.brasero.gschema.xml.in.h:23
 msgid "Whether to display file preview. Set to true to use it."
 msgstr ""
 "ফাইলৰ পূৰ্বদৰ্শন কৰা হব নে নাই। ইয়াক ব্যৱহাৰ কৰাৰ বাবে মান true নিৰ্ধাৰণ কৰক।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:24
+#: ../data/org.gnome.brasero.gschema.xml.in.h:24
 msgid "Should brasero filter hidden files"
 msgstr "লুকুৱা ফাইল brasero দ্বাৰা পৰিস্ৰাৱন কৰা হব নেকি"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:25
+#: ../data/org.gnome.brasero.gschema.xml.in.h:25
 msgid ""
 "Should brasero filter hidden files. Set to true, brasero will filter hidden "
 "files."
@@ -236,11 +211,11 @@ msgstr ""
 "লুকুৱা ফাইল brasero দ্বাৰা পৰিস্ৰাৱন কৰা হব নেকি। মান true হ'লে, লুকুৱা ফাইল "
 "brasero দ্বাৰা পৰিস্ৰাৱন কৰা হব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:26
+#: ../data/org.gnome.brasero.gschema.xml.in.h:26
 msgid "Replace symbolic links by their targets"
 msgstr "সাংকেতিক লিংকৰ পৰিবৰ্তে মূল অৱস্থান ধাৰ্য্য কৰক"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:27
+#: ../data/org.gnome.brasero.gschema.xml.in.h:27
 msgid ""
 "Should brasero replace symbolic links by their target files in the project. "
 "Set to true, brasero will replace symbolic links."
@@ -251,11 +226,11 @@ msgstr ""
 "কৰা "
 "হব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:28
+#: ../data/org.gnome.brasero.gschema.xml.in.h:28
 msgid "Should brasero filter broken symbolic links"
 msgstr "brasero এ ভগ্ন সাংকেতিক লিংকসমূহ পৰিস্ৰাৱন কৰিব নে"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:29
+#: ../data/org.gnome.brasero.gschema.xml.in.h:29
 msgid ""
 "Should brasero filter broken symbolic links. Set to true, brasero will "
 "filter broken symbolic links."
@@ -264,11 +239,11 @@ msgstr ""
 "ভগ্ন "
 "সাংকেতিক লিংকসমূহ brasero দ্বাৰা পৰিস্ৰাৱন কৰা হব।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:30
+#: ../data/org.gnome.brasero.gschema.xml.in.h:30
 msgid "The priority value for the plugin"
 msgstr "প্লাগিনৰ বাবে প্ৰাধন্যত মান"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:31
+#: ../data/org.gnome.brasero.gschema.xml.in.h:31
 msgid ""
 "When several plugins are available for the same task, this value is used to "
 "determine which plugin should be given priority. 0 means the plugin's native "
@@ -283,11 +258,11 @@ msgstr ""
 "দিয়ে। "
 "এটা ঋণাত্মক মানে প্লাগিনক অসামৰ্থবান কৰি দিয়ে।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:32
+#: ../data/org.gnome.brasero.gschema.xml.in.h:32
 msgid "Burning flags to be used"
 msgstr "ব্যৱহাৰ হব লগিয়া বাৰ্ণিং ফ্লেগ"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:33
+#: ../data/org.gnome.brasero.gschema.xml.in.h:33
 msgid ""
 "This value represents the burning flags that were used in such a context the "
 "last time."
@@ -295,11 +270,11 @@ msgstr ""
 "এইটো মানে এইখন পৰিপ্ৰেক্ষতিত সৰ্বশেষ ব্যৱহাৰ হোৱা বাৰ্ণ হৈ থকা ফ্লেগসমূহ "
 "ব্যক্ত কৰে।"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:34
+#: ../data/org.gnome.brasero.gschema.xml.in.h:34
 msgid "The speed to be used"
 msgstr "ব্যৱহাৰ হ'ব লগিয়া গতি"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:35
+#: ../data/org.gnome.brasero.gschema.xml.in.h:35
 msgid ""
 "This value represents the speed that was used in such a context the last "
 "time."
@@ -433,7 +408,7 @@ msgstr "ডিস্কত পৰ্যাপ্ত ৰিক্ত স্থা
 
 #. Translators: %s is the name of a missing application
 #: ../libbrasero-burn/brasero-burn.c:1708
-#: ../libbrasero-burn/brasero-burn-options.c:1187
+#: ../libbrasero-burn/brasero-burn-options.c:1180
 #: ../src/brasero-project.c:1385
 #, c-format
 msgid "%s (application)"
@@ -441,7 +416,7 @@ msgstr "%s (এপ্লিকেচন)"
 
 #. Translators: %s is the name of a missing library
 #: ../libbrasero-burn/brasero-burn.c:1714
-#: ../libbrasero-burn/brasero-burn-options.c:1193
+#: ../libbrasero-burn/brasero-burn-options.c:1186
 #: ../src/brasero-project.c:1391
 #, c-format
 msgid "%s (library)"
@@ -449,7 +424,7 @@ msgstr "%s (লাইব্ৰেৰি)"
 
 #. Translators: %s is the name of a missing GStreamer plugin
 #: ../libbrasero-burn/brasero-burn.c:1719
-#: ../libbrasero-burn/brasero-burn-options.c:1198
+#: ../libbrasero-burn/brasero-burn-options.c:1191
 #: ../src/brasero-project.c:1396
 #, c-format
 msgid "%s (GStreamer plugin)"
@@ -489,12 +464,12 @@ msgstr "অস্থায়ী ছবিৰ কোনো বিন্যাস �
 #: ../nautilus/nautilus-burn-extension.c:218
 #: ../plugins/cdrkit/burn-genisoimage.c:368
 #: ../plugins/cdrkit/burn-readom.c:129 ../plugins/cdrkit/burn-readom.c:370
-#: ../plugins/cdrkit/burn-wodim.c:725 ../plugins/cdrkit/burn-wodim.c:837
-#: ../plugins/cdrkit/burn-wodim.c:852 ../plugins/cdrtools/burn-cdrecord.c:835
-#: ../plugins/cdrtools/burn-cdrecord.c:850
+#: ../plugins/cdrkit/burn-wodim.c:726 ../plugins/cdrkit/burn-wodim.c:838
+#: ../plugins/cdrkit/burn-wodim.c:853 ../plugins/cdrtools/burn-cdrecord.c:836
+#: ../plugins/cdrtools/burn-cdrecord.c:851
 #: ../plugins/cdrtools/burn-mkisofs.c:368
 #: ../plugins/cdrtools/burn-readcd.c:130 ../plugins/cdrtools/burn-readcd.c:380
-#: ../src/brasero-app.c:786
+#: ../src/brasero-app.c:784
 #, c-format
 msgid "An internal error occurred"
 msgstr "অভ্যন্তৰীণ ত্ৰুটিয়ে দেখা দিছে"
@@ -666,7 +641,7 @@ msgid "Please insert a rewritable disc holding data."
 msgstr "অনুগ্ৰহ কৰি তথ্য এটা পুনৰলিখনযোগ্য ডিস্ক সুমুৱাওক।"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:557
-#: ../libbrasero-burn/brasero-burn-options.c:501
+#: ../libbrasero-burn/brasero-burn-options.c:494
 msgid "Please insert a disc holding data."
 msgstr "অনুগ্ৰহ কৰি তথ্য অন্তৰ্ভুক্ত কৰা এটা ডিস্ক সুমুৱাওক।"
 
@@ -742,7 +717,7 @@ msgstr ""
 #: ../libbrasero-burn/brasero-burn-dialog.c:613
 #: ../libbrasero-burn/brasero-burn-dialog.c:2171
 #: ../libbrasero-burn/brasero-burn-dialog.c:2185
-#: ../libbrasero-burn/brasero-burn-options.c:457 ../src/brasero-project.c:995
+#: ../libbrasero-burn/brasero-burn-options.c:450 ../src/brasero-project.c:995
 msgid "Please insert a writable CD or DVD."
 msgstr "অনুগ্ৰহ কৰি লিখনযোগ্য CD অথবা DVD সুমুৱাওক।"
 
@@ -992,7 +967,7 @@ msgid "An unknown error occurred."
 msgstr "অজ্ঞাত ত্ৰুটি দেখা দিছে।"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1743
-#: ../libbrasero-burn/brasero-burn-dialog.c:1761 ../src/brasero-app.c:620
+#: ../libbrasero-burn/brasero-burn-dialog.c:1761 ../src/brasero-app.c:618
 msgid "Error while burning."
 msgstr "বাৰ্ণ কৰাৰ সময় ত্ৰুটি দেখা দিছে।"
 
@@ -1131,43 +1106,43 @@ msgstr "বাৰ্ণ কৰক (_B)"
 msgid "Burn _Several Copies"
 msgstr "বহুতো কপি বাৰ্ণ কৰক (_S)"
 
-#: ../libbrasero-burn/brasero-burn-options.c:433 ../src/brasero-project.c:949
+#: ../libbrasero-burn/brasero-burn-options.c:426 ../src/brasero-project.c:949
 msgid "Would you like to burn the selection of files across several media?"
 msgstr "নিৰ্বাচিত ফাইলসমূহ একাধিক মাধ্যমত বাৰ্ণ কৰা হব নেকি ?"
 
-#: ../libbrasero-burn/brasero-burn-options.c:434
-#: ../libbrasero-burn/brasero-burn-options.c:451
+#: ../libbrasero-burn/brasero-burn-options.c:427
+#: ../libbrasero-burn/brasero-burn-options.c:444
 msgid "The data size is too large for the disc even with the overburn option."
 msgstr ""
 "ওভাৰ-বাৰ্ণ বিকল্প ব্যৱহাৰ কৰা সত্ত্বেও ডিষ্কৰ বাবে এই তথ্যৰ আকাৰ অত্যাধিক "
 "বৃহৎ।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:439 ../src/brasero-project.c:954
+#: ../libbrasero-burn/brasero-burn-options.c:432 ../src/brasero-project.c:954
 msgid "_Burn Several Discs"
 msgstr "বহুতো ডিষ্ক বাৰ্ণ কৰক (_B)"
 
-#: ../libbrasero-burn/brasero-burn-options.c:441 ../src/brasero-project.c:956
+#: ../libbrasero-burn/brasero-burn-options.c:434 ../src/brasero-project.c:956
 msgid "Burn the selection of files across several media"
 msgstr "নিৰ্বাচিত ফাইলসমূহ একাধিক মাধ্যমত বাৰ্ণ কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:450 ../src/brasero-project.c:965
+#: ../libbrasero-burn/brasero-burn-options.c:443 ../src/brasero-project.c:965
 msgid "Please choose another CD or DVD or insert a new one."
 msgstr "অনুগ্ৰহ কৰি এটা ভিন্ন CD অথবা DVD নিৰ্বাচন কৰক অথবা এটা নতুন সুমুৱাওক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:464 ../src/brasero-project.c:1010
+#: ../libbrasero-burn/brasero-burn-options.c:457 ../src/brasero-project.c:1010
 msgid "No track information (artist, title, ...) will be written to the disc."
 msgstr "ট্ৰেক তথ্য (শিল্পী, শীৰ্ষক, ...) ডিস্কত লিখা নহব।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:465 ../src/brasero-project.c:1011
+#: ../libbrasero-burn/brasero-burn-options.c:458 ../src/brasero-project.c:1011
 msgid "This is not supported by the current active burning backend."
 msgstr "বাৰ্ণ কৰাৰ বাবে বৰ্তমানে ব্যৱহৃত বেক-এন্ড দ্বাৰা ই সমৰ্থিত নহয়।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:477
+#: ../libbrasero-burn/brasero-burn-options.c:470
 #: ../nautilus/nautilus-burn-extension.c:239
 msgid "Please add files."
 msgstr "অনুগ্ৰহ কৰি ফাইল যোগ কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:478
+#: ../libbrasero-burn/brasero-burn-options.c:471
 #: ../libbrasero-burn/brasero-track-data.c:672
 #: ../libbrasero-burn/brasero-track-data-cfg.c:2432
 #: ../libbrasero-burn/brasero-track-stream.c:402
@@ -1176,65 +1151,65 @@ msgstr "অনুগ্ৰহ কৰি ফাইল যোগ কৰক।"
 msgid "There are no files to write to disc"
 msgstr "ডিষ্কত লিখিবলৈ কোনো ফাইল নাই"
 
-#: ../libbrasero-burn/brasero-burn-options.c:483
+#: ../libbrasero-burn/brasero-burn-options.c:476
 msgid "Please add songs."
 msgstr "অনুগ্ৰহ কৰি গান যোগ কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:484 ../src/brasero-project.c:1268
+#: ../libbrasero-burn/brasero-burn-options.c:477 ../src/brasero-project.c:1268
 msgid "There are no songs to write to disc"
 msgstr "ডিস্কত লিখাৰ উদ্দেশ্যে কোনো গান নিৰ্ধাৰিত নহয়"
 
-#: ../libbrasero-burn/brasero-burn-options.c:489
+#: ../libbrasero-burn/brasero-burn-options.c:482
 msgid "Please add videos."
 msgstr "অনুগ্ৰহ কৰি ভিডিঅ' যোগ কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:490
+#: ../libbrasero-burn/brasero-burn-options.c:483
 msgid "There are no videos to write to disc"
 msgstr "ডিস্কত লিখাৰ উদ্দেশ্যে কোনো ভিডিঅ' নিৰ্ধাৰিত নহয়"
 
-#: ../libbrasero-burn/brasero-burn-options.c:502
+#: ../libbrasero-burn/brasero-burn-options.c:495
 msgid "There is no inserted disc to copy."
 msgstr "কপি কৰাৰ উদ্দেশ্যে কোনো সুমুৱা ডিস্ক নাই।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:511
+#: ../libbrasero-burn/brasero-burn-options.c:504
 msgid "Please select a disc image."
 msgstr "অনুগ্ৰহ কৰি এটা ডিস্ক ছবি নিৰ্বাচন কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:512
+#: ../libbrasero-burn/brasero-burn-options.c:505
 msgid "There is no selected disc image."
 msgstr "কোনো ডিস্ক ছবি নিৰ্বাচন কৰা নহয়।"
 
 #. Translators: this is a disc image not a picture
 #. Translators: this is a disc image, not a picture
-#: ../libbrasero-burn/brasero-burn-options.c:522
+#: ../libbrasero-burn/brasero-burn-options.c:515
 #: ../libbrasero-burn/brasero-src-image.c:167
 msgctxt "disc"
 msgid "Please select another image."
 msgstr "অনুগ্ৰহ কৰি এটা ভিন্ন ছবি নিৰ্বাচন কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:523
+#: ../libbrasero-burn/brasero-burn-options.c:516
 msgid "It doesn't appear to be a valid disc image or a valid cue file."
 msgstr "সম্ভৱতঃ এইটো বৈধ ছবি অথবা কিউ (cue) ফাইল নহয়।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:532
+#: ../libbrasero-burn/brasero-burn-options.c:525
 msgid "Please insert a disc that is not copy protected."
 msgstr "অনুগ্ৰহ কৰি কপি কৰাৰ উদ্দেশ্যে প্ৰতিবন্ধিত নকৰা এটা ডিস্ক সুমুৱাওক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:533
-#: ../libbrasero-burn/brasero-burn-options.c:1235
+#: ../libbrasero-burn/brasero-burn-options.c:526
+#: ../libbrasero-burn/brasero-burn-options.c:1228
 #: ../src/brasero-project.c:1445
 msgid "All required applications and libraries are not installed."
 msgstr "সকলো প্ৰয়োজনীয় এপ্লিকেচনসমুহ আৰু লাইব্ৰেৰিসমুহ ইনস্টল নাই।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:540 ../src/brasero-project.c:1003
+#: ../libbrasero-burn/brasero-burn-options.c:533 ../src/brasero-project.c:1003
 msgid "Please replace the disc with a supported CD or DVD."
 msgstr "অনুগ্ৰহ কৰি এই ডিস্কৰ পৰিবৰ্তে এটা সমৰ্থিত CD অথবা DVD সুমুৱাওক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:549 ../src/brasero-project.c:976
+#: ../libbrasero-burn/brasero-burn-options.c:542 ../src/brasero-project.c:976
 msgid "Would you like to burn beyond the disc's reported capacity?"
 msgstr "ডিস্কৰ উল্লিখিত ধাৰণক্ষমতাৰ ওপৰত বাৰ্ণ কৰিব ইচ্ছুক নেকি ?"
 
-#: ../libbrasero-burn/brasero-burn-options.c:550
+#: ../libbrasero-burn/brasero-burn-options.c:543
 msgid ""
 "The data size is too large for the disc and you must remove files from the "
 "selection otherwise.\n"
@@ -1250,20 +1225,20 @@ msgstr ""
 "প্ৰয়োগ কৰা উপদেশিত আৰু ইয়াৰ ফলস্বৰূপ overburn বিকল্প ব্যৱহাৰ কৰা আৱশ্যক।\n"
 "উল্লেখ্য: এই বিকল্পৰ ফলস্বৰূপ কাম বিফল হোৱাৰ সম্ভাৱনা আছে।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:557 ../src/brasero-project.c:983
+#: ../libbrasero-burn/brasero-burn-options.c:550 ../src/brasero-project.c:983
 msgid "_Overburn"
 msgstr "ওভাৰ-বাৰ্ণ (_O)"
 
-#: ../libbrasero-burn/brasero-burn-options.c:559 ../src/brasero-project.c:985
+#: ../libbrasero-burn/brasero-burn-options.c:552 ../src/brasero-project.c:985
 msgid "Burn beyond the disc's reported capacity"
 msgstr "ডিস্কৰ উল্লিখিত ক্ষমতাৰ ওপৰত বাৰ্ণ কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:569
+#: ../libbrasero-burn/brasero-burn-options.c:562
 msgid ""
 "The drive that holds the source disc will also be the one used to record."
 msgstr "মূল ডিস্ক অন্তৰ্ভুক্ত কৰা ড্ৰাইভত ৰেকৰ্ড কৰাৰ সময় ব্যৱহাৰ কৰক।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:570
+#: ../libbrasero-burn/brasero-burn-options.c:563
 msgid ""
 "A new writable disc will be required once the currently loaded one has been "
 "copied."
@@ -1271,21 +1246,21 @@ msgstr ""
 "বৰ্তমানে ল'ড কৰাৰ ডিস্কৰ তথ্য কপি কৰা হ'লে লিখনযোগ্য এটা নতুন ডিস্কৰ "
 "প্ৰয়োজনহ'ব।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:657
+#: ../libbrasero-burn/brasero-burn-options.c:650
 msgid "Select a disc to write to"
 msgstr "লিখাৰ বাবে এটা ডিস্ক নিৰ্বাচন কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:737
-#: ../libbrasero-burn/brasero-burn-options.c:755
-#: ../libbrasero-burn/brasero-burn-options.c:875
+#: ../libbrasero-burn/brasero-burn-options.c:730
+#: ../libbrasero-burn/brasero-burn-options.c:748
+#: ../libbrasero-burn/brasero-burn-options.c:868
 msgid "Disc Burning Setup"
 msgstr "ডিস্ক বাৰ্ণ কৰাৰ ব্যৱস্থা"
 
-#: ../libbrasero-burn/brasero-burn-options.c:764 ../src/brasero-project.c:1544
+#: ../libbrasero-burn/brasero-burn-options.c:757 ../src/brasero-project.c:1544
 msgid "Video Options"
 msgstr "ভিডিঅ' বিকল্প"
 
-#: ../libbrasero-burn/brasero-burn-options.c:795
+#: ../libbrasero-burn/brasero-burn-options.c:788
 #: ../src/brasero-data-disc.c:613
 msgid ""
 "Do you want to create a disc from the contents of the image or with the "
@@ -1294,7 +1269,7 @@ msgstr ""
 "আপুনি ছবিৰ সমলৰ পৰা এটা ডিস্ক সৃষ্টি কৰিব বিচাৰে নে অন্তৰ্ভুক্ত ছবিৰ পৰা?"
 
 #. Translators: %s is the name of the image
-#: ../libbrasero-burn/brasero-burn-options.c:804
+#: ../libbrasero-burn/brasero-burn-options.c:797
 #, c-format
 msgid ""
 "There is only one selected file (\"%s\"). It is the image of a disc and its "
@@ -1303,32 +1278,32 @@ msgstr ""
 "অকল এটা ফাইল নিৰ্বাচন কৰা হৈছে (\"%s\")। এইটো এটা ডিস্কৰ ছবি আৰু ইয়াৰ সমলসমূহ "
 "বাৰ্ণ কৰিব পাৰে।"
 
-#: ../libbrasero-burn/brasero-burn-options.c:809
+#: ../libbrasero-burn/brasero-burn-options.c:802
 msgid "Burn as _File"
 msgstr "ফাইল হিচাপে বাৰ্ণ কৰক (_F)"
 
-#: ../libbrasero-burn/brasero-burn-options.c:811
+#: ../libbrasero-burn/brasero-burn-options.c:804
 msgid "Burn _Contents…"
 msgstr "সমল বাৰ্ণ কৰক...(_C)"
 
-#: ../libbrasero-burn/brasero-burn-options.c:893
+#: ../libbrasero-burn/brasero-burn-options.c:886
 msgid "Image Burning Setup"
 msgstr "ছবি বাৰ্ণ কৰাৰ ব্যৱস্থা"
 
 #. pack everything
-#: ../libbrasero-burn/brasero-burn-options.c:901
+#: ../libbrasero-burn/brasero-burn-options.c:894
 msgid "Select a disc image to write"
 msgstr "লিখাৰ বাবে এটা ডিস্ক নিৰ্বাচন কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:921
+#: ../libbrasero-burn/brasero-burn-options.c:914
 msgid "Copy CD/DVD"
 msgstr "CD/DVD কপি কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:927
+#: ../libbrasero-burn/brasero-burn-options.c:920
 msgid "Select disc to copy"
 msgstr "কপি কৰাৰ উদ্দেশ্যে ডিস্ক নিৰ্বাচন কৰক"
 
-#: ../libbrasero-burn/brasero-burn-options.c:1229
+#: ../libbrasero-burn/brasero-burn-options.c:1222
 #: ../src/brasero-project.c:1439
 msgid "Please install the following manually and try again:"
 msgstr ""
@@ -1359,24 +1334,24 @@ msgstr "%s ৰে"
 msgid "\"%s\" cannot be read"
 msgstr "\"%s\" পঢ়া নাযায়"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:605
+#: ../libbrasero-burn/brasero-dest-selection.c:599
 #: ../libbrasero-burn/brasero-image-type-chooser.c:133
 msgid "SVCD image"
 msgstr "SVCD ছবি"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:607
+#: ../libbrasero-burn/brasero-dest-selection.c:601
 #: ../libbrasero-burn/brasero-image-type-chooser.c:127
 msgid "VCD image"
 msgstr "VCD ছবি"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:611
+#: ../libbrasero-burn/brasero-dest-selection.c:605
 #: ../libbrasero-burn/brasero-image-type-chooser.c:106
 msgid "Video DVD image"
 msgstr "ভিডিঅ' DVD ছবি"
 
 #. NOTE for translators: the first %s is medium_name ("File
 #. * Image") and the second the path for the image file
-#: ../libbrasero-burn/brasero-dest-selection.c:623
+#: ../libbrasero-burn/brasero-dest-selection.c:617
 #, c-format
 msgid "%s: \"%s\""
 msgstr "%s: \"%s\""
@@ -1387,20 +1362,20 @@ msgstr "%s: \"%s\""
 #. * destination disc a new one (once the source has been
 #. * copied) which is to be inserted in the drive currently
 #. * holding the source disc
-#: ../libbrasero-burn/brasero-dest-selection.c:655
+#: ../libbrasero-burn/brasero-dest-selection.c:649
 #, c-format
 msgid "New disc in the burner holding the source disc"
 msgstr "মূল ডিস্ক অন্তৰ্ভুক্ত কৰা বাৰ্ণাৰত নতুন ডিস্ক"
 
 #. NOTE for translators, the first %s is the medium name
-#: ../libbrasero-burn/brasero-dest-selection.c:696
+#: ../libbrasero-burn/brasero-dest-selection.c:690
 #, c-format
 msgid "%s: not enough free space"
 msgstr "%s: পৰ্যাপ্ত ৰিক্ত স্থান নাই"
 
 #. NOTE for translators: the first %s is the medium name, the second %s
 #. * is its available free space. "Free" here is the free space available.
-#: ../libbrasero-burn/brasero-dest-selection.c:727
+#: ../libbrasero-burn/brasero-dest-selection.c:721
 #, c-format
 msgid "%s: %s of free space"
 msgstr "%s: অৱশিষ্ট স্থান %s"
@@ -1535,7 +1510,7 @@ msgid "Broken symbolic link"
 msgstr "ক্ষতিগ্ৰস্ত সাঙ্কেতিক সংযোগ"
 
 #: ../libbrasero-burn/brasero-filtered-uri.c:60
-#: ../libbrasero-utils/brasero-io.c:1190 ../libbrasero-utils/brasero-io.c:2061
+#: ../libbrasero-utils/brasero-io.c:1188 ../libbrasero-utils/brasero-io.c:2059
 #, c-format
 msgid "Recursive symbolic link"
 msgstr "ৰিকাৰ্ছিভ সাঙ্কেতিক সংযোগ"
@@ -1594,7 +1569,7 @@ msgstr "বৰ্তমান সম্প্ৰসাৰণ অপৰিবৰ�
 msgid "Change _Extension"
 msgstr "সম্প্ৰসাৰণ পৰিবৰ্তন কৰক (_E)"
 
-#: ../libbrasero-burn/brasero-medium-properties.c:234
+#: ../libbrasero-burn/brasero-medium-properties.c:233
 msgid "Configure recording options"
 msgstr "ৰেকৰ্ড বিকল্প সংৰূপণ কৰক"
 
@@ -1785,7 +1760,7 @@ msgid "The file integrity check could not be performed."
 msgstr "ফাইলৰ অখণ্ডতা পৰীক্ষা কৰা নাযায়।"
 
 #: ../libbrasero-burn/brasero-sum-dialog.c:166 ../src/brasero-data-disc.c:214
-#: ../src/brasero-eject-dialog.c:102 ../src/brasero-playlist.c:393
+#: ../src/brasero-eject-dialog.c:100 ../src/brasero-playlist.c:393
 #: ../src/brasero-project.c:2625
 msgid "An unknown error occurred"
 msgstr "অজ্ঞাত ত্ৰুটি দেখা দিছে"
@@ -1859,12 +1834,12 @@ msgstr "ডিস্ক সমৰ্থিত নহয়"
 msgid "The drive is empty"
 msgstr "ড্ৰাইভটো ৰিক্ত"
 
-#: ../libbrasero-burn/brasero-tool-dialog.c:554
-#: ../src/brasero-eject-dialog.c:167
+#: ../libbrasero-burn/brasero-tool-dialog.c:539
+#: ../src/brasero-eject-dialog.c:164
 msgid "Select a disc"
 msgstr "এটা ডিস্ক নিৰ্বাচন কৰক"
 
-#: ../libbrasero-burn/brasero-tool-dialog.c:581
+#: ../libbrasero-burn/brasero-tool-dialog.c:572
 msgid "Progress"
 msgstr "প্ৰগতি সূচক"
 
@@ -2135,7 +2110,7 @@ msgstr "ছবিৰ আউটপুটৰ কোনো পথ পোৱা ন�
 
 #. Translators: %s is the error returned by libburn
 #. Translators: the %s is the error message from errno
-#: ../libbrasero-burn/burn-job.c:768 ../plugins/cdrtools/burn-cdrecord.c:709
+#: ../libbrasero-burn/burn-job.c:768 ../plugins/cdrtools/burn-cdrecord.c:710
 #: ../plugins/libburnia/burn-libburn.c:717
 #: ../plugins/transcode/burn-transcode.c:790
 #, c-format
@@ -2490,7 +2465,7 @@ msgstr "পৰিবৰ্তন লুকুৱাওক (_H)"
 msgid "_Show changes"
 msgstr "পৰিবৰ্তন প্ৰদৰ্শন কৰক (_S)"
 
-#: ../libbrasero-utils/brasero-io.c:1418
+#: ../libbrasero-utils/brasero-io.c:1416
 #, c-format
 msgid "The file does not appear to be a playlist"
 msgstr "এই ফাইল সম্ভৱতঃ এটা প্লে-লিস্ট নহয়"
@@ -2553,55 +2528,55 @@ msgstr "স্কেইল্ড"
 msgid "Background Properties"
 msgstr "পটভূমিৰ বৈশিষ্ট্য"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:534
+#: ../libbrasero-utils/brasero-jacket-edit.c:589
 msgid "Print"
 msgstr "প্ৰিন্ট"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:546
+#: ../libbrasero-utils/brasero-jacket-edit.c:601
 msgid "Bac_kground Properties"
 msgstr "পটভূমিৰ বৈশিষ্ট্য (_k)"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:549
+#: ../libbrasero-utils/brasero-jacket-edit.c:604
 msgid "Background properties"
 msgstr "পটভূমিৰ বৈশিষ্ট্য"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:564
+#: ../libbrasero-utils/brasero-jacket-edit.c:619
 msgid "Align right"
 msgstr "সোফালে হালক"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:574
+#: ../libbrasero-utils/brasero-jacket-edit.c:629
 msgid "Center"
 msgstr "কেন্দ্ৰ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:584
+#: ../libbrasero-utils/brasero-jacket-edit.c:639
 msgid "Align left"
 msgstr "বাওফালে হালক"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:598
+#: ../libbrasero-utils/brasero-jacket-edit.c:653
 msgid "Underline"
 msgstr "নিম্নলিখিত"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:608
+#: ../libbrasero-utils/brasero-jacket-edit.c:663
 msgid "Italic"
 msgstr "ইটালীয়"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:618
+#: ../libbrasero-utils/brasero-jacket-edit.c:673
 msgid "Bold"
 msgstr "ডাঠ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:644
+#: ../libbrasero-utils/brasero-jacket-edit.c:699
 msgid "Font family and size"
 msgstr "ফন্ট পৰিয়াল আৰু আকাৰ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:651
+#: ../libbrasero-utils/brasero-jacket-edit.c:706
 msgid "_Text Color"
 msgstr "লিখনীৰ ৰঙ (_T)"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:652
+#: ../libbrasero-utils/brasero-jacket-edit.c:707
 msgid "Text color"
 msgstr "লিখনীৰ ৰঙ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:775
+#: ../libbrasero-utils/brasero-jacket-edit.c:830
 msgid "Cover Editor"
 msgstr "প্ৰচ্ছদ সম্পাদক"
 
@@ -2627,7 +2602,7 @@ msgstr "FRONT COVER"
 msgid "The image could not be loaded."
 msgstr "ছবি ল'ড কৰা সম্ভৱ নহয়।"
 
-#: ../libbrasero-utils/brasero-metadata.c:1126 ../src/brasero-audio-disc.c:643
+#: ../libbrasero-utils/brasero-metadata.c:1122 ../src/brasero-audio-disc.c:643
 #, c-format
 msgid "\"%s\" could not be handled by GStreamer."
 msgstr "Gstreamer দ্বাৰা \"%s\" পৰিচালন কৰা সম্ভৱ নহয়।"
@@ -2635,13 +2610,13 @@ msgstr "Gstreamer দ্বাৰা \"%s\" পৰিচালন কৰা স�
 #. Translators: %s is the name of the object (as in
 #. * GObject) from the Gstreamer library that could
 #. * not be created
-#: ../libbrasero-utils/brasero-metadata.c:1198
-#: ../libbrasero-utils/brasero-metadata.c:1211
-#: ../libbrasero-utils/brasero-metadata.c:1224
-#: ../libbrasero-utils/brasero-metadata.c:1366
-#: ../libbrasero-utils/brasero-metadata.c:1738
-#: ../libbrasero-utils/brasero-metadata.c:1753
-#: ../libbrasero-utils/brasero-metadata.c:1762
+#: ../libbrasero-utils/brasero-metadata.c:1194
+#: ../libbrasero-utils/brasero-metadata.c:1207
+#: ../libbrasero-utils/brasero-metadata.c:1220
+#: ../libbrasero-utils/brasero-metadata.c:1362
+#: ../libbrasero-utils/brasero-metadata.c:1734
+#: ../libbrasero-utils/brasero-metadata.c:1749
+#: ../libbrasero-utils/brasero-metadata.c:1758
 #: ../plugins/transcode/burn-normalize.c:172
 #: ../plugins/transcode/burn-normalize.c:187
 #: ../plugins/transcode/burn-normalize.c:209
@@ -2675,18 +2650,6 @@ msgstr "Gstreamer দ্বাৰা \"%s\" পৰিচালন কৰা স�
 #, c-format
 msgid "%s element could not be created"
 msgstr "%s উপাদান সৃষ্টি কৰা নাযায়"
-
-#: ../libbrasero-utils/brasero-misc.c:74
-msgid "Display debug statements on stdout for Brasero utilities library"
-msgstr "Brasero সঁজুলিসমূহ লাইব্ৰেৰিৰ বাবে stdout ত ডিবাগ তথ্য প্ৰদৰ্শন কৰক"
-
-#: ../libbrasero-utils/brasero-misc.c:91
-msgid "Brasero utilities library"
-msgstr "Brasero সঁজুলিসমূহ লাইব্ৰেৰি"
-
-#: ../libbrasero-utils/brasero-misc.c:92
-msgid "Display options for Brasero-utils library"
-msgstr "Brasero-utils লাইব্ৰেৰিৰ বাবে বিকল্পসমূহ প্ৰদৰ্শন কৰক"
 
 #: ../libbrasero-utils/brasero-tool-color-picker.c:166
 msgid "Pick a Color"
@@ -2931,15 +2894,15 @@ msgstr "কিউ শিট লিখা হৈছে"
 msgid "The disc needs to be reloaded before being recorded"
 msgstr "ৰেকৰ্ড কৰাৰ পূৰ্বে ডিস্ক পুনৰ ল'ড কৰা আৱশ্যক"
 
-#: ../plugins/cdrkit/burn-wodim.c:1269
+#: ../plugins/cdrkit/burn-wodim.c:1270
 msgid "Burns, blanks and formats CDs and DVDs"
 msgstr "CD আৰু DVDসমূহ বাৰ্ণ, ৰিক্ত আৰু ফৰমেট কৰে"
 
-#: ../plugins/cdrkit/burn-wodim.c:1413
+#: ../plugins/cdrkit/burn-wodim.c:1414
 msgid "Enable the \"-immed\" flag (see wodim manual)"
 msgstr "\"-immed\" ফ্ল্যাগ সক্ৰিয় কৰক (wodim সহায়িকা চাওক)"
 
-#: ../plugins/cdrkit/burn-wodim.c:1416
+#: ../plugins/cdrkit/burn-wodim.c:1417
 msgid "Minimum drive buffer fill ratio (in %) (see wodim manual):"
 msgstr ""
 "ড্ৰাইভ বাফাৰ পূৰণ কৰাৰ সৰ্বনিম্ন অনুপাত (% অনুসাৰে ধাৰ্য) (wodim ৰ সহায়িকা "
@@ -2959,16 +2922,16 @@ msgstr "অডিও ডিস্ক কপিৰ বাবে প্ৰস্�
 msgid "Copy tracks from an audio CD with all associated information"
 msgstr "এখন অডিও CD ৰ পৰা সকলো সংযুক্ত তথ্যৰ সৈতে ট্ৰেকসমুহ কপি কৰক"
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1203
+#: ../plugins/cdrtools/burn-cdrecord.c:1204
 #: ../plugins/libburnia/burn-libburn.c:975
 msgid "Burns, blanks and formats CDs, DVDs and BDs"
 msgstr "CD, DVD, আৰু BDসমূহ বাৰ্ণ, ৰিক্ত আৰু ফৰমেট কৰে"
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1416
+#: ../plugins/cdrtools/burn-cdrecord.c:1417
 msgid "Enable the \"-immed\" flag (see cdrecord manual)"
 msgstr "\"-immed\" ফ্ল্যাগ সক্ৰিয় কৰক (cdrecord ৰ সহায়িকা চাওক)"
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1419
+#: ../plugins/cdrtools/burn-cdrecord.c:1420
 #, c-format
 msgid "Minimum drive buffer fill ratio (in %%) (see cdrecord manual):"
 msgstr ""
@@ -3316,92 +3279,92 @@ msgstr "যিকোনো ভিডিঅ' ফাইলক ভিডিঅ' DVD
 msgid "Creates disc images suitable for SVCDs"
 msgstr "SVCDসমূহৰ কাৰণে উপযুক্ত ডিস্ক ছবিসমূহ সৃষ্টি কৰে"
 
-#: ../src/brasero-app.c:123
+#: ../src/brasero-app.c:124
 msgid "_Project"
 msgstr "প্ৰকল্প (_P)"
 
-#: ../src/brasero-app.c:124
+#: ../src/brasero-app.c:125
 msgid "_View"
 msgstr "দৰ্শন (_V)"
 
-#: ../src/brasero-app.c:125
+#: ../src/brasero-app.c:126
 msgid "_Edit"
 msgstr "সম্পাদনা (_E)"
 
-#: ../src/brasero-app.c:126
+#: ../src/brasero-app.c:127
 msgid "_Tools"
 msgstr "সঁজুলিসমূহ (_T)"
 
-#: ../src/brasero-app.c:128
+#: ../src/brasero-app.c:129
 msgid "_Help"
 msgstr "সহায় (_H)"
 
-#: ../src/brasero-app.c:130
+#: ../src/brasero-app.c:131
 msgid "P_lugins"
 msgstr "প্লাগিনসমূহ (_l)"
 
-#: ../src/brasero-app.c:131
+#: ../src/brasero-app.c:132
 msgid "Choose plugins for Brasero"
 msgstr "brasero ৰ বাবে প্লাগিন নিৰ্বাচন কৰক"
 
-#: ../src/brasero-app.c:133
+#: ../src/brasero-app.c:134
 msgid "E_ject"
 msgstr "বাহিৰ কৰক (_j)"
 
-#: ../src/brasero-app.c:134
+#: ../src/brasero-app.c:135
 msgid "Eject a disc"
 msgstr "ডিস্ক বাহিৰ কৰক"
 
-#: ../src/brasero-app.c:136
+#: ../src/brasero-app.c:137
 msgid "_Blank…"
 msgstr "ৰিক্ত... (_B)"
 
-#: ../src/brasero-app.c:137
+#: ../src/brasero-app.c:138
 msgid "Blank a disc"
 msgstr "ডিস্ক ৰিক্ত কৰক"
 
-#: ../src/brasero-app.c:139
+#: ../src/brasero-app.c:140
 msgid "_Check Integrity…"
 msgstr "অখণ্ডতা নীৰিক্ষণ কৰক... (_C)"
 
-#: ../src/brasero-app.c:140
+#: ../src/brasero-app.c:141
 msgid "Check data integrity of disc"
 msgstr "ডিস্কৰ অখণ্ডতা নীৰিক্ষণ কৰক"
 
-#: ../src/brasero-app.c:143
+#: ../src/brasero-app.c:144
 msgid "Quit Brasero"
 msgstr "Brasero ৰ পৰা প্ৰস্থান"
 
-#: ../src/brasero-app.c:145
+#: ../src/brasero-app.c:146
 msgid "_Contents"
 msgstr "সমলসমূহ (_C)"
 
-#: ../src/brasero-app.c:145
+#: ../src/brasero-app.c:146
 msgid "Display help"
 msgstr "সহায় প্ৰদৰ্শন কৰক"
 
-#: ../src/brasero-app.c:148
+#: ../src/brasero-app.c:149
 msgid "About"
 msgstr "বিষয়ে"
 
-#: ../src/brasero-app.c:420 ../src/brasero-app.c:2069
+#: ../src/brasero-app.c:421 ../src/brasero-app.c:2065
 msgid "Disc Burner"
 msgstr "ডিস্ক বাৰ্ণ ব্যৱস্থা"
 
-#: ../src/brasero-app.c:789 ../src/brasero-app.c:822 ../src/brasero-app.c:1451
+#: ../src/brasero-app.c:787 ../src/brasero-app.c:820 ../src/brasero-app.c:1449
 msgid "Error while loading the project"
 msgstr "প্ৰকল্প ল'ড কৰিবলৈ সমস্যা"
 
-#: ../src/brasero-app.c:831 ../src/brasero-app.c:860 ../src/brasero-app.c:920
+#: ../src/brasero-app.c:829 ../src/brasero-app.c:858 ../src/brasero-app.c:918
 #: ../src/brasero-project.c:1276
 msgid "Please add files to the project."
 msgstr "প্ৰকল্পত অনুগ্ৰহ কৰি ফাইল সুমুৱাওক।"
 
-#: ../src/brasero-app.c:832 ../src/brasero-app.c:861 ../src/brasero-app.c:921
+#: ../src/brasero-app.c:830 ../src/brasero-app.c:859 ../src/brasero-app.c:919
 msgid "The project is empty"
 msgstr "প্ৰকল্পটো ৰিক্ত"
 
-#: ../src/brasero-app.c:1176
+#: ../src/brasero-app.c:1174
 msgid ""
 "Brasero is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -3415,7 +3378,7 @@ msgstr ""
 "কৰিব পাৰিব; হৈতো অনুজ্ঞাৰ সংস্কৰণ ২, অথবা (আপুনাৰ বিকল্পত) যিকোনো পৰৱৰ্তী "
 "সংস্কৰণ।"
 
-#: ../src/brasero-app.c:1181
+#: ../src/brasero-app.c:1179
 msgid ""
 "Brasero is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -3428,7 +3391,7 @@ msgstr ""
 "অধিক "
 "জানিবলৈ  GNU General Public License চাওক।"
 
-#: ../src/brasero-app.c:1186
+#: ../src/brasero-app.c:1184
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Brasero; if not, write to the Free Software Foundation, Inc., 51 Franklin "
@@ -3438,11 +3401,11 @@ msgstr ""
 "পাইছে। যদি নাই , Free Software Foundation, Inc., 51 Franklin Street, Fifth "
 "Floor, Boston, MA 02110-1301, USA লে লিখক"
 
-#: ../src/brasero-app.c:1198
+#: ../src/brasero-app.c:1196
 msgid "A simple to use CD/DVD burning application for GNOME"
 msgstr "GNOME ৰ সম্পূৰ্ণ ব্যৱহাৰযোগ্য এটা সহজ CD/DVD বাৰ্ণ কৰাৰ এপ্লিকেচন।"
 
-#: ../src/brasero-app.c:1215
+#: ../src/brasero-app.c:1213
 msgid "Brasero Homepage"
 msgstr "Brasero ৰ ঘৰপৃষ্ঠা"
 
@@ -3454,23 +3417,23 @@ msgstr "Brasero ৰ ঘৰপৃষ্ঠা"
 #. * this translation; in that case, please write each of them on a separate
 #. * line seperated by newlines (\n).
 #.
-#: ../src/brasero-app.c:1227
+#: ../src/brasero-app.c:1225
 msgid "translator-credits"
 msgstr ""
 "অমিতাক্ষ ফুকন (aphukan@fedoraproject.org), নীলমদ্যুতি গোস্বামী "
 "(ngoswami@redhat."
 "com)"
 
-#: ../src/brasero-app.c:1449
+#: ../src/brasero-app.c:1447
 #, c-format
 msgid "The project \"%s\" does not exist"
 msgstr "\"%s\" নামৰ কোনো প্ৰকল্প উপস্থিত নাই"
 
-#: ../src/brasero-app.c:1733 ../src/brasero-app.c:1739
+#: ../src/brasero-app.c:1731 ../src/brasero-app.c:1737
 msgid "_Recent Projects"
 msgstr "শেহতীয়া প্ৰকল্পসমূহ (_R)"
 
-#: ../src/brasero-app.c:1734
+#: ../src/brasero-app.c:1732
 msgid "Display the projects recently opened"
 msgstr "শেহতীয়া প্ৰকল্পসমূহ প্ৰদৰ্শন কৰক"
 
@@ -3534,7 +3497,7 @@ msgstr "বিভাজন"
 msgid "Track"
 msgstr "ট্ৰেক"
 
-#: ../src/brasero-audio-disc.c:458 ../src/brasero-video-disc.c:1209
+#: ../src/brasero-audio-disc.c:458 ../src/brasero-video-disc.c:1206
 msgid "Title"
 msgstr "শীৰ্ষক"
 
@@ -3543,7 +3506,7 @@ msgid "Artist"
 msgstr "শিল্পী"
 
 #: ../src/brasero-audio-disc.c:488 ../src/brasero-playlist.c:772
-#: ../src/brasero-split-dialog.c:1225
+#: ../src/brasero-split-dialog.c:1219
 msgid "Length"
 msgstr "অবকাল"
 
@@ -3785,6 +3748,7 @@ msgid "The contents of the project changed since it was saved."
 msgstr "সংৰক্ষণৰ পিছত প্ৰকল্পত কিছু পৰিবৰ্তন কৰা হৈছে।"
 
 #: ../src/brasero-data-disc.c:561
+#| msgid "Discard the current modified project"
 msgid "Discard the current modified project ?"
 msgstr "বৰ্তমানে পৰিবৰ্তিত প্ৰকল্প বৰ্জন কৰিব নে?"
 
@@ -3944,7 +3908,7 @@ msgstr "পুনৰনামকৰণৰ অৱস্থা"
 msgid "Files"
 msgstr "ফাইল"
 
-#: ../src/brasero-data-disc.c:2350 ../src/brasero-video-disc.c:1227
+#: ../src/brasero-data-disc.c:2350 ../src/brasero-video-disc.c:1224
 msgid "Size"
 msgstr "আকাৰ"
 
@@ -3956,16 +3920,16 @@ msgstr "বিবৰণ"
 msgid "Space"
 msgstr "স্থান"
 
-#: ../src/brasero-eject-dialog.c:97
+#: ../src/brasero-eject-dialog.c:95
 #, c-format
 msgid "The disc in \"%s\" cannot be ejected"
 msgstr "\"%s\" ত উপস্থিত ডিস্ক বাহিৰ কৰা সম্ভৱ নহয়"
 
-#: ../src/brasero-eject-dialog.c:193
+#: ../src/brasero-eject-dialog.c:190
 msgid "_Eject"
 msgstr "বাহিৰ কৰক (_E)"
 
-#: ../src/brasero-eject-dialog.c:208
+#: ../src/brasero-eject-dialog.c:205
 msgid "Eject Disc"
 msgstr "ডিস্ক বাহিৰ কৰক"
 
@@ -4377,7 +4341,7 @@ msgstr "সংৰক্ষণ কৰক (_S)"
 msgid "_Add"
 msgstr "যোগ কৰক (_A)"
 
-#: ../src/brasero-project.c:2384 ../src/brasero-split-dialog.c:1255
+#: ../src/brasero-project.c:2384 ../src/brasero-split-dialog.c:1249
 msgid "_Remove"
 msgstr "আঁতৰাওক (_R)"
 
@@ -4630,15 +4594,15 @@ msgstr "ভিডিঅ' ডিস্ক (%s)"
 msgid "Error while loading the project."
 msgstr "প্ৰকল্প ল'ড কৰিব ব্যৰ্থ।"
 
-#: ../src/brasero-project-parse.c:458
+#: ../src/brasero-project-parse.c:454
 msgid "The project could not be opened"
 msgstr "প্ৰকল্প খোলা সম্ভৱ নহয়"
 
-#: ../src/brasero-project-parse.c:467
+#: ../src/brasero-project-parse.c:463
 msgid "The file is empty"
 msgstr "ফাইল ৰিক্ত"
 
-#: ../src/brasero-project-parse.c:546 ../src/brasero-project-parse.c:611
+#: ../src/brasero-project-parse.c:542 ../src/brasero-project-parse.c:607
 msgid "It does not seem to be a valid Brasero project"
 msgstr "এইটো সম্ভৱতঃ বৈধ Brasero প্ৰকল্প নহয়"
 
@@ -4694,7 +4658,7 @@ msgstr "শেহতীয়া কোনো প্ৰকল্প উপস্থ
 msgid "Create a new project:"
 msgstr "এটা নতুন প্ৰকল্প সৃষ্টি কৰক:"
 
-#: ../src/brasero-project-type-chooser.c:510
+#: ../src/brasero-project-type-chooser.c:509
 msgid "Recent projects:"
 msgstr "শেহতীয়া প্ৰকল্পসমূহ:"
 
@@ -4789,16 +4753,16 @@ msgstr "গানৰ সমাপ্তি:"
 msgid "Track length:"
 msgstr "ট্ৰেকৰ অবকাল:"
 
-#: ../src/brasero-song-properties.c:365
+#: ../src/brasero-song-properties.c:372
 #, c-format
 msgid "Song information for track %02i"
 msgstr "ট্ৰেক %02i ৰ গান তথ্য"
 
-#: ../src/brasero-split-dialog.c:172
+#: ../src/brasero-split-dialog.c:166
 msgid "Do you really want to split the track?"
 msgstr "আপুনি নিশ্চিতৰূপে ট্ৰেকটো বিভাজন কৰিব ইচ্ছুক নেকি ?"
 
-#: ../src/brasero-split-dialog.c:175
+#: ../src/brasero-split-dialog.c:169
 msgid ""
 "If you split the track, the size of the new track will be shorter than 6 "
 "seconds and will be padded."
@@ -4807,132 +4771,132 @@ msgstr ""
 "কৰা "
 "হ'ব।"
 
-#: ../src/brasero-split-dialog.c:181 ../src/brasero-split-dialog.c:752
+#: ../src/brasero-split-dialog.c:175 ../src/brasero-split-dialog.c:746
 msgid "_Split"
 msgstr "বিভাজন কৰক (_S)"
 
-#: ../src/brasero-split-dialog.c:609
+#: ../src/brasero-split-dialog.c:603
 msgid "The track wasn't split."
 msgstr "ট্ৰেক বিভাজন কৰা নহয়।"
 
-#: ../src/brasero-split-dialog.c:610
+#: ../src/brasero-split-dialog.c:604
 msgid "No silence could be detected"
 msgstr "নিঃশব্দ অংশ চিনাক্ত কৰা নাযায়"
 
-#: ../src/brasero-split-dialog.c:633
+#: ../src/brasero-split-dialog.c:627
 msgid "An error occurred while detecting silences."
 msgstr "নিঃশব্দ অংশ চিনাক্ত কৰিব যাওতে ত্ৰুটি দেখা দিছে।"
 
-#: ../src/brasero-split-dialog.c:712
+#: ../src/brasero-split-dialog.c:706
 msgid "This will remove all previous results."
 msgstr "ইয়াৰ ফলস্বৰূপ পূৰ্ববৰ্তী ফলাফল আতৰাওক যাব।"
 
-#: ../src/brasero-split-dialog.c:750
+#: ../src/brasero-split-dialog.c:744
 msgid "Do you really want to carry on with automatic splitting?"
 msgstr ""
 "স্বয়ংক্ৰিয় বিভাজনৰ প্ৰক্ৰিয়াৰ প্ৰয়োগ নিশ্চিতৰূপে চালিয়ে যাওয়া হ'ব নেকি ?"
 
-#: ../src/brasero-split-dialog.c:751
+#: ../src/brasero-split-dialog.c:745
 msgid "_Don't split"
 msgstr "বিভাজন কৰা নহব (_D)"
 
-#: ../src/brasero-split-dialog.c:968
+#: ../src/brasero-split-dialog.c:962
 msgid "Do you really want to empty the slices preview?"
 msgstr "অংশতৰ পূৰ্বদৰ্শন নিশ্চিতৰূপে ৰিক্ত কৰা হব নেকি ?"
 
-#: ../src/brasero-split-dialog.c:970 ../src/brasero-split-dialog.c:1269
+#: ../src/brasero-split-dialog.c:964 ../src/brasero-split-dialog.c:1263
 msgid "Re_move All"
 msgstr "সমগ্ৰ আতৰাওক (_m)"
 
-#: ../src/brasero-split-dialog.c:1055
+#: ../src/brasero-split-dialog.c:1049
 msgid "Split Track"
 msgstr "ট্ৰেক বিভাজন"
 
-#: ../src/brasero-split-dialog.c:1072
+#: ../src/brasero-split-dialog.c:1066
 msgid "M_ethod:"
 msgstr "পদ্ধতি: (_e)"
 
-#: ../src/brasero-split-dialog.c:1078
+#: ../src/brasero-split-dialog.c:1072
 msgid "Method to be used to split the track"
 msgstr "ট্ৰেক বিভাজনৰ বাবে ব্যৱহৃত পদ্ধতি"
 
-#: ../src/brasero-split-dialog.c:1081
+#: ../src/brasero-split-dialog.c:1075
 msgid "Split track manually"
 msgstr "হস্তচালিতভাৱে ট্ৰেক বিভাজন কৰক"
 
-#: ../src/brasero-split-dialog.c:1082
+#: ../src/brasero-split-dialog.c:1076
 msgid "Split track in parts with a fixed length"
 msgstr "সুনিৰ্দিষ্ট দৈৰ্ঘ্যৰ অংশত ট্ৰেক বিভাজন কৰক"
 
-#: ../src/brasero-split-dialog.c:1083
+#: ../src/brasero-split-dialog.c:1077
 msgid "Split track in a fixed number of parts"
 msgstr "সুনিৰ্দিষ্ট সংখ্যক অংশত ট্ৰেক বিভাজন কৰক"
 
-#: ../src/brasero-split-dialog.c:1084
+#: ../src/brasero-split-dialog.c:1078
 msgid "Split track for each silence"
 msgstr "প্ৰতিটো নিঃশব্দ অংশত ট্ৰেক বিভাজন কৰক"
 
-#: ../src/brasero-split-dialog.c:1090
+#: ../src/brasero-split-dialog.c:1084
 msgid "_Slice"
 msgstr "অংশ (_S)"
 
-#: ../src/brasero-split-dialog.c:1101
+#: ../src/brasero-split-dialog.c:1095
 msgid "Add a splitting point"
 msgstr "বিভাজনৰ স্থান যোগ কৰক"
 
 #. Translators: this goes with the next (= "seconds")
-#: ../src/brasero-split-dialog.c:1118
+#: ../src/brasero-split-dialog.c:1112
 msgid "Split this track every"
 msgstr "এই ট্ৰেকটো বিভাজন কৰক প্ৰতি"
 
 #. Translators: this goes with the previous (= "Split track every")
-#: ../src/brasero-split-dialog.c:1127
+#: ../src/brasero-split-dialog.c:1121
 msgid "seconds"
 msgstr "ছেকেণ্ড"
 
 #. Translators: this goes with the next (= "parts")
-#: ../src/brasero-split-dialog.c:1136
+#: ../src/brasero-split-dialog.c:1130
 msgid "Split this track in"
 msgstr "এই ট্ৰেকটো বিভাজন কৰক"
 
 #. Translators: this goes with the previous (= "Split this track in")
-#: ../src/brasero-split-dialog.c:1145
+#: ../src/brasero-split-dialog.c:1139
 msgid "parts"
 msgstr "অংশত"
 
-#: ../src/brasero-split-dialog.c:1153
+#: ../src/brasero-split-dialog.c:1147
 msgid "Slicing Method"
 msgstr "বিভাজনৰ পদ্ধতি"
 
-#: ../src/brasero-split-dialog.c:1211
+#: ../src/brasero-split-dialog.c:1205
 msgid "Start"
 msgstr "আৰম্ভ"
 
-#: ../src/brasero-split-dialog.c:1218
+#: ../src/brasero-split-dialog.c:1212
 msgid "End"
 msgstr "সমাপ্তি"
 
-#: ../src/brasero-split-dialog.c:1241
+#: ../src/brasero-split-dialog.c:1235
 msgid "Mer_ge"
 msgstr "একত্ৰিত কৰক (_g)"
 
-#: ../src/brasero-split-dialog.c:1252
+#: ../src/brasero-split-dialog.c:1246
 msgid "Merge a selected slice with the next selected one"
 msgstr "নিৰ্বাচিত অংশটো পৰিবৰ্তি অংশতৰ সম্পূৰ্ণ একত্ৰিত কৰক"
 
-#: ../src/brasero-split-dialog.c:1266
+#: ../src/brasero-split-dialog.c:1260
 msgid "Remove the selected slices"
 msgstr "নিৰ্বাচিত অংশসমূহ আতৰাওক"
 
-#: ../src/brasero-split-dialog.c:1280
+#: ../src/brasero-split-dialog.c:1274
 msgid "Clear the slices preview"
 msgstr "অংশসমূহৰ পূৰ্বদৰ্শন আতৰাওক"
 
-#: ../src/brasero-split-dialog.c:1290
+#: ../src/brasero-split-dialog.c:1284
 msgid "_List of slices that are to be created:"
 msgstr "সৃষ্টিৰ বাবে চিহ্নিত অংশসমূহৰ তালিকা: (_L)"
 
-#: ../src/brasero-split-dialog.c:1298
+#: ../src/brasero-split-dialog.c:1292
 msgid "Slices Preview"
 msgstr "অংশতৰ পূৰ্বদৰ্শন"
 
@@ -4989,56 +4953,77 @@ msgstr "ভিডিঅ' প্ৰকল্পৰ বাবে \"%s\" ত কো
 msgid "Please only add files with video content"
 msgstr "অনুগ্ৰহ কৰি অকল ভিডিঅ' ফাইল যোগ কৰক"
 
-#: ../src/main.c:84
+#: ../src/eggdesktopfile.c:165
+#, c-format
+msgid "File is not a valid .desktop file"
+msgstr "ফাইলটো বৈধ .desktop ফাইল নহয়"
+
+#: ../src/eggdesktopfile.c:188
+#, c-format
+msgid "Unrecognized desktop file Version '%s'"
+msgstr "অজ্ঞাত ডেস্কটপ ফাইল সংস্কৰণ '%s'"
+
+#: ../src/eggdesktopfile.c:968
+#, c-format
+msgid "Starting %s"
+msgstr "%s আৰম্ভ কৰা হৈছে"
+
+#: ../src/eggdesktopfile.c:1110
+#, c-format
+msgid "Application does not accept documents on command line"
+msgstr "এই এপ্লিকেচন দ্বাৰা কমান্ড-শাৰীৰ মাধ্যমে দস্তাবেজ গ্ৰহণ কৰা নহয়"
+
+#: ../src/eggdesktopfile.c:1178
+#, c-format
+msgid "Unrecognized launch option: %d"
+msgstr "অপৰিচিত লঞ্চ বিকল্প: %d"
+
+#: ../src/eggdesktopfile.c:1383
+#, c-format
+msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
+msgstr "'Type=Link' ডেস্কটপ প্ৰবিষ্টিৰ ক্ষেত্ৰত দস্তাবেজৰ URI উল্লেখ কৰা নাযাব"
+
+#: ../src/eggdesktopfile.c:1404
+#, c-format
+msgid "Not a launchable item"
+msgstr "আৰম্ভ কৰাৰ যোগ্য বস্তু নহয়"
+
+#: ../src/eggsmclient.c:226
+msgid "Disable connection to session manager"
+msgstr "অধিবেশন পৰিচালকৰ সম্পূৰ্ণ সংযোগ বিচ্ছিন্ন কৰক"
+
+#: ../src/eggsmclient.c:229
+msgid "Specify file containing saved configuration"
+msgstr "সংৰক্ষিত সংৰূপ অন্তৰ্ভুক্ত কৰা ফাইল ধাৰ্য্য কৰক"
+
+#: ../src/eggsmclient.c:229
+msgid "FILE"
+msgstr "FILE"
+
+#: ../src/eggsmclient.c:232
+msgid "Specify session management ID"
+msgstr "অধিবেশন পৰিচালনাৰ ID ধাৰ্য্য কৰক"
+
+#: ../src/eggsmclient.c:232
+msgid "ID"
+msgstr "ID"
+
+#: ../src/eggsmclient.c:253
+msgid "Session management options:"
+msgstr "অধিবেশন পৰিচালনা বিকল্প:"
+
+#: ../src/eggsmclient.c:254
+msgid "Show session management options"
+msgstr "অধিবেশন পৰিচালনা বিকল্প প্ৰদৰ্শন কৰক"
+
+#: ../src/main.c:85
 msgid "[URI] [URI] …"
 msgstr "[URI] [URI] ..."
 
-#: ../src/main.c:96
+#: ../src/main.c:97
 #, c-format
 msgid "Please type \"%s --help\" to see all available options\n"
 msgstr "উপলব্ধ সকলো বিকল্পসমূহ জানিবলে \"%s --help\" টাইপ কৰক\n"
-
-#~ msgid "File is not a valid .desktop file"
-#~ msgstr "ফাইলটো বৈধ .desktop ফাইল নহয়"
-
-#~ msgid "Unrecognized desktop file Version '%s'"
-#~ msgstr "অজ্ঞাত ডেস্কটপ ফাইল সংস্কৰণ '%s'"
-
-#~ msgid "Starting %s"
-#~ msgstr "%s আৰম্ভ কৰা হৈছে"
-
-#~ msgid "Application does not accept documents on command line"
-#~ msgstr "এই এপ্লিকেচন দ্বাৰা কমান্ড-শাৰীৰ মাধ্যমে দস্তাবেজ গ্ৰহণ কৰা নহয়"
-
-#~ msgid "Unrecognized launch option: %d"
-#~ msgstr "অপৰিচিত লঞ্চ বিকল্প: %d"
-
-#~ msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
-#~ msgstr "'Type=Link' ডেস্কটপ প্ৰবিষ্টিৰ ক্ষেত্ৰত দস্তাবেজৰ URI উল্লেখ কৰা নাযাব"
-
-#~ msgid "Not a launchable item"
-#~ msgstr "আৰম্ভ কৰাৰ যোগ্য বস্তু নহয়"
-
-#~ msgid "Disable connection to session manager"
-#~ msgstr "অধিবেশন পৰিচালকৰ সম্পূৰ্ণ সংযোগ বিচ্ছিন্ন কৰক"
-
-#~ msgid "Specify file containing saved configuration"
-#~ msgstr "সংৰক্ষিত সংৰূপ অন্তৰ্ভুক্ত কৰা ফাইল ধাৰ্য্য কৰক"
-
-#~ msgid "FILE"
-#~ msgstr "FILE"
-
-#~ msgid "Specify session management ID"
-#~ msgstr "অধিবেশন পৰিচালনাৰ ID ধাৰ্য্য কৰক"
-
-#~ msgid "ID"
-#~ msgstr "ID"
-
-#~ msgid "Session management options:"
-#~ msgstr "অধিবেশন পৰিচালনা বিকল্প:"
-
-#~ msgid "Show session management options"
-#~ msgstr "অধিবেশন পৰিচালনা বিকল্প প্ৰদৰ্শন কৰক"
 
 #~ msgid "Brasero - Creating Image"
 #~ msgstr "Brasero - ছবি সৃষ্টি কৰা হৈছে"

@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#tools"/>
-    <desc>Usuwanie zawartości płyty CD lub DVD do wielokrotnego zapisu.</desc>
+    <desc>Erase a rewritable CD or DVD by blanking it.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -11,42 +11,33 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Piotr Drąg</mal:name>
-      <mal:email>piotrdrag@gmail.com</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Aviary.pl</mal:name>
-      <mal:email>community-poland@mozilla.org</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Usuwanie zawartości płyty</title>
+  <title>Blank a disc</title>
 
-  <p>Można przygotować płytę do wielokrotnego zapisu z zapisanymi danymi do ponownego nagrania, usuwając jej zawartość.</p>
+  <p>You can prepare a rewritable disc, with existing data on it, for writing by
+  blanking it.</p>
 
   <steps>
     <item>
-      <p>Wybierz <guiseq><gui>Narzędzia</gui><gui>Usuń zawartość…</gui></guiseq>.</p>
+      <p>Select <guiseq><gui>Tools</gui><gui>Blank...</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Jeśli komputer ma więcej niż jeden napęd z włożoną płytą do wielokrotnego zapisu, to można wybrać właściwą pod nagłówkiem <gui>Wybór płyty</gui>.</p>
+      <p>If you have more than one disc drive with a rewritable disc in it, you
+      can select which disc to rewrite under <gui>Select a disc</gui>.</p>
     </item>
     <item>
-      <p>Można zaznaczyć opcję <gui>Szybkie usuwanie zawartości</gui>, aby szybciej usunąć zawartość płyty.</p>
+      <p>You can select <gui>Fast blanking</gui> to blank the CD quicker.</p>
       <note>
-        <p>Jeśli nagrywanie na płycie po szybkim usunięciu zawartości sprawia problemy, to ponownie usuń jej zawartość z wyłączonym szybkim usuwaniem.</p>
+        <p>If you have problems writing to a disc which you fast blanked, try
+        disabling fast blanking and blank it again.</p>
       </note>
     </item>
     <item>
-      <p>Kliknij <gui>Usuń zawartość</gui>, aby kontynuować.</p>
+      <p>Click <gui>Blank</gui> to continue.</p>
     </item>
     <item>
-      <p>Płyta może zostać wysunięta po ukończeniu usuwania zawartości.</p>
+      <p>The disc may be ejected when the blanking is complete.</p>
     </item>
   </steps>
 

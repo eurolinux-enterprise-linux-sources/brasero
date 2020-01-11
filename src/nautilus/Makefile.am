@@ -1,6 +1,6 @@
 module_flags = -avoid-version -module
 
-AM_CPPFLAGS =					\
+INCLUDES =					\
 	-I$(top_srcdir)/libbrasero-utils/	\
 	-I$(top_builddir)/libbrasero-utils/	\
 	-I$(top_srcdir)/libbrasero-media/	\
@@ -22,8 +22,7 @@ AM_CPPFLAGS =					\
 	-DSHAREDIR=\""$(datadir)"\"		\
 	-DDATADIR=\""$(datadir)/brasero"\"	\
 	$(NAUTILUS_EXTENSION_CFLAGS)		\
-	$(DISABLE_DEPRECATED) 			\
-	-Wno-error=format-y2k
+	$(DISABLE_DEPRECATED)
 
 @INTLTOOL_DESKTOP_RULE@
 

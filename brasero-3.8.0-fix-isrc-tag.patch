@@ -1,0 +1,611 @@
+From 9d5ac84e83fa6ca0cdde289eeeaa20c81a6ee4f6 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Tom=C3=A1=C5=A1=20B=C5=BEatek?= <tbzatek@redhat.com>
+Date: Wed, 30 Oct 2013 15:55:51 +0000
+Subject: [PATCH] Switch BRASERO_TRACK_STREAM_ISRC_TAG from int to string
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+The International Standard Recording Code (ISRC) is a  12
+byte string that is created from two uppercase characters
+for the country code, followed by three uppercase charac‐
+ters  for  the owner, followed by two digits for the year
+of recording followed by five digits for  the  recording
+serial number.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=711162
+---
+ libbrasero-burn/brasero-tags.h             |  2 +-
+ libbrasero-burn/brasero-track-stream-cfg.c | 10 +++++-----
+ libbrasero-utils/brasero-io.c              |  4 +++-
+ libbrasero-utils/brasero-metadata.c        | 14 +++++++++-----
+ libbrasero-utils/brasero-metadata.h        |  2 +-
+ plugins/audio2cue/burn-audio2cue.c         |  8 ++++----
+ plugins/cdrkit/burn-wodim.c                |  7 +++----
+ plugins/cdrtools/burn-cdrecord.c           |  7 +++----
+ plugins/transcode/burn-transcode.c         |  8 ++++----
+ src/brasero-audio-disc.c                   | 24 +++++++++++++-----------
+ src/brasero-multi-song-props.c             |  6 +++---
+ src/brasero-multi-song-props.h             |  2 +-
+ src/brasero-project-parse.c                | 27 +++++++++++++++------------
+ src/brasero-song-properties.c              | 23 ++++++-----------------
+ src/brasero-song-properties.h              |  4 ++--
+ src/brasero-video-disc.c                   | 23 +++++++++++++----------
+ 16 files changed, 86 insertions(+), 85 deletions(-)
+
+diff --git a/libbrasero-burn/brasero-tags.h b/libbrasero-burn/brasero-tags.h
+index 31a844d..c04f0a9 100644
+--- a/libbrasero-burn/brasero-tags.h
++++ b/libbrasero-burn/brasero-tags.h
+@@ -56,6 +56,7 @@ G_BEGIN_DECLS
+ #define BRASERO_TRACK_STREAM_COMPOSER_TAG		"track::stream::info::composer"
+ #define BRASERO_TRACK_STREAM_ARTIST_TAG			"track::stream::info::artist"
+ #define BRASERO_TRACK_STREAM_ALBUM_TAG			"track::stream::info::album"
++#define BRASERO_TRACK_STREAM_ISRC_TAG			"track::stream::info::isrc"
+ #define BRASERO_TRACK_STREAM_THUMBNAIL_TAG		"track::stream::snapshot"
+ #define BRASERO_TRACK_STREAM_MIME_TAG			"track::stream::mime"
+ 
+@@ -63,7 +64,6 @@ G_BEGIN_DECLS
+  * Int
+  */
+ 
+-#define BRASERO_TRACK_STREAM_ISRC_TAG			"track::stream::info::isrc"
+ 
+ /**
+  * This tag (for sessions) is used to set an estimated size, used to determine
+diff --git a/libbrasero-burn/brasero-track-stream-cfg.c b/libbrasero-burn/brasero-track-stream-cfg.c
+index 9d53dd6..2699b6f 100644
+--- a/libbrasero-burn/brasero-track-stream-cfg.c
++++ b/libbrasero-burn/brasero-track-stream-cfg.c
+@@ -299,11 +299,11 @@ brasero_track_stream_cfg_results_cb (GObject *obj,
+ 		brasero_track_tag_add_string (BRASERO_TRACK (obj),
+ 					      BRASERO_TRACK_STREAM_COMPOSER_TAG,
+ 					      g_file_info_get_attribute_string (info, BRASERO_IO_COMPOSER));
+-	if (g_file_info_get_attribute_int32 (info, BRASERO_IO_ISRC)
+-	&& !brasero_track_tag_lookup_int (BRASERO_TRACK (obj), BRASERO_TRACK_STREAM_ISRC_TAG))
+-		brasero_track_tag_add_int (BRASERO_TRACK (obj),
+-					   BRASERO_TRACK_STREAM_ISRC_TAG,
+-					   g_file_info_get_attribute_int32 (info, BRASERO_IO_ISRC));
++	if (g_file_info_get_attribute_string (info, BRASERO_IO_ISRC)
++	&& !brasero_track_tag_lookup_string (BRASERO_TRACK (obj), BRASERO_TRACK_STREAM_ISRC_TAG))
++		brasero_track_tag_add_string (BRASERO_TRACK (obj),
++					      BRASERO_TRACK_STREAM_ISRC_TAG,
++					      g_file_info_get_attribute_string (info, BRASERO_IO_ISRC));
+ 
+ 	/* Start monitoring it */
+ 	file = g_file_new_for_uri (uri);
+diff --git a/libbrasero-utils/brasero-io.c b/libbrasero-utils/brasero-io.c
+index 6124848..5619359 100644
+--- a/libbrasero-utils/brasero-io.c
++++ b/libbrasero-utils/brasero-io.c
+@@ -836,7 +836,6 @@ static void
+ brasero_io_set_metadata_attributes (GFileInfo *info,
+ 				    BraseroMetadataInfo *metadata)
+ {
+-	g_file_info_set_attribute_int32 (info, BRASERO_IO_ISRC, metadata->isrc);
+ 	g_file_info_set_attribute_uint64 (info, BRASERO_IO_LEN, metadata->len);
+ 
+ 	if (metadata->type)
+@@ -857,6 +856,9 @@ brasero_io_set_metadata_attributes (GFileInfo *info,
+ 	if (metadata->composer)
+ 		g_file_info_set_attribute_string (info, BRASERO_IO_COMPOSER, metadata->composer);
+ 
++	if (metadata->isrc)
++		g_file_info_set_attribute_string (info, BRASERO_IO_ISRC, metadata->isrc);
++
+ 	g_file_info_set_attribute_boolean (info, BRASERO_IO_HAS_AUDIO, metadata->has_audio);
+ 	if (metadata->has_audio) {
+ 		if (metadata->channels)
+diff --git a/libbrasero-utils/brasero-metadata.c b/libbrasero-utils/brasero-metadata.c
+index 7f10088..1943368 100644
+--- a/libbrasero-utils/brasero-metadata.c
++++ b/libbrasero-utils/brasero-metadata.c
+@@ -186,6 +186,9 @@ brasero_metadata_info_clear (BraseroMetadataInfo *info)
+ 	if (info->musicbrainz_id)
+ 		g_free (info->musicbrainz_id);
+ 
++	if (info->isrc)
++		g_free (info->isrc);
++
+ 	if (info->silences) {
+ 		g_slist_foreach (info->silences, (GFunc) g_free, NULL);
+ 		g_slist_free (info->silences);
+@@ -216,7 +219,6 @@ brasero_metadata_info_copy (BraseroMetadataInfo *dest,
+ 	dest->has_dts = src->has_dts;
+ 	dest->rate = src->rate;
+ 	dest->channels = src->channels;
+-	dest->isrc = src->isrc;
+ 	dest->len = src->len;
+ 	dest->is_seekable = src->is_seekable;
+ 	dest->has_audio = src->has_audio;
+@@ -243,6 +245,9 @@ brasero_metadata_info_copy (BraseroMetadataInfo *dest,
+ 	if (src->musicbrainz_id)
+ 		dest->musicbrainz_id = g_strdup (src->musicbrainz_id);
+ 
++	if (src->isrc)
++		dest->isrc = g_strdup (src->isrc);
++
+ 	if (src->snapshot) {
+ 		dest->snapshot = src->snapshot;
+ 		g_object_ref (dest->snapshot);
+@@ -943,11 +948,10 @@ foreach_tag (const GstTagList *list,
+ 		gst_tag_list_get_string (list, tag, &(self->composer));
+ 	}
+ */	else if (!strcmp (tag, GST_TAG_ISRC)) {
+-		gchar *isrc = NULL;
+-		gst_tag_list_get_string (list, tag, &isrc);
++		if (priv->info->isrc)
++			g_free (priv->info->isrc);
+ 
+-		if (isrc)
+-			priv->info->isrc = (int) g_ascii_strtoull (isrc, NULL, 10);
++		gst_tag_list_get_string (list, tag, &(priv->info->isrc));
+ 	}
+ 	else if (!strcmp (tag, GST_TAG_MUSICBRAINZ_TRACKID)) {
+ 		gst_tag_list_get_string (list, tag, &(priv->info->musicbrainz_id));
+diff --git a/libbrasero-utils/brasero-metadata.h b/libbrasero-utils/brasero-metadata.h
+index 8799642..eca95b4 100644
+--- a/libbrasero-utils/brasero-metadata.h
++++ b/libbrasero-utils/brasero-metadata.h
+@@ -69,7 +69,7 @@ typedef struct {
+ 	gchar *genre;
+ 	gchar *composer;
+ 	gchar *musicbrainz_id;
+-	int isrc;
++	gchar *isrc;
+ 	guint64 len;
+ 
+ 	gint channels;
+diff --git a/plugins/audio2cue/burn-audio2cue.c b/plugins/audio2cue/burn-audio2cue.c
+index 2601533..78c21f9 100644
+--- a/plugins/audio2cue/burn-audio2cue.c
++++ b/plugins/audio2cue/burn-audio2cue.c
+@@ -455,7 +455,6 @@ brasero_audio2cue_create_thread (gpointer data)
+ 	tracks = NULL;
+ 	brasero_job_get_tracks (data, &tracks);
+ 	for (; tracks; tracks = tracks->next) {
+-		int isrc;
+ 		guint64 gap;
+ 		guint64 len;
+ 		gchar *string;
+@@ -463,6 +462,7 @@ brasero_audio2cue_create_thread (gpointer data)
+ 		BraseroTrack *track;
+ 		const gchar *performer;
+ 		const gchar *songwriter;
++		const gchar *isrc;
+ 
+ 		track = tracks->data;
+ 
+@@ -527,9 +527,9 @@ brasero_audio2cue_create_thread (gpointer data)
+ 			g_free (line);
+ 		}
+ 
+-		isrc = brasero_track_tag_lookup_int (track, BRASERO_TRACK_STREAM_ISRC_TAG);
+-		if (isrc > 0) {
+-			line = g_strdup_printf ("\tISRC %i\n", isrc);
++		isrc = brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_ISRC_TAG);
++		if (isrc) {
++			line = g_strdup_printf ("\tISRC \"%s\"\n", isrc);
+ 			if (write (fd_out, line, strlen (line)) < 0) {
+ 				int err_saved = errno;
+ 				priv->error = g_error_new_literal (BRASERO_BURN_ERROR,
+diff --git a/plugins/cdrkit/burn-wodim.c b/plugins/cdrkit/burn-wodim.c
+index c0477c8..be7e5b9 100644
+--- a/plugins/cdrkit/burn-wodim.c
++++ b/plugins/cdrkit/burn-wodim.c
+@@ -438,7 +438,6 @@ brasero_wodim_write_inf (BraseroWodim *wodim,
+ 			 GError **error)
+ {
+ 	gint fd;
+-	int isrc;
+ 	gint size;
+         int errsv;
+ 	gchar *path;
+@@ -514,9 +513,9 @@ brasero_wodim_write_inf (BraseroWodim *wodim,
+ 		goto error;
+ 
+ 	/* ISRC */
+-	isrc = brasero_track_tag_lookup_int (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG);
+-	if (isrc > 0)
+-		string = g_strdup_printf ("ISRC=\t%i\n", isrc);
++	info = brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG);
++	if (info)
++		string = g_strdup_printf ("ISRC=\t%s\n", info);
+ 	else
+ 		string = g_strdup ("ISRC=\t\n");
+ 	size = strlen (string);
+diff --git a/plugins/cdrtools/burn-cdrecord.c b/plugins/cdrtools/burn-cdrecord.c
+index 92c23b3..89ba629 100644
+--- a/plugins/cdrtools/burn-cdrecord.c
++++ b/plugins/cdrtools/burn-cdrecord.c
+@@ -424,7 +424,6 @@ brasero_cdrecord_write_inf (BraseroCDRecord *cdrecord,
+ 			    GError **error)
+ {
+ 	gint fd;
+-	int isrc;
+         int errsv;
+ 	gint size;
+ 	gchar *path;
+@@ -503,9 +502,9 @@ brasero_cdrecord_write_inf (BraseroCDRecord *cdrecord,
+ 		goto error;
+ 
+ 	/* ISRC */
+-	isrc = brasero_track_tag_lookup_int (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG);
+-	if (isrc > 0)
+-		string = g_strdup_printf ("ISRC=\t%i\n", isrc);
++	info = brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG);
++	if (info)
++		string = g_strdup_printf ("ISRC=\t%s\n", info);
+ 	else
+ 		string = g_strdup ("ISRC=\t\n");
+ 	size = strlen (string);
+diff --git a/plugins/transcode/burn-transcode.c b/plugins/transcode/burn-transcode.c
+index 6861168..b93d17a 100644
+--- a/plugins/transcode/burn-transcode.c
++++ b/plugins/transcode/burn-transcode.c
+@@ -1396,13 +1396,13 @@ foreach_tag (const GstTagList *list,
+ 		}
+ 	}
+ 	else if (!strcmp (tag, GST_TAG_ISRC)) {
+-		if (!brasero_track_tag_lookup_int (track, BRASERO_TRACK_STREAM_ISRC_TAG)) {
++		if (!brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_ISRC_TAG)) {
+ 			gchar *isrc = NULL;
+ 
+ 			gst_tag_list_get_string (list, tag, &isrc);
+-			brasero_track_tag_add_int (track,
+-						   BRASERO_TRACK_STREAM_ISRC_TAG,
+-						   (int) g_ascii_strtoull (isrc, NULL, 10));
++			brasero_track_tag_add_string (track,
++						      BRASERO_TRACK_STREAM_ISRC_TAG,
++						      isrc);
+ 		}
+ 	}
+ 	else if (!strcmp (tag, GST_TAG_PERFORMER)) {
+diff --git a/src/brasero-audio-disc.c b/src/brasero-audio-disc.c
+index e2c49b8..b0dce92 100644
+--- a/src/brasero-audio-disc.c
++++ b/src/brasero-audio-disc.c
+@@ -1477,7 +1477,6 @@ static void
+ brasero_audio_disc_edit_multi_song_properties (BraseroAudioDisc *disc,
+ 					       GList *list)
+ {
+-	gint isrc;
+ 	gint64 gap;
+ 	GList *copy;
+ 	GList *item;
+@@ -1487,6 +1486,7 @@ brasero_audio_disc_edit_multi_song_properties (BraseroAudioDisc *disc,
+ 	gchar *artist = NULL;
+ 	GtkResponseType result;
+ 	gchar *composer = NULL;
++	gchar *isrc = NULL;
+ 
+ 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (disc->priv->tree));
+ 	toplevel = gtk_widget_get_toplevel (GTK_WIDGET (disc));
+@@ -1550,10 +1550,10 @@ brasero_audio_disc_edit_multi_song_properties (BraseroAudioDisc *disc,
+                                                       BRASERO_TRACK_STREAM_COMPOSER_TAG,
+                                                       composer);
+ 
+-		if (isrc > 0)
+-                        brasero_track_tag_add_int (BRASERO_TRACK (track),
+-                                                   BRASERO_TRACK_STREAM_ISRC_TAG,
+-                                                   isrc);
++		if (isrc)
++                        brasero_track_tag_add_string (BRASERO_TRACK (track),
++                                                      BRASERO_TRACK_STREAM_ISRC_TAG,
++                                                      isrc);
+ 
+                 if (gap > -1)
+                         brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
+@@ -1564,6 +1564,7 @@ brasero_audio_disc_edit_multi_song_properties (BraseroAudioDisc *disc,
+ 	g_list_free (copy);
+ 	g_free (artist);
+ 	g_free (composer);
++	g_free (isrc);
+ 
+ 	gtk_widget_destroy (props);
+ }
+@@ -1573,7 +1574,6 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
+ 						GtkTreePath *treepath)
+ {
+ 	gint64 gap;
+-	gint isrc;
+ 	gint64 end;
+ 	gint64 start;
+ 	guint track_num;
+@@ -1586,6 +1586,7 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
+ 	gchar *title;
+ 	gchar *artist;
+ 	gchar *composer;
++	gchar *isrc;
+ 	GtkTreeIter iter;
+ 
+ 	model = gtk_tree_view_get_model (GTK_TREE_VIEW (disc->priv->tree));
+@@ -1607,7 +1608,7 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
+ 					   brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ARTIST_TAG),
+ 					   brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_TITLE_TAG),
+ 					   brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_COMPOSER_TAG),
+-					   brasero_track_tag_lookup_int (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG),
++					   brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG),
+ 					   length,
+ 					   brasero_track_stream_get_start (BRASERO_TRACK_STREAM (track)),
+ 					   brasero_track_stream_get_end (BRASERO_TRACK_STREAM (track)),
+@@ -1657,10 +1658,10 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
+ 					      BRASERO_TRACK_STREAM_COMPOSER_TAG,
+ 					      composer);
+ 
+-	if (isrc > 0)
+-		brasero_track_tag_add_int (BRASERO_TRACK (track),
+-					   BRASERO_TRACK_STREAM_ISRC_TAG,
+-					   isrc);
++	if (isrc)
++		brasero_track_tag_add_string (BRASERO_TRACK (track),
++					      BRASERO_TRACK_STREAM_ISRC_TAG,
++					      isrc);
+ 
+ 	if (end - start + BRASERO_SECTORS_TO_DURATION (gap) < BRASERO_MIN_STREAM_LENGTH)
+ 		brasero_audio_disc_short_track_dialog (disc);
+@@ -1668,6 +1669,7 @@ brasero_audio_disc_edit_single_song_properties (BraseroAudioDisc *disc,
+ 	g_free (title);
+ 	g_free (artist);
+ 	g_free (composer);
++	g_free (isrc);
+ 	gtk_widget_destroy (props);
+ }
+ 
+diff --git a/src/brasero-multi-song-props.c b/src/brasero-multi-song-props.c
+index be2704e..823e22a 100644
+--- a/src/brasero-multi-song-props.c
++++ b/src/brasero-multi-song-props.c
+@@ -77,7 +77,7 @@ void
+ brasero_multi_song_props_get_properties (BraseroMultiSongProps *self,
+ 					 gchar **artist,
+ 					 gchar **composer,
+-					 gint *isrc,
++					 gchar **isrc,
+ 					 gint64 *gap)
+ {
+ 	const gchar *text;
+@@ -103,9 +103,9 @@ brasero_multi_song_props_get_properties (BraseroMultiSongProps *self,
+ 	if (isrc) {
+ 		text = gtk_entry_get_text (GTK_ENTRY (priv->isrc));
+ 		if (text && strcmp (text, _("<Keep current values>")))
+-			*isrc = (gint) g_strtod (text, NULL);
++			*isrc = g_strdup (text);
+ 		else
+-			*isrc = -1;
++			*isrc = NULL;
+ 	}
+ 
+ 	if (gap)
+diff --git a/src/brasero-multi-song-props.h b/src/brasero-multi-song-props.h
+index b7f4500..de34a73 100644
+--- a/src/brasero-multi-song-props.h
++++ b/src/brasero-multi-song-props.h
+@@ -70,7 +70,7 @@ void
+ brasero_multi_song_props_get_properties (BraseroMultiSongProps *props,
+ 					 gchar **artist,
+ 					 gchar **composer,
+-					 gint *isrc,
++					 gchar **isrc,
+ 					 gint64 *gap);
+ 
+ G_END_DECLS
+diff --git a/src/brasero-project-parse.c b/src/brasero-project-parse.c
+index 5359678..b2a58a1 100644
+--- a/src/brasero-project-parse.c
++++ b/src/brasero-project-parse.c
+@@ -330,18 +330,22 @@ _read_audio_track (xmlDocPtr project,
+         		g_free (unescaped_composer);
+ 		}
+ 		else if (!xmlStrcmp (uris->name, (const xmlChar *) "isrc")) {
+-			gchar *isrc;
++			xmlChar *isrc;
++                        gchar *unescaped_isrc;
+ 
+-			isrc = (gchar *) xmlNodeListGetString (project,
+-							       uris->xmlChildrenNode,
+-							       1);
++			isrc = xmlNodeListGetString (project,
++						     uris->xmlChildrenNode,
++						     1);
+ 			if (!isrc)
+ 				goto error;
+ 
+-                        brasero_track_tag_add_int (BRASERO_TRACK (track),
+-                                                   BRASERO_TRACK_STREAM_ISRC_TAG,
+-                                                   (gint) g_ascii_strtod (isrc, NULL));
++			unescaped_isrc = g_uri_unescape_string ((char *) isrc, NULL);
+ 			g_free (isrc);
++
++                        brasero_track_tag_add_string (BRASERO_TRACK (track),
++                                                      BRASERO_TRACK_STREAM_ISRC_TAG,
++                                                      unescaped_isrc);
++        		g_free (unescaped_isrc);
+ 		}
+ 		else if (uris->type == XML_ELEMENT_NODE)
+ 			goto error;
+@@ -626,7 +630,6 @@ _save_audio_track_xml (xmlTextWriter *project,
+ 	xmlChar *escaped;
+ 	gchar *start;
+ 	gint success;
+-	gchar *isrc;
+ 	gchar *uri;
+ 	gchar *end;
+ 
+@@ -709,13 +712,13 @@ _save_audio_track_xml (xmlTextWriter *project,
+ 			return FALSE;
+ 	}
+ 
+-	if (brasero_track_tag_lookup_int (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG)) {
+-		isrc = g_strdup_printf ("%d", brasero_track_tag_lookup_int (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG));
++	if (brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG)) {
++		escaped = (unsigned char *) g_uri_escape_string (brasero_track_tag_lookup_string (BRASERO_TRACK (track), BRASERO_TRACK_STREAM_ISRC_TAG), NULL, FALSE);
+ 		success = xmlTextWriterWriteElement (project,
+ 						     (xmlChar *) "isrc",
+-						     (xmlChar *) isrc);
++						     escaped);
+ 
+-		g_free (isrc);
++		g_free (escaped);
+ 		if (success == -1)
+ 			return FALSE;
+ 	}
+diff --git a/src/brasero-song-properties.c b/src/brasero-song-properties.c
+index ebbdc32..b8c8de2 100644
+--- a/src/brasero-song-properties.c
++++ b/src/brasero-song-properties.c
+@@ -307,7 +307,7 @@ brasero_song_props_get_properties (BraseroSongProps *self,
+ 				   gchar **artist,
+ 				   gchar **title,
+ 				   gchar **composer,
+-				   gint *isrc,
++				   gchar **isrc,
+ 				   gint64 *start,
+ 				   gint64 *end,
+ 				   gint64 *gap)
+@@ -333,15 +333,8 @@ brasero_song_props_get_properties (BraseroSongProps *self,
+ 			*composer = NULL;
+ 	}
+ 
+-	if (isrc) {
+-		const gchar *string;
+-
+-		string = brasero_song_props_get_entry_value (GTK_ENTRY (self->priv->isrc));
+-		if (string)
+-			*isrc = (gint) g_strtod (string, NULL);
+-		else
+-			*isrc = 0;
+-	}
++	if (isrc)
++		*isrc = brasero_song_props_get_entry_value (GTK_ENTRY (self->priv->isrc));
+ 
+ 	if (start)
+ 		*start = brasero_time_button_get_value (BRASERO_TIME_BUTTON (self->priv->start));
+@@ -357,7 +350,7 @@ brasero_song_props_set_properties (BraseroSongProps *self,
+ 				   const gchar *artist,
+ 				   const gchar *title,
+ 				   const gchar *composer,
+-				   gint isrc,
++				   const gchar *isrc,
+ 				   gint64 length,
+ 				   gint64 start,
+ 				   gint64 end,
+@@ -391,12 +384,8 @@ brasero_song_props_set_properties (BraseroSongProps *self,
+ 		gtk_entry_set_text (GTK_ENTRY (self->priv->title), title);
+ 	if (composer)
+ 		gtk_entry_set_text (GTK_ENTRY (self->priv->composer), composer);
+-
+-	if (isrc) {
+-		string = g_strdup_printf ("%i", isrc);
+-		gtk_entry_set_text (GTK_ENTRY (self->priv->isrc), string);
+-		g_free (string);
+-	}
++	if (isrc)
++		gtk_entry_set_text (GTK_ENTRY (self->priv->isrc), isrc);
+ 
+ 	if (gap > 0) {
+ 		secs = gap / GST_SECOND;
+diff --git a/src/brasero-song-properties.h b/src/brasero-song-properties.h
+index edb0ddb..997a49e 100644
+--- a/src/brasero-song-properties.h
++++ b/src/brasero-song-properties.h
+@@ -60,7 +60,7 @@ brasero_song_props_get_properties (BraseroSongProps *self,
+ 				   gchar **artist,
+ 				   gchar **title,
+ 				   gchar **composer,
+-				   gint *isrc,
++				   gchar **isrc,
+ 				   gint64 *start,
+ 				   gint64 *end,
+ 				   gint64 *gap);
+@@ -70,7 +70,7 @@ brasero_song_props_set_properties (BraseroSongProps *self,
+ 				   const gchar *artist,
+ 				   const gchar *title,
+ 				   const gchar *composer,
+-				   gint isrc,
++				   const gchar *isrc,
+ 				   gint64 length,
+ 				   gint64 start,
+ 				   gint64 end,
+diff --git a/src/brasero-video-disc.c b/src/brasero-video-disc.c
+index 3fa1134..d7c15b2 100644
+--- a/src/brasero-video-disc.c
++++ b/src/brasero-video-disc.c
+@@ -623,7 +623,6 @@ static void
+ brasero_video_disc_edit_song_properties_list (BraseroVideoDisc *self,
+ 					      GList *list)
+ {
+-	gint isrc;
+ 	GList *item;
+ 	GList *copy;
+ 	GtkWidget *props;
+@@ -631,6 +630,7 @@ brasero_video_disc_edit_song_properties_list (BraseroVideoDisc *self,
+ 	GtkTreeModel *model;
+ 	gchar *artist = NULL;
+ 	gchar *composer = NULL;
++	gchar *isrc = NULL;
+ 	GtkResponseType result;
+ 	BraseroVideoDiscPrivate *priv;
+ 
+@@ -688,14 +688,15 @@ brasero_video_disc_edit_song_properties_list (BraseroVideoDisc *self,
+ 					      BRASERO_TRACK_STREAM_COMPOSER_TAG,
+ 					      composer);
+ 
+-		brasero_track_tag_add_int (track,
+-					   BRASERO_TRACK_STREAM_ISRC_TAG,
+-					   isrc);
++		brasero_track_tag_add_string (track,
++					      BRASERO_TRACK_STREAM_ISRC_TAG,
++					      isrc);
+ 	}
+ 
+ 	g_list_free (copy);
+ 	g_free (artist);
+ 	g_free (composer);
++	g_free (isrc);
+ end:
+ 
+ 	gtk_widget_destroy (props);
+@@ -705,12 +706,12 @@ static void
+ brasero_video_disc_edit_song_properties_file (BraseroVideoDisc *self,
+ 					      BraseroTrack *track)
+ {
+-	gint isrc;
+ 	gint64 end;
+ 	gint64 start;
+ 	gchar *title;
+ 	gchar *artist;
+ 	gchar *composer;
++	gchar *isrc;
+ 	GtkWidget *props;
+ 	guint64 length = 0;
+ 	GtkWidget *toplevel;
+@@ -726,7 +727,7 @@ brasero_video_disc_edit_song_properties_file (BraseroVideoDisc *self,
+ 					   brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_ARTIST_TAG),
+ 					   brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_TITLE_TAG),
+ 					   brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_COMPOSER_TAG),
+-					   brasero_track_tag_lookup_int (track, BRASERO_TRACK_STREAM_ISRC_TAG),
++					   brasero_track_tag_lookup_string (track, BRASERO_TRACK_STREAM_ISRC_TAG),
+ 					   length,
+ 					   brasero_track_stream_get_start (BRASERO_TRACK_STREAM (track)),
+ 					   brasero_track_stream_get_end (BRASERO_TRACK_STREAM (track)),
+@@ -774,10 +775,12 @@ brasero_video_disc_edit_song_properties_file (BraseroVideoDisc *self,
+ 		g_free (composer);
+ 	}
+ 
+-	if (isrc)
+-		brasero_track_tag_add_int (track,
+-					   BRASERO_TRACK_STREAM_ISRC_TAG,
+-					   isrc);
++	if (isrc) {
++		brasero_track_tag_add_string (track,
++					      BRASERO_TRACK_STREAM_ISRC_TAG,
++					      isrc);
++		g_free (isrc);
++	}
+ 
+ 	brasero_track_stream_set_boundaries (BRASERO_TRACK_STREAM (track),
+ 					     start,
+-- 
+1.8.4.2
+

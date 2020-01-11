@@ -1575,11 +1575,6 @@ brasero_data_project_rename_node (BraseroDataProject *self,
 
 	priv = BRASERO_DATA_PROJECT_PRIVATE (self);
 
-	/* Don't allow rename to succeed if name is the empty string */
-	if (strlen (name) < 1) {
-		return FALSE;
-	}
-
 	/* make sure there isn't the same name in the directory: if so, that's 
 	 * simply not possible to rename. */
 	sibling = brasero_file_node_check_name_existence (node->parent, name);
@@ -1679,7 +1674,6 @@ brasero_data_project_add_node_real (BraseroDataProject *self,
 		/* The node is a fake directory; graft it as well as all the 
 		 * nodes already in the tree with the same URI */
 		graft = brasero_data_project_uri_graft_nodes (self, uri);
-		brasero_file_node_graft (node, graft);
 	}
 	else {
 		gchar *parent_uri;

@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index"/>
-    <desc>Εισαγωγή στην εφαρμογή εγγραφής δίσκου του <app>Brasero</app>.</desc>
+    <desc>Εισαγωγή στην εφαρμογή εγγραφής δίσκου του <app>Brasero</app></desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -22,12 +22,6 @@
       <mal:name> Ευστάθιος Ιωσηφίδης</mal:name>
       <mal:email>diamond_gr@freemail.gr</mal:email>
       <mal:years>2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name> Δημήτρης Σπίγγος</mal:name>
-      <mal:email>dmtrs32@gmail.com</mal:email>
-      <mal:years>2013, 2014</mal:years>
     </mal:credit>
   </info>
 

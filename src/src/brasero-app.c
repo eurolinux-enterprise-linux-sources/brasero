@@ -40,6 +40,7 @@
 #include "brasero-sum-dialog.h"
 #include "brasero-eject-dialog.h"
 #include "brasero-project-manager.h"
+#include "brasero-xsession.h"
 #include "brasero-pref.h"
 
 #include "brasero-drive.h"
@@ -512,10 +513,7 @@ brasero_app_set_parent (BraseroApp *app,
 	BraseroAppPrivate *priv;
 
 	priv = BRASERO_APP_PRIVATE (app);
-#ifdef GDK_WINDOWING_X11
-	if (GDK_IS_X11_DISPLAY (gdk_display_get_default ()))
-		priv->parent = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (), parent_xid);
-#endif
+	priv->parent = gdk_x11_window_foreign_new_for_display (gdk_display_get_default (), parent_xid);
 }
 
 gboolean
@@ -2015,9 +2013,6 @@ brasero_app_run_mainwin (BraseroApp *app)
 
 	priv = BRASERO_APP_PRIVATE (app);
 
-	if (!priv->mainwin)
-		return FALSE;
-
 	if (priv->mainwin_running)
 		return TRUE;
 
@@ -2060,11 +2055,12 @@ brasero_app_init (BraseroApp *object)
 
 	priv = BRASERO_APP_PRIVATE (object);
 
-	priv->mainwin = NULL;
-
 	/* Load settings */
 	priv->setting = brasero_setting_get_default ();
 	brasero_setting_load (priv->setting);
+
+	/* Connect to session */
+	brasero_session_connect (object);
 
 	g_set_application_name (_("Disc Burner"));
 	gtk_window_set_default_icon_name ("brasero");
@@ -2082,6 +2078,8 @@ brasero_app_finalize (GObject *object)
 	brasero_setting_save (priv->setting);
 	g_object_unref (priv->setting);
 	priv->setting = NULL;
+
+	brasero_session_disconnect (BRASERO_APP (object));
 
 	if (priv->saved_contents) {
 		g_free (priv->saved_contents);

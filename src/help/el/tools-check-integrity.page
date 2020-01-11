@@ -27,12 +27,6 @@
       <mal:email>diamond_gr@freemail.gr</mal:email>
       <mal:years>2011</mal:years>
     </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name> Δημήτρης Σπίγγος</mal:name>
-      <mal:email>dmtrs32@gmail.com</mal:email>
-      <mal:years>2013, 2014</mal:years>
-    </mal:credit>
   </info>
 
   <title>Έλεγχος ακεραιότητας δίσκου</title>
@@ -44,7 +38,7 @@
       <p>Επιλέξτε <guiseq><gui>Εργαλεία</gui><gui>Έλεγχος ακεραιότητας...</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Μπορείτε να επιλέξετε <gui>Χρήση ενός αρχείου MD5 για να ελέγξετε τον δίσκο</gui> εάν το προτιμάτε.</p>
+      <p>Επιλέξτε <guilabel>Χρησιμοποιήστε ένα αρχείο τύπου md5 για να ελέγξετε το δίσκο</guilabel> εάν το προτιμάτε.</p>
 	<note style="advanced">
 	<list>
 	<item><p>Ένα MD5 (Message-Digest Algorithm 5) είναι μια συνάρτηση κρυπτογραφικού κερματισμού που χρησιμοποιείται ευρέως για τον έλεγχο ακεραιότητας δεδομένων.</p></item>

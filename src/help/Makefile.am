@@ -4,9 +4,7 @@
 HELP_ID = brasero
 
 # List of figures to be included
-HELP_MEDIA = \
-	figures/brasero-main-window.png \
-	figures/logo48.png
+HELP_MEDIA = figures/brasero-main-window.png
 
 # List of pages
 HELP_FILES = \
@@ -26,6 +24,6 @@ HELP_FILES = \
 	tools-check-integrity.page
 
 # List of translations
-HELP_LINGUAS = bg ca cs de el en_GB es eu fi fr gl hu id it ja ko lv pl pt pt_BR ro ru sl te sv zh_CN zh_HK zh_TW
+HELP_LINGUAS = bg ca cs de el en_GB es eu fi fr gl hu it ko lv pl pt_BR ro ru sl te sv zh_CN zh_HK zh_TW
 
 -include $(top_srcdir)/git.mk

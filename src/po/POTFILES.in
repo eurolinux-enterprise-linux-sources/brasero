@@ -1,9 +1,8 @@
 # List of source files containing translatable strings.
 [encoding: UTF-8]
-data/brasero.appdata.xml.in
 data/brasero.desktop.in.in
 data/mime/brasero.xml.in
-data/org.gnome.brasero.gschema.xml
+data/org.gnome.brasero.gschema.xml.in
 libbrasero-burn/brasero-blank-dialog.c
 libbrasero-burn/brasero-burn.c
 libbrasero-burn/brasero-burn-dialog.c
@@ -56,7 +55,6 @@ libbrasero-utils/brasero-jacket-background.c
 libbrasero-utils/brasero-jacket-edit.c
 libbrasero-utils/brasero-jacket-view.c
 libbrasero-utils/brasero-metadata.c
-libbrasero-utils/brasero-misc.c
 libbrasero-utils/brasero-tool-color-picker.c
 nautilus/brasero-nautilus.desktop.in.in
 nautilus/nautilus-burn-bar.c
@@ -119,4 +117,6 @@ src/brasero-time-button.c
 src/brasero-utils.c
 src/brasero-video-disc.c
 src/brasero-video-tree-model.c
+src/eggdesktopfile.c
+src/eggsmclient.c
 src/main.c

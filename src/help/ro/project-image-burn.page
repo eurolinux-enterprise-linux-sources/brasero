@@ -7,7 +7,7 @@
     <link type="seealso" xref="project-disc-copy"/>
     <link type="seealso" xref="project-video"/>
     <revision version="3.3" date="2011-10-14" status="review"/>
-    <desc>Scrie pe un CD sau DVD o imagine de disc existentă.</desc>
+    <desc>Burn an existing disc image to a CD or DVD.</desc>
     <credit type="author">
       <name>Marta Bogdanowicz</name>
       <email>majus85@gmail.com</email>
@@ -17,49 +17,52 @@
       <email>kittykat3756@gmail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Atribuire - Distribuire-în-condiții-identice 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Șerbănescu</mal:name>
-      <mal:email>daniel [at] serbanescu [dot] dk</mal:email>
-      <mal:years>2010 , 2012, 2014</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Laurențiu Cristian Ion</mal:name>
-      <mal:email>ionlaurentiucristian@gmail.com</mal:email>
-      <mal:years>2011, 2012</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Scrierea unei imagini</title>
+  <title>Burn image</title>
 
-  <p><app>Brasero</app> vă permite să scrieți imagini de disc pe un CD sau DVD. Sunt compatibile următoarele extensii de imagini de discuri optice: <file>.iso</file>, <file>.toc</file> și <file>.cue</file>.</p>
+  <p><app>Brasero</app> allows you to burn disc images to a CD or DVD. It
+  supports the following extensions of optical disc images: <file>.iso</file>,
+  <file>.toc</file> and <file>.cue</file>.</p>
 
   <note style="advanced">
-    <p>Imaginile de disc sunt fișiere arhivă care conțin toate datele care se află pe un CD sau DVD. Doar o singură imagine de disc poate fi pe un CD la un moment dat, dar fiecare arhivă poate conține oricât de multe sau puține date doriți, atât timp cât încape pe disc.</p>
+    <p>Disc images are archive files which contain all the data that is on a CD
+    or DVD. Only one disc image can be on a CD at a time, but each archive can
+    contain as little or as much data as you want, as long as it fits on the
+    disc.</p>
   </note>
 
-  <p>Pentru a scrie o imagine de disc pe un CD sau DVD, urmați acești pași:</p>
+  <p>To burn a disc image to a CD or DVD, follow these steps:</p>
   <steps>
     <item>
-      <p>Apăsați pe <gui>Scriere imagine</gui> de pe pagina principală, sau selectați <guiseq><gui>Proiect</gui><gui>Proiect nou</gui><gui>Scrie imaginea…</gui> </guiseq>.</p>
+      <p>Click <gui>Burn image</gui> on the start page or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Burn image…</gui>
+      </guiseq>.</p>
     </item>
     <item>
-      <p>Alegeți o imagine de disc pentru a o scrie apăsând pe <gui>Clic aici pentru a alege o imagine de disc</gui>.</p>
+      <p>Select a disc image to write by clicking <gui>Click here to select
+      a disc image</gui>.</p>
     </item>
     <item>
-      <p>Alegeți discul pe care doriți să îl utilizați din lista de selecție de mai jos <gui>Alegeți un disc pe care să se scrie</gui>. Dacă aveți mai mult de o unitate de disc, ar trebui să fie enumerate toate discurile care sunt în ele.</p>
-        <note><p>După alegerea discului <app>Brasero</app> arată cât de mult spațiu liber va rămâne pe disc după scriere.</p></note>
+      <p>Select the disc that you want to use from drop down list below
+      <gui>Select a disc to write to</gui>. If you have more than one disc
+      drive, all discs which are currently in them should be listed.</p>
+        <note><p>After choosing the disc <app>Brasero</app> shows how much free
+        space will remain on the disc after burning.</p></note>
     </item>
     <item>
-      <p>Apăsați pe butonul <gui>Proprietăți</gui> pentru a alege viteza de scriere și alte opțiuni specifice.</p>
+      <p>Click the <gui>Properties</gui> button to select burning speed and
+      other custom options.</p>
     </item>
     <item>
-      <p>Apăsați pe <gui>Scrie</gui> pentru a începe scrierea imaginii. După această operațiune puteți să terminați scrierea sau să faceți cealaltă copie a imaginii.</p>
+      <p>Click <gui>Burn</gui> to start burning the image. After this operation
+      you can either finish burning or make the other copy of the image.</p>
         <note>
-          <p>Dacă folosiți un disc reinscriptibil, care conține deja date, veți fi întrebat dacă doriți să-l goliți sau să inserați un disc diferit.</p>
+          <p>If you are using a re-writable disc, which already contains data,
+          you will be asked if you want to blank it or insert a different
+          disc.</p>
         </note>
     </item>
     <!-- There are some problems with multiple burn. After burning one copy,

@@ -836,6 +836,7 @@ static void
 brasero_io_set_metadata_attributes (GFileInfo *info,
 				    BraseroMetadataInfo *metadata)
 {
+	g_file_info_set_attribute_int32 (info, BRASERO_IO_ISRC, metadata->isrc);
 	g_file_info_set_attribute_uint64 (info, BRASERO_IO_LEN, metadata->len);
 
 	if (metadata->type)
@@ -855,9 +856,6 @@ brasero_io_set_metadata_attributes (GFileInfo *info,
 
 	if (metadata->composer)
 		g_file_info_set_attribute_string (info, BRASERO_IO_COMPOSER, metadata->composer);
-
-	if (metadata->isrc)
-		g_file_info_set_attribute_string (info, BRASERO_IO_ISRC, metadata->isrc);
 
 	g_file_info_set_attribute_boolean (info, BRASERO_IO_HAS_AUDIO, metadata->has_audio);
 	if (metadata->has_audio) {

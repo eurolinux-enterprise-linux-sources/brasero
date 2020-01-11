@@ -69,7 +69,7 @@ typedef struct {
 	gchar *genre;
 	gchar *composer;
 	gchar *musicbrainz_id;
-	gchar *isrc;
+	int isrc;
 	guint64 len;
 
 	gint channels;

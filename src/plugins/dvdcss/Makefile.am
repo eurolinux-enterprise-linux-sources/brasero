@@ -1,4 +1,4 @@
-AM_CPPFLAGS = \
+INCLUDES = \
 	-I$(top_srcdir)					\
 	-I$(top_srcdir)/libbrasero-media/					\
 	-I$(top_builddir)/libbrasero-media/		\

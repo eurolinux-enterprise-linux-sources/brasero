@@ -11,24 +11,6 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Adrian Guniš</mal:name>
-      <mal:email>andygun696@gmail.com</mal:email>
-      <mal:years>2009, 2010</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Štěpán Šimsa</mal:name>
-      <mal:email>simsa.st@gmail.com</mal:email>
-      <mal:years>2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Marek Černocký</mal:name>
-      <mal:email>marek@manet.cz</mal:email>
-      <mal:years>2013</mal:years>
-    </mal:credit>
   </info>
 
   <title>Kopírovat disk</title>

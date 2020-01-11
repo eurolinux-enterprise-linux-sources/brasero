@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#tools"/>
-    <desc>Puteți testa integritatea unui disc după scrierea lui.</desc>
+    <desc>You can test out a disc integrity after burning it.</desc>
     <credit type="author">
       <name>Paulina Gonzalez</name>
       <email>pau.gonzalezbr@gmail.com</email>
@@ -13,44 +13,32 @@
       <email>kittykat3756@gmail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Atribuire - Distribuire-în-condiții-identice 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Șerbănescu</mal:name>
-      <mal:email>daniel [at] serbanescu [dot] dk</mal:email>
-      <mal:years>2010 , 2012, 2014</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Laurențiu Cristian Ion</mal:name>
-      <mal:email>ionlaurentiucristian@gmail.com</mal:email>
-      <mal:years>2011, 2012</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Verificarea integrității discului</title>
+  <title>Check disc integrity</title>
 
-  <p>După scrierea unui CD/DVD utilizând <app>Brasero</app>, îi puteți verifica integritatea pentru a vă asigura că fișierele de pe disc nu sunt corupte.</p>
+  <p>After burning a CD/DVD by using <app>Brasero</app>, you can check its integrity to make sure that the files in the disc are not corrupted.</p>
 
   <steps>
     <item>
-      <p>Selectați <guiseq><gui>Instrumente</gui><gui>Verifică integritatea...</gui></guiseq>.</p>
+      <p>Select <guiseq><gui>Tools</gui><gui>Check Integrity...</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Dacă preferați puteți selecta opțiunea <gui>Utilizează un fișier MD5 pentru a verifica discul.</gui></p>
+      <p>You can select the option <gui>Use an MD5 file to check the disk.</gui> if you prefer it.</p>
 	<note style="advanced">
 	<list>
-	<item><p>Un MD5 (Message-Digest Algorithm 5) este o funcție hash criptografică utilizată pe scară largă pentru a verifica integritatea datelor.</p></item>
-	<item><p>Dacă alegeți această opțiune, va trebui să găsiți fișierul MD5 apăsând pe pictograma dosarului de mai jos.</p></item>
+	<item><p>An MD5 (Message-Digest Algorithm 5) is a cryptographic hash function widely used for checking data integrity. </p></item>
+	<item><p>If you choose this option, you will have to find the MD5 file by clicking in the folder icon placed below.</p></item>
 	</list>
 	</note>
     </item>
     <item>
-      <p>Apăsați <gui>Verifică</gui> pentru a continua sau <gui>Închide</gui> pentru a anula procesul.</p>
+      <p>Press <gui>Check</gui> to continue or <gui>Close</gui> to cancel it.</p>
     </item>
     <item>
-      <p>Când verificarea s-a finalizat vă puteți alege fie <gui>Verifică din nou</gui> sau doar <gui>Închide</gui>.</p>
+      <p>When the checking is finished you can either choose to <gui>Check Again</gui> or just <gui>Close</gui>.</p>
     </item>
   </steps>
 

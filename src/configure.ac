@@ -1,10 +1,10 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_INIT([brasero],[3.12.2])
+AC_INIT([brasero],[3.8.0])
 AC_CONFIG_SRCDIR(src/main.c)
 
 BRASERO_MAJOR_VERSION=3
-BRASERO_MINOR_VERSION=12
-BRASERO_SUB=2
+BRASERO_MINOR_VERSION=6
+BRASERO_SUB=0
 BRASERO_VERSION=$BRASERO_MAJOR_VERSION.$BRASERO_MINOR_VERSION.$BRASERO_SUB
 
 AC_SUBST(BRASERO_MAJOR_VERSION)
@@ -21,7 +21,7 @@ dnl   change to C+1:0:0
 dnl - If the interface is the same as the previous version, change to C:R+1:A
 
 LT_CURRENT=3
-LT_REVISION=6
+LT_REVISION=3
 LT_AGE=2
 
 AC_SUBST(LT_CURRENT)
@@ -30,9 +30,6 @@ AC_SUBST(LT_AGE)
 
 LIBBRASERO_LT_VERSION=$LT_CURRENT:$LT_REVISION:$LT_AGE
 AC_SUBST(LIBBRASERO_LT_VERSION) 
-
-TYPELIB_MIN_VERSION=$((LT_CURRENT-LT_AGE))
-AC_SUBST(TYPELIB_MIN_VERSION)
 
 AC_DEFINE_UNQUOTED(BRASERO_MAJOR_VERSION, $BRASERO_MAJOR_VERSION, [major version])
 AC_DEFINE_UNQUOTED(BRASERO_MINOR_VERSION, $BRASERO_MINOR_VERSION, [minor version])
@@ -385,22 +382,21 @@ AC_ARG_ENABLE(search,
 			esac],
 			[enable_search="auto"])
 
-if test x"$enable_search" != "xno"; then
-        # Try to figure out the tracker API version to use
-        tracker_api="0.10"
-        m4_foreach([VERSION], [[0.10], [0.12], [0.14], [0.16], [0.18], [1.0], [2.0]],
-                              [PKG_CHECK_EXISTS([tracker-sparql-VERSION >= $TRACKER_REQUIRED],
-                                                [tracker_api="VERSION"])
-                              ])
-fi
-
 if test x"$enable_search" = "xauto"; then
-        PKG_CHECK_EXISTS([tracker-sparql-$tracker_api >= $TRACKER_REQUIRED],
-                         [enable_search=yes],
-                         [enable_search=no])
+        PKG_CHECK_EXISTS([tracker-sparql-0.14 >= $TRACKER_REQUIRED],
+                          [enable_search=yes],
+                          [PKG_CHECK_EXISTS([tracker-sparql-0.12 >= $TRACKER_REQUIRED],
+                                            [enable_search=yes],
+                                            [PKG_CHECK_EXISTS([tracker-sparql-0.10 >= $TRACKER_REQUIRED],
+                                                              [enable_search=yes],
+                                                              [enable_search=no])])])
 fi
 
 if test x"$enable_search" = "xyes"; then
+        PKG_CHECK_EXISTS([tracker-sparql-0.14 >= $TRACKER_REQUIRED],
+                         [tracker_api=0.14],
+                         [PKG_CHECK_EXISTS([tracker-sparql-0.12 >= $TRACKER_REQUIRED],
+                                           [tracker_api=0.12], [tracker_api=0.10])])
 	PKG_CHECK_MODULES(BRASERO_SEARCH, tracker-sparql-$tracker_api >= $TRACKER_REQUIRED)
 	AC_DEFINE(BUILD_SEARCH, 1, [define if you  want to use search pane])
 	AC_DEFINE(BUILD_TRACKER, 1, [define if you  want to use search pane])
@@ -470,8 +466,80 @@ if test x"$enable_inotify" = "xyes"; then
 fi
 AM_CONDITIONAL(BUILD_INOTIFY, test x"$enable_inotify" = "xyes")
 
-dnl ****** Check for introspection ***************************
-GOBJECT_INTROSPECTION_CHECK([1.30.0])
+dnl ****** GObject Introspection **********************
+dnl This is a copy of the m4 function in gobject-introspection package
+dnl but it was modified so the install path can be forced with a command
+dnl line parameter. This is to be able to use make distcheck.
+
+GOBJECT_INTROSPECTION_REQUIRED=0.6.3
+
+AC_ARG_ENABLE(introspection,
+                  AS_HELP_STRING([--enable-introspection[=@<:@no/auto/yes@:>@]], [Enable introspection for this build]),
+		  [enable_introspection=$enableval],
+		  [enable_introspection="auto"])
+
+AC_ARG_WITH(girdir,
+			AS_HELP_STRING([--with-girdir=DIR],[Installation path for .gir files @<:@auto@:>@]),
+			[ac_with_girdir=$withval],
+			[ac_with_girdir=""])
+
+AC_ARG_WITH(typelibdir,
+			AS_HELP_STRING([--with-typelibdir=DIR],[Installation path for .typelib files @<:@auto@:>@]),
+			[ac_with_typelibdir=$withval],
+			[ac_with_typelibdir=""])
+
+AC_MSG_CHECKING([for gobject-introspection])
+
+dnl presence/version checking
+AS_CASE([$enable_introspection],
+    [no], [dnl
+        found_introspection="no (disabled, use --enable-introspection to enable)"
+    ],dnl
+    [yes],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0],,
+                         AC_MSG_ERROR([gobject-introspection-1.0 is not installed]))
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED],
+                         found_introspection=yes,
+                         AC_MSG_ERROR([You need to have gobject-introspection >= $1 installed to build AC_PACKAGE_NAME]))
+    ],dnl
+    [auto],[dnl
+        PKG_CHECK_EXISTS([gobject-introspection-1.0 >= $GOBJECT_INTROSPECTION_REQUIRED], found_introspection=yes, found_introspection=no)
+    ],dnl
+    [dnl	
+        AC_MSG_ERROR([invalid argument passed to --enable-introspection, should be one of @<:@no/auto/yes@:>@])
+])dnl
+
+AC_MSG_RESULT([$found_introspection])
+
+INTROSPECTION_SCANNER=
+INTROSPECTION_COMPILER=
+INTROSPECTION_GENERATE=
+INTROSPECTION_GIRDIR=
+INTROSPECTION_TYPELIBDIR=
+if test "x$found_introspection" = "xyes"; then
+	INTROSPECTION_SCANNER=`$PKG_CONFIG --variable=g_ir_scanner gobject-introspection-1.0`
+	INTROSPECTION_COMPILER=`$PKG_CONFIG --variable=g_ir_compiler gobject-introspection-1.0`
+	INTROSPECTION_GENERATE=`$PKG_CONFIG --variable=g_ir_generate gobject-introspection-1.0`
+
+	if test "${ac_with_girdir}" = ""; then
+		ac_with_girdir=`$PKG_CONFIG --variable=girdir gobject-introspection-1.0`
+	fi
+	INTROSPECTION_GIRDIR=${ac_with_girdir}
+	AC_MSG_NOTICE([installing .gir files in ${INTROSPECTION_GIRDIR}])
+
+	if test "${ac_with_typelibdir}" = ""; then
+		ac_with_typelibdir="$($PKG_CONFIG --variable=typelibdir gobject-introspection-1.0)"
+	fi
+	INTROSPECTION_TYPELIBDIR=${ac_with_typelibdir}
+	AC_MSG_NOTICE([installing .typelib files in ${INTROSPECTION_TYPELIBDIR}])
+fi
+AC_SUBST(INTROSPECTION_SCANNER)
+AC_SUBST(INTROSPECTION_COMPILER)
+AC_SUBST(INTROSPECTION_GENERATE)
+AC_SUBST(INTROSPECTION_GIRDIR)
+AC_SUBST(INTROSPECTION_TYPELIBDIR)
+
+AM_CONDITIONAL(HAVE_INTROSPECTION, test "x$found_introspection" = "xyes")
 
 dnl ****** Update mime, desktop and icon caches *******
 AC_ARG_ENABLE(caches,
@@ -488,7 +556,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettex
 
 AM_GLIB_GNU_GETTEXT
 
-IT_PROG_INTLTOOL([0.50])
+IT_PROG_INTLTOOL([0.35.0])
 
 if test "x${prefix}" = "xNONE"; then
   AC_DEFINE_UNQUOTED(PACKAGE_LOCALE_DIR, "${ac_default_prefix}/${DATADIRNAME}/locale", [Location of package locale files])

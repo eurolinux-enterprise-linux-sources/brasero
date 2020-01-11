@@ -1,46 +1,21 @@
 # Vietnamese translation for Brasero.
-# Copyright © 2014 GNOME I18N Project for Vietnamese.
-# This file is distributed under the same license as the brasero package.
+# Copyright © 2009 GNOME I18N Project for Vietnamese.
 # Clytie Siddall <clytie@riverland.net.au>, 2009.
 # Nguyễn Thái Ngọc Duy <pclouds@gmail.com>, 2010-2012.
-# Trần Ngọc Quân <vnwildman@gmail.com>, 2013, 2014, 2017.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: barsero master\n"
-"Report-Msgid-Bugs-To: https://bugzilla.gnome.org/enter_bug.cgi?"
+"Project-Id-Version: barsero TRUNK\n"
+"Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=brasero&keywords=I18N+L10N&component=general\n"
-"POT-Creation-Date: 2017-06-28 18:46+0000\n"
-"PO-Revision-Date: 2017-06-29 07:50+0700\n"
-"Last-Translator: Trần Ngọc Quân <vnwildman@gmail.com>\n"
-"Language-Team: Vietnamese <gnome-vi-list@gnome.org>\n"
-"Language: vi\n"
+"POT-Creation-Date: 2012-06-13 10:08+0000\n"
+"PO-Revision-Date: 2012-08-22 14:03+0700\n"
+"Last-Translator: Nguyễn Thái Ngọc Duy <pclouds@gmail.com>\n"
+"Language-Team: Vietnamese <vi-VN@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Gtranslator 2.91.7\n"
-
-#: ../data/brasero.appdata.xml.in.h:1
-msgid ""
-"Brasero is a application to burn CD/DVD for the GNOME Desktop. It is "
-"designed to be as simple as possible and has some unique features to enable "
-"users to create their discs easily and quickly."
-msgstr ""
-"Brasero là ứng dụng để ghi đĩa CD/DVD trên môi trường máy tính để bàn GNOME. "
-"Nó được thiết kế theo kiểu càng đơn giản càng tốt và có một số tính năng độc "
-"đáo để giúp cho người dùng có thể tạo đĩa nhanh chóng và dễ dàng."
-
-#: ../data/brasero.appdata.xml.in.h:2
-msgid ""
-"Brasero can create, copy and burn Data and Audio CD/DVDs. It fully supports "
-"CD-TEXT, multisession and joliet extensions. You can simply drag and drop "
-"files from other local applications or from remote shared drives to easily "
-"burn them to a disc."
-msgstr ""
-"Brasero có thể tạo, chép và ghi đĩa CD/DVD dữ liệu hay âm nhạc. Nó hỗ trợ CD-"
-"TEXT, đa phần và joliet. Bạn có thể dễ dàng kéo thả các tập tin từ các ứng "
-"dụng hay từ các ổ đĩa chia sẻ trên mạng để dễ dàng ghi chúng lên đĩa."
+"X-Generator: LocFactoryEditor 1.8\n"
 
 #: ../data/brasero.desktop.in.in.h:1
 msgid "Brasero"
@@ -55,30 +30,25 @@ msgid "Create and copy CDs and DVDs"
 msgstr "Tạo và sao chép đĩa CD và DVD"
 
 #: ../data/brasero.desktop.in.in.h:4
-msgid "disc;cdrom;dvd;burn;audio;video;"
-msgstr "disc;đĩa;dia;cdrom;cd;dvd;burn;ghi;audio;nhạc;nhac;video;phim;"
+msgid "Brasero Disc Burner"
+msgstr "Công cụ chép ra đĩa Brasero"
 
 #: ../data/brasero.desktop.in.in.h:5
-msgid "Brasero Disc Burner"
-msgstr "Công cụ ghi đĩa Brasero"
-
-#: ../data/brasero.desktop.in.in.h:6
 msgid "Open a New Window"
 msgstr "Mở cửa sổ mới"
 
-#: ../data/brasero.desktop.in.in.h:7
+#: ../data/brasero.desktop.in.in.h:6
+#| msgid "Burn as _Image"
 msgid "Burn an Image File"
 msgstr "Ghi tập tin ảnh đĩa"
 
-#: ../data/brasero.desktop.in.in.h:8
-msgid "Copy a Disc"
-msgstr "Sao chép một đĩa"
-
-#: ../data/brasero.desktop.in.in.h:9
+#: ../data/brasero.desktop.in.in.h:7
+#| msgid "Create a new project"
 msgid "Create an Audio Project"
 msgstr "Tạo dự án nhạc"
 
-#: ../data/brasero.desktop.in.in.h:10
+#: ../data/brasero.desktop.in.in.h:8
+#| msgid "Create a new project"
 msgid "Create a Video Project"
 msgstr "Tạo dự án phim"
 
@@ -86,154 +56,153 @@ msgstr "Tạo dự án phim"
 msgid "Brasero project file"
 msgstr "Tập tin dự án Brasero"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:1
+#: ../data/org.gnome.brasero.gschema.xml.in.h:1
 msgid "Should Nautilus extension output debug statements"
 msgstr ""
-"Liệu trình mở rộng cho Nautilus phải hiển thị những thông tin gỡ lỗi hay "
-"không"
+"Liệu trình mở rộng cho Nautilus phải hiển thị những thông tin debug hay không"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:2
+#: ../data/org.gnome.brasero.gschema.xml.in.h:2
 msgid ""
 "Should Nautilus extension output debug statements. The value should be set "
 "to true if it should."
 msgstr ""
-"Liệu trình mở rộng cho Nautilus phải hiển thị những thông tin gỡ lỗi hay "
+"Liệu trình mở rộng cho Nautilus phải hiển thị những thông tin debug hay "
 "không. Nếu có, cần đặt giá trị là true."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:3
+#: ../data/org.gnome.brasero.gschema.xml.in.h:3
 msgid "The type of checksum used for images"
-msgstr "Kiểu checksum (tổng kiểm tra) sẽ dùng cho tập tin ảnh"
+msgstr "Đang tạo checksum (mã kiểm tra toàn vẹn) cho tập tin ảnh"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:4
+#: ../data/org.gnome.brasero.gschema.xml.in.h:4
 msgid "Set to 0 for MD5, 1 for SHA1 and 2 for SHA256"
 msgstr "Đặt là 0 cho MD5, 1 cho SHA1 và 2 cho SHA256"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:5
+#: ../data/org.gnome.brasero.gschema.xml.in.h:5
 msgid "The type of checksum used for files"
-msgstr "Kiểu checksum (tổng kiểm tra) sẽ dùng cho tập tin"
+msgstr "Kiểu checksum (kiểm tra toàn vẹn) cho tập tin"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:6
+#: ../data/org.gnome.brasero.gschema.xml.in.h:6
 msgid "Directory to use for temporary files"
 msgstr "Thư mục chứa các tập tin tạm thời"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:7
+#: ../data/org.gnome.brasero.gschema.xml.in.h:7
 msgid ""
 "Contains the path to the directory where brasero should store temporary "
 "files. If that value is empty, the default directory set for glib will be "
 "used."
 msgstr ""
-"Chứa đường dẫn thư mục nơi mà brasero nên lưu tập tin tạm ở đó. Nếu để trống "
-"sẽ dùng thư mục mặc định của glib."
+"Chứa đường dẫn thư mục brasero nên lưu tập tin tạm. Nếu rỗng, dùng thư mục "
+"mặc định của glib."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:8
+#: ../data/org.gnome.brasero.gschema.xml.in.h:8
 msgid "Favourite burn engine"
-msgstr "Bộ máy ghi đĩa ưa thích"
+msgstr "Cơ chế chép ra ưa thích"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:9
+#: ../data/org.gnome.brasero.gschema.xml.in.h:9
 msgid ""
 "Contains the name of the favourite burn engine suite installed. It will be "
 "used if possible."
 msgstr ""
-"Chứa tên của các bộ ghi đĩa ưa thích đã được cài đặt. Nó sẽ được sử dụng nếu "
+"Chứa tên của bộ cơ chế chép ra ưa thích được cài đặt. Nó sẽ được sử dụng nếu "
 "có thể."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:10
+#: ../data/org.gnome.brasero.gschema.xml.in.h:10
 msgid "White list of additional plugins to use"
-msgstr "Danh sách trắng các phần bổ sung thêm cần dùng"
+msgstr "Danh sách các phần bổ sung thêm cần dùng"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:11
+#: ../data/org.gnome.brasero.gschema.xml.in.h:11
 msgid ""
 "Contains the list of additional plugins Brasero will use to burn discs. If "
 "set to NULL, Brasero will load them all."
 msgstr ""
-"Chứa danh sách các phần bổ sung phụ mà phần mềm Brasero sẽ sử dụng để ghi "
-"đĩa. Đặt thành NULL (vô giá trị) thì Brasero sẽ tải tất cả. "
+"Chứa danh sách các phần bổ sung phụ mà trình Brasero sẽ sử dụng để chép ra "
+"đĩa. Đặt thành NULL (vô giá trị) thì Brasero sẽ nạp tất cả. "
 
-#: ../data/org.gnome.brasero.gschema.xml.h:12
+#: ../data/org.gnome.brasero.gschema.xml.in.h:12
 msgid "Enable the \"-immed\" flag with cdrecord"
-msgstr "Bật chức năng \"-immed\" với chương trình cdrecord"
+msgstr "Bật chức năng \"-immed\" với trình cdrecord"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:13
+#: ../data/org.gnome.brasero.gschema.xml.in.h:13
 msgid ""
 "Whether to use the \"-immed\" flag with cdrecord. Use with caution (set to "
 "true) as it's only a workaround for some drives/setups."
 msgstr ""
-"Liệu có dùng tùy chọn \"-immed\" với cdrecord hay không. Cận thẩn khi dùng "
+"Liệu có dùng tuỳ chọn \"-immed\" với cdrecord hay không. Cận thẩn khi dùng "
 "(khi chọn True) do đây chỉ là một thủ thuật cần dụng cho một số loại ổ đĩa/"
 "cấu hình."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:14
+#: ../data/org.gnome.brasero.gschema.xml.in.h:14
 msgid "Whether to use the \"-use-the-force-luke=dao\" flag with growisofs"
 msgstr ""
-"Liệu có dùng tùy chọn \"-use-the-force-luke=dao\" với growisofs hay không"
+"Liệu có dùng tuỳ chọn \"-use-the-force-luke=dao\" với growisofs hay không"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:15
+#: ../data/org.gnome.brasero.gschema.xml.in.h:15
 msgid ""
 "Whether to use the \"-use-the-force-luke=dao\" flag with growisofs. Set to "
 "false, brasero won't use it; it may be a workaround for some drives/setups."
 msgstr ""
-"Liệu có dùng tùy chọn \"-use-the-force-luke=dao\" với growisofs hay không. "
+"Liệu có dùng tuỳ chọn \"-use-the-force-luke=dao\" với growisofs hay không. "
 "Nếu chọn False, brasero sẽ không dùng; đây là một thủ thuật có thể dùng cho "
 "một số loại ổ đĩa/cấu hình."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:16
+#: ../data/org.gnome.brasero.gschema.xml.in.h:16
 msgid "Used in conjunction with the \"-immed\" flag with cdrecord"
-msgstr "Dùng chung với tùy chọn \"-immed\" với cdrecord"
+msgstr "Dùng chung với tuỳ chọn \"-immed\" của cdrecord"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:17
+#: ../data/org.gnome.brasero.gschema.xml.in.h:17
 msgid "Used in conjunction with the \"-immed\" flag with cdrecord."
-msgstr "Dùng chung với tùy chọn \"-immed\" với cdrecord"
+msgstr "Dùng chung với tuỳ chọn \"-immed\" của cdrecord"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:18
+#: ../data/org.gnome.brasero.gschema.xml.in.h:18
 msgid "Whether to use the \"--driver generic-mmc-raw\" flag with cdrdao"
 msgstr ""
-"Liệu có dùng tùy chọn \"--driver generic-mmc-raw\" với cdrdao hay không"
+"Liệu có dùng tuỳ chọn \"--driver generic-mmc-raw\" với cdrdao hay không"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:19
+#: ../data/org.gnome.brasero.gschema.xml.in.h:19
 msgid ""
 "Whether to use the \"--driver generic-mmc-raw\" flag with cdrdao. Set to "
 "True, brasero will use it; it may be a workaround for some drives/setups."
 msgstr ""
-"Liệu có dùng tùy chọn \"--driver generic-mmc-raw\" với cdrdao hay không. Nếu "
+"Liệu có dùng tuỳ chọn \"--driver generic-mmc-raw\" với cdrdao hay không. Nếu "
 "chọn True, brasero sẽ dùng; đây là một thủ thuật có thể dùng cho một số loại "
 "ổ đĩa/cấu hình."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:20
+#: ../data/org.gnome.brasero.gschema.xml.in.h:20
 msgid "The last browsed folder while looking for images to burn"
 msgstr "Thư mục duyệt ảnh đĩa cần ghi lần cuối"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:21
+#: ../data/org.gnome.brasero.gschema.xml.in.h:21
 msgid ""
 "Contains the absolute path of the directory that was last browsed for images "
 "to burn"
 msgstr "Chứa đường dẫn tuyệt đối của thư mục duyệt ảnh đĩa lần cuối để ghi đĩa"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:22
+#: ../data/org.gnome.brasero.gschema.xml.in.h:22
 msgid "Enable file preview"
 msgstr "Bật xem thử phim"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:23
+#: ../data/org.gnome.brasero.gschema.xml.in.h:23
 msgid "Whether to display file preview. Set to true to use it."
 msgstr ""
 "Có hiển thị ô xem thử tập tin hay không. Bật tùy chọn này thì hiển thị."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:24
+#: ../data/org.gnome.brasero.gschema.xml.in.h:24
 msgid "Should brasero filter hidden files"
-msgstr "Brasero nên lọc tập tin ẩn?"
+msgstr "Brasero nên lọc tập tin ẩn ?"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:25
+#: ../data/org.gnome.brasero.gschema.xml.in.h:25
 msgid ""
 "Should brasero filter hidden files. Set to true, brasero will filter hidden "
 "files."
 msgstr ""
-"Trình Brasero có nên lọc các tập tin bị ẩn (tập tin “chấm”, có tên bắt đầu "
+"Trình Brasero có nên lọc các tập tin bị ẩn (tập tin « chấm », có tên bắt đầu "
 "với dấu chấm). Bật tùy chọn này thì Brasero sẽ lọc mỗi tập tin bị ẩn."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:26
+#: ../data/org.gnome.brasero.gschema.xml.in.h:26
 msgid "Replace symbolic links by their targets"
 msgstr "Thay thế liên kết symbolic bằng đối tượng"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:27
+#: ../data/org.gnome.brasero.gschema.xml.in.h:27
 msgid ""
 "Should brasero replace symbolic links by their target files in the project. "
 "Set to true, brasero will replace symbolic links."
@@ -241,11 +210,11 @@ msgstr ""
 "Liệu brasero có phải thay thế những siêu liên kết mềm bằng những tập tin đối "
 "tượng trong dự án hay không. Nếu chọn True, brasero sẽ thay thế."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:28
+#: ../data/org.gnome.brasero.gschema.xml.in.h:28
 msgid "Should brasero filter broken symbolic links"
 msgstr "Liệu brasero cần sàng lọc những liên kết mềm đã bị vỡ hay không"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:29
+#: ../data/org.gnome.brasero.gschema.xml.in.h:29
 msgid ""
 "Should brasero filter broken symbolic links. Set to true, brasero will "
 "filter broken symbolic links."
@@ -253,11 +222,11 @@ msgstr ""
 "Liệu brasero có phải lọc những liên kết mềm bị vỡ hay không. Nếu chọn True, "
 "brasero sẽ sàng lọc."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:30
+#: ../data/org.gnome.brasero.gschema.xml.in.h:30
 msgid "The priority value for the plugin"
 msgstr "Giá trị độ ưu tiên của phần bổ sung"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:31
+#: ../data/org.gnome.brasero.gschema.xml.in.h:31
 msgid ""
 "When several plugins are available for the same task, this value is used to "
 "determine which plugin should be given priority. 0 means the plugin's native "
@@ -268,36 +237,34 @@ msgstr ""
 "tiên, 0 là ưu tiên bình thường. Giá trị dương sẽ ghi đè độ ưu tiên bình "
 "thường. Giá trị âm tắt phần bổ sung."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:32
+#: ../data/org.gnome.brasero.gschema.xml.in.h:32
 msgid "Burning flags to be used"
 msgstr "Cờ ghi đĩa cần dùng"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:33
+#: ../data/org.gnome.brasero.gschema.xml.in.h:33
 msgid ""
 "This value represents the burning flags that were used in such a context the "
 "last time."
-msgstr ""
-"Giá trị này tương ứng với các cờ ghi đĩa dùng lần cuối trong cùng hoàn cảnh."
+msgstr "Cờ ghi đĩa dùng lần cuối trong cùng hoàn cảnh."
 
-#: ../data/org.gnome.brasero.gschema.xml.h:34
+#: ../data/org.gnome.brasero.gschema.xml.in.h:34
 msgid "The speed to be used"
 msgstr "Tốt độ cần dùng"
 
-#: ../data/org.gnome.brasero.gschema.xml.h:35
+#: ../data/org.gnome.brasero.gschema.xml.in.h:35
 msgid ""
 "This value represents the speed that was used in such a context the last "
 "time."
-msgstr ""
-"Giá trị này tương ứng với tốc độ ghi đĩa dùng lần cuối trong cùng hoàn cảnh."
+msgstr "Tốt độ dùng lần cuối trong cùng hoàn cảnh."
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:222
 msgid "Error while blanking."
-msgstr "Gặp lỗi trong khi tẩy trắng."
+msgstr "Gặp lỗi trong khi để trắng."
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:227
 #: ../libbrasero-burn/brasero-blank-dialog.c:272
 msgid "Blank _Again"
-msgstr "Xóa trắng lần nữ_a"
+msgstr "Để _lại trắng"
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:244
 msgid "Unknown error."
@@ -306,7 +273,7 @@ msgstr "Lỗi không rõ."
 #: ../libbrasero-burn/brasero-blank-dialog.c:264
 #: ../libbrasero-burn/brasero-blank-dialog.c:288
 msgid "The disc was successfully blanked."
-msgstr "Đĩa đã được tẩy trắng."
+msgstr "Đĩa đã được để trắng."
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:270
 msgid "The disc is ready for use."
@@ -315,23 +282,23 @@ msgstr "Đĩa sẵn sàng sử dụng."
 #. Translators: This is a verb, an action
 #: ../libbrasero-burn/brasero-blank-dialog.c:371
 msgid "_Blank"
-msgstr "_Xóa đĩa"
+msgstr "Để t_rắng"
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:402
 msgid "_Fast blanking"
-msgstr "Xóa đĩa nh_anh"
+msgstr "Để trắng nh_anh"
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:403
 msgid "Activate fast blanking, as opposed to a longer, thorough blanking"
-msgstr "Bật chức năng xóa nhanh, đối lập với xóa chậm nhưng kỹ lưỡng hơn"
+msgstr "Bật chức năng xoá nhanh, thay mà xoá chậm và kỹ lưỡng hơn"
 
 #: ../libbrasero-burn/brasero-blank-dialog.c:433
 msgid "Disc Blanking"
-msgstr "Xóa trắng đĩa"
+msgstr "Để trắng đĩa"
 
 #: ../libbrasero-burn/brasero-burn.c:162
 msgid "Burning CD/DVD"
-msgstr "Ghi đĩa CD/DVD"
+msgstr "Chép ra đĩa CD/DVD"
 
 #: ../libbrasero-burn/brasero-burn.c:331
 #: ../libbrasero-burn/brasero-data-session.c:123
@@ -349,7 +316,7 @@ msgid "The drive is busy"
 msgstr "Ổ đĩa đang bận"
 
 #: ../libbrasero-burn/brasero-burn.c:332
-#: ../libbrasero-burn/brasero-burn-dialog.c:651
+#: ../libbrasero-burn/brasero-burn-dialog.c:649
 #: ../libbrasero-burn/brasero-tool-dialog.c:90
 msgid "Make sure another application is not using it"
 msgstr "Kiểm tra không có ứng dụng khác sử dụng nó"
@@ -357,12 +324,12 @@ msgstr "Kiểm tra không có ứng dụng khác sử dụng nó"
 #: ../libbrasero-burn/brasero-burn.c:409
 #, c-format
 msgid "\"%s\" cannot be unlocked"
-msgstr "Không thể mở khóa “%s”"
+msgstr "Không thể mở khoá « %s »"
 
 #: ../libbrasero-burn/brasero-burn.c:546 ../libbrasero-burn/brasero-burn.c:678
 #: ../libbrasero-burn/brasero-burn.c:761
 msgid "No burner specified"
-msgstr "Chưa chỉ định ổ ghi"
+msgstr "Chưa chỉ định ổ chép ra"
 
 #: ../libbrasero-burn/brasero-burn.c:586
 msgid "No source drive specified"
@@ -376,7 +343,7 @@ msgstr "Tiến trình sao chép đang chạy"
 #: ../libbrasero-burn/brasero-burn.c:872 ../libbrasero-burn/brasero-burn.c:987
 #, c-format
 msgid "The drive cannot be locked (%s)"
-msgstr "Không thể khóa ổ (%s)"
+msgstr "Không thể khoá ổ (%s)"
 
 #: ../libbrasero-burn/brasero-burn.c:695
 msgid "The drive has no rewriting capabilities"
@@ -384,7 +351,7 @@ msgstr "Ổ này không có khả năng ghi lại"
 
 #: ../libbrasero-burn/brasero-burn.c:731
 msgid "Ongoing blanking process"
-msgstr "Tiến trình tẩy trắng đang chạy"
+msgstr "Tiến trình để tráng đang chạy"
 
 #: ../libbrasero-burn/brasero-burn.c:770
 msgid "The drive cannot burn"
@@ -397,7 +364,7 @@ msgstr "Tiến trình chép ra đang chạy"
 
 #: ../libbrasero-burn/brasero-burn.c:983
 msgid "Ongoing checksumming operation"
-msgstr "Tính toán tổng kiểm tra"
+msgstr "Tính toán hệ số checksum"
 
 #: ../libbrasero-burn/brasero-burn.c:1623
 #: ../libbrasero-burn/brasero-burn.c:1817
@@ -405,7 +372,7 @@ msgid "Merging data is impossible with this disc"
 msgstr "Không thể trộn dữ liệu trên đĩa này"
 
 #: ../libbrasero-burn/brasero-burn.c:1624
-#: ../libbrasero-burn/brasero-burn-dialog.c:2186
+#: ../libbrasero-burn/brasero-burn-dialog.c:2184
 #: ../plugins/cdrkit/burn-genisoimage.c:206 ../plugins/cdrkit/burn-wodim.c:114
 #: ../plugins/cdrtools/burn-cdrecord.c:114
 #: ../plugins/cdrtools/burn-mkisofs.c:206
@@ -416,24 +383,27 @@ msgstr "Không đủ chỗ trống trên đĩa"
 
 #. Translators: %s is the name of a missing application
 #: ../libbrasero-burn/brasero-burn.c:1708
-#: ../libbrasero-burn/brasero-burn-options.c:1187 ../src/brasero-project.c:1385
+#: ../libbrasero-burn/brasero-burn-options.c:1180
+#: ../src/brasero-project.c:1383
 #, c-format
 msgid "%s (application)"
 msgstr "%s (ứng dụng)"
 
 #. Translators: %s is the name of a missing library
 #: ../libbrasero-burn/brasero-burn.c:1714
-#: ../libbrasero-burn/brasero-burn-options.c:1193 ../src/brasero-project.c:1391
+#: ../libbrasero-burn/brasero-burn-options.c:1186
+#: ../src/brasero-project.c:1389
 #, c-format
 msgid "%s (library)"
-msgstr "%s (thư viện)"
+msgstr "%s (ứng dụng)"
 
 #. Translators: %s is the name of a missing GStreamer plugin
 #: ../libbrasero-burn/brasero-burn.c:1719
-#: ../libbrasero-burn/brasero-burn-options.c:1198 ../src/brasero-project.c:1396
+#: ../libbrasero-burn/brasero-burn-options.c:1191
+#: ../src/brasero-project.c:1394
 #, c-format
 msgid "%s (GStreamer plugin)"
-msgstr "%s (phần bổ sung cho GStreamer)"
+msgstr "%s (plugin GStreamer)"
 
 #: ../libbrasero-burn/brasero-burn.c:1752
 msgid "There is no track to burn"
@@ -462,17 +432,18 @@ msgstr "Không tìm thấy định dạng cho ảnh tạm thời"
 #. * disc) where a file from any source will be added
 #. * ("grafted")
 #: ../libbrasero-burn/brasero-burn.c:2846
-#: ../libbrasero-burn/brasero-caps-burn.c:66 ../libbrasero-burn/burn-job.c:1219
-#: ../libbrasero-burn/burn-job.c:1228
+#: ../libbrasero-burn/brasero-caps-burn.c:66
+#: ../libbrasero-burn/burn-job.c:1219 ../libbrasero-burn/burn-job.c:1228
 #: ../libbrasero-burn/burn-mkisofs-base.c:302
 #: ../nautilus/nautilus-burn-extension.c:218
-#: ../plugins/cdrkit/burn-genisoimage.c:368 ../plugins/cdrkit/burn-readom.c:129
-#: ../plugins/cdrkit/burn-readom.c:370 ../plugins/cdrkit/burn-wodim.c:725
-#: ../plugins/cdrkit/burn-wodim.c:837 ../plugins/cdrkit/burn-wodim.c:852
-#: ../plugins/cdrtools/burn-cdrecord.c:835
-#: ../plugins/cdrtools/burn-cdrecord.c:850
-#: ../plugins/cdrtools/burn-mkisofs.c:368 ../plugins/cdrtools/burn-readcd.c:130
-#: ../plugins/cdrtools/burn-readcd.c:380 ../src/brasero-app.c:786
+#: ../plugins/cdrkit/burn-genisoimage.c:368
+#: ../plugins/cdrkit/burn-readom.c:129 ../plugins/cdrkit/burn-readom.c:370
+#: ../plugins/cdrkit/burn-wodim.c:726 ../plugins/cdrkit/burn-wodim.c:838
+#: ../plugins/cdrkit/burn-wodim.c:853 ../plugins/cdrtools/burn-cdrecord.c:836
+#: ../plugins/cdrtools/burn-cdrecord.c:851
+#: ../plugins/cdrtools/burn-mkisofs.c:368
+#: ../plugins/cdrtools/burn-readcd.c:130 ../plugins/cdrtools/burn-readcd.c:380
+#: ../src/brasero-app.c:784
 #, c-format
 msgid "An internal error occurred"
 msgstr "Đã gặp lỗi nội bộ"
@@ -482,173 +453,173 @@ msgid "Brasero notification"
 msgstr "Thông báo Brasero"
 
 #. Translators: This string is used in the title bar %s is the action currently performed
-#: ../libbrasero-burn/brasero-burn-dialog.c:219
+#: ../libbrasero-burn/brasero-burn-dialog.c:217
 #, c-format
 msgid "%s (%i%% Done)"
 msgstr "%s (Xong %i%%)"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:241
-#: ../libbrasero-burn/brasero-burn-dialog.c:1161
+#: ../libbrasero-burn/brasero-burn-dialog.c:239
+#: ../libbrasero-burn/brasero-burn-dialog.c:1159
 msgid "Creating Image"
 msgstr "Đang tạo ra tập tin ảnh"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:246
-#: ../libbrasero-burn/brasero-burn-dialog.c:1170
+#: ../libbrasero-burn/brasero-burn-dialog.c:244
+#: ../libbrasero-burn/brasero-burn-dialog.c:1168
 msgid "Burning DVD"
-msgstr "Đang ghi đĩa DVD"
+msgstr "Đang chép ra đĩa DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:250
-#: ../libbrasero-burn/brasero-burn-dialog.c:1166
+#: ../libbrasero-burn/brasero-burn-dialog.c:248
+#: ../libbrasero-burn/brasero-burn-dialog.c:1164
 msgid "Copying DVD"
 msgstr "Đang chép DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:256
-#: ../libbrasero-burn/brasero-burn-dialog.c:1180
+#: ../libbrasero-burn/brasero-burn-dialog.c:254
+#: ../libbrasero-burn/brasero-burn-dialog.c:1178
 msgid "Burning CD"
 msgstr "Đang ghi đĩa CD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:260
-#: ../libbrasero-burn/brasero-burn-dialog.c:381
-#: ../libbrasero-burn/brasero-burn-dialog.c:1176
+#: ../libbrasero-burn/brasero-burn-dialog.c:258
+#: ../libbrasero-burn/brasero-burn-dialog.c:379
+#: ../libbrasero-burn/brasero-burn-dialog.c:1174
 msgid "Copying CD"
 msgstr "Đang sao chép đĩa CD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:266
-#: ../libbrasero-burn/brasero-burn-dialog.c:1190
+#: ../libbrasero-burn/brasero-burn-dialog.c:264
+#: ../libbrasero-burn/brasero-burn-dialog.c:1188
 msgid "Burning Disc"
 msgstr "Đang ghi đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:270
-#: ../libbrasero-burn/brasero-burn-dialog.c:1186
+#: ../libbrasero-burn/brasero-burn-dialog.c:268
+#: ../libbrasero-burn/brasero-burn-dialog.c:1184
 msgid "Copying Disc"
-msgstr "Đang chép đĩa"
+msgstr "Đang sao chép đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:300
+#: ../libbrasero-burn/brasero-burn-dialog.c:298
 #: ../libbrasero-burn/burn-basics.c:78
 msgid "Creating image"
 msgstr "Đang tạo ảnh"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:306
+#: ../libbrasero-burn/brasero-burn-dialog.c:304
 msgid "Simulation of video DVD burning"
-msgstr "Mô phỏng về tiến trình ghi đĩa DVD"
+msgstr "Mô phỏng về tiến trình chép ra đĩa DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:308
+#: ../libbrasero-burn/brasero-burn-dialog.c:306
 msgid "Burning video DVD"
-msgstr "Đang ghi đĩa DVD phim"
+msgstr "Chép ra đĩa DVD phim"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:314
+msgid "Simulation of data DVD burning"
+msgstr "Mô phỏng về tiến trình chép ra đĩa DVD dữ liệu"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:316
-msgid "Simulation of data DVD burning"
-msgstr "Mô phỏng về tiến trình ghi đĩa DVD dữ liệu"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:318
 msgid "Burning data DVD"
-msgstr "Ghi đĩa DVD dữ liệu"
+msgstr "Chép ra đĩa DVD dữ liệu"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:324
+msgid "Simulation of image to DVD burning"
+msgstr "Mô phỏng về tiến trình chép ảnh ra đĩa DVD"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:326
-msgid "Simulation of image to DVD burning"
-msgstr "Mô phỏng về tiến trình ghi từ ảnh ra đĩa DVD"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:328
 msgid "Burning image to DVD"
-msgstr "Ghi từ ảnh ra đĩa DVD"
+msgstr "Chép ảnh ra đĩa DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:336
+#: ../libbrasero-burn/brasero-burn-dialog.c:334
 msgid "Simulation of data DVD copying"
 msgstr "Mô phỏng về tiến trình sao chép đĩa DVD dữ liệu"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:338
+#: ../libbrasero-burn/brasero-burn-dialog.c:336
 msgid "Copying data DVD"
-msgstr "Sao chép đĩa DVD dữ liệu"
+msgstr "Chép đĩa DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:349
+#: ../libbrasero-burn/brasero-burn-dialog.c:347
 msgid "Simulation of (S)VCD burning"
 msgstr "Mô phỏng về tiến trình chép ra đĩa (S)VCD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:351
+#: ../libbrasero-burn/brasero-burn-dialog.c:349
 msgid "Burning (S)VCD"
 msgstr "Chép ra đĩa (S)VCD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:359
-#: ../libbrasero-burn/brasero-burn-dialog.c:412
+#: ../libbrasero-burn/brasero-burn-dialog.c:357
+#: ../libbrasero-burn/brasero-burn-dialog.c:410
 msgid "Simulation of audio CD burning"
 msgstr "Mô phỏng về tiến trình chép ra đĩa CD âm thanh"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:361
-#: ../libbrasero-burn/brasero-burn-dialog.c:414
+#: ../libbrasero-burn/brasero-burn-dialog.c:359
+#: ../libbrasero-burn/brasero-burn-dialog.c:412
 msgid "Burning audio CD"
-msgstr "Ghi đĩa CD âm thanh"
+msgstr "Chép ra đĩa CD âm thanh"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:367
+msgid "Simulation of data CD burning"
+msgstr "Mô phỏng về tiến trình chép ra đĩa CD dữ liệu"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:369
-msgid "Simulation of data CD burning"
-msgstr "Mô phỏng về tiến trình ghi đĩa CD dữ liệu"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:371
 msgid "Burning data CD"
-msgstr "Ghi đĩa CD dữ liệu"
+msgstr "Chép ra đĩa CD dữ liệu"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:379
+#: ../libbrasero-burn/brasero-burn-dialog.c:377
 msgid "Simulation of CD copying"
 msgstr "Mô phỏng về tiến trình sao chép đĩa CD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:389
+#: ../libbrasero-burn/brasero-burn-dialog.c:387
 msgid "Simulation of image to CD burning"
-msgstr "Mô phỏng về tiến trình ghi từ ảnh ra đĩa CD"
+msgstr "Mô phỏng về tiến trình chép ảnh ra đĩa CD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:391
+#: ../libbrasero-burn/brasero-burn-dialog.c:389
 msgid "Burning image to CD"
-msgstr "Ghi từ ảnh ra đĩa CD"
+msgstr "Chép ảnh ra đĩa CD"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:400
+msgid "Simulation of video disc burning"
+msgstr "Mô phỏng về tiến trình chép ra đĩa phim"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:402
-msgid "Simulation of video disc burning"
-msgstr "Mô phỏng về tiến trình ghi đĩa phim"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:404
 msgid "Burning video disc"
-msgstr "Ghi đĩa phim"
+msgstr "Chép ra đĩa phim"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:422
+#: ../libbrasero-burn/brasero-burn-dialog.c:420
 msgid "Simulation of data disc burning"
 msgstr "Mô phỏng về tiến trình chép ra đĩa dữ liệu"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:424
+#: ../libbrasero-burn/brasero-burn-dialog.c:422
 msgid "Burning data disc"
-msgstr "Ghi ra đĩa dữ liệu"
+msgstr "Chép ra đĩa dữ liệu"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:432
+#: ../libbrasero-burn/brasero-burn-dialog.c:430
 msgid "Simulation of disc copying"
 msgstr "Mô phỏng về tiến trình sao chép đĩa "
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:434
+#: ../libbrasero-burn/brasero-burn-dialog.c:432
 #: ../libbrasero-burn/burn-basics.c:82
 msgid "Copying disc"
 msgstr "Sao chép đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:442
+#: ../libbrasero-burn/brasero-burn-dialog.c:440
 msgid "Simulation of image to disc burning"
-msgstr "Mô phỏng về tiến trình ghi từ ảnh ra đĩa "
+msgstr "Mô phỏng về tiến trình chép ảnh ra đĩa "
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:444
+#: ../libbrasero-burn/brasero-burn-dialog.c:442
 msgid "Burning image to disc"
-msgstr "Ghi từ ảnh ra đĩa"
+msgstr "Chép ảnh ra đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:549
+#: ../libbrasero-burn/brasero-burn-dialog.c:547
 msgid "Please replace the disc with a rewritable disc holding data."
 msgstr "Hãy thay thế đĩa trong ổ bằng một đĩa ghi lại được mà chứa dữ liệu."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:551
+#: ../libbrasero-burn/brasero-burn-dialog.c:549
 msgid "Please replace the disc with a disc holding data."
 msgstr "Hãy thay thế đĩa trong ổ bằng một đĩa chứa dữ liệu."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:555
+#: ../libbrasero-burn/brasero-burn-dialog.c:553
 msgid "Please insert a rewritable disc holding data."
-msgstr "Hãy tải một đĩa ghi lại được mà chứa dữ liệu."
+msgstr "Hãy nạp một đĩa ghi lại được mà chứa dữ liệu."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:557
-#: ../libbrasero-burn/brasero-burn-options.c:501
+#: ../libbrasero-burn/brasero-burn-dialog.c:555
+#: ../libbrasero-burn/brasero-burn-options.c:494
 msgid "Please insert a disc holding data."
-msgstr "Hãy đưa vào một đĩa chứa dữ liệu."
+msgstr "Hãy nạp một đĩa chứa dữ liệu."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:572
+#: ../libbrasero-burn/brasero-burn-dialog.c:570
 #, c-format
 msgid ""
 "Please replace the disc with a writable CD with at least %i MiB of free "
@@ -657,21 +628,21 @@ msgstr ""
 "Vui lòng thay đĩa bằng một đĩa CD ghi được với tối thiểu %i MiB không gian "
 "trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:575
+#: ../libbrasero-burn/brasero-burn-dialog.c:573
 msgid "Please replace the disc with a writable CD."
 msgstr "Vui lòng thay đĩa bằng một đĩa CD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:579
+#: ../libbrasero-burn/brasero-burn-dialog.c:577
 #, c-format
 msgid "Please insert a writable CD with at least %i MiB of free space."
 msgstr ""
 "Vui lòng đưa vào một đĩa CD ghi được với tối thiểu %i MiB không gian trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:582
+#: ../libbrasero-burn/brasero-burn-dialog.c:580
 msgid "Please insert a writable CD."
 msgstr "Vui lòng đưa vào một đĩa CD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:588
+#: ../libbrasero-burn/brasero-burn-dialog.c:586
 #, c-format
 msgid ""
 "Please replace the disc with a writable DVD with at least %i MiB of free "
@@ -680,21 +651,21 @@ msgstr ""
 "Vui lòng thay đĩa bằng một đĩa DVD ghi được với tối thiểu %i MiB không gian "
 "trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:591
+#: ../libbrasero-burn/brasero-burn-dialog.c:589
 msgid "Please replace the disc with a writable DVD."
 msgstr "Vui lòng thay đĩa bằng một đĩa DVD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:595
+#: ../libbrasero-burn/brasero-burn-dialog.c:593
 #, c-format
 msgid "Please insert a writable DVD with at least %i MiB of free space."
 msgstr ""
 "Vui lòng đưa vào một đĩa DVD ghi được với tối thiểu %i MiB không gian trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:598
+#: ../libbrasero-burn/brasero-burn-dialog.c:596
 msgid "Please insert a writable DVD."
 msgstr "Vui lòng đưa vào một đĩa DVD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:603
+#: ../libbrasero-burn/brasero-burn-dialog.c:601
 #, c-format
 msgid ""
 "Please replace the disc with a writable CD or DVD with at least %i MiB of "
@@ -703,25 +674,25 @@ msgstr ""
 "Vui lòng thay đĩa bằng một đĩa CD hoặc DVD ghi được với tối thiểu %i MiB "
 "không gian trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:606
+#: ../libbrasero-burn/brasero-burn-dialog.c:604
 msgid "Please replace the disc with a writable CD or DVD."
 msgstr "Vui lòng thay đĩa bằng một đĩa CD hoặc DVD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:610
+#: ../libbrasero-burn/brasero-burn-dialog.c:608
 #, c-format
 msgid "Please insert a writable CD or DVD with at least %i MiB of free space."
 msgstr ""
 "Vui lòng đưa vào một đĩa CD hoặc DVD ghi được với tối thiểu %i MiB không "
 "gian trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:613
-#: ../libbrasero-burn/brasero-burn-dialog.c:2171
-#: ../libbrasero-burn/brasero-burn-dialog.c:2185
-#: ../libbrasero-burn/brasero-burn-options.c:457 ../src/brasero-project.c:995
+#: ../libbrasero-burn/brasero-burn-dialog.c:611
+#: ../libbrasero-burn/brasero-burn-dialog.c:2169
+#: ../libbrasero-burn/brasero-burn-dialog.c:2183
+#: ../libbrasero-burn/brasero-burn-options.c:450 ../src/brasero-project.c:993
 msgid "Please insert a writable CD or DVD."
 msgstr "Vui lòng đưa vào mmọt đĩa CD hoặc DVD ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:640
+#: ../libbrasero-burn/brasero-burn-dialog.c:638
 msgid ""
 "An image of the disc has been created on your hard drive.\n"
 "Burning will begin as soon as a writable disc is inserted."
@@ -729,126 +700,126 @@ msgstr ""
 "Một tập tin ảnh đĩa đã được ghi lên đĩa cứng.\n"
 "Việc ghi vào đĩa sẽ khởi động ngay sau khi bạn đưa vào máy một đĩa ghi được."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:645
+#: ../libbrasero-burn/brasero-burn-dialog.c:643
 msgid "A data integrity test will begin as soon as the disc is inserted."
 msgstr ""
 "Một tiến trình kiểm tra tính nguyên vẹn của dữ liệu sẽ khởi chạy một khi bạn "
 "nạp đĩa."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:646
+#: ../libbrasero-burn/brasero-burn-dialog.c:644
 msgid "Please re-insert the disc in the CD/DVD burner."
 msgstr "Hãy nạp lại đĩa vào ổ chép ra CD/DVD."
 
 #. Translators: %s is the name of a drive
-#: ../libbrasero-burn/brasero-burn-dialog.c:650
+#: ../libbrasero-burn/brasero-burn-dialog.c:648
 #, c-format
 msgid "\"%s\" is busy."
-msgstr "“%s” vẫn bận."
+msgstr "« %s » vẫn bận."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:654
+#: ../libbrasero-burn/brasero-burn-dialog.c:652
 #, c-format
 msgid "There is no disc in \"%s\"."
-msgstr "“%s” không chứa đĩa."
+msgstr "« %s » không chứa đĩa."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:658
+#: ../libbrasero-burn/brasero-burn-dialog.c:656
 #, c-format
 msgid "The disc in \"%s\" is not supported."
-msgstr "“%s” chứa một đĩa không được hỗ trợ."
+msgstr "« %s » chứa một đĩa không được hỗ trợ."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:662
+#: ../libbrasero-burn/brasero-burn-dialog.c:660
 #, c-format
 msgid "The disc in \"%s\" is not rewritable."
-msgstr "“%s” chứa một đĩa không có khả năng ghi lại."
+msgstr "« %s » chứa một đĩa không có khả năng ghi lại."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:666
+#: ../libbrasero-burn/brasero-burn-dialog.c:664
 #, c-format
 msgid "The disc in \"%s\" is empty."
-msgstr "“%s” chứa một đĩa vẫn trống."
+msgstr "« %s » chứa một đĩa vẫn trống."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:670
+#: ../libbrasero-burn/brasero-burn-dialog.c:668
 #, c-format
 msgid "The disc in \"%s\" is not writable."
-msgstr "“%s” chứa một đĩa không có khả năng ghi."
+msgstr "« %s » chứa một đĩa không có khả năng ghi."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:674
+#: ../libbrasero-burn/brasero-burn-dialog.c:672
 #, c-format
 msgid "Not enough space available on the disc in \"%s\"."
-msgstr "Không đủ chỗ trống trên đĩa trong “%s”."
+msgstr "Không đủ sức chứa trống trên đĩa trong « %s »."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:682
+#: ../libbrasero-burn/brasero-burn-dialog.c:680
 #, c-format
 msgid "The disc in \"%s\" needs to be reloaded."
-msgstr "Đĩa trong “%s” cần phải được tải lại."
+msgstr "Đĩa trong « %s » cần phải được nạp lại."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:683
+#: ../libbrasero-burn/brasero-burn-dialog.c:681
 msgid "Please eject the disc and reload it."
-msgstr "Hãy đẩy đĩa ra và tải lại nó."
+msgstr "Hãy đẩy đĩa ra và nạp lại nó."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:728
+#: ../libbrasero-burn/brasero-burn-dialog.c:726
 #: ../libbrasero-burn/brasero-sum-dialog.c:333
 msgid ""
 "A file could not be created at the location specified for temporary files"
 msgstr "Không thể tạo tập tin ở vị trí xác định cho tập tin tạm thời"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:729
+#: ../libbrasero-burn/brasero-burn-dialog.c:727
 msgid "The image could not be created at the specified location"
 msgstr "Không thể tạo ảnh ở vị trí xác định"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:730
+#: ../libbrasero-burn/brasero-burn-dialog.c:728
 msgid ""
 "Do you want to specify another location for this session or retry with the "
 "current location?"
 msgstr ""
-"Bạn có muốn xác định một vị trí khác cho phiên làm việc này, hoặc thử lại ở "
-"vị trí hiện thời?"
+"Bạn có muốn xác định một vị trí khác cho buổi hợp này, hoặc thử lại ở vị trí "
+"hiện thời?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:742
+#: ../libbrasero-burn/brasero-burn-dialog.c:740
 msgid "You may want to free some space on the disc and retry"
-msgstr "Bạn nên xóa bớt một số tập tin không cần thiết và thử lại"
+msgstr "Khuyên bạn giải phóng thêm sức chứa trống trên đĩa và thử lại"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:749
+#: ../libbrasero-burn/brasero-burn-dialog.c:747
 #: ../libbrasero-burn/brasero-drive-properties.c:244
 #: ../libbrasero-burn/brasero-drive-properties.c:282
 #: ../libbrasero-burn/brasero-drive-properties.c:334
 msgid "_Keep Current Location"
 msgstr "_Giữ vị trí hiện tại"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:751
+#: ../libbrasero-burn/brasero-burn-dialog.c:749
 #: ../libbrasero-burn/brasero-drive-properties.c:245
 #: ../libbrasero-burn/brasero-drive-properties.c:283
 #: ../libbrasero-burn/brasero-drive-properties.c:335
 msgid "_Change Location"
 msgstr "Đổ_i vị trí"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:773
+#: ../libbrasero-burn/brasero-burn-dialog.c:771
 #: ../libbrasero-burn/brasero-image-properties.c:459
 msgid "Location for Image File"
 msgstr "Vị trí của tập tin ảnh"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:781
+#: ../libbrasero-burn/brasero-burn-dialog.c:779
 #: ../libbrasero-burn/brasero-drive-properties.c:366
 msgid "Location for Temporary Files"
 msgstr "Vị trí của tập tin tạm thời"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:889
-#: ../libbrasero-burn/brasero-burn-dialog.c:1135
+#: ../libbrasero-burn/brasero-burn-dialog.c:887
+#: ../libbrasero-burn/brasero-burn-dialog.c:1133
 msgid "_Replace Disc"
 msgstr "Tha_y đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:930
+#: ../libbrasero-burn/brasero-burn-dialog.c:928
 msgid "Do you really want to blank the current disc?"
-msgstr "Bạn có thật sự muốn xóa đĩa không?"
+msgstr "Bạn có thật sự muốn xoá đĩa không?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:931
+#: ../libbrasero-burn/brasero-burn-dialog.c:929
 msgid "The disc in the drive holds data."
 msgstr "Đĩa trong ổ vẫn còn chứa dữ liệu."
 
 #. Translators: Blank is a verb here
-#: ../libbrasero-burn/brasero-burn-dialog.c:933
+#: ../libbrasero-burn/brasero-burn-dialog.c:931
 msgid "_Blank Disc"
-msgstr "_Xóa đĩa"
+msgstr "_Xoá đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:947
+#: ../libbrasero-burn/brasero-burn-dialog.c:945
 msgid ""
 "If you import them you will be able to see and use them once the current "
 "selection of files is burned."
@@ -856,24 +827,24 @@ msgstr ""
 "Nếu bạn nhập chúng, bạn sẽ có khả năng xem và dùng chúng sau khi các tập tin "
 "đã chọn sẽ được ghi ra đĩa."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:948
+#: ../libbrasero-burn/brasero-burn-dialog.c:946
 msgid "If you don't, they will be invisible (though still readable)."
-msgstr "Nếu không, chúng sẽ trở nên vô hình (tùy rằng vẫn đọc được)."
+msgstr "Nếu không, chúng sẽ trở nên vô hình (tuỳ rằng vẫn đọc được)."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:951
+#: ../libbrasero-burn/brasero-burn-dialog.c:949
 msgid ""
 "There are files already burned on this disc. Would you like to import them?"
 msgstr "Đã có tập tin ghi trên đĩa này. Bạn có muốn nhập chúng không?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:953
+#: ../libbrasero-burn/brasero-burn-dialog.c:951
 msgid "_Import"
 msgstr "_Nhập"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:954
+#: ../libbrasero-burn/brasero-burn-dialog.c:952
 msgid "Only _Append"
 msgstr "Chỉ nối _thêm vào"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:967
+#: ../libbrasero-burn/brasero-burn-dialog.c:965
 msgid ""
 "CD-RW audio discs may not play correctly in older CD players and CD-Text "
 "won't be written."
@@ -881,55 +852,55 @@ msgstr ""
 "Đĩa âm thanh CD-RW có thể không chơi tốt khi dùng những ổ đọc CD cũ và CD-"
 "văn bản sẽ không được ghi."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:968
-#: ../libbrasero-burn/brasero-burn-dialog.c:990
+#: ../libbrasero-burn/brasero-burn-dialog.c:966
+#: ../libbrasero-burn/brasero-burn-dialog.c:988
 msgid "Do you want to continue anyway?"
-msgstr "Vẫn muốn tiếp tục?"
+msgstr "Vẫn muốn tiếp tục ?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:971
+#: ../libbrasero-burn/brasero-burn-dialog.c:969
 msgid "Appending audio tracks to a CD is not advised."
 msgstr "Không nên phụ thêm rãnh âm thanh vào một đĩa CD."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:973
-#: ../libbrasero-burn/brasero-burn-dialog.c:995
+#: ../libbrasero-burn/brasero-burn-dialog.c:971
+#: ../libbrasero-burn/brasero-burn-dialog.c:993
 #: ../libbrasero-burn/brasero-tool-dialog.c:422 ../src/brasero-data-disc.c:572
 msgid "_Continue"
 msgstr "Tiếp tụ_c"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:989
+#: ../libbrasero-burn/brasero-burn-dialog.c:987
 msgid "CD-RW audio discs may not play correctly in older CD players."
 msgstr "Đĩa âm thanh CD-RW có thể không chơi tốt khi dùng những ổ đọc CD cũ."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:993
+#: ../libbrasero-burn/brasero-burn-dialog.c:991
 msgid "Recording audio tracks on a rewritable disc is not advised."
 msgstr "Không nên thu rãnh âm thanh trên một đĩa có khả năng ghi lại."
 
 #. Translators: %s is the name of a drive
-#: ../libbrasero-burn/brasero-burn-dialog.c:1037
+#: ../libbrasero-burn/brasero-burn-dialog.c:1035
 #, c-format
 msgid "Please eject the disc from \"%s\" manually."
-msgstr "Vui lòng lấy đĩa ra khỏi \"%s\" bằng tay."
+msgstr "Vui lòng lấy đĩa ra từ \"%s\" bằng tay."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1046
+#: ../libbrasero-burn/brasero-burn-dialog.c:1044
 msgid ""
 "The disc could not be ejected though it needs to be removed for the current "
 "operation to continue."
 msgstr ""
-"Không đẩy đĩa ra được và cần bỏ đĩa ra mới có thể tiếp tục thao tác đang làm."
+"Khổng đẩy đĩa ra được và cần bỏ đĩa ra mới có thể tiếp tục thao tác đang làm."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1133
+#: ../libbrasero-burn/brasero-burn-dialog.c:1131
 msgid "Do you want to replace the disc and continue?"
 msgstr "Bạn có muốn thay đĩa rồi tiếp tục không?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1134
+#: ../libbrasero-burn/brasero-burn-dialog.c:1132
 msgid "The currently inserted disc could not be blanked."
-msgstr "Không thể xóa trắng đĩa hiện tại."
+msgstr "Không thể xoá trắng đĩa đang nạp."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1143
+#: ../libbrasero-burn/brasero-burn-dialog.c:1141
 msgid "Do you want to continue with full Windows compatibility disabled?"
-msgstr "Vẫn muốn tiếp tục với tính tương thích Windows đầy đủ bị tắt?"
+msgstr "Vẫn muốn tiếp tục với tính tương thích Windows đầy đủ bị tắt ?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1144
+#: ../libbrasero-burn/brasero-burn-dialog.c:1142
 #: ../libbrasero-burn/brasero-status-dialog.c:340
 #: ../src/brasero-data-disc.c:734
 msgid ""
@@ -938,141 +909,141 @@ msgstr ""
 "Vài tập tin không có tên thích hợp với một đĩa CD tương thích hoàn toàn với "
 "Windows."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1145
+#: ../libbrasero-burn/brasero-burn-dialog.c:1143
 msgid "C_ontinue"
 msgstr "Tiếp tụ_c"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1365
-#: ../libbrasero-burn/brasero-burn-dialog.c:1386
+#: ../libbrasero-burn/brasero-burn-dialog.c:1363
+#: ../libbrasero-burn/brasero-burn-dialog.c:1384
 msgid "The simulation was successful."
-msgstr "Mô phỏng đã thành công."
+msgstr "Đã mô phỏng thành công."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1368
+#: ../libbrasero-burn/brasero-burn-dialog.c:1366
 msgid "Real disc burning will take place in 10 seconds."
 msgstr "Chép ra đĩa thật sẽ bắt đầu sau 10 giây."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1371
+#: ../libbrasero-burn/brasero-burn-dialog.c:1369
 msgid "Burn _Now"
 msgstr "Chép ra _ngay"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1660
+#: ../libbrasero-burn/brasero-burn-dialog.c:1658
 msgid "Save Current Session"
-msgstr "Lưu phiên hiện thời"
+msgstr "Lưu buổi hợp hiện thời"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1735
+#: ../libbrasero-burn/brasero-burn-dialog.c:1733
 msgid "An unknown error occurred."
 msgstr "Gặp lỗi không xác định."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1743
-#: ../libbrasero-burn/brasero-burn-dialog.c:1761 ../src/brasero-app.c:620
+#: ../libbrasero-burn/brasero-burn-dialog.c:1741
+#: ../libbrasero-burn/brasero-burn-dialog.c:1759 ../src/brasero-app.c:618
 msgid "Error while burning."
-msgstr "Gặp lỗi trong khi ghi đĩa."
+msgstr "Gặp lỗi trong khi chép ra."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1751
+#: ../libbrasero-burn/brasero-burn-dialog.c:1749
 msgid "_Save Log"
-msgstr "_Lưu nhật ký"
+msgstr "_Lưu bản ghi"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1786
+#: ../libbrasero-burn/brasero-burn-dialog.c:1784
 msgid "Video DVD successfully burned"
 msgstr "Đĩa phim DVD đã được ghi thành công"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1788
+#: ../libbrasero-burn/brasero-burn-dialog.c:1786
 msgid "(S)VCD successfully burned"
 msgstr "Đĩa (S)VCD đã được ghi thành công"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1791
+#: ../libbrasero-burn/brasero-burn-dialog.c:1789
 msgid "Audio CD successfully burned"
 msgstr "Dĩa CD âm thanh đã được ghi thành công"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1793
-#: ../libbrasero-burn/brasero-burn-dialog.c:1824
+#: ../libbrasero-burn/brasero-burn-dialog.c:1791
+#: ../libbrasero-burn/brasero-burn-dialog.c:1822
 msgid "Image successfully created"
-msgstr "Ảnh đã được tạo thành công"
+msgstr "Ảnh đã được tạo"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:1796
+msgid "DVD successfully copied"
+msgstr "Đĩa DVD đã được sao chép"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1798
-msgid "DVD successfully copied"
-msgstr "Đĩa DVD đã sao chép thành công"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:1800
 msgid "CD successfully copied"
-msgstr "Đĩa CD đã sao chép thành công"
+msgstr "Đĩa CD đã được sao chép"
+
+#: ../libbrasero-burn/brasero-burn-dialog.c:1802
+msgid "Image of DVD successfully created"
+msgstr "Ảnh của đĩa DVD đã được tạo"
 
 #: ../libbrasero-burn/brasero-burn-dialog.c:1804
-msgid "Image of DVD successfully created"
-msgstr "Ảnh của đĩa DVD đã được tạo thành công"
-
-#: ../libbrasero-burn/brasero-burn-dialog.c:1806
 msgid "Image of CD successfully created"
-msgstr "Ảnh của đĩa CD đã được tạo thành công"
+msgstr "Ảnh của đĩa CD đã được tạo"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1812
+#: ../libbrasero-burn/brasero-burn-dialog.c:1810
 msgid "Image successfully burned to DVD"
 msgstr "Tập tin ảnh đã được ghi ra đĩa DVD thành công"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1814
+#: ../libbrasero-burn/brasero-burn-dialog.c:1812
 msgid "Image successfully burned to CD"
 msgstr "Tập tin ảnh đã được ghi ra đĩa CD thành công"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1820
+#: ../libbrasero-burn/brasero-burn-dialog.c:1818
 msgid "Data DVD successfully burned"
 msgstr "Số liệu đã được ghi thành công trên DVD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1822
+#: ../libbrasero-burn/brasero-burn-dialog.c:1820
 msgid "Data CD successfully burned"
 msgstr "Số liệu đã được ghi thành công trên CD"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1881
+#: ../libbrasero-burn/brasero-burn-dialog.c:1879
 #, c-format
 msgid "Copy #%i has been burned successfully."
 msgstr "Bản sao chép #%i đã được ghi thành công."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1889
+#: ../libbrasero-burn/brasero-burn-dialog.c:1887
 msgid ""
 "Another copy will start as soon as you insert a new writable disc. If you do "
 "not want to burn another copy, press \"Cancel\"."
 msgstr ""
 "Sẽ bắt đầu ghi bản sao chép mới ngay sau khi bạn đưa vào một đĩa ghi mới. "
-"Nếu không muốn ghi đĩa mới, nhấn \"Hủy bỏ\"."
+"Nếu không muốn ghi đĩa mới, nhấn \"Huỷ bỏ\"."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1963
+#: ../libbrasero-burn/brasero-burn-dialog.c:1961
 msgid "Make _More Copies"
 msgstr "_Ghi thêm đĩa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:1972
-msgid "Create Co_ver"
-msgstr "Tạo _vỏ đĩa"
+#: ../libbrasero-burn/brasero-burn-dialog.c:1970
+msgid "_Create Cover"
+msgstr "Tạo _bìa"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2134
+#: ../libbrasero-burn/brasero-burn-dialog.c:2132
 msgid "There are some files left to burn"
 msgstr "Còn một số tập tin để ghi"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2141
+#: ../libbrasero-burn/brasero-burn-dialog.c:2139
 msgid "There are some more videos left to burn"
 msgstr "Còn một số tập tin phim để ghi"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2145
+#: ../libbrasero-burn/brasero-burn-dialog.c:2143
 msgid "There are some more songs left to burn"
 msgstr "Còn một số bài hát để ghi"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2451
+#: ../libbrasero-burn/brasero-burn-dialog.c:2449
 #: ../libbrasero-burn/brasero-tool-dialog.c:411
 msgid "Do you really want to quit?"
 msgstr "Bạn có thực sự muốn thoát không?"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2455
+#: ../libbrasero-burn/brasero-burn-dialog.c:2453
 #: ../libbrasero-burn/brasero-tool-dialog.c:417
 msgid "Interrupting the process may make disc unusable."
 msgstr "Gián đoạn tiến trình thì có thể làm cho đĩa vô ích."
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2458
+#: ../libbrasero-burn/brasero-burn-dialog.c:2456
 msgid "C_ontinue Burning"
 msgstr "_Tiếp tục ghi"
 
-#: ../libbrasero-burn/brasero-burn-dialog.c:2465
+#: ../libbrasero-burn/brasero-burn-dialog.c:2463
 msgid "_Cancel Burning"
-msgstr "_Hủy lệnh ghi"
+msgstr "Thôi _chép ra"
 
-#: ../libbrasero-burn/brasero-burn-options.c:228 ../src/brasero-project.c:1020
+#: ../libbrasero-burn/brasero-burn-options.c:228 ../src/brasero-project.c:1018
 msgid ""
 "Please insert a writable CD or DVD if you don't want to write to an image "
 "file."
@@ -1080,133 +1051,133 @@ msgstr ""
 "Vui lòng đưa vào một đĩa CD hoặc DVD ghi được nếu bạn không muốn ghi ra tập "
 "tin ảnh."
 
-#: ../libbrasero-burn/brasero-burn-options.c:302 ../src/brasero-project.c:1595
+#: ../libbrasero-burn/brasero-burn-options.c:302 ../src/brasero-project.c:1593
 msgid "Create _Image"
 msgstr "Tạo tậ_p tin ảnh"
 
 #. Translators: This is a verb, an action
 #: ../libbrasero-burn/brasero-burn-options.c:307
 msgid "_Copy"
-msgstr "_Sao chép"
+msgstr "_Chép"
 
 #: ../libbrasero-burn/brasero-burn-options.c:310
 msgid "Make _Several Copies"
-msgstr "Tạo _nhiều bản sao"
+msgstr "Chép _nhiều bản"
 
 #. Translators: This is a verb, an action
-#: ../libbrasero-burn/brasero-burn-options.c:314 ../src/brasero-project.c:1524
+#: ../libbrasero-burn/brasero-burn-options.c:314 ../src/brasero-project.c:1522
 msgid "_Burn"
-msgstr "Chi _ra"
+msgstr "Chép _ra"
 
-#: ../libbrasero-burn/brasero-burn-options.c:317 ../src/brasero-project.c:1521
+#: ../libbrasero-burn/brasero-burn-options.c:317 ../src/brasero-project.c:1519
 msgid "Burn _Several Copies"
 msgstr "Ghi _nhiều bản"
 
-#: ../libbrasero-burn/brasero-burn-options.c:433 ../src/brasero-project.c:949
+#: ../libbrasero-burn/brasero-burn-options.c:426 ../src/brasero-project.c:947
 msgid "Would you like to burn the selection of files across several media?"
 msgstr "Bạn có muốn ghi những tập tin đã chọn sang nhiều phương tiện không?"
 
-#: ../libbrasero-burn/brasero-burn-options.c:434
-#: ../libbrasero-burn/brasero-burn-options.c:451
+#: ../libbrasero-burn/brasero-burn-options.c:427
+#: ../libbrasero-burn/brasero-burn-options.c:444
 msgid "The data size is too large for the disc even with the overburn option."
 msgstr ""
 "Kích thước số liệu quá lớn cho dung lượng của đĩa ngay cả với chức năng ghi "
 "quá tải."
 
-#: ../libbrasero-burn/brasero-burn-options.c:439 ../src/brasero-project.c:954
+#: ../libbrasero-burn/brasero-burn-options.c:432 ../src/brasero-project.c:952
 msgid "_Burn Several Discs"
 msgstr "_Ghi nhiều đĩa"
 
-#: ../libbrasero-burn/brasero-burn-options.c:441 ../src/brasero-project.c:956
+#: ../libbrasero-burn/brasero-burn-options.c:434 ../src/brasero-project.c:954
 msgid "Burn the selection of files across several media"
 msgstr "Ghi những tập tin đã chọn sang nhiều phương tiện"
 
-#: ../libbrasero-burn/brasero-burn-options.c:450 ../src/brasero-project.c:965
+#: ../libbrasero-burn/brasero-burn-options.c:443 ../src/brasero-project.c:963
 msgid "Please choose another CD or DVD or insert a new one."
-msgstr "Hãy chọn một đĩa CD/DVD khác, hoặc đưa vào một đĩa mới."
+msgstr "Hãy chọn một đĩa CD/DVD khác, hoặc nạp một đĩa mới."
 
-#: ../libbrasero-burn/brasero-burn-options.c:464 ../src/brasero-project.c:1010
+#: ../libbrasero-burn/brasero-burn-options.c:457 ../src/brasero-project.c:1008
 msgid "No track information (artist, title, ...) will be written to the disc."
-msgstr "Không có thông tin về rãnh (nghệ sĩ, tên bài,…) để ghi trên đĩa."
+msgstr "Không có thông tin về rãnh (nghệ sĩ, tên bài,...) để ghi trên đĩa."
 
-#: ../libbrasero-burn/brasero-burn-options.c:465 ../src/brasero-project.c:1011
+#: ../libbrasero-burn/brasero-burn-options.c:458 ../src/brasero-project.c:1009
 msgid "This is not supported by the current active burning backend."
 msgstr ""
-"Chức năng này không được hỗ trợ bởi ứng dụng chạy ở phía sau hiện đang được "
-"kích hoạt."
+"Chức năng này không được hỗ trợ bởi hậu phương chép ra hoạt động hiện thời."
 
-#: ../libbrasero-burn/brasero-burn-options.c:477
+#: ../libbrasero-burn/brasero-burn-options.c:470
 #: ../nautilus/nautilus-burn-extension.c:239
 msgid "Please add files."
 msgstr "Vui lòng bổ sung tập tin."
 
-#: ../libbrasero-burn/brasero-burn-options.c:478
+#: ../libbrasero-burn/brasero-burn-options.c:471
 #: ../libbrasero-burn/brasero-track-data.c:672
 #: ../libbrasero-burn/brasero-track-data-cfg.c:2432
 #: ../libbrasero-burn/brasero-track-stream.c:402
-#: ../nautilus/nautilus-burn-extension.c:240 ../src/brasero-project.c:1277
+#: ../nautilus/nautilus-burn-extension.c:240 ../src/brasero-project.c:1275
 #, c-format
 msgid "There are no files to write to disc"
 msgstr "Không có tập tin để ghi ra đĩa"
 
-#: ../libbrasero-burn/brasero-burn-options.c:483
+#: ../libbrasero-burn/brasero-burn-options.c:476
 msgid "Please add songs."
 msgstr "Vui lòng bổ sung bài hát."
 
-#: ../libbrasero-burn/brasero-burn-options.c:484 ../src/brasero-project.c:1268
+#: ../libbrasero-burn/brasero-burn-options.c:477 ../src/brasero-project.c:1266
 msgid "There are no songs to write to disc"
 msgstr "Không có bài hát để ghi ra đĩa."
 
-#: ../libbrasero-burn/brasero-burn-options.c:489
+#: ../libbrasero-burn/brasero-burn-options.c:482
 msgid "Please add videos."
 msgstr "Vui lòng bổ sung phim."
 
-#: ../libbrasero-burn/brasero-burn-options.c:490
+#: ../libbrasero-burn/brasero-burn-options.c:483
 msgid "There are no videos to write to disc"
 msgstr "Không có phim để ghi ra đĩa."
 
-#: ../libbrasero-burn/brasero-burn-options.c:502
+#: ../libbrasero-burn/brasero-burn-options.c:495
 msgid "There is no inserted disc to copy."
 msgstr "Chưa nạp đĩa để sao chép."
 
-#: ../libbrasero-burn/brasero-burn-options.c:511
+#: ../libbrasero-burn/brasero-burn-options.c:504
 msgid "Please select a disc image."
 msgstr "Vui lòng chọn một tập tin ảnh đĩa."
 
-#: ../libbrasero-burn/brasero-burn-options.c:512
+#: ../libbrasero-burn/brasero-burn-options.c:505
 msgid "There is no selected disc image."
 msgstr "Chưa chọn tập tin ảnh đĩa."
 
 #. Translators: this is a disc image not a picture
 #. Translators: this is a disc image, not a picture
-#: ../libbrasero-burn/brasero-burn-options.c:522
+#: ../libbrasero-burn/brasero-burn-options.c:515
 #: ../libbrasero-burn/brasero-src-image.c:167
 msgctxt "disc"
 msgid "Please select another image."
 msgstr "Vui lòng chọn một tập tin ảnh đĩa khác."
 
-#: ../libbrasero-burn/brasero-burn-options.c:523
+#: ../libbrasero-burn/brasero-burn-options.c:516
 msgid "It doesn't appear to be a valid disc image or a valid cue file."
 msgstr "Tập tin ảnh đĩa hoặc tập tin cue này có vẻ không chuẩn."
 
-#: ../libbrasero-burn/brasero-burn-options.c:532
+#: ../libbrasero-burn/brasero-burn-options.c:525
 msgid "Please insert a disc that is not copy protected."
 msgstr "Hãy nạp một đĩa không bị bảo vệ chống sao chép."
 
-#: ../libbrasero-burn/brasero-burn-options.c:533
-#: ../libbrasero-burn/brasero-burn-options.c:1235 ../src/brasero-project.c:1445
+#: ../libbrasero-burn/brasero-burn-options.c:526
+#: ../libbrasero-burn/brasero-burn-options.c:1228
+#: ../src/brasero-project.c:1443
 msgid "All required applications and libraries are not installed."
 msgstr "Một số ứng dụng và thư viện phần mềm cần thiết chưa cài đặt."
 
-#: ../libbrasero-burn/brasero-burn-options.c:540 ../src/brasero-project.c:1003
+#: ../libbrasero-burn/brasero-burn-options.c:533 ../src/brasero-project.c:1001
 msgid "Please replace the disc with a supported CD or DVD."
 msgstr "Hãy thay thế đĩa này bằng một đĩa CD/DVD được hỗ trợ."
 
-#: ../libbrasero-burn/brasero-burn-options.c:549 ../src/brasero-project.c:976
+#: ../libbrasero-burn/brasero-burn-options.c:542 ../src/brasero-project.c:974
 msgid "Would you like to burn beyond the disc's reported capacity?"
 msgstr "Bạn có muốn ghi vượt quá dung lượng khai báo của đĩa không?"
 
-#: ../libbrasero-burn/brasero-burn-options.c:550
+#: ../libbrasero-burn/brasero-burn-options.c:543
 msgid ""
 "The data size is too large for the disc and you must remove files from the "
 "selection otherwise.\n"
@@ -1221,40 +1192,41 @@ msgstr ""
 "chức năng này.\n"
 "CHÚ Ý: chọn chức năng có thể dẫn đến ghi thất bại."
 
-#: ../libbrasero-burn/brasero-burn-options.c:557 ../src/brasero-project.c:983
+#: ../libbrasero-burn/brasero-burn-options.c:550 ../src/brasero-project.c:981
 msgid "_Overburn"
 msgstr "_Quá chép ra"
 
-#: ../libbrasero-burn/brasero-burn-options.c:559 ../src/brasero-project.c:985
+#: ../libbrasero-burn/brasero-burn-options.c:552 ../src/brasero-project.c:983
 msgid "Burn beyond the disc's reported capacity"
 msgstr "Ghi vượt quá dung lượng khai báo của đĩa"
 
-#: ../libbrasero-burn/brasero-burn-options.c:569
+#: ../libbrasero-burn/brasero-burn-options.c:562
 msgid ""
 "The drive that holds the source disc will also be the one used to record."
 msgstr "Ổ chứa đĩa nguồn sẽ cũng là ổ dùng để thu."
 
-#: ../libbrasero-burn/brasero-burn-options.c:570
+#: ../libbrasero-burn/brasero-burn-options.c:563
 msgid ""
 "A new writable disc will be required once the currently loaded one has been "
 "copied."
 msgstr "Cần đưa vào một đĩa mới ghi  được, do đĩa trong máy đã được chép rồi."
 
-#: ../libbrasero-burn/brasero-burn-options.c:657
+#: ../libbrasero-burn/brasero-burn-options.c:650
 msgid "Select a disc to write to"
-msgstr "Chọn một đĩa để ghi"
+msgstr "Chọn một đĩa vào đó cần ghi"
 
-#: ../libbrasero-burn/brasero-burn-options.c:737
-#: ../libbrasero-burn/brasero-burn-options.c:755
-#: ../libbrasero-burn/brasero-burn-options.c:875
+#: ../libbrasero-burn/brasero-burn-options.c:730
+#: ../libbrasero-burn/brasero-burn-options.c:748
+#: ../libbrasero-burn/brasero-burn-options.c:868
 msgid "Disc Burning Setup"
-msgstr "Cài đặt ghi đĩa"
+msgstr "Thiết lập Chép ra Đĩa"
 
-#: ../libbrasero-burn/brasero-burn-options.c:764 ../src/brasero-project.c:1544
+#: ../libbrasero-burn/brasero-burn-options.c:757 ../src/brasero-project.c:1542
 msgid "Video Options"
-msgstr "Tùy chọn phim"
+msgstr "Tuỳ chọn phim"
 
-#: ../libbrasero-burn/brasero-burn-options.c:795 ../src/brasero-data-disc.c:613
+#: ../libbrasero-burn/brasero-burn-options.c:788
+#: ../src/brasero-data-disc.c:613
 msgid ""
 "Do you want to create a disc from the contents of the image or with the "
 "image file inside?"
@@ -1263,7 +1235,7 @@ msgstr ""
 "tin ảnh đĩa thôi?"
 
 #. Translators: %s is the name of the image
-#: ../libbrasero-burn/brasero-burn-options.c:804
+#: ../libbrasero-burn/brasero-burn-options.c:797
 #, c-format
 msgid ""
 "There is only one selected file (\"%s\"). It is the image of a disc and its "
@@ -1272,32 +1244,33 @@ msgstr ""
 "Chỉ có một tập tin đã được chọn (\"%s\"). Đó là tập tin ảnh đĩa và có thể "
 "ghi nội dung của nó."
 
-#: ../libbrasero-burn/brasero-burn-options.c:809
+#: ../libbrasero-burn/brasero-burn-options.c:802
 msgid "Burn as _File"
-msgstr "Ghi thành _tập tin"
+msgstr "Ghi như _tập tin"
 
-#: ../libbrasero-burn/brasero-burn-options.c:811
+#: ../libbrasero-burn/brasero-burn-options.c:804
 msgid "Burn _Contents…"
 msgstr "Ghi _nội dung…"
 
-#: ../libbrasero-burn/brasero-burn-options.c:893
+#: ../libbrasero-burn/brasero-burn-options.c:886
 msgid "Image Burning Setup"
-msgstr "Cài đặt ghi ra tập tin ảnh"
+msgstr "Thiết lập Chép ra Ảnh"
 
 #. pack everything
-#: ../libbrasero-burn/brasero-burn-options.c:901
+#: ../libbrasero-burn/brasero-burn-options.c:894
 msgid "Select a disc image to write"
 msgstr "Chọn một tập tin ảnh đĩa để ghi"
 
-#: ../libbrasero-burn/brasero-burn-options.c:921
+#: ../libbrasero-burn/brasero-burn-options.c:914
 msgid "Copy CD/DVD"
 msgstr "Chép CD/DVD"
 
-#: ../libbrasero-burn/brasero-burn-options.c:927
+#: ../libbrasero-burn/brasero-burn-options.c:920
 msgid "Select disc to copy"
 msgstr "Chọn đĩa cần sao chép"
 
-#: ../libbrasero-burn/brasero-burn-options.c:1229 ../src/brasero-project.c:1439
+#: ../libbrasero-burn/brasero-burn-options.c:1222
+#: ../src/brasero-project.c:1437
 msgid "Please install the following manually and try again:"
 msgstr "Vui lòng cài đặt gói sau và thử lại:"
 
@@ -1316,7 +1289,7 @@ msgstr "Không nhận ra bài hát"
 #. Translators: %s is the name of the artist
 #. Translators: %s is the name of an artist.
 #: ../libbrasero-burn/brasero-cover.c:146 ../src/brasero-player.c:419
-#: ../src/brasero-song-control.c:270
+#: ../src/brasero-song-control.c:271
 #, c-format
 msgid "by %s"
 msgstr "bởi %s"
@@ -1324,26 +1297,26 @@ msgstr "bởi %s"
 #: ../libbrasero-burn/brasero-data-vfs.c:218
 #, c-format
 msgid "\"%s\" cannot be read"
-msgstr "“%s” không đọc được"
+msgstr "« %s » không đọc được"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:605
+#: ../libbrasero-burn/brasero-dest-selection.c:599
 #: ../libbrasero-burn/brasero-image-type-chooser.c:133
 msgid "SVCD image"
 msgstr "Tập tin ảnh SVCD"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:607
+#: ../libbrasero-burn/brasero-dest-selection.c:601
 #: ../libbrasero-burn/brasero-image-type-chooser.c:127
 msgid "VCD image"
 msgstr "Tập tin ảnh VCD"
 
-#: ../libbrasero-burn/brasero-dest-selection.c:611
+#: ../libbrasero-burn/brasero-dest-selection.c:605
 #: ../libbrasero-burn/brasero-image-type-chooser.c:106
 msgid "Video DVD image"
 msgstr "Tập tin ảnh DVD phim"
 
 #. NOTE for translators: the first %s is medium_name ("File
 #. * Image") and the second the path for the image file
-#: ../libbrasero-burn/brasero-dest-selection.c:623
+#: ../libbrasero-burn/brasero-dest-selection.c:617
 #, c-format
 msgid "%s: \"%s\""
 msgstr "%s: \"%s\""
@@ -1354,36 +1327,36 @@ msgstr "%s: \"%s\""
 #. * destination disc a new one (once the source has been
 #. * copied) which is to be inserted in the drive currently
 #. * holding the source disc
-#: ../libbrasero-burn/brasero-dest-selection.c:655
+#: ../libbrasero-burn/brasero-dest-selection.c:649
 #, c-format
 msgid "New disc in the burner holding the source disc"
 msgstr "Cho đĩa mới vào ổ ghi đĩa dang có đĩa nguồn sao chép"
 
 #. NOTE for translators, the first %s is the medium name
-#: ../libbrasero-burn/brasero-dest-selection.c:696
+#: ../libbrasero-burn/brasero-dest-selection.c:690
 #, c-format
 msgid "%s: not enough free space"
 msgstr "%s: không đủ không gian trống"
 
 #. NOTE for translators: the first %s is the medium name, the second %s
 #. * is its available free space. "Free" here is the free space available.
-#: ../libbrasero-burn/brasero-dest-selection.c:727
+#: ../libbrasero-burn/brasero-dest-selection.c:721
 #, c-format
 msgid "%s: %s of free space"
-msgstr "%s: %s còn trống"
+msgstr "%s: %s sức chứa trống"
 
 #. Translators: the first %s is the path of the directory where brasero
 #. * will store its temporary files; the second one is the size available
 #: ../libbrasero-burn/brasero-drive-properties.c:192
 #, c-format
 msgid "%s: %s free"
-msgstr "%s: %s còn trống"
+msgstr "%s: %s không gian trống"
 
 #: ../libbrasero-burn/brasero-drive-properties.c:233
 #: ../libbrasero-burn/brasero-drive-properties.c:272
 #: ../libbrasero-burn/brasero-drive-properties.c:324
 msgid "Do you really want to choose this location?"
-msgstr "Thực sự muốn chọn vị trí này?"
+msgstr "Thực sự muốn chọn vị trí này ?"
 
 #: ../libbrasero-burn/brasero-drive-properties.c:277
 #: ../libbrasero-burn/brasero-session.c:1287
@@ -1440,7 +1413,7 @@ msgstr "Tốc độ tối đa"
 
 #: ../libbrasero-burn/brasero-drive-properties.c:710
 msgid "Burning speed"
-msgstr "Tốc độ ghi"
+msgstr "Tốc độ chép ra"
 
 #: ../libbrasero-burn/brasero-drive-properties.c:723
 msgid "_Simulate before burning"
@@ -1473,7 +1446,7 @@ msgstr "Cho phép thêm dữ liệu nữa vào đĩa về sau"
 #: ../libbrasero-burn/brasero-tool-dialog.c:284
 #: ../src/brasero-multi-song-props.c:308 ../src/brasero-song-properties.c:226
 msgid "Options"
-msgstr "Tùy chọn"
+msgstr "Tuỳ chọn"
 
 #: ../libbrasero-burn/brasero-drive-properties.c:763
 msgid "Location for _Temporary Files"
@@ -1497,13 +1470,13 @@ msgstr "Tập tin không đọc được"
 
 #: ../libbrasero-burn/brasero-filtered-uri.c:59
 msgid "Broken symbolic link"
-msgstr "Liên kết mềm bị gãy"
+msgstr "Liên kết tượng trưng bị ngắt"
 
 #: ../libbrasero-burn/brasero-filtered-uri.c:60
-#: ../libbrasero-utils/brasero-io.c:1190 ../libbrasero-utils/brasero-io.c:2061
+#: ../libbrasero-utils/brasero-io.c:1188 ../libbrasero-utils/brasero-io.c:2059
 #, c-format
 msgid "Recursive symbolic link"
-msgstr "Lên kết mềm đệ quy"
+msgstr "Lên kết tượng trưng đệ quy"
 
 #: ../libbrasero-burn/brasero-image-properties.c:243
 msgid "Disc image type:"
@@ -1511,7 +1484,7 @@ msgstr "Loại tập tin ảnh đĩa:"
 
 #: ../libbrasero-burn/brasero-image-type-chooser.c:97
 msgid "Autodetect"
-msgstr "Tự động dò tìm"
+msgstr "Tự động phát hiện"
 
 #: ../libbrasero-burn/brasero-image-type-chooser.c:106
 msgid "ISO9660 image"
@@ -1530,7 +1503,7 @@ msgid "Cdrdao image"
 msgstr "Tập tin ảnh cdrdao"
 
 #: ../libbrasero-burn/brasero-medium-properties.c:93
-#: ../src/brasero-project.c:1503
+#: ../src/brasero-project.c:1501
 #, c-format
 msgid "Properties of %s"
 msgstr "Thuộc tính về %s"
@@ -1554,9 +1527,9 @@ msgstr "_Giữ phần mở rộng hiện có"
 msgid "Change _Extension"
 msgstr "Đổi _phần mở rộng"
 
-#: ../libbrasero-burn/brasero-medium-properties.c:234
+#: ../libbrasero-burn/brasero-medium-properties.c:233
 msgid "Configure recording options"
-msgstr "Cấu hình tùy chọn thu"
+msgstr "Cấu hình tuỳ chọn thu"
 
 #. Translators: first %02i is hours, the second one is minutes and the
 #. * third one is seconds.
@@ -1589,20 +1562,20 @@ msgstr "Tốc độ ổ đĩa dự đoán:"
 #: ../libbrasero-burn/brasero-src-image.c:229
 #, c-format
 msgid "\"%s\": loading"
-msgstr "\"%s\": Đang tải"
+msgstr "Đang nạp \"%s\""
 
 #. Translators: %s is a path and image refers to a disc image
 #: ../libbrasero-burn/brasero-src-image.c:236
 #, c-format
 msgid "\"%s\": unknown disc image type"
-msgstr "\"%s\": Không xác định kiểu ảnh đĩa"
+msgstr "\"%s\": Không xác định được tập tin ảnh đĩa"
 
 #. NOTE to translators, the first %s is the path of the image
 #. * file and the second its size.
 #: ../libbrasero-burn/brasero-src-image.c:258
 #, c-format
 msgid "\"%s\": %s"
-msgstr "“%s”: %s"
+msgstr "« %s »: %s"
 
 #. This is hackish and meant to avoid ellipsization to make the
 #. * label too small.
@@ -1610,7 +1583,7 @@ msgstr "“%s”: %s"
 #: ../libbrasero-burn/brasero-src-image.c:271
 #: ../libbrasero-burn/brasero-src-image.c:554
 msgid "Click here to select a disc _image"
-msgstr "Nhấn vào đây để chọn một _tập tin ảnh đĩa"
+msgstr "Nhấn vào đây để chọn môt _tập tin ảnh đĩa"
 
 #: ../libbrasero-burn/brasero-src-image.c:415
 msgid "Select Disc Image"
@@ -1618,7 +1591,7 @@ msgstr "Chọn tập tin ảnh đĩa"
 
 #: ../libbrasero-burn/brasero-src-image.c:444
 #: ../nautilus/nautilus-burn-bar.c:236 ../src/brasero-file-chooser.c:350
-#: ../src/brasero-project.c:2225 ../src/brasero-project-name.c:162
+#: ../src/brasero-project.c:2221 ../src/brasero-project-name.c:162
 msgid "All files"
 msgstr "Mọi tập tin"
 
@@ -1641,7 +1614,7 @@ msgstr "Dung lượng ước tính: %s"
 #: ../src/brasero-data-disc.c:870
 #, c-format
 msgid "Do you really want to add \"%s\" to the selection?"
-msgstr "Bạn thực sự muốn thêm “%s” vào vùng chọn không?"
+msgstr "Bạn thực sự muốn thêm « %s » vào vùng chọn không?"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:228
 #: ../src/brasero-data-disc.c:879
@@ -1660,13 +1633,13 @@ msgstr ""
 #: ../libbrasero-burn/brasero-status-dialog.c:294
 #: ../src/brasero-data-disc.c:839 ../src/brasero-data-disc.c:883
 msgid "Ne_ver Add Such File"
-msgstr "Không _bao giờ thêm tập tin như thế này"
+msgstr "Không _bao giờ bổ sung loại tập tin này"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:233
 #: ../libbrasero-burn/brasero-status-dialog.c:295
 #: ../src/brasero-data-disc.c:840 ../src/brasero-data-disc.c:884
 msgid "Al_ways Add Such File"
-msgstr "L_uôn thêm những tập tin kiểu này"
+msgstr "Luôn bổ sung lo_ại tập tin này"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:271
 #: ../src/brasero-data-disc.c:826
@@ -1690,11 +1663,11 @@ msgid ""
 "However, Mac OS X cannot read images created with version 3 of the ISO9660 "
 "standard."
 msgstr ""
-"Tập tin này có kích cỡ hơn 2 GiB. Tập tin lớn hơn 2 GiB không được hỗ trợ "
-"bởi tiêu chuẩn ISO9660 trong phiên bản 1 và 2 (hai phiên bản phổ biến "
+"Tập tin này có kích cỡ hơn 2 GiB. Tập tin lớn hơn 2 GiB không phải được hỗ "
+"trợ bởi tiêu chuẩn ISO9660 trong phiên bản 1 và 2 (hai phiên bản phổ biến "
 "nhất).\n"
-"Khuyên bạn sử dụng tiêu chuẩn ISO9660 phiên bản 3, nó được hỗ trợ bởi hầu "
-"hết các hệ điều hành, gồm có Linux và tất cả các phiên bản Windows™.\n"
+"Khuyên bạn sử dụng tiêu chuẩn ISO9660 phiên bản 3 mà được hỗ trợ bởi hậu hết "
+"các hệ điều hành, gồm có Linux và tất cả các phiên bản Windows.\n"
 "Tiếc là Mac OSX chưa có khả năng đọc ảnh được tạo bằng tiêu chuẩn ISO9660 "
 "phiên bản 3."
 
@@ -1702,23 +1675,23 @@ msgstr ""
 #: ../src/brasero-data-disc.c:729
 msgid "Should files be renamed to be fully Windows-compatible?"
 msgstr ""
-"Có nên thay đổi tên của mỗi tập tin để nó tương thích hoàn toàn với Windows "
+"Có nên thay đổi tên của mỗi tập tin để tương thích hoàn toàn với Windows "
 "không?"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:341
 #: ../src/brasero-data-disc.c:735
 msgid "Those names should be changed and truncated to 64 characters."
-msgstr "Những tên này sẽ bị thay đổi và cắt ngắn thành 64 ký tự."
+msgstr "Mỗi tên nên bị thay đổi và cắt ngắn thành 64 ký tự."
 
 #: ../libbrasero-burn/brasero-status-dialog.c:346
 #: ../src/brasero-data-disc.c:738
 msgid "_Disable Full Windows Compatibility"
-msgstr "_Tắt tính tương thích hoàn toàn với Windows"
+msgstr "_Tắt tính tương thích Windows đầy đủ"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:349
 #: ../src/brasero-data-disc.c:737
 msgid "_Rename for Full Windows Compatibility"
-msgstr "Tha_y tên để tương thích hoàn toàn với Windows"
+msgstr "Tha_y tên để tương thích đầy đủ với Windows"
 
 #: ../libbrasero-burn/brasero-status-dialog.c:566
 msgid "Size Estimation"
@@ -1744,8 +1717,8 @@ msgstr ""
 "Không thể thực hiện thao tác kiểm tra tính nguyên vẹn của hệ thống tập tin."
 
 #: ../libbrasero-burn/brasero-sum-dialog.c:166 ../src/brasero-data-disc.c:214
-#: ../src/brasero-eject-dialog.c:102 ../src/brasero-playlist.c:393
-#: ../src/brasero-project.c:2625
+#: ../src/brasero-eject-dialog.c:100 ../src/brasero-playlist.c:393
+#: ../src/brasero-project.c:2621
 msgid "An unknown error occurred"
 msgstr "Đã gặp lỗi không xác định"
 
@@ -1772,7 +1745,7 @@ msgstr "Tải tập tin MD5"
 #: ../libbrasero-burn/brasero-sum-dialog.c:397
 #, c-format
 msgid "\"%s\" is not a valid URI"
-msgstr "“%s” không phải là một địa chỉ URI hợp lệ"
+msgstr "« %s » không phải là một địa chỉ URI hợp lệ"
 
 #: ../libbrasero-burn/brasero-sum-dialog.c:515
 msgid "No MD5 file was given."
@@ -1818,12 +1791,12 @@ msgstr "Đĩa này không được hỗ trợ"
 msgid "The drive is empty"
 msgstr "Ổ vẫn trống"
 
-#: ../libbrasero-burn/brasero-tool-dialog.c:556
-#: ../src/brasero-eject-dialog.c:167
+#: ../libbrasero-burn/brasero-tool-dialog.c:539
+#: ../src/brasero-eject-dialog.c:164
 msgid "Select a disc"
 msgstr "Chọn một đĩa"
 
-#: ../libbrasero-burn/brasero-tool-dialog.c:583
+#: ../libbrasero-burn/brasero-tool-dialog.c:572
 msgid "Progress"
 msgstr "Tiến hành"
 
@@ -1834,7 +1807,7 @@ msgstr "Tiến hành"
 #: ../libbrasero-burn/brasero-track-data-cfg.c:793
 #: ../src/brasero-playlist.c:536 ../src/brasero-video-tree-model.c:342
 msgid "(loading…)"
-msgstr "(đang tải…)"
+msgstr "(đang nạp…)"
 
 #: ../libbrasero-burn/brasero-track-data-cfg.c:619
 #: ../libbrasero-burn/brasero-track-data-cfg.c:799
@@ -1876,7 +1849,7 @@ msgstr "\"%s\" là một liên kết mềm đệ quy."
 #: ../libbrasero-burn/brasero-track-data-cfg.c:2578 ../src/brasero-cli.c:218
 #, c-format
 msgid "\"%s\" cannot be found."
-msgstr "Không tìm thấy “%s”."
+msgstr "Không tìm thấy « %s »."
 
 #: ../libbrasero-burn/brasero-track-image-cfg.c:451
 msgid "Retrieving image format and size"
@@ -1939,7 +1912,7 @@ msgstr "_PAL/SECAM"
 
 #: ../libbrasero-burn/brasero-video-options.c:475
 msgid "Format used mostly in Europe"
-msgstr "Định dạng thường được dùng ở châu Âu"
+msgstr "Định dạng thường dùng ở Âu"
 
 #: ../libbrasero-burn/brasero-video-options.c:489
 msgid "Native _format"
@@ -1947,7 +1920,7 @@ msgstr "Định dạng _sở hữu"
 
 #: ../libbrasero-burn/brasero-video-options.c:504
 msgid "Aspect ratio:"
-msgstr "Khổ phim:"
+msgstr "Tỷ lệ hình thể:"
 
 #: ../libbrasero-burn/brasero-video-options.c:515
 msgid "_4:3"
@@ -1968,7 +1941,7 @@ msgstr "Tạo ra một SVCD"
 
 #: ../libbrasero-burn/brasero-video-options.c:573
 msgid "Create a VCD"
-msgstr "Tạo ra một VCD"
+msgstr "Tạo VCD"
 
 #: ../libbrasero-burn/brasero-xfer.c:130 ../libbrasero-burn/brasero-xfer.c:266
 #, c-format
@@ -1985,7 +1958,7 @@ msgstr "Đang ghi"
 
 #: ../libbrasero-burn/burn-basics.c:80
 msgid "Blanking"
-msgstr "Đang xóa"
+msgstr "Đang để trắng"
 
 #: ../libbrasero-burn/burn-basics.c:81
 msgid "Creating checksum"
@@ -2046,7 +2019,7 @@ msgstr "Thư viện ghi đĩa của Brasero"
 
 #: ../libbrasero-burn/burn-debug.c:81
 msgid "Display options for Brasero-burn library"
-msgstr "Hiện thị các tùy chọn cho thư viện ghi đĩa của Brasero"
+msgstr "Hiện thị các tuỳ chọn cho thư viện ghi đĩa của Brasero"
 
 #. Translators: %s is the plugin name
 #: ../libbrasero-burn/burn-job.c:322 ../libbrasero-burn/burn-job.c:797
@@ -2054,7 +2027,7 @@ msgstr "Hiện thị các tùy chọn cho thư viện ghi đĩa của Brasero"
 #: ../libbrasero-burn/burn-job.c:1119
 #, c-format
 msgid "\"%s\" did not behave properly"
-msgstr "“%s” không ứng xử đúng"
+msgstr "« %s » không ứng xử đúng"
 
 #. Translators: the first %s is the size of the free space on the medium
 #. * and the second %s is the size of the space required by the data to be
@@ -2062,7 +2035,7 @@ msgstr "“%s” không ứng xử đúng"
 #: ../libbrasero-burn/burn-job.c:430
 #, c-format
 msgid "Not enough space available on the disc (%s available for %s)"
-msgstr "Không có đủ không gian trống trên đĩa (còn trống %s nhưng cần %s)"
+msgstr "Không có đủ không gian trống trên đĩa (%s trống mà yêu cầu là %s)"
 
 #: ../libbrasero-burn/burn-job.c:522
 #, c-format
@@ -2082,7 +2055,7 @@ msgstr ""
 "Bạn đã chọn lưu ảnh tạm thời ở một vị trí không có đủ chỗ trống cho ảnh đĩa "
 "(cần %ld MiB)"
 
-#: ../libbrasero-burn/burn-job.c:572 ../plugins/dvdcss/burn-dvdcss.c:362
+#: ../libbrasero-burn/burn-job.c:572 ../plugins/dvdcss/burn-dvdcss.c:365
 #, c-format
 msgid "The size of the volume could not be retrieved"
 msgstr "Không thể lấy kích cỡ của khối tin"
@@ -2094,9 +2067,9 @@ msgstr "Chưa chỉ định đường dẫn để xuất ảnh"
 
 #. Translators: %s is the error returned by libburn
 #. Translators: the %s is the error message from errno
-#: ../libbrasero-burn/burn-job.c:768 ../plugins/cdrtools/burn-cdrecord.c:709
+#: ../libbrasero-burn/burn-job.c:768 ../plugins/cdrtools/burn-cdrecord.c:710
 #: ../plugins/libburnia/burn-libburn.c:717
-#: ../plugins/transcode/burn-transcode.c:790
+#: ../plugins/transcode/burn-transcode.c:826
 #, c-format
 msgid "An internal error occurred (%s)"
 msgstr "Đã gặp lỗi nội bộ (%s)"
@@ -2115,28 +2088,28 @@ msgstr "Tập tin không phải được cất giữ cục bộ"
 msgid "VIDEO_TS directory is missing or invalid"
 msgstr "Thư mục VIDEO_TS bị thiếu hoặc không hợp lệ"
 
-#: ../libbrasero-burn/burn-plugin.c:647
+#: ../libbrasero-burn/burn-plugin.c:645
 #, c-format
 msgid "\"%s\" could not be found in the path"
-msgstr "Không tìm thấy “%s” trên đường dẫn"
+msgstr "Không tìm thấy « %s » trên đường dẫn"
 
-#: ../libbrasero-burn/burn-plugin.c:651
+#: ../libbrasero-burn/burn-plugin.c:649
 #, c-format
 msgid "\"%s\" GStreamer plugin could not be found"
-msgstr "Không tìm thấy phần dựng sẵn \"%s\" của GStreamer"
+msgstr "Không tìm được \"%s\" GStreamer plugin"
 
-#: ../libbrasero-burn/burn-plugin.c:655 ../libbrasero-burn/burn-plugin.c:667
+#: ../libbrasero-burn/burn-plugin.c:653 ../libbrasero-burn/burn-plugin.c:665
 #, c-format
 msgid "The version of \"%s\" is too old"
-msgstr "Phiên bản \"%s\" quá cũ"
+msgstr "Phiên bản  \"%s\" quá cũ"
 
-#: ../libbrasero-burn/burn-plugin.c:659
+#: ../libbrasero-burn/burn-plugin.c:657
 #, c-format
 msgid "\"%s\" is a symbolic link pointing to another program"
-msgstr "\"%s\" là một liên kết mềm đến một chương trình khác"
+msgstr "\"%s\" là một liên kết tượng trưng đến một trình khác"
 
 #. Translators: %s is a filename
-#: ../libbrasero-burn/burn-plugin.c:663 ../plugins/cdrdao/burn-cdrdao.c:211
+#: ../libbrasero-burn/burn-plugin.c:661 ../plugins/cdrdao/burn-cdrdao.c:211
 #: ../plugins/growisofs/burn-growisofs.c:509
 #, c-format
 msgid "\"%s\" could not be found"
@@ -2146,7 +2119,7 @@ msgstr "Không tìm thấy \"%s\""
 #: ../libbrasero-burn/burn-process.c:259
 #, c-format
 msgid "Process \"%s\" ended with an error code (%i)"
-msgstr "Tiến trình “%s” đã kết thúc với mã lỗi (%i)"
+msgstr "Tiến trình « %s » đã kết thúc với mã lỗi (%i)"
 
 #. Translators: This is a fake drive, a file, and means that
 #. * when we're writing, we're writing to a file and create an
@@ -2170,11 +2143,11 @@ msgstr ""
 
 #: ../libbrasero-media/brasero-media.c:477
 msgid "Brasero optical media library"
-msgstr "Thư viện đa phương tiện quang"
+msgstr "Thư viện phương tiện quang"
 
 #: ../libbrasero-media/brasero-media.c:478
 msgid "Display options for Brasero media library"
-msgstr "Hiển thị các lựa chọn cho thư viện đa phương tiện của Brasero"
+msgstr "Hiển thị các lựa chọn cho thư viện phương tiện của Brasero"
 
 #: ../libbrasero-media/brasero-medium.c:65
 msgid "File"
@@ -2214,15 +2187,15 @@ msgstr "DVD+RW"
 
 #: ../libbrasero-media/brasero-medium.c:74
 msgid "DVD+R dual layer"
-msgstr "DVD+R hai lớp"
+msgstr "DVD+R lớp đôi"
 
 #: ../libbrasero-media/brasero-medium.c:75
 msgid "DVD+RW dual layer"
-msgstr "DVD+RW hai lớp"
+msgstr "DVD+RW lớp đôi"
 
 #: ../libbrasero-media/brasero-medium.c:76
 msgid "DVD-R dual layer"
-msgstr "DVD-R hai lớp"
+msgstr "DVD-R lớp đôi"
 
 #: ../libbrasero-media/brasero-medium.c:77
 msgid "DVD-RAM"
@@ -2300,19 +2273,19 @@ msgstr "Đang tìm kiếm đĩa sẵn sàng"
 
 #: ../libbrasero-media/brasero-medium-selection.c:460
 msgid "No disc available"
-msgstr "Không có đĩa sẵn sàng"
+msgstr "Không có đĩa"
 
 #. Translators: this is hour minute second like '2 h 14 min 25'
 #: ../libbrasero-media/brasero-units.c:71
 #, c-format
 msgid "%s h %s min %s"
-msgstr "%s giờ %s phút %s"
+msgstr "%s h %s min %s"
 
 #. Translators: this is hour minute like '2 h 14'
 #: ../libbrasero-media/brasero-units.c:77
 #, c-format
 msgid "%s h %s"
-msgstr "%s giờ %s"
+msgstr "%s h %s"
 
 #. Translators: this is hour like '2 h'
 #: ../libbrasero-media/brasero-units.c:82
@@ -2337,7 +2310,7 @@ msgstr "%s:%s"
 #: ../libbrasero-media/brasero-units.c:99
 #, c-format
 msgid "%s min"
-msgstr "%s phút"
+msgstr "%s min"
 
 #. Translators: the first %s is the number of minutes
 #. * and the second one is the number of seconds.
@@ -2345,7 +2318,7 @@ msgstr "%s phút"
 #: ../libbrasero-media/brasero-units.c:104
 #, c-format
 msgid "%s:%s min"
-msgstr "%s:%s phút"
+msgstr "%s:%s min"
 
 #: ../libbrasero-media/brasero-volume.c:186
 #, c-format
@@ -2377,8 +2350,8 @@ msgstr "Đĩa nhạc (%s)"
 #. NOTE to translators: the final string must not be over
 #. * 32 _bytes_ otherwise it gets truncated.
 #. * The %s is the date
-#: ../libbrasero-media/brasero-volume.c:421 ../nautilus/nautilus-burn-bar.c:115
-#: ../src/brasero-project-name.c:255
+#: ../libbrasero-media/brasero-volume.c:421
+#: ../nautilus/nautilus-burn-bar.c:115 ../src/brasero-project-name.c:255
 #, c-format
 msgid "Data disc (%s)"
 msgstr "Đĩa dữ liệu (%s)"
@@ -2387,10 +2360,11 @@ msgstr "Đĩa dữ liệu (%s)"
 #: ../libbrasero-media/burn-iso9660.c:167
 #: ../libbrasero-media/burn-iso9660.c:402
 #: ../libbrasero-media/burn-iso9660.c:439
-#: ../libbrasero-media/burn-iso9660.c:488 ../libbrasero-media/burn-volume.c:128
+#: ../libbrasero-media/burn-iso9660.c:488
+#: ../libbrasero-media/burn-volume.c:128
 #, c-format
 msgid "It does not appear to be a valid ISO image"
-msgstr "Nó có vẻ không phải một ảnh ISO hợp lệ"
+msgstr "Có vẻ là nó không phải một ảnh ISO hợp lệ"
 
 #: ../libbrasero-media/scsi-error.c:43 ../src/brasero-project-name.c:84
 msgid "Unknown error"
@@ -2434,7 +2408,7 @@ msgstr "Thiết bị đã quá hạn"
 
 #: ../libbrasero-media/scsi-error.c:54
 msgid "Key not established"
-msgstr "Chưa thiết lập khóa"
+msgstr "Chưa thiết lập khoá"
 
 #: ../libbrasero-media/scsi-error.c:55
 msgid "Invalid track mode"
@@ -2449,10 +2423,10 @@ msgstr " Ẩn t_hay đổi"
 msgid "_Show changes"
 msgstr "_Hiện thay đổi"
 
-#: ../libbrasero-utils/brasero-io.c:1418
+#: ../libbrasero-utils/brasero-io.c:1416
 #, c-format
 msgid "The file does not appear to be a playlist"
-msgstr "Tập tin hình như không phải là một danh mục nhạc"
+msgstr "Tập tin không hình như một danh mục nhạc"
 
 #. Translators: This is an image, a picture, not a "Disc Image"
 #: ../libbrasero-utils/brasero-jacket-background.c:199
@@ -2502,7 +2476,7 @@ msgstr "Đặt vào giữa"
 
 #: ../libbrasero-utils/brasero-jacket-background.c:346
 msgid "Tiled"
-msgstr "Lát gạch"
+msgstr "Lát đều"
 
 #: ../libbrasero-utils/brasero-jacket-background.c:347
 msgid "Scaled"
@@ -2512,55 +2486,55 @@ msgstr "Co giãn"
 msgid "Background Properties"
 msgstr "Thuộc tính Nền"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:534
+#: ../libbrasero-utils/brasero-jacket-edit.c:589
 msgid "Print"
 msgstr "In"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:546
+#: ../libbrasero-utils/brasero-jacket-edit.c:601
 msgid "Bac_kground Properties"
 msgstr "Th_uộc tính nền"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:549
+#: ../libbrasero-utils/brasero-jacket-edit.c:604
 msgid "Background properties"
 msgstr "Thuộc tính của nền"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:564
+#: ../libbrasero-utils/brasero-jacket-edit.c:619
 msgid "Align right"
 msgstr "Canh phải"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:574
+#: ../libbrasero-utils/brasero-jacket-edit.c:629
 msgid "Center"
 msgstr "Canh giữa"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:584
+#: ../libbrasero-utils/brasero-jacket-edit.c:639
 msgid "Align left"
 msgstr "Canh trái"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:598
+#: ../libbrasero-utils/brasero-jacket-edit.c:653
 msgid "Underline"
 msgstr "Gạch chân"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:608
+#: ../libbrasero-utils/brasero-jacket-edit.c:663
 msgid "Italic"
 msgstr "Nghiêng"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:618
+#: ../libbrasero-utils/brasero-jacket-edit.c:673
 msgid "Bold"
 msgstr "Đậm"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:644
+#: ../libbrasero-utils/brasero-jacket-edit.c:699
 msgid "Font family and size"
 msgstr "Loại phông chữ và cỡ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:651
+#: ../libbrasero-utils/brasero-jacket-edit.c:706
 msgid "_Text Color"
 msgstr "Mà_u chữ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:652
+#: ../libbrasero-utils/brasero-jacket-edit.c:707
 msgid "Text color"
 msgstr "Màu chữ"
 
-#: ../libbrasero-utils/brasero-jacket-edit.c:775
+#: ../libbrasero-utils/brasero-jacket-edit.c:830
 msgid "Cover Editor"
 msgstr "Bộ sửa Bìa"
 
@@ -2586,7 +2560,7 @@ msgstr "BÌA TRƯỚC"
 msgid "The image could not be loaded."
 msgstr "Không thể nạp ảnh."
 
-#: ../libbrasero-utils/brasero-metadata.c:1126 ../src/brasero-audio-disc.c:643
+#: ../libbrasero-utils/brasero-metadata.c:1135 ../src/brasero-audio-disc.c:643
 #, c-format
 msgid "\"%s\" could not be handled by GStreamer."
 msgstr "GStreamer không xử lý được \"%s\""
@@ -2594,63 +2568,50 @@ msgstr "GStreamer không xử lý được \"%s\""
 #. Translators: %s is the name of the object (as in
 #. * GObject) from the Gstreamer library that could
 #. * not be created
-#: ../libbrasero-utils/brasero-metadata.c:1198
-#: ../libbrasero-utils/brasero-metadata.c:1211
-#: ../libbrasero-utils/brasero-metadata.c:1224
-#: ../libbrasero-utils/brasero-metadata.c:1366
-#: ../libbrasero-utils/brasero-metadata.c:1738
-#: ../libbrasero-utils/brasero-metadata.c:1753
-#: ../libbrasero-utils/brasero-metadata.c:1762
+#: ../libbrasero-utils/brasero-metadata.c:1207
+#: ../libbrasero-utils/brasero-metadata.c:1220
+#: ../libbrasero-utils/brasero-metadata.c:1233
+#: ../libbrasero-utils/brasero-metadata.c:1375
+#: ../libbrasero-utils/brasero-metadata.c:1746
+#: ../libbrasero-utils/brasero-metadata.c:1761
+#: ../libbrasero-utils/brasero-metadata.c:1770
 #: ../plugins/transcode/burn-normalize.c:172
 #: ../plugins/transcode/burn-normalize.c:187
 #: ../plugins/transcode/burn-normalize.c:209
 #: ../plugins/transcode/burn-normalize.c:221
 #: ../plugins/transcode/burn-normalize.c:238
 #: ../plugins/transcode/burn-normalize.c:335
-#: ../plugins/transcode/burn-transcode.c:292
-#: ../plugins/transcode/burn-transcode.c:304
-#: ../plugins/transcode/burn-transcode.c:426
-#: ../plugins/transcode/burn-transcode.c:479
-#: ../plugins/transcode/burn-transcode.c:513
-#: ../plugins/transcode/burn-transcode.c:556
-#: ../plugins/transcode/burn-transcode.c:577
-#: ../plugins/transcode/burn-transcode.c:589
+#: ../plugins/transcode/burn-transcode.c:294
+#: ../plugins/transcode/burn-transcode.c:306
+#: ../plugins/transcode/burn-transcode.c:456
+#: ../plugins/transcode/burn-transcode.c:509
+#: ../plugins/transcode/burn-transcode.c:543
+#: ../plugins/transcode/burn-transcode.c:590
 #: ../plugins/transcode/burn-transcode.c:611
-#: ../plugins/transcode/burn-vob.c:308 ../plugins/transcode/burn-vob.c:328
-#: ../plugins/transcode/burn-vob.c:343 ../plugins/transcode/burn-vob.c:355
-#: ../plugins/transcode/burn-vob.c:372 ../plugins/transcode/burn-vob.c:428
-#: ../plugins/transcode/burn-vob.c:445 ../plugins/transcode/burn-vob.c:457
-#: ../plugins/transcode/burn-vob.c:469 ../plugins/transcode/burn-vob.c:481
-#: ../plugins/transcode/burn-vob.c:498 ../plugins/transcode/burn-vob.c:582
-#: ../plugins/transcode/burn-vob.c:599 ../plugins/transcode/burn-vob.c:611
-#: ../plugins/transcode/burn-vob.c:623 ../plugins/transcode/burn-vob.c:642
-#: ../plugins/transcode/burn-vob.c:659 ../plugins/transcode/burn-vob.c:705
-#: ../plugins/transcode/burn-vob.c:782 ../plugins/transcode/burn-vob.c:799
-#: ../plugins/transcode/burn-vob.c:814 ../plugins/transcode/burn-vob.c:826
-#: ../plugins/transcode/burn-vob.c:837 ../plugins/transcode/burn-vob.c:848
-#: ../plugins/transcode/burn-vob.c:1023 ../plugins/transcode/burn-vob.c:1087
-#: ../plugins/transcode/burn-vob.c:1104 ../plugins/transcode/burn-vob.c:1125
-#: ../plugins/transcode/burn-vob.c:1152
+#: ../plugins/transcode/burn-transcode.c:623
+#: ../plugins/transcode/burn-transcode.c:648
+#: ../plugins/transcode/burn-vob.c:309 ../plugins/transcode/burn-vob.c:329
+#: ../plugins/transcode/burn-vob.c:344 ../plugins/transcode/burn-vob.c:356
+#: ../plugins/transcode/burn-vob.c:373 ../plugins/transcode/burn-vob.c:431
+#: ../plugins/transcode/burn-vob.c:448 ../plugins/transcode/burn-vob.c:460
+#: ../plugins/transcode/burn-vob.c:472 ../plugins/transcode/burn-vob.c:484
+#: ../plugins/transcode/burn-vob.c:501 ../plugins/transcode/burn-vob.c:592
+#: ../plugins/transcode/burn-vob.c:609 ../plugins/transcode/burn-vob.c:621
+#: ../plugins/transcode/burn-vob.c:633 ../plugins/transcode/burn-vob.c:655
+#: ../plugins/transcode/burn-vob.c:672 ../plugins/transcode/burn-vob.c:718
+#: ../plugins/transcode/burn-vob.c:795 ../plugins/transcode/burn-vob.c:812
+#: ../plugins/transcode/burn-vob.c:827 ../plugins/transcode/burn-vob.c:839
+#: ../plugins/transcode/burn-vob.c:850 ../plugins/transcode/burn-vob.c:861
+#: ../plugins/transcode/burn-vob.c:1036 ../plugins/transcode/burn-vob.c:1100
+#: ../plugins/transcode/burn-vob.c:1117 ../plugins/transcode/burn-vob.c:1138
+#: ../plugins/transcode/burn-vob.c:1165
 #, c-format
 msgid "%s element could not be created"
 msgstr "Không thể tạo phần tử %s"
 
-#: ../libbrasero-utils/brasero-misc.c:74
-msgid "Display debug statements on stdout for Brasero utilities library"
-msgstr ""
-"Hiển thị trên đầu ra tiêu chuẩn các câu gỡ lỗi về thư viện ghi đĩa Brasero"
-
-#: ../libbrasero-utils/brasero-misc.c:91
-msgid "Brasero utilities library"
-msgstr "Thư viện tiện ích của Brasero"
-
-#: ../libbrasero-utils/brasero-misc.c:92
-msgid "Display options for Brasero-utils library"
-msgstr "Hiển thị các lựa chọn cho thư viện tiện ích Brasero"
-
 #: ../libbrasero-utils/brasero-tool-color-picker.c:166
 msgid "Pick a Color"
-msgstr "Chọn một màu"
+msgstr "Kén màu"
 
 #: ../nautilus/brasero-nautilus.desktop.in.in.h:1
 #: ../nautilus/nautilus-burn-extension.c:281
@@ -2663,11 +2624,11 @@ msgstr "Tạo đĩa CD và DVD"
 
 #: ../nautilus/nautilus-burn-bar.c:228 ../src/brasero-project-name.c:154
 msgid "Medium Icon"
-msgstr "Biểu tượng cỡ vừa"
+msgstr "Biểu tượng Phương tiện"
 
 #. Translators: this is an image, a picture, not a "Disc Image"
 #: ../nautilus/nautilus-burn-bar.c:242 ../src/brasero-file-chooser.c:375
-#: ../src/brasero-project.c:2250 ../src/brasero-project-name.c:168
+#: ../src/brasero-project.c:2246 ../src/brasero-project-name.c:168
 msgctxt "picture"
 msgid "Image files"
 msgstr "Tập tin ảnh đĩa"
@@ -2701,7 +2662,7 @@ msgstr "Ghi nội dung ra đĩa CD hoặc DVD"
 
 #: ../nautilus/nautilus-burn-extension.c:370
 msgid "Copy Disc"
-msgstr "Sao chép đĩa"
+msgstr "Chép đĩa"
 
 #: ../nautilus/nautilus-burn-extension.c:571
 #: ../nautilus/nautilus-burn-extension.c:722
@@ -2718,15 +2679,15 @@ msgstr "_Chép đĩa…"
 
 #: ../nautilus/nautilus-burn-extension.c:646
 msgid "Create a copy of this CD or DVD"
-msgstr "Tạo ra bản sao của đĩa CD hoặc DVD"
+msgstr "Tạo ra bản sao chép của đĩa CD hoặc DVD"
 
 #: ../nautilus/nautilus-burn-extension.c:659
 msgid "_Blank Disc…"
-msgstr "_Xóa trắng đĩa…"
+msgstr "_Xoá trắng đĩa…"
 
 #: ../nautilus/nautilus-burn-extension.c:660
 msgid "Blank this CD or DVD"
-msgstr "Xóa trắng đĩa CD hoặc DVD"
+msgstr "Xoá đĩa CD hoặc DVD"
 
 #: ../nautilus/nautilus-burn-extension.c:676
 msgid "_Check Disc…"
@@ -2746,7 +2707,7 @@ msgstr "Dữ liệu không đọc được (%s)"
 #: ../plugins/checksum/burn-checksum-files.c:196
 #: ../plugins/checksum/burn-checksum-files.c:219
 #: ../plugins/checksum/burn-checksum-image.c:174
-#: ../plugins/dvdcss/burn-dvdcss.c:213 ../plugins/dvdcss/burn-dvdcss.c:492
+#: ../plugins/dvdcss/burn-dvdcss.c:216 ../plugins/dvdcss/burn-dvdcss.c:495
 #: ../plugins/libburnia/burn-libisofs.c:160
 #: ../plugins/libburnia/burn-libisofs.c:274
 #, c-format
@@ -2788,11 +2749,11 @@ msgstr "Đang chuyển đổi tập tin mục lục (.toc)"
 
 #: ../plugins/cdrdao/burn-cdrdao.c:697
 msgid "Copies, burns and blanks CDs"
-msgstr "Chép, ghi và xóa trắng CD"
+msgstr "Chép, ghi và xoá trắng CD"
 
 #: ../plugins/cdrdao/burn-cdrdao.c:762
 msgid "Enable the \"--driver generic-mmc-raw\" flag (see cdrdao manual)"
-msgstr "Bật tùy chọn \"--driver generic-mmc-raw\" (xem thêm tài liệu cdrdao)"
+msgstr "Bật tuỳ chọn \"--driver generic-mmc-raw\" (xem thêm tài liệu cdrdao)"
 
 #: ../plugins/cdrkit/burn-cdrkit.h:38
 msgid "cdrkit burning suite"
@@ -2804,7 +2765,7 @@ msgstr "bộ ghi đĩa cdrkit"
 #: ../plugins/libburnia/burn-libisofs.c:518
 #, c-format
 msgid "Last session import failed"
-msgstr "Gặp lỗi khi nhập phiên làm việc cuối cùng"
+msgstr "Lỗi nhập buổi hợp cuối cùng"
 
 #: ../plugins/cdrkit/burn-genisoimage.c:125
 #: ../plugins/cdrkit/burn-genisoimage.c:132
@@ -2829,7 +2790,7 @@ msgstr "Một số tập tin có tên tập tin không hợp lệ"
 #: ../plugins/cdrtools/burn-mkisofs.c:186
 #: ../plugins/growisofs/burn-growisofs.c:229
 msgid "Unknown character encoding"
-msgstr "Không hiểu bảng mã ký tự"
+msgstr "Bộ ký tự không rõ"
 
 #: ../plugins/cdrkit/burn-genisoimage.c:192
 #: ../plugins/cdrtools/burn-mkisofs.c:192
@@ -2860,7 +2821,7 @@ msgstr "Chép đĩa bất kỳ sang tập tin ảnh đĩa"
 #: ../plugins/libburnia/burn-libburn.c:887
 #, c-format
 msgid "An error occurred while writing to disc"
-msgstr "Nảy sinh lỗi khi đang ghi ra đĩa"
+msgstr "Đã gặp lỗi khi đang ghi ra đĩa"
 
 #: ../plugins/cdrkit/burn-wodim.c:128 ../plugins/cdrtools/burn-cdrecord.c:128
 #, c-format
@@ -2880,22 +2841,22 @@ msgstr "Đang định dạng đĩa"
 
 #: ../plugins/cdrkit/burn-wodim.c:372 ../plugins/cdrtools/burn-cdrecord.c:358
 msgid "Writing cue sheet"
-msgstr "Đang ghi bảng cue"
+msgstr "Đang ghi bảng đề tựa"
 
 #: ../plugins/cdrkit/burn-wodim.c:394 ../plugins/cdrtools/burn-cdrecord.c:380
 #, c-format
 msgid "The disc needs to be reloaded before being recorded"
 msgstr "Đĩa cần phải được nạp lại trước khi thu"
 
-#: ../plugins/cdrkit/burn-wodim.c:1269
+#: ../plugins/cdrkit/burn-wodim.c:1270
 msgid "Burns, blanks and formats CDs and DVDs"
-msgstr "Ghi, xóa trắng và đinh dạng CD và DVD"
+msgstr "Ghi, xoá trắng và đinh dạng CD và DVD"
 
-#: ../plugins/cdrkit/burn-wodim.c:1413
+#: ../plugins/cdrkit/burn-wodim.c:1414
 msgid "Enable the \"-immed\" flag (see wodim manual)"
-msgstr "Bật chức năng tùy chọn \"-immed\" (xem tài liệu wodim)"
+msgstr "Bật chức năng tuỳ chọn \"-immed\" (xem tài liệu wodim)"
 
-#: ../plugins/cdrkit/burn-wodim.c:1416
+#: ../plugins/cdrkit/burn-wodim.c:1417
 msgid "Minimum drive buffer fill ratio (in %) (see wodim manual):"
 msgstr "Tỷ lệ tối thiểu điền vùng đệm ổ đĩa (theo %%) (xem sổ tay wodim):"
 
@@ -2913,16 +2874,16 @@ msgstr "Đang chuẩn bị chép đĩa âm thanh"
 msgid "Copy tracks from an audio CD with all associated information"
 msgstr "Chép các rãnh từ một đĩa âm thanh với tất cả các thông tin đi kèm."
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1203
+#: ../plugins/cdrtools/burn-cdrecord.c:1204
 #: ../plugins/libburnia/burn-libburn.c:975
 msgid "Burns, blanks and formats CDs, DVDs and BDs"
-msgstr "Ghi, xóa trắng và đinh dạng CD, DVD và BD"
+msgstr "Ghi, xoá trắng và đinh dạng CD, DVD và BD"
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1416
+#: ../plugins/cdrtools/burn-cdrecord.c:1417
 msgid "Enable the \"-immed\" flag (see cdrecord manual)"
-msgstr "Bật tùy chỉnh \"-immed\" (xem tài liệu cdrecord)"
+msgstr "Bật tuỳ chỉnh \"-immed\" (xem tài liệu cdrecord)"
 
-#: ../plugins/cdrtools/burn-cdrecord.c:1419
+#: ../plugins/cdrtools/burn-cdrecord.c:1420
 #, c-format
 msgid "Minimum drive buffer fill ratio (in %%) (see cdrecord manual):"
 msgstr ""
@@ -2941,7 +2902,7 @@ msgstr "Phiên bản mkisofs này không được hỗ trợ"
 #: ../plugins/checksum/burn-checksum-files.c:589
 #, c-format
 msgid "File \"%s\" could not be opened (%s)"
-msgstr "Không mở được tập tin “%s” (%s)"
+msgstr "Không mở được tập tin « %s » (%s)"
 
 #: ../plugins/checksum/burn-checksum-files.c:617
 msgid "Creating checksum for image files"
@@ -2960,7 +2921,7 @@ msgstr "Đang kiểm tra tính nguyên vẹn của tập tin"
 #: ../plugins/checksum/burn-checksum-files.c:1012
 #, c-format
 msgid "File \"%s\" could not be opened"
-msgstr "Không mở được bộ tập tin “%s”"
+msgstr "Không mở được bộ tập tin « %s »"
 
 #: ../plugins/checksum/burn-checksum-files.c:1085
 #: ../plugins/checksum/burn-checksum-files.c:1206
@@ -2983,7 +2944,7 @@ msgstr "Kiểm tra sự toàn vẹn của các tập tin trên một đĩa"
 #: ../plugins/checksum/burn-checksum-files.c:1504
 #: ../plugins/checksum/burn-checksum-image.c:856
 msgid "Hashing algorithm to be used:"
-msgstr "Thuật toán băm được dùng:"
+msgstr "Nên dùng thuật toán tạo chuỗi duy nhất:"
 
 #: ../plugins/checksum/burn-checksum-files.c:1507
 #: ../plugins/checksum/burn-checksum-image.c:859
@@ -3008,7 +2969,7 @@ msgstr "SHA256"
 #: ../plugins/libburnia/burn-libburn.c:679
 #, c-format
 msgid "\"%s\" could not be opened (%s)"
-msgstr "Không thể mở “%s” (%s)"
+msgstr "Không thể mở « %s » (%s)"
 
 #: ../plugins/checksum/burn-checksum-image.c:359
 #: ../plugins/checksum/burn-checksum-image.c:456
@@ -3038,7 +2999,7 @@ msgstr "Tạo ra các ảnh đĩa thích hợp cho đĩa SVCD hình"
 #. Translators: %s is the path to a drive. "regionset %s"
 #. * should be left as is just like "DVDCSS_METHOD=title
 #. * brasero --no-existing-session"
-#: ../plugins/dvdcss/burn-dvdcss.c:291
+#: ../plugins/dvdcss/burn-dvdcss.c:294
 #, c-format
 msgid ""
 "Error while retrieving a key used for encryption. You may solve such a "
@@ -3047,41 +3008,41 @@ msgid ""
 "command or run the \"DVDCSS_METHOD=title brasero --no-existing-session\" "
 "command"
 msgstr ""
-"Lỗi nhận khóa để mã hóa. Bạn có thể giải quyết vấn đề bằng một trong các "
+"Lỗi nhận khoá để mã hoá. Bạn có thể giải quyết vấn đề bằng một trong các "
 "cách sau: đặt mã vùng DVD phù hợp cho đầu phát CD/DVD bằng lệnh \"regionset "
 "%s\" hoặc chạy lệnh \"DVDCSS_METHOD=tựa brasero --no-existing-session\" từ "
 "cửa sổ dòng lệnh."
 
-#: ../plugins/dvdcss/burn-dvdcss.c:336
+#: ../plugins/dvdcss/burn-dvdcss.c:339
 msgid "Retrieving DVD keys"
-msgstr "Đang lấy các khóa đĩa DVD"
+msgstr "Đang lấy các khoá đĩa DVD"
 
-#: ../plugins/dvdcss/burn-dvdcss.c:371
+#: ../plugins/dvdcss/burn-dvdcss.c:374
 #, c-format
 msgid "Video DVD could not be opened"
 msgstr "Không thể mở đĩa DVD phim"
 
-#: ../plugins/dvdcss/burn-dvdcss.c:392 ../plugins/dvdcss/burn-dvdcss.c:457
-#: ../plugins/dvdcss/burn-dvdcss.c:480
+#: ../plugins/dvdcss/burn-dvdcss.c:395 ../plugins/dvdcss/burn-dvdcss.c:460
+#: ../plugins/dvdcss/burn-dvdcss.c:483
 #, c-format
 msgid "Error while reading video DVD (%s)"
 msgstr "Gặp lỗi khi đọc đĩa DVD phim (%s)"
 
-#: ../plugins/dvdcss/burn-dvdcss.c:399
+#: ../plugins/dvdcss/burn-dvdcss.c:402
 msgid "Copying video DVD"
 msgstr "Đang chép DVD hình"
 
-#: ../plugins/dvdcss/burn-dvdcss.c:692
+#: ../plugins/dvdcss/burn-dvdcss.c:695
 msgid "Copies CSS encrypted video DVDs to a disc image"
-msgstr "Chép DVD hình mã hóa bằng CSS ra ảnh đĩa"
+msgstr "Chép DVD hình mã hoá bằng CSS ra ảnh đĩa"
 
 #: ../plugins/growisofs/burn-dvd-rw-format.c:190
 msgid "Blanks and formats rewritable DVDs and BDs"
-msgstr "Xóa trắng và đinh dạng đĩa DVD và BD ghi lại được"
+msgstr "Xoá trắng và đinh dạng đĩa DVD và BD ghi lại được"
 
 #: ../plugins/growisofs/burn-growisofs.c:753
 msgid "Burns and blanks DVDs and BDs"
-msgstr "Ghi và xóa trắng đĩa DVD và BD"
+msgstr "Ghi và xoá trắng đĩa DVD và BD"
 
 #: ../plugins/growisofs/burn-growisofs.c:924
 msgid "Allow DAO use"
@@ -3132,13 +3093,13 @@ msgstr "libisofs không khởi động được."
 #: ../plugins/libburnia/burn-libisofs.c:485
 #, c-format
 msgid "Read options could not be created"
-msgstr "Không thể tạo tùy chọn đọc"
+msgstr "Không thể tạo tuỳ chọn đọc"
 
 #. Translators: %s is the path
 #: ../plugins/libburnia/burn-libisofs.c:684
 #, c-format
 msgid "No parent could be found in the tree for the path \"%s\""
-msgstr "Không tìm thấy mục cấp trên trong cây cho đường dẫn “%s”"
+msgstr "Không tìm thấy mục cấp trên trong cây cho đường dẫn « %s »"
 
 #: ../plugins/libburnia/burn-libisofs.c:744
 #: ../plugins/libburnia/burn-libisofs.c:811
@@ -3173,7 +3134,7 @@ msgstr "Đang sao chép cục bộ các tập tin"
 #. * displaying.
 #: ../plugins/local-track/burn-local-image.c:909
 msgid "File Downloader"
-msgstr "Bộ tải tập tin về"
+msgstr "Bộ tải về tập tin"
 
 #: ../plugins/local-track/burn-local-image.c:910
 msgid "Allows files not stored locally to be burned"
@@ -3189,7 +3150,7 @@ msgstr "Không thể lấy đường dẫn tập tin cục bộ"
 msgid ""
 "Allows files added to the \"CD/DVD Creator Folder\" in Nautilus to be burned"
 msgstr ""
-"Cho phép bổ sung tập tin vào \"Thư mục Tạo CD/DVD\" của Nautilus để ghi"
+"Cho phép bổ sung tập tin vào  \"Thư mục Tạo CD/DVD\" của Nautilus để ghi"
 
 #. Translators: This message is sent
 #. * when brasero could not link together
@@ -3200,63 +3161,63 @@ msgstr ""
 #. * too technical and should be removed?
 #: ../plugins/transcode/burn-normalize.c:199
 #: ../plugins/transcode/burn-normalize.c:260
-#: ../plugins/transcode/burn-transcode.c:316
-#: ../plugins/transcode/burn-transcode.c:354
-#: ../plugins/transcode/burn-transcode.c:523
-#: ../plugins/transcode/burn-transcode.c:626
-#: ../plugins/transcode/burn-transcode.c:657
-#: ../plugins/transcode/burn-transcode.c:679
-#: ../plugins/transcode/burn-vob.c:189 ../plugins/transcode/burn-vob.c:392
-#: ../plugins/transcode/burn-vob.c:545 ../plugins/transcode/burn-vob.c:675
-#: ../plugins/transcode/burn-vob.c:1039 ../plugins/transcode/burn-vob.c:1115
-#: ../plugins/transcode/burn-vob.c:1166
+#: ../plugins/transcode/burn-transcode.c:318
+#: ../plugins/transcode/burn-transcode.c:356
+#: ../plugins/transcode/burn-transcode.c:553
+#: ../plugins/transcode/burn-transcode.c:663
+#: ../plugins/transcode/burn-transcode.c:694
+#: ../plugins/transcode/burn-transcode.c:715
+#: ../plugins/transcode/burn-vob.c:189 ../plugins/transcode/burn-vob.c:395
+#: ../plugins/transcode/burn-vob.c:555 ../plugins/transcode/burn-vob.c:688
+#: ../plugins/transcode/burn-vob.c:1052 ../plugins/transcode/burn-vob.c:1128
+#: ../plugins/transcode/burn-vob.c:1179
 #, c-format
 msgid "Impossible to link plugin pads"
 msgstr "Không thể liên kết các vùng đệm phần bổ sung"
 
 #: ../plugins/transcode/burn-normalize.c:554
 msgid "Normalizing tracks"
-msgstr "Đang chuẩn hóa các rãnh"
-
-#: ../plugins/transcode/burn-normalize.c:643
-msgid "Normalization"
-msgstr "Chuẩn hóa"
+msgstr "Đang chuẩn hoá các rãnh"
 
 #: ../plugins/transcode/burn-normalize.c:644
+msgid "Normalization"
+msgstr "Chuẩn hoá"
+
+#: ../plugins/transcode/burn-normalize.c:645
 msgid "Sets consistent sound levels between tracks"
 msgstr "Ổn định mức độ âm thanh giữa các rãnh bài nhạc"
 
 #. Translators: %s is the string error from errno
-#: ../plugins/transcode/burn-transcode.c:1050
-#: ../plugins/transcode/burn-transcode.c:1238
+#: ../plugins/transcode/burn-transcode.c:1086
+#: ../plugins/transcode/burn-transcode.c:1274
 #, c-format
 msgid "Error while padding file (%s)"
 msgstr "Gặp lỗi khi đệm lót tập tin (%s)"
 
-#: ../plugins/transcode/burn-transcode.c:1313
+#: ../plugins/transcode/burn-transcode.c:1350
 msgid "Error while getting duration"
 msgstr "Gặp lỗi khi lấy khoảng thời gian"
 
-#: ../plugins/transcode/burn-transcode.c:1462
-#, c-format
-msgid "Analysing \"%s\""
-msgstr "Đang phân tích “%s”"
-
 #: ../plugins/transcode/burn-transcode.c:1499
 #, c-format
-msgid "Transcoding \"%s\""
-msgstr "Đang chuyển đổi bảng mã của “%s”"
+msgid "Analysing \"%s\""
+msgstr "Đang phân tích « %s »"
 
-#: ../plugins/transcode/burn-transcode.c:1736
+#: ../plugins/transcode/burn-transcode.c:1536
+#, c-format
+msgid "Transcoding \"%s\""
+msgstr "Đang chuyển đổi bảng mã của « %s »"
+
+#: ../plugins/transcode/burn-transcode.c:1773
 msgid "Converts any song file into a format suitable for audio CDs"
 msgstr ""
 "Chuyển bất kỳ tập tin bài hát sang một định dạng thích hợp cho đĩa CD nhạc"
 
-#: ../plugins/transcode/burn-vob.c:1251
+#: ../plugins/transcode/burn-vob.c:1264
 msgid "Converting video file to MPEG2"
 msgstr "Đang chuyển đổi tập tin phim sang MPEG2"
 
-#: ../plugins/transcode/burn-vob.c:1353
+#: ../plugins/transcode/burn-vob.c:1367
 msgid "Converts any video file into a format suitable for video DVDs"
 msgstr ""
 "Chuyển bất kỳ tập tin bài hát sang một định dạng thích hợp cho đĩa DVD hình"
@@ -3265,92 +3226,92 @@ msgstr ""
 msgid "Creates disc images suitable for SVCDs"
 msgstr "Tạo ra các ảnh đĩa thích hợp cho đĩa SVCD"
 
-#: ../src/brasero-app.c:123
+#: ../src/brasero-app.c:124
 msgid "_Project"
 msgstr "_Dự án"
 
-#: ../src/brasero-app.c:124
+#: ../src/brasero-app.c:125
 msgid "_View"
 msgstr "_Xem"
 
-#: ../src/brasero-app.c:125
+#: ../src/brasero-app.c:126
 msgid "_Edit"
 msgstr "_Sửa"
 
-#: ../src/brasero-app.c:126
+#: ../src/brasero-app.c:127
 msgid "_Tools"
 msgstr "_Công cụ"
 
-#: ../src/brasero-app.c:128
+#: ../src/brasero-app.c:129
 msgid "_Help"
 msgstr "Trợ _giúp"
 
-#: ../src/brasero-app.c:130
+#: ../src/brasero-app.c:131
 msgid "P_lugins"
 msgstr "Phần _bổ sung"
 
-#: ../src/brasero-app.c:131
+#: ../src/brasero-app.c:132
 msgid "Choose plugins for Brasero"
-msgstr "Chọn phần bổ sung cho Brasero"
+msgstr "Chọn plugins cho Brasero"
 
-#: ../src/brasero-app.c:133
+#: ../src/brasero-app.c:134
 msgid "E_ject"
 msgstr "Đẩy r_a"
 
-#: ../src/brasero-app.c:134
+#: ../src/brasero-app.c:135
 msgid "Eject a disc"
 msgstr "Đẩy đĩa ra"
 
-#: ../src/brasero-app.c:136
-msgid "_Blank…"
-msgstr "_Xóa trắng…"
-
 #: ../src/brasero-app.c:137
-msgid "Blank a disc"
-msgstr "Xóa một đĩa"
+msgid "_Blank…"
+msgstr "_Xoá trắng…"
 
-#: ../src/brasero-app.c:139
+#: ../src/brasero-app.c:138
+msgid "Blank a disc"
+msgstr "Xoá một đĩa"
+
+#: ../src/brasero-app.c:140
 msgid "_Check Integrity…"
 msgstr "_Kiểm tra toàn vẹn…"
 
-#: ../src/brasero-app.c:140
+#: ../src/brasero-app.c:141
 msgid "Check data integrity of disc"
 msgstr "Kiểm tra tính nguyên vẹn dữ liệu của đĩa"
 
-#: ../src/brasero-app.c:143
+#: ../src/brasero-app.c:144
 msgid "Quit Brasero"
 msgstr "Thoát Brasero"
 
-#: ../src/brasero-app.c:145
+#: ../src/brasero-app.c:146
 msgid "_Contents"
 msgstr "Mụ_c lục"
 
-#: ../src/brasero-app.c:145
+#: ../src/brasero-app.c:146
 msgid "Display help"
 msgstr "Hiển thị trợ giúp"
 
-#: ../src/brasero-app.c:148
+#: ../src/brasero-app.c:149
 msgid "About"
 msgstr "Giới thiệu"
 
-#: ../src/brasero-app.c:420 ../src/brasero-app.c:2069
+#: ../src/brasero-app.c:421 ../src/brasero-app.c:2065
 msgid "Disc Burner"
 msgstr "Công cụ chép ra đĩa"
 
-#: ../src/brasero-app.c:789 ../src/brasero-app.c:822 ../src/brasero-app.c:1451
+#: ../src/brasero-app.c:787 ../src/brasero-app.c:820 ../src/brasero-app.c:1449
 msgid "Error while loading the project"
-msgstr "Gặp lỗi khi đang tải dự án"
+msgstr "Gặp loxi khi đang nạp dự án"
 
-#: ../src/brasero-app.c:831 ../src/brasero-app.c:860 ../src/brasero-app.c:920
-#: ../src/brasero-project.c:1276
+#: ../src/brasero-app.c:829 ../src/brasero-app.c:858 ../src/brasero-app.c:918
+#: ../src/brasero-project.c:1274
 msgid "Please add files to the project."
 msgstr "Hãy thêm tập tin vào dự án."
 
-#: ../src/brasero-app.c:832 ../src/brasero-app.c:861 ../src/brasero-app.c:921
+#: ../src/brasero-app.c:830 ../src/brasero-app.c:859 ../src/brasero-app.c:919
 msgid "The project is empty"
-msgstr "Dự án vẫn trống rỗng."
+msgstr "Dự án vẫn trống."
 
-#: ../src/brasero-app.c:1176
+#: ../src/brasero-app.c:1174
 msgid ""
 "Brasero is free software; you can redistribute it and/or modify it under the "
 "terms of the GNU General Public License as published by the Free Software "
@@ -3362,7 +3323,7 @@ msgstr ""
 "Mềm Tự Do; hoặc phiên bản 2 của Giấy Phép này, hoặc (tùy chọn) bất kỳ phiên "
 "bản sau nào."
 
-#: ../src/brasero-app.c:1181
+#: ../src/brasero-app.c:1179
 msgid ""
 "Brasero is distributed in the hope that it will be useful, but WITHOUT ANY "
 "WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS "
@@ -3373,7 +3334,7 @@ msgstr ""
 "CẢ, THẬM CHÍ KHÔNG CÓ BẢO ĐẢM ĐƯỢC NGỤ Ý KHẢ NĂNG BÁN HAY KHẢ NĂNG LÀM ĐƯỢC "
 "VIỆC DỨT KHOÁT. Xem Giấy Phép Công Cộng GNU để biết thêm chi tiết."
 
-#: ../src/brasero-app.c:1186
+#: ../src/brasero-app.c:1184
 msgid ""
 "You should have received a copy of the GNU General Public License along with "
 "Brasero; if not, write to the Free Software Foundation, Inc., 51 Franklin "
@@ -3385,11 +3346,11 @@ msgstr ""
 "51 Franklin Street, Fifth Floor,\n"
 "Boston, MA  02110-1301, USA (Mỹ)."
 
-#: ../src/brasero-app.c:1198
+#: ../src/brasero-app.c:1196
 msgid "A simple to use CD/DVD burning application for GNOME"
 msgstr "Một ứng dụng chép ra đĩa CD/DVD dễ dùng cho GNOME"
 
-#: ../src/brasero-app.c:1215
+#: ../src/brasero-app.c:1213
 msgid "Brasero Homepage"
 msgstr "Trang chủ Brasero"
 
@@ -3401,20 +3362,20 @@ msgstr "Trang chủ Brasero"
 #. * this translation; in that case, please write each of them on a separate
 #. * line seperated by newlines (\n).
 #.
-#: ../src/brasero-app.c:1227
+#: ../src/brasero-app.c:1225
 msgid "translator-credits"
-msgstr "Nhóm dịch GNOME <gnome-vi-list@gnome.org>"
+msgstr "Nhóm Việt hóa GNOME <gnomevi-list@lists.sourceforge.net>"
 
-#: ../src/brasero-app.c:1449
+#: ../src/brasero-app.c:1447
 #, c-format
 msgid "The project \"%s\" does not exist"
-msgstr "Dự án “%s” không tồn tại"
+msgstr "Dự án « %s » không tồn tại"
 
-#: ../src/brasero-app.c:1733 ../src/brasero-app.c:1739
+#: ../src/brasero-app.c:1731 ../src/brasero-app.c:1737
 msgid "_Recent Projects"
-msgstr "Dự án _mới dùng"
+msgstr "Dự án _vừa mở"
 
-#: ../src/brasero-app.c:1734
+#: ../src/brasero-app.c:1732
 msgid "Display the projects recently opened"
 msgstr "Hiển thị các dự án vừa mở"
 
@@ -3436,7 +3397,7 @@ msgid "Edit the track information (start, end, author, etc.)"
 msgstr "Sửa thông tin của rãnh (bắt đầu, kết thúc, tác giả, v.v.)"
 
 #: ../src/brasero-audio-disc.c:160 ../src/brasero-data-disc.c:127
-#: ../src/brasero-project.c:202
+#: ../src/brasero-project.c:200
 msgid "Remove the selected files from the project"
 msgstr "Gỡ bỏ các tập tin đã chọn khỏi dự án"
 
@@ -3472,13 +3433,13 @@ msgstr "Tạm dừng"
 
 #: ../src/brasero-audio-disc.c:349
 msgid "Split"
-msgstr "Chia nhỏ"
+msgstr "Xẻ"
 
 #: ../src/brasero-audio-disc.c:418
 msgid "Track"
 msgstr "Rãnh"
 
-#: ../src/brasero-audio-disc.c:458 ../src/brasero-video-disc.c:1209
+#: ../src/brasero-audio-disc.c:458 ../src/brasero-video-disc.c:1206
 msgid "Title"
 msgstr "Tên bài"
 
@@ -3487,7 +3448,7 @@ msgid "Artist"
 msgstr "Nghệ sĩ"
 
 #: ../src/brasero-audio-disc.c:488 ../src/brasero-playlist.c:772
-#: ../src/brasero-split-dialog.c:1225
+#: ../src/brasero-split-dialog.c:1219
 msgid "Length"
 msgstr "Dài"
 
@@ -3501,12 +3462,12 @@ msgstr "Rãnh này ngắn hơn 6 giây"
 
 #: ../src/brasero-audio-disc.c:646
 msgid "Make sure the appropriate codec is installed"
-msgstr "Kiểm tra xem bộ giải mã thích hợp đã được cài đặt hay chưa"
+msgstr "Kiểm tra xem codec thích hợp đã được cài đặt"
 
 #: ../src/brasero-audio-disc.c:662
 #, c-format
 msgid "Do you want to add \"%s\", which is a video file?"
-msgstr "Bạn có muốn thêm \"%s\", là một tập tin phim, không?"
+msgstr "Bạn có muốn bổ sung \"%s\", là một tập tin phim, không?"
 
 #: ../src/brasero-audio-disc.c:671
 msgid ""
@@ -3516,7 +3477,7 @@ msgstr "Tập tin này là một phim thì chỉ phần âm thanh có thể đư
 
 #: ../src/brasero-audio-disc.c:674
 msgid "_Discard File"
-msgstr "_Hủy tập tin"
+msgstr "_Huỷ tập tin"
 
 #: ../src/brasero-audio-disc.c:677
 msgid "_Add File"
@@ -3524,7 +3485,7 @@ msgstr "Thê_m tập tin"
 
 #: ../src/brasero-audio-disc.c:748
 msgid "Do you want to search for audio files inside the directory?"
-msgstr "Muốn quét thư mục này tìm tập tin âm thanh?"
+msgstr "Muốn quét thư mục này tìm tập tin âm thanh ?"
 
 #: ../src/brasero-audio-disc.c:758
 msgid "Search _Directory"
@@ -3533,7 +3494,7 @@ msgstr "Tìm tr_ong thư mục"
 #: ../src/brasero-audio-disc.c:812 ../src/brasero-video-disc.c:395
 #, c-format
 msgid "\"%s\" could not be opened."
-msgstr "“%s” không mở được."
+msgstr "« %s » không mở được."
 
 #: ../src/brasero-audio-disc.c:857
 msgid "Do you want to create an audio CD with DTS tracks?"
@@ -3549,7 +3510,7 @@ msgstr ""
 "Một số bài hát đã chọn có thể ghi theo dạng rãnh DTS.\n"
 "Loại CD nhạc này có chất lượng âm thanh cao hơn nhưng đòi hỏi phải dùng các "
 "loại máy chơi kỹ thuật số đặc biệt.\n"
-"Chú ý: Nếu bạn đồng ý, quá trình chuẩn hóa sẽ không áp dụng cho những rãnh "
+"Chú ý: Nếu bạn đồng ý, quá trình chuẩn hoá sẽ không áp dụng cho những rãnh "
 "đó."
 
 #: ../src/brasero-audio-disc.c:867
@@ -3574,11 +3535,11 @@ msgstr "Chỉ hãy chọn mọi bài hát riêng lẻ."
 
 #: ../src/brasero-audio-disc.c:1291
 msgid "Impossible to split more than one song at a time"
-msgstr "Chỉ có thể chia nhỏ mỗi lần một bài hát"
+msgstr "Chỉ có thể xẻ mỗi lần một bài hát"
 
 #: ../src/brasero-cli.c:70
 msgid "Open the specified project"
-msgstr "Mở dự án đã cho"
+msgstr "Mở dự án chỉ định"
 
 #: ../src/brasero-cli.c:71
 msgid "PROJECT"
@@ -3677,7 +3638,7 @@ msgstr ""
 
 #: ../src/brasero-cli.c:139
 msgid "PATH"
-msgstr "ĐƯỜNG_DẪN"
+msgstr "ĐƯỜNG DẪN"
 
 #. Translators: the xid is a number identifying each window in the X11
 #. * world (not Windows, MacOS X). The following sentence says that
@@ -3696,15 +3657,15 @@ msgstr "\"%s\" không ghi được."
 
 #: ../src/brasero-cli.c:206 ../src/brasero-cli.c:220
 msgid "Wrong command line option."
-msgstr "Tùy chọn sai trong dòng lệnh."
+msgstr "Tuỳ chọn sai trong dòng lệnh."
 
 #: ../src/brasero-cli.c:297
 msgid "Incompatible command line options used."
-msgstr "Dùng các tùy chọn dòng lệnh không tương thích với nhau."
+msgstr "Dùng các tuỳ chọn dòng lệnh không tương thích với nhau."
 
 #: ../src/brasero-cli.c:298
 msgid "Only one option can be given at a time"
-msgstr "Chỉ có thể đưa ra mỗi lần một tùy chọn"
+msgstr "Chỉ có thể đưa ra mỗi lần một tuỳ chọn"
 
 #: ../src/brasero-data-disc.c:125
 msgid "R_ename…"
@@ -3724,23 +3685,19 @@ msgstr "Tạo một thư mục trống mới"
 
 #: ../src/brasero-data-disc.c:213
 msgid "The session could not be imported."
-msgstr "Không nhập được phiên làm việc."
+msgstr "Buổi hợp không nhập được."
 
 #: ../src/brasero-data-disc.c:559
 msgid "The contents of the project changed since it was saved."
 msgstr "Nội dung của dự án bị sửa đổi kể từ lần lưu cuối cùng."
 
-#: ../src/brasero-data-disc.c:561
-msgid "Discard the current modified project ?"
-msgstr "Hủy dự án hiện thời đã bị sửa đổi chứ?"
+#: ../src/brasero-data-disc.c:561 ../src/brasero-data-disc.c:569
+msgid "Discard the current modified project"
+msgstr "Hủy dự án hiện thời bị sửa đổi"
 
 #: ../src/brasero-data-disc.c:567
 msgid "_Discard"
 msgstr "_Hủy"
-
-#: ../src/brasero-data-disc.c:569
-msgid "Discard the current modified project"
-msgstr "Hủy dự án hiện thời bị sửa đổi"
 
 #: ../src/brasero-data-disc.c:574
 msgid "Continue with the current modified project"
@@ -3758,7 +3715,7 @@ msgstr ""
 
 #: ../src/brasero-data-disc.c:625
 msgid "Burn as _Data"
-msgstr "Ghi dạng _Số liệu"
+msgstr "Ghi như _Số liệu"
 
 #: ../src/brasero-data-disc.c:627
 msgid "Burn as _Image"
@@ -3768,11 +3725,11 @@ msgstr "Ghi dạng _tập tin ảnh đĩa"
 #: ../src/brasero-data-disc.c:709
 #, c-format
 msgid "\"%s\" cannot be added to the selection."
-msgstr "Không thể thêm “%s” vào vùng chọn."
+msgstr "Không thể thêm « %s » vào vùng chọn."
 
 #: ../src/brasero-data-disc.c:694
 msgid "It is a recursive symlink"
-msgstr "Nó là một liên kết mềm đệ quy."
+msgstr "Nó là một liên kết tượng trưng đệ quy."
 
 #: ../src/brasero-data-disc.c:712
 msgid "It does not exist at the specified location"
@@ -3850,12 +3807,12 @@ msgstr "Bạn có muốn nhập phiên làm việc từ \"%s\" không?"
 msgid ""
 "That way, old files from previous sessions will be usable after burning."
 msgstr ""
-"Bằng cách đó, tập tin cũ từ các phiên làm việc chạy trước sẽ vẫn còn có khả "
-"năng sử dụng sau khi chép ra."
+"Bằng cách đó, tập tin cũ từ các buổi hợp chạy trước sẽ vẫn còn có khả năng "
+"sử dụng sau khi chép ra."
 
 #: ../src/brasero-data-disc.c:1109
 msgid "I_mport Session"
-msgstr "_Nhập phiên làm việc"
+msgstr "_Nhập buổi hợp"
 
 #: ../src/brasero-data-disc.c:1111
 msgid "Click here to import its contents"
@@ -3863,33 +3820,33 @@ msgstr "Nhấn vào đây để nhập nội dung của nó"
 
 #: ../src/brasero-data-disc.c:1490
 msgid "Please wait while the project is loading."
-msgstr "Hãy đời trong khi tải dự án."
+msgstr "Hãy đời trong khi nạp dự án."
 
 #: ../src/brasero-data-disc.c:1500
 msgid "_Cancel Loading"
-msgstr "_Thôi tải"
+msgstr "_Thôi nạp"
 
 #: ../src/brasero-data-disc.c:1502
 msgid "Cancel loading current project"
-msgstr "Thôi tiến trình tải dự án hiện thời"
+msgstr "Thôi tiến trình nạp dự án hiện thời"
 
 #: ../src/brasero-data-disc.c:1903
 msgid "File Renaming"
-msgstr "Đổi tên tập tin"
+msgstr "Thay tên Tập tin"
 
 #: ../src/brasero-data-disc.c:1907
 msgid "_Rename"
-msgstr "Đổ_i tên"
+msgstr "Tha_y tên"
 
 #: ../src/brasero-data-disc.c:1913
 msgid "Renaming mode"
-msgstr "Chế độ đổi tên tập tin"
+msgstr "Chế độ thay đổi tên tập tin"
 
 #: ../src/brasero-data-disc.c:2336 ../src/brasero-file-filtered.c:256
 msgid "Files"
 msgstr "Tập tin"
 
-#: ../src/brasero-data-disc.c:2350 ../src/brasero-video-disc.c:1227
+#: ../src/brasero-data-disc.c:2350 ../src/brasero-video-disc.c:1224
 msgid "Size"
 msgstr "Kích cỡ"
 
@@ -3899,26 +3856,26 @@ msgstr "Mô tả"
 
 #: ../src/brasero-data-disc.c:2380
 msgid "Space"
-msgstr "Dung lượng"
+msgstr "Sức chứa"
 
-#: ../src/brasero-eject-dialog.c:97
+#: ../src/brasero-eject-dialog.c:95
 #, c-format
 msgid "The disc in \"%s\" cannot be ejected"
-msgstr "Không thể đẩy đĩa ra “%s”"
+msgstr "Không thể đẩy đĩa ra « %s »"
 
-#: ../src/brasero-eject-dialog.c:193
+#: ../src/brasero-eject-dialog.c:190
 msgid "_Eject"
 msgstr "Đẩy _ra"
 
-#: ../src/brasero-eject-dialog.c:208
+#: ../src/brasero-eject-dialog.c:205
 msgid "Eject Disc"
 msgstr "Đẩy đĩa ra"
 
-#: ../src/brasero-file-chooser.c:357 ../src/brasero-project.c:2230
+#: ../src/brasero-file-chooser.c:357 ../src/brasero-project.c:2226
 msgid "Audio files"
 msgstr "Tập tin âm thanh"
 
-#: ../src/brasero-file-chooser.c:365 ../src/brasero-project.c:2239
+#: ../src/brasero-file-chooser.c:365 ../src/brasero-project.c:2235
 msgid "Movies"
 msgstr "Phim"
 
@@ -3940,12 +3897,12 @@ msgstr[0] "Hiện danh sách tập tin bị _lọc (%d tập tin)"
 
 #: ../src/brasero-file-filtered.c:135
 msgid "Filter Options"
-msgstr "Tùy chọn lọc"
+msgstr "Tuỳ chọn Lọc"
 
 #: ../src/brasero-file-filtered.c:218
 msgid ""
 "Select the files you want to restore and click on the \"Restore\" button"
-msgstr "Chọn những tập tin cần phục hồi, sau đó bấm nút “Phục hồi”"
+msgstr "Chọn những tập tin cần phục hồi, sau đó bấm nút « Phục hồi »"
 
 #: ../src/brasero-file-filtered.c:265
 msgid "Type"
@@ -3961,7 +3918,7 @@ msgstr "Phục hồi các tập tin đã chọn"
 
 #: ../src/brasero-file-filtered.c:303
 msgid "_Options…"
-msgstr "_Tùy chọn…"
+msgstr "_Tuỳ chọn…"
 
 #: ../src/brasero-file-filtered.c:311
 msgid "Set the options for file filtering"
@@ -3984,42 +3941,42 @@ msgstr "Sàng lọc liên kết mềm bị _vỡ"
 
 #: ../src/brasero-filter-option.c:85
 msgid "Filtering options"
-msgstr "Tùy chọn lọc"
+msgstr "Tùy chọn Lọc"
 
-#: ../src/brasero-layout.c:104
+#: ../src/brasero-layout.c:100
 msgid "P_review"
 msgstr "_Xem thử"
 
 #. Translators: this is an image, a picture, not a "Disc Image"
-#: ../src/brasero-layout.c:106
+#: ../src/brasero-layout.c:102
 msgid "Display video, audio and image preview"
 msgstr "Hiển thị ô xem thử phim, âm thanh và ảnh"
 
-#: ../src/brasero-layout.c:110
+#: ../src/brasero-layout.c:106
 msgid "_Show Side Panel"
 msgstr "_Hiện khung lề"
 
-#: ../src/brasero-layout.c:111
+#: ../src/brasero-layout.c:107
 msgid "Show a side pane along the project"
 msgstr "Hiển thị một khung lề bên cạnh dự án"
 
-#: ../src/brasero-layout.c:125
+#: ../src/brasero-layout.c:121
 msgid "_Horizontal Layout"
-msgstr "Bố cục _nằm ngang"
+msgstr "Bố trí _nằm ngang"
 
-#: ../src/brasero-layout.c:126
+#: ../src/brasero-layout.c:122
 msgid "Set a horizontal layout"
-msgstr "Trình bày theo bố cục nằm ngang"
+msgstr "Thiết lập sơ đồ bố trí nằm ngang"
 
-#: ../src/brasero-layout.c:128
+#: ../src/brasero-layout.c:124
 msgid "_Vertical Layout"
-msgstr "Bố cục nằm _dọc"
+msgstr "Bố trí nằm _dọc"
 
-#: ../src/brasero-layout.c:129
+#: ../src/brasero-layout.c:125
 msgid "Set a vertical layout"
-msgstr "Trình bày theo bố cục dọc"
+msgstr "Đặt một bố trí theo chiều dọc"
 
-#: ../src/brasero-layout.c:1193
+#: ../src/brasero-layout.c:1183
 msgid "Click to close the side pane"
 msgstr "Nhấn vào để đóng khung lề"
 
@@ -4030,7 +3987,7 @@ msgstr "Nhấn vào để đóng khung lề"
 #: ../src/brasero-multi-song-props.c:270 ../src/brasero-multi-song-props.c:291
 #: ../src/brasero-rename.c:90 ../src/brasero-rename.c:321
 msgid "<Keep current values>"
-msgstr "<Giữ giá trị hiện tại>"
+msgstr "<Giữ giá trị hiện thời>"
 
 #: ../src/brasero-multi-song-props.c:126 ../src/brasero-multi-song-props.c:143
 msgid "Remove silences"
@@ -4087,7 +4044,7 @@ msgstr "Không xem thử"
 #: ../src/brasero-playlist.c:390
 #, c-format
 msgid "Error parsing playlist \"%s\"."
-msgstr "Gặp lỗi khi phân tích cú pháp của danh mục nhạc “%s”."
+msgstr "Gặp lỗi khi phân tích cú pháp của danh mục nhạc « %s »."
 
 #. Translators: %d is the number of songs
 #: ../src/brasero-playlist.c:499
@@ -4125,25 +4082,25 @@ msgstr "Đã bật"
 msgid "Copyright %s"
 msgstr "Tác quyền %s"
 
-#: ../src/brasero-plugin-manager-ui.c:575
-#: ../src/brasero-plugin-manager-ui.c:963
+#: ../src/brasero-plugin-manager-ui.c:579
+#: ../src/brasero-plugin-manager-ui.c:967
 msgid "_About"
 msgstr "G_iới thiệu"
 
-#: ../src/brasero-plugin-manager-ui.c:583
-#: ../src/brasero-plugin-manager-ui.c:969
+#: ../src/brasero-plugin-manager-ui.c:587
+#: ../src/brasero-plugin-manager-ui.c:973
 msgid "C_onfigure"
 msgstr "Cấ_u hình"
 
-#: ../src/brasero-plugin-manager-ui.c:593
+#: ../src/brasero-plugin-manager-ui.c:597
 msgid "A_ctivate"
 msgstr "Kí_ch hoạt"
 
-#: ../src/brasero-plugin-manager-ui.c:605
+#: ../src/brasero-plugin-manager-ui.c:609
 msgid "Ac_tivate All"
 msgstr "Kích hoạ_t tất cả"
 
-#: ../src/brasero-plugin-manager-ui.c:610
+#: ../src/brasero-plugin-manager-ui.c:614
 msgid "_Deactivate All"
 msgstr "Tắt tất _cả"
 
@@ -4157,48 +4114,48 @@ msgstr "Tùy chọn về phần bổ sung %s"
 msgid "Brasero Plugins"
 msgstr "Phần bổ sung Brasero"
 
-#: ../src/brasero-project.c:196
+#: ../src/brasero-project.c:194
 msgid "Save current project"
 msgstr "Lưu dự án hiện thời"
 
-#: ../src/brasero-project.c:197
+#: ../src/brasero-project.c:195
 msgid "Save _As…"
 msgstr "Lưu _dạng…"
 
-#: ../src/brasero-project.c:198
+#: ../src/brasero-project.c:196
 msgid "Save current project to a different location"
 msgstr "Lưu dự án hiện thời vào một vị trí khác"
 
-#: ../src/brasero-project.c:199
+#: ../src/brasero-project.c:197
 msgid "_Add Files"
 msgstr "Thê_m tập tin"
 
-#: ../src/brasero-project.c:200
+#: ../src/brasero-project.c:198
 msgid "Add files to the project"
 msgstr "Thêm tập tin vào dự án"
 
-#: ../src/brasero-project.c:201
+#: ../src/brasero-project.c:199
 msgid "_Remove Files"
 msgstr "_Bỏ tập tin"
 
 #. Translators: "empty" is a verb here
-#: ../src/brasero-project.c:204 ../src/brasero-project.c:2312
+#: ../src/brasero-project.c:202 ../src/brasero-project.c:2308
 msgid "E_mpty Project"
 msgstr "Đổ dự án"
 
-#: ../src/brasero-project.c:205
+#: ../src/brasero-project.c:203
 msgid "Remove all files from the project"
 msgstr "Gỡ bỏ khỏi dự án tất cả các tập tin"
 
-#: ../src/brasero-project.c:206 ../src/brasero-project.c:1086
+#: ../src/brasero-project.c:204 ../src/brasero-project.c:1084
 msgid "_Burn…"
 msgstr "_Ghi…"
 
-#: ../src/brasero-project.c:207
+#: ../src/brasero-project.c:205
 msgid "Burn the disc"
 msgstr "Chép ra đĩa"
 
-#: ../src/brasero-project.c:695
+#: ../src/brasero-project.c:693
 msgid ""
 "To add files to this project click the \"Add\" button or drag files to this "
 "area"
@@ -4206,7 +4163,7 @@ msgstr ""
 "Để bổ sung tập tin cho dự án này hãy nhấn vào nút \"Bổ sung\" hoặc kéo thả "
 "những tập tin vào vùng này."
 
-#: ../src/brasero-project.c:697
+#: ../src/brasero-project.c:695
 msgid ""
 "To remove files select them then click on the \"Remove\" button or press "
 "\"Delete\" key"
@@ -4214,16 +4171,16 @@ msgstr ""
 "Để loại bỏ tập tin, hãy chọn chúng trước khi nhấn vào nút \"Loại bỏ\" hoặc "
 "nhấn vào phím \"Delete\""
 
-#: ../src/brasero-project.c:804
+#: ../src/brasero-project.c:802
 #, c-format
 msgid "Estimated project size: %s"
 msgstr "Ước lượng kích thước dự án: %s"
 
-#: ../src/brasero-project.c:950 ../src/brasero-project.c:966
+#: ../src/brasero-project.c:948 ../src/brasero-project.c:964
 msgid "The project is too large for the disc even with the overburn option."
 msgstr "Dự án quá lớn để ghi ra đĩa, ngay cả với chức năng ghi quá tải."
 
-#: ../src/brasero-project.c:977
+#: ../src/brasero-project.c:975
 msgid ""
 "The project is too large for the disc and you must remove files from it.\n"
 "You may want to use this option if you're using 90 or 100 min CD-R(W) which "
@@ -4235,139 +4192,139 @@ msgstr ""
 "lượng khai báo 90 hoặc 100 phút mà không được nhận dạng đúng như thế.\n"
 "Chú ý: Dùng chức năng này có thể gây thất bại."
 
-#: ../src/brasero-project.c:1098
+#: ../src/brasero-project.c:1096
 msgid "Start to burn the contents of the selection"
 msgstr "Bắt đầu chép ra nội dung của vùng chọn"
 
-#: ../src/brasero-project.c:1267
+#: ../src/brasero-project.c:1265
 msgid "Please add songs to the project."
 msgstr "Hãy thêm bài hát vào dự án."
 
-#: ../src/brasero-project.c:1904 ../src/brasero-project.c:1939
+#: ../src/brasero-project.c:1902 ../src/brasero-project.c:1937
 msgid "Do you really want to create a new project and discard the current one?"
 msgstr "Bạn thực sự muốn tạo một dự án mới và hủy dự án hiện thời không?"
 
-#: ../src/brasero-project.c:1909
+#: ../src/brasero-project.c:1907
 msgid "If you choose to create a new empty project, all changes will be lost."
 msgstr "Nếu bạn chọn khởi động một dự án mới, tất cả những thay đổi sẽ bị mất."
 
-#: ../src/brasero-project.c:1912
+#: ../src/brasero-project.c:1910
 msgid "_Discard Changes"
 msgstr "_Hủy thay đổi"
 
-#: ../src/brasero-project.c:1920
+#: ../src/brasero-project.c:1918
 msgid "Do you want to discard the file selection or add it to the new project?"
 msgstr "Bạn muốn bỏ các tập tin đã chọn hay bổ sung chúng nó vào dự án mới?"
 
-#: ../src/brasero-project.c:1925 ../src/brasero-project.c:1944
+#: ../src/brasero-project.c:1923 ../src/brasero-project.c:1942
 msgid ""
 "If you choose to create a new empty project, the file selection will be "
 "discarded."
 msgstr ""
 "Nếu bạn chọn tạo ra một dự án mới rỗng, những tập tin đã chọn sẽ bị loại bỏ."
 
-#: ../src/brasero-project.c:1927
+#: ../src/brasero-project.c:1925
 msgid "_Discard File Selection"
 msgstr "_Loại bỏ các tập tin đã chọn"
 
-#: ../src/brasero-project.c:1931
+#: ../src/brasero-project.c:1929
 msgid "_Keep File Selection"
 msgstr "_Giữ các tập tin đã chọn"
 
-#: ../src/brasero-project.c:1946
+#: ../src/brasero-project.c:1944
 msgid "_Discard Project"
 msgstr "_Hủy dự án"
 
-#: ../src/brasero-project.c:2188
+#: ../src/brasero-project.c:2184
 msgid "Select Files"
 msgstr "Chọn tập tin"
 
-#: ../src/brasero-project.c:2301
+#: ../src/brasero-project.c:2297
 msgid "Do you really want to empty the current project?"
 msgstr "Bạn thực sự muốn đổ dự án hiện thời không?"
 
-#: ../src/brasero-project.c:2306
+#: ../src/brasero-project.c:2302
 msgid ""
 "Emptying a project will remove all files already added. All the work will be "
 "lost. Note that files will not be deleted from their own location, just no "
 "longer listed here."
 msgstr ""
 "Đổ dự án thì gỡ bỏ mọi tập tin đều đã được thêm vào. Tất cả các sự cố gắng "
-"sẽ bị mất hoàn toàn. Ghi chú rằng tập tin không phải được xóa khỏi vị trí "
+"sẽ bị mất hoàn toàn. Ghi chú rằng tập tin không phải được xoá khỏi vị trí "
 "gốc, chỉ không còn được liệt kê lại ở đây."
 
-#: ../src/brasero-project.c:2368
+#: ../src/brasero-project.c:2364
 msgid "_Save"
 msgstr "_Lưu"
 
-#: ../src/brasero-project.c:2379
+#: ../src/brasero-project.c:2375
 msgid "_Add"
 msgstr "Thê_m"
 
-#: ../src/brasero-project.c:2384 ../src/brasero-split-dialog.c:1255
+#: ../src/brasero-project.c:2380 ../src/brasero-split-dialog.c:1249
 msgid "_Remove"
 msgstr "_Bỏ"
 
 #. Translators: %s is the name of the project
-#: ../src/brasero-project.c:2448
+#: ../src/brasero-project.c:2444
 #, c-format
 msgid "Brasero — %s (Data Disc)"
 msgstr "Brasero — %s (Đĩa Số liệu)"
 
 #. Translators: %s is the name of the project
-#: ../src/brasero-project.c:2451
+#: ../src/brasero-project.c:2447
 #, c-format
 msgid "Brasero — %s (Audio Disc)"
 msgstr "Brasero — %s (Đĩa Nhạc)"
 
 #. Translators: %s is the name of the project
-#: ../src/brasero-project.c:2454
+#: ../src/brasero-project.c:2450
 #, c-format
 msgid "Brasero — %s (Video Disc)"
 msgstr "Brasero — %s (Đĩa Phim)"
 
-#: ../src/brasero-project.c:2624 ../src/brasero-project.c:2927
+#: ../src/brasero-project.c:2620 ../src/brasero-project.c:2923
 msgid "Your project has not been saved."
 msgstr "Chưa lưu dự án."
 
-#: ../src/brasero-project.c:2638
+#: ../src/brasero-project.c:2634
 msgid "Save the changes of current project before closing?"
 msgstr "Lưu các thay đổi trong dự án hiện thời trước khi đóng lại chứ?"
 
-#: ../src/brasero-project.c:2643 ../src/brasero-project.c:2932
+#: ../src/brasero-project.c:2639 ../src/brasero-project.c:2928
 msgid "If you don't save, changes will be permanently lost."
 msgstr "Không lưu thì các thay đổi sẽ bị mất hoàn toàn."
 
-#: ../src/brasero-project.c:2647 ../src/brasero-project.c:2653
-#: ../src/brasero-project.c:2935
+#: ../src/brasero-project.c:2643 ../src/brasero-project.c:2649
+#: ../src/brasero-project.c:2931
 msgid "Cl_ose Without Saving"
 msgstr "Đóng mà _không lưu"
 
-#: ../src/brasero-project.c:2735
+#: ../src/brasero-project.c:2731
 msgid "Save Current Project"
 msgstr "Lưu dự án hiện thời"
 
-#: ../src/brasero-project.c:2753
+#: ../src/brasero-project.c:2749
 msgid "Save project as a Brasero audio project"
 msgstr "Lưu lại dự án như một dự án nhạc Brasero"
 
-#: ../src/brasero-project.c:2754
+#: ../src/brasero-project.c:2750
 msgid "Save project as a plain text list"
 msgstr "Lưu dự án dạng danh sách nhập thô"
 
-#: ../src/brasero-project.c:2758
+#: ../src/brasero-project.c:2754
 msgid "Save project as a PLS playlist"
 msgstr "Lưu dự án dạng danh mục nhạc PLS"
 
-#: ../src/brasero-project.c:2759
+#: ../src/brasero-project.c:2755
 msgid "Save project as an M3U playlist"
 msgstr "Lưu dự án dạng danh mục nhạc M3U"
 
-#: ../src/brasero-project.c:2760
+#: ../src/brasero-project.c:2756
 msgid "Save project as an XSPF playlist"
 msgstr "Lưu lại dự án như một danh sách chới XSPF"
 
-#: ../src/brasero-project.c:2761
+#: ../src/brasero-project.c:2757
 msgid "Save project as an iriver playlist"
 msgstr "Lưu lại dự án như một danh sách chơi iriver"
 
@@ -4409,7 +4366,7 @@ msgstr ""
 
 #: ../src/brasero-project-manager.c:103
 msgid "New _Data Project"
-msgstr "Dự án _dữ liệu mới"
+msgstr "_Dự án dữ liệu mới"
 
 #: ../src/brasero-project-manager.c:104
 #: ../src/brasero-project-type-chooser.c:81
@@ -4417,8 +4374,7 @@ msgid ""
 "Create a CD/DVD containing any type of data that can only be read on a "
 "computer"
 msgstr ""
-"Tạo một đĩa CD/DVD chứa bất cứ loại dữ liệu nào thứ mà chỉ đọc được trên máy "
-"tính"
+"Tạo một đĩa CD/DVD chứa bất cứ loại dữ liệu nào chỉ đọc được trên máy tính"
 
 #: ../src/brasero-project-manager.c:105
 msgid "New _Video Project"
@@ -4427,7 +4383,7 @@ msgstr "Dự án _phim mới"
 #: ../src/brasero-project-manager.c:106
 #: ../src/brasero-project-type-chooser.c:86
 msgid "Create a video DVD or an SVCD that is readable on TV readers"
-msgstr "Tạo một đĩa DVD phim hay SVCD thứ mà đọc được trên thiết bị đọc TV"
+msgstr "Tạo một đĩa DVD phim hay SVCD mà đọc được trên thiết bị đọc TV"
 
 #: ../src/brasero-project-manager.c:107
 msgid "Copy _Disc…"
@@ -4444,13 +4400,13 @@ msgstr ""
 
 #: ../src/brasero-project-manager.c:109
 msgid "_Burn Image…"
-msgstr "_Ghi đĩa từ ảnh…"
+msgstr "_Ghi ảnh đĩa…"
 
 #: ../src/brasero-project-manager.c:110
 #: ../src/brasero-project-type-chooser.c:95
 #: ../src/brasero-project-type-chooser.c:96
 msgid "Burn an existing CD/DVD image to disc"
-msgstr "Ghi đĩa từ một ảnh đĩa CD/DVD có sẵn"
+msgstr "Chép ra vào đĩa một ảnh đĩa CD/DVD đã tồn tại"
 
 #: ../src/brasero-project-manager.c:112
 msgid "_Open…"
@@ -4553,17 +4509,17 @@ msgstr "Đĩa phim (%s)"
 
 #: ../src/brasero-project-parse.c:62
 msgid "Error while loading the project."
-msgstr "Gặp lỗi khi tải dự án."
+msgstr "Gặp lỗi khi nạp dự án."
 
-#: ../src/brasero-project-parse.c:458
+#: ../src/brasero-project-parse.c:454
 msgid "The project could not be opened"
 msgstr "Không mở được đề án"
 
-#: ../src/brasero-project-parse.c:467
+#: ../src/brasero-project-parse.c:463
 msgid "The file is empty"
 msgstr "Tập tin rỗng"
 
-#: ../src/brasero-project-parse.c:546 ../src/brasero-project-parse.c:611
+#: ../src/brasero-project-parse.c:542 ../src/brasero-project-parse.c:607
 msgid "It does not seem to be a valid Brasero project"
 msgstr "Đề án này không phải là đề án Brasero"
 
@@ -4619,7 +4575,7 @@ msgstr "Không có dự án vừa dùng"
 msgid "Create a new project:"
 msgstr "Tạo một dự án mới:"
 
-#: ../src/brasero-project-type-chooser.c:510
+#: ../src/brasero-project-type-chooser.c:509
 msgid "Recent projects:"
 msgstr "Dự án vừa mở :"
 
@@ -4629,7 +4585,7 @@ msgstr "Chèn đoạn văn"
 
 #: ../src/brasero-rename.c:323
 msgid "Delete text"
-msgstr "Xóa đoạn văn"
+msgstr "Xoá đoạn văn"
 
 #: ../src/brasero-rename.c:324
 msgid "Substitute text"
@@ -4662,7 +4618,7 @@ msgstr "vào ở cuối"
 
 #: ../src/brasero-rename.c:370
 msgid "Delete every occurrence of"
-msgstr "Xóa mọi xuất hiện của"
+msgstr "Xoá mọi xuất hiện của"
 
 #. Reminder: if this string happens to be used somewhere else in brasero
 #. * we'll need a context with C_() macro
@@ -4674,7 +4630,7 @@ msgstr "bằng"
 
 #: ../src/brasero-rename.c:414
 msgid "Rename to"
-msgstr "Đổi tên thành"
+msgstr "Thay tên thành"
 
 #: ../src/brasero-rename.c:423
 msgid "{number}"
@@ -4690,11 +4646,11 @@ msgstr "(số)"
 msgid "%s / %s"
 msgstr "%s / %s"
 
-#: ../src/brasero-song-control.c:527
+#: ../src/brasero-song-control.c:528
 msgid "No file"
 msgstr "Không có tập tin"
 
-#: ../src/brasero-song-control.c:562
+#: ../src/brasero-song-control.c:563
 msgid "Start and stop playing"
 msgstr "Phát và dừng phát"
 
@@ -4714,147 +4670,147 @@ msgstr "Cuối bài:"
 msgid "Track length:"
 msgstr "Bề dài rãnh:"
 
-#: ../src/brasero-song-properties.c:365
+#: ../src/brasero-song-properties.c:372
 #, c-format
 msgid "Song information for track %02i"
 msgstr "Thông tin về bài trên rãnh %02i"
 
-#: ../src/brasero-split-dialog.c:172
+#: ../src/brasero-split-dialog.c:166
 msgid "Do you really want to split the track?"
 msgstr "Bạn có chắc muốn chia tách rãnh này không?"
 
-#: ../src/brasero-split-dialog.c:175
+#: ../src/brasero-split-dialog.c:169
 msgid ""
 "If you split the track, the size of the new track will be shorter than 6 "
 "seconds and will be padded."
 msgstr ""
 "Chia tách rãnh thì rãnh mới có kích cỡ ngắn hơn 6 giây và cũng bị đệm lót."
 
-#: ../src/brasero-split-dialog.c:181 ../src/brasero-split-dialog.c:752
+#: ../src/brasero-split-dialog.c:175 ../src/brasero-split-dialog.c:746
 msgid "_Split"
 msgstr "_Xẻ"
 
-#: ../src/brasero-split-dialog.c:609
+#: ../src/brasero-split-dialog.c:603
 msgid "The track wasn't split."
-msgstr "Chưa chia nhỏ rãnh đó."
+msgstr "Chưa sẻ rãnh đó."
 
-#: ../src/brasero-split-dialog.c:610
+#: ../src/brasero-split-dialog.c:604
 msgid "No silence could be detected"
-msgstr "Không phát hiện khoảng im lặng"
+msgstr "Không phát hiện khoảng im"
 
-#: ../src/brasero-split-dialog.c:633
+#: ../src/brasero-split-dialog.c:627
 msgid "An error occurred while detecting silences."
 msgstr "Đã gặp lỗi khi thử phát hiện các đoạn im lặng."
 
-#: ../src/brasero-split-dialog.c:712
+#: ../src/brasero-split-dialog.c:706
 msgid "This will remove all previous results."
 msgstr "Đây sẽ gỡ bỏ tất cả các kết quả tìm trước."
 
-#: ../src/brasero-split-dialog.c:750
+#: ../src/brasero-split-dialog.c:744
 msgid "Do you really want to carry on with automatic splitting?"
 msgstr "Bạn thực sự muốn tiếp tục với chức năng tự động chia tách không?"
 
-#: ../src/brasero-split-dialog.c:751
+#: ../src/brasero-split-dialog.c:745
 msgid "_Don't split"
 msgstr "_Không xẻ"
 
-#: ../src/brasero-split-dialog.c:968
+#: ../src/brasero-split-dialog.c:962
 msgid "Do you really want to empty the slices preview?"
-msgstr "Bạn thực sự muốn xóa sạch ô xem thử lát không?"
+msgstr "Bạn thực sự muốn xoá sạch ô xem thử lát không?"
 
-#: ../src/brasero-split-dialog.c:970 ../src/brasero-split-dialog.c:1269
+#: ../src/brasero-split-dialog.c:964 ../src/brasero-split-dialog.c:1263
 msgid "Re_move All"
 msgstr "Bỏ _tất cả"
 
-#: ../src/brasero-split-dialog.c:1055
+#: ../src/brasero-split-dialog.c:1049
 msgid "Split Track"
 msgstr "Xẻ rãnh"
 
-#: ../src/brasero-split-dialog.c:1072
+#: ../src/brasero-split-dialog.c:1066
 msgid "M_ethod:"
 msgstr "_Phương pháp:"
 
-#: ../src/brasero-split-dialog.c:1078
+#: ../src/brasero-split-dialog.c:1072
 msgid "Method to be used to split the track"
-msgstr "Phương pháp cần dùng để chia nhỏ rãnh"
+msgstr "Phương pháp cần dùng để chia tách rãnh"
 
-#: ../src/brasero-split-dialog.c:1081
+#: ../src/brasero-split-dialog.c:1075
 msgid "Split track manually"
-msgstr "Chia nhỏ rãnh bằng tay"
+msgstr "Xẻ rãnh bằng tay"
 
-#: ../src/brasero-split-dialog.c:1082
+#: ../src/brasero-split-dialog.c:1076
 msgid "Split track in parts with a fixed length"
-msgstr "Chia nhỏ rãnh thành các phần có chiều dài cố định"
+msgstr "Xẻ rãnh theo phần có chiều dài cố định"
 
-#: ../src/brasero-split-dialog.c:1083
+#: ../src/brasero-split-dialog.c:1077
 msgid "Split track in a fixed number of parts"
-msgstr "Chia nhỏ rãnh theo một số phần cố định"
+msgstr "Xẻ rãnh theo một số phần cố định"
+
+#: ../src/brasero-split-dialog.c:1078
+msgid "Split track for each silence"
+msgstr "Xẻ rãnh cho mỗi khoảng im"
 
 #: ../src/brasero-split-dialog.c:1084
-msgid "Split track for each silence"
-msgstr "Chia nhỏ rãnh mỗi khoảng im lặng"
-
-#: ../src/brasero-split-dialog.c:1090
 msgid "_Slice"
 msgstr "_Cắt ra"
 
-#: ../src/brasero-split-dialog.c:1101
+#: ../src/brasero-split-dialog.c:1095
 msgid "Add a splitting point"
-msgstr "Thêm một điểm để chia nhỏ"
+msgstr "Thêm một điểm xẻ"
 
 #. Translators: this goes with the next (= "seconds")
-#: ../src/brasero-split-dialog.c:1118
+#: ../src/brasero-split-dialog.c:1112
 msgid "Split this track every"
-msgstr "Chia nhỏ rãnh này mỗi"
+msgstr "Xẻ rãnh này mỗi"
 
 #. Translators: this goes with the previous (= "Split track every")
-#: ../src/brasero-split-dialog.c:1127
+#: ../src/brasero-split-dialog.c:1121
 msgid "seconds"
 msgstr "giây"
 
 #. Translators: this goes with the next (= "parts")
-#: ../src/brasero-split-dialog.c:1136
+#: ../src/brasero-split-dialog.c:1130
 msgid "Split this track in"
-msgstr "Chia nhỏ rãnh này theo"
+msgstr "Xẻ rãnh này theo"
 
 #. Translators: this goes with the previous (= "Split this track in")
-#: ../src/brasero-split-dialog.c:1145
+#: ../src/brasero-split-dialog.c:1139
 msgid "parts"
 msgstr "phần"
 
-#: ../src/brasero-split-dialog.c:1153
+#: ../src/brasero-split-dialog.c:1147
 msgid "Slicing Method"
 msgstr "Phương pháp cắt ra"
 
-#: ../src/brasero-split-dialog.c:1211
+#: ../src/brasero-split-dialog.c:1205
 msgid "Start"
 msgstr "Đầu"
 
-#: ../src/brasero-split-dialog.c:1218
+#: ../src/brasero-split-dialog.c:1212
 msgid "End"
 msgstr "Cuối"
 
-#: ../src/brasero-split-dialog.c:1241
+#: ../src/brasero-split-dialog.c:1235
 msgid "Mer_ge"
 msgstr "T_rộn"
 
-#: ../src/brasero-split-dialog.c:1252
+#: ../src/brasero-split-dialog.c:1246
 msgid "Merge a selected slice with the next selected one"
 msgstr "Trộn một lát đã chọn với lát được chọn kế tiếp"
 
-#: ../src/brasero-split-dialog.c:1266
+#: ../src/brasero-split-dialog.c:1260
 msgid "Remove the selected slices"
 msgstr "Gỡ bỏ các lát đã chọn"
 
-#: ../src/brasero-split-dialog.c:1280
+#: ../src/brasero-split-dialog.c:1274
 msgid "Clear the slices preview"
 msgstr "Gột ô xem thử lát"
 
-#: ../src/brasero-split-dialog.c:1290
+#: ../src/brasero-split-dialog.c:1284
 msgid "_List of slices that are to be created:"
 msgstr "Danh sách các _lát cần tạo :"
 
-#: ../src/brasero-split-dialog.c:1298
+#: ../src/brasero-split-dialog.c:1292
 msgid "Slices Preview"
 msgstr "Xem thử lát"
 
@@ -4896,73 +4852,94 @@ msgstr "Gỡ bỏ khỏi dự án các phim đã chọn"
 
 #: ../src/brasero-video-disc.c:359
 msgid "Do you want to search for video files inside the directory?"
-msgstr "Bạn có muốn tìm tập tin phim trong thư mục không?"
+msgstr "Muốn tìm tập tin phim trong thư mục ?"
 
 #: ../src/brasero-video-disc.c:369
 msgid "_Search Directory"
-msgstr "_Thư mục tìm kiếm"
+msgstr "_Tìm trong thư mục"
 
 #: ../src/brasero-video-disc.c:412
 #, c-format
 msgid "\"%s\" does not have a suitable type for video projects."
-msgstr "“%s” không có kiểu thích hợp với dự án phim."
+msgstr "« %s » không có kiểu thích hợp với dự án phim."
 
 #: ../src/brasero-video-disc.c:415
 msgid "Please only add files with video content"
 msgstr "Vui lòng chỉ bổ sung tập tin là phim"
 
-#: ../src/main.c:84
+#: ../src/eggdesktopfile.c:165
+#, c-format
+msgid "File is not a valid .desktop file"
+msgstr "Tập tin không phải là một tập tin .desktop hợp lệ"
+
+#: ../src/eggdesktopfile.c:188
+#, c-format
+msgid "Unrecognized desktop file Version '%s'"
+msgstr "Không nhận ra tập tin môi trường Phiên bản « %s »"
+
+#: ../src/eggdesktopfile.c:968
+#, c-format
+msgid "Starting %s"
+msgstr "Đang khởi chạy %s"
+
+#: ../src/eggdesktopfile.c:1110
+#, c-format
+msgid "Application does not accept documents on command line"
+msgstr "Ứng dụng không chấp nhận tài liệu trên dòng lệnh"
+
+#: ../src/eggdesktopfile.c:1178
+#, c-format
+msgid "Unrecognized launch option: %d"
+msgstr "Không nhận ra tuỳ chọn khởi chạy: %d"
+
+#: ../src/eggdesktopfile.c:1383
+#, c-format
+msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
+msgstr ""
+"Không thể gửi địa chỉ URI của tài liệu cho một mục nhập môi trường « "
+"Type=Link » (Kiểu=Liên kết)"
+
+#: ../src/eggdesktopfile.c:1404
+#, c-format
+msgid "Not a launchable item"
+msgstr "Không phải mục khởi chạy được"
+
+#: ../src/eggsmclient.c:226
+msgid "Disable connection to session manager"
+msgstr "Tắt kết nối đến trình quản lý buổi hợp"
+
+#: ../src/eggsmclient.c:229
+msgid "Specify file containing saved configuration"
+msgstr "Ghi rõ tập tin chứa cấu hình đã lưu"
+
+#: ../src/eggsmclient.c:229
+msgid "FILE"
+msgstr "TẬP TIN"
+
+#: ../src/eggsmclient.c:232
+msgid "Specify session management ID"
+msgstr "Xác định mã số quản lý buổi hợp"
+
+#: ../src/eggsmclient.c:232
+msgid "ID"
+msgstr "Mã số"
+
+#: ../src/eggsmclient.c:253
+msgid "Session management options:"
+msgstr "Các tuỳ chọn quản lý buổi hợp:"
+
+#: ../src/eggsmclient.c:254
+msgid "Show session management options"
+msgstr "Hiển thị các tuỳ chọn về trình quản lý buổi hợp"
+
+#: ../src/main.c:85
 msgid "[URI] [URI] …"
 msgstr "[URI] [URI] …"
 
-#: ../src/main.c:96
+#: ../src/main.c:97
 #, c-format
 msgid "Please type \"%s --help\" to see all available options\n"
-msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
-
-#~ msgid "File is not a valid .desktop file"
-#~ msgstr "Tập tin không phải là một tập tin .desktop hợp lệ"
-
-#~ msgid "Unrecognized desktop file Version '%s'"
-#~ msgstr "Không nhận ra tập tin môi trường Phiên bản “%s”"
-
-#~ msgid "Starting %s"
-#~ msgstr "Đang khởi chạy %s"
-
-#~ msgid "Application does not accept documents on command line"
-#~ msgstr "Ứng dụng không chấp nhận tài liệu trên dòng lệnh"
-
-#~ msgid "Unrecognized launch option: %d"
-#~ msgstr "Không nhận ra tùy chọn khởi chạy: %d"
-
-#~ msgid "Can't pass document URIs to a 'Type=Link' desktop entry"
-#~ msgstr ""
-#~ "Không thể gửi địa chỉ URI của tài liệu cho một mục nhập môi trường "
-#~ "“Type=Link” (Kiểu=Liên kết)"
-
-#~ msgid "Not a launchable item"
-#~ msgstr "Không phải mục khởi chạy được"
-
-#~ msgid "Disable connection to session manager"
-#~ msgstr "Tắt kết nối đến trình quản lý phiên làm việc"
-
-#~ msgid "Specify file containing saved configuration"
-#~ msgstr "Ghi rõ tập tin chứa cấu hình đã lưu"
-
-#~ msgid "FILE"
-#~ msgstr "TẬP TIN"
-
-#~ msgid "Specify session management ID"
-#~ msgstr "Xác định mã số quản lý phiên làm việc"
-
-#~ msgid "ID"
-#~ msgstr "Mã số"
-
-#~ msgid "Session management options:"
-#~ msgstr "Các tùy chọn quản lý phiên làm việc:"
-
-#~ msgid "Show session management options"
-#~ msgstr "Hiển thị các tùy chọn về trình quản lý phiên làm việc"
+msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tuỳ chọn\n"
 
 #~ msgid "Results %i–%i (out of %i)"
 #~ msgstr "Kết quả %i–%i (trên %i)"
@@ -4971,7 +4948,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Không tìm thấy"
 
 #~ msgid "Error querying for keywords."
-#~ msgstr "Lỗi khi tìm từ khóa."
+#~ msgstr "Lỗi khi tìm từ khoá."
 
 #~ msgid "Previous Results"
 #~ msgstr "Kết quả trước"
@@ -4998,7 +4975,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Qua các _phim"
 
 #~ msgid "Type your keywords or choose 'All files' from the menu"
-#~ msgstr "Gõ các từ khóa, hoặc chọn một “Mọi tập tin” trong trình đơn"
+#~ msgstr "Gõ các từ khoá, hoặc chọn một « Mọi tập tin » trong trình đơn"
 
 #~ msgid "Select if you want to search among image files only"
 #~ msgstr "Bật tùy chọn này nếu bạn chỉ muốn tìm kiếm qua các tập tin kiểu ảnh"
@@ -5020,10 +4997,10 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Nhấn để bắt đầu tìm"
 
 #~ msgid "Search files using keywords"
-#~ msgstr "Tìm tập tin theo từ khóa"
+#~ msgstr "Tìm tập tin theo từ khoá"
 
 #~ msgid "Copying `%s` locally"
-#~ msgstr "Đang sao chép cục bộ “%s”"
+#~ msgstr "Đang sao chép cục bộ « %s »"
 
 #~ msgid "The project could not be opened."
 #~ msgstr "Dự án không mở được."
@@ -5038,7 +5015,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Ổ"
 
 #~ msgid "Display options for Brasero-media library"
-#~ msgstr "Hiển thị các tùy chọn về thư viện phương tiện Brasero"
+#~ msgstr "Hiển thị các tuỳ chọn về thư viện phương tiện Brasero"
 
 #~ msgid "%lli min"
 #~ msgstr "%lli phút"
@@ -5069,7 +5046,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 
 #~ msgid "Allows to burn files added to \"CD/DVD Creator Folder\" in Nautilus"
 #~ msgstr ""
-#~ "Cho phép chép ra các tập tin được thêm vào thư mục “Thư mục Tạo CD/DVD” "
+#~ "Cho phép chép ra các tập tin được thêm vào thư mục « Thư mục Tạo CD/DVD » "
 #~ "trong Nautilus"
 
 #~ msgid "Write contents to a CD or DVD disc"
@@ -5079,25 +5056,25 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Không thể khởi chạy ứng dụng chép ra đĩa CD."
 
 #~ msgid "_Write to Disc..."
-#~ msgstr "_Ghi vào đĩa…"
+#~ msgstr "_Ghi vào đĩa..."
 
 #~ msgid "Write disc image to a CD or DVD disc"
 #~ msgstr "Ghi ảnh đĩa vào đĩa CD hoặc DVD"
 
 #~ msgid "_Copy Disc..."
-#~ msgstr "_Chép đĩa…"
+#~ msgstr "_Chép đĩa..."
 
 #~ msgid "Create a copy of this CD or DVD disc"
 #~ msgstr "Tạo bản sao của đĩa CD hoặc DVD này"
 
 #~ msgid "_Blank Disc..."
-#~ msgstr "Đĩa t_rắng…"
+#~ msgstr "Đĩa t_rắng..."
 
 #~ msgid "Blank this CD or DVD disc"
 #~ msgstr "Để trắng đĩa CD hoặc DVD này"
 
 #~ msgid "_Check Disc..."
-#~ msgstr "_Kiểm tra đĩa…"
+#~ msgstr "_Kiểm tra đĩa..."
 
 #~ msgid "Check the data integrity on this CD or DVD disc"
 #~ msgstr "Kiểm tra tính nguyên vẹn dữ liệu trên đĩa CD hoặc DVD này"
@@ -5125,7 +5102,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "The size of the project is too large for the disc even with the overburn "
 #~ "option."
 #~ msgstr ""
-#~ "Dự án này quá lớn để vừa trên đĩa này, ngay cả dùng tùy chọn quá chép ra."
+#~ "Dự án này quá lớn để vừa trên đĩa này, ngay cả dùng tuỳ chọn quá chép ra."
 
 #~ msgid "Please insert a recordable CD or DVD."
 #~ msgstr "Hãy nạp một đĩa CD/DVD có khả năng thu."
@@ -5166,9 +5143,9 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "NOTE: This option might cause failure."
 #~ msgstr ""
 #~ "Dự án này quá lớn để vừa trên đĩa đó.\n"
-#~ "Người dùng có thể muốn sử dụng tùy chọn này khi dùng một đĩa CD-R(W) mà "
-#~ "không nhận ra được thì yêu cầu tùy chọn quá chép ra.\n"
-#~ "GHI CHÚ : tùy chọn này có thể gây ra lỗi."
+#~ "Người dùng có thể muốn sử dụng tuỳ chọn này khi dùng một đĩa CD-R(W) mà "
+#~ "không nhận ra được thì yêu cầu tuỳ chọn quá chép ra.\n"
+#~ "GHI CHÚ : tuỳ chọn này có thể gây ra lỗi."
 
 #~ msgid "Burn beyond the disc reported capacity"
 #~ msgstr "Chép ra quá khả năng đã thông báo về đĩa"
@@ -5183,13 +5160,13 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Chọn các phần bổ sung cho Brasero"
 
 #~ msgid "_Erase..."
-#~ msgstr "_Xóa…"
+#~ msgstr "_Xoá..."
 
 #~ msgid "Erase a disc"
-#~ msgstr "_Xóa đĩa"
+#~ msgstr "_Xoá đĩa"
 
 #~ msgid "_Check Integrity..."
-#~ msgstr "_Kiểm tra toàn vẹn…"
+#~ msgstr "_Kiểm tra toàn vẹn..."
 
 #~ msgid "Exit the program"
 #~ msgstr "Thoát khỏi chương trình"
@@ -5207,7 +5184,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Chiều rộng mặc định cho ô xem thử phim."
 
 #~ msgid "Enable \"-immed\" flag with cdrecord"
-#~ msgstr "Bật cờ “-immed” với cdrecord"
+#~ msgstr "Bật cờ « -immed » với cdrecord"
 
 #~ msgid "Enable side pane"
 #~ msgstr "Bật khung lề"
@@ -5234,17 +5211,18 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Thay thế liên kết mềm bằng đích"
 
 #~ msgid "Should brasero filter broken symlinks files"
-#~ msgstr "Brasero nên lọc liên kết mềm bị gãy của tập tin?"
+#~ msgstr "Brasero nên lọc liên kết mềm bị ngắt của tập tin ?"
 
 #~ msgid ""
 #~ "Should brasero filter broken symlinks. Set to true, brasero will filter "
 #~ "broken symlinks."
 #~ msgstr ""
-#~ "Trình Brasero có nên lọc các liên kết mềm bị ngắt (không còn dẫn tới tập "
-#~ "tin đúng). Bật tùy chọn này thì Brasero sẽ lọc mỗi liên kết mềm bị ngắt."
+#~ "Trình Brasero có nên lọc các liên kết tượng trưng bị ngắt (không còn dẫn "
+#~ "tới tập tin đúng). Bật tùy chọn này thì Brasero sẽ lọc mỗi liên kết mềm "
+#~ "bị ngắt."
 
 #~ msgid "Should brasero notify when files are filtered"
-#~ msgstr "Brasero nên thông báo về tập tin bị lọc?"
+#~ msgstr "Brasero nên thông báo về tập tin bị lọc ?"
 
 #~ msgid ""
 #~ "Should brasero notify when files are filtered. Set to true, brasero will "
@@ -5257,59 +5235,60 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "Should brasero replace symlinks by their target files in the project. Set "
 #~ "to true, brasero will replace symlinks."
 #~ msgstr ""
-#~ "Brasero nên thay thế liên kết mềm bằng tập tin đích tương ứng trong dự "
-#~ "án, hay không. Bật tùy chọn này thì Brasero sẽ thay thế liên kết mềm."
+#~ "Brasero nên thay thế liên kết tượng trưng bằng tập tin đích tương ứng "
+#~ "trong dự án, hay không. Bật tùy chọn này thì Brasero sẽ thay thế liên kết "
+#~ "tượng trưng."
 
 #~ msgid ""
 #~ "The pane to display with audio projects. It should be one of the "
 #~ "following: \"Chooser\", \"Search\" or \"Playlist\"."
 #~ msgstr ""
 #~ "Ô cửa sổ cần hiển thị với dự án âm thanh. Nó nên là một của những ô này:\n"
-#~ " * Chooser\tlựa chọn\n"
-#~ " * Search\t\ttìm kiếm\n"
-#~ " * Playlist\t\tdanh mục nhạc."
+#~ " • Chooser\tlựa chọn\n"
+#~ " • Search\t\ttìm kiếm\n"
+#~ " • Playlist\t\tdanh mục nhạc."
 
 #~ msgid ""
 #~ "The pane to display with data projects. It should be one of the "
 #~ "following: \"Chooser\" or \"Search\"."
 #~ msgstr ""
 #~ "Ô cửa sổ cần hiển thị với dự án dữ liệu. Nó nên là một của những ô này:\n"
-#~ " * Chooser\tlựa chọn\n"
-#~ " * Search\t\ttìm kiếm"
+#~ " • Chooser\tlựa chọn\n"
+#~ " • Search\t\ttìm kiếm"
 
 #~ msgid ""
 #~ "The pane to display with video projects. It should be one of the "
 #~ "following: \"Chooser\", \"Search\" or \"Playlist\"."
 #~ msgstr ""
 #~ "Ô cửa sổ cần hiển thị với dự án phim. Nó nên là một của những ô này:\n"
-#~ " * Chooser\tlựa chọn\n"
-#~ " * Search\t\ttìm kiếm\n"
-#~ " * Playlist\t\tdanh mục nhạc."
+#~ " • Chooser\tlựa chọn\n"
+#~ " • Search\t\ttìm kiếm\n"
+#~ " • Playlist\t\tdanh mục nhạc."
 
 #~ msgid ""
 #~ "This key sets where the project pane should be (0 = on the right, 1 = on "
 #~ "the left, 2 = at the top, 3 = at the bottom)"
 #~ msgstr ""
-#~ "Khóa này đặt vị trí của ô cửa sổ dự án:\n"
-#~ " * 0\tbên phải\n"
-#~ " * 1\tbên trái\n"
-#~ " * 2\tbên trên\n"
-#~ " * 3\tbên dưới."
+#~ "Khoá này đặt vị trí của ô cửa sổ dự án:\n"
+#~ " • 0\tbên phải\n"
+#~ " • 1\tbên trái\n"
+#~ " • 2\tbên trên\n"
+#~ " • 3\tbên dưới."
 
 #~ msgid "Used in conjunction with \"-immed\" flag with cdrecord"
-#~ msgstr "Dùng cùng với cờ “-immed” với cdrecord"
+#~ msgstr "Dùng cùng với cờ « -immed » với cdrecord"
 
 #~ msgid "Whether to display a side pane. Set to true to use it."
 #~ msgstr "Có hiển thị khung lề hay không. Bật tùy chọn này thì hiển thị."
 
 #~ msgid "Whether to use \"--driver generic-mmc-raw\" flag with cdrdao"
-#~ msgstr "Có nên dùng cờ “--driver generic-mmc-raw” với cdrdao hay không"
+#~ msgstr "Có nên dùng cờ « --driver generic-mmc-raw » với cdrdao hay không"
 
 #~ msgid ""
 #~ "Whether to use \"--driver generic-mmc-raw\" flag with cdrdao. Set to "
 #~ "True, brasero will use it; it may be a workaround for some drives/setups."
 #~ msgstr ""
-#~ "Có nên dùng cờ “--driver generic-mmc-raw” với cdrdao hay không. Bật tùy "
+#~ "Có nên dùng cờ « --driver generic-mmc-raw » với cdrdao hay không. Bật tùy "
 #~ "chọn này thì Brasero sẽ sử dụng nó. Nó cũng có thể điều chỉnh một số "
 #~ "thiết lập hay ổ đĩa."
 
@@ -5317,19 +5296,19 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "Whether to use \"-immed\" flag with cdrecord. Use with caution (set to "
 #~ "true) as it's only a workaround for some drives/setups."
 #~ msgstr ""
-#~ "Có nên dùng cờ “-immed” với cdrecord hay không. Hãy sử dụng cẩn thận (bật "
-#~ "tùy chọn này) chỉ khi cần điều chỉnh một số thiết lập hay ổ đĩa."
+#~ "Có nên dùng cờ « -immed » với cdrecord hay không. Hãy sử dụng cẩn thận "
+#~ "(bật tuỳ chọn này) chỉ khi cần điều chỉnh một số thiết lập hay ổ đĩa."
 
 #~ msgid "Whether to use \"-use-the-force-luke=dao\" flag with growisofs"
-#~ msgstr "Có nên dùng cờ “-use-the-force-luke=dao” với growisofs hay không"
+#~ msgstr "Có nên dùng cờ « -use-the-force-luke=dao » với growisofs hay không"
 
 #~ msgid ""
 #~ "Whether to use \"-use-the-force-luke=dao\" flag with growisofs. Set to "
 #~ "false, brasero won't use it; it may be a workaround for some drives/"
 #~ "setups."
 #~ msgstr ""
-#~ "Có nên dùng cờ “-use-the-force-luke=dao” với growisofs hay không. Không "
-#~ "bật tùy chọn này thì Brasero không sử dụng nó. Nó cũng có thể điều chỉnh "
+#~ "Có nên dùng cờ « -use-the-force-luke=dao » với growisofs hay không. Không "
+#~ "bật tuỳ chọn này thì Brasero không sử dụng nó. Nó cũng có thể điều chỉnh "
 #~ "một số thiết lập hay ổ đĩa."
 
 #~ msgid "Width for image preview"
@@ -5345,25 +5324,25 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "%s: không có sức chứa trống"
 
 #~ msgid "_Edit Information..."
-#~ msgstr "_Sửa thông tin…"
+#~ msgstr "_Sửa thông tin..."
 
 #~ msgid "Edit the track information (start, end, author, ...)"
 #~ msgstr "Chỉnh sửa thông tin về rãnh (đầu, cuối, tác giả v.v.)"
 
 #~ msgid "_Split Track..."
-#~ msgstr "_Xẻ rãnh…"
+#~ msgstr "_Xẻ rãnh..."
 
 #~ msgid "\"%s\" could not be handled by Gstreamer."
-#~ msgstr "“%s” không thể được GStreamer quản lý."
+#~ msgstr "« %s » không thể được GStreamer quản lý."
 
 #~ msgid "Do you want to add \"%s\" which is a video file?"
-#~ msgstr "Muốn thêm “%s” (một tập tin phim)?"
+#~ msgstr "Muốn thêm « %s » (một tập tin phim) ?"
 
 #~ msgid "Directories cannot be added to an audio disc."
 #~ msgstr "Không thể thêm thư mục vào đĩa âm thanh (chỉ có thể thêm tập tin)."
 
 #~ msgid "(loading ...)"
-#~ msgstr "(đang nạp…)"
+#~ msgstr "(đang nạp...)"
 
 #~ msgid "It will be removed from the project"
 #~ msgstr "Nó sẽ bị gỡ bỏ khỏi dự án"
@@ -5514,16 +5493,16 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "Tiến trình chép ra sẽ khởi chạy một khi bạn nạp một đĩa có khả năng thu."
 
 #~ msgid "Do you really want to erase the current disc?"
-#~ msgstr "Bạn thực sự muốn xóa đĩa hiện thời không?"
+#~ msgstr "Bạn thực sự muốn xoá đĩa hiện thời không?"
 
 #~ msgid "_Erase Disc"
-#~ msgstr "_Xóa đĩa"
+#~ msgstr "_Xoá đĩa"
 
 #~ msgid "Already burnt files will be invisible (though still readable)."
 #~ msgstr "Tập tin nào đã chép ra thì vô hình (vẫn còn đọc được)."
 
 #~ msgid "Appending new files to a multisession disc is not advised."
-#~ msgstr "Không nên phụ thêm tập tin mới vào một đĩa đa phiên làm việc."
+#~ msgstr "Không nên phụ thêm tập tin mới vào một đĩa đa buổi hợp."
 
 #~ msgid ""
 #~ "You might not be able to listen to them with stereos and CD-TEXT won't be "
@@ -5559,10 +5538,10 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Brasero — đang chép ra đĩa (%i%% hoàn tất)"
 
 #~ msgid "Session Log"
-#~ msgstr "Bản ghi phiên làm việc"
+#~ msgstr "Bản ghi buổi hợp"
 
 #~ msgid "The session log cannot be displayed."
-#~ msgstr "Không thể hiển thị bản ghi phiên làm việc."
+#~ msgstr "Không thể hiển thị bản ghi buổi hợp."
 
 #~ msgid "The log file could not be found"
 #~ msgstr "Không tìm thấy tập tin ghi lưu"
@@ -5571,7 +5550,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "This is a excerpt from the session log (the last 10 MiB):\n"
 #~ "\n"
 #~ msgstr ""
-#~ "Dưới đây có một đoạn trích ra bản ghi phiên làm việc (10 MiB cuối cùng):\n"
+#~ "Dưới đây có một đoạn trích ra bản ghi buổi hợp (10 MiB cuối cùng):\n"
 
 #~ msgid "An unknown error occured."
 #~ msgstr "Gặp lỗi không rõ."
@@ -5598,7 +5577,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Tạo bản s_ao nữa"
 
 #~ msgid "R_ename..."
-#~ msgstr "Tha_y tên…"
+#~ msgstr "Tha_y tên..."
 
 #~ msgid ""
 #~ "The size of the project is too large for the disc and you must remove "
@@ -5609,19 +5588,19 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr ""
 #~ "Kích cỡ của dự án vẫn còn quá lớn để vừa trong đĩa này, nếu bạn không gỡ "
 #~ "bỏ một số tập tin khỏi dự án.\n"
-#~ "Bạn có thể bật tùy chọn này để sử dụng đĩa CD-R(W) có chiều dài 90 phút "
-#~ "hay 100 phút mà không nhận ra được thì yêu cầu tùy chọn quá chép ra.\n"
-#~ "GHI CHÚ : tùy chọn này cũng có thể gây ra lỗi."
+#~ "Bạn có thể bật tuỳ chọn này để sử dụng đĩa CD-R(W) có chiều dài 90 phút "
+#~ "hay 100 phút mà không nhận ra được thì yêu cầu tuỳ chọn quá chép ra.\n"
+#~ "GHI CHÚ : tuỳ chọn này cũng có thể gây ra lỗi."
 
 #~ msgid "Click here not to use overburning"
 #~ msgstr "Nhấn vào đây để không sử dụng chức năng quá chép ra"
 
 #~ msgid "Please delete some files from the project."
-#~ msgstr "Hãy xóa một số tập tin khỏi dự án."
+#~ msgstr "Hãy xoá một số tập tin khỏi dự án."
 
 #~ msgid ""
 #~ "Do you want to burn \"%s\" to a disc or add it in to the data project?"
-#~ msgstr "Muốn chép ra “%s” vào một đĩa, hoặc thêm nó vào dự án dữ liệu?"
+#~ msgstr "Muốn chép ra « %s » vào một đĩa, hoặc thêm nó vào dự án dữ liệu ?"
 
 #~ msgid ""
 #~ "This file is the image of a disc and can therefore be burnt to disc "
@@ -5634,13 +5613,13 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Thê_m vào dự án"
 
 #~ msgid "_Burn..."
-#~ msgstr "_Chép ra…"
+#~ msgstr "_Chép ra..."
 
 #~ msgid "\"%s\" is a recursive symlink."
-#~ msgstr "“%s” là một liên kết mềm đệ quy."
+#~ msgstr "« %s » là một liên kết tượng trưng đệ quy."
 
 #~ msgid "Do you really want to replace \"%s\"?"
-#~ msgstr "Thực sự muốn thay thế “%s”?"
+#~ msgstr "Thực sự muốn thay thế « %s » ?"
 
 #~ msgid "It already exists in the directory."
 #~ msgstr "Nó đã tồn tại trong thư mục."
@@ -5655,11 +5634,11 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "Do you really want to add \"%s\" to the selection and use the third "
 #~ "version of ISO9660 standard to support it?"
 #~ msgstr ""
-#~ "Bạn thực sự muốn thêm “%s” vào vùng chọn, và sử dụng tiêu chuẩn ISO9660 "
+#~ "Bạn thực sự muốn thêm « %s » vảo vùng chọn, và sử dụng tiêu chuẩn ISO9660 "
 #~ "phiên bản 3 để hỗ trợ nó không?"
 
 #~ msgid "Do you want to import the session from '%s'?"
-#~ msgstr "Muốn nhập phiên làm việc từ “%s”?"
+#~ msgstr "Muốn nhập buổi hợp từ « %s » ?"
 
 #~ msgid "Increase compatibility with _Windows systems"
 #~ msgstr "Tăng tính tương thích với hệ thống _Windows"
@@ -5672,7 +5651,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "tên tập tin dài (tối đa 64 ký tự)"
 
 #~ msgid "Disc options"
-#~ msgstr "Tùy chọn đĩa"
+#~ msgstr "Tuỳ chọn đĩa"
 
 #~ msgid "Format used mostly on the North American Continent"
 #~ msgstr "Định dạng thường dùng ở Mỹ"
@@ -5763,7 +5742,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "về <span size=\"smaller\"><i>%s</i></span>"
 
 #~ msgid "Save _As..."
-#~ msgstr "Lưu _dạng…"
+#~ msgstr "Lưu _dạng..."
 
 #~ msgid "_Name:"
 #~ msgstr "Tê_n:"
@@ -5805,7 +5784,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "just no longer listed here."
 #~ msgstr ""
 #~ "Nếu bạn chọn tạo một dự án mới thì mọi tập tin thêm đều sẽ bị hủy. Ghi "
-#~ "chú rằng tập tin không phải được xóa khỏi vị trí gốc, chỉ không còn được "
+#~ "chú rằng tập tin không phải được xoá khỏi vị trí gốc, chỉ không còn được "
 #~ "liệt kê lại ở đây."
 
 #~ msgid "Brasero - %s (Data Disc)"
@@ -5827,7 +5806,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Lưu dự án dạng danh mục nhạc IRIVER"
 
 #~ msgid "Copy _Disc..."
-#~ msgstr "Ché_p đĩa…"
+#~ msgstr "Ché_p đĩa..."
 
 #~ msgid ""
 #~ "Create a 1:1 copy of an audio CD or a data CD/DVD on your hardisk or on "
@@ -5837,10 +5816,10 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "đĩa cứng hay trên một đĩa CD/DVD khác"
 
 #~ msgid "_Burn Image..."
-#~ msgstr "Chép _ra ảnh…"
+#~ msgstr "Chép _ra ảnh..."
 
 #~ msgid "_Open..."
-#~ msgstr "_Mở…"
+#~ msgstr "_Mở..."
 
 #~ msgid "Brasero - New Audio Disc Project"
 #~ msgstr "Brasero — dự án đĩa âm thanh mới"
@@ -5900,7 +5879,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Không đủ chỗ trống trên đĩa (%lli trống cho %lli)"
 
 #~ msgid "\"%s\" already exists"
-#~ msgstr "“%s” đã có"
+#~ msgstr "« %s » đã có"
 
 #~ msgid "An internal error occured (%s)"
 #~ msgstr "Gặp lỗi nội bộ (%s)"
@@ -5909,8 +5888,8 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "\"%s\" is a symlink pointing to another program. Use the target program "
 #~ "instead"
 #~ msgstr ""
-#~ "“%s” là một liên kết mềm chỉ tới một chương trình khác. Hãy dùng chương "
-#~ "trình đích để thay thế"
+#~ "« %s » là một liên kết tượng trưng chỉ tới một chương trình khác. Hãy "
+#~ "dùng chương trình đích để thay thế"
 
 #~ msgid "Uri of an image file to be burnt (autodetected)"
 #~ msgstr "Địa chỉ URI của một tập tin ảnh cần chép ra (tự động phát hiện)"
@@ -5923,17 +5902,17 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ "This option is mainly useful for integration use with other applications."
 #~ msgstr ""
 #~ "Chép ra dự án chỉ định và GỠ BỎ nó.\n"
-#~ "Tùy chọn này thường có ích để hợp nhất với ứng dụng khác."
+#~ "Tuỳ chọn này thường có ích để hợp nhất với ứng dụng khác."
 
 #~ msgid "Display debug statements on stdout"
 #~ msgstr "Hiển thị câu gỡ lỗi trên đầu ra tiêu chuẩn"
 
 #~ msgid "[URI] [URI] ..."
-#~ msgstr "[URI] [URI] …"
+#~ msgstr "[URI] [URI] ..."
 
 #~ msgid "Please type %s --help to see all available options\n"
 #~ msgstr ""
-#~ "Hãy thử câu lệnh trợ giúp “%s --help” để xem các tùy chọn sẵn sàng\n"
+#~ "Hãy thử câu lệnh trợ giúp « %s --help » để xem các tùy chọn sẵn sàng\n"
 
 #~ msgid "Your version of cdrdao does not seem to be supported by libbrasero"
 #~ msgstr "Phiên bản cdrdao trên máy này có vẻ là không được libbrasero hỗ trợ"
@@ -5942,7 +5921,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Dùng cdrdao để sao chép và chép ra đĩa CD"
 
 #~ msgid "Enable \"--driver generic-mmc-raw\" flag (see cdrdao manual)"
-#~ msgstr "Bật cờ “--driver generic-mmc-raw” (xem sổ tay cdrdao)"
+#~ msgstr "Bật cờ « --driver generic-mmc-raw » (xem sổ tay cdrdao)"
 
 #~ msgid "Toc2cue converts .toc files into .cue files"
 #~ msgstr "Toc2cue chuyển đổi tập tin .toc sang tập tin .cue"
@@ -5960,13 +5939,13 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Dùng wodim để chép ra đĩa CD/DVD"
 
 #~ msgid "Enable \"-immed\" flag (see wodim manual)"
-#~ msgstr "Bật cờ “-immed” (xem sổ tay wodim)"
+#~ msgstr "Bật cờ « -immed » (xem sổ tay wodim)"
 
 #~ msgid "Use cdrecord to burn CDs and DVDs"
 #~ msgstr "Dùng cdrecord để chép ra đĩa CD/DVD"
 
 #~ msgid "Enable \"-immed\" flag (see cdrecord manual)"
-#~ msgstr "Bật cờ “-immed” (xem sổ ta cdrecord)"
+#~ msgstr "Bật cờ « -immed » (xem sổ ta cdrecord)"
 
 #~ msgid "Minimum drive buffer fill ratio (in %%)(see cdrecord manual):"
 #~ msgstr ""
@@ -5998,7 +5977,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Dvdcss cho phép đọc đĩa DVD mật mã bằng css"
 
 #~ msgid "Dvd+rw-format erases and formats DVD+/-R(W)"
-#~ msgstr "Dvd+rw-format thì xóa và định dạng đĩa DVD+/-R(W)"
+#~ msgstr "Dvd+rw-format thì xoá và định dạng đĩa DVD+/-R(W)"
 
 #~ msgid "Growisofs burns DVDs"
 #~ msgstr "Growisofs chép ra đĩa DVD"
@@ -6016,18 +5995,18 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Không thể sơ khởi thư viện Libisofs"
 
 #~ msgid "Libisofs reported an error while creating directory \"%s\""
-#~ msgstr "Thư viện Libisofs đã thông báo một lỗi trong khi tạo thư mục “%s”"
+#~ msgstr "Thư viện Libisofs đã thông báo một lỗi trong khi tạo thư mục « %s »"
 
 #~ msgid ""
 #~ "Libisofs reported an error while adding contents to directory \"%s\" (%x)"
 #~ msgstr ""
 #~ "Thư viện Libisofs đã thông báo một lỗi trong khi thêm nội dung vào thư "
-#~ "mục “%s” (%x)"
+#~ "mục « %s » (%x)"
 
 #~ msgid "Libisofs reported an error while adding file at path \"%s\""
 #~ msgstr ""
 #~ "Thư viện Libisofs đã thông báo một lỗi trong khi thêm tập tin ở đường dẫn "
-#~ "“%s”"
+#~ "« %s »"
 
 #~ msgid "Libisofs creates disc images from files"
 #~ msgstr "Libisofs tạo ảnh đĩa từ tập tin"
@@ -6037,7 +6016,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 
 #~ msgid "Normalize allows to set consistent sound levels between tracks"
 #~ msgstr ""
-#~ "Chức năng chuẩn hóa thì cho phép đặt cấp âm thống nhất giữa các rãnh khác "
+#~ "Chức năng chuẩn hoá thì cho phép đặt cấp âm thống nhất giữa các rãnh khác "
 #~ "nhau"
 
 #~ msgid ""
@@ -6080,10 +6059,10 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Để thêm tập tin vào dự án này, bạn có thể:"
 
 #~ msgid "click the \"Add\" button to show a selection dialog"
-#~ msgstr "bấm nút “Thêm” để hiển thị một hộp thoại lựa chọn"
+#~ msgstr "bấm nút « Thêm » để hiển thị một hộp thoại lựa chọn"
 
 #~ msgid "select files in the selection pane and click the \"Add\" button"
-#~ msgstr "chọn tập tin trong ô cửa sổ lựa chọn, sau đó bấm nút “Them”"
+#~ msgstr "chọn tập tin trong ô cửa sổ lựa chọn, sau đó bấm nút « Them »"
 
 #~ msgid ""
 #~ "drag files in this area from the selection pane or from the file manager"
@@ -6101,20 +6080,20 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "Để gỡ bỏ tập tin khỏi dự án này, bạn có thể:"
 
 #~ msgid "click on the \"Remove\" button to remove selected items in this area"
-#~ msgstr "bấm nút “Bỏ” để gỡ bỏ khỏi vùng này các mục đã chọn"
+#~ msgstr "bấm nút « Bỏ » để gỡ bỏ khỏi vùng này các mục đã chọn"
 
 #~ msgid "drag and release items out from this area"
 #~ msgstr "kéo mục ra vùng này, sau đó thả vào một vùng khác"
 
 #~ msgid "select items in this area, and choose \"Remove\" from context menu"
 #~ msgstr ""
-#~ "chọn mục trong vùng này, sau đó chọn mục “Bỏ” trong trình đơn ngữ cảnh"
+#~ "chọn mục trong vùng này, sau đó chọn mục « Bỏ » trong trình đơn ngữ cảnh"
 
 #~ msgid "select items in this area, and press \"Delete\" key"
-#~ msgstr "chọn mục trong vùng này, sau đó bấm phím “Delete”"
+#~ msgstr "chọn mục trong vùng này, sau đó bấm phím « Delete »"
 
 #~ msgid "_Options..."
-#~ msgstr "Tù_y chọn…"
+#~ msgstr "Tù_y chọn..."
 
 #~ msgid "Re_place symlinks"
 #~ msgstr "Tha_y thế liên kết mềm"
@@ -6142,7 +6121,7 @@ msgstr "Vui lòng gõ \"%s --help\" để xem tất cả các tùy chọn\n"
 #~ msgstr "vào ở đâu"
 
 #~ msgid "Delete every occurence of"
-#~ msgstr "Xóa mọi lần gặp"
+#~ msgstr "Xoá mọi lần gặp"
 
 #~ msgid "Edit the video information (start, end, author, ...)"
 #~ msgstr "Chỉnh sửa thông tin về phim (đầu, cuối, tác giả v.v.)"

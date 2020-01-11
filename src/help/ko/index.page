@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" xmlns:its="http://www.w3.org/2005/11/its" type="guide" id="index" xml:lang="ko">
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="index" xml:lang="ko">
 
-  <title><media type="image" src="figures/logo48.png" its:translate="no"/> 브라세로 도움말</title>
+  <title>브라세로 도움말</title>
 
   <section id="new-project" style="2column">
     <title>새 프로젝트 만들기</title>

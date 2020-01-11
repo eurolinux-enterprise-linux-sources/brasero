@@ -49,16 +49,20 @@ typedef enum {
 	BRASERO_UTILS_ERROR_SYMLINK_LOOP
 } BraseroUtilsErrors;
 
+#define BRASERO_UTILS_LOG_DOMAIN			"BraseroUtils"
+
 void
 brasero_utils_set_use_debug (gboolean active);
 
 void
-brasero_utils_debug_message (const gchar *location,
+brasero_utils_debug_message (const gchar *domain,
+			     const gchar *location,
 			     const gchar *format,
 			     ...);
 
 #define BRASERO_UTILS_LOG(format, ...)						\
-	brasero_utils_debug_message (G_STRLOC,					\
+	brasero_utils_debug_message (BRASERO_UTILS_LOG_DOMAIN,			\
+				     G_STRLOC,					\
 				     format,					\
 				     ##__VA_ARGS__);
 
@@ -73,9 +77,6 @@ brasero_utils_debug_message (const gchar *location,
 
 void
 brasero_utils_init (void);
-
-GOptionGroup *
-brasero_utils_get_option_group (void);
 
 gchar *
 brasero_utils_get_uri_name (const gchar *uri);

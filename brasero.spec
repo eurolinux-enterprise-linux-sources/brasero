@@ -1,18 +1,18 @@
-Name:      brasero
-Version:   3.12.2
-Release:   5%{?dist}
-Summary:   Gnome CD/DVD burning application
 
+Name:      brasero
+Version:   3.8.0
+Release:   3%{?dist}
+Summary:   Gnome CD/DVD burning application
+Group:     Applications/Multimedia
 # see https://bugzilla.gnome.org/show_bug.cgi?id=683503
 License:   GPLv3+
-URL:       https://wiki.gnome.org/Apps/Brasero
-Source0:   https://download.gnome.org/sources/brasero/3.12/brasero-%{version}.tar.xz
-# https://bugzilla.gnome.org/show_bug.cgi?id=647838
-# update man page
-Patch0: 0001-Update-the-man-page.patch
+URL:       http://www.gnome.org/projects/brasero/
+#VCS: git:git://git.gnome.org/brasero
+Source0:   http://ftp.gnome.org/pub/GNOME/sources/brasero/3.8/%{name}-%{version}.tar.xz
 
 BuildRequires:  gtk3-devel >= 2.99.0
 BuildRequires:  glib2-devel >= 2.15.6
+BuildRequires:  GConf2-devel
 BuildRequires:  gettext intltool gtk-doc
 BuildRequires:  desktop-file-utils
 BuildRequires:  gstreamer1-devel >= 0.11.92
@@ -22,14 +22,16 @@ BuildRequires:  libnotify-devel >= 0.7.0
 BuildRequires:  libxml2-devel >= 2.6.0
 BuildRequires:  dbus-glib-devel >= 0.7.2
 BuildRequires:  libxslt
-BuildRequires:  libappstream-glib
 BuildRequires:  libburn-devel >= 0.4.0
 BuildRequires:  libisofs-devel >= 0.6.4
 BuildRequires:  nautilus-devel >= 2.22.2
 BuildRequires:  libSM-devel
+BuildRequires:  unique3-devel
 BuildRequires:  libcanberra-devel
 BuildRequires:  gobject-introspection-devel
 BuildRequires:  tracker-devel
+BuildRequires:  autoconf automake libtool
+BuildRequires:  gnome-common
 BuildRequires:  itstool
 BuildRequires:  yelp-tools
 
@@ -37,10 +39,30 @@ Requires:  dvd+rw-tools
 Requires:  cdrecord
 Requires:  mkisofs
 Requires:  cdda2wav
-Requires:  %{name}-libs%{?_isa} = %{version}-%{release}
 %ifnarch s390 s390x
 Requires:  cdrdao
 %endif
+
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=685492
+# Support reading/copying complete BD(-RE) media
+Patch0: brasero-3.6.0-copy-BD.patch
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=647838
+# update man page
+Patch1: 0001-Update-the-man-page.patch
+
+# https://bugzilla.redhat.com/show_bug.cgi?id=861191
+# brasero ignores/discards ISRC
+Patch2: brasero-3.8.0-fix-isrc-tag.patch
+
+Requires(post):    shared-mime-info
+Requires(postun):  shared-mime-info
+Requires(pre):     GConf2
+Requires(post):    GConf2
+Requires(preun):   GConf2
+Requires(post):    /usr/bin/gtk-update-icon-cache
+Requires(postun):  /usr/bin/gtk-update-icon-cache
 
 %description
 Simple and easy to use CD/DVD burning application for the Gnome
@@ -49,7 +71,9 @@ desktop.
 
 %package   libs
 Summary:   Libraries for %{name}
+Group:     System Environment/Libraries
 Obsoletes: nautilus-cd-burner-libs < 2.25.4
+
 
 %description libs
 The %{name}-libs package contains the runtime shared libraries for
@@ -58,10 +82,11 @@ The %{name}-libs package contains the runtime shared libraries for
 
 %package   nautilus
 Summary:   Nautilus extension for %{name}
+Group:     User Interface/Desktops
 
 Provides:  nautilus-cd-burner = %{version}-%{release}
 Obsoletes: nautilus-cd-burner < 2.25.4
-Requires:  %{name} = %{version}-%{release}
+Requires:  brasero = %{version}-%{release}
 
 %description nautilus
 The %{name}-nautilus package contains the brasero nautilus extension.
@@ -69,7 +94,9 @@ The %{name}-nautilus package contains the brasero nautilus extension.
 
 %package        devel
 Summary:        Headers for developing programs that will use %{name}
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Group:          Development/Libraries
+Requires:       %{name} = %{version}-%{release}
+Requires:       pkgconfig
 Obsoletes:      nautilus-cd-burner-devel < 2.25.4
 
 
@@ -80,7 +107,12 @@ developing brasero applications.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch0 -p1 -b .copy-BD
+%patch1 -p1 -b .man
+%patch2 -p1 -b .fix-isrc-tag
+
+# https://bugzilla.gnome.org/show_bug.cgi?id=692664
+sed -i -e '/tracker/ s/0\.14/0.16/g' configure*
 
 
 %build
@@ -98,6 +130,7 @@ make %{?_smp_mflags}
 
 
 %install
+export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1
 make install DESTDIR=$RPM_BUILD_ROOT
 find $RPM_BUILD_ROOT -type f -name "*.la" -exec rm -f {} ';'
 %find_lang %{name}
@@ -113,13 +146,10 @@ desktop-file-install --vendor ""                   \
     $RPM_BUILD_ROOT%{_datadir}/applications/%{name}-nautilus.desktop
 
 
-%check
-appstream-util validate-relax --nonet %{buildroot}%{_datadir}/appdata/%{name}.appdata.xml
-
-
 %post
+umask 022
+update-mime-database %{_datadir}/mime &> /dev/null || :
 touch --no-create %{_datadir}/icons/hicolor || :
-touch --no-create %{_datadir}/mime/packages &> /dev/null || :
 update-desktop-database &> /dev/null ||:
 
 
@@ -127,13 +157,13 @@ update-desktop-database &> /dev/null ||:
 
 
 %postun
+umask 022
+update-mime-database %{_datadir}/mime &> /dev/null || :
 update-desktop-database &> /dev/null ||:
 if [ $1 -eq 0 ]; then
   touch --no-create %{_datadir}/icons/hicolor || :
-  gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
+  gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null|| :
   glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
-  touch --no-create %{_datadir}/mime/packages &> /dev/null || :
-  update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 fi
 
 
@@ -141,9 +171,12 @@ fi
 
 
 %posttrans
-gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null || :
+gtk-update-icon-cache %{_datadir}/icons/hicolor &> /dev/null|| :
 glib-compile-schemas %{_datadir}/glib-2.0/schemas &> /dev/null || :
-update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
+
+
+%pre
+%gconf_schema_obsolete brasero
 
 
 %files -f %{name}.lang
@@ -153,12 +186,12 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %{_libdir}/brasero3
 %{_datadir}/%{name}
 %{_datadir}/applications/%{name}.desktop
-%{_datadir}/appdata/%{name}.appdata.xml
 %{_datadir}/help/*
 %{_datadir}/icons/hicolor/*/apps/*
 %{_datadir}/mime/packages/*
 %{_datadir}/GConf/gsettings/brasero.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.brasero.gschema.xml
+
 
 %files libs
 %{_libdir}/*.so.*
@@ -167,6 +200,7 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 %files nautilus
 %{_libdir}/nautilus/extensions-3.0/*.so
 %{_datadir}/applications/brasero-nautilus.desktop
+
 
 %files devel
 %doc %{_datadir}/gtk-doc/html/libbrasero-media
@@ -179,32 +213,6 @@ update-mime-database %{?fedora:-n} %{_datadir}/mime &> /dev/null || :
 
 
 %changelog
-* Mon Jun 04 2018 Richard Hughes <rhughes@redhat.com> - 3.12.2-5
-- Update to 3.12.2
-- Resolves: #1569810
-
-* Tue May 19 2015 David King <dking@redhat.com> - 3.12.1-2
-- Rebuild for totem-pl-parser (#1222884)
-
-* Mon May  4 2015 Richard Hughes <rhughes@redhat.com> - 3.12.1-1
-- Update to 3.12.1
-- Resolves: #1174577
-
-* Sat Aug  2 2014 Peter Robinson <pbrobinson@redhat.com> 3.8.0-8
-- Fix dependencies on own library
-
-* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 3.8.0-7
-- Mass rebuild 2014-01-24
-
-* Tue Jan  7 2014 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-6
-- Add dep on own library (related: #1045140)
-
-* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 3.8.0-5
-- Mass rebuild 2013-12-27
-
-* Thu Dec  5 2013 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-4
-- Complete translations (related: #1030319)
-
 * Thu Nov  7 2013 Zeeshan Ali <zeenix@redhat.com> - 3.8.0-3
 - Fix ISRC handling (related: #861191)
 

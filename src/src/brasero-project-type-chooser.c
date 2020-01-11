@@ -316,7 +316,7 @@ brasero_project_type_chooser_build_recent (BraseroProjectTypeChooser *self,
 		GtkRecentInfo *info;
 		GList *child_iter;
 		const gchar *name;
-		GIcon *icon;
+		GdkPixbuf *pixbuf;
 		GtkWidget *image;
 		const gchar *uri;
 		GtkWidget *child;
@@ -328,9 +328,9 @@ brasero_project_type_chooser_build_recent (BraseroProjectTypeChooser *self,
 
 		tooltip = gtk_recent_info_get_uri_display (info);
 
-		icon = gtk_recent_info_get_gicon (info);
-		image = gtk_image_new_from_gicon (icon, GTK_ICON_SIZE_BUTTON);
-		g_object_unref (icon);
+		pixbuf = gtk_recent_info_get_icon (info, GTK_ICON_SIZE_BUTTON);
+		image = gtk_image_new_from_pixbuf (pixbuf);
+		g_object_unref (pixbuf);
 		gtk_size_group_add_widget (image_group, image);
 
 		gtk_widget_show (image);
@@ -467,7 +467,6 @@ brasero_project_type_chooser_init (BraseroProjectTypeChooser *obj)
 	gtk_widget_show (label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
-	gtk_misc_set_padding (GTK_MISC (label), 6.0, 0.0);
 	gtk_box_pack_start (GTK_BOX (project_box), label, FALSE, TRUE, 0);
 
 	/* get the number of rows */
@@ -500,7 +499,7 @@ brasero_project_type_chooser_init (BraseroProjectTypeChooser *obj)
 
 	separator = gtk_separator_new (GTK_ORIENTATION_VERTICAL);
 	gtk_widget_show (separator);
-	gtk_box_pack_start (GTK_BOX (obj), separator, FALSE, TRUE, 2);
+	gtk_box_pack_start (GTK_BOX (obj), separator, FALSE, TRUE, 8);
 
 	/* The recent files part */
 	recent_box = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
@@ -514,13 +513,12 @@ brasero_project_type_chooser_init (BraseroProjectTypeChooser *obj)
 	gtk_widget_show (label);
 	gtk_label_set_use_markup (GTK_LABEL (label), TRUE);
 	gtk_misc_set_alignment (GTK_MISC (label), 0.0, 0.0);
-	gtk_misc_set_padding (GTK_MISC (label), 6.0, 0.0);
 	gtk_box_pack_start (GTK_BOX (recent_box), label, FALSE, TRUE, 0);
 
 	vbox = gtk_box_new (GTK_ORIENTATION_VERTICAL, 0);
 	gtk_widget_show (vbox);
 	gtk_box_pack_start (GTK_BOX (recent_box), vbox, FALSE, TRUE, 0);
-	gtk_container_set_border_width (GTK_CONTAINER (vbox), 6);
+	gtk_container_set_border_width (GTK_CONTAINER (vbox), 12);
 	obj->priv->recent_box = vbox;
 
 	recent = gtk_recent_manager_get_default ();

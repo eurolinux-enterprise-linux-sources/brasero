@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Zapisywanie danych na płycie CD lub DVD.</desc>
+    <desc>Write data to a CD or DVD.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -11,54 +11,59 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Piotr Drąg</mal:name>
-      <mal:email>piotrdrag@gmail.com</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Aviary.pl</mal:name>
-      <mal:email>community-poland@mozilla.org</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Tworzenie projektu z danymi</title>
+  <title>Create a data project</title>
 
-  <p>Projekt z danymi jest używany do zapisywania danych (na przykład plików, zdjęć i muzyki) na płycie, bez zmieniania tych plików w jakikolwiek sposób. Jest to przydatne do przenoszenia plików między komputerami.</p>
+  <p>A data project is used for writing data (for example, files, photos or
+  music) to a disc, without changing those files in any way. This can be useful
+  for transferring files between computers.</p>
 
   <steps>
     <item>
-      <p>Kliknij <gui>Projekt z danymi</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nowy projekt z danymi</gui></guiseq>.</p>
+      <p>Click <gui>Data project</gui> on the start page, or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>New Data
+      Project</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Dodaj pliki do projektu klikając przycisk <gui>Dodaj</gui> na pasku narzędziowym i wybierając je. Można także dodawać pliki przeciągając je do obszaru projektu lub klikając <guiseq><gui>Edycja</gui><gui>Dodaj pliki</gui></guiseq>.</p>
+      <p>Add the desired files to the project by clicking <gui>Add</gui> in the
+      toolbar and selecting the files. You can also add files by
+      dragging and dropping them onto the project area or by clicking
+      <guiseq><gui>Edit</gui><gui>Add Files</gui></guiseq>.</p>
       <note style="tip">
-	<p>Można utworzyć katalogi na płycie w celu przechowywania danych w bardziej uporządkowany sposób. Aby utworzyć katalog, kliknij przycisk <gui>Nowy katalog</gui> na pasku narzędziowym lub wybierz <guiseq><gui>Edycja</gui><gui>Nowy katalog</gui></guiseq> z paska menu. Można także tworzyć katalogi wewnątrz katalogów.</p>
+	<p>You can create folders on the CD to store your data in a more
+	structured manner. To create a folder, click <gui>New Folder</gui> in
+	the toolbar or select <guiseq><gui>Edit</gui><gui>New
+	Folder</gui></guiseq> from the menu bar. You can also create folders
+	inside other folders.</p>
       </note>
     </item>
     <item>
-      <p>Można dodać nazwę płyty w polu tekstowym pod obszarem projektu.</p>
+      <p>You can add a title for the disc in the text entry field below the
+      project area.</p>
     </item>
     <item>
-      <p>Wybierz pustą płytę z rozwijanej listy.</p>
+      <p>Select the blank disc in the drop down list.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Nagraj…</gui>, aby kontynuować.</p>
+      <p>Click <gui>Burn...</gui> to continue.</p>
     </item>
     <item>
-      <p>Wybierz <gui>Prędkość nagrywania</gui> z rozwijanej listy, a także dowolne inne opcje.</p>
+      <p>Select the <gui>Burning speed</gui> from the drop down list, and any
+      other options you may want.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Nagraj</gui>, aby nagrać jedną płytę lub przycisk <gui>Nagraj kilka kopii</gui>, aby nagrać projekt na wiele płyt.</p>
+      <p>Click <gui>Burn</gui> to burn a single CD of the project or
+      <gui>Burn Several Copies</gui> to burn your project to multiple CDs</p>
       <note>
-        <p>Jeśli używana jest płyta do wielokrotnego zapisu, która już zawiera dane, to zostanie wyświetlone pytanie, czy usunąć jej zawartość lub włożyć inną płytę.</p>
+        <p>If you are using a rewritable disc, which already contains data, you
+        will be asked if you want to blank it or insert a different disc.</p>
       </note>
     </item>
   </steps>
 
-  <p>Jeśli używana jest płyta do wielokrotnego zapisu, której nagranie się nie powiodło, należy wykonać pełne (wolne) usuwanie zawartości przed ponowną próbą nagrania.</p>
+  <p>If you are using a rewritable disc and the data is not burned correctly
+  onto it, you may need to do a full (non-fast) blank of the disc before trying
+  again.</p>
 
 </page>

@@ -33,9 +33,9 @@
 
   <title>Introduction</title>
 
-  <p><app>Brasero</app> est un logiciel de gravure de CD et de DVD conçu pour être facile à utiliser bien que fournissant tous les outils nécessaires à la gravure.</p>
+  <p><application>Brasero</application> est un logiciel de gravure de CD et de DVD conçu pour être facile à utiliser bien que fournissant tous les outils nécessaires à la gravure.</p>
 
-  <p>Avec <app>Brasero</app>, vous pouvez :</p>
+  <p>Avec <application>Brasero</application>, vous pouvez :</p>
   <list>
     <item><p>graver des données sur des CD et des DVD,</p></item>
     <item><p>graver des CD audio à partir de fichiers audio (tels que OGG, FLAC et MP3),</p></item>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<page xmlns="http://projectmallard.org/1.0/" type="guide" id="prob-cd" xml:lang="ko">
+<page xmlns="http://projectmallard.org/1.0/" type="guide" id="prob-CD" xml:lang="ko">
 
   <info>
     <link type="guide" xref="index#troubleshooting"/>
@@ -11,25 +11,19 @@
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>크리에이티브 커먼즈 동일조건변경허락 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
   
     <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>조성호</mal:name>
+      <mal:name>Seong-ho Cho</mal:name>
       <mal:email>darkcircle.0426@gmail.com</mal:email>
-      <mal:years>2011, 2013, 2016.</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>류창우</mal:name>
-      <mal:email>cwryu@debian.org</mal:email>
-      <mal:years>2015.</mal:years>
+      <mal:years>2011, 2013.</mal:years>
     </mal:credit>
   </info>
 
   <title>CD가 CD 재생기에서 재생이 안돼요</title>
 
-  <p>CD가 CD 재생기나 스테레오에서 재생이 안되면, 음악이 올바르게 쓰여지지 않았거나 음악을 쓰려면 오디오 프로젝트 대신 데이터 프로젝트를 사용했기 때문인지도 모릅니다.</p>
+  <p>CD가 CD 재생기나 스테레오에서 재생이 되지 않는다면, 음악이 올바르게 쓰여지지 않았거나 음악을 쓰려면 오디오 프로젝트 대신 데이터 프로젝트를 사용했기 때문인지도 모릅니다.</p>
 
   <note>
     <p>수많은 CD 재생기나 DVD 재생기는 데이터 프로젝트를 사용해 만들어진 음악 CD를 재생할 수 있겠지만, 오래된 재생기는 그렇지 못합니다.</p>

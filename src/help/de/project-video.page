@@ -25,12 +25,6 @@
       <mal:email>gabor.karsay@gmx.at</mal:email>
       <mal:years>2011</mal:years>
     </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Christian Kirbach</mal:name>
-      <mal:email>Christian.Kirbach@gmail.com</mal:email>
-      <mal:years>2015</mal:years>
-    </mal:credit>
   </info>
 
   <title>Erstellen eines Video-Projekts</title>

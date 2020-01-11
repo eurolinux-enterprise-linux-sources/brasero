@@ -19,24 +19,6 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Adrian Guniš</mal:name>
-      <mal:email>andygun696@gmail.com</mal:email>
-      <mal:years>2009, 2010</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Štěpán Šimsa</mal:name>
-      <mal:email>simsa.st@gmail.com</mal:email>
-      <mal:years>2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Marek Černocký</mal:name>
-      <mal:email>marek@manet.cz</mal:email>
-      <mal:years>2013</mal:years>
-    </mal:credit>
   </info>
 
   <title>Vypálit obraz</title>
@@ -50,7 +32,9 @@
   <p>Pro vypálení obrazu disku na CD nebo DVD postupujte podle těchto kroků:</p>
   <steps>
     <item>
-      <p>Na úvodní stránce klikněte na <gui>Vypálit obraz</gui> nebo zvolte <guiseq><gui>Projekt</gui><gui>Nový projekt</gui><gui>Vypálit obraz…</gui></guiseq>.</p>
+      <p>Click <gui>Burn image</gui> on the start page or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Burn image…</gui>
+      </guiseq>.</p>
     </item>
     <item>
       <p>Vyberte obraz disku k zápisu kliknutím na <gui>Klikněte zde pro výběr obrazu disku</gui>.</p>

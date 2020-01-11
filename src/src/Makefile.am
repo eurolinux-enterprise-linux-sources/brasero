@@ -1,5 +1,5 @@
 
-AM_CPPFLAGS = \
+INCLUDES = \
 	-I$(top_srcdir)							\
 	-I$(top_srcdir)/libbrasero-utils/				\
 	-I$(top_builddir)/libbrasero-utils/				\
@@ -24,8 +24,7 @@ AM_CPPFLAGS = \
 	$(BRASERO_LIBXML_CFLAGS)					\
 	$(BRASERO_SEARCH_CFLAGS)					\
 	$(BRASERO_PL_PARSER_CFLAGS)					\
-	$(BRASERO_SM_CFLAGS) 						\
-	-Wno-error=format-y2k
+	$(BRASERO_SM_CFLAGS)
 
 GLIB_GENMARSHAL=`pkg-config --variable=glib_genmarshal glib-2.0`
 RECMARSHALFILES = brasero-marshal.h brasero-marshal.c
@@ -107,6 +106,14 @@ brasero_SOURCES = \
 	brasero-project-name.h           \
 	brasero-project-parse.c           \
 	brasero-project-parse.h           \
+	brasero-xsession.c           \
+	brasero-xsession.h		\
+	eggdesktopfile.c        \
+	eggdesktopfile.h        \
+	eggsmclient.c        \
+	eggsmclient.h        \
+	eggsmclient-private.h        \
+	eggsmclient-xsmp.c        \
 	brasero-setting.h        \
 	brasero-setting.c        \
 	brasero-search-engine.h        \

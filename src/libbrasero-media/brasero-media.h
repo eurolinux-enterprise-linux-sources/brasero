@@ -42,13 +42,13 @@ G_BEGIN_DECLS
 #define LIBBRASERO_MEDIA_VERSION_MAJOR						\
 	3
 #define LIBBRASERO_MEDIA_VERSION_MINOR						\
-	12
+	6
 #define LIBBRASERO_MEDIA_VERSION_MICRO						\
-	2
+	0
 #define LIBBRASERO_MEDIA_AGE							\
-	362
+	332
 #define LIBBRASERO_MEDIA_INSTALL							\
-	"/usr/local"
+	"/home/mclasen/gnome"
 
 /**
  * To start and stop the library

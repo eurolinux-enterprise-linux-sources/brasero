@@ -6,67 +6,68 @@
     <link type="seealso" xref="project-audio"/>
     <link type="seealso" xref="project-video"/>
     <link type="seealso" xref="project-data"/>
-    <desc>Salvați un proiect pentru a îl edita sau scrie mai târziu.</desc>
+    <desc>Save a project for editing or burning later.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Atribuire - Distribuire-în-condiții-identice 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Șerbănescu</mal:name>
-      <mal:email>daniel [at] serbanescu [dot] dk</mal:email>
-      <mal:years>2010 , 2012, 2014</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Laurențiu Cristian Ion</mal:name>
-      <mal:email>ionlaurentiucristian@gmail.com</mal:email>
-      <mal:years>2011, 2012</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Salvarea unui proiect</title>
+  <title>Save a project</title>
 
-  <p>Puteți salva un proiect audio, de date sau video în <app>Brasero</app> pentru a îl edita sau scrie mai târziu.</p>
+  <p>You can save an audio, a data or a video project in <app>Brasero</app> for
+  editing or burning later.</p>
 
   <steps>
     <item>
-      <p>Creați proiectul și adăugați fișierele pe care doriți să le utilizați în proiect.</p>
+      <p>Create the project and add the files you wish to use to the project.</p>
     </item>
     <item>
-      <p>Apăsați pe <guiseq><gui>Proiect</gui><gui>Salvează</gui></guiseq> pentru a salva proiectul.</p>
+      <p>Click <guiseq><gui>Project</gui><gui>Save</gui></guiseq> to save the
+      project.</p>
     </item>
     <item>
-      <p>Introduceți numele sub care doriți să salvați proiectul, apoi apăsați pe <gui>Salvează</gui> pentru a salva proiectul.</p>
+      <p>Enter the name you wish to save the project under, then click
+      <gui>Save</gui> to save the project.</p>
     </item>
   </steps>
 
-  <p>Sunt mai multe moduri în care poate fi deschis un proiect <app>Brasero</app> salvat:</p>
+  <p>There are a number of ways which can be used for opening a saved
+  <app>Brasero</app> project by:</p>
 
   <list>
     <item>
-      <p>alegându-l din lista de pe pagina de început, sub <gui>Proiecte recente</gui></p>
+      <p>selecting it from the list on the start page, under
+      <gui>Recent projects</gui></p>
     </item>
     <item>
-      <p>apăsând pe <guiseq><gui>Proiect</gui><gui>Proiecte recente</gui></guiseq></p>
+      <p>clicking <guiseq><gui>Project</gui><gui>Recent Projects</gui></guiseq></p>
     </item>
     <item>
-      <p>apăsând pe <guiseq><gui>Proiect</gui><gui>Deschide</gui></guiseq> și alegând proiectul</p>
+      <p>clicking <guiseq><gui>Project</gui><gui>Open</gui></guiseq> and
+      selecting the project</p>
     </item>
     <item>
-      <p>deschiderea proiectului dintr-un navigator de fișiere</p>
+      <p>opening the project from a file browser</p>
       <note>
-        <p>Doar o instanță de <app>Brasero</app> poate fi deschisă la un moment dat. Dacă încercați să deschideți o a doua instanță, fereastra <app>Brasero</app> deschisă deja va fi focalizată.</p>
-        <p>Dacă <app>Brasero</app> rulează deja și încercați să deschideți anumite fișiere cu el din <app>Fișiere</app>, fișierele vor fi adăugate proiectului la care lucrați.</p>
+        <p>Only one instance of <app>Brasero</app> can be opened at any time.
+        If you try to open a second instance, the currently open
+        <app>Brasero</app> window will be focused.</p>
+        <p>If <app>Brasero</app> is already running and you try to open some
+        files with it from <app>Files</app>, the files will be added to the
+        project that you are currently working on.</p>
       </note>
     </item>
   </list>
 
   <note>
-    <p>Dacă deschideți un proiect salvat, <app>Brasero</app> îl va trata ca pe un proiect nou: dacă doriți să salvați o versiune actualizată a proiectului, vă va cere să introduceți un nume pentru acesta, la acest punct puteți suprascrie versiunea veche sau să îl salvați ca un nou proiect, introducând un nume diferit de fișier.</p>
+    <p>If you open a saved project, <app>Brasero</app> will treat it as a new
+    project: if you want to save an updated version of the project, it will ask
+    you to enter a name for it, at this point you can overwrite the old version
+    or save it as a new project by entering a different file name.</p>
   </note>
 
 </page>

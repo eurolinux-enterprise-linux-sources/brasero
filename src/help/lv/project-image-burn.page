@@ -32,7 +32,9 @@
   <p>Lai ierakstītu diska attēlu uz CD vai DVD, sekojiet šiem soļiem:</p>
   <steps>
     <item>
-      <p>Spiediet <gui>Ierakstīt diska attēlu</gui> sākuma lapā vai izvēlieties <guiseq><gui>Projekts</gui><gui>Jauns projekts</gui><gui>Ierakstīt diska attēlu…</gui></guiseq>.</p>
+      <p>Click <gui>Burn image</gui> on the start page or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Burn image…</gui>
+      </guiseq>.</p>
     </item>
     <item>
       <p>Izvēlieties ierakstāmā diska attēlu, spiežot <gui>Spiediet šeit, lai izvēlētos diska attēlu</gui>.</p>

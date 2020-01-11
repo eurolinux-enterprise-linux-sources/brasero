@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Tworzenie identycznej kopii płyty.</desc>
+    <desc>Create an identical copy of a disc.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -11,39 +11,36 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Piotr Drąg</mal:name>
-      <mal:email>piotrdrag@gmail.com</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Aviary.pl</mal:name>
-      <mal:email>community-poland@mozilla.org</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Kopiowanie płyty</title>
+  <title>Copy disc</title>
 
   <steps>
     <item>
-      <p>Kliknij <gui>Skopiuj płytę</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Skopiuj płytę…</gui></guiseq>.</p>
+      <p>Click <gui>Disc copy</gui> on the start page, or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Copy Disc...
+      </gui></guiseq>.</p>
     </item>
     <item>
-      <p>Wybierz płytę do skopiowania z rozwijanej listy pod nagłówkiem <gui>Płyta do skopiowania</gui>. Jeśli komputer ma więcej niż jeden napęd, wszystkie płyty do nich włożone powinny być wyświetlane.</p>
+      <p>Select the disc you would like to copy from the drop down list below
+      <gui>Select disc to copy</gui>. If you have more than one disc drive, all
+      discs which are currently in them should be listed.</p>
     </item>
     <item>
-      <p>Wybierz, czy zrobić kopię na innej płycie lub utworzyć obraz do późniejszego użytku.</p>
+      <p>Choose whether you want to make a copy to another disc or create an
+      image for later use.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Właściwości</gui>, aby wybrać prędkość nagrywania i inne opcje.</p>
+      <p>Click the <gui>Properties</gui> button to select burning speed and
+      other custom options.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Skopiuj</gui>, aby rozpocząć kopiowanie płyty lub <gui>Utwórz kilka kopii</gui>, jeśli planowane jest utworzenie więcej niż jednej kopii.</p>
+      <p>Click <gui>Copy</gui> to start copying the disc, or <gui>Make Several
+      Copies</gui>, if you plan to make more than one copy of the disc.</p>
       <note>
-	<p>Jeśli kopiowana jest płyta na komputerze z tylko jednym napędem, to zostanie wyświetlona prośba o wymianę płyty na zapisywalną po tymczasowym skopiowaniu zawartości na dysk twardy.</p>
+	<p>If you are copying the disc and have only one disc drive, you will
+	be asked to replace the disc you are copying with a writable one after
+	the contents are copied temporarily to your hard disk.</p>
       </note>
     </item>
   </steps>

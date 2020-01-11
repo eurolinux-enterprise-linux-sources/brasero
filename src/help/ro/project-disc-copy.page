@@ -3,47 +3,44 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Crearea unei cópii identice a unui disc.</desc>
+    <desc>Create an identical copy of a disc.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons Atribuire - Distribuire-în-condiții-identice 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Șerbănescu</mal:name>
-      <mal:email>daniel [at] serbanescu [dot] dk</mal:email>
-      <mal:years>2010 , 2012, 2014</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Laurențiu Cristian Ion</mal:name>
-      <mal:email>ionlaurentiucristian@gmail.com</mal:email>
-      <mal:years>2011, 2012</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Copierea unui disc</title>
+  <title>Copy disc</title>
 
   <steps>
     <item>
-      <p>Apăsați pe <gui>Copiere disc</gui> de pe pagina principală, sau alegeți <guiseq><gui>Proiect</gui><gui>Proiect nou</gui><gui>Copiază discul...</gui></guiseq>.</p>
+      <p>Click <gui>Disc copy</gui> on the start page, or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>Copy Disc...
+      </gui></guiseq>.</p>
     </item>
     <item>
-      <p>Alegeți discul pe care doriți să îl copiați din lista de selecție de mai jos <gui>Alegeți disc pentru copiere</gui>. Dacă aveți mai mult de o unitate de disc, ar trebui să fie enumerate toate discurile care sunt în ele.</p>
+      <p>Select the disc you would like to copy from the drop down list below
+      <gui>Select disc to copy</gui>. If you have more than one disc drive, all
+      discs which are currently in them should be listed.</p>
     </item>
     <item>
-      <p>Alegeți dacă doriți să faceți o copie unui alt disc sau pentru a crea o imagine pentru o utilizare ulterioară.</p>
+      <p>Choose whether you want to make a copy to another disc or create an
+      image for later use.</p>
     </item>
     <item>
-      <p>Apăsați pe butonul <gui>Proprietăți</gui> pentru a alege viteza de scriere și alte opțiuni specifice.</p>
+      <p>Click the <gui>Properties</gui> button to select burning speed and
+      other custom options.</p>
     </item>
     <item>
-      <p>Apăsați pe <gui>Copiază</gui> pentru a începe copierea discului, sau <gui>Fă mai multe cópii</gui> dacă aveți de gând să faceți mai multe cópii de disc.</p>
+      <p>Click <gui>Copy</gui> to start copying the disc, or <gui>Make Several
+      Copies</gui>, if you plan to make more than one copy of the disc.</p>
       <note>
-	<p>Dacă copiați discul și aveți doar o unitate de disc, veți fi solicitat să înlocuiți discul pe care îl copiați cu unul inscripționabil după ce conținutul se copiază temporar pe hard disc.</p>
+	<p>If you are copying the disc and have only one disc drive, you will
+	be asked to replace the disc you are copying with a writable one after
+	the contents are copied temporarily to your hard disk.</p>
       </note>
     </item>
   </steps>

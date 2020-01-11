@@ -14,24 +14,6 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Adrian Guniš</mal:name>
-      <mal:email>andygun696@gmail.com</mal:email>
-      <mal:years>2009, 2010</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Štěpán Šimsa</mal:name>
-      <mal:email>simsa.st@gmail.com</mal:email>
-      <mal:years>2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Marek Černocký</mal:name>
-      <mal:email>marek@manet.cz</mal:email>
-      <mal:years>2013</mal:years>
-    </mal:credit>
   </info>
 
   <title>Uložit projekt</title>
@@ -65,8 +47,12 @@
     <item>
       <p>otevřením projektu v prohlížeči souborů</p>
       <note>
-        <p>V kterýkoliv okamžik může být spuštěna pouze jedna instance aplikace <app>Brasero</app>. Když se pokusíte otevřít druhou instanci, tak akorát současné otevřeno okno <app>Brasero</app> získá zaměření.</p>
-        <p>Pokud již <app>Brasero</app> běží a vy v něm zkusíte pomocí <app>Soubory</app> otevřít nějaké soubory, budou tyto soubory přidány do projektu, na kterém se právě pracuje.</p>
+        <p>Only one instance of <app>Brasero</app> can be opened at any time.
+        If you try to open a second instance, the currently open
+        <app>Brasero</app> window will be focused.</p>
+        <p>If <app>Brasero</app> is already running and you try to open some
+        files with it from <app>Files</app>, the files will be added to the
+        project that you are currently working on.</p>
       </note>
     </item>
   </list>

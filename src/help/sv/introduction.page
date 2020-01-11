@@ -3,45 +3,35 @@
 
   <info>
     <link type="guide" xref="index"/>
-    <desc>Introduktion till skivbrännarprogrammet <app>Brasero</app>.</desc>
+    <desc>Introduction to the <app>Brasero</app> disc burning application.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
     </credit>
     <license>
-      <p>Creative Commons DelaLika 3.0</p>
+      <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Daniel Nylander</mal:name>
-      <mal:email>po@danielnylander.se</mal:email>
-      <mal:years>2008, 2009, 2011</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Anders Jonsson</mal:name>
-      <mal:email>anders.jonsson@norsjovallen.se</mal:email>
-      <mal:years>2015</mal:years>
-    </mal:credit>
   </info>
 
   <title>Introduktion</title>
 
-  <p><app>Brasero</app> är ett program för att bränna cd- och dvd-skivor, designat för enkel användning samtidigt som det tillhandahåller alla verktygen som behövs för att bränna skivor.</p>
+  <p><app>Brasero</app> is an application for burning CDs and DVDs, designed to
+  be easy to use, while providing all the tools necessary for burning.</p>
 
-  <p>Med <app>Brasero</app> kan du:</p>
+  <p>With <app>Brasero</app> you can:</p>
   <list>
-    <item><p>Bränna data till cd- och dvd-skivor</p></item>
-    <item><p>Bränna ljud-cd-skivor från digitala ljudfiler (så som OGG, FLAC och MP3)</p></item>
+    <item><p>Burn data to CDs and DVDs</p></item>
+    <item><p>Burn audio CDs from digital audio files (such as OGG, FLAC and
+    MP3)</p></item>
     <item><p>Kopiera cd- och dvd-skivor</p></item>
-    <item><p>Skapa video-dvd-skivor eller svcd-skivor</p></item>
+    <item><p>Create video DVDs or SVCDs</p></item>
     <item><p>Skapa avbildningsfiler och bränna befintliga avbildningsfiler</p></item>
-    <item><p>Radera cd-rw-skivor och dvd-rw-skivor</p></item>
+    <item><p>Erase CD-RWs and DVD-RWs</p></item>
     <item><p>Kontrollera integriteten för skivor och skivavbildningar</p></item>
   </list>
 
   <figure>
-    <title><gui>Brasero</gui>s huvudfönster</title>
+    <title>The <gui>Brasero</gui> main window</title>
     <media type="image" mime="image/png" src="figures/brasero-main-window.png"/>
   </figure>
 

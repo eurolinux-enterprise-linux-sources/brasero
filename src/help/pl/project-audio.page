@@ -3,7 +3,7 @@
 
   <info>
     <link type="guide" xref="index#new-project"/>
-    <desc>Tworzenie projektu dźwiękowego.</desc>
+    <desc>Create an audio project.</desc>
     <credit type="author">
       <name>Ekaterina Gerasimova</name>
       <email>kittykat3756@googlemail.com</email>
@@ -11,50 +11,51 @@
     <license>
       <p>Creative Commons Share Alike 3.0</p>
     </license>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Piotr Drąg</mal:name>
-      <mal:email>piotrdrag@gmail.com</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
-  
-    <mal:credit xmlns:mal="http://projectmallard.org/1.0/" type="translator copyright">
-      <mal:name>Aviary.pl</mal:name>
-      <mal:email>community-poland@mozilla.org</mal:email>
-      <mal:years>2017</mal:years>
-    </mal:credit>
   </info>
 
-  <title>Zapisywanie muzycznych płyt CD</title>
+  <title>Write a music CD</title>
 
-  <p><app>Brasero</app> może nagrywać pliki dźwiękowe na płytach CD do odtwarzania w odtwarzaczach CD i na innych urządzeniach. Zwykle najlepiej jest używać jednorazowych płyt CD, ponieważ nie wszystkie odtwarzacze CD odtwarzają płyty CD do wielokrotnego zapisu.</p>
+  <p><app>Brasero</app> can write audio files to a CD, which you can then use
+  for playing in CD players and so on. It is usually best to
+  use a non-rewritable CD because not all CD players will play rewritable
+  CDs.</p>
 
   <steps>
     <item>
-      <p>Kliknij <gui>Projekt dźwiękowy</gui> na stronie startowej lub wybierz <guiseq><gui>Projekt</gui><gui>Nowy projekt</gui><gui>Nowy projekt dźwiękowy</gui></guiseq>.</p>
+      <p>Click <gui>Audio project</gui> on the start page, or select
+      <guiseq><gui>Project</gui><gui>New Project</gui><gui>New Audio
+      Project</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Dodaj pliki dźwiękowe do projektu klikając przycisk <gui>Dodaj</gui> na pasku narzędziowym i wybierając je. Można także dodawać pliki przeciągając je do obszaru projektu lub klikając <guiseq><gui>Edycja</gui><gui>Dodaj pliki</gui></guiseq>.</p>
+      <p>Add audio files to the project by clicking <gui>Add</gui> in the
+      toolbar and selecting the desired files. You can also add files by
+      dragging and dropping them onto the project area or by clicking
+      <guiseq><gui>Edit</gui><gui>Add Files</gui></guiseq>.</p>
     </item>
     <item>
-      <p>Można dodać tytuł płyty CD w polu tekstowym pod obszarem projektu.</p>
+      <p>You can add a title for the CD in the text entry field below the
+      project area.</p>
     </item>
     <item>
-      <p>Wybierz pustą płytę CD z rozwijanej listy.</p>
+      <p>Select the blank CD in the drop down list.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Nagraj…</gui>, aby kontynuować.</p>
+      <p>Click <gui>Burn...</gui> to continue.</p>
     </item>
     <item>
-      <p>Wybierz <gui>Prędkość nagrywania</gui> z rozwijanej listy, a także dowolne inne opcje.</p>
+      <p>Select the <gui>Burning speed</gui> from the drop down list, and any
+      other options you may want.</p>
     </item>
     <item>
-      <p>Kliknij przycisk <gui>Nagraj</gui>, aby nagrać jedną płytę lub przycisk <gui>Nagraj kilka kopii</gui>, aby nagrać projekt na wiele płyt.</p>
+      <p>Click <gui>Burn</gui> to burn a single disc of the project or
+      <gui>Burn Several Copies</gui> to burn your project to multiple discs.</p>
     </item>
   </steps>
 
   <note>
-    <p>Można także podzielić poszczególne ścieżki na wiele ścieżek za pomocą narzędzia <gui>Dzielenie</gui> oraz dodać dwusekundową przerwę po ścieżce za pomocą narzędzia <gui>Przerwa</gui>.</p>
+    <p>You can also split individual tracks into multiple tracks using the
+    <gui>Split</gui> tool and add a two second break after a track using the
+    <gui>Pause</gui> button.</p>
   </note>
 
 </page>
